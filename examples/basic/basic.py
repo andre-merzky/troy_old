@@ -39,7 +39,7 @@ def test_data ():
         du  = dus.submit_data_unit (dud)
  
     except Exception, e:
-        print "oy wey: %s" % (e.msg)
+        print str (e)
 
 
 def test_pilot ():
@@ -55,12 +55,13 @@ def test_pilot ():
         cu  = cus.submit_compute_unit (cud)
  
     except Exception, e:
-        print "oy wey: %s" % (e.msg)
+        print str (e)
+
  
 def main():
     test_compute ()
-    # test_data    ()
-    # test_pilot   ()
+    test_data    ()
+    test_pilot   ()
 
 if __name__ == "__main__":
     main()

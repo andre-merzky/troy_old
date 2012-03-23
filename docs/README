@@ -1,0 +1,4 @@
+To generate the API documentation, run this in the Troy root directory:
+
+epydoc -v --config=docs/epydoc.troy.pilot.cfg
+

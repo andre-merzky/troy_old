@@ -1,0 +1,24 @@
+
+include MANIFEST.in README.md LICENSE CHANGES
+
+include *.py
+
+include troy/*.py
+
+include troy/engine/*.py
+include troy/interface/*.py
+include troy/pilot/*.py
+
+include troy/adaptors/*.py
+include troy/adaptors/skeleton/*.py
+include troy/adaptors/bigjob/*.py
+include troy/adaptors/diane/*.py
+include troy/adaptors/bliss/*.py
+include troy/adaptors/local/*.py
+
+include example/*.py
+include example/basic/*.py
+
+include ./docs/
+include ./docs/troy.pilot/
+

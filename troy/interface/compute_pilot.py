@@ -30,18 +30,18 @@ class iComputePilot (iBase) :
         pass
 
 
-    def wait (self):
+    def wait (self, obj):
         """ Wait until CP enters a final state """
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self):        
+    def cancel (self, obj):        
         """ Remove the ComputePilot from the ComputePilot Service.
         """
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def reinitialize (self, cpd):        
+    def reinitialize (self, obj, cpd):        
         """ Re-Initialize the ComputePilot to the (new) ComputePilotDescription.
         
             Keyword arguments:
@@ -50,7 +50,7 @@ class iComputePilot (iBase) :
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def set_callback (self, member, cb):
+    def set_callback (self, obj, member, cb):
         """ Set a callback function for a member.
 
             Keyword arguments:
@@ -60,7 +60,7 @@ class iComputePilot (iBase) :
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def unset_callback (self, member):
+    def unset_callback (self, obj, member):
         """ Unset a callback function from a member
 
             Keyword arguments:

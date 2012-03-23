@@ -34,6 +34,7 @@ class DataPilotService (Base) :
             dps_id -- restore from dps_id
         """
         # FIXME: what happens on None?  needs URL?
+        Base.__init__ (self)
         pass
 
 
@@ -49,18 +50,19 @@ class DataPilotService (Base) :
             Return value:
             A DataPilot handle
         """
-        pass
+        return self.get_engine_().call ('DataPilotService', 'create_pilot', 
+                                        self, rm, dpd, dp_type, context)
 
 
     def list_pilots (self):
         """ List all DPs """
-        pass
+        return self.get_engine_().call ('DataPilotService', 'list_pilots', self)
 
 
     def wait (self):
         """ Wait until DPS enters a final state """
         # FIXME
-        pass
+        return self.get_engine_().call ('DataPilotService', 'wait', self)
 
 
     def cancel (self):
@@ -69,6 +71,6 @@ class DataPilotService (Base) :
             PDS.
         """
         # FIXME
-        pass
+        return self.get_engine_().call ('DataPilotService', 'cancel', self)
 
 

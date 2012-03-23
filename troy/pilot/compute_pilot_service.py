@@ -59,20 +59,18 @@ class ComputePilotService (Base) :
             A ComputePilot handle
         """
         print "cps: create pilot"
-        return ComputePilot()
-        pass
+        return self.get_engine_().call ('ComputePilotService', 'create_pilot', 
+                                         self, rm, cpd, cp_type, context)
 
 
     def list_pilots (self):
         """ List all CPs """
         return self.get_engine_().call ('ComputePilotService', 'list_pilots', self)
-        pass
 
 
     def wait (self):
         """ Wait until CPS enters a final state """
-        # FIXME
-        pass
+        return self.get_engine_().call ('ComputePilotService', 'wait', self)
 
 
     def cancel (self):
@@ -80,7 +78,6 @@ class ComputePilotService (Base) :
             This also cancels all the ComputePilots that were under control of this
             CPS.
         """
-        # FIXME
-        pass
+        return self.get_engine_().call ('ComputePilotService', 'cancel', self)
 
 

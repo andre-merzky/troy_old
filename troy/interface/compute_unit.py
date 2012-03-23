@@ -24,17 +24,17 @@ class iComputeUnit (iBase) :
         pass
 
     
-    def wait (self):
+    def wait (self, obj):
         """ Wait until CU enters a final state """
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self):
+    def cancel (self, obj):
         """ Cancel the CU """
         raise Exception (Error.NotImplemented, "method not implemented!")
 
     
-    def set_callback (self, member, cb):
+    def set_callback (self, obj, member, cb):
         """ Set a callback function for a member.
 
             Keyword arguments:
@@ -44,7 +44,7 @@ class iComputeUnit (iBase) :
         raise Exception (Error.NotImplemented, "method not implemented!")
 
     
-    def unset_callback (self, member):
+    def unset_callback (self, obj, member):
         """ Unset a callback function from a member
 
             Keyword arguments:

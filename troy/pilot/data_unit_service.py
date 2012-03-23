@@ -38,6 +38,7 @@ class DataUnitService (Base) :
             dus_id -- Reconnect to an existing DataUnitService 
         """
         # FIXME: what happens on None?  needs URL?
+        Base.__init__ (self)
         pass
 
 
@@ -47,12 +48,14 @@ class DataUnitService (Base) :
             Keyword arguments:
             dps -- The DataPilotService to which this DataUnitService will connect.
         """
-        pass
+        return self.get_engine_().call ('DataUnitService',
+                                         'add_data_pilot_service', self, dps)
 
 
     def list_data_pilot_services (self):
         """ List all DPSs of DUS """
-        pass
+        return self.get_engine_().call ('DataUnitService',
+                                         'list_data_pilot_services', self)
     
 
     def remove_data_pilot_service (self, dps):
@@ -64,7 +67,8 @@ class DataUnitService (Base) :
             Keyword arguments:
             dps -- The DataPilotService to remove 
         """
-        pass
+        return self.get_engine_().call ('DataUnitService',
+                                         'remove_data_pilot_services', self, dps)
     
     
     def submit_data_unit (self, dud):
@@ -76,12 +80,13 @@ class DataUnitService (Base) :
             Return:
             DataUnit object
         """
-        pass
+        return self.get_engine_().call ('DataUnitService',
+                                         'submit_data_unit', self, dud)
 
 
     def wait (self):
         """ Wait until DUS enters a final state """
-        pass
+        return self.get_engine_().call ('DataUnitService', 'wait', self)
 
     
     def cancel (self):
@@ -89,6 +94,6 @@ class DataUnitService (Base) :
             
             Cancelling the DUS also cancels all the DUs submitted to it.
         """
-        pass
+        return self.get_engine_().call ('DataUnitService', 'cancel', self)
 
 

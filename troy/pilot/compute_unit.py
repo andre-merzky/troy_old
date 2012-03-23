@@ -30,17 +30,18 @@ class ComputeUnit (Base) :
 
     def __init__ (self):
         print "cu : init"
+        Base.__init__ (self)
         pass
 
     
     def wait (self):
         """ Wait until CU enters a final state """
-        pass
+        return self.get_engine_().call ('ComputeUnit', 'wait', self)
 
 
     def cancel (self):
         """ Cancel the CU """
-        pass
+        return self.get_engine_().call ('ComputeUnit', 'cancel', self)
 
     
     def set_callback (self, member, cb):
@@ -50,7 +51,8 @@ class ComputeUnit (Base) :
             member -- The member to set the callback for (state / state_detail).
             cb     -- The callback object to call.
         """
-        pass
+        return self.get_engine_().call ('ComputeUnit', 'set_callback', 
+                                        self, member, cb)
 
     
     def unset_callback (self, member):
@@ -59,5 +61,7 @@ class ComputeUnit (Base) :
             Keyword arguments:
             member -- The member to unset the callback from.
         """
+        return self.get_engine_().call ('ComputeUnit', 'unset_callback', 
+                                        self, member)
         pass
 

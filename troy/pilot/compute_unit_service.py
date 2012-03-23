@@ -39,6 +39,7 @@ class ComputeUnitService (Base) :
         """
         # FIXME: what happens on None?  needs URL?
         print "cus: init"
+        Base.__init__ (self)
         pass
 
 
@@ -48,13 +49,13 @@ class ComputeUnitService (Base) :
             Keyword arguments:
             cps -- The ComputePilot Service to which this ComputeUnitService will connect.
         """
-        print "cus: add cps"
-        pass
+        return self.get_engine_().call ('ComputeUnitService',
+                                        'add_compute_pilot_service', self, cps)
 
 
     def list_compute_pilot_services (self):
         """ List all CPSs of CUS """
-        pass
+        return self.get_engine_().call ('ComputeUnitService', 'list_pilot_services', self)
 
 
     def remove_compute_pilot_service (self, cps):
@@ -66,7 +67,8 @@ class ComputeUnitService (Base) :
             Keyword arguments:
             cps -- The ComputePilotService to remove 
         """
-        pass
+        return self.get_engine_().call ('ComputeUnitService',
+                                        'remove_pilot_service', self, cps)
 
 
     def submit_compute_unit (self, cud):
@@ -78,14 +80,13 @@ class ComputeUnitService (Base) :
             Return:
             ComputeUnit object
         """
-        print "cus: submit cu"
-        return ComputeUnit()
-        pass
+        return self.get_engine_().call ('ComputeUnitService',
+                                        'submit_compute_unit', self, cud)
 
 
     def wait (self):
         """ Wait until CUS enters a final state """
-        pass
+        return self.get_engine_().call ('ComputeUnitService', 'wait', self)
 
 
     def cancel (self):
@@ -93,6 +94,6 @@ class ComputeUnitService (Base) :
             
             Cancelling the WUS also cancels all the WUs submitted to it.
         """
-        pass
+        return self.get_engine_().call ('ComputeUnitService', 'cancel', self)
 
 

@@ -38,18 +38,18 @@ class ComputePilot (Base) :
             Keyword arguments:
             cp_id -- restore from cp_id
         """
+        Base.__init__ (self)
         pass
 
 
     def wait (self):
         """ Wait until CP enters a final state """
-        pass
+        return self.get_engine_().call ('ComputePilot', 'wait', self)
 
 
     def cancel (self):        
-        """ Remove the ComputePilot from the ComputePilot Service.
-        """
-        pass
+        """ Remove the ComputePilot from the ComputePilot Service. """
+        return self.get_engine_().call ('ComputePilot', 'cancel', self)
 
 
     def reinitialize (self, cpd):        
@@ -58,7 +58,8 @@ class ComputePilot (Base) :
             Keyword arguments:
             cpd -- A ComputePilotDescription
         """
-        pass
+        return self.get_engine_().call ('ComputePilot', 'reinitialize', 
+                                        self, cpd)
 
 
     def set_callback (self, member, cb):
@@ -68,7 +69,8 @@ class ComputePilot (Base) :
             member -- The member to set the callback for (state / state_detail / wall_time_left).
             cb     -- The callback object to call.
         """
-        pass
+        return self.get_engine_().call ('ComputePilot', 'set_callback', 
+                                        self, member, cb)
 
     def unset_callback (self, member):
         """ Unset a callback function from a member
@@ -76,6 +78,7 @@ class ComputePilot (Base) :
             Keyword arguments:
             member -- The member to unset the callback for (state / state_detail / wall_tim_left).
         """
-        pass
+        return self.get_engine_().call ('ComputePilot', 'unset_callback', 
+                                        self, member)
     
 

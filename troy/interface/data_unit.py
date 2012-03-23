@@ -24,17 +24,17 @@ class iDataUnit (iBase) :
         pass
 
 
-    def wait (self):
+    def wait (self, obj):
         """ Wait until DU enters a final state """
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self):
+    def cancel (self, obj):
         """ Cancel the DU """
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def set_callback (self, member, cb):
+    def set_callback (self, obj, member, cb):
         """ Set a callback function for a member.
 
             Keyword arguments:
@@ -44,7 +44,7 @@ class iDataUnit (iBase) :
         raise Exception (Error.NotImplemented, "method not implemented!")
 
     
-    def unset_callback (self, member):
+    def unset_callback (self, obj, member):
         """ Unset a callback function from a member
 
             Keyword arguments:
@@ -53,17 +53,17 @@ class iDataUnit (iBase) :
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def list_files (self):
+    def list_files (self, obj):
         """ list files managed by the DU """
         raise Exception (Error.NotImplemented, "method not implemented!")
     
 
-    def data_export (self, target_directory):
+    def data_export (self, obj, target_directory):
         """ copies content of DU to a directory on the local machine"""
         raise Exception (Error.NotImplemented, "method not implemented!")
 
         
-    def data_import (self, src_directory):
+    def data_import (self, obj, src_directory):
         """ copies content from a directory on the local machine to DU"""
         raise Exception (Error.NotImplemented, "method not implemented!")
         

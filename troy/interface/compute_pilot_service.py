@@ -27,11 +27,11 @@ class iComputePilotService (iBase) :
         pass
 
 
-    def check (self, one, two, three):
+    def check (self, obj, one, two, three):
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def create_pilot (self, rm, cpd, cp_type=None, context=None):
+    def create_pilot (self, obj, rm, cpd, cp_type=None, context=None):
         """ Add a ComputePilot to the ComputePilotService
 
             Keyword arguments:
@@ -46,17 +46,17 @@ class iComputePilotService (iBase) :
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def list_pilots (self, api):
+    def list_pilots (self, obj):
         """ List all CPs """
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def wait (self):
+    def wait (self, obj):
         """ Wait until CPS enters a final state """
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self):
+    def cancel (self, obj):
         """ Cancel the CPS
             This also cancels all the ComputePilots that were under control of this
             CPS.

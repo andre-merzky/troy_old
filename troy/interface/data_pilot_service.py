@@ -27,7 +27,7 @@ class iDataPilotService (iBase) :
         pass
 
 
-    def create_pilot (self, rm, dpd, dp_type=None, context=None):
+    def create_pilot (self, obj, rm, dpd, dp_type=None, context=None):
         """ Add a DataPilot to the DataPilotService
 
             Keyword arguments:
@@ -42,17 +42,17 @@ class iDataPilotService (iBase) :
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def list_pilots (self):
+    def list_pilots (self, obj):
         """ List all DPs """
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def wait (self):
+    def wait (self, obj):
         """ Wait until DPS enters a final state """
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self):
+    def cancel (self, obj):
         """ Cancel the DPS
             This also cancels all the DataPilots that were under control of this
             PDS.

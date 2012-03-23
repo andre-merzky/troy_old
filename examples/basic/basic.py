@@ -5,9 +5,10 @@
 import troy
 
 def test_compute ():
-    try:
+    # try:
         cpd = troy.pilot.ComputePilotDescription ()
         cpd['queue'] = 'large'
+        cpd['key']   = 'val'
 
         cps = troy.pilot.ComputePilotService ()
         print "cps : " + str (cps)
@@ -22,12 +23,12 @@ def test_compute ():
         cud = troy.pilot.ComputeUnitDescription ()
         cu  = cus.submit_compute_unit (cud)
  
-    except Exception, e:
-        print str (e)
+    # except Exception, e:
+    #     print str (e)
 
 
 def test_data ():
-    try:
+    # try:
         dpd = troy.pilot.DataPilotDescription ()
         dps = troy.pilot.DataPilotService ()
         dp  = dps.create_pilot ("file://localhost", dpd)
@@ -38,12 +39,12 @@ def test_data ():
         dud = troy.pilot.DataUnitDescription ()
         du  = dus.submit_data_unit (dud)
  
-    except Exception, e:
-        print str (e)
+    # except Exception, e:
+    #     print str (e)
 
 
 def test_pilot ():
-    try:
+    # try:
         cpd = troy.pilot.ComputePilotDescription ()
         cps = troy.pilot.ComputePilotService ()
         cp  = cps.create_pilot ("fork://localhost", cpd)
@@ -54,8 +55,8 @@ def test_pilot ():
         cud = troy.pilot.ComputeUnitDescription ()
         cu  = cus.submit_compute_unit (cud)
  
-    except Exception, e:
-        print str (e)
+    # except Exception, e:
+    #     print str (e)
 
  
 def main():

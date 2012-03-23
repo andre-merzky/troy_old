@@ -39,17 +39,18 @@ class DataPilot (Base) :
             Keyword arguments:
             dp_id -- restore from dp_id
         """
+        Base.__init__ (self)
         pass
 
 
     def wait (self):
         """ Wait until DP enters a final state """
-        pass
+        return self.get_engine_().call ('DataPilot', 'wait', self)
 
 
     def cancel (self):        
         """ Cancel DP """
-        pass
+        return self.get_engine_().call ('DataPilot', 'cancel', self)
 
 
     def reinitialize (self, dpd):        
@@ -58,7 +59,7 @@ class DataPilot (Base) :
             Keyword arguments:
             dpd -- A DataPilotDescription
         """
-        pass
+        return self.get_engine_().call ('DataPilot', 'reinitialize', self, dpd)
 
 
     def set_callback (self, member, cb):
@@ -68,7 +69,8 @@ class DataPilot (Base) :
             member -- The member to set the callback for (state / state_detail / size_left).
             cb     -- The callback object to call.
         """
-        pass
+        return self.get_engine_().call ('DataPilot', 'set_callback', 
+                                        self, member, cb)
 
     def unset_callback (self, member):
         """ Unset a callback function from a member
@@ -76,6 +78,7 @@ class DataPilot (Base) :
             Keyword arguments:
             member -- The member to unset the callback for (state / state_detail / sizeleft).
         """
-        pass
+        return self.get_engine_().call ('DataPilot', 'unset_callback', 
+                                        self, member)
 
 

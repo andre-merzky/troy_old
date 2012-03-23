@@ -30,17 +30,17 @@ class iDataPilot (iBase) :
         pass
 
 
-    def wait (self):
+    def wait (self, obj):
         """ Wait until DP enters a final state """
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self):        
+    def cancel (self, obj):        
         """ Cancel DP """
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def reinitialize (self, dpd):        
+    def reinitialize (self, obj, dpd):        
         """ Re-Initialize the DataPilot to the (new) DataPilotDescription.
         
             Keyword arguments:
@@ -49,7 +49,7 @@ class iDataPilot (iBase) :
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def set_callback (self, member, cb):
+    def set_callback (self, obj, member, cb):
         """ Set a callback function for a member.
 
             Keyword arguments:
@@ -58,7 +58,7 @@ class iDataPilot (iBase) :
         """
         raise Exception (Error.NotImplemented, "method not implemented!")
 
-    def unset_callback (self, member):
+    def unset_callback (self, obj, member):
         """ Unset a callback function from a member
 
             Keyword arguments:

@@ -29,7 +29,7 @@ class iComputeUnitService (iBase) :
         pass
 
 
-    def add_compute_pilot_service (self, cps):
+    def add_compute_pilot_service (self, obj, cps):
         """ Add a ComputePilotService to this WUS.
 
             Keyword arguments:
@@ -38,12 +38,12 @@ class iComputeUnitService (iBase) :
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def list_compute_pilot_services (self):
+    def list_compute_pilot_services (self, obj):
         """ List all CPSs of CUS """
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def remove_compute_pilot_service (self, cps):
+    def remove_compute_pilot_service (self, obj, cps):
         """ Remove a ComputePilotService 
 
             Note that it won't cancel the ComputePilotService, it will just no
@@ -55,7 +55,7 @@ class iComputeUnitService (iBase) :
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def submit_compute_unit (self, cud):
+    def submit_compute_unit (self, obj, cud):
         """ Submit a CU to this ComputeUnitService.
 
             Keyword argument:
@@ -67,12 +67,12 @@ class iComputeUnitService (iBase) :
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def wait (self):
+    def wait (self, obj):
         """ Wait until CUS enters a final state """
         raise Exception (Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self):
+    def cancel (self, obj):
         """ Cancel the WUS.
             
             Cancelling the WUS also cancels all the WUs submitted to it.

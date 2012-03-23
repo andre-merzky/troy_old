@@ -130,6 +130,9 @@ class Engine:
                   api_class.adaptors_[a_name] = getattr (module, a_class)()
 
               # adaptor class now exists, and can be used
+              print "engine: call: " + a_name + "." + a_class + "." \
+                    + method_name + " (" + str (args) + str (kwargs) + ")"
+
               ret = getattr (api_class.adaptors_[a_name], method_name) (api_class, *args, **kwargs)
 
               print "engine: call: " + a_name + "." + a_class + "." \
@@ -148,6 +151,7 @@ class Engine:
         # FIXME: should re-throw one of the above exceptions
         if e_stack == "" :
           e_stack = "  Bummer, no adaptors loaded.  None at all!"
-        raise Exception (Error.NoSuccess, "no valid adaptor found:\n" + e_stack)        
+        # raise Exception (Error.NoSuccess, "no valid adaptor found:\n" + e_stack)        
+        print "no valid adaptor found:\n" + e_stack        
         pass
 

@@ -13,7 +13,7 @@ import troy.interface
 #     the name of your pilot implementation
 #   - implement the adaptor.sanity_check() method (check if the adaptor is
 #     viable in the given runtime environment)
-#   - in the new adaptor, replace all occurrences of 'bigjob' with <backend>
+#   - in the new adaptor, replace all occurrences of 'xyz' with <backend>
 #   - implement all classes/methods
 #
 
@@ -28,19 +28,19 @@ class adaptor (troy.interface.aBase) :
         
         # registry maps api classes to adaptor classes implementing the
         # respective class interface.
-        self.name     = 'troy_adaptor_bigjob'
-        self.registry = {'ComputePilotService'       : 'bigjob_cps' ,
-                         'ComputePilot'              : 'bigjob_cp'  ,
-                         'ComputeUnitService'        : 'bigjob_cus' ,
-                         'ComputeUnit'               : 'bigjob_cu'  , 
+        self.name     = 'troy_adaptor_xyz'
+        self.registry = {'ComputePilotService'       : 'xyz_cps' ,
+                         'ComputePilot'              : 'xyz_cp'  ,
+                         'ComputeUnitService'        : 'xyz_cus' ,
+                         'ComputeUnit'               : 'xyz_cu'  , 
 
-                         'DataPilotService'          : 'bigjob_dps' ,
-                         'DataPilot'                 : 'bigjob_dp'  ,
-                         'DataUnitService'           : 'bigjob_dus' ,
-                         'DataUnit'                  : 'bigjob_du'  , 
+                         'DataPilotService'          : 'xyz_dps' ,
+                         'DataPilot'                 : 'xyz_dp'  ,
+                         'DataUnitService'           : 'xyz_dus' ,
+                         'DataUnit'                  : 'xyz_du'  , 
 
-                         'ComputeDataUnitService'    : 'bigjob_cdus',
-                         'ComputeDataUnit'           : 'bigjob_cdu' }
+                         'ComputeDataUnitService'    : 'xyz_cdus',
+                         'ComputeDataUnit'           : 'xyz_cdu' }
 
     def get_name (self):
         return self.name
@@ -59,7 +59,7 @@ class adaptor (troy.interface.aBase) :
 #
 
 ########################################################################
-class bigjob_cps (troy.interface.iComputePilotService) :
+class xyz_cps (troy.interface.iComputePilotService) :
 
     def __init__ (self) :
         raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
@@ -99,7 +99,7 @@ class bigjob_cps (troy.interface.iComputePilotService) :
 
 
 ########################################################################
-class bigjob_cp (troy.interface.iComputePilot) :
+class xyz_cp (troy.interface.iComputePilot) :
 
     def __init__ (self) :
         raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
@@ -147,7 +147,7 @@ class bigjob_cp (troy.interface.iComputePilot) :
 
 
 ########################################################################
-class bigjob_cus (troy.interface.iComputeUnitService) :
+class xyz_cus (troy.interface.iComputeUnitService) :
 
     def __init__ (self) :
         raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
@@ -204,7 +204,7 @@ class bigjob_cus (troy.interface.iComputeUnitService) :
 
 
 ########################################################################
-class bigjob_cu (troy.interface.iComputeUnit) :
+class xyz_cu (troy.interface.iComputeUnit) :
 
     def __init__ (self) :
         raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
@@ -244,7 +244,7 @@ class bigjob_cu (troy.interface.iComputeUnit) :
 #
 
 ########################################################################
-class bigjob_dps (troy.interface.iDataPilotService) :
+class xyz_dps (troy.interface.iDataPilotService) :
 
     def __init__ (self) :
         raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
@@ -283,7 +283,7 @@ class bigjob_dps (troy.interface.iDataPilotService) :
 
 
 ########################################################################
-class bigjob_dp (troy.interface.iDataPilot) :
+class xyz_dp (troy.interface.iDataPilot) :
 
     def __init__ (self) :
         raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
@@ -326,7 +326,7 @@ class bigjob_dp (troy.interface.iDataPilot) :
 
 
 ########################################################################
-class bigjob_dus (troy.interface.iDataUnitService) :
+class xyz_dus (troy.interface.iDataUnitService) :
 
     def __init__ (self) :
         raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
@@ -383,7 +383,7 @@ class bigjob_dus (troy.interface.iDataUnitService) :
 
 
 ########################################################################
-class bigjob_du (troy.interface.iDataUnit) :
+class xyz_du (troy.interface.iDataUnit) :
 
     def __init__ (self) :
         raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
@@ -439,7 +439,7 @@ class bigjob_du (troy.interface.iDataUnit) :
 #
 
 ########################################################################
-class bigjob_dcus (troy.interface.iComputeDataUnitService) :
+class xyz_dcus (troy.interface.iComputeDataUnitService) :
 
     def __init__ (self) :
         raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
@@ -448,7 +448,7 @@ class bigjob_dcus (troy.interface.iComputeDataUnitService) :
 
 
 ########################################################################
-class bigjob_dcu (troy.interface.iComputeDataUnit) :
+class xyz_dcu (troy.interface.iComputeDataUnit) :
 
     def __init__ (self) :
         raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")

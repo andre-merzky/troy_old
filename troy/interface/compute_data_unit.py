@@ -3,7 +3,7 @@ from troy.interface.compute_unit import iComputeUnit
 from troy.interface.data_unit    import iDataUnit
 
 from troy.interface.base         import iBase
-from troy.pilot.exception        import Exception, Error
+from troy.pilot.exception        import TroyException, Error
 
 ########################################################################
 #

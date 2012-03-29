@@ -1,6 +1,6 @@
 
 from troy.interface.base  import iBase
-from troy.pilot.exception import Exception, Error
+from troy.pilot.exception import TroyException, Error
     
 
 ########################################################################
@@ -20,35 +20,35 @@ class iComputeUnit (iBase) :
         A ComputeUnit has state, can be queried and can be cancelled.
     """
 
-    def __init__ (self):
+    def __init__ (self, obj, adaptor):
         pass
 
     
-    def wait (self, obj):
+    def wait (self):
         """ Wait until CU enters a final state """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self, obj):
+    def cancel (self):
         """ Cancel the CU """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
     
-    def set_callback (self, obj, member, cb):
+    def set_callback (self, member, cb):
         """ Set a callback function for a member.
 
             Keyword arguments:
             member -- The member to set the callback for (state / state_detail).
             cb     -- The callback object to call.
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
     
-    def unset_callback (self, obj, member):
+    def unset_callback (self, member):
         """ Unset a callback function from a member
 
             Keyword arguments:
             member -- The member to unset the callback from.
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 

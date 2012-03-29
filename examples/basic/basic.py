@@ -10,12 +10,12 @@ def test_compute ():
         cpd['queue'] = 'large'
         cpd['key']   = 'val'
 
-        cps = troy.pilot.ComputePilotService ()
+        cps = troy.pilot.ComputePilotService ('1')
         print "cps : " + str (cps)
         print cps.check (1, 2, 3)
         print cps.list_pilots ()
 
-        cp  = cps.create_pilot ("fork://localhost", cpd)
+        cp  = cps.create_pilot ("peejay://localhost", cpd)
 
         cus = troy.pilot.ComputeUnitService ()
         cus.add_compute_pilot_service (cps)

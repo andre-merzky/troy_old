@@ -2,7 +2,7 @@
 from troy.pilot.base                           import Base                         
 from troy.pilot.state                          import State                        
 from troy.pilot.callback                       import Callback                     
-from troy.pilot.exception                      import Exception, Error
+from troy.pilot.exception                      import TroyException, Error
 
 from troy.pilot.compute_data_unit_description  import ComputeDataUnitDescription
 from troy.pilot.compute_data_unit              import ComputeDataUnit            

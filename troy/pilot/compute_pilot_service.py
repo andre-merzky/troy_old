@@ -30,16 +30,21 @@ class ComputePilotService (Base) :
             Keyword arguments:
             cps_id -- restore from cps_id
         """
-        # FIXME: what happens on None?  needs URL?
+
         print "cps: init"
+
+        # init api base
         Base.__init__ (self)
+
+        # prepare instance data
         idata = {
-                  'id'            : '',          # no id, yet
-                  'state'         : State.New,   # state of backend instance
-                  'state_detail'  : '',          # Backend specific state of the CPS
+                  'id' : cds_id,
                 }
         self.set_idata_ ('api', idata)
-        pass
+
+        # initialize adaptor class 
+        self.get_engine_().call ('ComputePilotService', 'init', self)
+
 
 
     def check (self, one, two, three):

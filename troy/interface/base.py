@@ -1,5 +1,5 @@
 
-from troy.pilot.exception        import Exception, Error
+from troy.pilot.exception        import TroyException, Error
 
 
 ########################################################################
@@ -22,6 +22,6 @@ class aBase:
         pass
 
     def sanity_check (self) :
-        raise Exception (Error.NoSuccess, "adaptor disabled as it does not" \
+        raise TroyException (Error.NoSuccess, "adaptor disabled as it does not" \
                                           "implement sanity check!")
 

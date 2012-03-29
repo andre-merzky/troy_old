@@ -1,6 +1,6 @@
 
 from troy.interface.base  import iBase
-from troy.pilot.exception import Exception, Error
+from troy.pilot.exception import TroyException, Error
     
 ########################################################################
 #
@@ -20,30 +20,33 @@ class iComputeUnitService (iBase) :
         execution of the ComputeUnits.
     """
 
-    def __init__ (self, cus_id=None):
+    def __init__ (self, obj, adaptor):
         """ Create a ComputeUnitService object
-    
-            Keyword arguments:
-            cus_id -- Reconnect to an existing ComputeUnitService 
         """
         pass
 
 
-    def add_compute_pilot_service (self, obj, cps):
+    def init (self):
+        """ dummy method to make sure the backend can initialize the object
+        """
+        pass
+
+
+    def add_compute_pilot_service (self, cps):
         """ Add a ComputePilotService to this WUS.
 
             Keyword arguments:
             cps -- The ComputePilot Service to which this ComputeUnitService will connect.
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def list_compute_pilot_services (self, obj):
+    def list_compute_pilot_services (self):
         """ List all CPSs of CUS """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def remove_compute_pilot_service (self, obj, cps):
+    def remove_compute_pilot_service (self, cps):
         """ Remove a ComputePilotService 
 
             Note that it won't cancel the ComputePilotService, it will just no
@@ -52,10 +55,10 @@ class iComputeUnitService (iBase) :
             Keyword arguments:
             cps -- The ComputePilotService to remove 
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def submit_compute_unit (self, obj, cud):
+    def submit_compute_unit (self, cud):
         """ Submit a CU to this ComputeUnitService.
 
             Keyword argument:
@@ -64,19 +67,19 @@ class iComputeUnitService (iBase) :
             Return:
             ComputeUnit object
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def wait (self, obj):
+    def wait (self):
         """ Wait until CUS enters a final state """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self, obj):
+    def cancel (self):
         """ Cancel the WUS.
             
             Cancelling the WUS also cancels all the WUs submitted to it.
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 

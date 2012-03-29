@@ -8,7 +8,7 @@ class Error:
     NotImplemented = 'NotImplemented'
 
 
-class Exception (Exception):
+class TroyException (Exception):
     
 
     def __init__ (self, error, msg) :

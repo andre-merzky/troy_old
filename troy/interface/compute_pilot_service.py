@@ -1,6 +1,6 @@
 
 from troy.interface.base  import iBase
-from troy.pilot.exception import Exception, Error
+from troy.pilot.exception import TroyException, Error
     
 ########################################################################
 #
@@ -18,20 +18,22 @@ class iComputePilotService (iBase) :
         P* Model.
     """
 
-    def __init__ (self, cds_id=None):
-        """ Create a ComputePilotService object
+    def __init__ (self, obj, adaptor) :
+        """ Create a ComputePilotService object"""
+        pass
 
-            Keyword arguments:
-            cps_id -- restore from cps_id
+
+    def init (self) :
+        """ dummy method to make sure the backend can initialize the object
         """
         pass
 
 
-    def check (self, obj, one, two, three):
-        raise Exception (Error.NotImplemented, "method not implemented!")
+    def check (self, one, two, three):
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def create_pilot (self, obj, rm, cpd, cp_type=None, context=None):
+    def create_pilot (self, rm, cpd, cp_type=None, context=None):
         """ Add a ComputePilot to the ComputePilotService
 
             Keyword arguments:
@@ -43,24 +45,24 @@ class iComputePilotService (iBase) :
             Return value:
             A ComputePilot handle
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def list_pilots (self, obj):
+    def list_pilots (self):
         """ List all CPs """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def wait (self, obj):
+    def wait (self):
         """ Wait until CPS enters a final state """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self, obj):
+    def cancel (self):
         """ Cancel the CPS
             This also cancels all the ComputePilots that were under control of this
             CPS.
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 

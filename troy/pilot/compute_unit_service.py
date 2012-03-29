@@ -37,9 +37,19 @@ class ComputeUnitService (Base) :
             Keyword arguments:
             cus_id -- Reconnect to an existing ComputeUnitService 
         """
-        # FIXME: what happens on None?  needs URL?
         print "cus: init"
+
+        # init api base
         Base.__init__ (self)
+
+        # prepare instance data
+        idata = {
+                  'id' : cus_id,
+                }
+        self.set_idata_ ('api', idata)
+
+        # initialize adaptor class 
+        self.get_engine_().call ('ComputeUnitService', 'init', self)
         pass
 
 

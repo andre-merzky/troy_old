@@ -1,6 +1,6 @@
 
 from troy.interface.base  import iBase
-from troy.pilot.exception import Exception, Error
+from troy.pilot.exception import TroyException, Error
 
 
 ########################################################################
@@ -21,7 +21,7 @@ class iDataPilot (iBase) :
         re-initialized.
     """
 
-    def __init__ (self, dp_id=None):
+    def __init__ (self, obj, adaptor, dp_id=None):
         """ Create a DataPilot
 
             Keyword arguments:
@@ -30,40 +30,40 @@ class iDataPilot (iBase) :
         pass
 
 
-    def wait (self, obj):
+    def wait (self):
         """ Wait until DP enters a final state """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self, obj):        
+    def cancel (self):        
         """ Cancel DP """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def reinitialize (self, obj, dpd):        
+    def reinitialize (self, dpd):        
         """ Re-Initialize the DataPilot to the (new) DataPilotDescription.
         
             Keyword arguments:
             dpd -- A DataPilotDescription
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def set_callback (self, obj, member, cb):
+    def set_callback (self, member, cb):
         """ Set a callback function for a member.
 
             Keyword arguments:
             member -- The member to set the callback for (state / state_detail / size_left).
             cb     -- The callback object to call.
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
-    def unset_callback (self, obj, member):
+    def unset_callback (self, member):
         """ Unset a callback function from a member
 
             Keyword arguments:
             member -- The member to unset the callback for (state / state_detail / sizeleft).
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 

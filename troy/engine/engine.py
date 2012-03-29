@@ -3,25 +3,29 @@ import os
 import glob
 import imp
 
-from troy.pilot.exception import Exception                         
+from troy.pilot.exception import TroyException                         
 from troy.pilot.exception import Error                         
 
-class Engine:
+def singleton (type) :
 
-    # make engine a singleton
-    def __new__ (type):
+    instances = {}
+    
+    def getinstance () :
         
-        # if instance does not exist (first usage)
-        if not '_the_instance' in type.__dict__:
-            # then create instance and store in _the_instance
-            type._the_instance = object.__new__ (type)
+        if type not in instances:
+            instances[type] = type()
         
-        # return the (new or existing) instance on new()
-        return type._the_instance
+        return instances[type]
+    
+    return getinstance
 
+
+@singleton
+class Engine (object) :
 
     def __init__(self):
 
+        print " === init engine"
         # __init__ loads all adaptors
         
         # self.adaptors is a dict of dicts.  The inner dicts have two elements:
@@ -41,7 +45,7 @@ class Engine:
         self.module_path = './troy/adaptors/'  # FIXME: pick from env or ini
 
         # iterate through modules and load adaptor classes
-        for path in glob.glob (self.module_path + '/*/troy_adaptor_*.py'): 
+        for path in glob.glob (self.module_path + '/troy_adaptor_*.py'): 
 
             try:
                 print "engine: init: load adaptor: " + path
@@ -55,7 +59,7 @@ class Engine:
                 adaptor    = module.adaptor ()
 
                 if not adaptor.sanity_check () :
-                    raise Exception (Error.NoSuccess, "failed sanity check")
+                    raise TroyException (Error.NoSuccess, "failed sanity check")
 
                 a_name     = adaptor.get_name ()
                 a_registry = adaptor.get_registry ()
@@ -66,7 +70,7 @@ class Engine:
 
                 print "engine: init: load adaptor: " + path + " done"
 
-            except Exception, e:
+            except TroyException, e:
                 print "engine: init: load adaptor: " + path + " failed:\n  " + str (e)
             
 
@@ -112,46 +116,54 @@ class Engine:
         for a_name in valid_adaptors :
 
             try:
-              adaptor    = self.adaptors[a_name]['adaptor']
-              module     = self.adaptors[a_name]['module']
-              a_registry = self.adaptors[a_name]['registry']
-              a_class    = a_registry[class_name]  # name of adaptor class
-                                                   # implementing the requested 
-                                                   # api class
+                adaptor    = self.adaptors[a_name]['adaptor']
+                module     = self.adaptors[a_name]['module']
+                a_registry = self.adaptors[a_name]['registry']
+                a_class    = a_registry[class_name]  # name of adaptor class
+                                                     # implementing the requested 
+                                                     # api class
 
-              # this module/adaptor combo should work.  Now we have to check if
-              # the api class used that one before - and if so, we reuse the
-              # adaptor class instance.  If not, we have to create a new one
-              # before actually calling the method
-              if not a_name in api_class.adaptors_ :
+                # this module/adaptor combo should work.  Now we have to check if
+                # the api class used that one before - and if so, we reuse the
+                # adaptor class instance.  If not, we have to create a new one
+                # before actually calling the method
+                if not a_name in api_class.adaptors_ :
 
-                  # adaptor has not been used for this api class - create new
-                  # adaptor class, and keep it in the api class' list
-                  api_class.adaptors_[a_name] = getattr (module, a_class)()
+                    # adaptor has not been used for this api class - create new
+                    # adaptor class, init it, and keep it in the api class' list
+                    api_class.adaptors_[a_name] = getattr (module, a_class)(api_class, adaptor)
 
-              # adaptor class now exists, and can be used
-              print "engine: call: " + a_name + "." + a_class + "." \
-                    + method_name + " (" + str (args) + str (kwargs) + ")"
+                # adaptor class now exists, and can be used
+                print "engine: call: " + a_name + "." + a_class + "." \
+                      + method_name + " (" + str (args) + str (kwargs) + ")"
 
-              ret = getattr (api_class.adaptors_[a_name], method_name) (api_class, *args, **kwargs)
+                # do we need to call init() again?
 
-              print "engine: call: " + a_name + "." + a_class + "." \
-                    + method_name + " (" + str (args) + str (kwargs) + ") : " + str (ret)
+                ret = None
+                # ret = getattr (api_class.adaptors_[a_name], method_name) (*args, **kwargs)
 
-              return ret
+                print "engine: call: " + a_name + "." + a_class + "." \
+                      + method_name + " (" + str (args) + str (kwargs) + ") : " + str (ret)
+
+                return ret
 
 
-            except Exception, e:
-              print "engine: call: " + a_name + "." + a_class + "." \
-                    + method_name + " (" + str (args) + str (kwargs) + ") failed : " \
-                    + e.msg
-              e_stack = "  " + a_name + " \t: " + str (e) + "\n";
+            except TroyException as e:
+                print "engine: call: " + a_name + "." + a_class + "." \
+                      + method_name + " (" + str (args) + str (kwargs) + ") failed : " \
+                      + e.msg
+                e_stack = "  " + a_name + " \t: " + str (e) + "\n";
+
 
         # no adaptor succeeded
         # FIXME: should re-throw one of the above exceptions
         if e_stack == "" :
-          e_stack = "  Bummer, no adaptors loaded.  None at all!"
-        # raise Exception (Error.NoSuccess, "no valid adaptor found:\n" + e_stack)        
+            e_stack = "  Bummer, no adaptors loaded.  None at all!"
+
+        # raise TroyException (Error.NoSuccess, "no valid adaptor found:\n" + e_stack)        
         print "no valid adaptor found:\n" + e_stack        
         pass
+
+
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

@@ -1,6 +1,6 @@
 
 from troy.interface.base  import iBase
-from troy.pilot.exception import Exception, Error
+from troy.pilot.exception import TroyException, Error
     
 
 ########################################################################
@@ -21,7 +21,7 @@ class iComputePilot (iBase) :
         re-initialized.
     """
 
-    def __init__ (self, cp_id=None):
+    def __init__ (self, obj, adaptor, cp_id=None):
         """ Create a ComputePilot
 
             Keyword arguments:
@@ -30,42 +30,42 @@ class iComputePilot (iBase) :
         pass
 
 
-    def wait (self, obj):
+    def wait (self):
         """ Wait until CP enters a final state """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self, obj):        
+    def cancel (self):        
         """ Remove the ComputePilot from the ComputePilot Service.
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def reinitialize (self, obj, cpd):        
+    def reinitialize (self, cpd):        
         """ Re-Initialize the ComputePilot to the (new) ComputePilotDescription.
         
             Keyword arguments:
             cpd -- A ComputePilotDescription
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def set_callback (self, obj, member, cb):
+    def set_callback (self, member, cb):
         """ Set a callback function for a member.
 
             Keyword arguments:
             member -- The member to set the callback for (state / state_detail / wall_time_left).
             cb     -- The callback object to call.
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def unset_callback (self, obj, member):
+    def unset_callback (self, member):
         """ Unset a callback function from a member
 
             Keyword arguments:
             member -- The member to unset the callback for (state / state_detail / wall_tim_left).
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
     
 

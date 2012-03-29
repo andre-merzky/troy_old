@@ -1,20 +1,15 @@
 
+import imp
+
 import troy
 import troy.interface
+from troy.pilot.exception import TroyException, Error
+
 
 ########################################################################
 # 
-# FIXME:
-#
-#   In order to write a functional adaptor, do the following:
-#
-#   - copy this file to a new location
-#   - rename it to 'troy_adaptor_<backend>.py', where <backend> is 
-#     the name of your pilot implementation
-#   - implement the adaptor.sanity_check() method (check if the adaptor is
-#     viable in the given runtime environment)
-#   - in the new adaptor, replace all occurrences of 'bigjob' with <backend>
-#   - implement all classes/methods
+# This TROY adaptor interfaces to peejay, a minimal P* aligned PJ (doh!) 
+# implementation -- see https://github.com/andre-merzky/peejay
 #
 
 
@@ -24,23 +19,23 @@ import troy.interface
 #
 class adaptor (troy.interface.aBase) :
     
-    def __init__ (self):
+    def __init__ (self) :
         
         # registry maps api classes to adaptor classes implementing the
         # respective class interface.
-        self.name     = 'troy_adaptor_bigjob'
-        self.registry = {'ComputePilotService'       : 'bigjob_cps' ,
-                         'ComputePilot'              : 'bigjob_cp'  ,
-                         'ComputeUnitService'        : 'bigjob_cus' ,
-                         'ComputeUnit'               : 'bigjob_cu'  , 
+        self.name     = 'troy_adaptor_peejay'
+        self.registry = {'ComputePilotService'       : 'peejay_cps' ,
+                         'ComputePilot'              : 'peejay_cp'  ,
+                         'ComputeUnitService'        : 'peejay_cus' ,
+                         'ComputeUnit'               : 'peejay_cu'  , 
 
-                         'DataPilotService'          : 'bigjob_dps' ,
-                         'DataPilot'                 : 'bigjob_dp'  ,
-                         'DataUnitService'           : 'bigjob_dus' ,
-                         'DataUnit'                  : 'bigjob_du'  , 
+                         'DataPilotService'          : 'peejay_dps' ,
+                         'DataPilot'                 : 'peejay_dp'  ,
+                         'DataUnitService'           : 'peejay_dus' ,
+                         'DataUnit'                  : 'peejay_du'  , 
 
-                         'ComputeDataUnitService'    : 'bigjob_cdus',
-                         'ComputeDataUnit'           : 'bigjob_cdu' }
+                         'ComputeDataUnitService'    : 'peejay_cdus',
+                         'ComputeDataUnit'           : 'peejay_cdu' }
 
     def get_name (self):
         return self.name
@@ -49,7 +44,16 @@ class adaptor (troy.interface.aBase) :
         return self.registry
 
     def sanity_check (self):
-        # version checks etc.
+        
+        # try lo load peejay
+        try :
+            (f, p, d)   = imp.find_module ('peejay', ['/home/merzky/saga/peejay/'])
+            self.module = imp.load_module ('peejay', f, p, d)
+        except TroyException as e :
+            print ' ======== could not load peejay adaptor: ' + str (e)
+            return False
+
+        print '--------------------' + str (self.module.state.New)
         return True
 
 
@@ -59,10 +63,25 @@ class adaptor (troy.interface.aBase) :
 #
 
 ########################################################################
-class bigjob_cps (troy.interface.iComputePilotService) :
+class peejay_cps (troy.interface.iComputePilotService) :
 
-    def __init__ (self) :
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+    def __init__ (self, api, adaptor) :
+
+        self.api     = api 
+        self.adaptor = adaptor
+
+        self.peejay  = self.adaptor.module
+        self.master  = self.peejay.master ()
+
+        idata = self.api.get_idata_ ('api')
+
+        # we MUST interpret cps_id, if present
+        if 'id' in idata :
+            if idata['id'] :
+                raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
+                        "peejay cannot yet reconnect to CPS instances")
+        print " === idata: " + str(idata)
+        print " === peejay cps init done"
 
 
     def create_pilot (self, rm, cpd, cp_type=None, context=None):
@@ -77,17 +96,24 @@ class bigjob_cps (troy.interface.iComputePilotService) :
             Return value:
             A ComputePilot handle
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+
+        print ' === self     :' + str(self    ) 
+        print ' === rm       :' + str(rm      ) 
+        print ' === cpd      :' + str(cpd     ) 
+        print ' === cp_type  :' + str(cp_type ) 
+        print ' === context  :' + str(context ) 
+
+        exit (0)
 
 
-    def list_pilots (self, api):
+    def list_pilots (self):
         """ List all CPs """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def wait (self):
         """ Wait until CPS enters a final state """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def cancel (self):
@@ -95,25 +121,25 @@ class bigjob_cps (troy.interface.iComputePilotService) :
             This also cancels all the ComputePilots that were under control of this
             CPS.
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
 ########################################################################
-class bigjob_cp (troy.interface.iComputePilot) :
+class peejay_cp (troy.interface.iComputePilot) :
 
-    def __init__ (self) :
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+    def __init__ (self, adaptor) :
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def wait (self):
         """ Wait until CP enters a final state """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def cancel (self):        
         """ Remove the ComputePilot from the ComputePilot Service.
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def reinitialize (self, cpd):        
@@ -122,7 +148,7 @@ class bigjob_cp (troy.interface.iComputePilot) :
             Keyword arguments:
             cpd -- A ComputePilotDescription
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def set_callback (self, member, cb):
@@ -132,7 +158,7 @@ class bigjob_cp (troy.interface.iComputePilot) :
             member -- The member to set the callback for (state / state_detail / wall_time_left).
             cb     -- The callback object to call.
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def unset_callback (self, member):
@@ -141,16 +167,17 @@ class bigjob_cp (troy.interface.iComputePilot) :
             Keyword arguments:
             member -- The member to unset the callback for (state / state_detail / wall_tim_left).
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
     
 
 
 
 ########################################################################
-class bigjob_cus (troy.interface.iComputeUnitService) :
+class peejay_cus (troy.interface.iComputeUnitService) :
 
-    def __init__ (self) :
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+    def __init__ (self, api, adaptor) :
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+
 
     def add_compute_pilot_service (self, cps):
         """ Add a ComputePilotService to this WUS.
@@ -158,12 +185,12 @@ class bigjob_cus (troy.interface.iComputeUnitService) :
             Keyword arguments:
             cps -- The ComputePilot Service to which this ComputeUnitService will connect.
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def list_compute_pilot_services (self):
         """ List all CPSs of CUS """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def remove_compute_pilot_service (self, cps):
@@ -175,7 +202,7 @@ class bigjob_cus (troy.interface.iComputeUnitService) :
             Keyword arguments:
             cps -- The ComputePilotService to remove 
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def submit_compute_unit (self, cud):
@@ -187,12 +214,12 @@ class bigjob_cus (troy.interface.iComputeUnitService) :
             Return:
             ComputeUnit object
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def wait (self):
         """ Wait until CUS enters a final state """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def cancel (self):
@@ -200,23 +227,23 @@ class bigjob_cus (troy.interface.iComputeUnitService) :
             
             Cancelling the WUS also cancels all the WUs submitted to it.
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
 ########################################################################
-class bigjob_cu (troy.interface.iComputeUnit) :
+class peejay_cu (troy.interface.iComputeUnit) :
 
-    def __init__ (self) :
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+    def __init__ (self, api, adaptor) :
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
     def wait (self):
         """ Wait until CU enters a final state """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def cancel (self):
         """ Cancel the CU """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
     
     def set_callback (self, member, cb):
@@ -226,7 +253,7 @@ class bigjob_cu (troy.interface.iComputeUnit) :
             member -- The member to set the callback for (state / state_detail).
             cb     -- The callback object to call.
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
     
     def unset_callback (self, member):
@@ -235,7 +262,7 @@ class bigjob_cu (troy.interface.iComputeUnit) :
             Keyword arguments:
             member -- The member to unset the callback from.
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -244,10 +271,10 @@ class bigjob_cu (troy.interface.iComputeUnit) :
 #
 
 ########################################################################
-class bigjob_dps (troy.interface.iDataPilotService) :
+class peejay_dps (troy.interface.iDataPilotService) :
 
-    def __init__ (self) :
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+    def __init__ (self, api, adaptor) :
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
     def create_pilot (self, rm, dpd, dp_type=None, context=None):
         """ Add a DataPilot to the DataPilotService
@@ -261,17 +288,17 @@ class bigjob_dps (troy.interface.iDataPilotService) :
             Return value:
             A DataPilot handle
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def list_pilots (self):
         """ List all DPs """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def wait (self):
         """ Wait until DPS enters a final state """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def cancel (self):
@@ -279,23 +306,23 @@ class bigjob_dps (troy.interface.iDataPilotService) :
             This also cancels all the DataPilots that were under control of this
             PDS.
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
 ########################################################################
-class bigjob_dp (troy.interface.iDataPilot) :
+class peejay_dp (troy.interface.iDataPilot) :
 
-    def __init__ (self) :
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+    def __init__ (self, api, adaptor) :
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
     def wait (self):
         """ Wait until DP enters a final state """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def cancel (self):        
         """ Cancel DP """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def reinitialize (self, dpd):        
@@ -304,7 +331,7 @@ class bigjob_dp (troy.interface.iDataPilot) :
             Keyword arguments:
             dpd -- A DataPilotDescription
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def set_callback (self, member, cb):
@@ -314,7 +341,7 @@ class bigjob_dp (troy.interface.iDataPilot) :
             member -- The member to set the callback for (state / state_detail / size_left).
             cb     -- The callback object to call.
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
     def unset_callback (self, member):
         """ Unset a callback function from a member
@@ -322,14 +349,14 @@ class bigjob_dp (troy.interface.iDataPilot) :
             Keyword arguments:
             member -- The member to unset the callback for (state / state_detail / sizeleft).
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
 ########################################################################
-class bigjob_dus (troy.interface.iDataUnitService) :
+class peejay_dus (troy.interface.iDataUnitService) :
 
-    def __init__ (self) :
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+    def __init__ (self, api, adaptor) :
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
     def add_data_pilot_service (self, dps):
         """ Add a DataPilotService 
@@ -337,12 +364,12 @@ class bigjob_dus (troy.interface.iDataUnitService) :
             Keyword arguments:
             dps -- The DataPilotService to which this DataUnitService will connect.
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def list_data_pilot_services (self):
         """ List all DPSs of DUS """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
     
 
     def remove_data_pilot_service (self, dps):
@@ -354,7 +381,7 @@ class bigjob_dus (troy.interface.iDataUnitService) :
             Keyword arguments:
             dps -- The DataPilotService to remove 
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
     
     
     def submit_data_unit (self, dud):
@@ -366,12 +393,12 @@ class bigjob_dus (troy.interface.iDataUnitService) :
             Return:
             DataUnit object
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def wait (self):
         """ Wait until DUS enters a final state """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
     
     def cancel (self):
@@ -379,24 +406,24 @@ class bigjob_dus (troy.interface.iDataUnitService) :
             
             Cancelling the DUS also cancels all the DUs submitted to it.
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
 ########################################################################
-class bigjob_du (troy.interface.iDataUnit) :
+class peejay_du (troy.interface.iDataUnit) :
 
-    def __init__ (self) :
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+    def __init__ (self, api, adaptor) :
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def wait (self):
         """ Wait until DU enters a final state """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def cancel (self):
         """ Cancel the DU """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def set_callback (self, member, cb):
@@ -406,7 +433,7 @@ class bigjob_du (troy.interface.iDataUnit) :
             member -- The member to set the callback for (state / state_detail).
             cb     -- The callback object to call.
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
     
     def unset_callback (self, member):
@@ -415,22 +442,22 @@ class bigjob_du (troy.interface.iDataUnit) :
             Keyword arguments:
             member -- The member to unset the callback from.
         """
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def list_files (self):
         """ list files managed by the DU """
-        raise troy.pilot.Exception (troy.pilot.troy.pilot.troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.troy.pilot.troy.pilot.Error.NotImplemented, "method not implemented!")
     
 
     def data_export (self, target_directory):
         """ copies content of DU to a directory on the local machine"""
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
         
     def data_import (self, src_directory):
         """ copies content from a directory on the local machine to DU"""
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -439,18 +466,21 @@ class bigjob_du (troy.interface.iDataUnit) :
 #
 
 ########################################################################
-class bigjob_dcus (troy.interface.iComputeDataUnitService) :
+class peejay_dcus (troy.interface.iComputeDataUnitService) :
 
-    def __init__ (self) :
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+    def __init__ (self, api, adaptor) :
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
 
 
 ########################################################################
-class bigjob_dcu (troy.interface.iComputeDataUnit) :
+class peejay_dcu (troy.interface.iComputeDataUnit) :
 
-    def __init__ (self) :
-        raise troy.pilot.Exception (troy.pilot.Error.NotImplemented, "method not implemented!")
+    def __init__ (self, api, adaptor) :
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
+
+
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

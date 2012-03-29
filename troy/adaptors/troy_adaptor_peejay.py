@@ -40,8 +40,10 @@ class adaptor (troy.interface.aBase) :
     def get_name (self):
         return self.name
 
+
     def get_registry (self):
         return self.registry
+
 
     def sanity_check (self):
         
@@ -49,12 +51,12 @@ class adaptor (troy.interface.aBase) :
         try :
             (f, p, d)   = imp.find_module ('peejay', ['/home/merzky/saga/peejay/'])
             self.module = imp.load_module ('peejay', f, p, d)
-        except TroyException as e :
+        except Exception as e :
             print ' ======== could not load peejay adaptor: ' + str (e)
-            return False
+            raise TroyException (Error.NoSuccess, 'Could not load the peejay module')
 
-        print '--------------------' + str (self.module.state.New)
-        return True
+        # Hey, we can use peejay objects now!  Like this:
+        # self.module.state.New
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -69,19 +71,24 @@ class peejay_cps (troy.interface.iComputePilotService) :
 
         self.api     = api 
         self.adaptor = adaptor
+        self.idata   = self.api.get_idata_ ('api')
+
+        # we MUST interpret cps_id, if present
+        if 'id' in self.idata :
+            if self.idata['id'] :
+                raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
+                        "peejay cannot yet reconnect to CPS instances")
+
+        print " === peejay cps init done"
 
         self.peejay  = self.adaptor.module
         self.master  = self.peejay.master ()
 
-        idata = self.api.get_idata_ ('api')
+        # if we got this far, we can now register adaptor level instance data in
+        # the api.  Well, we don't have any, yet, but anyway: that saves us from
+        # checking dict keys later on
+        self.api.set_idata_ (self.adaptor.get_name (), {})
 
-        # we MUST interpret cps_id, if present
-        if 'id' in idata :
-            if idata['id'] :
-                raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
-                        "peejay cannot yet reconnect to CPS instances")
-        print " === idata: " + str(idata)
-        print " === peejay cps init done"
 
 
     def create_pilot (self, rm, cpd, cp_type=None, context=None):
@@ -103,12 +110,17 @@ class peejay_cps (troy.interface.iComputePilotService) :
         print ' === cp_type  :' + str(cp_type ) 
         print ' === context  :' + str(context ) 
 
-        exit (0)
+        # FIXME: add param checks
+        pilot = self.master.run_pilot ()
+        ret   = troy.pilot.ComputePilot (pilot.get_id ())
+
 
 
     def list_pilots (self):
+        return self.master.list_pilots ()
+
         """ List all CPs """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+
 
 
     def wait (self):
@@ -127,8 +139,33 @@ class peejay_cps (troy.interface.iComputePilotService) :
 ########################################################################
 class peejay_cp (troy.interface.iComputePilot) :
 
-    def __init__ (self, adaptor) :
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+    def __init__ (self, api, adaptor) :
+
+        self.api     = api 
+        self.adaptor = adaptor
+        self.idata   = self.api.get_idata_ ('api')
+
+        self.peejay  = self.adaptor.module
+        self.master  = self.peejay.master ()
+
+        # we MUST interpret cps_id, if present.  In fact, we need to have an id,
+        # as creation is always done in the CPS
+        have_id = False
+        if 'id' in self.idata :
+            if self.idata['id'] :
+                self.pilot = self.peejay.pilot (self.idata['id'])
+                have_id    = True
+
+        if not have_id :
+            raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
+                    "peejay cannot needs an id to reconnect to a pilot")
+
+        print " === peejay cp init done"
+
+        # if we got this far, we can now register adaptor level instance data in
+        # the api.  Well, we don't have any, yet, but anyway: that saves us from
+        # checking dict keys later on
+        self.api.set_idata_ (self.adaptor.get_name (), {})
 
 
     def wait (self):

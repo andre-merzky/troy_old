@@ -47,10 +47,6 @@ class ComputePilotService (Base) :
 
 
 
-    def check (self, one, two, three):
-        return self.get_engine_().call ('ComputePilotService', 'check', self, one, two, three)
-
-
     def create_pilot (self, rm, cpd, cp_type=None, context=None):
         """ Add a ComputePilot to the ComputePilotService
 

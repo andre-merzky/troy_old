@@ -34,12 +34,18 @@ class Engine (object) :
         # suitable classes etc).  The outer dict maps the inner dicts to
         # a unique adaptor name
         #
-        # adaptor = {
-        #      troy_adaptor_bigjob : { 'module'  : impl.source (troy_adaptor_bigjob.py)
-        #                              'adaptor' : module.adaptor () },
-        #      troy_adaptor_diane  : { 'module'  : impl.source (troy_adaptor_diane.py)
-        #                              'adaptor' : module.adaptor () },
-        #     }
+        # adaptors = {
+        #       troy_adaptor_bigjob : 
+        #            : { 'module'   : impl.source (troy_adaptor_bigjob.py),
+        #                'adaptor'  : module.adaptor (),
+        #                'registry' : { troy_api_class : adaptor_bigjob_class } 
+        #              },
+        #       troy_adaptor_diane : 
+        #            : { 'module'   : impl.source (troy_adaptor_diane.py),
+        #                'adaptor'  : module.adaptor (),
+        #                'registry' : { troy_api_class : adaptor_diane_class } 
+        #              }
+        #            }
         #
         self.adaptors    = {}
         self.module_path = './troy/adaptors/'  # FIXME: pick from env or ini
@@ -58,8 +64,8 @@ class Engine (object) :
                 # classes
                 adaptor    = module.adaptor ()
 
-                if not adaptor.sanity_check () :
-                    raise TroyException (Error.NoSuccess, "failed sanity check")
+                # this will throw if the adaptor is not viable
+                adaptor.sanity_check ()
 
                 a_name     = adaptor.get_name ()
                 a_registry = adaptor.get_registry ()
@@ -67,8 +73,6 @@ class Engine (object) :
                 self.adaptors[a_name] = {'module'   : module, 
                                          'adaptor'  : adaptor,
                                          'registry' : a_registry}
-
-                print "engine: init: load adaptor: " + path + " done"
 
             except TroyException, e:
                 print "engine: init: load adaptor: " + path + " failed:\n  " + str (e)
@@ -137,15 +141,7 @@ class Engine (object) :
                 print "engine: call: " + a_name + "." + a_class + "." \
                       + method_name + " (" + str (args) + str (kwargs) + ")"
 
-                # do we need to call init() again?
-
-                ret = None
-                # ret = getattr (api_class.adaptors_[a_name], method_name) (*args, **kwargs)
-
-                print "engine: call: " + a_name + "." + a_class + "." \
-                      + method_name + " (" + str (args) + str (kwargs) + ") : " + str (ret)
-
-                return ret
+                return getattr (api_class.adaptors_[a_name], method_name) (*args, **kwargs)
 
 
             except TroyException as e:

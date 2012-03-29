@@ -10,18 +10,17 @@ def test_compute ():
         cpd['queue'] = 'large'
         cpd['key']   = 'val'
 
-        cps = troy.pilot.ComputePilotService ('1')
+        cps = troy.pilot.ComputePilotService ()
         print "cps : " + str (cps)
-        print cps.check (1, 2, 3)
         print cps.list_pilots ()
 
         cp  = cps.create_pilot ("peejay://localhost", cpd)
 
-        cus = troy.pilot.ComputeUnitService ()
-        cus.add_compute_pilot_service (cps)
+        # cus = troy.pilot.ComputeUnitService ()
+        # cus.add_compute_pilot_service (cps)
 
-        cud = troy.pilot.ComputeUnitDescription ()
-        cu  = cus.submit_compute_unit (cud)
+        # cud = troy.pilot.ComputeUnitDescription ()
+        # cu  = cus.submit_compute_unit (cud)
  
     # except Exception, e:
     #     print str (e)
@@ -61,8 +60,8 @@ def test_pilot ():
  
 def main():
     test_compute ()
-    test_data    ()
-    test_pilot   ()
+    # test_data    ()
+    # test_pilot   ()
 
 if __name__ == "__main__":
     main()

@@ -38,8 +38,18 @@ class ComputePilot (Base) :
             Keyword arguments:
             cp_id -- restore from cp_id
         """
+
+        # init api base
         Base.__init__ (self)
-        pass
+
+        # prepare instance data
+        idata = {
+                  'id' : cp_id,
+                }
+        self.set_idata_ ('api', idata)
+
+        # initialize adaptor class 
+        self.get_engine_().call ('ComputePilot', 'init', self)
 
 
     def wait (self):

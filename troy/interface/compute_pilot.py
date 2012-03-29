@@ -21,12 +21,14 @@ class iComputePilot (iBase) :
         re-initialized.
     """
 
-    def __init__ (self, obj, adaptor, cp_id=None):
-        """ Create a ComputePilot
+    def __init__ (self, obj, adaptor):
+        """ Create a ComputePilot """
+        pass
 
-            Keyword arguments:
-            cp_id -- restore from cp_id
-        """
+
+    def init (self) :
+        """ dummy method to make sure the backend can initialize the object.
+            This method should *not* be implemented in the adaptor!"""
         pass
 
 

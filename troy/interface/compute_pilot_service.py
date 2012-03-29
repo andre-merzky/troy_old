@@ -10,7 +10,6 @@ class iComputePilotService (iBase) :
 
     """  ComputePilotService (CPS)
 
-    
         The ComputePilotService is responsible for creating and managing 
         the ComputePilots.
 
@@ -18,19 +17,16 @@ class iComputePilotService (iBase) :
         P* Model.
     """
 
+
     def __init__ (self, obj, adaptor) :
         """ Create a ComputePilotService object"""
         pass
 
 
     def init (self) :
-        """ dummy method to make sure the backend can initialize the object
-        """
+        """ dummy method to make sure the backend can initialize the object.
+            This method should *not* be implemented in the adaptor!"""
         pass
-
-
-    def check (self, one, two, three):
-        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     def create_pilot (self, rm, cpd, cp_type=None, context=None):

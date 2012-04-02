@@ -14,13 +14,24 @@ def test_compute ():
         print "cps : " + str (cps)
         print cps.list_pilots ()
 
-        cp  = cps.create_pilot ("peejay://localhost", cpd)
+        cp1 = cps.create_pilot ("peejay://localhost", cpd)
+        cp2 = cps.create_pilot ("peejay://localhost", cpd)
 
-        # cus = troy.pilot.ComputeUnitService ()
-        # cus.add_compute_pilot_service (cps)
+        print str(cps.list_pilots ())
 
-        # cud = troy.pilot.ComputeUnitDescription ()
-        # cu  = cus.submit_compute_unit (cud)
+        cus = troy.pilot.ComputeUnitService ()
+        cus.add_compute_pilot_service (cps)
+
+        print str(cus.list_compute_pilot_services ())
+
+        cud = troy.pilot.ComputeUnitDescription ()
+
+        cud['executable'] = 'touch'
+        cud['arguments']  = ['/tmp/hello_troy', '&&', 'sleep', '10']
+
+        cu  = cus.submit_compute_unit (cud)
+
+        cu.wait ()
  
     # except Exception, e:
     #     print str (e)

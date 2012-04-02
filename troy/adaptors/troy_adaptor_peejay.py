@@ -36,6 +36,15 @@ class adaptor (troy.interface.aBase) :
 
                          'ComputeDataUnitService'    : 'peejay_cdus',
                          'ComputeDataUnit'           : 'peejay_cdu' }
+        
+        # the adaptor_data keeps links between all id's and backend instances.
+        # In the current API, that is basically the only way to handle things
+        # :-/
+        self.adata = { 'cps' : {},
+                       'cp'  : {}, 
+                       'cus' : {},
+                       'cu'  : {} }
+
 
     def get_name (self):
         return self.name
@@ -57,6 +66,15 @@ class adaptor (troy.interface.aBase) :
 
         # Hey, we can use peejay objects now!  Like this:
         # self.module.state.New
+    
+
+    # for each api object, we register our adaptor data.  That way, the adata
+    # will be available in all adaptor level calls (each belonging to exactly
+    # one api class instance)
+    def register_adata (self, api) :
+
+        api.set_idata_ (self.get_name (), self.adata)
+        return self.adata
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -72,22 +90,24 @@ class peejay_cps (troy.interface.iComputePilotService) :
         self.api     = api 
         self.adaptor = adaptor
         self.idata   = self.api.get_idata_ ('api')
+        self.peejay  = self.adaptor.module
 
         # we MUST interpret cps_id, if present
         if 'id' in self.idata :
-            if self.idata['id'] :
-                raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
-                        "peejay cannot yet reconnect to CPS instances")
+            self.master  = self.peejay.master (self.idata['id'])
+        else :
+            self.master  = self.peejay.master ()
+
+        self.id = self.master.get_id ()
 
         print " === peejay cps init done"
 
-        self.peejay  = self.adaptor.module
-        self.master  = self.peejay.master ()
-
         # if we got this far, we can now register adaptor level instance data in
-        # the api.  Well, we don't have any, yet, but anyway: that saves us from
-        # checking dict keys later on
-        self.api.set_idata_ (self.adaptor.get_name (), {})
+        # the api.  
+        self.adata = self.adaptor.register_adata (self.api)
+
+        # register the master after creation
+        self.adata ['cps'][self.id] = self.master
 
 
 
@@ -111,15 +131,20 @@ class peejay_cps (troy.interface.iComputePilotService) :
         print ' === context  :' + str(context ) 
 
         # FIXME: add param checks
-        pilot = self.master.run_pilot ()
-        ret   = troy.pilot.ComputePilot (pilot.get_id ())
+        pilot     = self.master.run_pilot ()
+        pilot_id  = str(pilot.get_id ())
+
+        # register pilot for later use
+        self.adata['cp'][pilot_id] = pilot
+
+        return troy.pilot.ComputePilot (pilot_id)
 
 
 
     def list_pilots (self):
+        """ List all CPs """
         return self.master.list_pilots ()
 
-        """ List all CPs """
 
 
 
@@ -146,26 +171,22 @@ class peejay_cp (troy.interface.iComputePilot) :
         self.idata   = self.api.get_idata_ ('api')
 
         self.peejay  = self.adaptor.module
-        self.master  = self.peejay.master ()
 
         # we MUST interpret cps_id, if present.  In fact, we need to have an id,
         # as creation is always done in the CPS
-        have_id = False
-        if 'id' in self.idata :
-            if self.idata['id'] :
-                self.pilot = self.peejay.pilot (self.idata['id'])
-                have_id    = True
-
-        if not have_id :
+        if not 'id' in self.idata :
             raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
-                    "peejay cannot needs an id to reconnect to a pilot")
+                    "peejay needs an id to reconnect to a pilot")
+
+        self.id    = self.idata['id']
+        self.pilot = self.peejay.pilot (self.id)
 
         print " === peejay cp init done"
 
         # if we got this far, we can now register adaptor level instance data in
-        # the api.  Well, we don't have any, yet, but anyway: that saves us from
-        # checking dict keys later on
-        self.api.set_idata_ (self.adaptor.get_name (), {})
+        # the api.  
+        self.adata = self.adaptor.register_adata (self.api)
+
 
 
     def wait (self):
@@ -212,8 +233,38 @@ class peejay_cp (troy.interface.iComputePilot) :
 ########################################################################
 class peejay_cus (troy.interface.iComputeUnitService) :
 
+    cus_index = 0
+
     def __init__ (self, api, adaptor) :
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+
+        self.api     = api 
+        self.adaptor = adaptor
+        self.idata   = self.api.get_idata_ ('api')
+
+        self.peejay  = self.adaptor.module
+        self.cps     = []  # list of associated compute pilot services
+
+
+        peejay_cus.cus_index += 1
+        self.id      = str(peejay_cus.cus_index)
+
+        # we MUST interpret cus_id, if present.  But in fact, peejay does not
+        # have a CUS, so we cannot, ever, reconnect to a CUS.  So, we have to
+        # throw if an id is present
+        # as creation is always done in the CPS
+        if 'id' in self.idata :
+            if self.idata['id'] :
+                raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, "peejay cannot reconnect to CUS!")
+
+        print " === peejay cus init done"
+
+
+        # if we got this far, we can now register adaptor level instance data in
+        # the api.  
+        self.adata = self.adaptor.register_adata (self.api)
+
+        # register the pilot after creation
+        self.adata ['cus'][self.id] = self
 
 
     def add_compute_pilot_service (self, cps):
@@ -222,12 +273,13 @@ class peejay_cus (troy.interface.iComputeUnitService) :
             Keyword arguments:
             cps -- The ComputePilot Service to which this ComputeUnitService will connect.
         """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+        self.cps.append (cps)
 
 
     def list_compute_pilot_services (self):
         """ List all CPSs of CUS """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+
+        return self.cps
 
 
     def remove_compute_pilot_service (self, cps):
@@ -239,7 +291,7 @@ class peejay_cus (troy.interface.iComputeUnitService) :
             Keyword arguments:
             cps -- The ComputePilotService to remove 
         """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+        self.cps.remove(cps)
 
 
     def submit_compute_unit (self, cud):
@@ -251,18 +303,50 @@ class peejay_cus (troy.interface.iComputeUnitService) :
             Return:
             ComputeUnit object
         """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+        # build command from cud
+        cmd = ""
+
+        if not 'executable' in cud :
+            raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
+                    "executable missing in compute unit description!")
+
+
+        if 'environment' in cud :
+            cmd += '/bin/env'
+            for env in cud['environment'] :
+                cmd += ' ' + env
+            cmd += ' '
+
+        cmd += cud['executable']
+
+        if 'arguments' in cud :
+            for arg in cud['arguments'] :
+                cmd += ' ' + arg
+
+        # simply run on first pilot for now -- FIXME here goes our scheduler!
+        cps      = self.cps[0]
+        pilots   = cps.list_pilots ()
+        pilot_id = pilots[0]
+
+        pilot    = self.adata['cp'][pilot_id]
+        job      = pilot.job_submit (cmd)
+        job_id   = str(job.get_id ())
+
+        # register cu for later state checks
+        self.adata['cu'][job_id] = job
+
+        return troy.pilot.ComputeUnit(job_id)
 
 
     def wait (self):
         """ Wait until CUS enters a final state """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method useless!")
 
 
     def cancel (self):
-        """ Cancel the WUS.
+        """ Cancel the CUS.
             
-            Cancelling the WUS also cancels all the WUs submitted to it.
+            Cancelling the CUS also cancels all the CUs submitted to it.
         """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
@@ -271,11 +355,36 @@ class peejay_cus (troy.interface.iComputeUnitService) :
 class peejay_cu (troy.interface.iComputeUnit) :
 
     def __init__ (self, api, adaptor) :
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+
+        self.api     = api 
+        self.adaptor = adaptor
+        self.idata   = self.api.get_idata_ ('api')
+
+        self.peejay  = self.adaptor.module
+
+        # we MUST interpret cu_id, if present.  In fact, we need to have an id,
+        # as creation is always done in the CUS
+        if not 'id' in self.idata :
+            raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
+                    "peejay needs an id to reconnect to a cu")
+
+        self.id    = self.idata['id']
+
+        print " === peejay cu init done"
+
+        # if we got this far, we can now register adaptor level instance data in
+        # the api.  
+        self.adata = self.adaptor.register_adata (self.api)
+
+        self.job   = self.adata['cu'][self.id]
+
+
 
     def wait (self):
         """ Wait until CU enters a final state """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+
+        self.job.wait ()
+
 
 
     def cancel (self):

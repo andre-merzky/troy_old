@@ -65,7 +65,8 @@ class ComputeUnitService (Base) :
 
     def list_compute_pilot_services (self):
         """ List all CPSs of CUS """
-        return self.get_engine_().call ('ComputeUnitService', 'list_pilot_services', self)
+        return self.get_engine_().call ('ComputeUnitService', 
+                                        'list_compute_pilot_services', self)
 
 
     def remove_compute_pilot_service (self, cps):

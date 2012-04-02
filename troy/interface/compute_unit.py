@@ -24,6 +24,12 @@ class iComputeUnit (iBase) :
         pass
 
     
+    def init (self) :
+        """ dummy method to make sure the backend can initialize the object.
+            This method should *not* be implemented in the adaptor!"""
+        pass
+
+
     def wait (self):
         """ Wait until CU enters a final state """
         raise TroyException (Error.NotImplemented, "method not implemented!")

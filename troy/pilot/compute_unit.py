@@ -28,10 +28,21 @@ class ComputeUnit (Base) :
         'description',  # Description
     )
 
-    def __init__ (self):
+    def __init__ (self, cu_id=None):
         print "cu : init"
+
+        # init api base
         Base.__init__ (self)
-        pass
+
+        # prepare instance data
+        idata = {
+                  'id' : cu_id,
+                }
+        self.set_idata_ ('api', idata)
+
+        # initialize adaptor class 
+        self.get_engine_().call ('ComputeUnit', 'init', self)
+
 
     
     def wait (self):

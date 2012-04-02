@@ -154,7 +154,6 @@ troy.pilot.compute_pilot_service.ComputePilotService.create_pilot	troy.pilot.com
 troy.pilot.base.Base.get_adaptors_	troy.pilot.base.Base-class.html#get_adaptors_
 troy.pilot.compute_pilot_service.ComputePilotService.cancel	troy.pilot.compute_pilot_service.ComputePilotService-class.html#cancel
 troy.pilot.compute_pilot_service.ComputePilotService.list_pilots	troy.pilot.compute_pilot_service.ComputePilotService-class.html#list_pilots
-troy.pilot.compute_pilot_service.ComputePilotService.check	troy.pilot.compute_pilot_service.ComputePilotService-class.html#check
 troy.pilot.compute_pilot_service.ComputePilotService.__init__	troy.pilot.compute_pilot_service.ComputePilotService-class.html#__init__
 troy.pilot.compute_pilot_service.ComputePilotService.wait	troy.pilot.compute_pilot_service.ComputePilotService-class.html#wait
 troy.pilot.compute_unit.ComputeUnit	troy.pilot.compute_unit.ComputeUnit-class.html
@@ -248,7 +247,7 @@ troy.pilot.data_unit.DataUnit.data_import	troy.pilot.data_unit.DataUnit-class.ht
 troy.pilot.data_unit.DataUnit.cancel	troy.pilot.data_unit.DataUnit-class.html#cancel
 troy.pilot.base.Base.get_adaptors_	troy.pilot.base.Base-class.html#get_adaptors_
 troy.pilot.data_unit.DataUnit.data_export	troy.pilot.data_unit.DataUnit-class.html#data_export
-troy.pilot.base.Base.__init__	troy.pilot.base.Base-class.html#__init__
+troy.pilot.data_unit.DataUnit.__init__	troy.pilot.data_unit.DataUnit-class.html#__init__
 troy.pilot.data_unit.DataUnit.wait	troy.pilot.data_unit.DataUnit-class.html#wait
 troy.pilot.data_unit_description.DataUnitDescription	troy.pilot.data_unit_description.DataUnitDescription-class.html
 troy.pilot.data_unit_description.DataUnitDescription.__init__	troy.pilot.data_unit_description.DataUnitDescription-class.html#__init__
@@ -269,9 +268,9 @@ troy.pilot.data_unit_service.DataUnitService.wait	troy.pilot.data_unit_service.D
 troy.pilot.exception.Error	troy.pilot.exception.Error-class.html
 troy.pilot.exception.Error.NoSuccess	troy.pilot.exception.Error-class.html#NoSuccess
 troy.pilot.exception.Error.NotImplemented	troy.pilot.exception.Error-class.html#NotImplemented
-troy.pilot.exception.Exception	troy.pilot.exception.Exception-class.html
-troy.pilot.exception.Exception.__str__	troy.pilot.exception.Exception-class.html#__str__
-troy.pilot.exception.Exception.__init__	troy.pilot.exception.Exception-class.html#__init__
+troy.pilot.exception.TroyException	troy.pilot.exception.TroyException-class.html
+troy.pilot.exception.TroyException.__str__	troy.pilot.exception.TroyException-class.html#__str__
+troy.pilot.exception.TroyException.__init__	troy.pilot.exception.TroyException-class.html#__init__
 troy.pilot.state.State	troy.pilot.state.State-class.html
 troy.pilot.state.State.Canceled	troy.pilot.state.State-class.html#Canceled
 troy.pilot.state.State.Unknown	troy.pilot.state.State-class.html#Unknown

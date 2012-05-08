@@ -68,6 +68,34 @@
 </dd></dl>
 
 <hr />
+<p>All Troy API classes inherit  from this base class, which provides 
+  interfaces to adaptor management and to the management of class instance 
+  data.</p>
+  <p>In particular, this base class provides the following class members to
+  all API classes:</p>
+  <ul>
+    <li>
+      engine_   : a reference to the engine singleton, which manages 
+      adaptors and call forwarding
+    </li>
+    <li>
+      adaptors_ : a sorted list of used adaptors, which *can* be used by 
+      the engine to optimize adaptor invocation (previously successful 
+      adaptors are most likely to succeed again)
+    </li>
+    <li>
+      idata_    : a dict of dicts, for class instance state data 
+      management. The dict under idata_['api'] holds the actual class 
+      instance data (documented for each class), all other keys hold 
+      adaptor level instance data, for example to cache connections.  The 
+      keys for those adaptor instance data SHOULD be the adaptor name.  
+      idata_ SHOULD not be accessed directly, but via get_idata() and 
+      set_idata(),
+    </li>
+  </ul>
+  <p>The accessor methods are marked as private, as they are not part of 
+  the API. They are intended to be used by the engine and the adaptors.</p>
+
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -98,7 +126,8 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="get_engine_"></a><span class="summary-sig-name">get_engine_</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td><span class="summary-sig"><a href="troy.pilot.base.Base-class.html#get_engine_" class="summary-sig-name">get_engine_</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the engine singleton.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.get_engine_">source&nbsp;code</a></span>
             
@@ -114,7 +143,8 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="get_adaptors_"></a><span class="summary-sig-name">get_adaptors_</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td><span class="summary-sig"><a href="troy.pilot.base.Base-class.html#get_adaptors_" class="summary-sig-name">get_adaptors_</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get list of all previously successful adaptors.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.get_adaptors_">source&nbsp;code</a></span>
             
@@ -130,8 +160,9 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="get_idata_"></a><span class="summary-sig-name">get_idata_</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">id</span>)</span></td>
+          <td><span class="summary-sig"><a href="troy.pilot.base.Base-class.html#get_idata_" class="summary-sig-name">get_idata_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">id</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">api</code><code class="variable-quote">'</code></span>)</span><br />
+      Get instance data dict entry.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.get_idata_">source&nbsp;code</a></span>
             
@@ -147,9 +178,10 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="set_idata_"></a><span class="summary-sig-name">set_idata_</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">id</span>,
-        <span class="summary-sig-arg">data</span>)</span></td>
+          <td><span class="summary-sig"><a href="troy.pilot.base.Base-class.html#set_idata_" class="summary-sig-name">set_idata_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">data</span>,
+        <span class="summary-sig-arg">id</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">api</code><code class="variable-quote">'</code></span>)</span><br />
+      Set instance data dict entry.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.set_idata_">source&nbsp;code</a></span>
             
@@ -160,6 +192,102 @@
     </td>
   </tr>
 </table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="get_engine_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_engine_</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.get_engine_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the engine singleton.</p>
+  <p>That method is only used by the API instance itself, to invoke the 
+  engine's call() forwarding mechanism.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_adaptors_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_adaptors_</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.get_adaptors_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get list of all previously successful adaptors.</p>
+  <p>That list is maintained by the engine (only).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_idata_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_idata_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">id</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">api</code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.get_idata_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get instance data dict entry.</p>
+  <p>By default, this returns the class instance data, otherwise the 
+  instance data of the specified adaptor.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_idata_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_idata_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">data</span>,
+        <span class="sig-arg">id</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">api</code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.set_idata_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set instance data dict entry.</p>
+  <p>By default, this sets the class instance data, otherwise the instance 
+  data of the specified adaptor.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
 <!-- ==================== NAVIGATION BAR ==================== -->
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
@@ -192,7 +320,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Mon Apr  2 12:23:30 2012</a>
+    3.0.1 on Tue May  8 12:48:54 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

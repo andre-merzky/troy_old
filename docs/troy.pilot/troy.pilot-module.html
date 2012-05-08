@@ -59,6 +59,13 @@
 </table>
 <!-- ==================== PACKAGE DESCRIPTION ==================== -->
 <h1 class="epydoc">Package pilot</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot-pysrc.html">source&nbsp;code</a></span></p>
+<p>For the sake of code organization, all API classes are defined in a 
+  separate file.  Alas, pythons module naming rules then introduce an 
+  additional element, the file name, so that, for example, the compute 
+  pilot class would be available as troy.pilot.compute_pilot.ComputePilot.
+  We thus move the symbols into the parent namespace, which makes them 
+  available as, for example, troy.pilot.ComputePilot.</p>
+
 <!-- ==================== SUBMODULES ==================== -->
 <a name="section-Submodules"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -108,6 +115,46 @@
     </td>
   </tr>
 </table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <a href="troy.pilot.state.State-class.html" title="troy.pilot.state.State">State</a>,
+  <a href="troy.pilot.callback.Callback-class.html" title="troy.pilot.callback.Callback">Callback</a>,
+  <a href="troy.pilot.exception.TroyException-class.html" title="troy.pilot.exception.TroyException">TroyException</a>,
+  <a href="troy.pilot.exception.Error-class.html" title="troy.pilot.exception.Error">Error</a>,
+  <a href="troy.pilot.compute_data_unit_description.ComputeDataUnitDescription-class.html" title="troy.pilot.compute_data_unit_description.ComputeDataUnitDescription">ComputeDataUnitDescription</a>,
+  <a href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html" title="troy.pilot.compute_data_unit.ComputeDataUnit">ComputeDataUnit</a>,
+  <a href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html" title="troy.pilot.compute_data_unit_service.ComputeDataUnitService">ComputeDataUnitService</a>,
+  <a href="troy.pilot.compute_pilot_description.ComputePilotDescription-class.html" title="troy.pilot.compute_pilot_description.ComputePilotDescription">ComputePilotDescription</a>,
+  <a href="troy.pilot.compute_pilot.ComputePilot-class.html" title="troy.pilot.compute_pilot.ComputePilot">ComputePilot</a>,
+  <a href="troy.pilot.compute_pilot_service.ComputePilotService-class.html" title="troy.pilot.compute_pilot_service.ComputePilotService">ComputePilotService</a>,
+  <a href="troy.pilot.compute_unit_description.ComputeUnitDescription-class.html" title="troy.pilot.compute_unit_description.ComputeUnitDescription">ComputeUnitDescription</a>,
+  <a href="troy.pilot.compute_unit.ComputeUnit-class.html" title="troy.pilot.compute_unit.ComputeUnit">ComputeUnit</a>,
+  <a href="troy.pilot.compute_unit_service.ComputeUnitService-class.html" title="troy.pilot.compute_unit_service.ComputeUnitService">ComputeUnitService</a>,
+  <a href="troy.pilot.data_pilot_description.DataPilotDescription-class.html" title="troy.pilot.data_pilot_description.DataPilotDescription">DataPilotDescription</a>,
+  <a href="troy.pilot.data_pilot.DataPilot-class.html" title="troy.pilot.data_pilot.DataPilot">DataPilot</a>,
+  <a href="troy.pilot.data_pilot_service.DataPilotService-class.html" title="troy.pilot.data_pilot_service.DataPilotService">DataPilotService</a>,
+  <a href="troy.pilot.data_unit_description.DataUnitDescription-class.html" title="troy.pilot.data_unit_description.DataUnitDescription">DataUnitDescription</a>,
+  <a href="troy.pilot.data_unit.DataUnit-class.html" title="troy.pilot.data_unit.DataUnit">DataUnit</a>,
+  <a href="troy.pilot.data_unit_service.DataUnitService-class.html" title="troy.pilot.data_unit_service.DataUnitService">DataUnitService</a>,
+  <a href="troy.pilot.base-module.html" title="troy.pilot.base">base</a>,
+  <a href="troy.pilot.callback-module.html" title="troy.pilot.callback">callback</a>,
+  <a href="troy.pilot.compute_data_unit-module.html" title="troy.pilot.compute_data_unit">compute_data_unit</a>,
+  <a href="troy.pilot.compute_data_unit_description-module.html" title="troy.pilot.compute_data_unit_description">compute_data_unit_description</a>,
+  <a href="troy.pilot.compute_data_unit_service-module.html" title="troy.pilot.compute_data_unit_service">compute_data_unit_service</a>,
+  <a href="troy.pilot.compute_pilot-module.html" title="troy.pilot.compute_pilot">compute_pilot</a>,
+  <a href="troy.pilot.compute_pilot_description-module.html" title="troy.pilot.compute_pilot_description">compute_pilot_description</a>,
+  <a href="troy.pilot.compute_pilot_service-module.html" title="troy.pilot.compute_pilot_service">compute_pilot_service</a>,
+  <a href="troy.pilot.compute_unit-module.html" title="troy.pilot.compute_unit">compute_unit</a>,
+  <a href="troy.pilot.compute_unit_description-module.html" title="troy.pilot.compute_unit_description">compute_unit_description</a>,
+  <a href="troy.pilot.compute_unit_service-module.html" title="troy.pilot.compute_unit_service">compute_unit_service</a>,
+  <a href="troy.pilot.data_pilot-module.html" title="troy.pilot.data_pilot">data_pilot</a>,
+  <a href="troy.pilot.data_pilot_description-module.html" title="troy.pilot.data_pilot_description">data_pilot_description</a>,
+  <a href="troy.pilot.data_pilot_service-module.html" title="troy.pilot.data_pilot_service">data_pilot_service</a>,
+  <a href="troy.pilot.data_unit-module.html" title="troy.pilot.data_unit">data_unit</a>,
+  <a href="troy.pilot.data_unit_description-module.html" title="troy.pilot.data_unit_description">data_unit_description</a>,
+  <a href="troy.pilot.data_unit_service-module.html" title="troy.pilot.data_unit_service">data_unit_service</a>,
+  <a href="troy.pilot.exception-module.html" title="troy.pilot.exception">exception</a>,
+  <a href="troy.pilot.state-module.html" title="troy.pilot.state">state</a>
+</p><br />
 <!-- ==================== NAVIGATION BAR ==================== -->
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
@@ -140,7 +187,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Mon Apr  2 12:23:30 2012</a>
+    3.0.1 on Tue May  8 12:48:54 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

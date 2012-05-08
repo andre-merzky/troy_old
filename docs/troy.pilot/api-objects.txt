@@ -269,6 +269,7 @@ troy.pilot.exception.Error	troy.pilot.exception.Error-class.html
 troy.pilot.exception.Error.NoSuccess	troy.pilot.exception.Error-class.html#NoSuccess
 troy.pilot.exception.Error.NotImplemented	troy.pilot.exception.Error-class.html#NotImplemented
 troy.pilot.exception.TroyException	troy.pilot.exception.TroyException-class.html
+troy.pilot.exception.TroyException.get_trace	troy.pilot.exception.TroyException-class.html#get_trace
 troy.pilot.exception.TroyException.__str__	troy.pilot.exception.TroyException-class.html#__str__
 troy.pilot.exception.TroyException.__init__	troy.pilot.exception.TroyException-class.html#__init__
 troy.pilot.state.State	troy.pilot.state.State-class.html

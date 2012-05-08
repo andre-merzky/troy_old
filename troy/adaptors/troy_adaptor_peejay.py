@@ -21,9 +21,11 @@ class adaptor (troy.interface.aBase) :
     
     def __init__ (self) :
         
-        # registry maps api classes to adaptor classes implementing the
-        # respective class interface.
+        # duh!
         self.name     = 'troy_adaptor_peejay'
+
+        # The registry maps api interface classes to the adaptor classes 
+        # implementing them:
         self.registry = {'ComputePilotService'       : 'peejay_cps' ,
                          'ComputePilot'              : 'peejay_cp'  ,
                          'ComputeUnitService'        : 'peejay_cus' ,
@@ -37,9 +39,8 @@ class adaptor (troy.interface.aBase) :
                          'ComputeDataUnitService'    : 'peejay_cdus',
                          'ComputeDataUnit'           : 'peejay_cdu' }
         
-        # the adaptor_data keeps links between all id's and backend instances.
-        # In the current API, that is basically the only way to handle things
-        # :-/
+        # The adaptor_data keeps links between all id's and backend instances.
+        # It is also use to maintain any other adaptor level state.
         self.adata = { 'cps' : {},
                        'cp'  : {}, 
                        'cus' : {},
@@ -70,7 +71,7 @@ class adaptor (troy.interface.aBase) :
 
     # for each api object, we register our adaptor data.  That way, the adata
     # will be available in all adaptor level calls (each belonging to exactly
-    # one api class instance)
+    # one api class instance).
     def register_adata (self, api) :
 
         api.set_idata_ (self.adata, self.get_name ())
@@ -111,6 +112,11 @@ class peejay_cps (troy.interface.iComputePilotService) :
 
 
 
+    def get_id (self) :
+        return self.id
+   
+
+
     def create_pilot (self, rm, cpd, cp_type=None, context=None):
         """ Add a ComputePilot to the ComputePilotService
 
@@ -144,8 +150,6 @@ class peejay_cps (troy.interface.iComputePilotService) :
     def list_pilots (self):
         """ List all CPs """
         return self.master.list_pilots ()
-
-
 
 
     def wait (self):
@@ -188,6 +192,48 @@ class peejay_cp (troy.interface.iComputePilot) :
         # the api.  
         self.adata = self.adaptor.register_adata (self.api)
 
+
+
+    def get_id (self) :
+        return self.id
+   
+
+    def submit_compute_unit_ (self, cud):
+        """ Submit a CU to this Pilot.
+
+            Keyword argument:
+            cud -- The ComputeUnitDescription from the application
+
+            Return:
+            ComputeUnit object
+        """
+        # build command from cud
+        cmd = ""
+
+        if not 'executable' in cud :
+            raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
+                    "executable missing in compute unit description!")
+
+
+        if 'environment' in cud :
+            cmd += '/bin/env'
+            for env in cud['environment'] :
+                cmd += ' ' + env
+            cmd += ' '
+
+        cmd += cud['executable']
+
+        if 'arguments' in cud :
+            for arg in cud['arguments'] :
+                cmd += ' ' + arg
+
+        job      = self.pilot.job_submit (cmd)
+        job_id   = str(job.get_id ())
+
+        # register cu for later state checks etc.
+        self.adata['cu'][job_id] = job
+
+        return troy.pilot.ComputeUnit(job_id)
 
 
     def wait (self):
@@ -275,6 +321,11 @@ class peejay_cus (troy.interface.iComputeUnitService) :
 
         print " === peejay cus init done"
 
+        # we need a scheduler.  There is no way for the API to re-init or
+        # re-assign a scheduler after the CUS has been created -- the scheduler
+        # is fully internal -- so we can just create it here.  For now, we use
+        # the 'Random' scheduler
+        self.scheduler = troy.pilot._ComputeScheduler ('Random')
 
         # if we got this far, we can now register adaptor level instance data in
         # the api.  
@@ -282,6 +333,12 @@ class peejay_cus (troy.interface.iComputeUnitService) :
 
         # register the pilot after creation
         self.adata ['cus'][self.id] = self
+
+
+
+    def get_id (self) :
+        return self.id
+
 
 
     def add_compute_pilot_service (self, cps):
@@ -296,7 +353,12 @@ class peejay_cus (troy.interface.iComputeUnitService) :
     def list_compute_pilot_services (self):
         """ List all CPSs of CUS """
 
-        return self.cps
+        ret = []
+
+        for cps in self.cps :
+            ret.append (cps.get_id())
+
+        return ret
 
 
     def remove_compute_pilot_service (self, cps):
@@ -309,50 +371,6 @@ class peejay_cus (troy.interface.iComputeUnitService) :
             cps -- The ComputePilotService to remove 
         """
         self.cps.remove(cps)
-
-
-    def submit_compute_unit (self, cud):
-        """ Submit a CU to this ComputeUnitService.
-
-            Keyword argument:
-            cud -- The ComputeUnitDescription from the application
-
-            Return:
-            ComputeUnit object
-        """
-        # build command from cud
-        cmd = ""
-
-        if not 'executable' in cud :
-            raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
-                    "executable missing in compute unit description!")
-
-
-        if 'environment' in cud :
-            cmd += '/bin/env'
-            for env in cud['environment'] :
-                cmd += ' ' + env
-            cmd += ' '
-
-        cmd += cud['executable']
-
-        if 'arguments' in cud :
-            for arg in cud['arguments'] :
-                cmd += ' ' + arg
-
-        # simply run on first pilot for now -- FIXME here goes our scheduler!
-        cps      = self.cps[0]
-        pilots   = cps.list_pilots ()
-        pilot_id = pilots[0]
-
-        pilot    = self.adata['cp'][pilot_id]
-        job      = pilot.job_submit (cmd)
-        job_id   = str(job.get_id ())
-
-        # register cu for later state checks
-        self.adata['cu'][job_id] = job
-
-        return troy.pilot.ComputeUnit(job_id)
 
 
     def wait (self):
@@ -385,28 +403,26 @@ class peejay_cu (troy.interface.iComputeUnit) :
             raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
                     "peejay needs an id to reconnect to a cu")
 
-        self.id    = self.idata['id']
+        self.id = self.idata['id']
 
         print " === peejay cu init done"
 
         # if we got this far, we can now register adaptor level instance data in
         # the api.  
         self.adata = self.adaptor.register_adata (self.api)
-
         self.job   = self.adata['cu'][self.id]
 
 
 
     def wait (self):
         """ Wait until CU enters a final state """
-
         self.job.wait ()
 
 
 
     def cancel (self):
         """ Cancel the CU """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+        self.job.cancel ()
 
     
     def set_callback (self, member, cb):

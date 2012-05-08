@@ -23,10 +23,35 @@ class iComputePilotService (iBase) :
         pass
 
 
+
+    ############################################################################
+    #
+    # Note that submit_compute_unit_ is not called directly by the CPS impl, but
+    # instead by a scheduler class, for those implementation which don't provide
+    # scheduling on CUS level.  It is thus a private call.
+    #
+    def submit_compute_unit_ (self, cud):
+        """ Submit a CU to this ComputePilotService.
+    
+            Keyword argument:
+            cud -- The ComputeUnitDescription from the application
+    
+            Return:
+            ComputeUnit object
+        """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
+
+
+
     def init (self) :
         """ dummy method to make sure the backend can initialize the object.
             This method should *not* be implemented in the adaptor!"""
         pass
+
+
+    def get_id (self):        
+        """ get instance id """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     def create_pilot (self, rm, cpd, cp_type=None, context=None):

@@ -58,15 +58,27 @@ class iComputeUnitService (iBase) :
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
+    ############################################################################
+    #
+    # Note that submit_compute_unit *is* called directly by the CUS impl, in
+    # case the backend provides CUS level scheduling.  If not, then this call
+    # will raise an exception, and the scheduler class will take over
+    #
     def submit_compute_unit (self, cud):
         """ Submit a CU to this ComputeUnitService.
-
+    
             Keyword argument:
             cud -- The ComputeUnitDescription from the application
-
+    
             Return:
             ComputeUnit object
         """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
+
+
+
+    def get_id (self):        
+        """ get instance id """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 

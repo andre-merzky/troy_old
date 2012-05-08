@@ -156,8 +156,8 @@ class Engine (object) :
         if e_stack == "" :
             e_stack = "  Bummer, no adaptors loaded.  None at all!"
 
-        # raise TroyException (Error.NoSuccess, "no valid adaptor found:\n" + e_stack)        
         print "no valid adaptor found:\n" + e_stack        
+        raise TroyException (Error.NoSuccess, "no valid adaptor found:\n" + e_stack)        
         pass
 
 

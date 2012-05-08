@@ -27,6 +27,7 @@ from troy.pilot.compute_pilot_service          import ComputePilotService
 from troy.pilot.compute_unit_description       import ComputeUnitDescription     
 from troy.pilot.compute_unit                   import ComputeUnit                 
 from troy.pilot.compute_unit_service           import ComputeUnitService         
+from troy.pilot.compute_scheduler              import _ComputeScheduler            
 
 from troy.pilot.data_pilot_description         import DataPilotDescription       
 from troy.pilot.data_pilot                     import DataPilot                   
@@ -34,6 +35,8 @@ from troy.pilot.data_pilot_service             import DataPilotService
 from troy.pilot.data_unit_description          import DataUnitDescription        
 from troy.pilot.data_unit                      import DataUnit                    
 from troy.pilot.data_unit_service              import DataUnitService            
+
+
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

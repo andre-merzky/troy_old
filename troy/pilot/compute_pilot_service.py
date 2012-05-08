@@ -1,7 +1,8 @@
 
-from base          import Base
-from state         import State
-from compute_pilot import ComputePilot
+from base               import Base
+from state              import State
+from compute_pilot      import ComputePilot
+from compute_scheduler  import _ComputeScheduler
     
 ########################################################################
 #
@@ -38,13 +39,48 @@ class ComputePilotService (Base) :
 
         # prepare instance data
         idata = {
-                  'id' : cds_id,
+                  'id'        : cds_id,
+                  'scheduler' : _ComputeScheduler ('Random')
                 }
         self.set_idata_ (idata)
 
         # initialize adaptor class 
         self.get_engine_().call ('ComputePilotService', 'init', self)
 
+
+
+    ############################################################################
+    #
+    # The submit_compute_unit's implementation first tries to submit the CU via
+    # the backend -- if that does not work, the call is handed of to a scheduler
+    # which may be able to submit to on of the CPS' CPs instead.
+    #
+    # This is a private method
+    #
+    def submit_compute_unit_ (self, cud):
+        """ Submit a CU to this ComputePilotService.
+
+            Keyword argument:
+            cud -- The ComputeUnitDescription from the application
+
+            Return:
+            ComputeUnit object
+        """
+
+        try :
+            return self.get_engine_().call ('ComputePilotService',
+                                            'submit_compute_unit_', self, cud)
+        except :
+            # internal scheduling did not work -- invoke the scheduler
+            idata = self.get_idata_ ()
+            cu = idata['scheduler'].schedule (self, cud)
+            return cu
+
+
+
+    def get_id (self):
+        """ get instance id """
+        return self.get_engine_().call ('ComputePilotService', 'get_id', self)
 
 
     def create_pilot (self, rm, cpd, cp_type=None, context=None):

@@ -8,6 +8,7 @@ from troy.interface.compute_pilot                  import iComputePilot
 from troy.interface.compute_pilot_service          import iComputePilotService        
 from troy.interface.compute_unit                   import iComputeUnit                 
 from troy.interface.compute_unit_service           import iComputeUnitService         
+from troy.interface.compute_scheduler              import iComputeScheduler         
 
 from troy.interface.data_pilot                     import iDataPilot                   
 from troy.interface.data_pilot_service             import iDataPilotService           

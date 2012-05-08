@@ -1,6 +1,7 @@
 
-from base          import Base
-from compute_unit  import ComputeUnit
+from base               import Base
+from compute_unit       import ComputeUnit
+from compute_scheduler  import _ComputeScheduler
     
 ########################################################################
 #
@@ -44,13 +45,20 @@ class ComputeUnitService (Base) :
 
         # prepare instance data
         idata = {
-                  'id' : cus_id,
+                  'id'        : cus_id,
+                  'scheduler' : _ComputeScheduler ('Random')
                 }
         self.set_idata_ (idata)
 
         # initialize adaptor class 
         self.get_engine_().call ('ComputeUnitService', 'init', self)
+
         pass
+
+
+    def get_id (self):
+        """ get instance id """
+        return self.get_engine_().call ('ComputeUnitService', 'get_id', self)
 
 
     def add_compute_pilot_service (self, cps):
@@ -81,7 +89,12 @@ class ComputeUnitService (Base) :
         return self.get_engine_().call ('ComputeUnitService',
                                         'remove_pilot_service', self, cps)
 
-
+    ############################################################################
+    #
+    # The submit_compute_unit's implementation first tries to submit the CU via
+    # the backend -- if that does not work, the call is handed of to a scheduler
+    # which may be able to submit to on of the CUS' CPSs instead.
+    #
     def submit_compute_unit (self, cud):
         """ Submit a CU to this ComputeUnitService.
 
@@ -91,8 +104,16 @@ class ComputeUnitService (Base) :
             Return:
             ComputeUnit object
         """
-        return self.get_engine_().call ('ComputeUnitService',
-                                        'submit_compute_unit', self, cud)
+
+        try :
+            return self.get_engine_().call ('ComputeUnitService',
+                                            'submit_compute_unit', self, cud)
+        except :
+            # internal scheduling did not work -- invoke the scheduler
+            idata = self.get_idata_ ()
+            cu = idata['scheduler'].schedule (self, cud)
+            return cu
+
 
 
     def wait (self):

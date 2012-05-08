@@ -81,3 +81,5 @@ class DataUnit (Base) :
         return self.get_engine_().call ('DataUnit', 'data_import', 
                                         self, src)
         
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
+

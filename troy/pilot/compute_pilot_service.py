@@ -40,7 +40,7 @@ class ComputePilotService (Base) :
         idata = {
                   'id' : cds_id,
                 }
-        self.set_idata_ ('api', idata)
+        self.set_idata_ (idata)
 
         # initialize adaptor class 
         self.get_engine_().call ('ComputePilotService', 'init', self)
@@ -81,4 +81,6 @@ class ComputePilotService (Base) :
         """
         return self.get_engine_().call ('ComputePilotService', 'cancel', self)
 
+
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

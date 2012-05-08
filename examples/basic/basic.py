@@ -5,7 +5,7 @@
 import troy
 
 def test_compute ():
-    # try:
+    try:
         cpd = troy.pilot.ComputePilotDescription ()
         cpd['queue'] = 'large'
         cpd['key']   = 'val'
@@ -32,9 +32,12 @@ def test_compute ():
         cu  = cus.submit_compute_unit (cud)
 
         cu.wait ()
+
+        cp1.cancel ()
+        cp2.cancel ()
  
-    # except Exception, e:
-    #     print str (e)
+    except Exception, e:
+        print str (e)
 
 
 def test_data ():

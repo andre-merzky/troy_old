@@ -44,9 +44,9 @@ class ComputePilot (Base) :
 
         # prepare instance data
         idata = {
-                  'id' : cp_id,
+                  'id'    : cp_id,
                 }
-        self.set_idata_ ('api', idata)
+        self.set_idata_ (idata)
 
         # initialize adaptor class 
         self.get_engine_().call ('ComputePilot', 'init', self)
@@ -91,4 +91,6 @@ class ComputePilot (Base) :
         return self.get_engine_().call ('ComputePilot', 'unset_callback', 
                                         self, member)
     
+
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

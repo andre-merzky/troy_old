@@ -74,3 +74,5 @@ class DataPilotService (Base) :
         return self.get_engine_().call ('DataPilotService', 'cancel', self)
 
 
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
+

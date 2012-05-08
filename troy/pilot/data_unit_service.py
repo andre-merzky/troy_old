@@ -97,3 +97,5 @@ class DataUnitService (Base) :
         return self.get_engine_().call ('DataUnitService', 'cancel', self)
 
 
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
+

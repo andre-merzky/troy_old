@@ -46,7 +46,7 @@ class ComputeUnitService (Base) :
         idata = {
                   'id' : cus_id,
                 }
-        self.set_idata_ ('api', idata)
+        self.set_idata_ (idata)
 
         # initialize adaptor class 
         self.get_engine_().call ('ComputeUnitService', 'init', self)
@@ -107,4 +107,6 @@ class ComputeUnitService (Base) :
         """
         return self.get_engine_().call ('ComputeUnitService', 'cancel', self)
 
+
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

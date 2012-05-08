@@ -73,7 +73,7 @@ class adaptor (troy.interface.aBase) :
     # one api class instance)
     def register_adata (self, api) :
 
-        api.set_idata_ (self.get_name (), self.adata)
+        api.set_idata_ (self.adata, self.get_name ())
         return self.adata
 
 
@@ -89,7 +89,7 @@ class peejay_cps (troy.interface.iComputePilotService) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.idata   = self.api.get_idata_ ('api')
+        self.idata   = self.api.get_idata_ ()
         self.peejay  = self.adaptor.module
 
         # we MUST interpret cps_id, if present
@@ -168,7 +168,7 @@ class peejay_cp (troy.interface.iComputePilot) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.idata   = self.api.get_idata_ ('api')
+        self.idata   = self.api.get_idata_ ()
 
         self.peejay  = self.adaptor.module
 
@@ -178,8 +178,9 @@ class peejay_cp (troy.interface.iComputePilot) :
             raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
                     "peejay needs an id to reconnect to a pilot")
 
-        self.id    = self.idata['id']
-        self.pilot = self.peejay.pilot (self.id)
+        self.id      = self.idata['id']
+        self.pilot   = self.peejay.pilot (self.id)
+        self.running = 1
 
         print " === peejay cp init done"
 
@@ -191,13 +192,21 @@ class peejay_cp (troy.interface.iComputePilot) :
 
     def wait (self):
         """ Wait until CP enters a final state """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+        if not self.running :
+            return
+
+        self.pilot.wait ()
+        self.running = 0
 
 
     def cancel (self):        
         """ Remove the ComputePilot from the ComputePilot Service.
         """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+        if not self.running :
+            return
+
+        self.pilot.kill ()
+        self.running = 0
 
 
     def reinitialize (self, cpd):        
@@ -216,6 +225,10 @@ class peejay_cp (troy.interface.iComputePilot) :
             member -- The member to set the callback for (state / state_detail / wall_time_left).
             cb     -- The callback object to call.
         """
+        if not self.running :
+            raise troy.pilot.TroyException (troy.pilot.Error.IncorrectState, 
+                    "cannot attach callback to dead pilot!")
+
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
@@ -225,6 +238,10 @@ class peejay_cp (troy.interface.iComputePilot) :
             Keyword arguments:
             member -- The member to unset the callback for (state / state_detail / wall_tim_left).
         """
+        if not self.running :
+            raise troy.pilot.TroyException (troy.pilot.Error.IncorrectState, 
+                    "cannot remove callback from dead pilot!")
+
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
     
 
@@ -239,7 +256,7 @@ class peejay_cus (troy.interface.iComputeUnitService) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.idata   = self.api.get_idata_ ('api')
+        self.idata   = self.api.get_idata_ ()
 
         self.peejay  = self.adaptor.module
         self.cps     = []  # list of associated compute pilot services
@@ -358,7 +375,7 @@ class peejay_cu (troy.interface.iComputeUnit) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.idata   = self.api.get_idata_ ('api')
+        self.idata   = self.api.get_idata_ ()
 
         self.peejay  = self.adaptor.module
 

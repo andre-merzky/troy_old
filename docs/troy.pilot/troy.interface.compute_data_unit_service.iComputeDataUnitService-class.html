@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>troy.interface.compute_data_unit_service.iComputeDataUnitService</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://andre-merzky.github.com/troy">Troy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;troy ::
+        <a href="troy.interface-module.html">Package&nbsp;interface</a> ::
+        <a href="troy.interface.compute_data_unit_service-module.html">Module&nbsp;compute_data_unit_service</a> ::
+        Class&nbsp;iComputeDataUnitService
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class iComputeDataUnitService</h1><p class="nomargin-top"><span class="codelink"><a href="troy.interface.compute_data_unit_service-pysrc.html#iComputeDataUnitService">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_troy_int_4" name="uml_class_diagram_for_troy_int_4">
+<area shape="rect" id="node29" href="troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html#__init__" title="Create a Compute Data Unit Service object." alt="" coords="205,311,379,329"/>
+<area shape="rect" id="node1" href="troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html" title="ComputeDataUnitService." alt="" coords="193,278,391,335"/>
+<area shape="rect" id="node3" href="troy_adaptor_peejay.peejay_dcus-class.html" title="troy_adaptor_peejay.peejay_dcus" alt="" coords="177,355,407,394"/>
+<area shape="rect" id="node30" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#add_compute_pilot_service" title="Add a ComputePilotService to this WUS." alt="" coords="17,103,275,121"/>
+<area shape="rect" id="node30" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#cancel" title="Cancel the WUS." alt="" coords="17,121,275,140"/>
+<area shape="rect" id="node30" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#get_id" title="get instance id" alt="" coords="17,140,275,159"/>
+<area shape="rect" id="node30" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#init" title="dummy method to make sure the backend can initialize the object" alt="" coords="17,159,275,177"/>
+<area shape="rect" id="node30" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#list_compute_pilot_services" title="List all CPSs of CUS" alt="" coords="17,177,275,196"/>
+<area shape="rect" id="node30" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#remove_compute_pilot_service" title="Remove a ComputePilotService" alt="" coords="17,196,275,215"/>
+<area shape="rect" id="node30" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#submit_compute_unit" title="Submit a CU to this ComputeUnitService." alt="" coords="17,215,275,233"/>
+<area shape="rect" id="node30" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#wait" title="Wait until CUS enters a final state" alt="" coords="17,233,275,252"/>
+<area shape="rect" id="node2" href="troy.interface.compute_unit_service.iComputeUnitService-class.html" title="ComputeUnitService (CUS)" alt="" coords="5,70,285,258"/>
+<area shape="rect" id="node32" href="troy.interface.data_unit_service.iDataUnitService-class.html#add_data_pilot_service" title="Add a DataPilotService" alt="" coords="327,140,547,159"/>
+<area shape="rect" id="node32" href="troy.interface.data_unit_service.iDataUnitService-class.html#list_data_pilot_services" title="List all DPSs of DUS" alt="" coords="327,159,547,177"/>
+<area shape="rect" id="node32" href="troy.interface.data_unit_service.iDataUnitService-class.html#remove_data_pilot_service" title="Remove a DataPilotService" alt="" coords="327,177,547,196"/>
+<area shape="rect" id="node32" href="troy.interface.data_unit_service.iDataUnitService-class.html#submit_data_unit" title="Submit a DU to this DataUnitService." alt="" coords="327,196,547,215"/>
+<area shape="rect" id="node4" href="troy.interface.data_unit_service.iDataUnitService-class.html" title="DataUnitService (DUS)" alt="" coords="315,107,557,221"/>
+<area shape="rect" id="node5" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="247,6,337,50"/>
+</map>
+  <img src="uml_class_diagram_for_troy_int_4.gif" alt='' usemap="#uml_class_diagram_for_troy_int_4" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>ComputeDataUnitService.</p>
+  <p>The ComputeDataUnitService is the application's interface to submit 
+  ComputeDataUnits to the Pilot-Manager in the P* Model.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cdus_id</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Create a Compute Data Unit Service object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_data_unit_service-pysrc.html#iComputeDataUnitService.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#add_compute_pilot_service" class="summary-sig-name">add_compute_pilot_service</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cps</span>)</span><br />
+      Add a ComputePilotService to this WUS.
+      <em>(Inherited from <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html">troy.interface.compute_unit_service.iComputeUnitService</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.add_compute_pilot_service">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.data_unit_service.iDataUnitService-class.html#add_data_pilot_service" class="summary-sig-name">add_data_pilot_service</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dps</span>)</span><br />
+      Add a DataPilotService
+      <em>(Inherited from <a href="troy.interface.data_unit_service.iDataUnitService-class.html">troy.interface.data_unit_service.iDataUnitService</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.add_data_pilot_service">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#cancel" class="summary-sig-name">cancel</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Cancel the WUS.
+      <em>(Inherited from <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html">troy.interface.compute_unit_service.iComputeUnitService</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.cancel">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_id"></a><span class="summary-sig-name">get_id</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      get instance id
+      <em>(Inherited from <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html">troy.interface.compute_unit_service.iComputeUnitService</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.get_id">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="init"></a><span class="summary-sig-name">init</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      dummy method to make sure the backend can initialize the object
+      <em>(Inherited from <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html">troy.interface.compute_unit_service.iComputeUnitService</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.init">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="list_compute_pilot_services"></a><span class="summary-sig-name">list_compute_pilot_services</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      List all CPSs of CUS
+      <em>(Inherited from <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html">troy.interface.compute_unit_service.iComputeUnitService</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.list_compute_pilot_services">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="list_data_pilot_services"></a><span class="summary-sig-name">list_data_pilot_services</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      List all DPSs of DUS
+      <em>(Inherited from <a href="troy.interface.data_unit_service.iDataUnitService-class.html">troy.interface.data_unit_service.iDataUnitService</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.list_data_pilot_services">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#remove_compute_pilot_service" class="summary-sig-name">remove_compute_pilot_service</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cps</span>)</span><br />
+      Remove a ComputePilotService
+      <em>(Inherited from <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html">troy.interface.compute_unit_service.iComputeUnitService</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.remove_compute_pilot_service">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.data_unit_service.iDataUnitService-class.html#remove_data_pilot_service" class="summary-sig-name">remove_data_pilot_service</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dps</span>)</span><br />
+      Remove a DataPilotService
+      <em>(Inherited from <a href="troy.interface.data_unit_service.iDataUnitService-class.html">troy.interface.data_unit_service.iDataUnitService</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.remove_data_pilot_service">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#submit_compute_unit" class="summary-sig-name">submit_compute_unit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cud</span>)</span><br />
+      Submit a CU to this ComputeUnitService.
+      <em>(Inherited from <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html">troy.interface.compute_unit_service.iComputeUnitService</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.submit_compute_unit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.data_unit_service.iDataUnitService-class.html#submit_data_unit" class="summary-sig-name">submit_data_unit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dud</span>)</span><br />
+      Submit a DU to this DataUnitService.
+      <em>(Inherited from <a href="troy.interface.data_unit_service.iDataUnitService-class.html">troy.interface.data_unit_service.iDataUnitService</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.submit_data_unit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="wait"></a><span class="summary-sig-name">wait</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Wait until CUS enters a final state
+      <em>(Inherited from <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html">troy.interface.compute_unit_service.iComputeUnitService</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.wait">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cdus_id</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.interface.compute_data_unit_service-pysrc.html#iComputeDataUnitService.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Create a Compute Data Unit Service object.</p>
+  <p>Keyword arguments: cdus_id -- Reconnect to an existing CDUS 
+  (optional).</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.data_unit_service.iDataUnitService-class.html#__init__">data_unit_service.iDataUnitService.__init__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://andre-merzky.github.com/troy">Troy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Wed May  9 00:28:09 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

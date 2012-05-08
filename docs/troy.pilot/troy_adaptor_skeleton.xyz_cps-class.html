@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>troy_adaptor_skeleton.xyz_cps</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://andre-merzky.github.com/troy">Troy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="troy_adaptor_skeleton-module.html">Module&nbsp;troy_adaptor_skeleton</a> ::
+        Class&nbsp;xyz_cps
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class xyz_cps</h1><p class="nomargin-top"><span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#xyz_cps">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_troy_ada_14" name="uml_class_diagram_for_troy_ada_14">
+<area shape="rect" id="node187" href="troy_adaptor_skeleton.xyz_cps-class.html#__init__" title="Create a ComputePilotService object" alt="" coords="20,180,359,199"/>
+<area shape="rect" id="node187" href="troy_adaptor_skeleton.xyz_cps-class.html#create_pilot" title="Add a ComputePilot to the ComputePilotService" alt="" coords="20,199,359,217"/>
+<area shape="rect" id="node187" href="troy_adaptor_skeleton.xyz_cps-class.html#list_pilots" title="List all CPs" alt="" coords="20,217,359,236"/>
+<area shape="rect" id="node187" href="troy_adaptor_skeleton.xyz_cps-class.html#wait" title="Wait until CPS enters a final state" alt="" coords="20,236,359,255"/>
+<area shape="rect" id="node187" href="troy_adaptor_skeleton.xyz_cps-class.html#cancel" title="Cancel the CPS This also cancels all the ComputePilots that were under &#160;control of this CPS." alt="" coords="20,255,359,273"/>
+<area shape="rect" id="node1" href="troy_adaptor_skeleton.xyz_cps-class.html" title="troy_adaptor_skeleton.xyz_cps" alt="" coords="8,147,371,279"/>
+<area shape="rect" id="node188" href="troy.interface.compute_pilot_service.iComputePilotService-class.html#init" title="dummy method to make sure the backend can initialize the object." alt="" coords="17,103,360,121"/>
+<area shape="rect" id="node2" href="troy.interface.compute_pilot_service.iComputePilotService-class.html" title="ComputePilotService (CPS)" alt="" coords="5,70,371,127"/>
+<area shape="rect" id="node3" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="104,6,275,50"/>
+</map>
+  <img src="uml_class_diagram_for_troy_ada_14.gif" alt='' usemap="#uml_class_diagram_for_troy_ada_14" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy_adaptor_skeleton.xyz_cps-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">adaptor</span>)</span><br />
+      Create a ComputePilotService object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#xyz_cps.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy_adaptor_skeleton.xyz_cps-class.html#create_pilot" class="summary-sig-name">create_pilot</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">rm</span>,
+        <span class="summary-sig-arg">cpd</span>,
+        <span class="summary-sig-arg">cp_type</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">context</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Add a ComputePilot to the ComputePilotService</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#xyz_cps.create_pilot">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy_adaptor_skeleton.xyz_cps-class.html#list_pilots" class="summary-sig-name">list_pilots</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">api</span>)</span><br />
+      List all CPs</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#xyz_cps.list_pilots">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy_adaptor_skeleton.xyz_cps-class.html#wait" class="summary-sig-name">wait</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Wait until CPS enters a final state</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#xyz_cps.wait">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy_adaptor_skeleton.xyz_cps-class.html#cancel" class="summary-sig-name">cancel</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Cancel the CPS This also cancels all the ComputePilots that were 
+      under control of this CPS.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#xyz_cps.cancel">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#init" class="summary-sig-name">init</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      dummy method to make sure the backend can initialize the object.
+      <em>(Inherited from <a href="troy.interface.compute_pilot_service.iComputePilotService-class.html">troy.interface.compute_pilot_service.iComputePilotService</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_pilot_service-pysrc.html#iComputePilotService.init">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">adaptor</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#xyz_cps.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Create a ComputePilotService object</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.base.iBase-class.html#__init__">troy.interface.base.iBase.__init__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="create_pilot"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">create_pilot</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">rm</span>,
+        <span class="sig-arg">cpd</span>,
+        <span class="sig-arg">cp_type</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">context</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#xyz_cps.create_pilot">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add a ComputePilot to the ComputePilotService</p>
+  <p>Keyword arguments: rm      -- Contact string for the resource manager 
+  cpd     -- ComputePilot Description cp_type -- backend type (optional) 
+  context -- Security context (optional)</p>
+  <p>Return value: A ComputePilot handle</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#create_pilot">troy.interface.compute_pilot_service.iComputePilotService.create_pilot</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="list_pilots"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">list_pilots</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">api</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#xyz_cps.list_pilots">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>List all CPs</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#list_pilots">troy.interface.compute_pilot_service.iComputePilotService.list_pilots</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="wait"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">wait</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#xyz_cps.wait">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Wait until CPS enters a final state</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#wait">troy.interface.compute_pilot_service.iComputePilotService.wait</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="cancel"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">cancel</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#xyz_cps.cancel">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Cancel the CPS This also cancels all the ComputePilots that were under
+  control of this CPS.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#cancel">troy.interface.compute_pilot_service.iComputePilotService.cancel</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://andre-merzky.github.com/troy">Troy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Tue May  8 13:28:05 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -27,7 +27,6 @@ from troy.pilot.compute_pilot_service          import ComputePilotService
 from troy.pilot.compute_unit_description       import ComputeUnitDescription     
 from troy.pilot.compute_unit                   import ComputeUnit                 
 from troy.pilot.compute_unit_service           import ComputeUnitService         
-from troy.pilot.compute_scheduler              import _ComputeScheduler            
 
 from troy.pilot.data_pilot_description         import DataPilotDescription       
 from troy.pilot.data_pilot                     import DataPilot                   

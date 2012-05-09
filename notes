@@ -1,0 +1,21 @@
+
+call parent class ctor:
+    super (Base,self).__init__()
+
+
+Why does compute_pilot not have a list_cus() call?  How else do I find out what
+CU runs on a specific pilot?  Same for cps.list_cus.  So, how can the scheduler
+to any sensible co-location, for example?
+
+There is no compute_data_pilot_service, and no compute_data_pilot -- so there
+also cannot be a scheduler on that level.  We can only have a data-compute
+scheduler on unit service level, which then operates on data_pilot_services and
+compute_pilot_services.  Not sure if that is sufficient...
+
+Expose adaptor via object inspection.
+
+
+TODO: create list of API questions / unclarities
+
+
+

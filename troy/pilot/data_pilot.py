@@ -1,5 +1,6 @@
 
-from base import Base
+from base            import Base
+from data_scheduler  import _DataScheduler
 
 
 ########################################################################
@@ -39,17 +40,53 @@ class DataPilot (Base) :
             Keyword arguments:
             dp_id -- restore from dp_id
         """
-        pass
+
+        # init api base
+        Base.__init__ (self)
+
+        # prepare instance data
+        idata = {
+                  'id'        : dp_id,
+                  'scheduler' : _DataScheduler ('Random')
+                }
+        self.set_idata_ (idata)
+
+        # initialize adaptor class 
+        self.get_engine_().call ('DataPilot', 'init', self)
+
+
+    ############################################################################
+    #
+    # The submit_data_unit's implementation tries to submit the DU via
+    # the backend -- if that does not work, no scheduler can help anymore, so an
+    # exception is raised (falls through really)
+    #
+    # This is a private method
+    #
+    def submit_compute_unit_ (self, dud):
+        """ Submit a DU to this DataPilot.
+
+            Keyword argument:
+            dud -- The DataUnitDescription from the application
+
+            Return:
+            DataUnit object
+        """
+
+        return self.get_engine_().call ('DataPilot',
+                                        'submit_data_unit_', self, dud)
+
+
 
 
     def wait (self):
         """ Wait until DP enters a final state """
-        pass
+        return self.get_engine_().call ('DataPilot', 'wait', self)
 
 
     def cancel (self):        
         """ Cancel DP """
-        pass
+        return self.get_engine_().call ('DataPilot', 'cancel', self)
 
 
     def reinitialize (self, dpd):        
@@ -58,7 +95,7 @@ class DataPilot (Base) :
             Keyword arguments:
             dpd -- A DataPilotDescription
         """
-        pass
+        return self.get_engine_().call ('DataPilot', 'reinitialize', self, dpd)
 
 
     def set_callback (self, member, cb):
@@ -68,7 +105,8 @@ class DataPilot (Base) :
             member -- The member to set the callback for (state / state_detail / size_left).
             cb     -- The callback object to call.
         """
-        pass
+        return self.get_engine_().call ('DataPilot', 'set_callback', 
+                                        self, member, cb)
 
     def unset_callback (self, member):
         """ Unset a callback function from a member
@@ -76,6 +114,9 @@ class DataPilot (Base) :
             Keyword arguments:
             member -- The member to unset the callback for (state / state_detail / sizeleft).
         """
-        pass
+        return self.get_engine_().call ('DataPilot', 'unset_callback', 
+                                        self, member)
 
+
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

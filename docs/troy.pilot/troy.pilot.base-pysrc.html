@@ -14,9 +14,6 @@
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="troy.pilot-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -50,10 +47,6 @@
     <td>
       <table cellpadding="0" cellspacing="0">
         <!-- hide/show private -->
-        <tr><td align="right"><span class="options"
-            >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="troy.pilot.base-pysrc.html"
-            target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
@@ -61,8 +54,9 @@
 <h1 class="epydoc">Source Code for <a href="troy.pilot.base-module.html">Module troy.pilot.base</a></h1>
 <pre class="py-src">
 <a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"> </tt>
-<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt>    <tt class="py-keyword">import</tt> <tt class="py-name">engine</tt> </tt>
-<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module troy.pilot.state=troy.pilot.state-module.html"><a title="troy.pilot.state" class="py-name" href="#" onclick="return doclink('link-0', 'state', 'link-0');">state</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class troy.pilot.state.State=troy.pilot.state.State-class.html"><a title="troy.pilot.state.State" class="py-name" href="#" onclick="return doclink('link-1', 'State', 'link-1');">State</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt>    <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package troy.engine=troy.engine-module.html,Module troy.engine.engine=troy.engine.engine-module.html"><a title="troy.engine
+troy.engine.engine" class="py-name" href="#" onclick="return doclink('link-0', 'engine', 'link-0');">engine</a></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-1" class="py-name" targets="Module troy.pilot.state=troy.pilot.state-module.html"><a title="troy.pilot.state" class="py-name" href="#" onclick="return doclink('link-1', 'state', 'link-1');">state</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class troy.pilot.state.State=troy.pilot.state.State-class.html"><a title="troy.pilot.state.State" class="py-name" href="#" onclick="return doclink('link-2', 'State', 'link-2');">State</a></tt> </tt>
 <a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
 <a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment">########################################################################</tt> </tt>
 <a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
@@ -70,24 +64,80 @@
 <a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
 <a name="Base"></a><div id="Base-def"><a name="L9"></a><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="Base-toggle" onclick="return toggle('Base');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="troy.pilot.base.Base-class.html">Base</a><tt class="py-op">:</tt> </tt>
 </div><div id="Base-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Base-expanded"><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
-<a name="Base.__init__"></a><div id="Base.__init__-def"><a name="L11"></a><tt class="py-lineno">11</tt> <a class="py-toggle" href="#" id="Base.__init__-toggle" onclick="return toggle('Base.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.base.Base-class.html#__init__">__init__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="Base.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Base.__init__-expanded"><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"base: init"</tt> </tt>
-<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt>   <tt class="py-op">=</tt> <tt class="py-name">engine</tt><tt class="py-op">.</tt><tt class="py-name">Engine</tt> <tt class="py-op">(</tt><tt class="py-op">)</tt>  <tt class="py-comment"># engine singleton to handle adaptors</tt> </tt>
-<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">adaptors_</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt>                <tt class="py-comment"># sorted list of used adaptors</tt> </tt>
-<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">idata_</tt>    <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt>                <tt class="py-comment"># adaptor specific instance data</tt> </tt>
-</div><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
-<a name="Base.get_engine_"></a><div id="Base.get_engine_-def"><a name="L17"></a><tt class="py-lineno">17</tt> <a class="py-toggle" href="#" id="Base.get_engine_-toggle" onclick="return toggle('Base.get_engine_');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.base.Base-class.html#get_engine_">get_engine_</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="Base.get_engine_-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Base.get_engine_-expanded"><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt> </tt>
-</div><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">         </tt>
-<a name="Base.get_adaptors_"></a><div id="Base.get_adaptors_-def"><a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="Base.get_adaptors_-toggle" onclick="return toggle('Base.get_adaptors_');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.base.Base-class.html#get_adaptors_">get_adaptors_</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="Base.get_adaptors_-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Base.get_adaptors_-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">adaptors_</tt> </tt>
-</div><a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">         </tt>
-<a name="Base.get_idata_"></a><div id="Base.get_idata_-def"><a name="L23"></a><tt class="py-lineno">23</tt> <a class="py-toggle" href="#" id="Base.get_idata_-toggle" onclick="return toggle('Base.get_idata_');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.base.Base-class.html#get_idata_">get_idata_</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">id</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="Base.get_idata_-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Base.get_idata_-expanded"><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">idata_</tt><tt class="py-op">[</tt><tt class="py-name">id</tt><tt class="py-op">]</tt> </tt>
-</div><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt>
-<a name="Base.set_idata_"></a><div id="Base.set_idata_-def"><a name="L26"></a><tt class="py-lineno">26</tt> <a class="py-toggle" href="#" id="Base.set_idata_-toggle" onclick="return toggle('Base.set_idata_');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.base.Base-class.html#set_idata_">set_idata_</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">id</tt><tt class="py-op">,</tt> <tt class="py-param">data</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="Base.set_idata_-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Base.set_idata_-expanded"><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">idata_</tt><tt class="py-op">[</tt><tt class="py-name">id</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">data</tt> </tt>
-</div></div><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">    <tt class="py-docstring">""" </tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">    All Troy API classes inherit  from this base class, which provides</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">    interfaces to adaptor management and to the management of class instance</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">    data.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">    In particular, this base class provides the following class members to all</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">    API classes:</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">      - engine_   : a reference to the engine singleton, which manages adaptors </tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">                    and call forwarding</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">      - adaptors_ : a sorted list of used adaptors, which *can* be used by the</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">                    engine to optimize adaptor invocation (previously successful</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">                    adaptors are most likely to succeed again)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">      - idata_    : a dict of dicts, for class instance state data management.  </tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">                    The dict under idata_['api'] holds the actual class instance</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-docstring">                    data (documented for each class), all other keys hold adaptor</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-docstring">                    level instance data, for example to cache connections.  The</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-docstring">                    keys for those adaptor instance data SHOULD be the adaptor</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-docstring">                    name.  idata_ SHOULD not be accessed directly, but via</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-docstring">                    get_idata() and set_idata(),</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-docstring">    The accessor methods are marked as private, as they are not part of the API.</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-docstring">    They are intended to be used by the engine and the adaptors.</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">     </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="Base.__init__"></a><div id="Base.__init__-def"><a name="L37"></a><tt class="py-lineno">37</tt> <a class="py-toggle" href="#" id="Base.__init__-toggle" onclick="return toggle('Base.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.base.Base-class.html#__init__">__init__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="Base.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Base.__init__-expanded"><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"base: init"</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt>   <tt class="py-op">=</tt> <tt id="link-3" class="py-name"><a title="troy.engine
+troy.engine.engine" class="py-name" href="#" onclick="return doclink('link-3', 'engine', 'link-0');">engine</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Function troy.engine.engine.Engine()=troy.engine.engine-module.html#Engine"><a title="troy.engine.engine.Engine" class="py-name" href="#" onclick="return doclink('link-4', 'Engine', 'link-4');">Engine</a></tt> <tt class="py-op">(</tt><tt class="py-op">)</tt>  <tt class="py-comment"># engine singleton to handle adaptors</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">adaptors_</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt>                <tt class="py-comment"># sorted list of used adaptors</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">idata_</tt>    <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt>                <tt class="py-comment"># adaptor specific instance data</tt> </tt>
+</div><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt>
+<a name="Base.get_engine_"></a><div id="Base.get_engine_-def"><a name="L43"></a><tt class="py-lineno">43</tt> <a class="py-toggle" href="#" id="Base.get_engine_-toggle" onclick="return toggle('Base.get_engine_');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.base.Base-class.html#get_engine_">get_engine_</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="Base.get_engine_-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Base.get_engine_-expanded"><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt class="py-docstring">        Get the engine singleton.  </tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"><tt class="py-docstring">        That method is only used by the API instance itself, to invoke the</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"><tt class="py-docstring">        engine's call() forwarding mechanism.</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">         </tt>
+<a name="Base.get_adaptors_"></a><div id="Base.get_adaptors_-def"><a name="L53"></a><tt class="py-lineno">53</tt> <a class="py-toggle" href="#" id="Base.get_adaptors_-toggle" onclick="return toggle('Base.get_adaptors_');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.base.Base-class.html#get_adaptors_">get_adaptors_</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="Base.get_adaptors_-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Base.get_adaptors_-expanded"><a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"><tt class="py-docstring">        Get list of all previously successful adaptors.</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"><tt class="py-docstring">        That list is maintained by the engine (only).</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">adaptors_</tt> </tt>
+</div><a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">         </tt>
+<a name="Base.get_idata_"></a><div id="Base.get_idata_-def"><a name="L62"></a><tt class="py-lineno">62</tt> <a class="py-toggle" href="#" id="Base.get_idata_-toggle" onclick="return toggle('Base.get_idata_');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.base.Base-class.html#get_idata_">get_idata_</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">id</tt> <tt class="py-op">=</tt> <tt class="py-string">'api'</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="Base.get_idata_-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Base.get_idata_-expanded"><a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"><tt class="py-docstring">        Get instance data dict entry.</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"><tt class="py-docstring">        By default, this returns the class instance data, otherwise the instance</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"><tt class="py-docstring">        data of the specified adaptor.</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">idata_</tt><tt class="py-op">[</tt><tt class="py-name">id</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line"> </tt>
+<a name="Base.set_idata_"></a><div id="Base.set_idata_-def"><a name="L72"></a><tt class="py-lineno">72</tt> <a class="py-toggle" href="#" id="Base.set_idata_-toggle" onclick="return toggle('Base.set_idata_');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.base.Base-class.html#set_idata_">set_idata_</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">data</tt><tt class="py-op">,</tt> <tt class="py-param">id</tt><tt class="py-op">=</tt><tt class="py-string">'api'</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="Base.set_idata_-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Base.set_idata_-expanded"><a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line"><tt class="py-docstring">        Set instance data dict entry.</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line"><tt class="py-docstring">        By default, this sets the class instance data, otherwise the instance</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line"><tt class="py-docstring">        data of the specified adaptor.</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">idata_</tt><tt class="py-op">[</tt><tt class="py-name">id</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">data</tt> </tt>
+</div></div><a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line"> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line"> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line"><tt class="py-comment"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</tt> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -98,9 +148,6 @@ expandto(location.href);
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="troy.pilot-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -126,7 +173,7 @@ expandto(location.href);
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Fri Mar 23 22:20:16 2012</a>
+    3.0.1 on Wed May  9 12:01:31 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

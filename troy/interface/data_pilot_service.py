@@ -1,6 +1,6 @@
 
 from troy.interface.base  import iBase
-from troy.pilot.exception import Exception, Error
+from troy.pilot.exception import TroyException, Error
 
 
 ########################################################################
@@ -18,7 +18,7 @@ class iDataPilotService (iBase) :
         P* Model.
     """
 
-    def __init__ (self, dps_id=None):
+    def __init__ (self, obj, adaptor, dps_id=None):
         """ Create a DataPilotService object
 
             Keyword arguments:
@@ -39,17 +39,17 @@ class iDataPilotService (iBase) :
             Return value:
             A DataPilot handle
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     def list_pilots (self):
         """ List all DPs """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     def wait (self):
         """ Wait until DPS enters a final state """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     def cancel (self):
@@ -57,6 +57,6 @@ class iDataPilotService (iBase) :
             This also cancels all the DataPilots that were under control of this
             PDS.
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 

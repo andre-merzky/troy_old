@@ -14,9 +14,6 @@
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="troy.pilot-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -50,10 +47,6 @@
     <td>
       <table cellpadding="0" cellspacing="0">
         <!-- hide/show private -->
-        <tr><td align="right"><span class="options"
-            >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="troy.pilot.exception-pysrc.html"
-            target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
@@ -66,29 +59,53 @@
 <a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
 <a name="Error"></a><div id="Error-def"><a name="L5"></a><tt class="py-lineno"> 5</tt> <a class="py-toggle" href="#" id="Error-toggle" onclick="return toggle('Error');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="troy.pilot.exception.Error-class.html">Error</a><tt class="py-op">:</tt> </tt>
 </div><div id="Error-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Error-expanded"><a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
-<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">    <tt id="link-0" class="py-name" targets="Variable troy.pilot.exception.Error.NoSuccess=troy.pilot.exception.Error-class.html#NoSuccess"><a title="troy.pilot.exception.Error.NoSuccess" class="py-name" href="#" onclick="return doclink('link-0', 'NoSuccess', 'link-0');">NoSuccess</a></tt>      <tt class="py-op">=</tt> <tt class="py-string">'NoSuccess'</tt> </tt>
-<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">    <tt id="link-1" class="py-name" targets="Variable troy.pilot.exception.Error.NotImplemented=troy.pilot.exception.Error-class.html#NotImplemented"><a title="troy.pilot.exception.Error.NotImplemented" class="py-name" href="#" onclick="return doclink('link-1', 'NotImplemented', 'link-1');">NotImplemented</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'NotImplemented'</tt> </tt>
-</div><a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
-<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
-<a name="Exception"></a><div id="Exception-def"><a name="L11"></a><tt class="py-lineno">11</tt> <a class="py-toggle" href="#" id="Exception-toggle" onclick="return toggle('Exception');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="troy.pilot.exception.Exception-class.html">Exception</a> <tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="Exception-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Exception-expanded"><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">     </tt>
-<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
-<a name="Exception.__init__"></a><div id="Exception.__init__-def"><a name="L14"></a><tt class="py-lineno">14</tt> <a class="py-toggle" href="#" id="Exception.__init__-toggle" onclick="return toggle('Exception.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.exception.Exception-class.html#__init__">__init__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">error</tt><tt class="py-op">,</tt> <tt class="py-param">msg</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="Exception.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Exception.__init__-expanded"><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
-<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">        <tt class="py-name">tmp</tt> <tt class="py-op">=</tt> <tt class="py-name">StringIO</tt><tt class="py-op">.</tt><tt class="py-name">StringIO</tt> <tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-name">traceback</tt><tt class="py-op">.</tt><tt class="py-name">print_stack</tt> <tt class="py-op">(</tt><tt class="py-name">file</tt> <tt class="py-op">=</tt> <tt class="py-name">tmp</tt><tt class="py-op">)</tt> </tt>
-<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
-<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">trace</tt> <tt class="py-op">=</tt> <tt class="py-name">tmp</tt><tt class="py-op">.</tt><tt class="py-name">getvalue</tt> <tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Variable troy.pilot.compute_pilot_description.ComputePilotDescription.error=troy.pilot.compute_pilot_description.ComputePilotDescription-class.html#error,Variable troy.pilot.compute_unit_description.ComputeUnitDescription.error=troy.pilot.compute_unit_description.ComputeUnitDescription-class.html#error"><a title="troy.pilot.compute_pilot_description.ComputePilotDescription.error
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">    TROY's exception class instances have two attributes: an error code, and an</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">    error message.  This 'Error' enum is the error code.  This list will be</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">    expanded once the API's semantics is smoothening out.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">    <tt id="link-0" class="py-name" targets="Variable troy.pilot.exception.Error.NoSuccess=troy.pilot.exception.Error-class.html#NoSuccess"><a title="troy.pilot.exception.Error.NoSuccess" class="py-name" href="#" onclick="return doclink('link-0', 'NoSuccess', 'link-0');">NoSuccess</a></tt>      <tt class="py-op">=</tt> <tt class="py-string">'NoSuccess'</tt>         <tt class="py-string">""" operation failed on backend.  """</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt id="link-1" class="py-name" targets="Variable troy.pilot.exception.Error.NotImplemented=troy.pilot.exception.Error-class.html#NotImplemented"><a title="troy.pilot.exception.Error.NotImplemented" class="py-name" href="#" onclick="return doclink('link-1', 'NotImplemented', 'link-1');">NotImplemented</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'NotImplemented'</tt>    <tt class="py-string">""" operation is not implemented. """</tt> </tt>
+</div><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"> </tt>
+<a name="TroyException"></a><div id="TroyException-def"><a name="L18"></a><tt class="py-lineno">18</tt> <a class="py-toggle" href="#" id="TroyException-toggle" onclick="return toggle('TroyException');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="troy.pilot.exception.TroyException-class.html">TroyException</a> <tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TroyException-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="TroyException-expanded"><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">    The TROY exception class is (obviously) used to signal error conditions to</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">    the user of TROY's pilot API.</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">    In principle, the name 'Exception' would suffice, but that can, on</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">    occasions, collide  with the native python Exception type (on careless</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-docstring">    'import as' directives (as I learned the hard way...).  That is why the</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-docstring">    class is named TroyException for now -- that may change in the future.</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">     </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="TroyException.__init__"></a><div id="TroyException.__init__-def"><a name="L31"></a><tt class="py-lineno">31</tt> <a class="py-toggle" href="#" id="TroyException.__init__-toggle" onclick="return toggle('TroyException.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.exception.TroyException-class.html#__init__">__init__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">error</tt><tt class="py-op">,</tt> <tt class="py-param">msg</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="TroyException.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="TroyException.__init__-expanded"><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-name">tmp</tt> <tt class="py-op">=</tt> <tt class="py-name">StringIO</tt><tt class="py-op">.</tt><tt class="py-name">StringIO</tt> <tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-name">traceback</tt><tt class="py-op">.</tt><tt class="py-name">print_stack</tt> <tt class="py-op">(</tt><tt class="py-name">file</tt> <tt class="py-op">=</tt> <tt class="py-name">tmp</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">trace</tt> <tt class="py-op">=</tt> <tt class="py-name">tmp</tt><tt class="py-op">.</tt><tt class="py-name">getvalue</tt> <tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Variable troy.pilot.compute_pilot_description.ComputePilotDescription.error=troy.pilot.compute_pilot_description.ComputePilotDescription-class.html#error,Variable troy.pilot.compute_unit_description.ComputeUnitDescription.error=troy.pilot.compute_unit_description.ComputeUnitDescription-class.html#error"><a title="troy.pilot.compute_pilot_description.ComputePilotDescription.error
 troy.pilot.compute_unit_description.ComputeUnitDescription.error" class="py-name" href="#" onclick="return doclink('link-2', 'error', 'link-2');">error</a></tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name"><a title="troy.pilot.compute_pilot_description.ComputePilotDescription.error
 troy.pilot.compute_unit_description.ComputeUnitDescription.error" class="py-name" href="#" onclick="return doclink('link-3', 'error', 'link-2');">error</a></tt> </tt>
-<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt>   <tt class="py-op">=</tt> <tt class="py-name">msg</tt> </tt>
-</div><a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
-<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
-<a name="Exception.__str__"></a><div id="Exception.__str__-def"><a name="L24"></a><tt class="py-lineno">24</tt> <a class="py-toggle" href="#" id="Exception.__str__-toggle" onclick="return toggle('Exception.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.exception.Exception-class.html#__str__">__str__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="Exception.__str__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Exception.__str__-expanded"><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">str</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="troy.pilot.compute_pilot_description.ComputePilotDescription.error
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt>   <tt class="py-op">=</tt> <tt class="py-name">msg</tt> </tt>
+</div><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="TroyException.__str__"></a><div id="TroyException.__str__-def"><a name="L41"></a><tt class="py-lineno">41</tt> <a class="py-toggle" href="#" id="TroyException.__str__-toggle" onclick="return toggle('TroyException.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.exception.TroyException-class.html#__str__">__str__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="TroyException.__str__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="TroyException.__str__-expanded"><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">str</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="troy.pilot.compute_pilot_description.ComputePilotDescription.error
 troy.pilot.compute_unit_description.ComputeUnitDescription.error" class="py-name" href="#" onclick="return doclink('link-4', 'error', 'link-2');">error</a></tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">": "</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt> </tt>
-</div></div><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+</div><a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="TroyException.get_trace"></a><div id="TroyException.get_trace-def"><a name="L45"></a><tt class="py-lineno">45</tt> <a class="py-toggle" href="#" id="TroyException.get_trace-toggle" onclick="return toggle('TroyException.get_trace');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.exception.TroyException-class.html#get_trace">get_trace</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="TroyException.get_trace-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="TroyException.get_trace-expanded"><a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">trace</tt> </tt>
+</div></div><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">  </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"><tt class="py-comment"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -99,9 +116,6 @@ expandto(location.href);
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="troy.pilot-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -127,7 +141,7 @@ expandto(location.href);
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Fri Mar 23 22:20:16 2012</a>
+    3.0.1 on Wed May  9 12:01:31 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

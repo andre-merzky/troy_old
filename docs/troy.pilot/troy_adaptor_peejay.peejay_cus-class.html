@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>troy_adaptor_peejay.peejay_cus</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://andre-merzky.github.com/troy">Troy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="troy_adaptor_peejay-module.html">Module&nbsp;troy_adaptor_peejay</a> ::
+        Class&nbsp;peejay_cus
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class peejay_cus</h1><p class="nomargin-top"><span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cus">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_troy_ada_5" name="uml_class_diagram_for_troy_ada_5">
+<area shape="rect" id="node155" href="troy_adaptor_peejay.peejay_cus-class.html#cus_index" title="troy_adaptor_peejay.peejay_cus.cus_index" alt="" coords="64,191,309,209"/>
+<area shape="rect" id="node155" href="troy_adaptor_peejay.peejay_cus-class.html#__init__" title="Create a ComputeUnitService object" alt="" coords="64,212,309,231"/>
+<area shape="rect" id="node155" href="troy_adaptor_peejay.peejay_cus-class.html#get_id" title="get instance id" alt="" coords="64,231,309,249"/>
+<area shape="rect" id="node155" href="troy_adaptor_peejay.peejay_cus-class.html#add_compute_pilot_service" title="Add a ComputePilotService to this WUS." alt="" coords="64,249,309,268"/>
+<area shape="rect" id="node155" href="troy_adaptor_peejay.peejay_cus-class.html#list_compute_pilot_services" title="List all CPSs of CUS" alt="" coords="64,268,309,287"/>
+<area shape="rect" id="node155" href="troy_adaptor_peejay.peejay_cus-class.html#remove_compute_pilot_service" title="Remove a ComputePilotService" alt="" coords="64,287,309,305"/>
+<area shape="rect" id="node155" href="troy_adaptor_peejay.peejay_cus-class.html#wait" title="Wait until CUS enters a final state" alt="" coords="64,305,309,324"/>
+<area shape="rect" id="node155" href="troy_adaptor_peejay.peejay_cus-class.html#cancel" title="Cancel the CUS." alt="" coords="64,324,309,343"/>
+<area shape="rect" id="node1" href="troy_adaptor_peejay.peejay_cus-class.html" title="troy_adaptor_peejay.peejay_cus" alt="" coords="52,166,321,349"/>
+<area shape="rect" id="node156" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#init" title="dummy method to make sure the backend can initialize the object" alt="" coords="17,103,355,121"/>
+<area shape="rect" id="node156" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#submit_compute_unit" title="Submit a CU to this ComputeUnitService." alt="" coords="17,121,355,140"/>
+<area shape="rect" id="node2" href="troy.interface.compute_unit_service.iComputeUnitService-class.html" title="ComputeUnitService (CUS)" alt="" coords="5,70,365,146"/>
+<area shape="rect" id="node3" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="101,6,272,50"/>
+</map>
+  <img src="uml_class_diagram_for_troy_ada_5.gif" alt='' usemap="#uml_class_diagram_for_troy_ada_5" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy_adaptor_peejay.peejay_cus-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">api</span>,
+        <span class="summary-sig-arg">adaptor</span>)</span><br />
+      Create a ComputeUnitService object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cus.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy_adaptor_peejay.peejay_cus-class.html#get_id" class="summary-sig-name">get_id</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      get instance id</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cus.get_id">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy_adaptor_peejay.peejay_cus-class.html#add_compute_pilot_service" class="summary-sig-name">add_compute_pilot_service</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cps</span>)</span><br />
+      Add a ComputePilotService to this WUS.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cus.add_compute_pilot_service">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy_adaptor_peejay.peejay_cus-class.html#list_compute_pilot_services" class="summary-sig-name">list_compute_pilot_services</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      List all CPSs of CUS</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cus.list_compute_pilot_services">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy_adaptor_peejay.peejay_cus-class.html#remove_compute_pilot_service" class="summary-sig-name">remove_compute_pilot_service</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cps</span>)</span><br />
+      Remove a ComputePilotService</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cus.remove_compute_pilot_service">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy_adaptor_peejay.peejay_cus-class.html#wait" class="summary-sig-name">wait</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Wait until CUS enters a final state</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cus.wait">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy_adaptor_peejay.peejay_cus-class.html#cancel" class="summary-sig-name">cancel</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Cancel the CUS.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cus.cancel">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="init"></a><span class="summary-sig-name">init</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      dummy method to make sure the backend can initialize the object
+      <em>(Inherited from <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html">troy.interface.compute_unit_service.iComputeUnitService</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.init">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#submit_compute_unit" class="summary-sig-name">submit_compute_unit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cud</span>)</span><br />
+      Submit a CU to this ComputeUnitService.
+      <em>(Inherited from <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html">troy.interface.compute_unit_service.iComputeUnitService</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.submit_compute_unit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="cus_index"></a><span class="summary-name">cus_index</span> = <code title="0">0</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">api</span>,
+        <span class="sig-arg">adaptor</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cus.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Create a ComputeUnitService object</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.base.iBase-class.html#__init__">troy.interface.base.iBase.__init__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_id</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cus.get_id">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>get instance id</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#get_id">troy.interface.compute_unit_service.iComputeUnitService.get_id</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="add_compute_pilot_service"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">add_compute_pilot_service</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cps</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cus.add_compute_pilot_service">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add a ComputePilotService to this WUS.</p>
+  <p>Keyword arguments: cps -- The ComputePilot Service to which this 
+  ComputeUnitService will connect.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#add_compute_pilot_service">troy.interface.compute_unit_service.iComputeUnitService.add_compute_pilot_service</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="list_compute_pilot_services"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">list_compute_pilot_services</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cus.list_compute_pilot_services">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>List all CPSs of CUS</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#list_compute_pilot_services">troy.interface.compute_unit_service.iComputeUnitService.list_compute_pilot_services</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="remove_compute_pilot_service"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">remove_compute_pilot_service</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cps</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cus.remove_compute_pilot_service">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Remove a ComputePilotService</p>
+  <p>Note that it won't cancel the ComputePilotService, it will just no 
+  longer be connected to this CUS.</p>
+  <p>Keyword arguments: cps -- The ComputePilotService to remove</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#remove_compute_pilot_service">troy.interface.compute_unit_service.iComputeUnitService.remove_compute_pilot_service</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="wait"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">wait</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cus.wait">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Wait until CUS enters a final state</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#wait">troy.interface.compute_unit_service.iComputeUnitService.wait</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="cancel"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">cancel</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cus.cancel">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Cancel the CUS.</p>
+  <p>Cancelling the CUS also cancels all the CUs submitted to it.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#cancel">troy.interface.compute_unit_service.iComputeUnitService.cancel</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://andre-merzky.github.com/troy">Troy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Wed May  9 12:01:31 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

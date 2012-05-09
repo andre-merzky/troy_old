@@ -14,9 +14,6 @@
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="troy.pilot-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -50,10 +47,6 @@
     <td>
       <table cellpadding="0" cellspacing="0">
         <!-- hide/show private -->
-        <tr><td align="right"><span class="options"
-            >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="troy.pilot.data_unit-pysrc.html"
-            target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
@@ -61,7 +54,8 @@
 <h1 class="epydoc">Source Code for <a href="troy.pilot.data_unit-module.html">Module troy.pilot.data_unit</a></h1>
 <pre class="py-src">
 <a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"> </tt>
-<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module troy.pilot.base=troy.pilot.base-module.html"><a title="troy.pilot.base" class="py-name" href="#" onclick="return doclink('link-0', 'base', 'link-0');">base</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class troy.pilot.base.Base=troy.pilot.base.Base-class.html"><a title="troy.pilot.base.Base" class="py-name" href="#" onclick="return doclink('link-1', 'Base', 'link-1');">Base</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module troy.interface.base=troy.interface.base-module.html,Module troy.pilot.base=troy.pilot.base-module.html"><a title="troy.interface.base
+troy.pilot.base" class="py-name" href="#" onclick="return doclink('link-0', 'base', 'link-0');">base</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class troy.pilot.base.Base=troy.pilot.base.Base-class.html"><a title="troy.pilot.base.Base" class="py-name" href="#" onclick="return doclink('link-1', 'Base', 'link-1');">Base</a></tt> </tt>
 <a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
 <a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
 <a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment">########################################################################</tt> </tt>
@@ -90,50 +84,102 @@
 <a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-string">'description'</tt><tt class="py-op">,</tt>  <tt class="py-comment"># Description</tt> </tt>
 <a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">    <tt class="py-op">)</tt> </tt>
 <a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
-<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
-<a name="DataUnit.wait"></a><div id="DataUnit.wait-def"><a name="L32"></a><tt class="py-lineno">32</tt> <a class="py-toggle" href="#" id="DataUnit.wait-toggle" onclick="return toggle('DataUnit.wait');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_unit.DataUnit-class.html#wait">wait</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="DataUnit.wait-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DataUnit.wait-expanded"><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-docstring">""" Wait until DU enters a final state """</tt> </tt>
-<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
-</div><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
-<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
-<a name="DataUnit.cancel"></a><div id="DataUnit.cancel-def"><a name="L37"></a><tt class="py-lineno">37</tt> <a class="py-toggle" href="#" id="DataUnit.cancel-toggle" onclick="return toggle('DataUnit.cancel');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_unit.DataUnit-class.html#cancel">cancel</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="DataUnit.cancel-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DataUnit.cancel-expanded"><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-docstring">""" Cancel the DU """</tt> </tt>
-<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
-</div><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
-<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
-<a name="DataUnit.set_callback"></a><div id="DataUnit.set_callback-def"><a name="L42"></a><tt class="py-lineno">42</tt> <a class="py-toggle" href="#" id="DataUnit.set_callback-toggle" onclick="return toggle('DataUnit.set_callback');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_unit.DataUnit-class.html#set_callback">set_callback</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">member</tt><tt class="py-op">,</tt> <tt class="py-param">cb</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="DataUnit.set_callback-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DataUnit.set_callback-expanded"><a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-docstring">""" Set a callback function for a member.</tt> </tt>
-<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt class="py-docstring">            Keyword arguments:</tt> </tt>
-<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"><tt class="py-docstring">            member -- The member to set the callback for (state / state_detail).</tt> </tt>
-<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"><tt class="py-docstring">            cb     -- The callback object to call.</tt> </tt>
-<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
-<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
-</div><a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"> </tt>
-<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">     </tt>
-<a name="DataUnit.unset_callback"></a><div id="DataUnit.unset_callback-def"><a name="L52"></a><tt class="py-lineno">52</tt> <a class="py-toggle" href="#" id="DataUnit.unset_callback-toggle" onclick="return toggle('DataUnit.unset_callback');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_unit.DataUnit-class.html#unset_callback">unset_callback</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">member</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="DataUnit.unset_callback-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DataUnit.unset_callback-expanded"><a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">        <tt class="py-docstring">""" Unset a callback function from a member</tt> </tt>
-<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"><tt class="py-docstring">            Keyword arguments:</tt> </tt>
-<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"><tt class="py-docstring">            member -- The member to unset the callback from.</tt> </tt>
-<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
-<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
-</div><a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"> </tt>
-<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"> </tt>
-<a name="DataUnit.list_files"></a><div id="DataUnit.list_files-def"><a name="L61"></a><tt class="py-lineno">61</tt> <a class="py-toggle" href="#" id="DataUnit.list_files-toggle" onclick="return toggle('DataUnit.list_files');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_unit.DataUnit-class.html#list_files">list_files</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="DataUnit.list_files-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DataUnit.list_files-expanded"><a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">        <tt class="py-docstring">""" list files managed by the DU """</tt> </tt>
-<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
-</div><a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">     </tt>
-<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"> </tt>
-<a name="DataUnit.data_export"></a><div id="DataUnit.data_export-def"><a name="L66"></a><tt class="py-lineno">66</tt> <a class="py-toggle" href="#" id="DataUnit.data_export-toggle" onclick="return toggle('DataUnit.data_export');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_unit.DataUnit-class.html#data_export">data_export</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">target_directory</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="DataUnit.data_export-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DataUnit.data_export-expanded"><a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">        <tt class="py-docstring">""" copies content of DU to a directory on the local machine"""</tt> </tt>
-<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt>     </tt>
-</div><a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line"> </tt>
-<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">         </tt>
-<a name="DataUnit.data_import"></a><div id="DataUnit.data_import-def"><a name="L71"></a><tt class="py-lineno">71</tt> <a class="py-toggle" href="#" id="DataUnit.data_import-toggle" onclick="return toggle('DataUnit.data_import');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_unit.DataUnit-class.html#data_import">data_import</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">src_directory</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="DataUnit.data_import-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DataUnit.data_import-expanded"><a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">        <tt class="py-docstring">""" copies content from a directory on the local machine to DU"""</tt> </tt>
-<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
-</div></div><a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="DataUnit.__init__"></a><div id="DataUnit.__init__-def"><a name="L31"></a><tt class="py-lineno">31</tt> <a class="py-toggle" href="#" id="DataUnit.__init__-toggle" onclick="return toggle('DataUnit.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_unit.DataUnit-class.html#__init__">__init__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="DataUnit.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DataUnit.__init__-expanded"><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt id="link-2" class="py-name"><a title="troy.pilot.base.Base" class="py-name" href="#" onclick="return doclink('link-2', 'Base', 'link-1');">Base</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method troy.interface.base.aBase.__init__()=troy.interface.base.aBase-class.html#__init__,Method troy.interface.base.iBase.__init__()=troy.interface.base.iBase-class.html#__init__,Method troy.interface.compute_data_scheduler.iComputeDataScheduler.__init__()=troy.interface.compute_data_scheduler.iComputeDataScheduler-class.html#__init__,Method troy.interface.compute_data_unit.iComputeDataUnit.__init__()=troy.interface.compute_data_unit.iComputeDataUnit-class.html#__init__,Method troy.interface.compute_data_unit_service.iComputeDataUnitService.__init__()=troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html#__init__,Method troy.interface.compute_pilot.iComputePilot.__init__()=troy.interface.compute_pilot.iComputePilot-class.html#__init__,Method troy.interface.compute_pilot_service.iComputePilotService.__init__()=troy.interface.compute_pilot_service.iComputePilotService-class.html#__init__,Method troy.interface.compute_scheduler.iComputeScheduler.__init__()=troy.interface.compute_scheduler.iComputeScheduler-class.html#__init__,Method troy.interface.compute_unit.iComputeUnit.__init__()=troy.interface.compute_unit.iComputeUnit-class.html#__init__,Method troy.interface.compute_unit_service.iComputeUnitService.__init__()=troy.interface.compute_unit_service.iComputeUnitService-class.html#__init__,Method troy.interface.data_pilot.iDataPilot.__init__()=troy.interface.data_pilot.iDataPilot-class.html#__init__,Method troy.interface.data_pilot_service.iDataPilotService.__init__()=troy.interface.data_pilot_service.iDataPilotService-class.html#__init__,Method troy.interface.data_scheduler.iDataScheduler.__init__()=troy.interface.data_scheduler.iDataScheduler-class.html#__init__,Method troy.interface.data_unit.iDataUnit.__init__()=troy.interface.data_unit.iDataUnit-class.html#__init__,Method troy.interface.data_unit_service.iDataUnitService.__init__()=troy.interface.data_unit_service.iDataUnitService-class.html#__init__,Method troy.pilot.base.Base.__init__()=troy.pilot.base.Base-class.html#__init__,Method troy.pilot.compute_data_unit.ComputeDataUnit.__init__()=troy.pilot.compute_data_unit.ComputeDataUnit-class.html#__init__,Method troy.pilot.compute_data_unit_service.ComputeDataUnitService.__init__()=troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#__init__,Method troy.pilot.compute_pilot.ComputePilot.__init__()=troy.pilot.compute_pilot.ComputePilot-class.html#__init__,Method troy.pilot.compute_pilot_description.ComputePilotDescription.__init__()=troy.pilot.compute_pilot_description.ComputePilotDescription-class.html#__init__,Method troy.pilot.compute_pilot_service.ComputePilotService.__init__()=troy.pilot.compute_pilot_service.ComputePilotService-class.html#__init__,Method troy.pilot.compute_unit.ComputeUnit.__init__()=troy.pilot.compute_unit.ComputeUnit-class.html#__init__,Method troy.pilot.compute_unit_description.ComputeUnitDescription.__init__()=troy.pilot.compute_unit_description.ComputeUnitDescription-class.html#__init__,Method troy.pilot.compute_unit_service.ComputeUnitService.__init__()=troy.pilot.compute_unit_service.ComputeUnitService-class.html#__init__,Method troy.pilot.data_pilot.DataPilot.__init__()=troy.pilot.data_pilot.DataPilot-class.html#__init__,Method troy.pilot.data_pilot_description.DataPilotDescription.__init__()=troy.pilot.data_pilot_description.DataPilotDescription-class.html#__init__,Method troy.pilot.data_pilot_service.DataPilotService.__init__()=troy.pilot.data_pilot_service.DataPilotService-class.html#__init__,Method troy.pilot.data_unit.DataUnit.__init__()=troy.pilot.data_unit.DataUnit-class.html#__init__,Method troy.pilot.data_unit_description.DataUnitDescription.__init__()=troy.pilot.data_unit_description.DataUnitDescription-class.html#__init__,Method troy.pilot.data_unit_service.DataUnitService.__init__()=troy.pilot.data_unit_service.DataUnitService-class.html#__init__,Method troy.pilot.exception.TroyException.__init__()=troy.pilot.exception.TroyException-class.html#__init__,Method troy_adaptor_peejay.adaptor.__init__()=troy_adaptor_peejay.adaptor-class.html#__init__,Method troy_adaptor_peejay.peejay_cp.__init__()=troy_adaptor_peejay.peejay_cp-class.html#__init__,Method troy_adaptor_peejay.peejay_cps.__init__()=troy_adaptor_peejay.peejay_cps-class.html#__init__,Method troy_adaptor_peejay.peejay_cu.__init__()=troy_adaptor_peejay.peejay_cu-class.html#__init__,Method troy_adaptor_peejay.peejay_cus.__init__()=troy_adaptor_peejay.peejay_cus-class.html#__init__,Method troy_adaptor_peejay.peejay_dcu.__init__()=troy_adaptor_peejay.peejay_dcu-class.html#__init__,Method troy_adaptor_peejay.peejay_dcus.__init__()=troy_adaptor_peejay.peejay_dcus-class.html#__init__,Method troy_adaptor_peejay.peejay_dp.__init__()=troy_adaptor_peejay.peejay_dp-class.html#__init__,Method troy_adaptor_peejay.peejay_dps.__init__()=troy_adaptor_peejay.peejay_dps-class.html#__init__,Method troy_adaptor_peejay.peejay_du.__init__()=troy_adaptor_peejay.peejay_du-class.html#__init__,Method troy_adaptor_peejay.peejay_dus.__init__()=troy_adaptor_peejay.peejay_dus-class.html#__init__"><a title="troy.interface.base.aBase.__init__
+troy.interface.base.iBase.__init__
+troy.interface.compute_data_scheduler.iComputeDataScheduler.__init__
+troy.interface.compute_data_unit.iComputeDataUnit.__init__
+troy.interface.compute_data_unit_service.iComputeDataUnitService.__init__
+troy.interface.compute_pilot.iComputePilot.__init__
+troy.interface.compute_pilot_service.iComputePilotService.__init__
+troy.interface.compute_scheduler.iComputeScheduler.__init__
+troy.interface.compute_unit.iComputeUnit.__init__
+troy.interface.compute_unit_service.iComputeUnitService.__init__
+troy.interface.data_pilot.iDataPilot.__init__
+troy.interface.data_pilot_service.iDataPilotService.__init__
+troy.interface.data_scheduler.iDataScheduler.__init__
+troy.interface.data_unit.iDataUnit.__init__
+troy.interface.data_unit_service.iDataUnitService.__init__
+troy.pilot.base.Base.__init__
+troy.pilot.compute_data_unit.ComputeDataUnit.__init__
+troy.pilot.compute_data_unit_service.ComputeDataUnitService.__init__
+troy.pilot.compute_pilot.ComputePilot.__init__
+troy.pilot.compute_pilot_description.ComputePilotDescription.__init__
+troy.pilot.compute_pilot_service.ComputePilotService.__init__
+troy.pilot.compute_unit.ComputeUnit.__init__
+troy.pilot.compute_unit_description.ComputeUnitDescription.__init__
+troy.pilot.compute_unit_service.ComputeUnitService.__init__
+troy.pilot.data_pilot.DataPilot.__init__
+troy.pilot.data_pilot_description.DataPilotDescription.__init__
+troy.pilot.data_pilot_service.DataPilotService.__init__
+troy.pilot.data_unit.DataUnit.__init__
+troy.pilot.data_unit_description.DataUnitDescription.__init__
+troy.pilot.data_unit_service.DataUnitService.__init__
+troy.pilot.exception.TroyException.__init__
+troy_adaptor_peejay.adaptor.__init__
+troy_adaptor_peejay.peejay_cp.__init__
+troy_adaptor_peejay.peejay_cps.__init__
+troy_adaptor_peejay.peejay_cu.__init__
+troy_adaptor_peejay.peejay_cus.__init__
+troy_adaptor_peejay.peejay_dcu.__init__
+troy_adaptor_peejay.peejay_dcus.__init__
+troy_adaptor_peejay.peejay_dp.__init__
+troy_adaptor_peejay.peejay_dps.__init__
+troy_adaptor_peejay.peejay_du.__init__
+troy_adaptor_peejay.peejay_dus.__init__" class="py-name" href="#" onclick="return doclink('link-3', '__init__', 'link-3');">__init__</a></tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt>  </tt>
+</div><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="DataUnit.wait"></a><div id="DataUnit.wait-def"><a name="L36"></a><tt class="py-lineno">36</tt> <a class="py-toggle" href="#" id="DataUnit.wait-toggle" onclick="return toggle('DataUnit.wait');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_unit.DataUnit-class.html#wait">wait</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DataUnit.wait-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DataUnit.wait-expanded"><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-docstring">""" Wait until DU enters a final state """</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method troy.pilot.base.Base.get_engine_()=troy.pilot.base.Base-class.html#get_engine_"><a title="troy.pilot.base.Base.get_engine_" class="py-name" href="#" onclick="return doclink('link-4', 'get_engine_', 'link-4');">get_engine_</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'DataUnit'</tt><tt class="py-op">,</tt> <tt class="py-string">'wait'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="DataUnit.cancel"></a><div id="DataUnit.cancel-def"><a name="L41"></a><tt class="py-lineno">41</tt> <a class="py-toggle" href="#" id="DataUnit.cancel-toggle" onclick="return toggle('DataUnit.cancel');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_unit.DataUnit-class.html#cancel">cancel</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DataUnit.cancel-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DataUnit.cancel-expanded"><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-docstring">""" Cancel the DU """</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="troy.pilot.base.Base.get_engine_" class="py-name" href="#" onclick="return doclink('link-5', 'get_engine_', 'link-4');">get_engine_</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'DataUnit'</tt><tt class="py-op">,</tt> <tt class="py-string">'cancel'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"> </tt>
+<a name="DataUnit.set_callback"></a><div id="DataUnit.set_callback-def"><a name="L46"></a><tt class="py-lineno">46</tt> <a class="py-toggle" href="#" id="DataUnit.set_callback-toggle" onclick="return toggle('DataUnit.set_callback');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_unit.DataUnit-class.html#set_callback">set_callback</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">member</tt><tt class="py-op">,</tt> <tt class="py-param">cb</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DataUnit.set_callback-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DataUnit.set_callback-expanded"><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-docstring">""" Set a callback function for a member.</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"><tt class="py-docstring">            Keyword arguments:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"><tt class="py-docstring">            member -- The member to set the callback for (state / state_detail).</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"><tt class="py-docstring">            cb     -- The callback object to call.</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="troy.pilot.base.Base.get_engine_" class="py-name" href="#" onclick="return doclink('link-6', 'get_engine_', 'link-4');">get_engine_</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'DataUnit'</tt><tt class="py-op">,</tt> <tt class="py-string">'set_callback'</tt><tt class="py-op">,</tt>  </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">                                        <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">member</tt><tt class="py-op">,</tt> <tt id="link-7" class="py-name" targets="Method troy.pilot.callback.Callback.cb()=troy.pilot.callback.Callback-class.html#cb"><a title="troy.pilot.callback.Callback.cb" class="py-name" href="#" onclick="return doclink('link-7', 'cb', 'link-7');">cb</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">     </tt>
+<a name="DataUnit.unset_callback"></a><div id="DataUnit.unset_callback-def"><a name="L57"></a><tt class="py-lineno">57</tt> <a class="py-toggle" href="#" id="DataUnit.unset_callback-toggle" onclick="return toggle('DataUnit.unset_callback');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_unit.DataUnit-class.html#unset_callback">unset_callback</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">member</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DataUnit.unset_callback-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DataUnit.unset_callback-expanded"><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt class="py-docstring">""" Unset a callback function from a member</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"><tt class="py-docstring">            Keyword arguments:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"><tt class="py-docstring">            member -- The member to unset the callback from.</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="troy.pilot.base.Base.get_engine_" class="py-name" href="#" onclick="return doclink('link-8', 'get_engine_', 'link-4');">get_engine_</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'DataUnit'</tt><tt class="py-op">,</tt> <tt class="py-string">'unset_callback'</tt><tt class="py-op">,</tt>  </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">                                        <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">member</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"> </tt>
+<a name="DataUnit.list_files"></a><div id="DataUnit.list_files-def"><a name="L67"></a><tt class="py-lineno">67</tt> <a class="py-toggle" href="#" id="DataUnit.list_files-toggle" onclick="return toggle('DataUnit.list_files');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_unit.DataUnit-class.html#list_files">list_files</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DataUnit.list_files-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DataUnit.list_files-expanded"><a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">        <tt class="py-docstring">""" list files managed by the DU """</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="troy.pilot.base.Base.get_engine_" class="py-name" href="#" onclick="return doclink('link-9', 'get_engine_', 'link-4');">get_engine_</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'DataUnit'</tt><tt class="py-op">,</tt> <tt class="py-string">'list_files'</tt><tt class="py-op">,</tt>  </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">                                        <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">     </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line"> </tt>
+<a name="DataUnit.data_export"></a><div id="DataUnit.data_export-def"><a name="L73"></a><tt class="py-lineno">73</tt> <a class="py-toggle" href="#" id="DataUnit.data_export-toggle" onclick="return toggle('DataUnit.data_export');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_unit.DataUnit-class.html#data_export">data_export</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">tgt</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DataUnit.data_export-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DataUnit.data_export-expanded"><a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">        <tt class="py-docstring">""" copies content of DU to a directory on the local machine"""</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="troy.pilot.base.Base.get_engine_" class="py-name" href="#" onclick="return doclink('link-10', 'get_engine_', 'link-4');">get_engine_</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'DataUnit'</tt><tt class="py-op">,</tt> <tt class="py-string">'data_export'</tt><tt class="py-op">,</tt>  </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">                                        <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">tgt</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">         </tt>
+<a name="DataUnit.data_import"></a><div id="DataUnit.data_import-def"><a name="L79"></a><tt class="py-lineno">79</tt> <a class="py-toggle" href="#" id="DataUnit.data_import-toggle" onclick="return toggle('DataUnit.data_import');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_unit.DataUnit-class.html#data_import">data_import</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">src_directory</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DataUnit.data_import-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="DataUnit.data_import-expanded"><a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">        <tt class="py-docstring">""" copies content from a directory on the local machine to DU"""</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="troy.pilot.base.Base.get_engine_" class="py-name" href="#" onclick="return doclink('link-11', 'get_engine_', 'link-4');">get_engine_</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'DataUnit'</tt><tt class="py-op">,</tt> <tt class="py-string">'data_import'</tt><tt class="py-op">,</tt>  </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">                                        <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">src</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line">         </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line"><tt class="py-comment"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</tt> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -144,9 +190,6 @@ expandto(location.href);
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="troy.pilot-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -172,7 +215,7 @@ expandto(location.href);
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Fri Mar 23 22:20:16 2012</a>
+    3.0.1 on Wed May  9 12:01:31 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

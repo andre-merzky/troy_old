@@ -14,9 +14,6 @@
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="troy.pilot-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -51,28 +48,33 @@
     <td>
       <table cellpadding="0" cellspacing="0">
         <!-- hide/show private -->
-        <tr><td align="right"><span class="options"
-            >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="troy.pilot.data_unit.DataUnit-class.html"
-            target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
 <h1 class="epydoc">Class DataUnit</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.data_unit-pysrc.html#DataUnit">source&nbsp;code</a></span></p>
-<pre class="base-tree">
-<a href="troy.pilot.base.Base-class.html">base.Base</a> --+
-            |
-           <strong class="uidshort">DataUnit</strong>
-</pre>
-
-<dl><dt>Known Subclasses:</dt>
-<dd>
-      <ul class="subclass-list">
-<li><a href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html">compute_data_unit.ComputeDataUnit</a></li>  </ul>
-</dd></dl>
-
+<center>
+<center>  <map id="uml_class_diagram_for_troy_pil_15" name="uml_class_diagram_for_troy_pil_15">
+<area shape="rect" id="node132" href="troy.pilot.data_unit.DataUnit-class.html#__init__" title="troy.pilot.data_unit.DataUnit.__init__" alt="" coords="39,172,227,191"/>
+<area shape="rect" id="node132" href="troy.pilot.data_unit.DataUnit-class.html#wait" title="Wait until DU enters a final state" alt="" coords="39,191,227,209"/>
+<area shape="rect" id="node132" href="troy.pilot.data_unit.DataUnit-class.html#cancel" title="Cancel the DU" alt="" coords="39,209,227,228"/>
+<area shape="rect" id="node132" href="troy.pilot.data_unit.DataUnit-class.html#set_callback" title="Set a callback function for a member." alt="" coords="39,228,227,247"/>
+<area shape="rect" id="node132" href="troy.pilot.data_unit.DataUnit-class.html#unset_callback" title="Unset a callback function from a member" alt="" coords="39,247,227,265"/>
+<area shape="rect" id="node132" href="troy.pilot.data_unit.DataUnit-class.html#list_files" title="list files managed by the DU" alt="" coords="39,265,227,284"/>
+<area shape="rect" id="node132" href="troy.pilot.data_unit.DataUnit-class.html#data_export" title="copies content of DU to a directory on the local machine" alt="" coords="39,284,227,303"/>
+<area shape="rect" id="node132" href="troy.pilot.data_unit.DataUnit-class.html#data_import" title="copies content from a directory on the local machine to DU" alt="" coords="39,303,227,321"/>
+<area shape="rect" id="node1" href="troy.pilot.data_unit.DataUnit-class.html" title="DataUnit." alt="" coords="27,139,237,327"/>
+<area shape="rect" id="node3" href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html" title="ComputeDataUnit." alt="" coords="5,347,261,386"/>
+<area shape="rect" id="node133" href="troy.pilot.base.Base-class.html#get_engine_" title="Get the engine singleton." alt="" coords="44,39,223,57"/>
+<area shape="rect" id="node133" href="troy.pilot.base.Base-class.html#get_adaptors_" title="Get list of all previously successful adaptors." alt="" coords="44,57,223,76"/>
+<area shape="rect" id="node133" href="troy.pilot.base.Base-class.html#get_idata_" title="Get instance data dict entry." alt="" coords="44,76,223,95"/>
+<area shape="rect" id="node133" href="troy.pilot.base.Base-class.html#set_idata_" title="Set instance data dict entry." alt="" coords="44,95,223,113"/>
+<area shape="rect" id="node2" href="troy.pilot.base.Base-class.html" title="All Troy API classes inherit from this base class, which provides interfaces to adaptor management and to the management of class instance data." alt="" coords="32,6,235,119"/>
+</map>
+  <img src="uml_class_diagram_for_troy_pil_15.gif" alt='' usemap="#uml_class_diagram_for_troy_pil_15" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
 <hr />
 <p>DataUnit.</p>
   <p>This is the object that is returned by the DataUnitService when a new 
@@ -89,6 +91,22 @@
   <td align="left" colspan="2" class="table-header">
     <span class="table-header">Instance Methods</span></td>
 </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.data_unit.DataUnit-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.data_unit-pysrc.html#DataUnit.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
@@ -184,7 +202,7 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a name="data_export"></a><span class="summary-sig-name">data_export</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">target_directory</span>)</span><br />
+        <span class="summary-sig-arg">tgt</span>)</span><br />
       copies content of DU to a directory on the local machine</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.data_unit-pysrc.html#DataUnit.data_export">source&nbsp;code</a></span>
@@ -213,32 +231,15 @@
       
     </td>
   </tr>
-<tr bgcolor="#e8f0f8" >
-  <th colspan="2" class="group-header"
-    >&nbsp;&nbsp;&nbsp;&nbsp;Inherited from <a href="troy.pilot.base.Base-class.html">base.Base</a></th></tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="__init__"></a><span class="summary-sig-name">__init__</span>(<span class="summary-sig-arg">self</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.__init__">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="get_adaptors_"></a><span class="summary-sig-name">get_adaptors_</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td><span class="summary-sig"><a href="troy.pilot.base.Base-class.html#get_adaptors_" class="summary-sig-name">get_adaptors_</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get list of all previously successful adaptors.
+      <em>(Inherited from <a href="troy.pilot.base.Base-class.html">troy.pilot.base.Base</a>)</em></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.get_adaptors_">source&nbsp;code</a></span>
             
@@ -254,7 +255,9 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="get_engine_"></a><span class="summary-sig-name">get_engine_</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td><span class="summary-sig"><a href="troy.pilot.base.Base-class.html#get_engine_" class="summary-sig-name">get_engine_</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the engine singleton.
+      <em>(Inherited from <a href="troy.pilot.base.Base-class.html">troy.pilot.base.Base</a>)</em></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.get_engine_">source&nbsp;code</a></span>
             
@@ -270,8 +273,10 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="get_idata_"></a><span class="summary-sig-name">get_idata_</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">id</span>)</span></td>
+          <td><span class="summary-sig"><a href="troy.pilot.base.Base-class.html#get_idata_" class="summary-sig-name">get_idata_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">id</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">api</code><code class="variable-quote">'</code></span>)</span><br />
+      Get instance data dict entry.
+      <em>(Inherited from <a href="troy.pilot.base.Base-class.html">troy.pilot.base.Base</a>)</em></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.get_idata_">source&nbsp;code</a></span>
             
@@ -287,9 +292,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="set_idata_"></a><span class="summary-sig-name">set_idata_</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">id</span>,
-        <span class="summary-sig-arg">data</span>)</span></td>
+          <td><span class="summary-sig"><a href="troy.pilot.base.Base-class.html#set_idata_" class="summary-sig-name">set_idata_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">data</span>,
+        <span class="summary-sig-arg">id</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">api</code><code class="variable-quote">'</code></span>)</span><br />
+      Set instance data dict entry.
+      <em>(Inherited from <a href="troy.pilot.base.Base-class.html">troy.pilot.base.Base</a>)</em></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.set_idata_">source&nbsp;code</a></span>
             
@@ -309,6 +316,29 @@
     <span class="table-header">Method Details</span></td>
 </tr>
 </table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.data_unit-pysrc.html#DataUnit.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.pilot.base.Base-class.html#__init__">base.Base.__init__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
 <a name="set_callback"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -359,9 +389,6 @@
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="troy.pilot-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -387,7 +414,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Fri Mar 23 22:20:16 2012</a>
+    3.0.1 on Wed May  9 12:01:30 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

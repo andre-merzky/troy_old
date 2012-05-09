@@ -1,6 +1,6 @@
 
 from troy.interface.base  import iBase
-from troy.pilot.exception import Exception, Error
+from troy.pilot.exception import TroyException, Error
     
 
 ########################################################################
@@ -21,24 +21,51 @@ class iComputePilot (iBase) :
         re-initialized.
     """
 
-    def __init__ (self, cp_id=None):
-        """ Create a ComputePilot
-
-            Keyword arguments:
-            cp_id -- restore from cp_id
-        """
+    def __init__ (self, obj, adaptor):
+        """ Create a ComputePilot """
         pass
+
+
+
+    ############################################################################
+    #
+    # Note that submit_compute_unit_ is not called directly by the CP impl, but
+    # instead by a scheduler class, for those implementation which don't provide
+    # scheduling on CPS level.  It is thus a private call.
+    #
+    def submit_compute_unit_ (self, cud):
+        """ Submit a CU to this ComputePilot.
+    
+            Keyword argument:
+            cud -- The ComputeUnitDescription from the application
+    
+            Return:
+            ComputeUnit object
+        """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
+
+
+
+    def init (self) :
+        """ dummy method to make sure the backend can initialize the object.
+            This method should *not* be implemented in the adaptor!"""
+        pass
+
+
+    def get_id (self):        
+        """ get instance id """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     def wait (self):
         """ Wait until CP enters a final state """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     def cancel (self):        
         """ Remove the ComputePilot from the ComputePilot Service.
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     def reinitialize (self, cpd):        
@@ -47,7 +74,7 @@ class iComputePilot (iBase) :
             Keyword arguments:
             cpd -- A ComputePilotDescription
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     def set_callback (self, member, cb):
@@ -57,7 +84,7 @@ class iComputePilot (iBase) :
             member -- The member to set the callback for (state / state_detail / wall_time_left).
             cb     -- The callback object to call.
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     def unset_callback (self, member):
@@ -66,6 +93,6 @@ class iComputePilot (iBase) :
             Keyword arguments:
             member -- The member to unset the callback for (state / state_detail / wall_tim_left).
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
     
 

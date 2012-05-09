@@ -1,6 +1,6 @@
 
 from troy.interface.base  import iBase
-from troy.pilot.exception import Exception, Error
+from troy.pilot.exception import TroyException, Error
 
 
 ########################################################################
@@ -21,7 +21,7 @@ class iDataUnitService (iBase) :
         execution of the DataUnits.
     """
 
-    def __init__ (self, dus_id=None):
+    def __init__ (self, obj, adaptor, dus_id=None):
         """ Create a DataUnitService object
 
             Keyword arguments:
@@ -36,12 +36,12 @@ class iDataUnitService (iBase) :
             Keyword arguments:
             dps -- The DataPilotService to which this DataUnitService will connect.
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     def list_data_pilot_services (self):
         """ List all DPSs of DUS """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
     
 
     def remove_data_pilot_service (self, dps):
@@ -53,7 +53,7 @@ class iDataUnitService (iBase) :
             Keyword arguments:
             dps -- The DataPilotService to remove 
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
     
     
     def submit_data_unit (self, dud):
@@ -65,12 +65,12 @@ class iDataUnitService (iBase) :
             Return:
             DataUnit object
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     def wait (self):
         """ Wait until DUS enters a final state """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
     
     def cancel (self):
@@ -78,6 +78,6 @@ class iDataUnitService (iBase) :
             
             Cancelling the DUS also cancels all the DUs submitted to it.
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 

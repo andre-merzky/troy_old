@@ -28,15 +28,19 @@ class DataUnit (Base) :
         'description',  # Description
     )
 
+    def __init__ (self) :
+        Base.__init__ (self)
+        pass 
+
 
     def wait (self):
         """ Wait until DU enters a final state """
-        pass
+        return self.get_engine_().call ('DataUnit', 'wait', self)
 
 
     def cancel (self):
         """ Cancel the DU """
-        pass
+        return self.get_engine_().call ('DataUnit', 'cancel', self)
 
 
     def set_callback (self, member, cb):
@@ -46,7 +50,8 @@ class DataUnit (Base) :
             member -- The member to set the callback for (state / state_detail).
             cb     -- The callback object to call.
         """
-        pass
+        return self.get_engine_().call ('DataUnit', 'set_callback', 
+                                        self, member, cb)
 
     
     def unset_callback (self, member):
@@ -55,20 +60,26 @@ class DataUnit (Base) :
             Keyword arguments:
             member -- The member to unset the callback from.
         """
-        pass
+        return self.get_engine_().call ('DataUnit', 'unset_callback', 
+                                        self, member)
 
 
     def list_files (self):
         """ list files managed by the DU """
-        pass
+        return self.get_engine_().call ('DataUnit', 'list_files', 
+                                        self)
     
 
-    def data_export (self, target_directory):
+    def data_export (self, tgt):
         """ copies content of DU to a directory on the local machine"""
-        pass    
+        return self.get_engine_().call ('DataUnit', 'data_export', 
+                                        self, tgt)
 
         
     def data_import (self, src_directory):
         """ copies content from a directory on the local machine to DU"""
-        pass    
+        return self.get_engine_().call ('DataUnit', 'data_import', 
+                                        self, src)
         
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
+

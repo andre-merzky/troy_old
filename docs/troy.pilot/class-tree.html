@@ -14,9 +14,6 @@
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="troy.pilot-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th bgcolor="#70b0f0" class="navbar-select"
@@ -44,10 +41,6 @@
     <td>
       <table cellpadding="0" cellspacing="0">
         <!-- hide/show private -->
-        <tr><td align="right"><span class="options"
-            >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="class-tree.html"
-            target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
@@ -58,7 +51,10 @@
 </b></center><br />
 <h1 class="epydoc">Class Hierarchy</h1>
 <ul class="nomargin-top">
-    <li> <strong class="uidlink"><a href="troy.pilot.base.Base-class.html">troy.pilot.base.Base</a></strong>
+    <li> <strong class="uidlink"><a href="troy.pilot.base.Base-class.html">troy.pilot.base.Base</a></strong>:
+      <em class="summary">All Troy API classes inherit  from this base class, which provides 
+        interfaces to adaptor management and to the management of class 
+        instance data.</em>
     <ul>
     <li> <strong class="uidlink"><a href="troy.pilot.compute_pilot.ComputePilot-class.html">troy.pilot.compute_pilot.ComputePilot</a></strong>:
       <em class="summary">ComputePilot (PilotJob)</em>
@@ -107,11 +103,117 @@
     </ul>
     </li>
     <li> <strong class="uidlink"><a href="troy.pilot.callback.Callback-class.html">troy.pilot.callback.Callback</a></strong>:
-      <em class="summary">Callback class.</em>
+      <em class="summary">Callback base class.</em>
     </li>
-    <li> <strong class="uidlink"><a href="troy.pilot.exception.Error-class.html">troy.pilot.exception.Error</a></strong>
+    <li> <strong class="uidlink"><a href="troy.pilot.exception.Error-class.html">troy.pilot.exception.Error</a></strong>:
+      <em class="summary">TROY's exception class instances have two attributes: an error 
+        code, and an error message.</em>
     </li>
-    <li> <strong class="uidlink"><a href="troy.pilot.state.State-class.html">troy.pilot.state.State</a></strong>
+    <li> <strong class="uidlink"><a href="troy.pilot.state.State-class.html">troy.pilot.state.State</a></strong>:
+      <em class="summary">The State class is really an enum, or what python uses as an enum.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.interface.base.aBase-class.html">troy.interface.base.aBase</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy_adaptor_peejay.adaptor-class.html">troy_adaptor_peejay.adaptor</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.interface.base.iBase-class.html">troy.interface.base.iBase</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy.interface.compute_data_scheduler.iComputeDataScheduler-class.html">troy.interface.compute_data_scheduler.iComputeDataScheduler</a></strong>:
+      <em class="summary">ComputeDataScheduler (CDS)</em>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.interface.compute_pilot.iComputePilot-class.html">troy.interface.compute_pilot.iComputePilot</a></strong>:
+      <em class="summary">ComputePilot (PilotJob)</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy_adaptor_peejay.peejay_cp-class.html">troy_adaptor_peejay.peejay_cp</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.interface.compute_pilot_service.iComputePilotService-class.html">troy.interface.compute_pilot_service.iComputePilotService</a></strong>:
+      <em class="summary">ComputePilotService (CPS)</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy_adaptor_peejay.peejay_cps-class.html">troy_adaptor_peejay.peejay_cps</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.interface.compute_scheduler.iComputeScheduler-class.html">troy.interface.compute_scheduler.iComputeScheduler</a></strong>:
+      <em class="summary">ComputeScheduler (CS)</em>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.interface.compute_unit.iComputeUnit-class.html">troy.interface.compute_unit.iComputeUnit</a></strong>:
+      <em class="summary">ComputeUnit</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy.interface.compute_data_unit.iComputeDataUnit-class.html">troy.interface.compute_data_unit.iComputeDataUnit</a></strong>:
+      <em class="summary">ComputeDataUnit.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy_adaptor_peejay.peejay_dcu-class.html">troy_adaptor_peejay.peejay_dcu</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy_adaptor_peejay.peejay_cu-class.html">troy_adaptor_peejay.peejay_cu</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html">troy.interface.compute_unit_service.iComputeUnitService</a></strong>:
+      <em class="summary">ComputeUnitService (CUS)</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html">troy.interface.compute_data_unit_service.iComputeDataUnitService</a></strong>:
+      <em class="summary">ComputeDataUnitService.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy_adaptor_peejay.peejay_dcus-class.html">troy_adaptor_peejay.peejay_dcus</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy_adaptor_peejay.peejay_cus-class.html">troy_adaptor_peejay.peejay_cus</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.interface.data_pilot.iDataPilot-class.html">troy.interface.data_pilot.iDataPilot</a></strong>:
+      <em class="summary">DataPilot (PilotStore)</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy_adaptor_peejay.peejay_dp-class.html">troy_adaptor_peejay.peejay_dp</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.interface.data_pilot_service.iDataPilotService-class.html">troy.interface.data_pilot_service.iDataPilotService</a></strong>:
+      <em class="summary">DataPilotService (DPS)</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy_adaptor_peejay.peejay_dps-class.html">troy_adaptor_peejay.peejay_dps</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.interface.data_scheduler.iDataScheduler-class.html">troy.interface.data_scheduler.iDataScheduler</a></strong>:
+      <em class="summary">DataScheduler (CS)</em>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.interface.data_unit.iDataUnit-class.html">troy.interface.data_unit.iDataUnit</a></strong>:
+      <em class="summary">DataUnit.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy.interface.compute_data_unit.iComputeDataUnit-class.html">troy.interface.compute_data_unit.iComputeDataUnit</a></strong>:
+      <em class="summary">ComputeDataUnit.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy_adaptor_peejay.peejay_dcu-class.html">troy_adaptor_peejay.peejay_dcu</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy_adaptor_peejay.peejay_du-class.html">troy_adaptor_peejay.peejay_du</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.interface.data_unit_service.iDataUnitService-class.html">troy.interface.data_unit_service.iDataUnitService</a></strong>:
+      <em class="summary">DataUnitService (DUS)</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html">troy.interface.compute_data_unit_service.iComputeDataUnitService</a></strong>:
+      <em class="summary">ComputeDataUnitService.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy_adaptor_peejay.peejay_dcus-class.html">troy_adaptor_peejay.peejay_dcus</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy_adaptor_peejay.peejay_dus-class.html">troy_adaptor_peejay.peejay_dus</a></strong>
+    </li>
+    </ul>
+    </li>
+    </ul>
     </li>
     <li> <strong class="uidlink">object</strong>:
       <em class="summary">The most base type</em>
@@ -122,7 +224,9 @@
     <li> <strong class="uidlink">exceptions.Exception</strong>:
       <em class="summary">Common base class for all non-exit exceptions.</em>
     <ul>
-    <li> <strong class="uidlink"><a href="troy.pilot.exception.Exception-class.html">troy.pilot.exception.Exception</a></strong>
+    <li> <strong class="uidlink"><a href="troy.pilot.exception.TroyException-class.html">troy.pilot.exception.TroyException</a></strong>:
+      <em class="summary">The TROY exception class is (obviously) used to signal error 
+        conditions to the user of TROY's pilot API.</em>
     </li>
     </ul>
     </li>
@@ -170,9 +274,6 @@ dict(**kwargs) -&gt; new dictionary initialized with the name=value pairs
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="troy.pilot-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th bgcolor="#70b0f0" class="navbar-select"
@@ -198,7 +299,7 @@ dict(**kwargs) -&gt; new dictionary initialized with the name=value pairs
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Fri Mar 23 22:20:16 2012</a>
+    3.0.1 on Wed May  9 12:01:29 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

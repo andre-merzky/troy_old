@@ -1,6 +1,6 @@
 
 from troy.interface.base  import iBase
-from troy.pilot.exception import Exception, Error
+from troy.pilot.exception import TroyException, Error
 
 
 ########################################################################
@@ -20,18 +20,18 @@ class iDataUnit (iBase) :
         A DataUnit has state, can be queried and can be cancelled.
     """
 
-    def __init__ (self):
+    def __init__ (self, obj, adaptor):
         pass
 
 
     def wait (self):
         """ Wait until DU enters a final state """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     def cancel (self):
         """ Cancel the DU """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     def set_callback (self, member, cb):
@@ -41,7 +41,7 @@ class iDataUnit (iBase) :
             member -- The member to set the callback for (state / state_detail).
             cb     -- The callback object to call.
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
     
     def unset_callback (self, member):
@@ -50,20 +50,20 @@ class iDataUnit (iBase) :
             Keyword arguments:
             member -- The member to unset the callback from.
         """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     def list_files (self):
         """ list files managed by the DU """
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
     
 
     def data_export (self, target_directory):
         """ copies content of DU to a directory on the local machine"""
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
         
     def data_import (self, src_directory):
         """ copies content from a directory on the local machine to DU"""
-        raise Exception (Error.NotImplemented, "method not implemented!")
+        raise TroyException (Error.NotImplemented, "method not implemented!")
         

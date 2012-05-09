@@ -1,5 +1,6 @@
 
-from base import Base
+from base            import Base
+from data_scheduler  import _DataScheduler
 
 
 ########################################################################
@@ -39,8 +40,43 @@ class DataPilot (Base) :
             Keyword arguments:
             dp_id -- restore from dp_id
         """
+
+        # init api base
         Base.__init__ (self)
-        pass
+
+        # prepare instance data
+        idata = {
+                  'id'        : dp_id,
+                  'scheduler' : _DataScheduler ('Random')
+                }
+        self.set_idata_ (idata)
+
+        # initialize adaptor class 
+        self.get_engine_().call ('DataPilot', 'init', self)
+
+
+    ############################################################################
+    #
+    # The submit_data_unit's implementation tries to submit the DU via
+    # the backend -- if that does not work, no scheduler can help anymore, so an
+    # exception is raised (falls through really)
+    #
+    # This is a private method
+    #
+    def submit_compute_unit_ (self, dud):
+        """ Submit a DU to this DataPilot.
+
+            Keyword argument:
+            dud -- The DataUnitDescription from the application
+
+            Return:
+            DataUnit object
+        """
+
+        return self.get_engine_().call ('DataPilot',
+                                        'submit_data_unit_', self, dud)
+
+
 
 
     def wait (self):

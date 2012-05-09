@@ -9,6 +9,8 @@ troy.interface	troy.interface-module.html
 troy.interface.__package__	troy.interface-module.html#__package__
 troy.interface.base	troy.interface.base-module.html
 troy.interface.base.__package__	troy.interface.base-module.html#__package__
+troy.interface.compute_data_scheduler	troy.interface.compute_data_scheduler-module.html
+troy.interface.compute_data_scheduler.__package__	troy.interface.compute_data_scheduler-module.html#__package__
 troy.interface.compute_data_unit	troy.interface.compute_data_unit-module.html
 troy.interface.compute_data_unit.__package__	troy.interface.compute_data_unit-module.html#__package__
 troy.interface.compute_data_unit_service	troy.interface.compute_data_unit_service-module.html
@@ -27,6 +29,8 @@ troy.interface.data_pilot	troy.interface.data_pilot-module.html
 troy.interface.data_pilot.__package__	troy.interface.data_pilot-module.html#__package__
 troy.interface.data_pilot_service	troy.interface.data_pilot_service-module.html
 troy.interface.data_pilot_service.__package__	troy.interface.data_pilot_service-module.html#__package__
+troy.interface.data_scheduler	troy.interface.data_scheduler-module.html
+troy.interface.data_scheduler.__package__	troy.interface.data_scheduler-module.html#__package__
 troy.interface.data_unit	troy.interface.data_unit-module.html
 troy.interface.data_unit.__package__	troy.interface.data_unit-module.html#__package__
 troy.interface.data_unit_service	troy.interface.data_unit_service-module.html
@@ -37,6 +41,8 @@ troy.pilot.base	troy.pilot.base-module.html
 troy.pilot.base.__package__	troy.pilot.base-module.html#__package__
 troy.pilot.callback	troy.pilot.callback-module.html
 troy.pilot.callback.__package__	troy.pilot.callback-module.html#__package__
+troy.pilot.compute_data_scheduler	troy.pilot.compute_data_scheduler-module.html
+troy.pilot.compute_data_scheduler.__package__	troy.pilot.compute_data_scheduler-module.html#__package__
 troy.pilot.compute_data_unit	troy.pilot.compute_data_unit-module.html
 troy.pilot.compute_data_unit.__package__	troy.pilot.compute_data_unit-module.html#__package__
 troy.pilot.compute_data_unit_description	troy.pilot.compute_data_unit_description-module.html
@@ -63,6 +69,8 @@ troy.pilot.data_pilot_description	troy.pilot.data_pilot_description-module.html
 troy.pilot.data_pilot_description.__package__	troy.pilot.data_pilot_description-module.html#__package__
 troy.pilot.data_pilot_service	troy.pilot.data_pilot_service-module.html
 troy.pilot.data_pilot_service.__package__	troy.pilot.data_pilot_service-module.html#__package__
+troy.pilot.data_scheduler	troy.pilot.data_scheduler-module.html
+troy.pilot.data_scheduler.__package__	troy.pilot.data_scheduler-module.html#__package__
 troy.pilot.data_unit	troy.pilot.data_unit-module.html
 troy.pilot.data_unit.__package__	troy.pilot.data_unit-module.html#__package__
 troy.pilot.data_unit_description	troy.pilot.data_unit_description-module.html
@@ -80,6 +88,10 @@ troy.interface.base.aBase.__init__	troy.interface.base.aBase-class.html#__init__
 troy.interface.base.aBase.sanity_check	troy.interface.base.aBase-class.html#sanity_check
 troy.interface.base.iBase	troy.interface.base.iBase-class.html
 troy.interface.base.iBase.__init__	troy.interface.base.iBase-class.html#__init__
+troy.interface.compute_data_scheduler.iComputeDataScheduler	troy.interface.compute_data_scheduler.iComputeDataScheduler-class.html
+troy.interface.compute_data_scheduler.iComputeDataScheduler.init	troy.interface.compute_data_scheduler.iComputeDataScheduler-class.html#init
+troy.interface.compute_data_scheduler.iComputeDataScheduler.__init__	troy.interface.compute_data_scheduler.iComputeDataScheduler-class.html#__init__
+troy.interface.compute_data_scheduler.iComputeDataScheduler.schedule	troy.interface.compute_data_scheduler.iComputeDataScheduler-class.html#schedule
 troy.interface.compute_data_unit.iComputeDataUnit	troy.interface.compute_data_unit.iComputeDataUnit-class.html
 troy.interface.compute_unit.iComputeUnit.set_callback	troy.interface.compute_unit.iComputeUnit-class.html#set_callback
 troy.interface.data_unit.iDataUnit.list_files	troy.interface.data_unit.iDataUnit-class.html#list_files
@@ -157,6 +169,10 @@ troy.interface.data_pilot_service.iDataPilotService.list_pilots	troy.interface.d
 troy.interface.data_pilot_service.iDataPilotService.create_pilot	troy.interface.data_pilot_service.iDataPilotService-class.html#create_pilot
 troy.interface.data_pilot_service.iDataPilotService.__init__	troy.interface.data_pilot_service.iDataPilotService-class.html#__init__
 troy.interface.data_pilot_service.iDataPilotService.wait	troy.interface.data_pilot_service.iDataPilotService-class.html#wait
+troy.interface.data_scheduler.iDataScheduler	troy.interface.data_scheduler.iDataScheduler-class.html
+troy.interface.data_scheduler.iDataScheduler.init	troy.interface.data_scheduler.iDataScheduler-class.html#init
+troy.interface.data_scheduler.iDataScheduler.__init__	troy.interface.data_scheduler.iDataScheduler-class.html#__init__
+troy.interface.data_scheduler.iDataScheduler.schedule	troy.interface.data_scheduler.iDataScheduler-class.html#schedule
 troy.interface.data_unit.iDataUnit	troy.interface.data_unit.iDataUnit-class.html
 troy.interface.data_unit.iDataUnit.set_callback	troy.interface.data_unit.iDataUnit-class.html#set_callback
 troy.interface.data_unit.iDataUnit.list_files	troy.interface.data_unit.iDataUnit-class.html#list_files
@@ -225,6 +241,7 @@ troy.pilot.compute_unit_description.ComputeUnitDescription.output	troy.pilot.com
 troy.pilot.compute_unit_description.ComputeUnitDescription.cleanup	troy.pilot.compute_unit_description.ComputeUnitDescription-class.html#cleanup
 troy.pilot.compute_unit_description.ComputeUnitDescription.interactive	troy.pilot.compute_unit_description.ComputeUnitDescription-class.html#interactive
 troy.pilot.compute_data_unit_service.ComputeDataUnitService	troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html
+troy.pilot.data_unit_service.DataUnitService.list_data_pilot_services	troy.pilot.data_unit_service.DataUnitService-class.html#list_data_pilot_services
 troy.pilot.data_unit_service.DataUnitService.remove_data_pilot_service	troy.pilot.data_unit_service.DataUnitService-class.html#remove_data_pilot_service
 troy.pilot.compute_unit_service.ComputeUnitService.list_compute_pilot_services	troy.pilot.compute_unit_service.ComputeUnitService-class.html#list_compute_pilot_services
 troy.pilot.data_unit_service.DataUnitService.submit_data_unit	troy.pilot.data_unit_service.DataUnitService-class.html#submit_data_unit
@@ -237,7 +254,7 @@ troy.pilot.base.Base.get_engine_	troy.pilot.base.Base-class.html#get_engine_
 troy.pilot.base.Base.get_adaptors_	troy.pilot.base.Base-class.html#get_adaptors_
 troy.pilot.compute_unit_service.ComputeUnitService.cancel	troy.pilot.compute_unit_service.ComputeUnitService-class.html#cancel
 troy.pilot.compute_unit_service.ComputeUnitService.remove_compute_pilot_service	troy.pilot.compute_unit_service.ComputeUnitService-class.html#remove_compute_pilot_service
-troy.pilot.data_unit_service.DataUnitService.list_data_pilot_services	troy.pilot.data_unit_service.DataUnitService-class.html#list_data_pilot_services
+troy.pilot.compute_data_unit_service.ComputeDataUnitService.submit_compute_data_unit	troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#submit_compute_data_unit
 troy.pilot.compute_unit_service.ComputeUnitService.submit_compute_unit	troy.pilot.compute_unit_service.ComputeUnitService-class.html#submit_compute_unit
 troy.pilot.compute_data_unit_service.ComputeDataUnitService.__init__	troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#__init__
 troy.pilot.compute_unit_service.ComputeUnitService.wait	troy.pilot.compute_unit_service.ComputeUnitService-class.html#wait
@@ -351,6 +368,7 @@ troy.pilot.compute_unit_service.ComputeUnitService.__init__	troy.pilot.compute_u
 troy.pilot.compute_unit_service.ComputeUnitService.wait	troy.pilot.compute_unit_service.ComputeUnitService-class.html#wait
 troy.pilot.data_pilot.DataPilot	troy.pilot.data_pilot.DataPilot-class.html
 troy.pilot.data_pilot.DataPilot.set_callback	troy.pilot.data_pilot.DataPilot-class.html#set_callback
+troy.pilot.data_pilot.DataPilot.submit_compute_unit_	troy.pilot.data_pilot.DataPilot-class.html#submit_compute_unit_
 troy.pilot.base.Base.set_idata_	troy.pilot.base.Base-class.html#set_idata_
 troy.pilot.base.Base.get_idata_	troy.pilot.base.Base-class.html#get_idata_
 troy.pilot.data_pilot.DataPilot.unset_callback	troy.pilot.data_pilot.DataPilot-class.html#unset_callback
@@ -369,6 +387,7 @@ troy.pilot.data_pilot_description.DataPilotDescription.service_url	troy.pilot.da
 troy.pilot.data_pilot_description.DataPilotDescription.affinity_datacenter_label	troy.pilot.data_pilot_description.DataPilotDescription-class.html#affinity_datacenter_label
 troy.pilot.data_pilot_description.DataPilotDescription.affinity_machine_label	troy.pilot.data_pilot_description.DataPilotDescription-class.html#affinity_machine_label
 troy.pilot.data_pilot_service.DataPilotService	troy.pilot.data_pilot_service.DataPilotService-class.html
+troy.pilot.data_pilot_service.DataPilotService.submit_data_unit_	troy.pilot.data_pilot_service.DataPilotService-class.html#submit_data_unit_
 troy.pilot.base.Base.get_engine_	troy.pilot.base.Base-class.html#get_engine_
 troy.pilot.base.Base.get_idata_	troy.pilot.base.Base-class.html#get_idata_
 troy.pilot.base.Base.set_idata_	troy.pilot.base.Base-class.html#set_idata_

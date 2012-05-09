@@ -56,6 +56,33 @@ class ComputeUnitService (Base) :
         pass
 
 
+    ############################################################################
+    #
+    # The submit_compute_unit's implementation first tries to submit the CU via
+    # the backend -- if that does not work, the call is handed of to a scheduler
+    # which may be able to submit to on of the CUS' CPSs instead.
+    #
+    def submit_compute_unit (self, cud):
+        """ Submit a CU to this ComputeUnitService.
+
+            Keyword argument:
+            cud -- The ComputeUnitDescription from the application
+
+            Return:
+            ComputeUnit object
+        """
+
+        try :
+            return self.get_engine_().call ('ComputeUnitService',
+                                            'submit_compute_unit', self, cud)
+        except :
+            # internal scheduling did not work -- invoke the scheduler
+            idata = self.get_idata_ ()
+            cu = idata['scheduler'].schedule (self, cud)
+            return cu
+
+
+
     def get_id (self):
         """ get instance id """
         return self.get_engine_().call ('ComputeUnitService', 'get_id', self)
@@ -88,32 +115,6 @@ class ComputeUnitService (Base) :
         """
         return self.get_engine_().call ('ComputeUnitService',
                                         'remove_pilot_service', self, cps)
-
-    ############################################################################
-    #
-    # The submit_compute_unit's implementation first tries to submit the CU via
-    # the backend -- if that does not work, the call is handed of to a scheduler
-    # which may be able to submit to on of the CUS' CPSs instead.
-    #
-    def submit_compute_unit (self, cud):
-        """ Submit a CU to this ComputeUnitService.
-
-            Keyword argument:
-            cud -- The ComputeUnitDescription from the application
-
-            Return:
-            ComputeUnit object
-        """
-
-        try :
-            return self.get_engine_().call ('ComputeUnitService',
-                                            'submit_compute_unit', self, cud)
-        except :
-            # internal scheduling did not work -- invoke the scheduler
-            idata = self.get_idata_ ()
-            cu = idata['scheduler'].schedule (self, cud)
-            return cu
-
 
 
     def wait (self):

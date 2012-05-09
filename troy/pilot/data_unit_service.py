@@ -1,5 +1,6 @@
 
-from base import Base
+from base            import Base
+from data_scheduler  import _DataScheduler
 
 
 ########################################################################
@@ -33,13 +34,55 @@ class DataUnitService (Base) :
 
     def __init__ (self, dus_id=None):
         """ Create a DataUnitService object
-
+    
             Keyword arguments:
             dus_id -- Reconnect to an existing DataUnitService 
         """
-        # FIXME: what happens on None?  needs URL?
+        print "dus: init"
+
+        # init api base
         Base.__init__ (self)
+
+        # prepare instance data
+        idata = {
+                  'id'        : dus_id,
+                  'scheduler' : _DataScheduler ('Random')
+                }
+        self.set_idata_ (idata)
+
+        # initialize adaptor class 
+        self.get_engine_().call ('DataUnitService', 'init', self)
+
         pass
+
+
+
+
+    ############################################################################
+    #
+    # The submit_data_unit's implementation first tries to submit the DU via
+    # the backend -- if that does not work, the call is handed of to a scheduler
+    # which may be able to submit to on of the DUS' DPSs instead.
+    #
+    def submit_data_unit (self, dud):
+        """ Submit a CU to this DataUnitService.
+
+            Keyword argument:
+            cud -- The DataUnitDescription from the application
+
+            Return:
+            DataUnit object
+        """
+
+        try :
+            return self.get_engine_().call ('DataUnitService',
+                                            'submit_data_unit', self, dud)
+        except :
+            # internal scheduling did not work -- invoke the scheduler
+            idata = self.get_idata_ ()
+            du = idata['scheduler'].schedule (self, dud)
+            return du
+
 
 
     def add_data_pilot_service (self, dps):

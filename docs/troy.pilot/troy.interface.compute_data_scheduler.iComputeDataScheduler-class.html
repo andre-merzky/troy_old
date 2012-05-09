@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>troy_adaptor_skeleton.adaptor</title>
+  <title>troy.interface.compute_data_scheduler.iComputeDataScheduler</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -39,8 +39,10 @@
   <tr valign="top">
     <td width="100%">
       <span class="breadcrumbs">
-        <a href="troy_adaptor_skeleton-module.html">Module&nbsp;troy_adaptor_skeleton</a> ::
-        Class&nbsp;adaptor
+        Package&nbsp;troy ::
+        <a href="troy.interface-module.html">Package&nbsp;interface</a> ::
+        <a href="troy.interface.compute_data_scheduler-module.html">Module&nbsp;compute_data_scheduler</a> ::
+        Class&nbsp;iComputeDataScheduler
       </span>
     </td>
     <td>
@@ -51,20 +53,26 @@
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class adaptor</h1><p class="nomargin-top"><span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#adaptor">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class iComputeDataScheduler</h1><p class="nomargin-top"><span class="codelink"><a href="troy.interface.compute_data_scheduler-pysrc.html#iComputeDataScheduler">source&nbsp;code</a></span></p>
 <center>
-<center>  <map id="uml_class_diagram_for_troy_ada_12" name="uml_class_diagram_for_troy_ada_12">
-<area shape="rect" id="node182" href="troy_adaptor_skeleton.adaptor-class.html#__init__" title="troy_adaptor_skeleton.adaptor.__init__" alt="" coords="36,103,149,121"/>
-<area shape="rect" id="node182" href="troy_adaptor_skeleton.adaptor-class.html#get_name" title="troy_adaptor_skeleton.adaptor.get_name" alt="" coords="36,121,149,140"/>
-<area shape="rect" id="node182" href="troy_adaptor_skeleton.adaptor-class.html#get_registry" title="troy_adaptor_skeleton.adaptor.get_registry" alt="" coords="36,140,149,159"/>
-<area shape="rect" id="node182" href="troy_adaptor_skeleton.adaptor-class.html#sanity_check" title="troy_adaptor_skeleton.adaptor.sanity_check" alt="" coords="36,159,149,177"/>
-<area shape="rect" id="node1" href="troy_adaptor_skeleton.adaptor-class.html" title="troy_adaptor_skeleton.adaptor" alt="" coords="24,70,160,183"/>
-<area shape="rect" id="node2" href="troy.interface.base.aBase-class.html" title="troy.interface.base.aBase" alt="" coords="5,6,179,50"/>
+<center>  <map id="uml_class_diagram_for_troy_int_3" name="uml_class_diagram_for_troy_int_3">
+<area shape="rect" id="node26" href="troy.interface.compute_data_scheduler.iComputeDataScheduler-class.html#__init__" title="Create a ComputeDataScheduler" alt="" coords="17,103,177,121"/>
+<area shape="rect" id="node26" href="troy.interface.compute_data_scheduler.iComputeDataScheduler-class.html#init" title="dummy method to make sure the backend can initialize the object." alt="" coords="17,121,177,140"/>
+<area shape="rect" id="node26" href="troy.interface.compute_data_scheduler.iComputeDataScheduler-class.html#schedule" title="schedule a cdu/cdud on a cdus" alt="" coords="17,140,177,159"/>
+<area shape="rect" id="node1" href="troy.interface.compute_data_scheduler.iComputeDataScheduler-class.html" title="ComputeDataScheduler (CDS)" alt="" coords="5,70,189,165"/>
+<area shape="rect" id="node2" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="52,6,143,50"/>
 </map>
-  <img src="uml_class_diagram_for_troy_ada_12.gif" alt='' usemap="#uml_class_diagram_for_troy_ada_12" ismap="ismap" class="graph-without-title" />
+  <img src="uml_class_diagram_for_troy_int_3.gif" alt='' usemap="#uml_class_diagram_for_troy_int_3" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
+<p>ComputeDataScheduler (CDS)</p>
+  <p>The CDS is a troy-internal object which provides scheduling 
+  capabilities to Troy.  In particular, it will schedule compute_data units
+  over a set of compute_data pilots.  To do that, the scheduler 
+  implementation (adaptor) will need to pull various information from the 
+  backend.</p>
+
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -79,9 +87,12 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy_adaptor_skeleton.adaptor-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td><span class="summary-sig"><a href="troy.interface.compute_data_scheduler.iComputeDataScheduler-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">obj</span>,
+        <span class="summary-sig-arg">adaptor</span>)</span><br />
+      Create a ComputeDataScheduler</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#adaptor.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.interface.compute_data_scheduler-pysrc.html#iComputeDataScheduler.__init__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -95,9 +106,10 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="get_name"></a><span class="summary-sig-name">get_name</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td><span class="summary-sig"><a href="troy.interface.compute_data_scheduler.iComputeDataScheduler-class.html#init" class="summary-sig-name">init</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      dummy method to make sure the backend can initialize the object.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#adaptor.get_name">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.interface.compute_data_scheduler-pysrc.html#iComputeDataScheduler.init">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -111,25 +123,12 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="get_registry"></a><span class="summary-sig-name">get_registry</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td><span class="summary-sig"><a name="schedule"></a><span class="summary-sig-name">schedule</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">thing</span>,
+        <span class="summary-sig-arg">cdud</span>)</span><br />
+      schedule a cdu/cdud on a cdus</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#adaptor.get_registry">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="troy_adaptor_skeleton.adaptor-class.html#sanity_check" class="summary-sig-name">sanity_check</a>(<span class="summary-sig-arg">self</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#adaptor.sanity_check">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.interface.compute_data_scheduler-pysrc.html#iComputeDataScheduler.schedule">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -154,41 +153,41 @@
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">obj</span>,
+        <span class="sig-arg">adaptor</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#adaptor.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.interface.compute_data_scheduler-pysrc.html#iComputeDataScheduler.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  
+  <p>Create a ComputeDataScheduler</p>
   <dl class="fields">
     <dt>Overrides:
-        <a href="troy.interface.base.aBase-class.html#__init__">troy.interface.base.aBase.__init__</a>
+        <a href="troy.interface.base.iBase-class.html#__init__">base.iBase.__init__</a>
     </dt>
   </dl>
 </td></tr></table>
 </div>
-<a name="sanity_check"></a>
+<a name="init"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">sanity_check</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">init</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy_adaptor_skeleton-pysrc.html#adaptor.sanity_check">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.interface.compute_data_scheduler-pysrc.html#iComputeDataScheduler.init">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  
+  <p>dummy method to make sure the backend can initialize the object. This 
+  method should *not* be implemented in the adaptor!</p>
   <dl class="fields">
-    <dt>Overrides:
-        <a href="troy.interface.base.aBase-class.html#sanity_check">troy.interface.base.aBase.sanity_check</a>
-    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -222,7 +221,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Tue May  8 13:28:05 2012</a>
+    3.0.1 on Wed May  9 12:01:29 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

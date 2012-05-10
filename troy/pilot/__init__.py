@@ -2,16 +2,13 @@
 """
 
 For the sake of code organization, all API classes are defined in a separate
-file.  Alas, pythons module naming rules then introduce an additional element,
+file.  Alas, python's module naming rules then introduce an additional element,
 the file name, so that, for example, the compute pilot class would be available
 as troy.pilot.compute_pilot.ComputePilot.  We thus move the symbols into the
 parent namespace, which makes them available as, for example,
 troy.pilot.ComputePilot.
 
 """
-
-# we don't want to expose 'base'. really - that is not part of the API
-# from troy.pilot.base                           import Base                         
 
 from troy.pilot.state                          import State                        
 from troy.pilot.callback                       import Callback                     

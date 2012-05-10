@@ -69,7 +69,8 @@ Questions / comments about API, to be discussed
 
     - reinitialize
       - what happens to running CUs?
-      - does it stay 'registered' in CPS?  
+      - does it stay 'registered' in CPS?  (might get smaller)
+      - can dead pilots be reinitialized?
       - what state after calling reinit?
 
 

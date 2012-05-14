@@ -3,23 +3,12 @@ import imp
 
 import troy
 import troy.interface
-from troy.pilot.exception import TroyException, Error
+from   troy.pilot.exception import TroyException, Error
+
+from   bigjob import bigjob, subjob, description
 
 
-########################################################################
-# 
-# FIXME:
-#
-#   In order to write a functional adaptor, do the following:
-#
-#   - copy this file to a new location
-#   - rename it to 'troy_adaptor_<backend>.py', where <backend> is 
-#     the name of your pilot implementation
-#   - implement the adaptor.sanity_check() method (check if the adaptor is
-#     viable in the given runtime environment)
-#   - in the new adaptor, replace all occurrences of 'bigjob' with <backend>
-#   - implement all classes/methods
-#
+COORDINATION_URL = "advert://localhost/?dbtype=sqlite3"
 
 
 ########################################################################
@@ -68,40 +57,40 @@ class adaptor (troy.interface.aBase) :
 class bigjob_cps (troy.interface.iComputePilotService) :
 
     def __init__ (self, api, adaptor) :
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+
+        self.api     = api 
+        self.adaptor = adaptor
+        self.idata   = self.api.get_idata_ ()
+
+        # if we got this far, we can now register adaptor level instance data in
+        # the api.  
+        self.adata = self.adaptor.register_adata (self.api)
 
 
-    def create_pilot (self, rm, cpd, cp_type=None, context=None):
-        """ Add a ComputePilot to the ComputePilotService
+    def create_pilot (self, cpd, context=None):
+        """ Create a ComputePilot
 
             Keyword arguments:
-            rm      -- Contact string for the resource manager
             cpd     -- ComputePilot Description
-            cp_type -- backend type (optional)
             context -- Security context (optional)
 
             Return value:
             A ComputePilot handle
         """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+        pilot = bigjob (COORDINATION_URL)
+        pilot.start_pilot_job (cpd['rm'],
+                               None,
+                               cpd['number_of_processes'],
+                               cpd['queue'],
+                               cpd['project'],
+                               cpd['workingdirectory'],
+                               cpd['userproxy'],
+                               cpd['walltime'],
+                               cpd['processes_per_node'])
+        pilot_url = pilot.pilot_url
+        self.adata['cp'][pilot_url] = pilot
 
-
-    def list_pilots (self, api):
-        """ List all CPs """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-
-    def wait (self):
-        """ Wait until CPS enters a final state """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-
-    def cancel (self):
-        """ Cancel the CPS
-            This also cancels all the ComputePilots that were under control of this
-            CPS.
-        """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+        return pilot_url
 
 
 ########################################################################
@@ -158,28 +147,28 @@ class bigjob_cus (troy.interface.iComputeUnitService) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def add_compute_pilot_service (self, cps):
-        """ Add a ComputePilotService to this WUS.
+    def add_compute_pilot (self, cp):
+        """ Add a ComputePilot to this CUS.
 
             Keyword arguments:
-            cps -- The ComputePilot Service to which this ComputeUnitService will connect.
+            cps -- The ComputePilot to which this ComputeUnitService will connect.
         """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def list_compute_pilot_services (self):
-        """ List all CPSs of CUS """
+    def list_compute_pilots (self):
+        """ List all CPs of CUS """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def remove_compute_pilot_service (self, cps):
-        """ Remove a ComputePilotService 
+    def remove_compute_pilot (self, cp):
+        """ Remove a ComputePilot
 
-            Note that it won't cancel the ComputePilotService, it will just no
-            longer be connected to this CUS.
+            Note that it won't cancel the ComputePilot, it will just not receive
+            any CUs anynmore.
 
             Keyword arguments:
-            cps -- The ComputePilotService to remove 
+            cp -- The ComputePilot to remove 
         """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
@@ -202,9 +191,9 @@ class bigjob_cus (troy.interface.iComputeUnitService) :
 
 
     def cancel (self):
-        """ Cancel the WUS.
+        """ Cancel the CUS.
             
-            Cancelling the WUS also cancels all the WUs submitted to it.
+            Cancelling the CUS also cancels all the CUS submitted to it.
         """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
@@ -255,35 +244,15 @@ class bigjob_dps (troy.interface.iDataPilotService) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def create_pilot (self, rm, dpd, dp_type=None, context=None):
-        """ Add a DataPilot to the DataPilotService
+    def create_pilot (self, dpd, context=None):
+        """ Create a DataPilot.
 
             Keyword arguments:
-            rm      -- Contact string for the resource manager
             cpd     -- DataPilot Description
-            dp_type -- backend type (optional)
             context -- Security context (optional)
 
             Return value:
             A DataPilot handle
-        """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-
-    def list_pilots (self):
-        """ List all DPs """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-
-    def wait (self):
-        """ Wait until DPS enters a final state """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-
-    def cancel (self):
-        """ Cancel the DPS
-            This also cancels all the DataPilots that were under control of this
-            PDS.
         """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
@@ -337,28 +306,28 @@ class bigjob_dus (troy.interface.iDataUnitService) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def add_data_pilot_service (self, dps):
-        """ Add a DataPilotService 
+    def add_data_pilot (self, dp):
+        """ Add a DataPilot
 
             Keyword arguments:
-            dps -- The DataPilotService to which this DataUnitService will connect.
+            dp -- The DataPilot to which this DataUnitService will connect.
         """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def list_data_pilot_services (self):
-        """ List all DPSs of DUS """
+    def list_data_pilots (self):
+        """ List all DPs of DUS """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
     
 
-    def remove_data_pilot_service (self, dps):
-        """ Remove a DataPilotService 
+    def remove_data_pilot (self, dp):
+        """ Remove a DataPilot 
 
-            Note that it won't cancel the DataPilotService, it will just no
-            longer be connected to this DUS.
+            Note that it won't cancel the DataPilot, it will just not receive
+            any DUs anymore.
             
             Keyword arguments:
-            dps -- The DataPilotService to remove 
+            dp -- The DataPilot to remove 
         """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
     

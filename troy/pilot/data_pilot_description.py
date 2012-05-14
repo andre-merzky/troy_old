@@ -12,6 +12,8 @@ class DataPilotDescription (dict) :
     
     # Class members
     __slots__ = (
+        'rm',          # url
+        'dp_type',     # string
         # Pilot / Agent description
         'service_url', # "ssh://localhost/tmp/datapilot/",
         'size',        # 100, size in MegaByte

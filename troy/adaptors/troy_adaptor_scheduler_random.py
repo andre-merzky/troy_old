@@ -94,35 +94,12 @@ class scheduler_data_random (troy.interface.iDataScheduler) :
 
 
 
-    def schedule (self, thing, dud) :
+    def schedule (self, dus, dud) :
 
-        if isinstance ( thing, troy.pilot.DataUnitService ) :
-
-            # print "=========== DUS submit"
-            dps_list = thing.list_data_pilot_services () # FIXME: check list size
-            dps      = troy.pilot.DataPilotService    (dps_list[0])
-            return dps.submit_data_unit_              (dud)
-
-
-        elif isinstance ( thing, troy.pilot.ComputePilotService ) :
-
-            # print "=========== DPS submit"
-            dp_list = thing.list_pilots    () # FIXME: check list size
-            dp      = troy.pilot.DataPilot (dp_list[0])
-            return dp.submit_compute_unit_ (dud)
-
-
-        elif isinstance ( thing, troy.pilot.DataPilot ) :
-
-            # print "=========== DP submit -> error"
-            raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess,
-                  "Cannot run the data unit!")
-
-
-        else :
-            # print "=========== ??"
-            raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess,
-                  "schedule() expects a DUS, DPS or DP as scheduling target!")
+        # print "=========== DUS submit"
+        dp_list = dus.list_data_pilots ()  # FIXME: check list size
+        dp      = troy.pilot.DataPilot (dp_list[0])
+        return dp.submit_data_unit_    (dud)
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -151,35 +128,12 @@ class scheduler_compute_random (troy.interface.iComputeScheduler) :
 
 
 
-    def schedule (self, thing, cud) :
+    def schedule (self, cus, cud) :
 
-        if isinstance ( thing, troy.pilot.ComputeUnitService ) :
-
-            # print "=========== CUS submit"
-            cps_list = thing.list_compute_pilot_services () # FIXME: check list size
-            cps      = troy.pilot.ComputePilotService    (cps_list[0])
-            return cps.submit_compute_unit_              (cud)
-
-
-        elif isinstance ( thing, troy.pilot.ComputePilotService ) :
-
-            # print "=========== CPS submit"
-            cp_list = thing.list_pilots       () # FIXME: check list size
-            cp      = troy.pilot.ComputePilot (cp_list[0])
-            return cp.submit_compute_unit_ (cud)
-
-
-        elif isinstance ( thing, troy.pilot.ComputePilot ) :
-
-            # print "=========== CP submit -> error"
-            raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess,
-                  "Cannot run the compute unit!")
-
-
-        else :
-            # print "=========== ??"
-            raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess,
-                  "schedule() expects a CUS, CPS or CP as scheduling target!")
+        # print "=========== CUS submit"
+        cp_list = cus.list_compute_pilots () # FIXME: check list size
+        cp      = troy.pilot.ComputePilot   (cp_list[0])
+        return cp.submit_compute_unit_      (cud)
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -208,22 +162,15 @@ class scheduler_compute_data_random (troy.interface.iComputeDataScheduler) :
 
 
 
-    def schedule (self, thing, dcud) :
+    def schedule (self, dcus, dcud) :
 
-        if isinstance ( thing, troy.pilot.ComputeDataUnitService ) :
-
-            # print "=========== DCUS submit"
-            # Well, problem here is that we can't break the DCUS into DCPSs --
-            # those do not exist in the troy API.  So, we would need to split
-            # the dcud into a dud and cud.  That is waaaay to complicated for
-            # this simple random scheduler - so we don't...
-            raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented,
-                  "random scheduler cannot handle DCUs!")
-
-        else :
-            # print "=========== ??"
-            raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess,
-                  "schedule() expects a DCUS as scheduling target!")
+        # print "=========== DCUS submit"
+        # Well, problem here is that we can't break the DCUS into DCPSs --
+        # those do not exist in the troy API.  So, we would need to split
+        # the dcud into a dud and cud.  That is waaaay to complicated for
+        # this simple random scheduler - so we don't...
+        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented,
+              "random scheduler cannot handle DCUs!")
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

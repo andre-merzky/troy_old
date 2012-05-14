@@ -35,7 +35,6 @@ class Base:
     
 
     def __init__ (self) :
-        print "base: init"
         self.engine_   = engine.Engine ()  # engine singleton to handle adaptors
         self.adaptors_ = {}                # sorted list of used adaptors
         self.idata_    = {}                # adaptor specific instance data

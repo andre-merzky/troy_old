@@ -11,18 +11,14 @@ def test_compute ():
         cpd['key']   = 'val'
 
         cps = troy.pilot.ComputePilotService ()
-        print "cps : " + str (cps)
-        print cps.list_pilots ()
-
         cp1 = cps.create_pilot ("peejay://localhost", cpd)
         cp2 = cps.create_pilot ("peejay://localhost", cpd)
 
-        print str(cps.list_pilots ())
-
         cus = troy.pilot.ComputeUnitService ()
-        cus.add_compute_pilot_service (cps)
+        cus.add_compute_pilot (cp1)
+        cus.add_compute_pilot (cp2)
 
-        print str(cus.list_compute_pilot_services ())
+        print str(cus.list_compute_pilots ())
 
         cud = troy.pilot.ComputeUnitDescription ()
 
@@ -47,7 +43,7 @@ def test_data ():
         dp  = dps.create_pilot ("file://localhost", dpd)
 
         dus = troy.pilot.DataUnitService ()
-        dus.add_data_pilot_service (dps)
+        dus.add_data_pilot (dp)
 
         dud = troy.pilot.DataUnitDescription ()
         du  = dus.submit_data_unit (dud)
@@ -63,7 +59,7 @@ def test_pilot ():
         cp  = cps.create_pilot ("fork://localhost", cpd)
 
         cus = troy.pilot.ComputeUnitService ()
-        cus.add_compute_pilot_service (cps)
+        cus.add_compute_pilot (cp)
 
         cud = troy.pilot.ComputeUnitDescription ()
         cu  = cus.submit_compute_unit (cud)

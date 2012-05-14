@@ -56,15 +56,15 @@
 <h1 class="epydoc">Class ComputeUnitService</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.compute_unit_service-pysrc.html#ComputeUnitService">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_pil_11" name="uml_class_diagram_for_troy_pil_11">
-<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#__init__" title="Create a ComputeUnitService object" alt="" coords="57,172,303,191"/>
-<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#submit_compute_unit" title="Submit a CU to this ComputeUnitService." alt="" coords="57,191,303,209"/>
-<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#get_id" title="get instance id" alt="" coords="57,209,303,228"/>
-<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#add_compute_pilot_service" title="Add a ComputePilotService to this WUS." alt="" coords="57,228,303,247"/>
-<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#list_compute_pilot_services" title="List all CPSs of CUS" alt="" coords="57,247,303,265"/>
-<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#remove_compute_pilot_service" title="Remove a ComputePilotService" alt="" coords="57,265,303,284"/>
-<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#wait" title="Wait until CUS enters a final state" alt="" coords="57,284,303,303"/>
-<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#cancel" title="Cancel the WUS." alt="" coords="57,303,303,321"/>
-<area shape="rect" id="node1" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html" title="ComputeUnitService (CUS)" alt="" coords="45,139,315,327"/>
+<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#__init__" title="Create a ComputeUnitService object" alt="" coords="77,172,281,191"/>
+<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#submit_compute_unit" title="Submit a CU to this ComputeUnitService." alt="" coords="77,191,281,209"/>
+<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#get_id" title="get instance id" alt="" coords="77,209,281,228"/>
+<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#add_compute_pilot" title="Add a ComputePilot to this CUS." alt="" coords="77,228,281,247"/>
+<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#list_compute_pilots" title="List all CPs of CUS" alt="" coords="77,247,281,265"/>
+<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#remove_compute_pilots" title="Remove a ComputePilot" alt="" coords="77,265,281,284"/>
+<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#wait" title="Wait until CUS enters a final state" alt="" coords="77,284,281,303"/>
+<area shape="rect" id="node148" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#cancel" title="Cancel the CUS." alt="" coords="77,303,281,321"/>
+<area shape="rect" id="node1" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html" title="ComputeUnitService (CUS)" alt="" coords="65,139,292,327"/>
 <area shape="rect" id="node3" href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html" title="ComputeDataUnitService." alt="" coords="5,347,355,386"/>
 <area shape="rect" id="node149" href="troy.pilot.base.Base-class.html#get_engine_" title="Get the engine singleton." alt="" coords="91,39,269,57"/>
 <area shape="rect" id="node149" href="troy.pilot.base.Base-class.html#get_adaptors_" title="Get list of all previously successful adaptors." alt="" coords="91,57,269,76"/>
@@ -78,10 +78,10 @@
 <hr />
 <p>ComputeUnitService (CUS)</p>
   <p>The ComputeUnitService is the application's interface to submit 
-  ComputeUnits to the Pilot-Manager in the P* Model.</p>
-  <p>It can provide the application with a list of ComputeUnits that are 
-  managed by the Pilot-Manager.</p>
-  <p>The ComputeUnitService is linked to a ComputePilotService for the 
+  ComputeUnits to the Pilot-Manager in the P* Model.  It can provide the 
+  application with a list of ComputeUnits that are managed by the 
+  Pilot-Manager.</p>
+  <p>The ComputeUnitService is linked to a set of ComputePilots for the 
   actual execution of the ComputeUnits.</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
@@ -151,11 +151,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#add_compute_pilot_service" class="summary-sig-name">add_compute_pilot_service</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">cps</span>)</span><br />
-      Add a ComputePilotService to this WUS.</td>
+          <td><span class="summary-sig"><a href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#add_compute_pilot" class="summary-sig-name">add_compute_pilot</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cp</span>)</span><br />
+      Add a ComputePilot to this CUS.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.compute_unit_service-pysrc.html#ComputeUnitService.add_compute_pilot_service">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.compute_unit_service-pysrc.html#ComputeUnitService.add_compute_pilot">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -169,10 +169,10 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="list_compute_pilot_services"></a><span class="summary-sig-name">list_compute_pilot_services</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      List all CPSs of CUS</td>
+          <td><span class="summary-sig"><a name="list_compute_pilots"></a><span class="summary-sig-name">list_compute_pilots</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      List all CPs of CUS</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.compute_unit_service-pysrc.html#ComputeUnitService.list_compute_pilot_services">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.compute_unit_service-pysrc.html#ComputeUnitService.list_compute_pilots">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -186,11 +186,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#remove_compute_pilot_service" class="summary-sig-name">remove_compute_pilot_service</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#remove_compute_pilots" class="summary-sig-name">remove_compute_pilots</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">cps</span>)</span><br />
-      Remove a ComputePilotService</td>
+      Remove a ComputePilot</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.compute_unit_service-pysrc.html#ComputeUnitService.remove_compute_pilot_service">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.compute_unit_service-pysrc.html#ComputeUnitService.remove_compute_pilots">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -222,7 +222,7 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#cancel" class="summary-sig-name">cancel</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Cancel the WUS.</td>
+      Cancel the CUS.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.compute_unit_service-pysrc.html#ComputeUnitService.cancel">source&nbsp;code</a></span>
             
@@ -366,47 +366,47 @@
   </dl>
 </td></tr></table>
 </div>
-<a name="add_compute_pilot_service"></a>
+<a name="add_compute_pilot"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">add_compute_pilot_service</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">cps</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">add_compute_pilot</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cp</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.pilot.compute_unit_service-pysrc.html#ComputeUnitService.add_compute_pilot_service">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.pilot.compute_unit_service-pysrc.html#ComputeUnitService.add_compute_pilot">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Add a ComputePilotService to this WUS.</p>
-  <p>Keyword arguments: cps -- The ComputePilot Service to which this 
-  ComputeUnitService will connect.</p>
+  <p>Add a ComputePilot to this CUS.</p>
+  <p>Keyword arguments: cp -- The ComputePilot which this 
+  ComputeUnitService will utilize.</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
 </div>
-<a name="remove_compute_pilot_service"></a>
+<a name="remove_compute_pilots"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">remove_compute_pilot_service</span>(<span class="sig-arg">self</span>,
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">remove_compute_pilots</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">cps</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.pilot.compute_unit_service-pysrc.html#ComputeUnitService.remove_compute_pilot_service">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.pilot.compute_unit_service-pysrc.html#ComputeUnitService.remove_compute_pilots">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Remove a ComputePilotService</p>
-  <p>Note that it won't cancel the ComputePilotService, it will just no 
-  longer be connected to this CUS.</p>
-  <p>Keyword arguments: cps -- The ComputePilotService to remove</p>
+  <p>Remove a ComputePilot</p>
+  <p>Note that it won't cancel the ComputePilot, it will just no longer 
+  receive new CUs.</p>
+  <p>Keyword arguments: cp -- The ComputePilot to remove</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -425,8 +425,8 @@
     </td>
   </tr></table>
   
-  <p>Cancel the WUS.</p>
-  <p>Cancelling the WUS also cancels all the WUs submitted to it.</p>
+  <p>Cancel the CUS.</p>
+  <p>Cancelling the CUS also cancels all the CUS submitted to it.</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -461,7 +461,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Thu May 10 11:55:47 2012</a>
+    3.0.1 on Mon May 14 13:17:54 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

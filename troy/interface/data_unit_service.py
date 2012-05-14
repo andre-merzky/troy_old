@@ -30,28 +30,28 @@ class iDataUnitService (iBase) :
         pass
 
 
-    def add_data_pilot_service (self, dps):
-        """ Add a DataPilotService 
+    def add_data_pilot (self, dp):
+        """ Add a DataPilot
 
             Keyword arguments:
-            dps -- The DataPilotService to which this DataUnitService will connect.
+            dp -- The DataPilot to which this DataUnitService will connect.
         """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def list_data_pilot_services (self):
-        """ List all DPSs of DUS """
+    def list_data_pilots (self):
+        """ List all DPs of DUS """
         raise TroyException (Error.NotImplemented, "method not implemented!")
     
 
-    def remove_data_pilot_service (self, dps):
-        """ Remove a DataPilotService 
+    def remove_data_pilot (self, dp):
+        """ Remove a DataPilot
 
-            Note that it won't cancel the DataPilotService, it will just no
-            longer be connected to this DUS.
+            Note that it won't cancel the DataPilot, it will just no longer
+            receive any DUs.
             
             Keyword arguments:
-            dps -- The DataPilotService to remove 
+            dp -- The DataPilot to remove 
         """
         raise TroyException (Error.NotImplemented, "method not implemented!")
     

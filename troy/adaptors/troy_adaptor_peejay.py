@@ -94,12 +94,7 @@ class peejay_cps (troy.interface.iComputePilotService) :
         self.peejay  = self.adaptor.module
 
         # we MUST interpret cps_id, if present
-        if 'id' in self.idata :
-            self.master  = self.peejay.master (self.idata['id'])
-        else :
-            self.master  = self.peejay.master ()
-
-        self.id = self.master.get_id ()
+        self.master  = self.peejay.master ()
 
         print " === peejay cps init done"
 
@@ -107,23 +102,12 @@ class peejay_cps (troy.interface.iComputePilotService) :
         # the api.  
         self.adata = self.adaptor.register_adata (self.api)
 
-        # register the master after creation
-        self.adata ['cps'][self.id] = self.master
 
-
-
-    def get_id (self) :
-        return self.id
-   
-
-
-    def create_pilot (self, rm, cpd, cp_type=None, context=None):
+    def create_pilot (self, cpd, context=None):
         """ Add a ComputePilot to the ComputePilotService
 
             Keyword arguments:
-            rm      -- Contact string for the resource manager
             cpd     -- ComputePilot Description
-            cp_type -- backend type (optional)
             context -- Security context (optional)
 
             Return value:
@@ -131,9 +115,7 @@ class peejay_cps (troy.interface.iComputePilotService) :
         """
 
         print ' === self     :' + str(self    ) 
-        print ' === rm       :' + str(rm      ) 
         print ' === cpd      :' + str(cpd     ) 
-        print ' === cp_type  :' + str(cp_type ) 
         print ' === context  :' + str(context ) 
 
         # FIXME: add param checks
@@ -145,24 +127,6 @@ class peejay_cps (troy.interface.iComputePilotService) :
 
         return troy.pilot.ComputePilot (pilot_id)
 
-
-
-    def list_pilots (self):
-        """ List all CPs """
-        return self.master.list_pilots ()
-
-
-    def wait (self):
-        """ Wait until CPS enters a final state """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-
-    def cancel (self):
-        """ Cancel the CPS
-            This also cancels all the ComputePilots that were under control of this
-            CPS.
-        """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
 ########################################################################
@@ -305,7 +269,7 @@ class peejay_cus (troy.interface.iComputeUnitService) :
         self.idata   = self.api.get_idata_ ()
 
         self.peejay  = self.adaptor.module
-        self.cps     = []  # list of associated compute pilot services
+        self.cp     = []  # list of associated compute pilots
 
 
         peejay_cus.cus_index += 1
@@ -341,36 +305,36 @@ class peejay_cus (troy.interface.iComputeUnitService) :
 
 
 
-    def add_compute_pilot_service (self, cps):
-        """ Add a ComputePilotService to this WUS.
+    def add_compute_pilot (self, cp):
+        """ Add a ComputePilot to this CUS.
 
             Keyword arguments:
-            cps -- The ComputePilot Service to which this ComputeUnitService will connect.
+            cp -- The ComputePilot to which this ComputeUnitService will connect.
         """
-        self.cps.append (cps)
+        self.cp.append (cp)
 
 
-    def list_compute_pilot_services (self):
-        """ List all CPSs of CUS """
+    def list_compute_pilots (self):
+        """ List all CPs of CUS """
 
         ret = []
 
-        for cps in self.cps :
-            ret.append (cps.get_id())
+        for cp in self.cp :
+            ret.append (cp.get_id())
 
         return ret
 
 
-    def remove_compute_pilot_service (self, cps):
-        """ Remove a ComputePilotService 
+    def remove_compute_pilot (self, cp):
+        """ Remove a ComputePilot
 
-            Note that it won't cancel the ComputePilotService, it will just no
-            longer be connected to this CUS.
+            Note that it won't cancel the ComputePilot, it will just no longer
+            receive any CUs.
 
             Keyword arguments:
-            cps -- The ComputePilotService to remove 
+            cp -- The ComputePilot to remove 
         """
-        self.cps.remove(cps)
+        self.cp.remove (cp)
 
 
     def wait (self):
@@ -455,35 +419,15 @@ class peejay_dps (troy.interface.iDataPilotService) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def create_pilot (self, rm, dpd, dp_type=None, context=None):
+    def create_pilot (self, dpd, context=None):
         """ Add a DataPilot to the DataPilotService
 
             Keyword arguments:
-            rm      -- Contact string for the resource manager
             cpd     -- DataPilot Description
-            dp_type -- backend type (optional)
             context -- Security context (optional)
 
             Return value:
             A DataPilot handle
-        """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-
-    def list_pilots (self):
-        """ List all DPs """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-
-    def wait (self):
-        """ Wait until DPS enters a final state """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-
-    def cancel (self):
-        """ Cancel the DPS
-            This also cancels all the DataPilots that were under control of this
-            PDS.
         """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
@@ -537,28 +481,28 @@ class peejay_dus (troy.interface.iDataUnitService) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def add_data_pilot_service (self, dps):
-        """ Add a DataPilotService 
+    def add_data_pilot (self, dp):
+        """ Add a DataPilot
 
             Keyword arguments:
-            dps -- The DataPilotService to which this DataUnitService will connect.
+            dp -- The DataPilot to which this DataUnitService will connect.
         """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def list_data_pilot_services (self):
-        """ List all DPSs of DUS """
+    def list_data_pilots (self):
+        """ List all DPs of DUS """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
     
 
     def remove_data_pilot_service (self, dps):
         """ Remove a DataPilotService 
 
-            Note that it won't cancel the DataPilotService, it will just no
-            longer be connected to this DUS.
+            Note that it won't cancel the DataPilot, it will just no longer
+            receive any DUs.
             
             Keyword arguments:
-            dps -- The DataPilotService to remove 
+            dp -- The DataPilot to remove 
         """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
     

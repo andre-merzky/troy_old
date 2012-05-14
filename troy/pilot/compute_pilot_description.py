@@ -12,6 +12,8 @@ class ComputePilotDescription (dict):
 
     # Class members
     __slots__ = (
+        'rm',                       # url
+        'cp_type',                  # string
         # Pilot / Agent description
         'executable',               # string
         'arguments',                # string vec

@@ -56,28 +56,21 @@
 <h1 class="epydoc">Class DataPilotService</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.data_pilot_service-pysrc.html#DataPilotService">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_pil_14" name="uml_class_diagram_for_troy_pil_14">
-<area shape="rect" id="node155" href="troy.pilot.data_pilot_service.DataPilotService-class.html#__init__" title="Create a DataPilotService object" alt="" coords="17,172,356,191"/>
-<area shape="rect" id="node155" href="troy.pilot.data_pilot_service.DataPilotService-class.html#submit_data_unit_" title="Submit a DU to this DataPilotService." alt="" coords="17,191,356,209"/>
-<area shape="rect" id="node155" href="troy.pilot.data_pilot_service.DataPilotService-class.html#create_pilot" title="Add a DataPilot to the DataPilotService" alt="" coords="17,209,356,228"/>
-<area shape="rect" id="node155" href="troy.pilot.data_pilot_service.DataPilotService-class.html#list_pilots" title="List all DPs" alt="" coords="17,228,356,247"/>
-<area shape="rect" id="node155" href="troy.pilot.data_pilot_service.DataPilotService-class.html#wait" title="Wait until DPS enters a final state" alt="" coords="17,247,356,265"/>
-<area shape="rect" id="node155" href="troy.pilot.data_pilot_service.DataPilotService-class.html#cancel" title="Cancel the DPS This also cancels all the DataPilots that were under control of this PDS." alt="" coords="17,265,356,284"/>
-<area shape="rect" id="node1" href="troy.pilot.data_pilot_service.DataPilotService-class.html" title="DataPilotService (DPS)" alt="" coords="5,139,368,290"/>
-<area shape="rect" id="node156" href="troy.pilot.base.Base-class.html#get_engine_" title="Get the engine singleton." alt="" coords="97,39,276,57"/>
-<area shape="rect" id="node156" href="troy.pilot.base.Base-class.html#get_adaptors_" title="Get list of all previously successful adaptors." alt="" coords="97,57,276,76"/>
-<area shape="rect" id="node156" href="troy.pilot.base.Base-class.html#get_idata_" title="Get instance data dict entry." alt="" coords="97,76,276,95"/>
-<area shape="rect" id="node156" href="troy.pilot.base.Base-class.html#set_idata_" title="Set instance data dict entry." alt="" coords="97,95,276,113"/>
-<area shape="rect" id="node2" href="troy.pilot.base.Base-class.html" title="All Troy API classes inherit from this base class, which provides interfaces to adaptor management and to the management of class instance data." alt="" coords="85,6,288,119"/>
+<area shape="rect" id="node155" href="troy.pilot.data_pilot_service.DataPilotService-class.html#__init__" title="Create a DataPilotService object" alt="" coords="17,172,240,191"/>
+<area shape="rect" id="node155" href="troy.pilot.data_pilot_service.DataPilotService-class.html#create_pilot" title="Create a DataPilot." alt="" coords="17,191,240,209"/>
+<area shape="rect" id="node1" href="troy.pilot.data_pilot_service.DataPilotService-class.html" title="DataPilotService (DPS)" alt="" coords="5,139,251,215"/>
+<area shape="rect" id="node156" href="troy.pilot.base.Base-class.html#get_engine_" title="Get the engine singleton." alt="" coords="40,39,219,57"/>
+<area shape="rect" id="node156" href="troy.pilot.base.Base-class.html#get_adaptors_" title="Get list of all previously successful adaptors." alt="" coords="40,57,219,76"/>
+<area shape="rect" id="node156" href="troy.pilot.base.Base-class.html#get_idata_" title="Get instance data dict entry." alt="" coords="40,76,219,95"/>
+<area shape="rect" id="node156" href="troy.pilot.base.Base-class.html#set_idata_" title="Set instance data dict entry." alt="" coords="40,95,219,113"/>
+<area shape="rect" id="node2" href="troy.pilot.base.Base-class.html" title="All Troy API classes inherit from this base class, which provides interfaces to adaptor management and to the management of class instance data." alt="" coords="28,6,231,119"/>
 </map>
   <img src="uml_class_diagram_for_troy_pil_14.gif" alt='' usemap="#uml_class_diagram_for_troy_pil_14" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
 <p>DataPilotService (DPS)</p>
-  <p>The DataPilotService is responsible for creating and managing the 
-  DataPilots.</p>
-  <p>It is the application's interface to the Pilot-Manager in the P* 
-  Model.</p>
+  <p>The DataPilotService is in fact a factory for DataPilots.</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -93,8 +86,7 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.data_pilot_service.DataPilotService-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">dps_id</span>=<span class="summary-sig-default">None</span>)</span><br />
+          <td><span class="summary-sig"><a href="troy.pilot.data_pilot_service.DataPilotService-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
       Create a DataPilotService object</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.data_pilot_service-pysrc.html#DataPilotService.__init__">source&nbsp;code</a></span>
@@ -111,84 +103,12 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.data_pilot_service.DataPilotService-class.html#submit_data_unit_" class="summary-sig-name">submit_data_unit_</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">dud</span>)</span><br />
-      Submit a DU to this DataPilotService.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.data_pilot_service-pysrc.html#DataPilotService.submit_data_unit_">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
           <td><span class="summary-sig"><a href="troy.pilot.data_pilot_service.DataPilotService-class.html#create_pilot" class="summary-sig-name">create_pilot</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">rm</span>,
         <span class="summary-sig-arg">dpd</span>,
-        <span class="summary-sig-arg">dp_type</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">context</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Add a DataPilot to the DataPilotService</td>
+      Create a DataPilot.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.data_pilot_service-pysrc.html#DataPilotService.create_pilot">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="list_pilots"></a><span class="summary-sig-name">list_pilots</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      List all DPs</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.data_pilot_service-pysrc.html#DataPilotService.list_pilots">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="wait"></a><span class="summary-sig-name">wait</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      Wait until DPS enters a final state</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.data_pilot_service-pysrc.html#DataPilotService.wait">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="cancel"></a><span class="summary-sig-name">cancel</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      Cancel the DPS This also cancels all the DataPilots that were under 
-      control of this PDS.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.data_pilot_service-pysrc.html#DataPilotService.cancel">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -288,8 +208,7 @@
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">dps_id</span>=<span class="sig-default">None</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
@@ -298,34 +217,10 @@
   </tr></table>
   
   <p>Create a DataPilotService object</p>
-  <p>Keyword arguments: dps_id -- restore from dps_id</p>
   <dl class="fields">
     <dt>Overrides:
         <a href="troy.pilot.base.Base-class.html#__init__">base.Base.__init__</a>
     </dt>
-  </dl>
-</td></tr></table>
-</div>
-<a name="submit_data_unit_"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">submit_data_unit_</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">dud</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.pilot.data_pilot_service-pysrc.html#DataPilotService.submit_data_unit_">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Submit a DU to this DataPilotService.</p>
-  <p>Keyword argument: dud -- The DataUnitDescription from the 
-  application</p>
-  <p>Return: ComputeUnit object</p>
-  <dl class="fields">
   </dl>
 </td></tr></table>
 </div>
@@ -337,9 +232,7 @@
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">create_pilot</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">rm</span>,
         <span class="sig-arg">dpd</span>,
-        <span class="sig-arg">dp_type</span>=<span class="sig-default">None</span>,
         <span class="sig-arg">context</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
@@ -347,10 +240,9 @@
     </td>
   </tr></table>
   
-  <p>Add a DataPilot to the DataPilotService</p>
-  <p>Keyword arguments: rm      -- Contact string for the resource manager 
-  cpd     -- DataPilot Description dp_type -- backend type (optional) 
-  context -- Security context (optional)</p>
+  <p>Create a DataPilot.</p>
+  <p>Keyword arguments: cpd     -- DataPilot Description context -- 
+  Security context (optional)</p>
   <p>Return value: A DataPilot handle</p>
   <dl class="fields">
   </dl>
@@ -386,7 +278,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Thu May 10 11:55:47 2012</a>
+    3.0.1 on Mon May 14 13:17:55 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

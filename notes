@@ -9,6 +9,10 @@ to any sensible co-location, for example?
 
 
 TODO: Expose adaptor via object inspection, e.g. for info upstream to scheduler.
+TODO: on what class should one reconnect to a pilot?  Where to discover running
+      pilots?  Probably CPS after all?  But there is no backend specifier for
+      the CPS ctor!
+
 
 
 Questions / comments about API, to be discussed
@@ -17,6 +21,7 @@ Questions / comments about API, to be discussed
   here with focus on compute - analogous questions for data and compute_data.
 
   - why is there no ComputeDataPilot?
+    -> no impl, need to cross-schedule...
 
 
   ------------------------------------------------------------------------------
@@ -25,47 +30,39 @@ Questions / comments about API, to be discussed
     - why does the user need to know the executable path of the pilot job (and
       similar details)?  For all he knows, the executable could be named
       differently on each host.  That should be internal to the framework...
+      - pilot description: executable is optional
+      - TODO AL: clean up legacy attributes
+
+    - rm within pilot description?  
+      - rm: where to submit the pilot
+      - DONE AM.
 
     - 'affinity_datacenter_label' should be defined by the implementation, not
       by the user - correct?
+      - ultimately  yes
+      - momentarily needed on app level
 
+    - why rm and backend type?  Shouldn't rm suffice?  What happens on
+      mismatch?
 
   ------------------------------------------------------------------------------
   - ComputePilotService:
-
-    - not stateful, right?  Then remove state, wait, cancel.  Why does it have
-      an id?  If I can reconnect and find the same set of pilots, then CPS has
-      state!
 
     - create_pilot()
       - gets rm and backend_type, so I assume a CPS can talk to different
         backends.  Correct?  
         - yes: implies late binding 
         - no : why rm as parameter?
-      - why rm and backend type?  Shouldn't rm suffice?  What happens on
-        mismatch?
       - the returned pilot is in what state?
-
-    - list_pilots:
-      - list all running pilots?  all pilots created by instance?  ever?  
-        all pilots created and not yet dead?
-      - returns IDs or objects?  (IDs)
-      - can return pilots created by other CPS on the same rm/backend_type?  
-        - If not, then CPS is stateful!
-        - If yes, then CPS is not a container.  How is then CUS supposed to use
-          the CPS?
-      
-    - what happens to the pilots if CPS instance is closed (nothing, right?)
-    - what happens to CUS if CPS instance is closed (nothing, right?)
 
 
   ------------------------------------------------------------------------------
   - ComputePilot
     
     - I can reconnect - how can I inspect?
-      - get_description
-      - why no list_cus() call?
-      - why no list_cps() call?
+      - get_description          TODO AM: add
+      - why no list_cus() call?  TODO AM: add
+      - why no list_cps() call?  TODO AM: add
 
     - reinitialize
       - what happens to running CUs?
@@ -77,33 +74,17 @@ Questions / comments about API, to be discussed
   ------------------------------------------------------------------------------
   - ComputeUnitService:
 
-    - add_compute_pilot_service
-      - why is that not add_compute_pilot?  Please an answer beyond 'this is how
-        it is defined / implemented'.  What is the additional semantics?  What
-        is the semantics at all?
-
-    - list_compute_pilot_services
-      - list instances or ids?
-        - instances: how are those related to instance lifetime at add_...
-        - ids      : how are the ids related to instance lifetime?  CPS
-          stateful...
-
-    - remove_compute_pilot_service
+    - remove_compute_pilot
       - will that kill CUs on pilots? (no?)
       - will that kill pilots?        (no?)
-      - can I re-add after remove?
-      - parameter is an cps instance.
-        - if cps is stateless, then it should not have an id, I cannot
-          reconnect.  So, I can never remove a CPS on a second application
-          instance?
-        - or cps is stateful after all?
-      - what is returned?
+      - can I re-add after remove?    (yes?)
+      - param is id or instance?  What is returned?
 
     - CUS has state 
       - what are the states?
       - what calls can I call in which state?
       - how are state transitions triggered?
-      - is state bound to object instance?
+      - is state bound to object instance?  Backend instance?
       - does cancel() kill CUs?
 
 
@@ -112,10 +93,10 @@ Questions / comments about API, to be discussed
 
     - I can reconnect.  After reconnect, 
       - how can I inspect
-        - get_description ()
+        - get_description ()  TODO AM: add
       - how can I find out where it runs?
-        - get_pilot ()
-        - get_cus ()
+        - get_pilot ()        TODO AM: add
+        - get_cus ()          TODO AM: add
 
 
   ------------------------------------------------------------------------------
@@ -124,11 +105,6 @@ Questions / comments about API, to be discussed
 
     - scheduler is supposed to act on CUS level.  How to select/provide/specify
       a scheduler or a scheduling policy per CUS?
-
-
-  ------------------------------------------------------------------------------
-  - why is there no ComputeDataPilot?
-
 
 
 --------------------------------------------------------------------------------
@@ -146,6 +122,10 @@ Questions / comments about API, to be discussed
 
         get_compute_pilot (id) :
           return self.engine.call (get_compute_pilot (id))
+
+        list_compute_pilots () :
+          return self.engine.call (list_compute_pilots ())
+
 
     - change CUS:
       add_compute_pilot_service (cps) -> add_compute_pilot (cp)

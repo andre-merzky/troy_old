@@ -11,18 +11,17 @@ class ComputeUnitService (Base) :
 
     """  ComputeUnitService (CUS)
     
-        The ComputeUnitService is the application's interface to submit 
-        ComputeUnits to the Pilot-Manager in the P* Model.
+        The ComputeUnitService is the application's interface to submit
+        ComputeUnits to the Pilot-Manager in the P* Model.  It can provide the
+        application with a list of ComputeUnits that are managed by the
+        Pilot-Manager.
 
-        It can provide the application with a list of ComputeUnits that are 
-        managed by the Pilot-Manager.
-
-        The ComputeUnitService is linked to a ComputePilotService for the actual 
+        The ComputeUnitService is linked to a set of ComputePilots for the actual 
         execution of the ComputeUnits.
     """
 
-    # FIXME: why is this stateful?
-    # FIXME: A Pilot-Manager must thus handle multiple CUS?
+    # FIXME: why has this state?  What state semantics?
+    # FIXME: add list_compute_units()
 
     # Class members
     __slots__ = (
@@ -88,33 +87,33 @@ class ComputeUnitService (Base) :
         return self.get_engine_().call ('ComputeUnitService', 'get_id', self)
 
 
-    def add_compute_pilot_service (self, cps):
-        """ Add a ComputePilotService to this WUS.
+    def add_compute_pilot (self, cp):
+        """ Add a ComputePilot to this CUS.
 
             Keyword arguments:
-            cps -- The ComputePilot Service to which this ComputeUnitService will connect.
+            cp -- The ComputePilot which this ComputeUnitService will utilize.
         """
         return self.get_engine_().call ('ComputeUnitService',
-                                        'add_compute_pilot_service', self, cps)
+                                        'add_compute_pilot', self, cp)
 
 
-    def list_compute_pilot_services (self):
-        """ List all CPSs of CUS """
+    def list_compute_pilots (self):
+        """ List all CPs of CUS """
         return self.get_engine_().call ('ComputeUnitService', 
-                                        'list_compute_pilot_services', self)
+                                        'list_compute_pilots', self)
 
 
-    def remove_compute_pilot_service (self, cps):
-        """ Remove a ComputePilotService 
+    def remove_compute_pilots (self, cps):
+        """ Remove a ComputePilot
 
-            Note that it won't cancel the ComputePilotService, it will just no
-            longer be connected to this CUS.
+            Note that it won't cancel the ComputePilot, it will just no
+            longer receive new CUs.
 
             Keyword arguments:
-            cps -- The ComputePilotService to remove 
+            cp -- The ComputePilot to remove 
         """
         return self.get_engine_().call ('ComputeUnitService',
-                                        'remove_pilot_service', self, cps)
+                                        'remove_compute_pilot', self, cp)
 
 
     def wait (self):
@@ -123,9 +122,9 @@ class ComputeUnitService (Base) :
 
 
     def cancel (self):
-        """ Cancel the WUS.
+        """ Cancel the CUS.
             
-            Cancelling the WUS also cancels all the WUs submitted to it.
+            Cancelling the CUS also cancels all the CUS submitted to it.
         """
         return self.get_engine_().call ('ComputeUnitService', 'cancel', self)
 

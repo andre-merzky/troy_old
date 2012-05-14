@@ -17,12 +17,11 @@ class DataUnitService (Base) :
         It can provide the application with a list of DataUnits that are 
         managed by the Pilot-Manager.
 
-        The DataUnitService is linked to a DataPilotService for the actual 
+        The DataUnitService is linked to a set of DataPilots for the actual 
         execution of the DataUnits.
     """
 
-    # FIXME: why is this stateful?
-    # FIXME: A Pilot-Manager must thus handle multiple DUS?
+    # FIXME: why does it has a state attribute?  What semantics?
    
     # Class members
     __slots__ = (
@@ -38,8 +37,6 @@ class DataUnitService (Base) :
             Keyword arguments:
             dus_id -- Reconnect to an existing DataUnitService 
         """
-        print "dus: init"
-
         # init api base
         Base.__init__ (self)
 
@@ -85,33 +82,34 @@ class DataUnitService (Base) :
 
 
 
-    def add_data_pilot_service (self, dps):
-        """ Add a DataPilotService 
+    def add_data_pilot (self, dp):
+        """ Add a DataPilot 
 
             Keyword arguments:
-            dps -- The DataPilotService to which this DataUnitService will connect.
+            dp -- The DataPilot to which this DataUnitService will connect.
         """
         return self.get_engine_().call ('DataUnitService',
-                                         'add_data_pilot_service', self, dps)
+                                         'add_data_pilot', self, dp)
 
 
-    def list_data_pilot_services (self):
-        """ List all DPSs of DUS """
+    def list_data_pilots (self):
+        """ List all DPs of DUS """
         return self.get_engine_().call ('DataUnitService',
-                                         'list_data_pilot_services', self)
+                                         'list_data_pilots', self)
     
 
-    def remove_data_pilot_service (self, dps):
+    def remove_data_pilot (self, dp):
+        # FIXME: dp: id or instance?
         """ Remove a DataPilotService 
 
-            Note that it won't cancel the DataPilotService, it will just no
-            longer be connected to this DUS.
+            Note that it won't cancel the DataPilot, it will simply not receive
+            DUs anymore.
             
             Keyword arguments:
-            dps -- The DataPilotService to remove 
+            dp -- The DataPilot to remove 
         """
         return self.get_engine_().call ('DataUnitService',
-                                         'remove_data_pilot_services', self, dps)
+                                         'remove_data_pilot', self, dp)
     
     
     def submit_data_unit (self, dud):

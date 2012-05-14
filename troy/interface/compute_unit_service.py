@@ -32,28 +32,28 @@ class iComputeUnitService (iBase) :
         pass
 
 
-    def add_compute_pilot_service (self, cps):
-        """ Add a ComputePilotService to this WUS.
+    def add_compute_pilot (self, cp):
+        """ Add a ComputePilot to this WUS.
 
             Keyword arguments:
-            cps -- The ComputePilot Service to which this ComputeUnitService will connect.
+            cp -- The ComputePilot to which this ComputeUnitService will connect.
         """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def list_compute_pilot_services (self):
-        """ List all CPSs of CUS """
+    def list_compute_pilots (self):
+        """ List all CPs of CUS """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def remove_compute_pilot_service (self, cps):
-        """ Remove a ComputePilotService 
+    def remove_compute_pilot (self, cp):
+        """ Remove a ComputePilot
 
-            Note that it won't cancel the ComputePilotService, it will just no
-            longer be connected to this CUS.
+            Note that it won't cancel the ComputePilot, it will just not receive
+            new CUs anymore.
 
             Keyword arguments:
-            cps -- The ComputePilotService to remove 
+            cp -- The ComputePilot to remove 
         """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 

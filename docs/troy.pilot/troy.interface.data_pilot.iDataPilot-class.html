@@ -56,16 +56,18 @@
 <h1 class="epydoc">Class iDataPilot</h1><p class="nomargin-top"><span class="codelink"><a href="troy.interface.data_pilot-pysrc.html#iDataPilot">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_int_11" name="uml_class_diagram_for_troy_int_11">
-<area shape="rect" id="node75" href="troy.interface.data_pilot.iDataPilot-class.html#__init__" title="Create a DataPilot" alt="" coords="113,103,349,121"/>
-<area shape="rect" id="node75" href="troy.interface.data_pilot.iDataPilot-class.html#cancel" title="Cancel DP" alt="" coords="113,121,349,140"/>
-<area shape="rect" id="node75" href="troy.interface.data_pilot.iDataPilot-class.html#reinitialize" title="Re&#45;Initialize the DataPilot to the (new) DataPilotDescription." alt="" coords="113,140,349,159"/>
-<area shape="rect" id="node75" href="troy.interface.data_pilot.iDataPilot-class.html#set_callback" title="Set a callback function for a member." alt="" coords="113,159,349,177"/>
-<area shape="rect" id="node75" href="troy.interface.data_pilot.iDataPilot-class.html#unset_callback" title="Unset a callback function from a member" alt="" coords="113,177,349,196"/>
-<area shape="rect" id="node75" href="troy.interface.data_pilot.iDataPilot-class.html#wait" title="Wait until DP enters a final state" alt="" coords="113,196,349,215"/>
-<area shape="rect" id="node1" href="troy.interface.data_pilot.iDataPilot-class.html" title="DataPilot (PilotStore)" alt="" coords="101,70,360,221"/>
-<area shape="rect" id="node3" href="troy_adaptor_skeleton.xyz_dp-class.html" title="troy_adaptor_skeleton.xyz_dp" alt="" coords="5,241,216,279"/>
-<area shape="rect" id="node4" href="troy_adaptor_peejay.peejay_dp-class.html" title="troy_adaptor_peejay.peejay_dp" alt="" coords="245,241,461,279"/>
-<area shape="rect" id="node2" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="187,6,277,50"/>
+<area shape="rect" id="node75" href="troy.interface.data_pilot.iDataPilot-class.html#__init__" title="Create a DataPilot" alt="" coords="113,116,349,135"/>
+<area shape="rect" id="node75" href="troy.interface.data_pilot.iDataPilot-class.html#cancel" title="Cancel DP" alt="" coords="113,135,349,153"/>
+<area shape="rect" id="node75" href="troy.interface.data_pilot.iDataPilot-class.html#reinitialize" title="Re&#45;Initialize the DataPilot to the (new) DataPilotDescription." alt="" coords="113,153,349,172"/>
+<area shape="rect" id="node75" href="troy.interface.data_pilot.iDataPilot-class.html#set_callback" title="Set a callback function for a member." alt="" coords="113,172,349,191"/>
+<area shape="rect" id="node75" href="troy.interface.data_pilot.iDataPilot-class.html#submit_data_unit" title="Submit a DU to this ComputePilot." alt="" coords="113,191,349,209"/>
+<area shape="rect" id="node75" href="troy.interface.data_pilot.iDataPilot-class.html#unset_callback" title="Unset a callback function from a member" alt="" coords="113,209,349,228"/>
+<area shape="rect" id="node75" href="troy.interface.data_pilot.iDataPilot-class.html#wait" title="Wait until DP enters a final state" alt="" coords="113,228,349,247"/>
+<area shape="rect" id="node1" href="troy.interface.data_pilot.iDataPilot-class.html" title="DataPilot (PilotStore)" alt="" coords="101,83,360,253"/>
+<area shape="rect" id="node3" href="troy_adaptor_skeleton.xyz_dp-class.html" title="troy_adaptor_skeleton.xyz_dp" alt="" coords="5,273,216,311"/>
+<area shape="rect" id="node4" href="troy_adaptor_peejay.peejay_dp-class.html" title="troy_adaptor_peejay.peejay_dp" alt="" coords="245,273,461,311"/>
+<area shape="rect" id="node76" href="troy.interface.base.iBase-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="199,39,265,57"/>
+<area shape="rect" id="node2" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="187,6,277,63"/>
 </map>
   <img src="uml_class_diagram_for_troy_int_11.gif" alt='' usemap="#uml_class_diagram_for_troy_int_11" ismap="ismap" class="graph-without-title" />
 </center>
@@ -130,6 +132,24 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
+          <td><span class="summary-sig"><a href="troy.interface.base.iBase-class.html#init_" class="summary-sig-name">init_</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      dummy method to make sure the backend can initialize the object.
+      <em>(Inherited from <a href="troy.interface.base.iBase-class.html">troy.interface.base.iBase</a>)</em></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.base-pysrc.html#iBase.init_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
           <td><span class="summary-sig"><a href="troy.interface.data_pilot.iDataPilot-class.html#reinitialize" class="summary-sig-name">reinitialize</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">dpd</span>)</span><br />
       Re-Initialize the DataPilot to the (new) DataPilotDescription.</td>
@@ -154,6 +174,24 @@
       Set a callback function for a member.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.interface.data_pilot-pysrc.html#iDataPilot.set_callback">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.data_pilot.iDataPilot-class.html#submit_data_unit" class="summary-sig-name">submit_data_unit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dud</span>)</span><br />
+      Submit a DU to this ComputePilot.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.data_pilot-pysrc.html#iDataPilot.submit_data_unit">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -277,6 +315,29 @@
   </dl>
 </td></tr></table>
 </div>
+<a name="submit_data_unit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">submit_data_unit</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">dud</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.interface.data_pilot-pysrc.html#iDataPilot.submit_data_unit">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Submit a DU to this ComputePilot.</p>
+  <p>Keyword argument: dud -- The DataUnitDescription from the 
+  application</p>
+  <p>Return: DataUnit object</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
 <a name="unset_callback"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -329,7 +390,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Mon May 14 13:17:54 2012</a>
+    3.0.1 on Tue Jun  5 11:35:24 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

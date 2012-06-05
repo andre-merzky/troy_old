@@ -34,7 +34,7 @@ class DataPilot (Base) :
     )
 
 
-    def __init__ (self, dp_id=None):
+    def __init__ (self, dp_id=None) :
         """ Create a DataPilot
 
             Keyword arguments:
@@ -52,18 +52,12 @@ class DataPilot (Base) :
         self.set_idata_ (idata)
 
         # initialize adaptor class 
-        self.get_engine_().call ('DataPilot', 'init', self)
+        self.engine_.call ('DataPilot', 'init_', self)
 
 
     ############################################################################
     #
-    # The submit_data_unit's implementation tries to submit the DU via
-    # the backend -- if that does not work, no scheduler can help anymore, so an
-    # exception is raised (falls through really)
-    #
-    # This is a private method
-    #
-    def submit_compute_unit_ (self, dud):
+    def submit_data_unit (self, dud) :
         """ Submit a DU to this DataPilot.
 
             Keyword argument:
@@ -73,48 +67,48 @@ class DataPilot (Base) :
             DataUnit object
         """
 
-        return self.get_engine_().call ('DataPilot',
-                                        'submit_data_unit_', self, dud)
+        return self.engine_.call ('DataPilot',
+                                        'submit_data_unit', self, dud)
 
 
 
 
-    def wait (self):
+    def wait (self) :
         """ Wait until DP enters a final state """
-        return self.get_engine_().call ('DataPilot', 'wait', self)
+        return self.engine_.call ('DataPilot', 'wait', self)
 
 
-    def cancel (self):        
+    def cancel (self) :
         """ Cancel DP """
-        return self.get_engine_().call ('DataPilot', 'cancel', self)
+        return self.engine_.call ('DataPilot', 'cancel', self)
 
 
-    def reinitialize (self, dpd):        
+    def reinitialize (self, dpd) :
         """ Re-Initialize the DataPilot to the (new) DataPilotDescription.
         
             Keyword arguments:
             dpd -- A DataPilotDescription
         """
-        return self.get_engine_().call ('DataPilot', 'reinitialize', self, dpd)
+        return self.engine_.call ('DataPilot', 'reinitialize', self, dpd)
 
 
-    def set_callback (self, member, cb):
+    def set_callback (self, member, cb) :
         """ Set a callback function for a member.
 
             Keyword arguments:
             member -- The member to set the callback for (state / state_detail / size_left).
             cb     -- The callback object to call.
         """
-        return self.get_engine_().call ('DataPilot', 'set_callback', 
+        return self.engine_.call ('DataPilot', 'set_callback', 
                                         self, member, cb)
 
-    def unset_callback (self, member):
+    def unset_callback (self, member) :
         """ Unset a callback function from a member
 
             Keyword arguments:
             member -- The member to unset the callback for (state / state_detail / sizeleft).
         """
-        return self.get_engine_().call ('DataPilot', 'unset_callback', 
+        return self.engine_.call ('DataPilot', 'unset_callback', 
                                         self, member)
 
 

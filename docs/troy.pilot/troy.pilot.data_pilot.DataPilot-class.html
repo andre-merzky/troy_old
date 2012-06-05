@@ -56,19 +56,18 @@
 <h1 class="epydoc">Class DataPilot</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_pil_12" name="uml_class_diagram_for_troy_pil_12">
-<area shape="rect" id="node151" href="troy.pilot.data_pilot.DataPilot-class.html#__init__" title="Create a DataPilot" alt="" coords="17,172,213,191"/>
-<area shape="rect" id="node151" href="troy.pilot.data_pilot.DataPilot-class.html#submit_compute_unit_" title="Submit a DU to this DataPilot." alt="" coords="17,191,213,209"/>
-<area shape="rect" id="node151" href="troy.pilot.data_pilot.DataPilot-class.html#wait" title="Wait until DP enters a final state" alt="" coords="17,209,213,228"/>
-<area shape="rect" id="node151" href="troy.pilot.data_pilot.DataPilot-class.html#cancel" title="Cancel DP" alt="" coords="17,228,213,247"/>
-<area shape="rect" id="node151" href="troy.pilot.data_pilot.DataPilot-class.html#reinitialize" title="Re&#45;Initialize the DataPilot to the (new) DataPilotDescription." alt="" coords="17,247,213,265"/>
-<area shape="rect" id="node151" href="troy.pilot.data_pilot.DataPilot-class.html#set_callback" title="Set a callback function for a member." alt="" coords="17,265,213,284"/>
-<area shape="rect" id="node151" href="troy.pilot.data_pilot.DataPilot-class.html#unset_callback" title="Unset a callback function from a member" alt="" coords="17,284,213,303"/>
-<area shape="rect" id="node1" href="troy.pilot.data_pilot.DataPilot-class.html" title="DataPilot (PilotStore)" alt="" coords="5,139,224,309"/>
-<area shape="rect" id="node152" href="troy.pilot.base.Base-class.html#get_engine_" title="Get the engine singleton." alt="" coords="27,39,205,57"/>
-<area shape="rect" id="node152" href="troy.pilot.base.Base-class.html#get_adaptors_" title="Get list of all previously successful adaptors." alt="" coords="27,57,205,76"/>
-<area shape="rect" id="node152" href="troy.pilot.base.Base-class.html#get_idata_" title="Get instance data dict entry." alt="" coords="27,76,205,95"/>
-<area shape="rect" id="node152" href="troy.pilot.base.Base-class.html#set_idata_" title="Set instance data dict entry." alt="" coords="27,95,205,113"/>
-<area shape="rect" id="node2" href="troy.pilot.base.Base-class.html" title="All Troy API classes inherit from this base class, which provides interfaces to adaptor management and to the management of class instance data." alt="" coords="15,6,217,119"/>
+<area shape="rect" id="node151" href="troy.pilot.data_pilot.DataPilot-class.html#__init__" title="Create a DataPilot" alt="" coords="17,153,204,172"/>
+<area shape="rect" id="node151" href="troy.pilot.data_pilot.DataPilot-class.html#submit_data_unit" title="Submit a DU to this DataPilot." alt="" coords="17,172,204,191"/>
+<area shape="rect" id="node151" href="troy.pilot.data_pilot.DataPilot-class.html#wait" title="Wait until DP enters a final state" alt="" coords="17,191,204,209"/>
+<area shape="rect" id="node151" href="troy.pilot.data_pilot.DataPilot-class.html#cancel" title="Cancel DP" alt="" coords="17,209,204,228"/>
+<area shape="rect" id="node151" href="troy.pilot.data_pilot.DataPilot-class.html#reinitialize" title="Re&#45;Initialize the DataPilot to the (new) DataPilotDescription." alt="" coords="17,228,204,247"/>
+<area shape="rect" id="node151" href="troy.pilot.data_pilot.DataPilot-class.html#set_callback" title="Set a callback function for a member." alt="" coords="17,247,204,265"/>
+<area shape="rect" id="node151" href="troy.pilot.data_pilot.DataPilot-class.html#unset_callback" title="Unset a callback function from a member" alt="" coords="17,265,204,284"/>
+<area shape="rect" id="node1" href="troy.pilot.data_pilot.DataPilot-class.html" title="DataPilot (PilotStore)" alt="" coords="5,121,216,290"/>
+<area shape="rect" id="node152" href="troy.pilot.base.Base-class.html#get_idata_" title="Get instance data dict entry." alt="" coords="21,39,200,57"/>
+<area shape="rect" id="node152" href="troy.pilot.base.Base-class.html#set_idata_" title="Set instance data dict entry." alt="" coords="21,57,200,76"/>
+<area shape="rect" id="node152" href="troy.pilot.base.Base-class.html#dump_" title="Dump dumps." alt="" coords="21,76,200,95"/>
+<area shape="rect" id="node2" href="troy.pilot.base.Base-class.html" title="All Troy API classes inherit from this base class, which provides support for adaptor management and the management of class instance data." alt="" coords="9,6,212,101"/>
 </map>
   <img src="uml_class_diagram_for_troy_pil_12.gif" alt='' usemap="#uml_class_diagram_for_troy_pil_12" ismap="ismap" class="graph-without-title" />
 </center>
@@ -114,11 +113,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.data_pilot.DataPilot-class.html#submit_compute_unit_" class="summary-sig-name">submit_compute_unit_</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="troy.pilot.data_pilot.DataPilot-class.html#submit_data_unit" class="summary-sig-name">submit_data_unit</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">dud</span>)</span><br />
       Submit a DU to this DataPilot.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.submit_compute_unit_">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.submit_data_unit">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -221,29 +220,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.base.Base-class.html#get_adaptors_" class="summary-sig-name">get_adaptors_</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Get list of all previously successful adaptors.
+          <td><span class="summary-sig"><a href="troy.pilot.base.Base-class.html#dump_" class="summary-sig-name">dump_</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Dump dumps.
       <em>(Inherited from <a href="troy.pilot.base.Base-class.html">troy.pilot.base.Base</a>)</em></td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.get_adaptors_">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.base.Base-class.html#get_engine_" class="summary-sig-name">get_engine_</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Get the engine singleton.
-      <em>(Inherited from <a href="troy.pilot.base.Base-class.html">troy.pilot.base.Base</a>)</em></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.get_engine_">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.dump_">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -325,18 +306,18 @@
   </dl>
 </td></tr></table>
 </div>
-<a name="submit_compute_unit_"></a>
+<a name="submit_data_unit"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">submit_compute_unit_</span>(<span class="sig-arg">self</span>,
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">submit_data_unit</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">dud</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.submit_compute_unit_">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.submit_data_unit">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -444,7 +425,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Mon May 14 13:17:54 2012</a>
+    3.0.1 on Tue Jun  5 11:35:24 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

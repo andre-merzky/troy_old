@@ -10,12 +10,14 @@ class Error:
     expanded once the API's semantics is smoothening out.
     """
 
-    NoSuccess      = 'NoSuccess'         """ operation failed on backend.  """
-    NotImplemented = 'NotImplemented'    """ operation is not implemented. """
+    NoSuccess      = 'NoSuccess'      # """ operation failed on backend. """
+    BadParameter   = 'BadParameter'   # """ operation cannot handle parameter type or value. """
+    IncorrectState = 'IncorrectState' # """ operation not allowed in current object state. """
+    NotImplemented = 'NotImplemented' # """ operation is not implemented. """
 
 
 
-class TroyException (Exception):
+class TroyException (Exception) :
 
     """
     The TROY exception class is (obviously) used to signal error conditions to

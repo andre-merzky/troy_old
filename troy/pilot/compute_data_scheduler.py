@@ -22,7 +22,7 @@ class _ComputeDataScheduler (Base) :
     )
 
 
-    def __init__ (self, policy=None):
+    def __init__ (self, policy=None) :
         """ Create a ComputeDataScheduler -- private, only called by CDUS
 
             Keyword arguments:
@@ -39,10 +39,10 @@ class _ComputeDataScheduler (Base) :
         self.set_idata_ (idata)
 
         # initialize adaptor class 
-        self.get_engine_().call ('ComputeDataScheduler', 'init', self)
+        self.engine_.call ('ComputeDataScheduler', 'init_', self)
 
 
-    def schedule (self, thing, dud):
+    def schedule (self, thing, dud) :
         """
 
         This is the main method: for a given 'thing', schedule a given
@@ -53,7 +53,7 @@ class _ComputeDataScheduler (Base) :
         
         On Error (no scheduling possible), 'None' is returned.  
         """
-        return self.get_engine_().call ('ComputeDataScheduler', 'schedule', 
+        return self.engine_.call ('ComputeDataScheduler', 'schedule', 
                                         self, thing, dud)
 
 

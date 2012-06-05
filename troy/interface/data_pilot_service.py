@@ -18,7 +18,7 @@ class iDataPilotService (iBase) :
         P* Model.
     """
 
-    def __init__ (self, obj, adaptor):
+    def __init__ (self, obj, adaptor) :
         """ Create a DataPilotService object
 
             Keyword arguments:
@@ -27,7 +27,7 @@ class iDataPilotService (iBase) :
         pass
 
 
-    def create_pilot (self, dpd, context=None):
+    def create_pilot (self, dpd, context=None) :
         """ Create a DataPilot.
 
             Keyword arguments:

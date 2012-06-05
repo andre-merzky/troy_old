@@ -44,15 +44,18 @@ class adaptor (troy.interface.aBase) :
                          'ComputeDataUnitService'    : 'xyz_cdus',
                          'ComputeDataUnit'           : 'xyz_cdu' }
 
-    def get_name (self):
+    def get_name (self) :
         return self.name
 
-    def get_registry (self):
+    def get_registry (self) :
         return self.registry
 
-    def sanity_check (self):
+    def get_order (self) :
+        return 3
+
+    def sanity_check (self) :
         # version checks etc.
-        return True
+        pass
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -67,7 +70,7 @@ class xyz_cps (troy.interface.iComputePilotService) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def create_pilot (self, cpd, context=None):
+    def create_pilot (self, cpd, context=None) :
         """ Create a ComputePilot.
 
             Keyword arguments:
@@ -88,18 +91,18 @@ class xyz_cp (troy.interface.iComputePilot) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def wait (self):
+    def wait (self) :
         """ Wait until CP enters a final state """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self):        
+    def cancel (self) :
         """ Remove the ComputePilot from the ComputePilot Service.
         """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def reinitialize (self, cpd):        
+    def reinitialize (self, cpd) :
         """ Re-Initialize the ComputePilot to the (new) ComputePilotDescription.
         
             Keyword arguments:
@@ -108,7 +111,7 @@ class xyz_cp (troy.interface.iComputePilot) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def set_callback (self, member, cb):
+    def set_callback (self, member, cb) :
         """ Set a callback function for a member.
 
             Keyword arguments:
@@ -118,7 +121,7 @@ class xyz_cp (troy.interface.iComputePilot) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def unset_callback (self, member):
+    def unset_callback (self, member) :
         """ Unset a callback function from a member
 
             Keyword arguments:
@@ -135,7 +138,7 @@ class xyz_cus (troy.interface.iComputeUnitService) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def add_compute_pilot (self, cp):
+    def add_compute_pilot (self, cp) :
         """ Add a ComputePilot to this CUS.
 
             Keyword arguments:
@@ -144,12 +147,12 @@ class xyz_cus (troy.interface.iComputeUnitService) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def list_compute_pilots (self):
+    def list_compute_pilots (self) :
         """ List all CPs of CUS """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def remove_compute_pilot (self, cp):
+    def remove_compute_pilot (self, cp) :
         """ Remove a ComputePilot
 
             Note that it won't cancel the ComputePilot, it will just no longer
@@ -161,7 +164,7 @@ class xyz_cus (troy.interface.iComputeUnitService) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def submit_compute_unit (self, cud):
+    def submit_compute_unit (self, cud) :
         """ Submit a CU to this ComputeUnitService.
 
             Keyword argument:
@@ -173,36 +176,23 @@ class xyz_cus (troy.interface.iComputeUnitService) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def wait (self):
-        """ Wait until CUS enters a final state """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-
-    def cancel (self):
-        """ Cancel the CUS.
-            
-            Cancelling the CUS also cancels all the CUS submitted to it.
-        """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-
 ########################################################################
 class xyz_cu (troy.interface.iComputeUnit) :
 
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def wait (self):
+    def wait (self) :
         """ Wait until CU enters a final state """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self):
+    def cancel (self) :
         """ Cancel the CU """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
     
-    def set_callback (self, member, cb):
+    def set_callback (self, member, cb) :
         """ Set a callback function for a member.
 
             Keyword arguments:
@@ -212,7 +202,7 @@ class xyz_cu (troy.interface.iComputeUnit) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
     
-    def unset_callback (self, member):
+    def unset_callback (self, member) :
         """ Unset a callback function from a member
 
             Keyword arguments:
@@ -232,7 +222,7 @@ class xyz_dps (troy.interface.iDataPilotService) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def create_pilot (self, dpd, context=None):
+    def create_pilot (self, dpd, context=None) :
         """ Create a DataPilot.
 
             Keyword arguments:
@@ -251,17 +241,17 @@ class xyz_dp (troy.interface.iDataPilot) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def wait (self):
+    def wait (self) :
         """ Wait until DP enters a final state """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self):        
+    def cancel (self) :
         """ Cancel DP """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def reinitialize (self, dpd):        
+    def reinitialize (self, dpd) :
         """ Re-Initialize the DataPilot to the (new) DataPilotDescription.
         
             Keyword arguments:
@@ -270,7 +260,7 @@ class xyz_dp (troy.interface.iDataPilot) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def set_callback (self, member, cb):
+    def set_callback (self, member, cb) :
         """ Set a callback function for a member.
 
             Keyword arguments:
@@ -279,7 +269,7 @@ class xyz_dp (troy.interface.iDataPilot) :
         """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def unset_callback (self, member):
+    def unset_callback (self, member) :
         """ Unset a callback function from a member
 
             Keyword arguments:
@@ -294,7 +284,7 @@ class xyz_dus (troy.interface.iDataUnitService) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def add_data_pilot (self, dp):
+    def add_data_pilot (self, dp) :
         """ Add a DataPilot
 
             Keyword arguments:
@@ -303,12 +293,12 @@ class xyz_dus (troy.interface.iDataUnitService) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def list_data_pilots (self):
+    def list_data_pilots (self) :
         """ List all DPs of DUS """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
     
 
-    def remove_data_pilot (self, dp):
+    def remove_data_pilot (self, dp) :
         """ Remove a DataPilot 
 
             Note that it won't cancel the DataPilot, it will just no longer
@@ -320,7 +310,7 @@ class xyz_dus (troy.interface.iDataUnitService) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
     
     
-    def submit_data_unit (self, dud):
+    def submit_data_unit (self, dud) :
         """ Submit a DU to this DataUnitService.
 
             Keyword argument:
@@ -332,18 +322,6 @@ class xyz_dus (troy.interface.iDataUnitService) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def wait (self):
-        """ Wait until DUS enters a final state """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-    
-    def cancel (self):
-        """ Cancel the DUS.
-            
-            Cancelling the DUS also cancels all the DUs submitted to it.
-        """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
 
 ########################################################################
 class xyz_du (troy.interface.iDataUnit) :
@@ -352,17 +330,17 @@ class xyz_du (troy.interface.iDataUnit) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def wait (self):
+    def wait (self) :
         """ Wait until DU enters a final state """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self):
+    def cancel (self) :
         """ Cancel the DU """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def set_callback (self, member, cb):
+    def set_callback (self, member, cb) :
         """ Set a callback function for a member.
 
             Keyword arguments:
@@ -372,7 +350,7 @@ class xyz_du (troy.interface.iDataUnit) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
     
-    def unset_callback (self, member):
+    def unset_callback (self, member) :
         """ Unset a callback function from a member
 
             Keyword arguments:
@@ -381,17 +359,17 @@ class xyz_du (troy.interface.iDataUnit) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def list_files (self):
+    def list_files (self) :
         """ list files managed by the DU """
         raise troy.pilot.TroyException (troy.pilot.troy.pilot.troy.pilot.Error.NotImplemented, "method not implemented!")
     
 
-    def data_export (self, target_directory):
+    def data_export (self, target_directory) :
         """ copies content of DU to a directory on the local machine"""
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
         
-    def data_import (self, src_directory):
+    def data_import (self, src_directory) :
         """ copies content from a directory on the local machine to DU"""
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 

@@ -28,7 +28,7 @@ class ComputeUnit (Base) :
         'description',  # Description
     )
 
-    def __init__ (self, cu_id=None):
+    def __init__ (self, cu_id=None) :
         print "cu : init"
 
         # init api base
@@ -41,38 +41,38 @@ class ComputeUnit (Base) :
         self.set_idata_ (idata)
 
         # initialize adaptor class 
-        self.get_engine_().call ('ComputeUnit', 'init', self)
+        self.engine_.call ('ComputeUnit', 'init_', self)
 
 
     
-    def wait (self):
+    def wait (self) :
         """ Wait until CU enters a final state """
-        return self.get_engine_().call ('ComputeUnit', 'wait', self)
+        return self.engine_.call ('ComputeUnit', 'wait', self)
 
 
-    def cancel (self):
+    def cancel (self) :
         """ Cancel the CU """
-        return self.get_engine_().call ('ComputeUnit', 'cancel', self)
+        return self.engine_.call ('ComputeUnit', 'cancel', self)
 
     
-    def set_callback (self, member, cb):
+    def set_callback (self, member, cb) :
         """ Set a callback function for a member.
 
             Keyword arguments:
             member -- The member to set the callback for (state / state_detail).
             cb     -- The callback object to call.
         """
-        return self.get_engine_().call ('ComputeUnit', 'set_callback', 
+        return self.engine_.call ('ComputeUnit', 'set_callback', 
                                         self, member, cb)
 
     
-    def unset_callback (self, member):
+    def unset_callback (self, member) :
         """ Unset a callback function from a member
 
             Keyword arguments:
             member -- The member to unset the callback from.
         """
-        return self.get_engine_().call ('ComputeUnit', 'unset_callback', 
+        return self.engine_.call ('ComputeUnit', 'unset_callback', 
                                         self, member)
         pass
 

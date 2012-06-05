@@ -22,7 +22,7 @@ class _ComputeScheduler (Base) :
     )
 
 
-    def __init__ (self, policy=None):
+    def __init__ (self, policy=None) :
         """ Create a ComputeScheduler -- private, only called by CUS
 
             Keyword arguments:
@@ -39,10 +39,10 @@ class _ComputeScheduler (Base) :
         self.set_idata_ (idata)
 
         # initialize adaptor class 
-        self.get_engine_().call ('ComputeScheduler', 'init', self)
+        self.engine_.call ('ComputeScheduler', 'init_', self)
 
 
-    def schedule (self, thing, cud):
+    def schedule (self, thing, cud) :
         """
 
         This is the main method: for a given 'thing', schedule a given
@@ -53,7 +53,7 @@ class _ComputeScheduler (Base) :
         
         On Error (no scheduling possible), 'None' is returned.  
         """
-        return self.get_engine_().call ('ComputeScheduler', 'schedule', 
+        return self.engine_.call ('ComputeScheduler', 'schedule', 
                                         self, thing, cud)
 
 

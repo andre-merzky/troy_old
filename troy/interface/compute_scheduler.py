@@ -17,18 +17,18 @@ class iComputeScheduler (iBase) :
         need to pull various information from the backend.
     """
 
-    def __init__ (self, obj, adaptor):
+    def __init__ (self, obj, adaptor) :
         """ Create a ComputeScheduler """
         pass
 
 
-    def init (self) :
+    def init_ (self) :
         """ dummy method to make sure the backend can initialize the object.
             This method should *not* be implemented in the adaptor!"""
         pass
 
 
-    def schedule (self, thing, cud):
+    def schedule (self, thing, cud) :
         """ schedule a cu/cud on a cus/cps/cp """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 

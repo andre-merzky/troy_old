@@ -18,7 +18,7 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
     """
    
 
-    def __init__ (self, cdus_id=None):
+    def __init__ (self, cdus_id=None) :
         """ Create a ComputeDataUnitService object
     
             Keyword arguments:
@@ -37,7 +37,7 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
         self.set_idata_ (idata)
 
         # initialize adaptor class 
-        self.get_engine_().call ('ComputeDataUnitService', 'init', self)
+        self.engine_.call ('ComputeDataUnitService', 'init_', self)
 
         pass
 
@@ -49,7 +49,7 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
     # CDU via the backend -- if that does not work, the call is handed of to a 
     # scheduler which may be able to handle it, somehow?
     #
-    def submit_compute_data_unit (self, cdud):
+    def submit_compute_data_unit (self, cdud) :
         """ Submit a CDU to this ComputeDataUnitService.
 
             Keyword argument:
@@ -60,7 +60,7 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
         """
 
         try :
-            return self.get_engine_().call ('ComputeDataUnitService',
+            return self.engine_.call ('ComputeDataUnitService',
                                             'submit_compute_data_unit', self, cdud)
         except :
             # internal scheduling did not work -- invoke the scheduler

@@ -44,7 +44,7 @@ class Callback ():
 
     """
 
-    def cb (self, wu, member, value):
+    def cb (self, wu, member, value) :
         """ This is the method that needs to be implemented by the application
         
             Keyword arguments:

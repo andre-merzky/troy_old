@@ -4,26 +4,41 @@
 
 import troy
 
+COORDINATION_URL = "advert://localhost/?dbtype=sqlite3"
+
 def test_compute ():
     # try:
         cpd = troy.pilot.ComputePilotDescription ()
-        cpd['queue'] = 'large'
-        cpd['key']   = 'val'
+        cpd['rm'] = 'fork://localhost'
 
-        cps = troy.pilot.ComputePilotService ()
-        cp1 = cps.create_pilot ("peejay://localhost", cpd)
-        cp2 = cps.create_pilot ("peejay://localhost", cpd)
+        cps = troy.pilot.ComputePilotService ('bigjob://localhost/')
+        cp1 = cps.create_pilot (cpd)
+        cp2 = cps.create_pilot (cpd)
+
+        print "--------------------"
+        cps.dump_()
+        print "--------------------"
 
         cus = troy.pilot.ComputeUnitService ()
+
+        print "--------------------"
+        cus.dump_()
+        print "--------------------"
+
+
         cus.add_compute_pilot (cp1)
         cus.add_compute_pilot (cp2)
+
+        print "--------------------"
+        cus.dump_()
+        print "--------------------"
 
         print str(cus.list_compute_pilots ())
 
         cud = troy.pilot.ComputeUnitDescription ()
 
-        cud['executable'] = 'touch'
-        cud['arguments']  = ['/tmp/hello_troy', '&&', 'sleep', '10']
+        cud['executable'] = '/bin/sh'
+        cud['arguments']  = ['-c', 'touch /tmp/hello_troy_bj && sleep 10']
 
         cu  = cus.submit_compute_unit (cud)
 
@@ -39,8 +54,8 @@ def test_compute ():
 def test_data ():
     # try:
         dpd = troy.pilot.DataPilotDescription ()
-        dps = troy.pilot.DataPilotService ()
-        dp  = dps.create_pilot ("file://localhost", dpd)
+        dps = troy.pilot.DataPilotService ('file://localhost')
+        dp  = dps.create_pilot (dpd)
 
         dus = troy.pilot.DataUnitService ()
         dus.add_data_pilot (dp)
@@ -55,8 +70,8 @@ def test_data ():
 def test_pilot ():
     # try:
         cpd = troy.pilot.ComputePilotDescription ()
-        cps = troy.pilot.ComputePilotService ()
-        cp  = cps.create_pilot ("fork://localhost", cpd)
+        cps = troy.pilot.ComputePilotService ('fork://localhost')
+        cp  = cps.create_pilot (cpd)
 
         cus = troy.pilot.ComputeUnitService ()
         cus.add_compute_pilot (cp)
@@ -73,6 +88,6 @@ def main():
     # test_data    ()
     # test_pilot   ()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
 

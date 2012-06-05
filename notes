@@ -9,9 +9,11 @@ to any sensible co-location, for example?
 
 
 TODO: Expose adaptor via object inspection, e.g. for info upstream to scheduler.
-TODO: on what class should one reconnect to a pilot?  Where to discover running
+DONE: on what class should one reconnect to a pilot?  Where to discover running
       pilots?  Probably CPS after all?  But there is no backend specifier for
       the CPS ctor!
+TODO: check late binding: create cps  via bj, then cps via pj -> should not submit
+      jobs, then cps via bj -> should submit jobs
 
 
 
@@ -120,11 +122,12 @@ Questions / comments about API, to be discussed
         create_compute_pilot (cpd) :
           return self.engine.call (create_compute_pilot (cpd))
 
-        get_compute_pilot (id) :
-          return self.engine.call (get_compute_pilot (id))
-
         list_compute_pilots () :
           return self.engine.call (list_compute_pilots ())
+
+        get_compute_pilot (id) :
+          return self.engine.call (get_compute_pilot (id))
+          # not needed as the pilot ctor takes an id which contains the rm URL
 
 
     - change CUS:
@@ -134,5 +137,55 @@ Questions / comments about API, to be discussed
 
     - add to ComputePilot
       submit_compute_unit (cud)
+
+
+
+--------------------------------------------------------------------------
+Why does Troy need late binding?
+
+  cus   = troy.pilot.ComputeUnitService  ()
+
+  cps_1 = troy.pilot.ComputePilotService ('bigjob://')
+  cp_1  = cps_a.create_pilot             (...)
+
+  cus.add_pilot           (cp_1)
+  cus.submit_compute_unit (...)
+
+  # --> up to this point, the bigjob adaptor can handle the code 
+  # quite nicely, and will bind to all object instances (note that 
+  # BJ provides a CUS).  Next, however:
+
+
+  cps_2 = troy.pilot.ComputePilotService ('peejay://')
+  cp_2  = cps_a.create_pilot             (...)
+
+  cus.add_pilot           (cp_2)
+  cus.submit_compute_unit (...)
+
+  # at this point, the cus submit will need to consider pilots 
+  # which are no longer in the BigJob universe only -- a meta 
+  # scheduler adaptor will need to be invoked, on the same API 
+  # class --> late binding.
+
+  
+  cus.remove_pilot        (cp_1)
+  cus.submit_compute_unit (...)
+
+  # now, OTOH, the peejay adaptor will be able to handle 
+  # submission just fine...
+
+
+----------------------------------------------------------------------
+
+On Persistency:
+
+  - if an entity has an ID, it is persistent, and can be reconnected to.
+  - if an entity is persistent, it needs a cancel() to signal that it can perish
+  - if an entity can perish on its own (w/o calling cancel), it needs a wait()
+  - if an entity can perish on its own (w/o calling cancel), and if some actions
+    are then no longer possible, it needs an state / state_detail.
+  - 'perish on its own' mean regular state transition -- irregular transitions
+    (network breaks, machine dies) will simply result in error conditions -- no
+    need for actual states
 
 

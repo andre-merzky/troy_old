@@ -17,7 +17,7 @@ class ComputeDataUnit (ComputeUnit, DataUnit) :
     """
    
 
-    def __init__ (self, cdu_id = None):
+    def __init__ (self, cdu_id = None) :
         """ Create a Compute Data Unit  object.
 
             Keyword arguments:

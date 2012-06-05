@@ -20,13 +20,7 @@ class iComputePilotService (iBase) :
 
 
 
-    def init (self) :
-        """ dummy method to make sure the backend can initialize the object.
-            This method should *not* be implemented in the adaptor!"""
-        pass
-
-
-    def create_pilot (self, cpd, context=None):
+    def create_pilot (self, cpd, context=None) :
         """ Create a ComputePilot
 
             Keyword arguments:

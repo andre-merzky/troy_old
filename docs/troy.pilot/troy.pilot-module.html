@@ -52,12 +52,132 @@
 </table>
 <!-- ==================== PACKAGE DESCRIPTION ==================== -->
 <h1 class="epydoc">Package pilot</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot-pysrc.html">source&nbsp;code</a></span></p>
-<p>For the sake of code organization, all API classes are defined in a 
-  separate file.  Alas, python's module naming rules then introduce an 
-  additional element, the file name, so that, for example, the compute 
-  pilot class would be available as troy.pilot.compute_pilot.ComputePilot.
-  We thus move the symbols into the parent namespace, which makes them 
-  available as, for example, troy.pilot.ComputePilot.</p>
+<p>Troy is an implementation of the Pilot API, which is an interface to 
+  pilot abstractions.  Most prominently, pilot abstractions cover 
+  PilotJobs, a well known mechanism for application level job management, 
+  which is usually employed for HTC type applications on HPC type resources
+  (amongst others).  Another pilot abstraction is PilotData, which, in a 
+  similar fashion as PilotJobs, decouples system level and application 
+  level data management.  Finally, the Pilot API exposes the ability to 
+  handle Compute and Data workloads concurrently, by interleaving PilotJobs
+  and PilotData concepts.</p>
+  <p>The main concepts and classes exposed by the Compute part of the API 
+  are:</p>
+  <ul>
+    <li>
+      <a href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+      class="link">ComputePilot</a> (CP): a pilot job, which can execute 
+      some compute workload (<a 
+      href="troy.pilot.compute_unit.ComputeUnit-class.html" 
+      class="link">ComputeUnit</a>)
+    </li>
+    <li>
+      <a 
+      href="troy.pilot.compute_pilot_service.ComputePilotService-class.html"
+      class="link">ComputePilotService</a> (CPS): a factory (service) which
+      can create <a href="troy.pilot.compute_pilot.ComputePilot-class.html"
+      class="link">ComputePilot</a>s according to some specification
+    </li>
+    <li>
+      <a href="troy.pilot.compute_unit.ComputeUnit-class.html" 
+      class="link">ComputeUnit</a> (CU): a work item executed on a <a 
+      href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+      class="link">ComputePilot</a>
+    </li>
+    <li>
+      <a 
+      href="troy.pilot.compute_unit_service.ComputeUnitService-class.html" 
+      class="link">ComputeUnitService</a> (CUS): a service which can map <a
+      href="troy.pilot.compute_unit.ComputeUnit-class.html" 
+      class="link">ComputeUnit</a> requests to a set of <a 
+      href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+      class="link">ComputePilot</a>s
+    </li>
+  </ul>
+  <p>The <a 
+  href="troy.pilot.compute_unit_service.ComputeUnitService-class.html" 
+  class="link">ComputeUnitService</a> is what the application will mostly 
+  work with: it takes care of proper work item distribution, and will in 
+  fact enact the applications compute workload.  The set of <a 
+  href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+  class="link">ComputePilot</a>s available to the CUS can be changed during
+  the application's runtime.  A simple example (on 'Hello World' level) 
+  would be (some details left out for brevity):</p>
+<pre class="literalblock">
+   ----------------------------------------------------------------
+   import troy
+
+   # create on ComputePilot from a BigJob ComputePilotservice
+   cps = troy,pilot.ComputePilotService ('bigjob://')
+   cp  = cps.create_pilot ([some compute pilot description])
+
+   # create a work unit service with one ComputePilot resource, to submit work
+   # items to
+   cus = troy.pilot.ComputeUnitService ()
+   cus.add_pilot (cp)
+
+   # submit some compute work item
+   cu  = cus.submit ([some work unit description])
+
+   cu.wait ()     # wait 'til work is done
+
+   cp.cancel  ()  # terminate compute pilots
+   cus.cancel ()  # terminate cus
+   ----------------------------------------------------------------
+</pre>
+  <p>The Data side of the Pilot API looks symmetric to the compute side.  
+  The exposed classes are:</p>
+  <ul>
+    <li>
+      <a href="troy.pilot.data_pilot.DataPilot-class.html" 
+      class="link">DataPilot</a> (DP): a pilot store, which can manage some
+      data workload (<a href="troy.pilot.data_unit.DataUnit-class.html" 
+      class="link">DataUnit</a>)
+    </li>
+    <li>
+      <a href="troy.pilot.data_pilot_service.DataPilotService-class.html" 
+      class="link">DataPilotService</a> (DPS): a factory (service) which 
+      can create <a href="troy.pilot.data_pilot.DataPilot-class.html" 
+      class="link">DataPilot</a>s according to some specification
+    </li>
+    <li>
+      <a href="troy.pilot.data_unit.DataUnit-class.html" 
+      class="link">DataUnit</a> (DU): a data item managed by a <a 
+      href="troy.pilot.data_pilot.DataPilot-class.html" 
+      class="link">DataPilot</a>
+    </li>
+    <li>
+      <a href="troy.pilot.data_unit_service.DataUnitService-class.html" 
+      class="link">DataUnitService</a> (DUS): a service which can map <a 
+      href="troy.pilot.data_unit.DataUnit-class.html" 
+      class="link">DataUnit</a> requests to a set of <a 
+      href="troy.pilot.data_pilot.DataPilot-class.html" 
+      class="link">DataPilot</a>s
+    </li>
+  </ul>
+  <p>Finally, the API exposes two additional classes:</p>
+  <ul>
+    <li>
+      <a href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html" 
+      class="link">ComputeDataUnit</a> (CDU): a combination of data and 
+      compute workload which the application requests to be handled via the
+      Pilot API
+    </li>
+    <li>
+      <a 
+      href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html"
+      class="link">ComputeDataUnitService</a> (CDUS) a service which can 
+      map CDUs to a set of <a 
+      href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+      class="link">ComputePilot</a>s and <a 
+      href="troy.pilot.data_pilot.DataPilot-class.html" 
+      class="link">DataPilot</a>s.
+    </li>
+  </ul>
+  <p>So, the CDUS combines the abilities of the CUS and DUS, but at the 
+  same time allows for a richer semantics -- for example, the CDUS will 
+  transparently be able to support data-compute-colocation for the 
+  requested data-compute workload units.</p>
 
 <!-- ==================== SUBMODULES ==================== -->
 <a name="section-Submodules"></a>
@@ -116,9 +236,6 @@
   <a href="troy.pilot.callback.Callback-class.html" title="troy.pilot.callback.Callback">Callback</a>,
   <a href="troy.pilot.exception.TroyException-class.html" title="troy.pilot.exception.TroyException">TroyException</a>,
   <a href="troy.pilot.exception.Error-class.html" title="troy.pilot.exception.Error">Error</a>,
-  <a href="troy.pilot.compute_data_unit_description.ComputeDataUnitDescription-class.html" title="troy.pilot.compute_data_unit_description.ComputeDataUnitDescription">ComputeDataUnitDescription</a>,
-  <a href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html" title="troy.pilot.compute_data_unit.ComputeDataUnit">ComputeDataUnit</a>,
-  <a href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html" title="troy.pilot.compute_data_unit_service.ComputeDataUnitService">ComputeDataUnitService</a>,
   <a href="troy.pilot.compute_pilot_description.ComputePilotDescription-class.html" title="troy.pilot.compute_pilot_description.ComputePilotDescription">ComputePilotDescription</a>,
   <a href="troy.pilot.compute_pilot.ComputePilot-class.html" title="troy.pilot.compute_pilot.ComputePilot">ComputePilot</a>,
   <a href="troy.pilot.compute_pilot_service.ComputePilotService-class.html" title="troy.pilot.compute_pilot_service.ComputePilotService">ComputePilotService</a>,
@@ -131,6 +248,9 @@
   <a href="troy.pilot.data_unit_description.DataUnitDescription-class.html" title="troy.pilot.data_unit_description.DataUnitDescription">DataUnitDescription</a>,
   <a href="troy.pilot.data_unit.DataUnit-class.html" title="troy.pilot.data_unit.DataUnit">DataUnit</a>,
   <a href="troy.pilot.data_unit_service.DataUnitService-class.html" title="troy.pilot.data_unit_service.DataUnitService">DataUnitService</a>,
+  <a href="troy.pilot.compute_data_unit_description.ComputeDataUnitDescription-class.html" title="troy.pilot.compute_data_unit_description.ComputeDataUnitDescription">ComputeDataUnitDescription</a>,
+  <a href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html" title="troy.pilot.compute_data_unit.ComputeDataUnit">ComputeDataUnit</a>,
+  <a href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html" title="troy.pilot.compute_data_unit_service.ComputeDataUnitService">ComputeDataUnitService</a>,
   <a href="troy.pilot.base-module.html" title="troy.pilot.base">base</a>,
   <a href="troy.pilot.callback-module.html" title="troy.pilot.callback">callback</a>,
   <a href="troy.pilot.compute_data_scheduler-module.html" title="troy.pilot.compute_data_scheduler">compute_data_scheduler</a>,
@@ -183,7 +303,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Mon May 14 13:17:53 2012</a>
+    3.0.1 on Tue Jun  5 11:35:23 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -19,15 +19,15 @@ class DataUnitDescription (dict) :
         )
 
 
-    def __init__ (self):
+    def __init__ (self) :
         pass
 
 
-    def __setattr__ (self, attr, value):
+    def __setattr__ (self, attr, value) :
         self[attr]=value
     
 
-    def __getattr__ (self, attr):
+    def __getattr__ (self, attr) :
         return self[attr]
     
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

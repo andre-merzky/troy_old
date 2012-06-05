@@ -1,9 +1,10 @@
 
 import imp
+import urlparse
 
 import troy
 import troy.interface
-from troy.pilot.exception import TroyException, Error
+from   troy.pilot.exception import TroyException, Error
 
 
 ########################################################################
@@ -47,15 +48,17 @@ class adaptor (troy.interface.aBase) :
                        'cu'  : {} }
 
 
-    def get_name (self):
+    def get_name (self) :
         return self.name
 
 
-    def get_registry (self):
+    def get_registry (self) :
         return self.registry
 
+    def get_order (self) :
+        return 2
 
-    def sanity_check (self):
+    def sanity_check (self) :
         
         # try lo load peejay
         try :
@@ -67,6 +70,9 @@ class adaptor (troy.interface.aBase) :
 
         # Hey, we can use peejay objects now!  Like this:
         # self.module.state.New
+
+        # FIXME: disable module for now, so that we can test bigjob :P
+        # raise TroyException (Error.NoSuccess, 'disabling peejay adaptor')
     
 
     # for each api object, we register our adaptor data.  That way, the adata
@@ -96,6 +102,17 @@ class peejay_cps (troy.interface.iComputePilotService) :
         # we MUST interpret cps_id, if present
         self.master  = self.peejay.master ()
 
+        if 'rm' in self.idata :
+            self.rm = self.idata['rm']
+        else :
+            self.rm = ''
+
+        elems = urlparse.urlparse (self.rm)
+        if elems.scheme != 'peejay' :
+            raise troy.pilot.TroyException (troy.pilot.Error.BadParameter, 
+                  "can only handle peejay:// URLs, not " + elems.scheme + "://")
+
+
         print " === peejay cps init done"
 
         # if we got this far, we can now register adaptor level instance data in
@@ -103,7 +120,7 @@ class peejay_cps (troy.interface.iComputePilotService) :
         self.adata = self.adaptor.register_adata (self.api)
 
 
-    def create_pilot (self, cpd, context=None):
+    def create_pilot (self, cpd, context=None) :
         """ Add a ComputePilot to the ComputePilotService
 
             Keyword arguments:
@@ -114,13 +131,13 @@ class peejay_cps (troy.interface.iComputePilotService) :
             A ComputePilot handle
         """
 
-        print ' === self     :' + str(self    ) 
-        print ' === cpd      :' + str(cpd     ) 
-        print ' === context  :' + str(context ) 
+        print ' === self     :' + str (self    ) 
+        print ' === cpd      :' + str (cpd     ) 
+        print ' === context  :' + str (context ) 
 
         # FIXME: add param checks
         pilot     = self.master.run_pilot ()
-        pilot_id  = str(pilot.get_id ())
+        pilot_id  = str (pilot.get_id ())
 
         # register pilot for later use
         self.adata['cp'][pilot_id] = pilot
@@ -137,7 +154,6 @@ class peejay_cp (troy.interface.iComputePilot) :
         self.api     = api 
         self.adaptor = adaptor
         self.idata   = self.api.get_idata_ ()
-
         self.peejay  = self.adaptor.module
 
         # we MUST interpret cps_id, if present.  In fact, we need to have an id,
@@ -157,12 +173,11 @@ class peejay_cp (troy.interface.iComputePilot) :
         self.adata = self.adaptor.register_adata (self.api)
 
 
-
     def get_id (self) :
         return self.id
    
 
-    def submit_compute_unit_ (self, cud):
+    def submit_compute_unit (self, cud) :
         """ Submit a CU to this Pilot.
 
             Keyword argument:
@@ -192,15 +207,15 @@ class peejay_cp (troy.interface.iComputePilot) :
                 cmd += ' ' + arg
 
         job      = self.pilot.job_submit (cmd)
-        job_id   = str(job.get_id ())
+        job_id   = str (job.get_id ())
 
         # register cu for later state checks etc.
         self.adata['cu'][job_id] = job
 
-        return troy.pilot.ComputeUnit(job_id)
+        return troy.pilot.ComputeUnit (job_id)
 
 
-    def wait (self):
+    def wait (self) :
         """ Wait until CP enters a final state """
         if not self.running :
             return
@@ -209,7 +224,7 @@ class peejay_cp (troy.interface.iComputePilot) :
         self.running = 0
 
 
-    def cancel (self):        
+    def cancel (self) :
         """ Remove the ComputePilot from the ComputePilot Service.
         """
         if not self.running :
@@ -219,7 +234,7 @@ class peejay_cp (troy.interface.iComputePilot) :
         self.running = 0
 
 
-    def reinitialize (self, cpd):        
+    def reinitialize (self, cpd) :
         """ Re-Initialize the ComputePilot to the (new) ComputePilotDescription.
         
             Keyword arguments:
@@ -228,7 +243,7 @@ class peejay_cp (troy.interface.iComputePilot) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def set_callback (self, member, cb):
+    def set_callback (self, member, cb) :
         """ Set a callback function for a member.
 
             Keyword arguments:
@@ -242,7 +257,7 @@ class peejay_cp (troy.interface.iComputePilot) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def unset_callback (self, member):
+    def unset_callback (self, member) :
         """ Unset a callback function from a member
 
             Keyword arguments:
@@ -267,13 +282,12 @@ class peejay_cus (troy.interface.iComputeUnitService) :
         self.api     = api 
         self.adaptor = adaptor
         self.idata   = self.api.get_idata_ ()
-
         self.peejay  = self.adaptor.module
-        self.cp     = []  # list of associated compute pilots
+        self.cp      = []  # list of associated compute pilots
 
 
         peejay_cus.cus_index += 1
-        self.id      = str(peejay_cus.cus_index)
+        self.id      = str (peejay_cus.cus_index)
 
         # we MUST interpret cus_id, if present.  But in fact, peejay does not
         # have a CUS, so we cannot, ever, reconnect to a CUS.  So, we have to
@@ -305,7 +319,7 @@ class peejay_cus (troy.interface.iComputeUnitService) :
 
 
 
-    def add_compute_pilot (self, cp):
+    def add_compute_pilot (self, cp) :
         """ Add a ComputePilot to this CUS.
 
             Keyword arguments:
@@ -314,18 +328,18 @@ class peejay_cus (troy.interface.iComputeUnitService) :
         self.cp.append (cp)
 
 
-    def list_compute_pilots (self):
+    def list_compute_pilots (self) :
         """ List all CPs of CUS """
 
         ret = []
 
         for cp in self.cp :
-            ret.append (cp.get_id())
+            ret.append (cp.get_id ())
 
         return ret
 
 
-    def remove_compute_pilot (self, cp):
+    def remove_compute_pilot (self, cp) :
         """ Remove a ComputePilot
 
             Note that it won't cancel the ComputePilot, it will just no longer
@@ -337,19 +351,6 @@ class peejay_cus (troy.interface.iComputeUnitService) :
         self.cp.remove (cp)
 
 
-    def wait (self):
-        """ Wait until CUS enters a final state """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method useless!")
-
-
-    def cancel (self):
-        """ Cancel the CUS.
-            
-            Cancelling the CUS also cancels all the CUs submitted to it.
-        """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-
 ########################################################################
 class peejay_cu (troy.interface.iComputeUnit) :
 
@@ -358,7 +359,6 @@ class peejay_cu (troy.interface.iComputeUnit) :
         self.api     = api 
         self.adaptor = adaptor
         self.idata   = self.api.get_idata_ ()
-
         self.peejay  = self.adaptor.module
 
         # we MUST interpret cu_id, if present.  In fact, we need to have an id,
@@ -378,18 +378,18 @@ class peejay_cu (troy.interface.iComputeUnit) :
 
 
 
-    def wait (self):
+    def wait (self) :
         """ Wait until CU enters a final state """
         self.job.wait ()
 
 
 
-    def cancel (self):
+    def cancel (self) :
         """ Cancel the CU """
         self.job.cancel ()
 
     
-    def set_callback (self, member, cb):
+    def set_callback (self, member, cb) :
         """ Set a callback function for a member.
 
             Keyword arguments:
@@ -399,7 +399,7 @@ class peejay_cu (troy.interface.iComputeUnit) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
     
-    def unset_callback (self, member):
+    def unset_callback (self, member) :
         """ Unset a callback function from a member
 
             Keyword arguments:
@@ -419,7 +419,7 @@ class peejay_dps (troy.interface.iDataPilotService) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def create_pilot (self, dpd, context=None):
+    def create_pilot (self, dpd, context=None) :
         """ Add a DataPilot to the DataPilotService
 
             Keyword arguments:
@@ -438,17 +438,17 @@ class peejay_dp (troy.interface.iDataPilot) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def wait (self):
+    def wait (self) :
         """ Wait until DP enters a final state """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self):        
+    def cancel (self) :
         """ Cancel DP """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def reinitialize (self, dpd):        
+    def reinitialize (self, dpd) :
         """ Re-Initialize the DataPilot to the (new) DataPilotDescription.
         
             Keyword arguments:
@@ -457,7 +457,7 @@ class peejay_dp (troy.interface.iDataPilot) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def set_callback (self, member, cb):
+    def set_callback (self, member, cb) :
         """ Set a callback function for a member.
 
             Keyword arguments:
@@ -466,7 +466,7 @@ class peejay_dp (troy.interface.iDataPilot) :
         """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def unset_callback (self, member):
+    def unset_callback (self, member) :
         """ Unset a callback function from a member
 
             Keyword arguments:
@@ -481,7 +481,7 @@ class peejay_dus (troy.interface.iDataUnitService) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def add_data_pilot (self, dp):
+    def add_data_pilot (self, dp) :
         """ Add a DataPilot
 
             Keyword arguments:
@@ -490,12 +490,12 @@ class peejay_dus (troy.interface.iDataUnitService) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def list_data_pilots (self):
+    def list_data_pilots (self) :
         """ List all DPs of DUS """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
     
 
-    def remove_data_pilot_service (self, dps):
+    def remove_data_pilot_service (self, dps) :
         """ Remove a DataPilotService 
 
             Note that it won't cancel the DataPilot, it will just no longer
@@ -507,7 +507,7 @@ class peejay_dus (troy.interface.iDataUnitService) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
     
     
-    def submit_data_unit (self, dud):
+    def submit_data_unit (self, dud) :
         """ Submit a DU to this DataUnitService.
 
             Keyword argument:
@@ -519,18 +519,6 @@ class peejay_dus (troy.interface.iDataUnitService) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def wait (self):
-        """ Wait until DUS enters a final state """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-    
-    def cancel (self):
-        """ Cancel the DUS.
-            
-            Cancelling the DUS also cancels all the DUs submitted to it.
-        """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
 
 ########################################################################
 class peejay_du (troy.interface.iDataUnit) :
@@ -539,17 +527,17 @@ class peejay_du (troy.interface.iDataUnit) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def wait (self):
+    def wait (self) :
         """ Wait until DU enters a final state """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self):
+    def cancel (self) :
         """ Cancel the DU """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def set_callback (self, member, cb):
+    def set_callback (self, member, cb) :
         """ Set a callback function for a member.
 
             Keyword arguments:
@@ -559,7 +547,7 @@ class peejay_du (troy.interface.iDataUnit) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
     
-    def unset_callback (self, member):
+    def unset_callback (self, member) :
         """ Unset a callback function from a member
 
             Keyword arguments:
@@ -568,17 +556,17 @@ class peejay_du (troy.interface.iDataUnit) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def list_files (self):
+    def list_files (self) :
         """ list files managed by the DU """
         raise troy.pilot.TroyException (troy.pilot.troy.pilot.troy.pilot.Error.NotImplemented, "method not implemented!")
     
 
-    def data_export (self, target_directory):
+    def data_export (self, target_directory) :
         """ copies content of DU to a directory on the local machine"""
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
         
-    def data_import (self, src_directory):
+    def data_import (self, src_directory) :
         """ copies content from a directory on the local machine to DU"""
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 

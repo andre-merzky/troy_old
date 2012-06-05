@@ -31,7 +31,7 @@ class DataUnitService (Base) :
     )
 
 
-    def __init__ (self, dus_id=None):
+    def __init__ (self, dus_id=None) :
         """ Create a DataUnitService object
     
             Keyword arguments:
@@ -48,7 +48,7 @@ class DataUnitService (Base) :
         self.set_idata_ (idata)
 
         # initialize adaptor class 
-        self.get_engine_().call ('DataUnitService', 'init', self)
+        self.engine_.call ('DataUnitService', 'init_', self)
 
         pass
 
@@ -61,7 +61,7 @@ class DataUnitService (Base) :
     # the backend -- if that does not work, the call is handed of to a scheduler
     # which may be able to submit to on of the DUS' DPSs instead.
     #
-    def submit_data_unit (self, dud):
+    def submit_data_unit (self, dud) :
         """ Submit a CU to this DataUnitService.
 
             Keyword argument:
@@ -72,7 +72,7 @@ class DataUnitService (Base) :
         """
 
         try :
-            return self.get_engine_().call ('DataUnitService',
+            return self.engine_.call ('DataUnitService',
                                             'submit_data_unit', self, dud)
         except :
             # internal scheduling did not work -- invoke the scheduler
@@ -82,23 +82,23 @@ class DataUnitService (Base) :
 
 
 
-    def add_data_pilot (self, dp):
+    def add_data_pilot (self, dp) :
         """ Add a DataPilot 
 
             Keyword arguments:
             dp -- The DataPilot to which this DataUnitService will connect.
         """
-        return self.get_engine_().call ('DataUnitService',
+        return self.engine_.call ('DataUnitService',
                                          'add_data_pilot', self, dp)
 
 
-    def list_data_pilots (self):
+    def list_data_pilots (self) :
         """ List all DPs of DUS """
-        return self.get_engine_().call ('DataUnitService',
+        return self.engine_.call ('DataUnitService',
                                          'list_data_pilots', self)
     
 
-    def remove_data_pilot (self, dp):
+    def remove_data_pilot (self, dp) :
         # FIXME: dp: id or instance?
         """ Remove a DataPilotService 
 
@@ -108,11 +108,11 @@ class DataUnitService (Base) :
             Keyword arguments:
             dp -- The DataPilot to remove 
         """
-        return self.get_engine_().call ('DataUnitService',
+        return self.engine_.call ('DataUnitService',
                                          'remove_data_pilot', self, dp)
     
     
-    def submit_data_unit (self, dud):
+    def submit_data_unit (self, dud) :
         """ Submit a DU to this DataUnitService.
 
             Keyword argument:
@@ -121,21 +121,21 @@ class DataUnitService (Base) :
             Return:
             DataUnit object
         """
-        return self.get_engine_().call ('DataUnitService',
+        return self.engine_.call ('DataUnitService',
                                          'submit_data_unit', self, dud)
 
 
-    def wait (self):
+    def wait (self) :
         """ Wait until DUS enters a final state """
-        return self.get_engine_().call ('DataUnitService', 'wait', self)
+        return self.engine_.call ('DataUnitService', 'wait', self)
 
     
-    def cancel (self):
+    def cancel (self) :
         """ Cancel the DUS.
             
             Cancelling the DUS also cancels all the DUs submitted to it.
         """
-        return self.get_engine_().call ('DataUnitService', 'cancel', self)
+        return self.engine_.call ('DataUnitService', 'cancel', self)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

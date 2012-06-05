@@ -15,28 +15,31 @@ class ComputePilotService (Base) :
     """
 
     # FIXME: it should be names factory
+    # FIXME: mirror the API on DPS
 
     # Class members
 
 
-    def __init__ (self):
+    def __init__ (self, rm="") :
         """ Create a ComputePilotService object
         """
 
-        print "cps: init"
+        # FIXME: should we in fact allow ctor w/o rm?
+
+        print "cps: init " + rm
 
         # init api base
         Base.__init__ (self)
 
         # prepare instance data
-        idata = { }
+        idata = { 'rm' : rm } 
         self.set_idata_ (idata)
 
         # initialize adaptor class 
-        self.get_engine_().call ('ComputePilotService', 'init', self)
+        self.engine_.call ('ComputePilotService', 'init_', self)
 
 
-    def create_pilot (self, cpd, context=None):
+    def create_pilot (self, cpd, context=None) :
         """ Create a ComputePilot.
 
             Keyword arguments:
@@ -46,8 +49,35 @@ class ComputePilotService (Base) :
             Return value:
             A ComputePilot handle
         """
-        return self.get_engine_().call ('ComputePilotService', 'create_pilot', 
+        return self.engine_.call ('ComputePilotService', 'create_pilot', 
                                          self, cpd, context)
+
+
+    def list_pilots (self, context=None) :
+        """ list known ComputePilots.
+
+            Keyword arguments:
+            context -- Security context (optional)
+
+            Return value:
+            A list of ComputePilot IDs
+        """
+        return self.engine_.call ('ComputePilotService', 'list_pilots', 
+                                         self, context)
+
+
+    def get_pilot (self, cp_id, context=None) :
+        """ Reconnect to a ComputePilot.
+
+            Keyword arguments:
+            cp_id   -- ComputePilot's id
+            context -- Security context (optional)
+
+            Return value:
+            A ComputePilot handle
+        """
+        return self.engine_.call ('ComputePilotService', 'get_pilot', 
+                                         self, cp_id, context)
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

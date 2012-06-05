@@ -12,8 +12,8 @@ def singleton (type) :
     
     def getinstance () :
         
-        if type not in instances:
-            instances[type] = type()
+        if type not in instances :
+            instances[type] = type ()
         
         return instances[type]
     
@@ -23,7 +23,11 @@ def singleton (type) :
 @singleton
 class Engine (object) :
 
-    def __init__(self):
+    ##########################################################################
+    # 
+    # load all adaptors
+    #
+    def __init__ (self) :
 
         print " === init engine"
         # __init__ loads all adaptors
@@ -48,12 +52,13 @@ class Engine (object) :
         #            }
         #
         self.adaptors    = {}
+        tuples           = []
         self.module_path = './troy/adaptors/'  # FIXME: pick from env or ini
 
         # iterate through modules and load adaptor classes
-        for path in glob.glob (self.module_path + '/troy_adaptor_*.py'): 
+        for path in glob.glob (self.module_path + '/troy_adaptor_*.py') : 
 
-            try:
+            try :
                 print "engine: init: load adaptor: " + path
 
                 name, ext  = os.path.splitext (os.path.basename (path))
@@ -67,98 +72,122 @@ class Engine (object) :
                 # this will throw if the adaptor is not viable
                 adaptor.sanity_check ()
 
-                a_name     = adaptor.get_name ()
+                a_order    = adaptor.get_order    ()
+                a_name     = adaptor.get_name     ()
                 a_registry = adaptor.get_registry ()
 
                 self.adaptors[a_name] = {'module'   : module, 
                                          'adaptor'  : adaptor,
+                                         'order'    : a_order,
                                          'registry' : a_registry}
 
-            except TroyException, e:
+            except TroyException, e :
+                # this adaptor failed to load, or failed the sanity check - log
+                # error and continute.
                 print "engine: init: load adaptor: " + path + " failed:\n  " + str (e)
+                pass
             
 
-
-
-    def call (self, class_name, method_name, api_class, *args, **kwargs):
+    ##########################################################################
+    # 
+    # invoke an adaptor method
+    #
+    def call (self, class_name, method_name, api_class, *args, **kwargs) :
         '''call an adaptor function, for the given class/method, and give as
            args the object state (extracted from api_class), and the method args
         '''
 
-        # for all known adaptors, find those who implement the requested class
-        valid_adaptors = []
+        # if the api_class is used the first time, sift through loaded adaptors (sorted list)
+        if 0 == len (api_class.adaptors_) :
 
-        for a_name in self.adaptors.keys () :
+            for a_name in self.adaptors.keys () :
 
-            adaptor    = self.adaptors[a_name]['adaptor']
-            a_registry = self.adaptors[a_name]['registry']
+                a_registry = self.adaptors[a_name]['registry']
+                a_order    = self.adaptors[a_name]['order']
 
-            if class_name in a_registry:
+                # did that adaptor register to handle the class?
+                if class_name in a_registry :
 
-                valid_adaptors.append (a_name)
+                    # if so, add that one to the list of adaptors for that
+                    # class.  Initially, the adaptor does not create a adaptor
+                    # class instance, so we set that to 'None' -- that is only
+                    # created as needed, see below
+                    api_class.adaptors_ [a_name] = {}
+                    api_class.adaptors_ [a_name]['a_class'] = None
+                    api_class.adaptors_ [a_name]['success'] = 0
+                    api_class.adaptors_ [a_name]['order']   = a_order
 
 
-
-        # for all those valid adaptor classes, try to find one which can run 
-        # the requested # method successfully.
-        #
-        # FIXME: a necessary optimization (i.e. not premature optimization) is
-        # to *first* try to re-use previously successful adaptors.  For that
-        # purpose, the list of adaptor class instances managed by the api_class
-        # should be sorted, and 'good' adaptors should be on top.  New adaptor
-        # class instances should only be created once that list cycled through
-        # w/o success. 
-        # 
-        # FIXME: further, before attempting to create a adaptor class instance,
-        # the adaptor instance should be called to check if it is applicable.
-        # For example, a URL scheme match could be performed for some classes,
-        # if applicable.  That check should operate on the api class instance
-        # data.
-        # 
+        # create a log message container for logging failed adaptors
         e_stack = "";
 
-        for a_name in valid_adaptors :
+        # for all known adaptors, try to find one which can run the
+        # requested method successfully.  We try the adaptors in inverse sorted
+        # order, the order key being the number of successful method calls on
+        # this api instance.
+        #
+        # Note that we, however, sort the tuples *twice* -- for the initial
+        # attempt (where the success count is '0' for all adaptors, we use the
+        # 'order' attribute, and thus sort for that one first (non-reversed).
 
-            try:
+        ordered_adaptor_tuples = sorted (api_class.adaptors_.items (), 
+                                         key     = lambda x:x[1]['order'])
+        ordered_adaptor_tuples = sorted (ordered_adaptor_tuples,
+                                         key     = lambda x:x[1]['success'], 
+                                         reverse = True)
+
+
+        for a_tuple in ordered_adaptor_tuples :
+
+            a_name = a_tuple[0]
+
+            # each adaptor's method invocation is tried/catched, so that the
+            # next adaptor can be used on failure
+            try :
                 adaptor    = self.adaptors[a_name]['adaptor']
                 module     = self.adaptors[a_name]['module']
                 a_registry = self.adaptors[a_name]['registry']
-                a_class    = a_registry[class_name]  # name of adaptor class
-                                                     # implementing the requested 
-                                                     # api class
+                a_cname    = a_registry[class_name]      # name of adaptor class
+                                                         # implementing the requested 
+                                                         # api class
+                a_class    = api_class.adaptors_[a_name]['a_class'] # old adaptor class | None
 
-                # this module/adaptor combo should work.  Now we have to check if
-                # the api class used that one before - and if so, we reuse the
-                # adaptor class instance.  If not, we have to create a new one
-                # before actually calling the method
-                if not a_name in api_class.adaptors_ :
+                # this module/adaptor combo can in principle work.  Now we have
+                # to check if the api class used that adaptor before - and if
+                # so, we reuse the adaptor's class instance.  If not, we have to
+                # create a new one before actually calling the method
+                if not a_class :
 
                     # adaptor has not been used for this api class - create new
                     # adaptor class, init it, and keep it in the api class' list
-                    api_class.adaptors_[a_name] = getattr (module, a_class)(api_class, adaptor)
+                    api_class.adaptors_[a_name]['a_class'] = getattr (module, a_cname) (api_class, adaptor)
 
-                # adaptor class now exists, and can be used
-                print "engine: call: " + a_name + "." + a_class + "." \
-                      + method_name + " (" + str (args) + str (kwargs) + ")"
+                # adaptor class now exists, and can be used.  We try to invoke
+                # the method, and to get something we can return.
+                ret = getattr (api_class.adaptors_[a_name]['a_class'], method_name) (*args, **kwargs)
 
-                return getattr (api_class.adaptors_[a_name], method_name) (*args, **kwargs)
+                # so, this call was successful -- we move the adaptor to the
+                # first place in the adaptor list, so that it is the first one
+                # tried on the next method call on that api class instance
+                api_class.adaptors_[a_name]['success'] += 1
 
+                print "engine: call: " + a_name     + "." + a_cname + "." + method_name + \
+                                  " (" + str (args) + str (kwargs)  + ") = " + str (ret)
+                return ret
 
-            except TroyException as e:
-                print "engine: call: " + a_name + "." + a_class + "." \
-                      + method_name + " (" + str (args) + str (kwargs) + ") failed : " \
-                      + e.msg
-                e_stack = "  " + a_name + " \t: " + str (e) + "\n";
+            # this adaptor failed to successfully call the method - we log the
+            # error and the next adaptor is tried
+            except TroyException as e :
+                print "engine: call: " + a_name     + "." + a_cname + "."    + method_name + \
+                                  " (" + str (args) + str (kwargs)  + ") : " + str (e)
+                e_stack += "  " + a_name + " \t: " + str (e) + "\n";
 
 
         # no adaptor succeeded
-        # FIXME: should re-throw one of the above exceptions
         if e_stack == "" :
             e_stack = "  Bummer, no adaptors loaded.  None at all!"
 
-        print "no valid adaptor found:\n" + e_stack        
         raise TroyException (Error.NoSuccess, "no valid adaptor found:\n" + e_stack)        
-        pass
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

@@ -20,19 +20,19 @@ class iComputeUnitService (iBase) :
         execution of the ComputeUnits.
     """
 
-    def __init__ (self, obj, adaptor):
+    def __init__ (self, obj, adaptor) :
         """ Create a ComputeUnitService object
         """
         pass
 
 
-    def init (self):
+    def init_ (self) :
         """ dummy method to make sure the backend can initialize the object
         """
         pass
 
 
-    def add_compute_pilot (self, cp):
+    def add_compute_pilot (self, cp) :
         """ Add a ComputePilot to this WUS.
 
             Keyword arguments:
@@ -41,12 +41,12 @@ class iComputeUnitService (iBase) :
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def list_compute_pilots (self):
+    def list_compute_pilots (self) :
         """ List all CPs of CUS """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def remove_compute_pilot (self, cp):
+    def remove_compute_pilot (self, cp) :
         """ Remove a ComputePilot
 
             Note that it won't cancel the ComputePilot, it will just not receive
@@ -64,7 +64,7 @@ class iComputeUnitService (iBase) :
     # case the backend provides CUS level scheduling.  If not, then this call
     # will raise an exception, and the scheduler class will take over
     #
-    def submit_compute_unit (self, cud):
+    def submit_compute_unit (self, cud) :
         """ Submit a CU to this ComputeUnitService.
     
             Keyword argument:
@@ -77,21 +77,8 @@ class iComputeUnitService (iBase) :
 
 
 
-    def get_id (self):        
+    def get_id (self) :
         """ get instance id """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
-
-
-    def wait (self):
-        """ Wait until CUS enters a final state """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
-
-
-    def cancel (self):
-        """ Cancel the WUS.
-            
-            Cancelling the WUS also cancels all the WUs submitted to it.
-        """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 

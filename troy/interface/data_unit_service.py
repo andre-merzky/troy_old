@@ -21,7 +21,7 @@ class iDataUnitService (iBase) :
         execution of the DataUnits.
     """
 
-    def __init__ (self, obj, adaptor, dus_id=None):
+    def __init__ (self, obj, adaptor, dus_id=None) :
         """ Create a DataUnitService object
 
             Keyword arguments:
@@ -30,7 +30,7 @@ class iDataUnitService (iBase) :
         pass
 
 
-    def add_data_pilot (self, dp):
+    def add_data_pilot (self, dp) :
         """ Add a DataPilot
 
             Keyword arguments:
@@ -39,12 +39,12 @@ class iDataUnitService (iBase) :
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def list_data_pilots (self):
+    def list_data_pilots (self) :
         """ List all DPs of DUS """
         raise TroyException (Error.NotImplemented, "method not implemented!")
     
 
-    def remove_data_pilot (self, dp):
+    def remove_data_pilot (self, dp) :
         """ Remove a DataPilot
 
             Note that it won't cancel the DataPilot, it will just no longer
@@ -56,7 +56,7 @@ class iDataUnitService (iBase) :
         raise TroyException (Error.NotImplemented, "method not implemented!")
     
     
-    def submit_data_unit (self, dud):
+    def submit_data_unit (self, dud) :
         """ Submit a DU to this DataUnitService.
 
             Keyword argument:
@@ -68,12 +68,12 @@ class iDataUnitService (iBase) :
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def wait (self):
+    def wait (self) :
         """ Wait until DUS enters a final state """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
     
-    def cancel (self):
+    def cancel (self) :
         """ Cancel the DUS.
             
             Cancelling the DUS also cancels all the DUs submitted to it.

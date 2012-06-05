@@ -21,7 +21,7 @@ class iDataPilot (iBase) :
         re-initialized.
     """
 
-    def __init__ (self, obj, adaptor, dp_id=None):
+    def __init__ (self, obj, adaptor, dp_id=None) :
         """ Create a DataPilot
 
             Keyword arguments:
@@ -30,17 +30,32 @@ class iDataPilot (iBase) :
         pass
 
 
-    def wait (self):
+    ############################################################################
+    #
+    def submit_data_unit (self, dud) :
+        """ Submit a DU to this ComputePilot.
+    
+            Keyword argument:
+            dud -- The DataUnitDescription from the application
+    
+            Return:
+            DataUnit object
+        """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
+
+
+
+    def wait (self) :
         """ Wait until DP enters a final state """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self):        
+    def cancel (self) :
         """ Cancel DP """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def reinitialize (self, dpd):        
+    def reinitialize (self, dpd) :
         """ Re-Initialize the DataPilot to the (new) DataPilotDescription.
         
             Keyword arguments:
@@ -49,7 +64,7 @@ class iDataPilot (iBase) :
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def set_callback (self, member, cb):
+    def set_callback (self, member, cb) :
         """ Set a callback function for a member.
 
             Keyword arguments:
@@ -58,7 +73,7 @@ class iDataPilot (iBase) :
         """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
-    def unset_callback (self, member):
+    def unset_callback (self, member) :
         """ Unset a callback function from a member
 
             Keyword arguments:

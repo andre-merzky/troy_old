@@ -21,7 +21,7 @@ class iComputePilot (iBase) :
         re-initialized.
     """
 
-    def __init__ (self, obj, adaptor):
+    def __init__ (self, obj, adaptor) :
         """ Create a ComputePilot """
         pass
 
@@ -29,11 +29,7 @@ class iComputePilot (iBase) :
 
     ############################################################################
     #
-    # Note that submit_compute_unit_ is not called directly by the CP impl, but
-    # instead by a scheduler class, for those implementation which don't provide
-    # scheduling on CPS level.  It is thus a private call.
-    #
-    def submit_compute_unit_ (self, cud):
+    def submit_compute_unit (self, cud) :
         """ Submit a CU to this ComputePilot.
     
             Keyword argument:
@@ -45,30 +41,29 @@ class iComputePilot (iBase) :
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-
-    def init (self) :
+    def init_ (self) :
         """ dummy method to make sure the backend can initialize the object.
             This method should *not* be implemented in the adaptor!"""
         pass
 
 
-    def get_id (self):        
+    def get_id (self) :
         """ get instance id """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def wait (self):
+    def wait (self) :
         """ Wait until CP enters a final state """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def cancel (self):        
+    def cancel (self) :
         """ Remove the ComputePilot from the ComputePilot Service.
         """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def reinitialize (self, cpd):        
+    def reinitialize (self, cpd) :
         """ Re-Initialize the ComputePilot to the (new) ComputePilotDescription.
         
             Keyword arguments:
@@ -77,7 +72,7 @@ class iComputePilot (iBase) :
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def set_callback (self, member, cb):
+    def set_callback (self, member, cb) :
         """ Set a callback function for a member.
 
             Keyword arguments:
@@ -87,7 +82,7 @@ class iComputePilot (iBase) :
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def unset_callback (self, member):
+    def unset_callback (self, member) :
         """ Unset a callback function from a member
 
             Keyword arguments:

@@ -39,7 +39,7 @@ class _DataScheduler (Base) :
         self.set_idata_ (idata)
 
         # initialize adaptor class 
-        self.get_engine_().call ('DataScheduler', 'init', self)
+        self.engine_.call ('DataScheduler', 'init', self)
 
 
     def schedule (self, thing, dud):
@@ -53,7 +53,7 @@ class _DataScheduler (Base) :
         
         On Error (no scheduling possible), 'None' is returned.  
         """
-        return self.get_engine_().call ('DataScheduler', 'schedule', 
+        return self.engine_.call ('DataScheduler', 'schedule', 
                                         self, thing, dud)
 
 

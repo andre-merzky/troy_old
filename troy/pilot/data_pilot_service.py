@@ -16,18 +16,18 @@ class DataPilotService (Base) :
 
     # FIXME: it should be named factory
 
-    def __init__ (self):
+    def __init__ (self) :
         """ Create a DataPilotService object """
 
         # init api base
         Base.__init__ (self)
 
         # initialize adaptor class 
-        self.get_engine_().call ('DataPilotService', 'init', self)
+        self.engine_.call ('DataPilotService', 'init_', self)
 
 
 
-    def create_pilot (self, dpd, context=None):
+    def create_pilot (self, dpd, context=None) :
         """ Create a DataPilot.
 
             Keyword arguments:
@@ -37,7 +37,7 @@ class DataPilotService (Base) :
             Return value:
             A DataPilot handle
         """
-        return self.get_engine_().call ('DataPilotService', 'create_pilot', 
+        return self.engine_.call ('DataPilotService', 'create_pilot', 
                                         self, dpd, context)
 
 

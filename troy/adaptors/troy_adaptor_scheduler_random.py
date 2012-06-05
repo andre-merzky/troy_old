@@ -1,5 +1,6 @@
 
 import imp
+import random
 
 import troy
 import troy.interface
@@ -42,31 +43,23 @@ class adaptor (troy.interface.aBase) :
         self.adata = { 'cs' : {} }
 
 
-    def get_name (self):
+    def get_name (self) :
         return self.name
 
-
-    def get_registry (self):
+    def get_registry (self) :
         return self.registry
 
+    def get_order (self) :
+        return 4
 
-    def sanity_check (self):
+    def sanity_check (self) :
         # what did you expect?
         # if sys.random (1) > 0.5 :
         #     return True
         # else :
         #     return False
-        return True
+        pass
     
-
-    # for each api object, we register our adaptor data.  That way, the adata
-    # will be available in all adaptor level calls (each belonging to exactly
-    # one api class instance).
-    def register_adata (self, api) :
-
-        api.set_idata_ (self.adata, self.get_name ())
-        return self.adata
-
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
@@ -87,10 +80,6 @@ class scheduler_data_random (troy.interface.iDataScheduler) :
             if self.idata['policy'] != 'Random' :
                 raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess,
                       "Cannot provide the requested scheduling policy!")
-
-        # if we got this far, we can now register adaptor level instance data in
-        # the api.  
-        self.adata = self.adaptor.register_adata (self.api)
 
 
 
@@ -122,18 +111,20 @@ class scheduler_compute_random (troy.interface.iComputeScheduler) :
                 raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess,
                       "Cannot provide the requested scheduling policy!")
 
-        # if we got this far, we can now register adaptor level instance data in
-        # the api.  
-        self.adata = self.adaptor.register_adata (self.api)
-
-
 
     def schedule (self, cus, cud) :
 
         # print "=========== CUS submit"
-        cp_list = cus.list_compute_pilots () # FIXME: check list size
-        cp      = troy.pilot.ComputePilot   (cp_list[0])
-        return cp.submit_compute_unit_      (cud)
+        pilots = cus.list_compute_pilots ()
+
+        if len (pilots) == 0 :
+            raise troy.pilot.TroyException (troy.pilot.Error.IncorrectState,
+                  "Cannot schedule: no pilots available")
+
+        idx = random.randint (0, len  (pilots) - 1)
+        cp  = troy.pilot.ComputePilot (pilots[idx])
+
+        return cp.submit_compute_unit (cud)
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -155,11 +146,6 @@ class scheduler_compute_data_random (troy.interface.iComputeDataScheduler) :
             if self.idata['policy'] != 'Random' :
                 raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess,
                       "Cannot provide the requested scheduling policy!")
-
-        # if we got this far, we can now register adaptor level instance data in
-        # the api.  
-        self.adata = self.adaptor.register_adata (self.api)
-
 
 
     def schedule (self, dcus, dcud) :

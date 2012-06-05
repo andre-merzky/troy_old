@@ -33,11 +33,12 @@ class ComputePilot (Base) :
     )
 
 
-    def __init__ (self, cp_id=None):
+    def __init__ (self, cp_id=None, context=None) :
         """ Create a ComputePilot
 
             Keyword arguments:
-            cp_id -- restore from cp_id
+            cp_id   -- restore from cp_id
+            context -- Security context (optional)
         """
 
         # init api base
@@ -46,12 +47,13 @@ class ComputePilot (Base) :
         # prepare instance data
         idata = {
                   'id'        : cp_id,
+                  'context'   : context,
                   'scheduler' : _ComputeScheduler ('Random')
                 }
         self.set_idata_ (idata)
 
         # initialize adaptor class 
-        self.get_engine_().call ('ComputePilot', 'init', self)
+        self.engine_.call ('ComputePilot', 'init_', self)
 
 
     ############################################################################
@@ -62,7 +64,7 @@ class ComputePilot (Base) :
     #
     # This is a private method
     #
-    def submit_compute_unit_ (self, cud):
+    def submit_compute_unit (self, cud) :
         """ Submit a CU to this ComputePilot.
 
             Keyword argument:
@@ -72,53 +74,53 @@ class ComputePilot (Base) :
             ComputeUnit object
         """
 
-        return self.get_engine_().call ('ComputePilot',
-                                        'submit_compute_unit_', self, cud)
+        return self.engine_.call ('ComputePilot',
+                                        'submit_compute_unit', self, cud)
 
 
 
-    def get_id (self):
+    def get_id (self) :
         """ get instance id """
-        return self.get_engine_().call ('ComputePilot', 'get_id', self)
+        return self.engine_.call ('ComputePilot', 'get_id', self)
 
 
-    def wait (self):
+    def wait (self) :
         """ Wait until CP enters a final state """
-        return self.get_engine_().call ('ComputePilot', 'wait', self)
+        return self.engine_.call ('ComputePilot', 'wait', self)
 
 
-    def cancel (self):        
+    def cancel (self) :
         """ Remove the ComputePilot from the ComputePilot Service. """
-        return self.get_engine_().call ('ComputePilot', 'cancel', self)
+        return self.engine_.call ('ComputePilot', 'cancel', self)
 
 
-    def reinitialize (self, cpd):        
+    def reinitialize (self, cpd) :
         """ Re-Initialize the ComputePilot to the (new) ComputePilotDescription.
         
             Keyword arguments:
             cpd -- A ComputePilotDescription
         """
-        return self.get_engine_().call ('ComputePilot', 'reinitialize', 
+        return self.engine_.call ('ComputePilot', 'reinitialize', 
                                         self, cpd)
 
 
-    def set_callback (self, member, cb):
+    def set_callback (self, member, cb) :
         """ Set a callback function for a member.
 
             Keyword arguments:
             member -- The member to set the callback for (state / state_detail / wall_time_left).
             cb     -- The callback object to call.
         """
-        return self.get_engine_().call ('ComputePilot', 'set_callback', 
+        return self.engine_.call ('ComputePilot', 'set_callback', 
                                         self, member, cb)
 
-    def unset_callback (self, member):
+    def unset_callback (self, member) :
         """ Unset a callback function from a member
 
             Keyword arguments:
             member -- The member to unset the callback for (state / state_detail / wall_tim_left).
         """
-        return self.get_engine_().call ('ComputePilot', 'unset_callback', 
+        return self.engine_.call ('ComputePilot', 'unset_callback', 
                                         self, member)
     
 

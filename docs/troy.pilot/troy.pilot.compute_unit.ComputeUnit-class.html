@@ -56,18 +56,17 @@
 <h1 class="epydoc">Class ComputeUnit</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.compute_unit-pysrc.html#ComputeUnit">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_pil_9" name="uml_class_diagram_for_troy_pil_9">
-<area shape="rect" id="node142" href="troy.pilot.compute_unit.ComputeUnit-class.html#__init__" title="troy.pilot.compute_unit.ComputeUnit.__init__" alt="" coords="40,172,227,191"/>
-<area shape="rect" id="node142" href="troy.pilot.compute_unit.ComputeUnit-class.html#wait" title="Wait until CU enters a final state" alt="" coords="40,191,227,209"/>
-<area shape="rect" id="node142" href="troy.pilot.compute_unit.ComputeUnit-class.html#cancel" title="Cancel the CU" alt="" coords="40,209,227,228"/>
-<area shape="rect" id="node142" href="troy.pilot.compute_unit.ComputeUnit-class.html#set_callback" title="Set a callback function for a member." alt="" coords="40,228,227,247"/>
-<area shape="rect" id="node142" href="troy.pilot.compute_unit.ComputeUnit-class.html#unset_callback" title="Unset a callback function from a member" alt="" coords="40,247,227,265"/>
-<area shape="rect" id="node1" href="troy.pilot.compute_unit.ComputeUnit-class.html" title="ComputeUnit" alt="" coords="28,139,239,271"/>
-<area shape="rect" id="node3" href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html" title="ComputeDataUnit." alt="" coords="5,291,261,330"/>
-<area shape="rect" id="node143" href="troy.pilot.base.Base-class.html#get_engine_" title="Get the engine singleton." alt="" coords="44,39,223,57"/>
-<area shape="rect" id="node143" href="troy.pilot.base.Base-class.html#get_adaptors_" title="Get list of all previously successful adaptors." alt="" coords="44,57,223,76"/>
-<area shape="rect" id="node143" href="troy.pilot.base.Base-class.html#get_idata_" title="Get instance data dict entry." alt="" coords="44,76,223,95"/>
-<area shape="rect" id="node143" href="troy.pilot.base.Base-class.html#set_idata_" title="Set instance data dict entry." alt="" coords="44,95,223,113"/>
-<area shape="rect" id="node2" href="troy.pilot.base.Base-class.html" title="All Troy API classes inherit from this base class, which provides interfaces to adaptor management and to the management of class instance data." alt="" coords="32,6,235,119"/>
+<area shape="rect" id="node142" href="troy.pilot.compute_unit.ComputeUnit-class.html#__init__" title="troy.pilot.compute_unit.ComputeUnit.__init__" alt="" coords="40,153,227,172"/>
+<area shape="rect" id="node142" href="troy.pilot.compute_unit.ComputeUnit-class.html#wait" title="Wait until CU enters a final state" alt="" coords="40,172,227,191"/>
+<area shape="rect" id="node142" href="troy.pilot.compute_unit.ComputeUnit-class.html#cancel" title="Cancel the CU" alt="" coords="40,191,227,209"/>
+<area shape="rect" id="node142" href="troy.pilot.compute_unit.ComputeUnit-class.html#set_callback" title="Set a callback function for a member." alt="" coords="40,209,227,228"/>
+<area shape="rect" id="node142" href="troy.pilot.compute_unit.ComputeUnit-class.html#unset_callback" title="Unset a callback function from a member" alt="" coords="40,228,227,247"/>
+<area shape="rect" id="node1" href="troy.pilot.compute_unit.ComputeUnit-class.html" title="ComputeUnit" alt="" coords="28,121,239,253"/>
+<area shape="rect" id="node3" href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html" title="ComputeDataUnit." alt="" coords="5,273,261,311"/>
+<area shape="rect" id="node143" href="troy.pilot.base.Base-class.html#get_idata_" title="Get instance data dict entry." alt="" coords="44,39,223,57"/>
+<area shape="rect" id="node143" href="troy.pilot.base.Base-class.html#set_idata_" title="Set instance data dict entry." alt="" coords="44,57,223,76"/>
+<area shape="rect" id="node143" href="troy.pilot.base.Base-class.html#dump_" title="Dump dumps." alt="" coords="44,76,223,95"/>
+<area shape="rect" id="node2" href="troy.pilot.base.Base-class.html" title="All Troy API classes inherit from this base class, which provides support for adaptor management and the management of class instance data." alt="" coords="32,6,235,101"/>
 </map>
   <img src="uml_class_diagram_for_troy_pil_9.gif" alt='' usemap="#uml_class_diagram_for_troy_pil_9" ismap="ismap" class="graph-without-title" />
 </center>
@@ -182,29 +181,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.base.Base-class.html#get_adaptors_" class="summary-sig-name">get_adaptors_</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Get list of all previously successful adaptors.
+          <td><span class="summary-sig"><a href="troy.pilot.base.Base-class.html#dump_" class="summary-sig-name">dump_</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Dump dumps.
       <em>(Inherited from <a href="troy.pilot.base.Base-class.html">troy.pilot.base.Base</a>)</em></td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.get_adaptors_">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.base.Base-class.html#get_engine_" class="summary-sig-name">get_engine_</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Get the engine singleton.
-      <em>(Inherited from <a href="troy.pilot.base.Base-class.html">troy.pilot.base.Base</a>)</em></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.get_engine_">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.base-pysrc.html#Base.dump_">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -360,7 +341,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Mon May 14 13:17:54 2012</a>
+    3.0.1 on Tue Jun  5 11:35:24 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

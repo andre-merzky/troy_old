@@ -1,6 +1,6 @@
 
 from base            import Base
-from data_scheduler  import _DataScheduler
+from data_scheduler  import DataScheduler_
 
 
 ########################################################################
@@ -43,7 +43,7 @@ class DataUnitService (Base) :
         # prepare instance data
         idata = {
                   'id'        : dus_id,
-                  'scheduler' : _DataScheduler ('Random')
+                  'scheduler' : DataScheduler_ ('Random')
                 }
         self.set_idata_ (idata)
 
@@ -73,7 +73,7 @@ class DataUnitService (Base) :
 
         try :
             return self.engine_.call ('DataUnitService',
-                                            'submit_data_unit', self, dud)
+                                      'submit_data_unit', self, dud)
         except :
             # internal scheduling did not work -- invoke the scheduler
             idata = self.get_idata_ ()
@@ -112,19 +112,6 @@ class DataUnitService (Base) :
                                          'remove_data_pilot', self, dp)
     
     
-    def submit_data_unit (self, dud) :
-        """ Submit a DU to this DataUnitService.
-
-            Keyword argument:
-            dud -- The DataUnitDescription from the application
-
-            Return:
-            DataUnit object
-        """
-        return self.engine_.call ('DataUnitService',
-                                         'submit_data_unit', self, dud)
-
-
     def wait (self) :
         """ Wait until DUS enters a final state """
         return self.engine_.call ('DataUnitService', 'wait', self)

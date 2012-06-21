@@ -1,7 +1,7 @@
 
 from compute_unit_service    import ComputeUnitService
 from data_unit_service       import DataUnitService
-from compute_data_scheduler  import _ComputeDataScheduler
+from compute_data_scheduler  import ComputeDataScheduler_
 
 
 ########################################################################
@@ -13,8 +13,7 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
     """ ComputeDataUnitService.
     
         The ComputeDataUnitService is the application's interface to submit 
-        ComputeDataUnits to the Pilot-Manager 
-        in the P* Model.        
+        ComputeDataUnits to the Pilot-Manager in the P* Model.        
     """
    
 
@@ -32,7 +31,7 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
         # prepare instance data
         idata = {
                   'id'        : cdus_id,
-                  'scheduler' : _ComputeDataScheduler ('Random')
+                  'scheduler' : ComputeDataScheduler_ ('Random')
                 }
         self.set_idata_ (idata)
 
@@ -61,7 +60,7 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
 
         try :
             return self.engine_.call ('ComputeDataUnitService',
-                                            'submit_compute_data_unit', self, cdud)
+                                      'submit_compute_data_unit', self, cdud)
         except :
             # internal scheduling did not work -- invoke the scheduler
             idata = self.get_idata_ ()

@@ -1,8 +1,1 @@
 
-  - what entities in Troy are expected to be services?  I.e., which are real
-    services in BigJob?  Service: persistent network reachable active entity.
- 
-    E.g.: a CPS can have multiple ComputePilots, and can be added to multiple 
-    CUSs.  Who is keeping track of the PJs in a CPS, and of the CPSs in a CUS?
-
-

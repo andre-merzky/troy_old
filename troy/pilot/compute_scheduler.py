@@ -5,9 +5,9 @@ from base import Base
 #
 #
 #
-class _ComputeScheduler (Base) :
+class ComputeScheduler_ (Base) :
 
-    """ _ComputeScheduler (CS)
+    """ ComputeScheduler_ (CS)
     
         The CS is a troy-internal object which provides scheduling capabilities
         to Troy.  In particular, it will schedule compute units over a set of
@@ -27,6 +27,11 @@ class _ComputeScheduler (Base) :
 
             Keyword arguments:
             policy -- scheduling policy to be provided
+
+            The given policy determines what backend (adaptor) should be used
+            for scheduling.  'None' leaves the scheduler selection to the
+            implementation.
+
         """
 
         # init api base
@@ -43,18 +48,29 @@ class _ComputeScheduler (Base) :
 
 
     def schedule (self, thing, cud) :
-        """
+        """ Schedule a compute unit.
 
-        This is the main method: for a given 'thing', schedule a given
-        ComputeUnit.  A thing can be a CUS, CPS or CP.
-        
-        The method returns the CU, which is at that point scheduled (bound) to
-        a specific CPS or CP.
-        
-        On Error (no scheduling possible), 'None' is returned.  
+            A compute unit description is used to instantiate a cu on the
+            resource managed by a specific compute pilot.  If 'thing' is a CP,
+            the CU is instantiated on its resourced.  If 'thing' is a CUS, the
+            CU is instantiated on any pilot currently registered on that CUS.
+            
+            If the scheduler cannot find suitable resources for the requested
+            CU, a BadParameter exception is raised.  Not raising this exception
+            is not a guarantee that the CU will in fact be (able to be) executed
+            -- in that case, the returned CU will later be moved to Failed state.
+            
+            On success, the returned CU is in Pending state (or moved into any
+            state downstream from Pending).
+
+            schedule() will honor all attributes set on the cud.  Attributes
+            which are not explicitly set are interpreted as having default
+            values (see documentation of CUD), or, where default values are not
+            specified, are ignored.
+
         """
         return self.engine_.call ('ComputeScheduler', 'schedule', 
-                                        self, thing, cud)
+                                  self, thing, cud)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

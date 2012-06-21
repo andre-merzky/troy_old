@@ -1,8 +1,9 @@
 
+
+""" documentation -- where is this docstring ending up? """
+
+
 # on 'import troy', we expect the module 'troy.pilot' to be loaded
-
-""" documentation"""
-
 
 import troy.pilot
 

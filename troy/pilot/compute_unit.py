@@ -73,7 +73,7 @@ class ComputeUnit (Base) :
             member -- The member to unset the callback from.
         """
         return self.engine_.call ('ComputeUnit', 'unset_callback', 
-                                        self, member)
+                                  self, member)
         pass
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

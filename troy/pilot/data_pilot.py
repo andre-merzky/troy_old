@@ -1,6 +1,5 @@
 
 from base            import Base
-from data_scheduler  import _DataScheduler
 
 
 ########################################################################
@@ -47,7 +46,6 @@ class DataPilot (Base) :
         # prepare instance data
         idata = {
                   'id'        : dp_id,
-                  'scheduler' : _DataScheduler ('Random')
                 }
         self.set_idata_ (idata)
 

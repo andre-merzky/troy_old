@@ -5,9 +5,9 @@ from base import Base
 #
 #
 #
-class _DataScheduler (Base) :
+class DataScheduler_ (Base) :
 
-    """ _DataScheduler (DS)
+    """ DataScheduler_ (DS)
     
         The DS is a troy-internal object which provides scheduling capabilities
         to Troy.  In particular, it will schedule data units over a set of
@@ -27,6 +27,11 @@ class _DataScheduler (Base) :
 
             Keyword arguments:
             policy -- scheduling policy to be provided
+
+            The given policy determines what backend (adaptor) should be used
+            for scheduling.  'None' leaves the scheduler selection to the
+            implementation.
+
         """
 
         # init api base
@@ -48,8 +53,8 @@ class _DataScheduler (Base) :
         This is the main method: for a given 'thing', schedule a given
         DataUnit.  A thing can be a DUS, DPS or DP.
         
-        The method returns the DU, which is at that point scheduled (bound) to
-        a specific DPS or DP.
+        The method returns the DU, which is at that point bound to (i.e.
+        scheduled on) a specific DPS or DP.
         
         On Error (no scheduling possible), 'None' is returned.  
         """

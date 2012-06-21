@@ -11,13 +11,12 @@ class ComputeDataUnit (ComputeUnit, DataUnit) :
 
     """ ComputeDataUnit.
     
-        The ComputeDataUnit is the application's interface to submit 
-        ComputeDataUnits to the Pilot-Manager 
-        in the P* Model.        
+        The ComputeDataUnit is a handle to a unit of (sompute and/or data)
+        workload.
     """
    
 
-    def __init__ (self, cdu_id = None) :
+    def __init__ (self, cdu_id=None) :
         """ Create a Compute Data Unit  object.
 
             Keyword arguments:

@@ -6,5 +6,10 @@ different pilot backends (or components).
 
 Please refer to the Troy wiki for installation instructions, user guide, etc:
 
-  https://github.com/andre-merzky/troy/wiki/
+  https://github.com/saga-project/troy/wiki/
+
+
+The documentation of the Troy's pilot API is at:
+
+  https://saga-project,github.com/troy/apidoc/
 

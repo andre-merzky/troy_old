@@ -1,6 +1,5 @@
 
 from base               import Base
-from compute_scheduler  import _ComputeScheduler
     
 ########################################################################
 #
@@ -39,6 +38,14 @@ class ComputePilot (Base) :
             Keyword arguments:
             cp_id   -- restore from cp_id
             context -- Security context (optional)
+
+            If a cp_id is specified, the implementation will attempt to
+            reconnect to the CP instance referenced by the ID.  If that instance
+            got reinitialized meanwhile, the implementation may attempt to
+            connect to the reinitialized instance.  If that is not possible, or
+            if the instance matching cp_id cannot be found for other reasons,
+            a BadParameter exception is raised.
+
         """
 
         # init api base
@@ -48,7 +55,6 @@ class ComputePilot (Base) :
         idata = {
                   'id'        : cp_id,
                   'context'   : context,
-                  'scheduler' : _ComputeScheduler ('Random')
                 }
         self.set_idata_ (idata)
 
@@ -62,8 +68,6 @@ class ComputePilot (Base) :
     # the backend -- if that does not work, no scheduler can help anymore, so an
     # exception is raised (falls through really)
     #
-    # This is a private method
-    #
     def submit_compute_unit (self, cud) :
         """ Submit a CU to this ComputePilot.
 
@@ -72,25 +76,62 @@ class ComputePilot (Base) :
 
             Return:
             ComputeUnit object
+
+            A compute unit description is used to instantiate a cu on the
+            resource managed by the pilot.  
+            
+            If the pilot's resource is not suitable to run the requested CU,
+            a BadParameter exception is raised.  Not raising this exception is
+            not a guarantee that the CU will in fact be (able to be) executed --
+            in that case, the returned CU will later be moved to Failed state.
+            
+            On success, the returned CU is in Pending state (or moved into any
+            state downstream from Pending).
+
+            submit() will honor all attributes set on the cud.  Attributes which
+            are not explicitly set are interpreted as having default values (see
+            documentation of CUD), or, where default values are not specified,
+            are ignored.
+
         """
 
-        return self.engine_.call ('ComputePilot',
-                                        'submit_compute_unit', self, cud)
+        return self.engine_.call ('ComputePilot', 'submit_compute_unit', self, cud)
 
 
 
     def get_id (self) :
-        """ get instance id """
+        """ get instance id 
+        
+        This call may return 'None' if the Pilot is not yet in Running state.
+
+        The returned ID can be used to connect to the CP instance later on, for
+        example from within a different application instance.  
+        
+        """
         return self.engine_.call ('ComputePilot', 'get_id', self)
 
 
     def wait (self) :
-        """ Wait until CP enters a final state """
+        """ Wait until CP enters a final state 
+
+        It is not an error to call wait() in a final state -- the call simply
+        returns immediately.
+        
+        """
         return self.engine_.call ('ComputePilot', 'wait', self)
 
 
     def cancel (self) :
-        """ Remove the ComputePilot from the ComputePilot Service. """
+        """ Move the pilot into Canceled state, releasing all resources.
+
+        The will block until the pilot reaches Canceled state and resources have
+        been released.  
+
+        It is not an error to call the method in a final state -- it will simple
+        return immediately.  The pilot's state will not be changed in that case
+        though.
+        
+        """
         return self.engine_.call ('ComputePilot', 'cancel', self)
 
 
@@ -99,9 +140,25 @@ class ComputePilot (Base) :
         
             Keyword arguments:
             cpd -- A ComputePilotDescription
+
+            The reinitialize method is intended to change the amount of
+            resources available to a pilot, without changing the pilot's state
+            otherwise.  The method can be called in any non-final state, and
+            will automatically move the pilot to 'Pending' state (if
+            successful).  If reinitialization fails (for example, because no
+            suitable resources have been found), the pilot is moved to 'Failed'
+            state.
+
+            It is up to the backend is the pilot's ID changes during the call to
+            reinitialize(), but the implementation SHOULD attempt to keep the ID
+            constant.
+
+            Any compute units running on the pilot remain running -- but the
+            backend may achieve this by aborting the units, and resubmitting
+            them to the re-initialized pilot.
         """
         return self.engine_.call ('ComputePilot', 'reinitialize', 
-                                        self, cpd)
+                                  self, cpd)
 
 
     def set_callback (self, member, cb) :
@@ -110,6 +167,26 @@ class ComputePilot (Base) :
             Keyword arguments:
             member -- The member to set the callback for (state / state_detail / wall_time_left).
             cb     -- The callback object to call.
+
+            Setting the callback does not guarantee that all changes of the
+            watched member cause a callback invocation.  For example,
+            wall_time_left will be a continuously changing member, but the
+            callback may be invoked at regular or non-regular intervals.  The
+            implementation will, however, invoke the callback on a best-effort
+            basis.
+
+
+            It is not an error to call this method if a callback is already
+            registered -- the call will then replace the callback, and behave
+            like::
+
+                def set_callback (self, member, cb) :
+                  
+                  if self.has_callback () :
+                      unset_callback  (member)
+
+                  self.set_callback (member, cb)
+
         """
         return self.engine_.call ('ComputePilot', 'set_callback', 
                                         self, member, cb)
@@ -119,6 +196,12 @@ class ComputePilot (Base) :
 
             Keyword arguments:
             member -- The member to unset the callback for (state / state_detail / wall_tim_left).
+
+            A callback may still be invoked during the unset_call, but it is
+            guaranteed that no invocation will happen after the call finishes.
+
+            It is not an error to call this method if no callback is registered
+            -- the call will simply return immediately.
         """
         return self.engine_.call ('ComputePilot', 'unset_callback', 
                                         self, member)

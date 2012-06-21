@@ -9,8 +9,6 @@ class ComputeUnitDescription (dict) :
         The ComputeUnitDescription is a job/task/call description based on 
         SAGA Job Description. 
         
-        It offers the application to describe a ComputComputet in an abstract 
-        way that is dealt with by the Pilot-Manager.
     """
 
     # Class members
@@ -25,17 +23,20 @@ class ComputeUnitDescription (dict) :
         'project',
         'start_time',
         'working_directory',
+
         # I/O
         'input',
         'error',
         'output',
         'file_transfer',
+
         # Parallelism
         'number_of_processes',  # Total number of processes to start
         'processes_per_host',   # Nr of processes per host
         'threads_per_process',  # Nr of threads to start per process
         'total_core_count',     # Total number of cores requested
         'spmd_variation',       # Type and startup mechanism
+
         # Requirements
         'candidate_hosts',
         'cpu_architecture',

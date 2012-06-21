@@ -13,6 +13,7 @@ class ComputePilotDescription (dict):
     # Class members
     __slots__ = (
         'cp_type',                  # string
+
         # Pilot / Agent description
         'executable',               # string
         'arguments',                # string vec
@@ -23,11 +24,13 @@ class ComputePilotDescription (dict):
         'project',                  # string
         'start_time',               # time
         'working_directory',        # url
+
         # I/O
         'input',                    # url
         'error',                    # url
         'output',                   # url
         'file_transfer',            # string vec
+
         # Parallelism
         'number_of_processes',      # int, # of processes to start
         'processes_per_host',       # int, # of processes per host

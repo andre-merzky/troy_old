@@ -5,14 +5,15 @@ from base import Base
 #
 #
 #
-class _ComputeDataScheduler (Base) :
+class ComputeDataScheduler_ (Base) :
 
-    """ _ComputeDataScheduler (CDS)
+    """ ComputeDataScheduler_ (CDS)
     
         The CS is a troy-internal object which provides scheduling capabilities
         to Troy.  In particular, it will schedule compute_data units over a set of
         compute_data pilots.  To do that, the scheduler implementation (adaptor) will
-        need to pull various information from the backend.
+        need to pull various information from the backend.  See adaptor level 
+        documentation for more details (TODO: link)
     """
 
     # Class members
@@ -27,6 +28,11 @@ class _ComputeDataScheduler (Base) :
 
             Keyword arguments:
             policy -- scheduling policy to be provided
+
+            The given policy determines what backend (adaptor) should be used
+            for scheduling.  'None' leaves the scheduler selection to the
+            implementation.
+
         """
 
         # init api base
@@ -42,19 +48,19 @@ class _ComputeDataScheduler (Base) :
         self.engine_.call ('ComputeDataScheduler', 'init_', self)
 
 
-    def schedule (self, thing, dud) :
+    def schedule (self, thing, cdud) :
         """
 
         This is the main method: for a given 'thing', schedule a given
-        ComputeDataUnit.  A thing can be a CDUS.
+        ComputeDataUnit.  A thing can actually only be a CDUS in this case.
         
-        The method returns the CDU, which is at that point scheduled (bound) to
-        a specific resource.
+        The method returns the CDU, which is at that point bound to (i.e.
+        scheduled on) a specific resource.
         
         On Error (no scheduling possible), 'None' is returned.  
         """
         return self.engine_.call ('ComputeDataScheduler', 'schedule', 
-                                        self, thing, dud)
+                                  self, thing, cdud)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

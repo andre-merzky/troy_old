@@ -1,6 +1,5 @@
 
 from base            import Base
-from data_scheduler  import _DataScheduler
 
 
 ########################################################################

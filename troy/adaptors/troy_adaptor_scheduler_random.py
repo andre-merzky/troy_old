@@ -12,8 +12,8 @@ from   troy.pilot.exception import TroyException, Error
 # This TROY adaptor implements a simple random scheduler, which schedules (as
 # the above suggests) 
 #   
-#   DUs  on random DUSs, DPSs and DPs.
-#   CUs  on random CUSs, CPSs and CPs.
+#   DUs  on random DUSs, and DPs.
+#   CUs  on random CUSs, and CPs.
 #   DCUs on ??? (see below)
 #
 # Note: http://xkcd.com/221/

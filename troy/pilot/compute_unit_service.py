@@ -64,8 +64,14 @@ class ComputeUnitService (Base) :
             ComputeUnit object
         """
 
-        return self.engine_.call ('ComputeUnitService', 
-                'submit_compute_unit', self, cud)
+        try :
+            return self.engine_.call ('ComputeUnitService',
+                                      'submit_compute_unit', self, cud)
+        except :
+            # internal scheduling did not work -- invoke the scheduler
+            idata = self.get_idata_ ()
+            cu    = idata['scheduler'].schedule (self, cud)
+            return cu
 
 
     def get_id (self) :
@@ -74,6 +80,7 @@ class ComputeUnitService (Base) :
 
 
     def add_compute_pilot (self, cp) :
+        # FIXME: cp: id or instance?
         """ Add a ComputePilot to this CUS.
 
             Keyword arguments:
@@ -84,12 +91,14 @@ class ComputeUnitService (Base) :
 
 
     def list_compute_pilots (self) :
+        # FIXME: cp: id or instance?
         """ List all CPs of CUS """
         return self.engine_.call ('ComputeUnitService', 
                                         'list_compute_pilots', self)
 
 
-    def remove_compute_pilots (self, cps) :
+    def remove_compute_pilot (self, cp) :
+        # FIXME: cp: id or instance?
         """ Remove a ComputePilot
 
             Note that it won't cancel the ComputePilot, it will just no
@@ -99,7 +108,7 @@ class ComputeUnitService (Base) :
             cp -- The ComputePilot to remove 
         """
         return self.engine_.call ('ComputeUnitService',
-                                        'remove_compute_pilot', self, cp)
+                                  'remove_compute_pilot', self, cp)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

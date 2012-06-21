@@ -65,7 +65,7 @@ class DataUnitService (Base) :
         """ Submit a CU to this DataUnitService.
 
             Keyword argument:
-            cud -- The DataUnitDescription from the application
+            dud -- The DataUnitDescription from the application
 
             Return:
             DataUnit object
@@ -77,22 +77,24 @@ class DataUnitService (Base) :
         except :
             # internal scheduling did not work -- invoke the scheduler
             idata = self.get_idata_ ()
-            du = idata['scheduler'].schedule (self, dud)
+            du    = idata['scheduler'].schedule (self, dud)
             return du
 
 
 
     def add_data_pilot (self, dp) :
+        # FIXME: dp: id or instance?
         """ Add a DataPilot 
 
             Keyword arguments:
             dp -- The DataPilot to which this DataUnitService will connect.
         """
         return self.engine_.call ('DataUnitService',
-                                         'add_data_pilot', self, dp)
+                                  'add_data_pilot', self, dp)
 
 
     def list_data_pilots (self) :
+        # FIXME: dp: id or instance?
         """ List all DPs of DUS """
         return self.engine_.call ('DataUnitService',
                                          'list_data_pilots', self)
@@ -109,7 +111,7 @@ class DataUnitService (Base) :
             dp -- The DataPilot to remove 
         """
         return self.engine_.call ('DataUnitService',
-                                         'remove_data_pilot', self, dp)
+                                  'remove_data_pilot', self, dp)
     
     
     def wait (self) :

@@ -303,7 +303,7 @@ class peejay_cus (troy.interface.iComputeUnitService) :
         # re-assign a scheduler after the CUS has been created -- the scheduler
         # is fully internal -- so we can just create it here.  For now, we use
         # the 'Random' scheduler
-        self.scheduler = troy.pilot.compute_scheduler._ComputeScheduler ('Random')
+        self.scheduler = troy.pilot.compute_scheduler.ComputeScheduler_ ('Random')
 
         # if we got this far, we can now register adaptor level instance data in
         # the api.  

@@ -54,46 +54,55 @@
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
 <h1 class="epydoc">Class Callback</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.callback-pysrc.html#Callback">source&nbsp;code</a></span></p>
-<p>Callback base class.</p>
-  <p>All stateful objects of the pilot API allow to register a callback for
-  'state' (and 'state_detail') attribute changes.  That callback is a class
-  instance which inherits this callback base class, and implements 
-  (overloads) the cb() method.  The cb() method is then invoked whenever 
-  the TROY implementation is notified of a state change of the monitored 
-  object.</p>
-  <p>The cb instance receives three parameters upon invokation:</p>
-  <ul>
-    <li>
-      obj:    the watched object instance
-    </li>
-    <li>
-      member: the watched attribute ('state' or 'state_detail')
-    </li>
-    <li>
-      value:  the new value of the watched attribute
-    </li>
-  </ul>
-  <p>If cb() returns True, the callback will remain registered after 
-  invocation, to monitor the object for the next subsequent state change.  
-  On False, the callback will not be called again.</p>
-  <p>To register a callback on a object instance, use:</p>
 <pre class="literalblock">
- def MyCallback (troy.pilot.Callback) :
 
-     def cb (self, obj, member, value) :
+   Callback base class.
 
-         print &quot; %s (%s) : %s&quot; %  obj, member, value
+   All stateful objects of the pilot API allow to register a callback for
+   'state' (and 'state_detail') attribute changes.  That callback is a class
+   instance which inherits this callback base class, and implements (overloads)
+   the cb() method.  The cb() method is then invoked whenever the TROY
+   implementation is notified of a state change of the monitored object.
+
+   The cb instance receives three parameters upon invokation:
+
+     - obj:    the watched object instance
+     - member: the watched attribute ('state' or 'state_detail')
+     - value:  the new value of the watched attribute
+
+   If cb() returns True, the callback will remain registered after invocation,
+   to monitor the object for the next subsequent state change.  On False, the
+   callback will not be called again.
+
+   Only one callback can be registered for any given object instance at any
+   given time.  If 'set_callback()' is called twice, the earlier callback is
+   unregistered.
+
+   To register a callback on a object instance, use::
+
+       class MyCallback (troy.pilot.Callback) :
+          
+           def __init__ (self, msg) :
+               self.msg_ = msg
+
+           def cb (self, obj, member, value) :
+
+               print &quot; %s
+%s (%s) : %s&quot;  %  self.msg_, obj, member, value
 
 
- def main () :
+       def main () :
+         
+           cpd = troy.pilot.compute_pilot_description ()
+           cps = troy.pilot.compute_pilot_service ()
+           cp  = cps.create_pilot (cpd)
+
+           mcb = MyCallback (&quot;Hello Pilot, how is your state?&quot;)
+
+           cp.set_callback ('state', mcb)
+
    
-     cpd = troy.pilot.compute_pilot_description ()
-     cps = troy.pilot.compute_pilot_service ()
-     cp  = cps.create_pilot (cpd)
 
-     mcb = MyCallback ()
-
-     cp.register_callback ('state', mcb)
 </pre>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
@@ -104,6 +113,25 @@
   <td align="left" colspan="2" class="table-header">
     <span class="table-header">Instance Methods</span></td>
 </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__init__"></a><span class="summary-sig-name">__init__</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      The callback constructor simply raises an IncorrectState exception, 
+      to signal that the application needs to inherit the callback class in
+      a custom class in order to use notifications.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.callback-pysrc.html#Callback.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
@@ -155,7 +183,13 @@
   <p>Keyword arguments: obj:    the watched object instance member: the 
   watched attribute ('state' or 'state_detail') value:  the new value of 
   the watched attribute</p>
-  <p>Return: Keep   -- bool, Keep (true) or remove (false) the callback</p>
+  <p>Return: Keep   -- bool, Keep or remove the callback</p>
+  <p>Callback invocation may (and in general will) happen in a separate 
+  thread -- so the application need to make sure that the callback code is 
+  thread-safe.</p>
+  <p>The boolean return value is used to signal Troy if the callback should
+  continue to listen for events (return True) , or if it rather should get 
+  unregistered after this invocation (return False).</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -190,7 +224,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Fri Jun 15 23:17:42 2012</a>
+    3.0.1 on Fri Jun 22 09:37:55 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

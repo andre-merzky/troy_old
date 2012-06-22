@@ -202,6 +202,13 @@ troy.pilot.base.Base.get_idata_	troy.pilot.base.Base-class.html#get_idata_
 troy.pilot.base.Base.__init__	troy.pilot.base.Base-class.html#__init__
 troy.pilot.callback.Callback	troy.pilot.callback.Callback-class.html
 troy.pilot.callback.Callback.cb	troy.pilot.callback.Callback-class.html#cb
+troy.pilot.callback.Callback.__init__	troy.pilot.callback.Callback-class.html#__init__
+troy.pilot.compute_data_scheduler.ComputeDataScheduler_	troy.pilot.compute_data_scheduler.ComputeDataScheduler_-class.html
+troy.pilot.base.Base.set_idata_	troy.pilot.base.Base-class.html#set_idata_
+troy.pilot.base.Base.dump_	troy.pilot.base.Base-class.html#dump_
+troy.pilot.base.Base.get_idata_	troy.pilot.base.Base-class.html#get_idata_
+troy.pilot.compute_data_scheduler.ComputeDataScheduler_.__init__	troy.pilot.compute_data_scheduler.ComputeDataScheduler_-class.html#__init__
+troy.pilot.compute_data_scheduler.ComputeDataScheduler_.schedule	troy.pilot.compute_data_scheduler.ComputeDataScheduler_-class.html#schedule
 troy.pilot.compute_data_unit.ComputeDataUnit	troy.pilot.compute_data_unit.ComputeDataUnit-class.html
 troy.pilot.compute_unit.ComputeUnit.set_callback	troy.pilot.compute_unit.ComputeUnit-class.html#set_callback
 troy.pilot.base.Base.set_idata_	troy.pilot.base.Base-class.html#set_idata_
@@ -257,7 +264,7 @@ troy.pilot.data_unit_service.DataUnitService.add_data_pilot	troy.pilot.data_unit
 troy.pilot.compute_data_unit_service.ComputeDataUnitService.submit_compute_data_unit	troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#submit_compute_data_unit
 troy.pilot.compute_unit_service.ComputeUnitService.list_compute_pilots	troy.pilot.compute_unit_service.ComputeUnitService-class.html#list_compute_pilots
 troy.pilot.compute_unit_service.ComputeUnitService.submit_compute_unit	troy.pilot.compute_unit_service.ComputeUnitService-class.html#submit_compute_unit
-troy.pilot.compute_unit_service.ComputeUnitService.remove_compute_pilots	troy.pilot.compute_unit_service.ComputeUnitService-class.html#remove_compute_pilots
+troy.pilot.compute_unit_service.ComputeUnitService.remove_compute_pilot	troy.pilot.compute_unit_service.ComputeUnitService-class.html#remove_compute_pilot
 troy.pilot.compute_data_unit_service.ComputeDataUnitService.__init__	troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#__init__
 troy.pilot.data_unit_service.DataUnitService.list_data_pilots	troy.pilot.data_unit_service.DataUnitService-class.html#list_data_pilots
 troy.pilot.compute_pilot.ComputePilot	troy.pilot.compute_pilot.ComputePilot-class.html
@@ -312,6 +319,12 @@ troy.pilot.compute_pilot_service.ComputePilotService.get_pilot	troy.pilot.comput
 troy.pilot.compute_pilot_service.ComputePilotService.list_pilots	troy.pilot.compute_pilot_service.ComputePilotService-class.html#list_pilots
 troy.pilot.base.Base.dump_	troy.pilot.base.Base-class.html#dump_
 troy.pilot.compute_pilot_service.ComputePilotService.__init__	troy.pilot.compute_pilot_service.ComputePilotService-class.html#__init__
+troy.pilot.compute_scheduler.ComputeScheduler_	troy.pilot.compute_scheduler.ComputeScheduler_-class.html
+troy.pilot.base.Base.set_idata_	troy.pilot.base.Base-class.html#set_idata_
+troy.pilot.base.Base.dump_	troy.pilot.base.Base-class.html#dump_
+troy.pilot.base.Base.get_idata_	troy.pilot.base.Base-class.html#get_idata_
+troy.pilot.compute_scheduler.ComputeScheduler_.__init__	troy.pilot.compute_scheduler.ComputeScheduler_-class.html#__init__
+troy.pilot.compute_scheduler.ComputeScheduler_.schedule	troy.pilot.compute_scheduler.ComputeScheduler_-class.html#schedule
 troy.pilot.compute_unit.ComputeUnit	troy.pilot.compute_unit.ComputeUnit-class.html
 troy.pilot.compute_unit.ComputeUnit.set_callback	troy.pilot.compute_unit.ComputeUnit-class.html#set_callback
 troy.pilot.base.Base.set_idata_	troy.pilot.base.Base-class.html#set_idata_
@@ -358,7 +371,7 @@ troy.pilot.base.Base.set_idata_	troy.pilot.base.Base-class.html#set_idata_
 troy.pilot.compute_unit_service.ComputeUnitService.get_id	troy.pilot.compute_unit_service.ComputeUnitService-class.html#get_id
 troy.pilot.compute_unit_service.ComputeUnitService.list_compute_pilots	troy.pilot.compute_unit_service.ComputeUnitService-class.html#list_compute_pilots
 troy.pilot.compute_unit_service.ComputeUnitService.submit_compute_unit	troy.pilot.compute_unit_service.ComputeUnitService-class.html#submit_compute_unit
-troy.pilot.compute_unit_service.ComputeUnitService.remove_compute_pilots	troy.pilot.compute_unit_service.ComputeUnitService-class.html#remove_compute_pilots
+troy.pilot.compute_unit_service.ComputeUnitService.remove_compute_pilot	troy.pilot.compute_unit_service.ComputeUnitService-class.html#remove_compute_pilot
 troy.pilot.compute_unit_service.ComputeUnitService.__init__	troy.pilot.compute_unit_service.ComputeUnitService-class.html#__init__
 troy.pilot.data_pilot.DataPilot	troy.pilot.data_pilot.DataPilot-class.html
 troy.pilot.data_pilot.DataPilot.set_callback	troy.pilot.data_pilot.DataPilot-class.html#set_callback
@@ -387,6 +400,12 @@ troy.pilot.data_pilot_service.DataPilotService.create_pilot	troy.pilot.data_pilo
 troy.pilot.base.Base.dump_	troy.pilot.base.Base-class.html#dump_
 troy.pilot.base.Base.get_idata_	troy.pilot.base.Base-class.html#get_idata_
 troy.pilot.data_pilot_service.DataPilotService.__init__	troy.pilot.data_pilot_service.DataPilotService-class.html#__init__
+troy.pilot.data_scheduler.DataScheduler_	troy.pilot.data_scheduler.DataScheduler_-class.html
+troy.pilot.base.Base.set_idata_	troy.pilot.base.Base-class.html#set_idata_
+troy.pilot.base.Base.dump_	troy.pilot.base.Base-class.html#dump_
+troy.pilot.base.Base.get_idata_	troy.pilot.base.Base-class.html#get_idata_
+troy.pilot.data_scheduler.DataScheduler_.__init__	troy.pilot.data_scheduler.DataScheduler_-class.html#__init__
+troy.pilot.data_scheduler.DataScheduler_.schedule	troy.pilot.data_scheduler.DataScheduler_-class.html#schedule
 troy.pilot.data_unit.DataUnit	troy.pilot.data_unit.DataUnit-class.html
 troy.pilot.data_unit.DataUnit.set_callback	troy.pilot.data_unit.DataUnit-class.html#set_callback
 troy.pilot.base.Base.set_idata_	troy.pilot.base.Base-class.html#set_idata_

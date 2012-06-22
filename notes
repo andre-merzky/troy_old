@@ -63,6 +63,8 @@ Questions / comments about API, to be discussed
       - can dead pilots be reinitialized? TODO
       - what state after calling reinitialize?  
         TODO: should be same as after create()
+      - stays the pilot ID the same during the call?
+      - what happens on error (e.g. insufficient resources)?
 
 
   ------------------------------------------------------------------------------

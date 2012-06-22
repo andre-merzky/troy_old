@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>troy.pilot.compute_unit.ComputeUnit</title>
+  <title>troy.pilot.compute_scheduler.ComputeScheduler_</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -41,8 +41,8 @@
       <span class="breadcrumbs">
         Package&nbsp;troy ::
         <a href="troy.pilot-module.html">Package&nbsp;pilot</a> ::
-        <a href="troy.pilot.compute_unit-module.html">Module&nbsp;compute_unit</a> ::
-        Class&nbsp;ComputeUnit
+        <a href="troy.pilot.compute_scheduler-module.html">Module&nbsp;compute_scheduler</a> ::
+        Class&nbsp;ComputeScheduler_
       </span>
     </td>
     <td>
@@ -53,31 +53,26 @@
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class ComputeUnit</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.compute_unit-pysrc.html#ComputeUnit">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class ComputeScheduler_</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.compute_scheduler-pysrc.html#ComputeScheduler_">source&nbsp;code</a></span></p>
 <center>
-<center>  <map id="uml_class_diagram_for_troy_pil_10" name="uml_class_diagram_for_troy_pil_10">
-<area shape="rect" id="node135" href="troy.pilot.compute_unit.ComputeUnit-class.html#__init__" title="troy.pilot.compute_unit.ComputeUnit.__init__" alt="" coords="40,153,227,172"/>
-<area shape="rect" id="node135" href="troy.pilot.compute_unit.ComputeUnit-class.html#wait" title="Wait until CU enters a final state" alt="" coords="40,172,227,191"/>
-<area shape="rect" id="node135" href="troy.pilot.compute_unit.ComputeUnit-class.html#cancel" title="Cancel the CU" alt="" coords="40,191,227,209"/>
-<area shape="rect" id="node135" href="troy.pilot.compute_unit.ComputeUnit-class.html#set_callback" title="Set a callback function for a member." alt="" coords="40,209,227,228"/>
-<area shape="rect" id="node135" href="troy.pilot.compute_unit.ComputeUnit-class.html#unset_callback" title="Unset a callback function from a member" alt="" coords="40,228,227,247"/>
-<area shape="rect" id="node1" href="troy.pilot.compute_unit.ComputeUnit-class.html" title="ComputeUnit" alt="" coords="28,121,239,253"/>
-<area shape="rect" id="node3" href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html" title="ComputeDataUnit." alt="" coords="5,273,261,311"/>
-<area shape="rect" id="node136" href="troy.pilot.base.Base-class.html#get_idata_" title="Get instance data dict entry." alt="" coords="44,39,223,57"/>
-<area shape="rect" id="node136" href="troy.pilot.base.Base-class.html#set_idata_" title="Set instance data dict entry." alt="" coords="44,57,223,76"/>
-<area shape="rect" id="node136" href="troy.pilot.base.Base-class.html#dump_" title="Dump dumps." alt="" coords="44,76,223,95"/>
-<area shape="rect" id="node2" href="troy.pilot.base.Base-class.html" title="All Troy API classes inherit from this base class, which provides support for adaptor management and the management of class instance data." alt="" coords="32,6,235,101"/>
+<center>  <map id="uml_class_diagram_for_troy_pil_9" name="uml_class_diagram_for_troy_pil_9">
+<area shape="rect" id="node133" href="troy.pilot.compute_scheduler.ComputeScheduler_-class.html#__init__" title="Create a ComputeScheduler &#45;&#45; private, only called by CUS" alt="" coords="25,153,188,172"/>
+<area shape="rect" id="node133" href="troy.pilot.compute_scheduler.ComputeScheduler_-class.html#schedule" title="Schedule a compute unit." alt="" coords="25,172,188,191"/>
+<area shape="rect" id="node1" href="troy.pilot.compute_scheduler.ComputeScheduler_-class.html" title="ComputeScheduler_ (CS)" alt="" coords="13,121,200,197"/>
+<area shape="rect" id="node134" href="troy.pilot.base.Base-class.html#get_idata_" title="Get instance data dict entry." alt="" coords="17,39,196,57"/>
+<area shape="rect" id="node134" href="troy.pilot.base.Base-class.html#set_idata_" title="Set instance data dict entry." alt="" coords="17,57,196,76"/>
+<area shape="rect" id="node134" href="troy.pilot.base.Base-class.html#dump_" title="Dump dumps." alt="" coords="17,76,196,95"/>
+<area shape="rect" id="node2" href="troy.pilot.base.Base-class.html" title="All Troy API classes inherit from this base class, which provides support for adaptor management and the management of class instance data." alt="" coords="5,6,208,101"/>
 </map>
-  <img src="uml_class_diagram_for_troy_pil_10.gif" alt='' usemap="#uml_class_diagram_for_troy_pil_10" ismap="ismap" class="graph-without-title" />
+  <img src="uml_class_diagram_for_troy_pil_9.gif" alt='' usemap="#uml_class_diagram_for_troy_pil_9" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
-<p>ComputeUnit</p>
-  <p>This is the object that is returned by the ComputeUnitService when a 
-  new ComputeUnit is created based on a ComputeUnitDescription.</p>
-  <p>The ComputeUnit object can be used by the application to keep track of
-  ComputeUnits that are active.</p>
-  <p>A ComputeUnit has state, can be queried and can be cancelled.</p>
+<p>ComputeScheduler_ (CS)</p>
+  <p>The CS is a troy-internal object which provides scheduling 
+  capabilities to Troy.  In particular, it will schedule compute units over
+  a set of compute pilots.  To do that, the scheduler implementation 
+  (adaptor) will need to pull various information from the backend.</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -93,10 +88,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.compute_unit.ComputeUnit-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">cu_id</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td><span class="summary-sig"><a href="troy.pilot.compute_scheduler.ComputeScheduler_-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">policy</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Create a ComputeScheduler -- private, only called by CUS</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.compute_unit-pysrc.html#ComputeUnit.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.compute_scheduler-pysrc.html#ComputeScheduler_.__init__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -110,64 +106,12 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="wait"></a><span class="summary-sig-name">wait</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      Wait until CU enters a final state</td>
+          <td><span class="summary-sig"><a href="troy.pilot.compute_scheduler.ComputeScheduler_-class.html#schedule" class="summary-sig-name">schedule</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">thing</span>,
+        <span class="summary-sig-arg">cud</span>)</span><br />
+      Schedule a compute unit.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.compute_unit-pysrc.html#ComputeUnit.wait">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="cancel"></a><span class="summary-sig-name">cancel</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      Cancel the CU</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.compute_unit-pysrc.html#ComputeUnit.cancel">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.compute_unit.ComputeUnit-class.html#set_callback" class="summary-sig-name">set_callback</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">member</span>,
-        <span class="summary-sig-arg">cb</span>)</span><br />
-      Set a callback function for a member.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.compute_unit-pysrc.html#ComputeUnit.set_callback">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.compute_unit.ComputeUnit-class.html#unset_callback" class="summary-sig-name">unset_callback</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">member</span>)</span><br />
-      Unset a callback function from a member</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.compute_unit-pysrc.html#ComputeUnit.unset_callback">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.compute_scheduler-pysrc.html#ComputeScheduler_.schedule">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -250,15 +194,19 @@
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">cu_id</span>=<span class="sig-default">None</span>)</span>
+        <span class="sig-arg">policy</span>=<span class="sig-default">None</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.pilot.compute_unit-pysrc.html#ComputeUnit.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.pilot.compute_scheduler-pysrc.html#ComputeScheduler_.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  
+  <p>Create a ComputeScheduler -- private, only called by CUS</p>
+  <p>Keyword arguments: policy -- scheduling policy to be provided</p>
+  <p>The given policy determines what backend (adaptor) should be used for 
+  scheduling.  'None' leaves the scheduler selection to the 
+  implementation.</p>
   <dl class="fields">
     <dt>Overrides:
         <a href="troy.pilot.base.Base-class.html#__init__">base.Base.__init__</a>
@@ -266,47 +214,37 @@
   </dl>
 </td></tr></table>
 </div>
-<a name="set_callback"></a>
+<a name="schedule"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_callback</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">member</span>,
-        <span class="sig-arg">cb</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">schedule</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">thing</span>,
+        <span class="sig-arg">cud</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.pilot.compute_unit-pysrc.html#ComputeUnit.set_callback">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.pilot.compute_scheduler-pysrc.html#ComputeScheduler_.schedule">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Set a callback function for a member.</p>
-  <p>Keyword arguments: member -- The member to set the callback for (state
-  / state_detail). cb     -- The callback object to call.</p>
-  <dl class="fields">
-  </dl>
-</td></tr></table>
-</div>
-<a name="unset_callback"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">unset_callback</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">member</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.pilot.compute_unit-pysrc.html#ComputeUnit.unset_callback">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Unset a callback function from a member</p>
-  <p>Keyword arguments: member -- The member to unset the callback 
-  from.</p>
+  <p>Schedule a compute unit.</p>
+  <p>A compute unit description is used to instantiate a cu on the resource
+  managed by a specific compute pilot.  If 'thing' is a CP, the CU is 
+  instantiated on its resourced.  If 'thing' is a CUS, the CU is 
+  instantiated on any pilot currently registered on that CUS.</p>
+  <p>If the scheduler cannot find suitable resources for the requested CU, 
+  a BadParameter exception is raised.  Not raising this exception is not a 
+  guarantee that the CU will in fact be (able to be) executed -- in that 
+  case, the returned CU will later be moved to Failed state.</p>
+  <p>On success, the returned CU is in Pending state (or moved into any 
+  state downstream from Pending).</p>
+  <p>schedule() will honor all attributes set on the cud.  Attributes which
+  are not explicitly set are interpreted as having default values (see 
+  documentation of CUD), or, where default values are not specified, are 
+  ignored.</p>
   <dl class="fields">
   </dl>
 </td></tr></table>

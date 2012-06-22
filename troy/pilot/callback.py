@@ -29,25 +29,25 @@ class Callback ():
 
     To register a callback on a object instance, use::
 
-      class MyCallback (troy.pilot.Callback) :
-         
-          def __init__ (self, msg) :
-              self.msg_ = msg
+        class MyCallback (troy.pilot.Callback) :
+           
+            def __init__ (self, msg) :
+                self.msg_ = msg
 
-          def cb (self, obj, member, value) :
+            def cb (self, obj, member, value) :
 
-              print " %s\n %s (%s) : %s" %  self.msg_, obj, member, value
+                print " %s\n %s (%s) : %s"  %  self.msg_, obj, member, value
 
 
-      def main () :
-        
-          cpd = troy.pilot.compute_pilot_description ()
-          cps = troy.pilot.compute_pilot_service ()
-          cp  = cps.create_pilot (cpd)
+        def main () :
+          
+            cpd = troy.pilot.compute_pilot_description ()
+            cps = troy.pilot.compute_pilot_service ()
+            cp  = cps.create_pilot (cpd)
 
-          mcb = MyCallback ("Hello Pilot, how is your state?")
+            mcb = MyCallback ("Hello Pilot, how is your state?")
 
-          cp.set_callback ('state', mcb)
+            cp.set_callback ('state', mcb)
 
     """
 

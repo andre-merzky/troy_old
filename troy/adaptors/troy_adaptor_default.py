@@ -2,8 +2,6 @@
 import troy
 import troy.interface
 
-from   troy.pilot.compute_scheduler import _ComputeScheduler
-
 
 ########################################################################
 #
@@ -104,7 +102,7 @@ class default_cus (troy.interface.iComputeUnitService) :
         # get a scheduler instance, as requested via idata.  We always get that
         # scheduler instance, even if taking over a CUS created by a foreign
         # adaptor...
-        self.scheduler = _ComputeScheduler (self.idata['scheduler'])
+        self.scheduler = ComputeScheduler_ (self.idata['scheduler'])
 
 
     def add_compute_pilot (self, cp) :

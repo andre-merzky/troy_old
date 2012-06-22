@@ -56,14 +56,14 @@
 <h1 class="epydoc">Class ComputePilotService</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.compute_pilot_service-pysrc.html#ComputePilotService">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_pil_8" name="uml_class_diagram_for_troy_pil_8">
-<area shape="rect" id="node140" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#__init__" title="Create a ComputePilotService object" alt="" coords="17,153,240,172"/>
-<area shape="rect" id="node140" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#create_pilot" title="Create a ComputePilot." alt="" coords="17,172,240,191"/>
-<area shape="rect" id="node140" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#list_pilots" title="list known ComputePilots." alt="" coords="17,191,240,209"/>
-<area shape="rect" id="node140" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#get_pilot" title="Reconnect to a ComputePilot." alt="" coords="17,209,240,228"/>
+<area shape="rect" id="node131" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#__init__" title="Create a ComputePilotService object" alt="" coords="17,153,240,172"/>
+<area shape="rect" id="node131" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#create_pilot" title="Create a ComputePilot." alt="" coords="17,172,240,191"/>
+<area shape="rect" id="node131" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#list_pilots" title="list known ComputePilots." alt="" coords="17,191,240,209"/>
+<area shape="rect" id="node131" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#get_pilot" title="Reconnect to a ComputePilot." alt="" coords="17,209,240,228"/>
 <area shape="rect" id="node1" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html" title="ComputePilotService (CPS)" alt="" coords="5,121,251,234"/>
-<area shape="rect" id="node141" href="troy.pilot.base.Base-class.html#get_idata_" title="Get instance data dict entry." alt="" coords="40,39,219,57"/>
-<area shape="rect" id="node141" href="troy.pilot.base.Base-class.html#set_idata_" title="Set instance data dict entry." alt="" coords="40,57,219,76"/>
-<area shape="rect" id="node141" href="troy.pilot.base.Base-class.html#dump_" title="Dump dumps." alt="" coords="40,76,219,95"/>
+<area shape="rect" id="node132" href="troy.pilot.base.Base-class.html#get_idata_" title="Get instance data dict entry." alt="" coords="40,39,219,57"/>
+<area shape="rect" id="node132" href="troy.pilot.base.Base-class.html#set_idata_" title="Set instance data dict entry." alt="" coords="40,57,219,76"/>
+<area shape="rect" id="node132" href="troy.pilot.base.Base-class.html#dump_" title="Dump dumps." alt="" coords="40,76,219,95"/>
 <area shape="rect" id="node2" href="troy.pilot.base.Base-class.html" title="All Troy API classes inherit from this base class, which provides support for adaptor management and the management of class instance data." alt="" coords="28,6,231,101"/>
 </map>
   <img src="uml_class_diagram_for_troy_pil_8.gif" alt='' usemap="#uml_class_diagram_for_troy_pil_8" ismap="ismap" class="graph-without-title" />
@@ -71,7 +71,12 @@
 </center>
 <hr />
 <p>ComputePilotService (CPS)</p>
-  <p>The ComputePilotService is in fact a factory for ComputePilots.</p>
+  <p>The ComputePilotService is a factory for ComputePilots.</p>
+  <p>A CPS instance represents a specific resource or set of resources, 
+  identified by the ctor's rm url parameter.  The CPS can be asked to 
+  instantiate a CP, according to a CP description.  A CPS can also be asked
+  to list (the IDs) of pilots on its (set of) resources.  Finally, the CPS 
+  can reconnect to a pilot on these resources.</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -266,6 +271,18 @@
   <p>Keyword arguments: cpd     -- ComputePilot Description context -- 
   Security context (optional)</p>
   <p>Return value: A ComputePilot handle</p>
+  <p>A compute pilot description is used to instantiate a CP on the CPS's 
+  resources.</p>
+  <p>If those resources are not suitable to run the requested CP, a 
+  BadParameter exception is raised.  Not raising this exception is not a 
+  guarantee that the CP will in fact be (able to be) executed -- in that 
+  case, the returned CP will be moved to Failed state.</p>
+  <p>On success, the returned CP is in Pending state (or moved into any 
+  state downstream from Pending).</p>
+  <p>create_pilot will honor all attributes set on the CPD.  Attributes 
+  which are not explicitly set are interpreted as having default values 
+  (see documentation of CPD), or, where default values are not specified, 
+  are ignored.</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -288,6 +305,11 @@
   <p>list known ComputePilots.</p>
   <p>Keyword arguments: context -- Security context (optional)</p>
   <p>Return value: A list of ComputePilot IDs</p>
+  <p>The returned list can include pilots which have not been created by 
+  this CPS instance, but also may be incomplete, and not include pilots 
+  created by the CPS.  There is no guarantee that pilots in the returned 
+  list can in fact be reconnected to.  Also, an inclusion in the list does 
+  not have any indication about the respective pilot's state.</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -312,6 +334,10 @@
   <p>Keyword arguments: cp_id   -- ComputePilot's id context -- Security 
   context (optional)</p>
   <p>Return value: A ComputePilot handle</p>
+  <p>The call behaves identically to:</p>
+<pre class="literalblock">
+ cp = troy.pilot.ComputePilot (id, context)
+</pre>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -346,7 +372,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Fri Jun 15 23:17:42 2012</a>
+    3.0.1 on Fri Jun 22 09:37:56 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

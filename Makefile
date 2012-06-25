@@ -7,4 +7,5 @@ clean:
 	@find . -name .\*.sw[o-z] -exec rm {} \;
 	@rm -rf docs/troy.pilot/
 	@rm -rf /tmp/peejay/*
+	@rm -rf $(HOME)/.bigjob/
 

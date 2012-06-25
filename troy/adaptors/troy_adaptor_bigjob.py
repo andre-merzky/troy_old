@@ -20,16 +20,16 @@ class adaptor (troy.interface.aBase) :
         # name space clashes / confusions...
 
         print "adaptor bigjob: init: load bigjob's pilot module"
-        try :
-            file, path, desc = imp.find_module ('pilot')
-            self.bj_module   = imp.load_module ('pilot', file, path, desc)
-            print str(self.bj_module)
-            print "loading bigjob's pilot module ok, version (" + str (self.bj_module.application_id) + ")"
+        ## try :
+        ##     file, path, desc = imp.find_module ('pilot')
+        ##     self.bj_module   = imp.load_module ('pilot', file, path, desc)
+        ##     print str(self.bj_module)
+        ##     print "loading bigjob's pilot module ok, version (" + str (self.bj_module.application_id) + ")"
 
-        except Exception as e :
-            print "loading bigjob failed: " + str (e)
-            raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
-                                            "Could not load bigjob!")
+        ## except Exception as e :
+        ##     print "loading bigjob failed: " + str (e)
+        ##     raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
+        ##                                     "Could not load bigjob!")
 
         # duh!
         self.name     = 'troy_adaptor_bigjob'
@@ -66,6 +66,8 @@ class adaptor (troy.interface.aBase) :
         return 1
 
     def sanity_check (self) :
+        raise TroyException (Error.NoSuccess, "adaptor disabled")
+
         # # not sure when the BJ pilot API was introduced, but everything beyond
         # # 0.4 should be fine
         # v = self.bj_module.version

@@ -1,6 +1,7 @@
 
 import troy
 import troy.interface
+from   troy.pilot.exception import TroyException, Error
 
 ########################################################################
 # 
@@ -54,6 +55,7 @@ class adaptor (troy.interface.aBase) :
         return 3
 
     def sanity_check (self) :
+        raise TroyException (Error.NoSuccess, "adaptor disabled")
         # version checks etc.
         pass
 

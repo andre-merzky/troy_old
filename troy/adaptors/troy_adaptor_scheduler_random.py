@@ -53,6 +53,8 @@ class adaptor (troy.interface.aBase) :
         return 4
 
     def sanity_check (self) :
+        # raise TroyException (Error.NoSuccess, "adaptor disabled")
+        
         # what did you expect?
         # if sys.random (1) > 0.5 :
         #     return True

@@ -241,4 +241,11 @@ Misc:
     __set_attribute__() needed for slots?
 
 
+  - right now, a 'cus.schedule_compute_unit()' will first attempt backend
+    scheduling, before handing off to the troy scheduler interface.  That should
+    only be attempted if all pilots on that cus belong to the same (called)
+    backend...
+
+  - TODO ANDRE: the XUS need a 'set_scheduler(name)' call
+
 

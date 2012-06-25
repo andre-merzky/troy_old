@@ -1,6 +1,7 @@
 
 import troy
 import troy.interface
+from   troy.pilot.exception import TroyException, Error
 
 
 ########################################################################
@@ -45,6 +46,7 @@ class adaptor (troy.interface.aBase) :
         return 1000  # low adaptor priority
 
     def sanity_check (self) :
+        raise TroyException (Error.NoSuccess, "adaptor disabled")
         pass
 
     def get_serial_ (self) :
@@ -102,7 +104,7 @@ class default_cus (troy.interface.iComputeUnitService) :
         # get a scheduler instance, as requested via idata.  We always get that
         # scheduler instance, even if taking over a CUS created by a foreign
         # adaptor...
-        self.scheduler = ComputeScheduler_ (self.idata['scheduler'])
+        self.scheduler = troy.pilot.compute_scheduler.ComputeScheduler_ (self.idata['scheduler'])
 
 
     def add_compute_pilot (self, cp) :

@@ -1,8 +1,9 @@
 
 Questions / comments about API, to be discussed
 (focus on compute - analogous for data and compute_data)
---------------------------------------------------------------------------------
 
+
+--------------------------------------------------------------------------------
 
   - why is there no ComputeDataPilot?
     -> AL: no impl, need to cross-schedule...
@@ -45,7 +46,6 @@ Questions / comments about API, to be discussed
 
     - the returned pilot is in what state?
       TODO
-
 
 
   ------------------------------------------------------------------------------
@@ -178,6 +178,7 @@ Why does Troy need late binding?
   # a single backend, neither explicitly nor implicitly -- that 
   # is best handled via late binding.
 
+
 ----------------------------------------------------------------------
 
   - contexts: 
@@ -186,6 +187,7 @@ Why does Troy need late binding?
     For the late binding classes, how are multiple security contexts
     handled?  Is there a need for that?  
     TODO
+
 
 ----------------------------------------------------------------------
 
@@ -199,6 +201,7 @@ On persistency and states:
   - 'perish on its own' means regular state transition -- irregular transitions
     (network breaks, machine dies) will simply result in error conditions -- no
     need for actual states.
+
 
 ----------------------------------------------------------------------
 

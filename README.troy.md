@@ -75,6 +75,13 @@ How does Troy interact with other pilot frameworks?
  Pilot API need to be mapped to the system's native API.
 
 
+How does Troy interact with DIANE[2]?
+--------------------------------------------------------------------------------
+
+ DIANE is a pilot job application framework, developed at CERN.  
+
+
+
 
 How does Troy support application level scheduling?
 --------------------------------------------------------------------------------
@@ -117,6 +124,7 @@ that the similarity between the Trojan Horse and Pilot jobs is obvious ;-)
 
 
 [1]  http://dl.acm.org/citation.cfm?id=2287094&dl=ACM&coll=DL&CFID=118451532&CFTOKEN=85218786
+[2]  https://twiki.cern.ch/twiki/bin/view/ArdaGrid/DIANETutorial
 
 DAG: Directed Acyclic  Graph
 DG:  Directed Graph (can be cyclic)

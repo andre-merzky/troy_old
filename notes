@@ -1,40 +1,35 @@
 
 Questions / comments about API, to be discussed
-(focus on compute - analogous for data and compute_data)
-
-
---------------------------------------------------------------------------------
-
-  - why is there no ComputeDataPilot?
-    -> AL: no impl, need to cross-schedule...
-    -> AM: will that always be true?  Means that Troy will always plug
-       a ComputeDataUnitDescription apart...  TODO
-
+(mostly focus on compute - analogous for data and compute_data)
 
   ------------------------------------------------------------------------------
+  
   - ComputePilotDescription:
 
     - why does the user need to know the executable path of the pilot job (and
       similar details)?  For all he knows, the executable could be named
       differently on each host.  That should be internal to the framework...
       - pilot description: executable is optional
-      - TODO AL: clean up legacy attributes
+      - TODO AL: clean up legacy attributes  DONE AM
 
     - rm within pilot description?  
       - rm: where to submit the pilot
-      - AGREE AL. DONE AM.
+      - AGREE AL. DONE AM (CandidateHosts)
 
     - 'affinity_datacenter_label' should be defined by the implementation, not
       by the user - correct?
       - ultimately  yes
       - momentarily needed on app level.
-      - TODO: document as potentially deprecated.
+      - DONE: document as potentially deprecated.
+      - TODO: shouldn't the labels also show up on UnitDescription
+        level?  (on inspection, sure, but also on submission?!)
 
     - why specify rm *and* backend type?  Shouldn't rm suffice?  What happens on
       mismatch?
       TODO
 
   ------------------------------------------------------------------------------
+  
   - ComputePilotService:
 
     - create_pilot()
@@ -45,56 +40,62 @@ Questions / comments about API, to be discussed
         DONE AM
 
     - the returned pilot is in what state?
-      TODO
+      TODO: Pending?  
+      -> Why do we have a New state? (same for XXXUnits)
+
+    - has state after all, and represents the P* level queue over multiple
+      pilots.  It needs submit, list_units, inspection, ...
+      That scheduling will *not* be handled by Troy.
 
 
   ------------------------------------------------------------------------------
+  
   - ComputePilot
     
     - I can reconnect - how can I (scheduler) inspect it?
-      - get_description          TODO: add
-      - why no list_cus() call?  TODO: add
-      - why no get_cps()  call?  TODO: add cps rm url as part of description?
+      - get_description          DONE: add
+      - why no list_cus() call?  TODO: add?
+      - why no get_cps()  call?  DONE: 
+      - add cps rm url as part of id?
 
     - reinitialize()
-      - what happens to running CUs?      TODO
-      - does it stay 'registered' in CPS?  (might get smaller)
-        obsolete
-      - can dead pilots be reinitialized? TODO
-      - what state after calling reinitialize?  
-        TODO: should be same as after create()
-      - stays the pilot ID the same during the call?
-      - what happens on error (e.g. insufficient resources)?
+      - what happens to running CUs?                         TODO: undefined?
+      - can dead pilots be reinitialized?                    TODO: no?
+      - what state after calling reinitialize?               TODO: Pending?
+        TODO: should be same as after create()               TODO: Pending?
+      - stays the pilot ID the same during the call?         TODO: yes (race conds...)
+      - what happens on error (e.g. insufficient resources)? TODO: Failed state, dies
 
 
   ------------------------------------------------------------------------------
+
   - ComputeUnitService:
 
     - remove_compute_pilot
       - will that kill CUs on pilots? (no?)     TODO
       - will that kill pilots?        (no?)     TODO
       - can I re-add after remove?    (yes?)    TODO
-      - param is id or instance?      (either?) TODO
+      - param is id or instance?      (id?)     TODO
       - What is to be returned?       (None?)   TODO
 
     - CUS has state 
-      - what are the states?                    TODO
+      - what are the states?                    (none really?) TODO
       - what calls can I call in which state?   TODO
       - how are state transitions triggered?    TODO
       - is state bound to object instance?  
         Backend instance?                       TODO
-      - does cancel() kill CUs?                 TODO
 
 
   ------------------------------------------------------------------------------
+
   - ComputeUnit:
 
     - I can reconnect.  After reconnect, 
       - how can I (scheduler) inspect
-        - get_description ()  TODO: add         TODO
+        - get_description ()  DONE: add         DONE
       - how can I (scheduler) find out where it runs?
-        - get_pilot ()        TODO: add         TODO
-        - get_cus ()          TODO: add         TODO
+        - get_pilot ()        DONE: add         DONE
+        - get_cus ()          DONE: add         DONE
 
 
   ------------------------------------------------------------------------------
@@ -103,145 +104,170 @@ Questions / comments about API, to be discussed
 
     - scheduler is supposed to act on CUS level.  How to select/provide/specify
       a scheduler or a scheduling policy per CUS? 
-      TODO
+      
+      TODO AM: add 'set_scheduler(name/policy), set_scheduler(class)
 
 
---------------------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
-  - proposal (AGREE AL, DONE AM)
-    
-    - reduce CPS to stateless class
-      class ComputePilotService (Base) :
+  - Contexts: 
 
-        __init__ (rm = "") :
-            self.rm = rm
-        # TODO: should we in fact allow ctor w/o rm?  
-        # seems useful for global list_pilots().
-        # But what is the expected semantics on create_pilot?
-
-
-        create_compute_pilot (cpd) :
-          return self.engine.call (create_compute_pilot (cpd))
-
-        list_compute_pilots () :
-          return self.engine.call (list_compute_pilots ())
-
-        get_compute_pilot (id) :
-          return self.engine.call (get_compute_pilot (id))
-          # not really needed as the pilot ctor takes an id which contains the rm URL
-
-
-    - change CUS:
-      add_compute_pilot_service (cps) -> add_compute_pilot (cp)
-      remove...
-      list...
-
-    - add to ComputePilot
-      submit_compute_unit (cud)
-
-
---------------------------------------------------------------------------
-Why does Troy need late binding?
-
-  cus   = troy.pilot.ComputeUnitService  ()
-
-  cps_1 = troy.pilot.ComputePilotService ('bigjob://')
-  cp_1  = cps_a.create_pilot             (...)
-
-  cus.add_pilot           (cp_1)
-  cus.submit_compute_unit (...)
-
-  # --> up to this point, the bigjob adaptor can handle the code 
-  # quite nicely, and will bind to all object instances (note that 
-  # BJ provides a CUS).  Next, however:
-
-
-  cps_2 = troy.pilot.ComputePilotService ('peejay://')
-  cp_2  = cps_a.create_pilot             (...)
-
-  cus.add_pilot           (cp_2)
-  cus.submit_compute_unit (...)
-
-  # at this point, the cus submit will need to consider pilots 
-  # which are no longer in the BigJob universe only -- a meta 
-  # scheduler adaptor will need to be invoked, on the same API 
-  # class --> late binding.
-
-
-  cus.remove_pilot        (cp_1)
-  cus.submit_compute_unit (...)
-
-  # now, OTOH, the peejay adaptor will be able to handle 
-  # submission just fine...
-
-  # summa summarum: the CUS is not bound to a specific nor to 
-  # a single backend, neither explicitly nor implicitly -- that 
-  # is best handled via late binding.
-
-
-----------------------------------------------------------------------
-
-  - contexts: 
     Several calls/ctors take a single context as parameter (mostly 
     those which create something, or reconnect (TODO: check).
     For the late binding classes, how are multiple security contexts
     handled?  Is there a need for that?  
-    TODO
+
+    DONE AM: added 'contexts' property to base class
 
 
-----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
 
-On persistency and states:
+  - DataUnit:
 
-  - if an entity has an ID, it is persistent, and can be reconnected to.
-  - if an entity is persistent, it needs a cancel() to signal that it can perish
-  - if an entity can perish on its own (w/o calling cancel), it needs a wait() (?)
-  - if an entity can perish on its own (w/o calling cancel), and if some actions
-    are then no longer possible, it needs an state / state_detail.
-  - 'perish on its own' means regular state transition -- irregular transitions
-    (network breaks, machine dies) will simply result in error conditions -- no
-    need for actual states.
+    Aren't the fundamental actions on a data unit level 'create' and
+    'destroy'?  create would need a source (stage in), destroy MAY
+    need a target (stage out), or not (delete).
+
+    As it is right now, I don't understand what a DataUnit really
+    *is*, and what it's state means (Running means Available??)
+
+    - locality: A ComputeUnit will usually be run on one single pilot.
+      Will a DataUnit also be associated with one single DataPilot, or
+      is replication an option?  If so, the inspection needs to show
+      multiple pilots and multiple affinity labels...  
+      
+      TODO clarify
 
 
-----------------------------------------------------------------------
+  ------------------------------------------------------------------------------
+
+  - DataComputeUnitDescription
+
+    - why does it exist?  There is no submit_data_compute_unit
+      anywhere?
+
+      TODO: clarify
+
+
+  ------------------------------------------------------------------------------
+
+
+  - ComputeDataPilot?
+    - why is there no such thing?
+    -> AL: no impl, need to cross-schedule...
+    -> AM: will that always be true?  Means that Troy will always plug
+       a ComputeDataUnitDescription apart...  
+    - from Troy's perspective, BigJob is well able to act as
+      ComputeDataPilot, or not?
+      TODO clarify
+
+  ------------------------------------------------------------------------------
 
 Misc:
+
+  - Why does Troy need late binding?
+
+    ----------------------
+    cus   = troy.pilot.ComputeUnitService  ()
+  
+    cps_1 = troy.pilot.ComputePilotService ('bigjob://')
+    cp_1  = cps_a.create_pilot             (...)
+  
+    cus.add_pilot_service   (cps_1)
+    cus.submit_compute_unit (...)
+  
+    # --> up to this point, the bigjob adaptor can handle the code 
+    # quite nicely, and will bind to all object instances (note that 
+    # BJ provides a CUS).  Next, however:
+  
+  
+    cps_2 = troy.pilot.ComputePilotService ('peejay://')
+    cp_2  = cps_a.create_pilot             (...)
+  
+    cus.add_pilot_service   (cps_2)
+    cus.submit_compute_unit (...)
+  
+    # at this point, the cus submit will need to consider pilots 
+    # which are no longer in the BigJob universe only -- a meta 
+    # scheduler adaptor will need to be invoked, on the same API 
+    # class --> late binding.
+  
+  
+    cus.remove_pilot_service (cps_1)
+    cus.submit_compute_unit  (...)
+  
+    # now, OTOH, the peejay adaptor will be able to handle 
+    # submission just fine...
+  
+    # summa summarum: the CUS is not bound to a specific nor to 
+    # a single backend, neither explicitly nor implicitly -- that 
+    # is best handled via late binding.
+    ----------------------
+  
+    Counter argument: IFF the CUS scheduler is guaranteed to stay at
+    app level, and IFF the CU, CP and CPS API is sufficient for the
+    scheduler to be implemented, then backend multiplexing can
+    effectively happen on Scheduler implementation level, via the
+    Pilot API itself, and not on adaptor level.
+
+
 
   - TODO: the API layer should test the parameter types, so that adaptors can
     rely on getting correct parameter types.  Make sure that derived types are
     accepted!
 
 
-  - call base class ctor:
+  - call base class ctor ?
     super (Base,self).__init__()
 
 
   - Why does compute_pilot not have a list_cus() call?  How else do I find out
     what CUs run on a specific pilot?  Same for cps.list_cus.  So, how can the
     scheduler provide any sensible co-location (for example)?
+    DONE AM.
 
 
-  - TODO: Expose adaptor via object inspection, e.g. for info upstream to scheduler.
+  - TODO?: Expose adaptor via object inspection, e.g. for info upstream to scheduler.
 
 
   - how is multiple inheritance supposed to work in Python?  Like, we have
 
-      class ComputeDataUnit (ComputeUnit, DataUnit) :
+      class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
 
     so, on the following code, what is supposed to be called?
 
       cdu = cdus.submit (cdud)
       cdu.set_callback  ('state', my_cb)
 
-    will the callback method receive a DU or a CU as parameter?
+    will the callback method receive a DU or a CU as parameter?  Will
+    a CU or DU be returned (there is no CDU)?
     
-    I guess the answer will be that this is not really object inheritance, but
-    interface inheritance, so the CDU will simple implement that call in
-    whatever way it thinks necessary -- so, the cb receives a cdu.
+    Python: inheritance call order is left to right, depths first.
+
+    I guess the *real* answer will be that this is not really object
+    inheritance, but interface inheritance, so the CDU will simple
+    implement that call in whatever way it thinks necessary -- so, the
+    cb receives a cdu instance.  I am not sure how that solves the
+    ambiguity between the two submit calls?
+
+    TODO: clarify
+
+    Note: may be irrelevant, as all methods have unique names.  That
+    explains the cumbersome names like
+
+      ComputeUnitService.submit_compute_unit()
+
+    instead of
+
+      ComputeUnitService.submit()
+
+    Is that the reason?
 
 
   - slots vs. properties?  How to document slots?  Why is an explicit
     __set_attribute__() needed for slots?
+
+    documentation: no docstrings for slots, document in class details
 
 
   - right now, a 'cus.schedule_compute_unit()' will first attempt backend
@@ -249,6 +275,23 @@ Misc:
     only be attempted if all pilots on that cus belong to the same (called)
     backend...
 
-  - TODO ANDRE: the XUS need a 'set_scheduler(name)' call
+    PS.: in the current model, there will never be a backend CUS.  But
+    that renders the BJ implementation of the CUS useless for Troy's
+    purposes?  Well, given that BJ does not expose any other
+    XXXUnitService, that seems... wrong?
+
+    TODO: clarify
+
+
+  - TODO ANDRE: the XxxUS need a 'set_scheduler(name)' or
+    set_scheduler (class) call
+
+
+  - TODO ANDRE: it is not clear what calls need contexts.  I would think we go
+    SAGA style, add a context list as member to the base class, so we can
+    manipulate that whenever we want/need, but keep the API free of it.
+    DONE AM.
+
+  - TODO ANDRE: need to define / document context class
 
 

@@ -1,0 +1,430 @@
+
+package pilot.compute
+{
+  //////////////////////////////////////////////////////////////////////////////
+  //
+  //
+  //
+  class compute_pilot_service : implements   saga::object
+                                implements   saga::async
+                                implements   saga::attributes
+                             // from object: saga::error_handler
+  {
+    CONSTRUCTOR         (in  url                       cps_id = "",
+                         out compute_pilot_service     obj);
+    DESTRUCTOR          (in  compute_pilot_service     obj);
+
+    create_pilot        (in  compute_pilot_description cpd, 
+                         out compute_pilot             cp);
+    list_pilots         (out array<url>                cp_ids);
+    get_pilot           (in  url                       cp_id, 
+                         out compute_pilot             cp);
+    submit_compute_unit (in  compute_init_description  cud, 
+                         out compute_unit              cu);
+    list_compute_units  (out array<url>                cu_ids);
+    get_compute_unit    (in  url                       cu_id, 
+                         out compute_unit              cu);
+
+    // Attributes / Metrics:
+    //
+    //   name:  ID
+    //   desc:  pilot service id
+    //   mode:  ReadOnly
+    //   type:  String
+    //   value: -
+    //   notes: - can be used to reconnect to the compute pilot service.
+    //          - is guaranteed to be constant over the service's lifetime.
+  };
+
+
+  //////////////////////////////////////////////////////////////////////////////
+  //
+  //
+  //
+  class compute_pilot_description : implements   saga::object
+                                    implements   saga::attributes
+                                 // from object: saga::error_handler
+  {
+      // Attributes:
+      //
+      //   name:  Size
+      //   desc:  expected number of concurrent work units
+      //   mode:  ReadWrite, optional
+      //   type:  Int
+      //   value: '1'
+      //   notes: - maximum number of processes the pilot 
+      //            is expected to host at any point in time.
+      //          - usually translates to number of CPU cores 
+      //            managed by the pilot.
+      //
+      //   name:  Environment
+      //   desc:  set of environment variables for the job
+      //   mode:  ReadWrite, optional
+      //   type:  Vector String
+      //   value: -
+      //   notes: - exported into the environment of the executed ComputeUnits
+      //          - format: 'key=value'
+      //          - semantics as specified by JSDL
+      //
+      //   name:  Queue
+      //   desc:  name of the queue the pilot should be submitted to.
+      //   mode:  ReadWrite, optional
+      //   type:  String
+      //   value: ''
+      //   notes: -
+      //
+      //   name:  Project
+      //   desc:  project ID used for accounting of pilot's resource consumption.
+      //   type:  String
+      //   mode:  ReadWrite, optional
+      //   value: ''
+      //   notes: - 
+      // 
+      //   name:  CandidateHosts
+      //   desc:  list of hostnames or resource URLs on any of which the pilot 
+      //          may be run.
+      //   mode:  ReadWrite, optional
+      //   type:  array<string>
+      //   value: ''
+      //   notes: - order is not significant.
+      //          - the pilot submission will fail if non of the listed hosts
+      //            can be used to execute the pilot.
+      //          - if unspecified, it is up to the backend to select a suitable
+      //            execution host.
+      // 
+      //   name:  CPUArchitecture
+      //   desc:  the CPU architecture the pilot is expected to run on.
+      //   mode:  ReadWrite, optional
+      //   type:  Enum
+      //   value: ''
+      //   notes: - allowed values as defined by Glue.v2
+      // 
+      //   name:  OperatingSystemType
+      //   desc:  operating system the pilot is expected to run on.
+      //   mode:  ReadWrite, optional
+      //   type:  Enum
+      //   value: ''
+      //   notes: - allowed values as defined by Glue.v2
+      // 
+      //   name:  TotalPhysicalMemory
+      //   desc:  maximum amount of memory the pilot is expected to allocate
+      //   mode:  ReadWrite, optional
+      //   type:  Int
+      //   value: ''
+      //   notes: - unit: MegaByte
+      //          - memory usage of the pilot is aggregated across all utilized
+      //          resources.
+      // 
+      //   name:  TotalCPUTime
+      //   desc:  the maximum number of CPU hours the pilot is expected to
+      //          consume.
+      //   mode:  ReadWrite, optional
+      //   type:  Int
+      //   value: ''
+      //   notes: - unit in hours
+      //          - the value will be identical to wall_time_limit for pilots
+      //            consuming only one CPU (see Size).
+      //          - no assumption is made about actual CPU speed.
+      // 
+      //   name:  WallTimeLimit
+      //   desc:  the maximum time the pilot is expected to run
+      //   mode:  ReadWrite, optional
+      //   type:  Int
+      //   value: ''
+      //   notes: - Unit in hours
+      // 
+      //   name:  StartTime
+      //   desc:  the point in time when the pilot is expected to become active.
+      //   mode:  ReadWrite, optional
+      //   type:  Time
+      //   value: ''
+      //   notes: - 
+      // 
+      //   name:  Contact
+      //   desc:  a (email, sms, IM) contact URL to notify on pilot state changes.
+      //   mode:  ReadWrite, optional
+      //   type:  String
+      //   value: ''
+      //   notes: - format: URI (e.g. fax:+123456789, 
+      //            sms:+123456789, mailto:joe@doe.net). 
+      // 
+      //   name:  AffinityDatacenterLabel
+      //   desc:  name of the data center the pilot is associated
+      //   with.
+      //   mode:  ReadWrite, optional
+      //   type:  String
+      //   value: ''
+      //   notes: - pilot jobs sharing the same label are located in the same 
+      //            data center
+      //          - can be set by implementation if not specified by application.
+      //          - used by scheduler for co-location scheduling
+      // 
+      //   name:  AffinityMachineLabel
+      //   desc:  name of the data center the pilot is associated
+      //   with.
+      //   mode:  ReadWrite, optional
+      //   type:  String
+      //   value: ''
+      //   notes: - pilot jobs sharing the same label are located in the same 
+      //            data center
+      //          - can be set by implementation if not specified by application.
+      //          - used by scheduler for co-location scheduling
+      // 
+  };
+
+
+  //////////////////////////////////////////////////////////////////////////////
+  //
+  //
+  //
+  class compute_pilot : implements   saga::object
+                        implements   saga::async
+                        implements   saga::monitorable
+                        implements   saga::attributes
+                     // from object: saga::error_handler
+  {
+    CONSTRUCTOR         (in  url                       cps_id,
+                         out compute_pilot             obj);
+    DESTRUCTOR          (in  compute_pilot             obj);
+
+    submit_compute_unit (in  compute_init_description  cud, 
+                         out compute_unit              cu);
+    list_compute_units  (out array<url>                cu_ids);
+    get_compute_unit    (in  url                       cu_id, 
+                         out compute_unit              cu);
+
+    wait                ();
+    cancel              ();
+
+    get_description     (out compute_pilot_description cpd);
+    reinitialize        (in  compute_pilot_description cpd);
+
+    // Attributes / Metrics:
+    //
+    //   name:  ID
+    //   desc:  pilot id
+    //   mode:  ReadOnly
+    //   type:  String
+    //   value: -
+    //   notes: - can be used to reconnect to the pilot at a later stage.
+    //          - is guaranteed to be constant over the pilot lifetime.
+    //          - the id is only be guaranteed to be available once the pilot is
+    //            in Running state.  Before that, the implementation MAY return
+    //            an empty string.
+    // 
+    //   name:  ServiceURL
+    //   desc:  URL representation of the compute_pilot_service instance
+    //          managing this pilot.
+    //   mode:  ReadOnly
+    //   type:  String
+    //   value: -
+    //   notes: - can be used for a compute_pilot_service CONSTRUCTOR.
+    // 
+    //   name:  ExecutionHosts
+    //   desc:  list of host names or IP addresses allocated 
+    //          to run this job
+    //   mode:  ReadOnly, optional
+    //   type:  Vector String
+    //   value: -
+    //   notes: - 
+    // 
+    //   name:  Created
+    //   desc:  time stamp of the job creation in the 
+    //          resource manager
+    //   mode:  ReadOnly, optional
+    //   type:  Time
+    //   value: -
+    //   notes: - can be interpreted as submission time
+    // 
+    //   name:  Started
+    //   desc:  time stamp indicating when the job started 
+    //          running
+    //   mode:  ReadOnly, optional
+    //   type:  Time
+    //   value: -
+    // 
+    //   name:  Finished
+    //   desc:  time stamp indicating when the job completed
+    //   mode:  ReadOnly, optional
+    //   type:  Time
+    //   value: -
+    // 
+    //   name:  State
+    //   desc:  literal value of the job state enum.
+    //   mode:  ReadOnly
+    //   type:  Enum
+    //   notes: - see description of states above
+    // 
+    //   name:  StateDetail
+    //   desc:  backend specific state information
+    //   mode:  ReadOnly, optional
+    //   type:  String
+    //   value: -
+    // 
+    //   name:  WallTimeLeft
+    //   desc:  remaining time allocation.
+    //   mode:  ReadOnly, optional
+    //   unit:  hours
+    //   type:  Float
+    //   notes: - 
+  };
+
+
+  //////////////////////////////////////////////////////////////////////////////
+  //
+  //
+  //
+  class compute_unit_service : implements   saga::object
+                               implements   saga::async
+                               implements   saga::attributes
+                            // from object: saga::error_handler
+  {
+    CONSTRUCTOR         (in  url                       cps_id = "",
+                         out compute_unit_service      obj);
+    DESTRUCTOR          (in  compute_unit_service      obj);
+
+    // cps management
+    add_compute_pilot_service 
+                        (in  url                       cps_id);
+    remove_compute_pilot_service 
+                        (in  url                       cps_id);
+    list_compute_pilot_services
+                        (out array<url>                cps_ids);
+
+    // convenience methods
+    list_pilots         (out array<url>                cp_ids);
+    get_pilot           (in  url                       cp_id, 
+                         out compute_pilot             cp);
+
+    // cu management
+    submit_compute_unit (in  compute_init_description  cud, 
+                         out compute_unit              cu);
+    list_compute_units  (out array<url>                cu_ids);
+    get_compute_unit    (in  url                       cu_id, 
+                         out compute_unit              cu);
+
+
+    // Attributes / Metrics:
+    //
+    //   name:  ID
+    //   desc:  compute unit service id
+    //   mode:  ReadOnly
+    //   type:  String
+    //   value: -
+    //   notes: - can be used to reconnect to the compute unit service.
+    //          - is guaranteed to be constant over the service's lifetime.
+  };
+
+
+  //////////////////////////////////////////////////////////////////////////////
+  //
+  //
+  //
+  class compute_unit_description : inherits saga::job::description
+  {
+    CONSTRUCTOR         (out compute_unit_description  obj);
+    DESTRUCTOR          (in  compute_unit_description  obj);
+  }
+
+
+  class compute_unit : implements   saga::object
+                       implements   saga::async
+                       implements   saga::monitorable
+                       implements   saga::attributes
+                    // from object: saga::error_handler
+  {
+    CONSTRUCTOR         (in  url                       cu_id,
+                         out compute_unit              obj);
+    DESTRUCTOR          (in  compute_unit              obj);
+
+    wait                ();
+    cancel              ();
+
+    get_description     (out compute_unit_description  cud);
+
+
+    // Attributes / Metrics:
+    //
+    //   name:  ID
+    //   desc:  pilot id
+    //   mode:  ReadOnly
+    //   type:  String
+    //   value: -
+    //   notes: - can be used to reconnect to the pilot at a later stage.
+    //          - is guaranteed to be constant over the pilot lifetime.
+    //          - the id is only be guaranteed to be available once the pilot is
+    //            in Running state.  Before that, the implementation MAY return
+    //            an empty string.
+    // 
+    //   name:  UnitServiceURL
+    //   desc:  URL representation of the compute_unit_service instance
+    //          managing this compute unit.
+    //   mode:  ReadOnly
+    //   type:  String
+    //   value: -
+    //   notes: - can be used for a compute_unit_service CONSTRUCTOR.
+    //          - may be undefined, for example, if the unit was scheduled via
+    //            a compute_pilot_service.
+    // 
+    //   name:  PilotServiceURL
+    //   desc:  URL representation of the compute_pilot_service instance
+    //          managing this compute unit.
+    //   mode:  ReadOnly
+    //   type:  String
+    //   value: -
+    //   notes: - can be used for a compute_pilot_service CONSTRUCTOR.
+    //          - may be undefined, for example, if the unit was scheduled via
+    //            a compute_unit_service.
+    // 
+    //   name:  PilotURL
+    //   desc:  URL representation of the compute_pilot instance
+    //          managing this compute unit.
+    //   mode:  ReadOnly
+    //   type:  String
+    //   value: -
+    //   notes: - can be used for a compute_pilot CONSTRUCTOR.
+    // 
+    //   name:  ExecutionHosts
+    //   desc:  list of host names or IP addresses allocated 
+    //          to run this job
+    //   mode:  ReadOnly, optional
+    //   type:  Vector String
+    //   value: -
+    //   notes: - 
+    // 
+    //   name:  Created
+    //   desc:  time stamp of the job creation in the 
+    //          resource manager
+    //   mode:  ReadOnly, optional
+    //   type:  Time
+    //   value: -
+    //   notes: - can be interpreted as submission time
+    // 
+    //   name:  Started
+    //   desc:  time stamp indicating when the job started 
+    //          running
+    //   mode:  ReadOnly, optional
+    //   type:  Time
+    //   value: -
+    // 
+    //   name:  Finished
+    //   desc:  time stamp indicating when the job completed
+    //   mode:  ReadOnly, optional
+    //   type:  Time
+    //   value: -
+    // 
+    //   name:  State
+    //   desc:  literal value of the job state enum.
+    //   mode:  ReadOnly
+    //   type:  Enum
+    //   notes: - see description of states above
+    // 
+    //   name:  StateDetail
+    //   desc:  backend specific state information
+    //   mode:  ReadOnly, optional
+    //   type:  String
+    //   value: -
+  };
+
+} // package pilot.compute
+

@@ -1,0 +1,29 @@
+
+package pilot.compute_data
+{
+  //////////////////////////////////////////////////////////////////////////////
+  //
+  //
+  //
+  class compute_data_unit_service : inherits   compute_unit_service, 
+                                    inherits   data_unit_service
+  {
+    CONSTRUCTOR         (in  url                       cdus_id = "",
+                         out compute_data_unit_service obj);
+    DESTRUCTOR          (in  compute_data_unit_service obj);
+  };
+
+
+  //////////////////////////////////////////////////////////////////////////////
+  //
+  //
+  //
+  class compute_data_unit_description : inherits compute_unit_description
+                                        inherits data_unit_description
+  {
+    CONSTRUCTOR         (out compute_data_unit_description  obj);
+    DESTRUCTOR          (in  compute_data_unit_description  obj);
+  }
+
+} // package pilot.compute_data_data
+

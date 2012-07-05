@@ -121,12 +121,11 @@ class peejay_cps (troy.interface.iComputePilotService) :
         self.adata = self.adaptor.register_adata (self.api)
 
 
-    def create_pilot (self, cpd, context=None) :
+    def create_pilot (self, cpd) :
         """ Add a ComputePilot to the ComputePilotService
 
             Keyword arguments:
             cpd     -- ComputePilot Description
-            context -- Security context (optional)
 
             Return value:
             A ComputePilot handle
@@ -134,7 +133,6 @@ class peejay_cps (troy.interface.iComputePilotService) :
 
         print ' === self     :' + str (self    ) 
         print ' === cpd      :' + str (cpd     ) 
-        print ' === context  :' + str (context ) 
 
         # FIXME: add param checks
         pilot     = self.master.run_pilot ()
@@ -420,12 +418,11 @@ class peejay_dps (troy.interface.iDataPilotService) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def create_pilot (self, dpd, context=None) :
+    def create_pilot (self, dpd) :
         """ Add a DataPilot to the DataPilotService
 
             Keyword arguments:
             cpd     -- DataPilot Description
-            context -- Security context (optional)
 
             Return value:
             A DataPilot handle

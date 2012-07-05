@@ -27,12 +27,11 @@ class iDataPilotService (iBase) :
         pass
 
 
-    def create_pilot (self, dpd, context=None) :
+    def create_pilot (self, dpd) :
         """ Create a DataPilot.
 
             Keyword arguments:
             cpd     -- DataPilot Description
-            context -- Security context (optional)
 
             Return value:
             A DataPilot handle

@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>troy.interface.compute_pilot_service.iComputePilotService</title>
+  <title>troy.pilot.callback.monitorable</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -40,9 +40,9 @@
     <td width="100%">
       <span class="breadcrumbs">
         Package&nbsp;troy ::
-        <a href="troy.interface-module.html">Package&nbsp;interface</a> ::
-        <a href="troy.interface.compute_pilot_service-module.html">Module&nbsp;compute_pilot_service</a> ::
-        Class&nbsp;iComputePilotService
+        <a href="troy.pilot-module.html">Package&nbsp;pilot</a> ::
+        <a href="troy.pilot.callback-module.html">Module&nbsp;callback</a> ::
+        Class&nbsp;monitorable
       </span>
     </td>
     <td>
@@ -53,23 +53,28 @@
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class iComputePilotService</h1><p class="nomargin-top"><span class="codelink"><a href="troy.interface.compute_pilot_service-pysrc.html#iComputePilotService">source&nbsp;code</a></span></p>
-<center>
-<center>  <map id="uml_class_diagram_for_troy_int_7" name="uml_class_diagram_for_troy_int_7">
-<area shape="rect" id="node55" href="troy.interface.compute_pilot_service.iComputePilotService-class.html#__init__" title="Create a ComputePilotService object" alt="" coords="159,116,316,135"/>
-<area shape="rect" id="node55" href="troy.interface.compute_pilot_service.iComputePilotService-class.html#create_pilot" title="Create a ComputePilot" alt="" coords="159,135,316,153"/>
-<area shape="rect" id="node1" href="troy.interface.compute_pilot_service.iComputePilotService-class.html" title="ComputePilotService (CPS)" alt="" coords="147,83,328,159"/>
-<area shape="rect" id="node3" href="troy_adaptor_skeleton.xyz_cps-class.html" title="troy_adaptor_skeleton.xyz_cps" alt="" coords="5,179,221,218"/>
-<area shape="rect" id="node4" href="troy_adaptor_peejay.peejay_cps-class.html" title="troy_adaptor_peejay.peejay_cps" alt="" coords="251,179,475,218"/>
-<area shape="rect" id="node56" href="troy.interface.base.iBase-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="204,39,271,57"/>
-<area shape="rect" id="node2" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="192,6,283,63"/>
-</map>
-  <img src="uml_class_diagram_for_troy_int_7.gif" alt='' usemap="#uml_class_diagram_for_troy_int_7" ismap="ismap" class="graph-without-title" />
-</center>
-</center>
-<hr />
-<p>ComputePilotService (CPS)</p>
-  <p>The ComputePilotService is in fact a factory for ComputePilots.</p>
+<h1 class="epydoc">Class monitorable</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.callback-pysrc.html#monitorable">source&nbsp;code</a></span></p>
+<p>Interface to attach callback to watch class attributes.</p>
+  <p>This interface is used throughout Troy's Pilot API to support the 
+  monitoring of stateful class instances, such as <a 
+  href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+  class="link">ComputePilot</a>s and <a 
+  href="troy.pilot.compute_unit.ComputeUnit-class.html" 
+  class="link">ComputeUnit</a>s. It provides two methods, to register and 
+  unregister callbacks for a specific class attribute:</p>
+<pre class="literalblock">
+   class MyCallback (troy.pilot.Callback) :
+       def cb (self, obj, member, value) :
+           print &quot; %s (%s) : %s&quot;  %  obj, member, value
+
+   def main () :
+       cb = MyCallback()
+       cu = troy.pilot.ComputeUnit (id)
+       cu.add_callback ('state', cb)
+
+       cu.wait ()  
+       # callback will get triggered when the cu reaches a final state.
+</pre>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -85,12 +90,12 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">obj</span>,
-        <span class="summary-sig-arg">adaptor</span>)</span><br />
-      Create a ComputePilotService object</td>
+          <td><span class="summary-sig"><a href="troy.pilot.callback.monitorable-class.html#set_callback" class="summary-sig-name">set_callback</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">member</span>,
+        <span class="summary-sig-arg">cb</span>)</span><br />
+      Set a callback function for a member.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.compute_pilot_service-pysrc.html#iComputePilotService.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.callback-pysrc.html#monitorable.set_callback">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -104,29 +109,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#create_pilot" class="summary-sig-name">create_pilot</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">cpd</span>)</span><br />
-      Create a ComputePilot</td>
+          <td><span class="summary-sig"><a href="troy.pilot.callback.monitorable-class.html#unset_callback" class="summary-sig-name">unset_callback</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">member</span>)</span><br />
+      Unset a callback function from a member</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.compute_pilot_service-pysrc.html#iComputePilotService.create_pilot">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="troy.interface.base.iBase-class.html#init_" class="summary-sig-name">init_</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      dummy method to make sure the backend can initialize the object.
-      <em>(Inherited from <a href="troy.interface.base.iBase-class.html">troy.interface.base.iBase</a>)</em></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.base-pysrc.html#iBase.init_">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.callback-pysrc.html#monitorable.unset_callback">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -144,49 +131,68 @@
     <span class="table-header">Method Details</span></td>
 </tr>
 </table>
-<a name="__init__"></a>
+<a name="set_callback"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">obj</span>,
-        <span class="sig-arg">adaptor</span>)</span>
-    <br /><em class="fname">(Constructor)</em>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_callback</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">member</span>,
+        <span class="sig-arg">cb</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.interface.compute_pilot_service-pysrc.html#iComputePilotService.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.pilot.callback-pysrc.html#monitorable.set_callback">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Create a ComputePilotService object</p>
+  <p>Set a callback function for a member.</p>
+  <p>Keyword arguments: member -- The member to set the callback for (state
+  / state_detail / wall_time_left). cb     -- The callback object to 
+  call.</p>
+  <p>Setting the callback does not guarantee that all changes of the 
+  watched member cause a callback invocation.  For example, wall_time_left 
+  will be a continuously changing member, but the callback may be invoked 
+  at regular or non-regular intervals.  The implementation will, however, 
+  invoke the callback on a best-effort basis.</p>
+  <p>It is not an error to call this method if a callback is already 
+  registered -- the call will then replace the callback, and behave 
+  like:</p>
+<pre class="literalblock">
+   def set_callback (self, member, cb) :
+     
+     if self.has_callback () :
+         unset_callback  (member)
+
+     self.set_callback (member, cb)
+</pre>
   <dl class="fields">
-    <dt>Overrides:
-        <a href="troy.interface.base.iBase-class.html#__init__">base.iBase.__init__</a>
-    </dt>
   </dl>
 </td></tr></table>
 </div>
-<a name="create_pilot"></a>
+<a name="unset_callback"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">create_pilot</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">cpd</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">unset_callback</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">member</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.interface.compute_pilot_service-pysrc.html#iComputePilotService.create_pilot">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.pilot.callback-pysrc.html#monitorable.unset_callback">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Create a ComputePilot</p>
-  <p>Keyword arguments: cpd     -- ComputePilot Description</p>
-  <p>Return value: A ComputePilot handle</p>
+  <p>Unset a callback function from a member</p>
+  <p>Keyword arguments: member -- The member to unset the callback for 
+  (state / state_detail / wall_tim_left).</p>
+  <p>A callback may still be invoked during the unset_call, but it is 
+  guaranteed that no invocation will happen after the call finishes.</p>
+  <p>It is not an error to call this method if no callback is registered --
+  the call will simply return immediately.</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -221,7 +227,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Thu Jul  5 14:34:02 2012</a>
+    3.0.1 on Thu Jul  5 14:34:03 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

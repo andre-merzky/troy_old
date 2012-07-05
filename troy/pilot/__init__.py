@@ -13,18 +13,19 @@ interleaving PilotJobs and PilotData concepts.
 The main concepts and classes exposed by the Compute part of the API are:
 
     - L{ComputePilot} (CP): 
-          a pilot job, which can execute some compute workload (L{ComputeUnit})
+          a pilot job, which can execute some compute workload (L{ComputeUnit}).
 
     - L{ComputePilotService} (CPS): 
-          a factory (service) which can create L{ComputePilot}s according to some
-          specification
+          manages multiple \L{ComputePilot}s.  A 'submit' method accepts
+          requests for work units (L{ComputeUnit}s), to be scheduled over all
+          pilots.
 
     - L{ComputeUnit} (CU): 
-          a work item executed on a L{ComputePilot}
+          a work item executed on a L{ComputePilot}.
 
     - L{ComputeUnitService} (CUS):
           a service which can map L{ComputeUnit} requests to a set of
-          L{ComputePilot}s
+          L{ComputePilotService}s or L{ComputePilot}s.
 
 The L{ComputeUnitService} is what the application will mostly work with: it takes
 care of proper work item distribution, and will in fact enact the applications

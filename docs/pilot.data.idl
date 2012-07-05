@@ -32,6 +32,7 @@ package pilot.data
     //   mode:  ReadOnly
     //   type:  String
     //   value: -
+    //   unit:  -
     //   notes: - can be used to reconnect to the data pilot service.
     //          - is guaranteed to be constant over the service's lifetime.
   };
@@ -45,57 +46,62 @@ package pilot.data
                                  implements   saga::attributes
                               // from object: saga::error_handler
   {
-      // Attributes:
-      //
-      //   name:  Size
-      //   desc:  expected accumulated size of data units to be stored
-      //   mode:  ReadWrite, optional
-      //   type:  Int
-      //   value: ''
-      //   notes: - maximal size of storage resource managed by the
-      //            data pilot, at any point in time.
-      //          - unit in MegaBytes.
-      //
-      //   name:  Project
-      //   desc:  project ID used for accounting of pilot's resource consumption.
-      //   type:  String
-      //   mode:  ReadWrite, optional
-      //   value: ''
-      //   notes: - 
-      // 
-      //   name:  CandidateHosts
-      //   desc:  list of hostnames on any of which the pilot may be run..
-      //   mode:  ReadWrite, optional
-      //   type:  array<string>
-      //   value: ''
-      //   notes: - order is not significant.
-      //          - the pilot submission will fail if non of the listed hosts
-      //            can be used to execute the pilot.
-      //          - if unspecified, it is up to the backend to select a suitable
-      //            execution host.
-      // 
-      //   name:  WallTimeLimit
-      //   desc:  the maximum time the pilot is expected to run
-      //   mode:  ReadWrite, optional
-      //   type:  Int
-      //   value: ''
-      //   notes: - Unit in hours
-      // 
-      //   name:  StartTime
-      //   desc:  the point in time when the pilot is expected to become active.
-      //   mode:  ReadWrite, optional
-      //   type:  Time
-      //   value: ''
-      //   notes: - 
-      // 
-      //   name:  Contact
-      //   desc:  a (email, sms, IM) contact URL to notify on pilot state changes.
-      //   mode:  ReadWrite, optional
-      //   type:  String
-      //   value: ''
-      //   notes: - format: URI (e.g. fax:+123456789, 
-      //            sms:+123456789, mailto:joe@doe.net). 
-      // 
+    // Attributes:
+    //
+    //   name:  Size
+    //   desc:  expected accumulated size of data units to be stored
+    //   mode:  ReadWrite, optional
+    //   type:  Int
+    //   value: ''
+    //   unit:  MegaBytes
+    //   notes: - maximal size of storage resource managed by the
+    //            data pilot, at any point in time.
+    //
+    //   name:  Project
+    //   desc:  project ID used for accounting of pilot's resource consumption.
+    //   type:  String
+    //   mode:  ReadWrite, optional
+    //   value: ''
+    //   unit:  -
+    //   notes: - 
+    // 
+    //   name:  CandidateHosts
+    //   desc:  list of hostnames on any of which the pilot may be run..
+    //   mode:  ReadWrite, optional
+    //   type:  array<string>
+    //   value: ''
+    //   unit:  -
+    //   notes: - order is not significant.
+    //          - the pilot submission will fail if non of the listed hosts
+    //            can be used to execute the pilot.
+    //          - if unspecified, it is up to the backend to select a suitable
+    //            execution host.
+    // 
+    //   name:  WallTimeLimit
+    //   desc:  the maximum time the pilot is expected to run
+    //   mode:  ReadWrite, optional
+    //   type:  Int
+    //   value: ''
+    //   unit:  hours
+    //   notes: -
+    // 
+    //   name:  StartTime
+    //   desc:  the point in time when the pilot is expected to become active.
+    //   mode:  ReadWrite, optional
+    //   type:  Time
+    //   value: ''
+    //   unit:  -
+    //   notes: - native time specs SHOULD be supported
+    // 
+    //   name:  Contact
+    //   desc:  a (email, sms, IM) contact URL to notify on pilot state changes.
+    //   mode:  ReadWrite, optional
+    //   type:  String
+    //   value: ''
+    //   unit:  -
+    //   notes: - format: URI (e.g. fax:+123456789, 
+    //            sms:+123456789, mailto:joe@doe.net). 
+    // 
   };
 
 
@@ -132,6 +138,7 @@ package pilot.data
     //   mode:  ReadOnly
     //   type:  String
     //   value: -
+    //   unit:  -
     //   notes: - can be used to reconnect to the pilot at a later stage.
     //          - is guaranteed to be constant over the pilot lifetime.
     //          - the id is only be guaranteed to be available once the pilot is
@@ -144,6 +151,7 @@ package pilot.data
     //   mode:  ReadOnly
     //   type:  String
     //   value: -
+    //   unit:  -
     //   notes: - can be used for a data_pilot_service CONSTRUCTOR.
     // 
     //   name:  ExecutionHosts
@@ -152,6 +160,7 @@ package pilot.data
     //   mode:  ReadOnly, optional
     //   type:  Vector String
     //   value: -
+    //   unit:  -
     //   notes: - 
     // 
     //   name:  Created
@@ -160,7 +169,9 @@ package pilot.data
     //   mode:  ReadOnly, optional
     //   type:  Time
     //   value: -
+    //   unit:  seconds since epoch
     //   notes: - can be interpreted as submission time
+    //          - native time specs SHOULD be supported
     // 
     //   name:  Started
     //   desc:  time stamp indicating when the job started 
@@ -168,17 +179,23 @@ package pilot.data
     //   mode:  ReadOnly, optional
     //   type:  Time
     //   value: -
+    //   unit:  seconds since epoch
+    //   notes: - native time specs SHOULD be supported
     // 
     //   name:  Finished
     //   desc:  time stamp indicating when the job completed
     //   mode:  ReadOnly, optional
     //   type:  Time
     //   value: -
+    //   unit:  seconds since epoch
+    //   notes: - native time specs SHOULD be supported
     // 
     //   name:  State
     //   desc:  literal value of the job state enum.
     //   mode:  ReadOnly
     //   type:  Enum
+    //   value: -
+    //   unit:  -
     //   notes: - see description of states above
     // 
     //   name:  StateDetail
@@ -186,6 +203,8 @@ package pilot.data
     //   mode:  ReadOnly, optional
     //   type:  String
     //   value: -
+    //   unit:  -
+    //   notes: -
     // 
     //   name:  WallTimeLeft
     //   desc:  remaining time allocation.
@@ -237,6 +256,7 @@ package pilot.data
     //   mode:  ReadOnly
     //   type:  String
     //   value: -
+    //   unit:  -
     //   notes: - can be used to reconnect to the data unit service.
     //          - is guaranteed to be constant over the service's lifetime.
   };
@@ -266,6 +286,7 @@ package pilot.data
     //   mode:  ReadWrite, optional
     //   type:  array<url>
     //   value: -
+    //   unit:  -
     //   notes: - 
     //
     //   name:  outputData
@@ -273,6 +294,7 @@ package pilot.data
     //   mode:  ReadWrite, optional
     //   type:  array<url>
     //   value: -
+    //   unit:  -
     //   notes: - 
   }
 
@@ -295,11 +317,14 @@ package pilot.data
 
     // Attributes / Metrics:
     //
+    //   Size?? FIXME
+    //
     //   name:  ID
     //   desc:  pilot id
     //   mode:  ReadOnly
     //   type:  String
     //   value: -
+    //   unit:  -
     //   notes: - can be used to reconnect to the pilot at a later stage.
     //          - is guaranteed to be constant over the pilot lifetime.
     //          - the id is only be guaranteed to be available once the pilot is
@@ -312,6 +337,7 @@ package pilot.data
     //   mode:  ReadOnly
     //   type:  String
     //   value: -
+    //   unit:  -
     //   notes: - can be used for a data_unit_service CONSTRUCTOR.
     //          - may be undefined, for example, if the unit was scheduled via
     //            a data_pilot_service.
@@ -322,6 +348,7 @@ package pilot.data
     //   mode:  ReadOnly
     //   type:  String
     //   value: -
+    //   unit:  -
     //   notes: - can be used for a data_pilot_service CONSTRUCTOR.
     //          - may be undefined, for example, if the unit was scheduled via
     //            a data_unit_service.
@@ -332,6 +359,7 @@ package pilot.data
     //   mode:  ReadOnly
     //   type:  String
     //   value: -
+    //   unit:  -
     //   notes: - can be used for a data_pilot CONSTRUCTOR.
     // 
     //   name:  ExecutionHosts
@@ -340,6 +368,7 @@ package pilot.data
     //   mode:  ReadOnly, optional
     //   type:  Vector String
     //   value: -
+    //   unit:  -
     //   notes: - 
     // 
     //   name:  Created
@@ -348,7 +377,9 @@ package pilot.data
     //   mode:  ReadOnly, optional
     //   type:  Time
     //   value: -
+    //   unit:  seconds since epoch
     //   notes: - can be interpreted as submission time
+    //          - native time specs SHOULD be supported
     // 
     //   name:  Started
     //   desc:  time stamp indicating when the data unit got
@@ -356,6 +387,8 @@ package pilot.data
     //   mode:  ReadOnly, optional
     //   type:  Time
     //   value: -
+    //   unit:  seconds since epoch
+    //   notes: - native time specs SHOULD be supported
     // 
     //   name:  Finished
     //   desc:  time stamp indicating when the data unit got
@@ -363,11 +396,15 @@ package pilot.data
     //   mode:  ReadOnly, optional
     //   type:  Time
     //   value: -
+    //   unit:  seconds since epoch
+    //   notes: - native time specs SHOULD be supported
     // 
     //   name:  State
     //   desc:  literal value of the unit's state enum.
     //   mode:  ReadOnly
     //   type:  Enum
+    //   value: -
+    //   unit:  - 
     //   notes: - see description of states above
     // 
     //   name:  StateDetail
@@ -375,6 +412,8 @@ package pilot.data
     //   mode:  ReadOnly, optional
     //   type:  String
     //   value: -
+    //   unit:  - 
+    //   notes: - 
   };
 
 } // package pilot.data

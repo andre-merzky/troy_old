@@ -11,106 +11,183 @@ class ComputePilotService (Base) :
 
     """  ComputePilotService (CPS)
 
-        The ComputePilotService is a factory for ComputePilots.  
+        The ComputePilotService is a ComputePilot manager.
         
-        A CPS instance represents a specific resource or set of resources,
-        identified by the ctor's rm url parameter.  The CPS can be asked to
-        instantiate a CP, according to a CP description.  A CPS can also be
-        asked to list (the IDs) of pilots on its (set of) resources.  Finally,
-        the CPS can reconnect to a pilot on these resources.
-        
+        A CPS acts as the interface to an underlying pilot job framework -- it
+        creates and manages L{ComputePilot} instances within that framework, and
+        can scheduler L{ComputeUnit}s amongst those pilots.
+
+        The class is stateful, and instances are identified by an url, and can
+        be reconnected to.  A CPS can be added to a L{ComputeUnitService}, whose
+        scheduler will then be able to utilize the CPS's pilots for
+        L{ComputeUnit} execution.  
+
+        Properties::
+
+          - id:
+            The returned ID can be used to connect to the CPs instance later 
+            on, for example from within a different application instance.  
+            type: string (url)
+
     """
 
-    # FIXME: it should be names factory
     # FIXME: mirror the API on DPS
 
     # Class members
+    __slots__ = (
+        'id',             # Reference to this CPS
+    )
 
 
-    def __init__ (self, rm="") :
+    def __init__ (self, url) :
         """ Create a ComputePilotService object
+
+        Keyword arguments:
+        url: url identifying the backend CPS.
+
+        Note that the URL may be incomplete, if a new CPS instance is to be
+        created -- for example, it may contain only a hint about what pilot
+        framework is to be used on what resource.  On inspection, the CPS will
+        always return a fully qualified URL, which will not change over the
+        lifetime of the CPS.
+
         """
 
         # init api base
         Base.__init__ (self)
 
         # prepare instance data
-        idata = { 'rm' : rm } 
+        idata = { 'url' : url } 
         self.set_idata_ (idata)
 
         # initialize adaptor class 
         self.engine_.call ('ComputePilotService', 'init_', self)
 
 
-    def create_pilot (self, cpd, context=None) :
+    def create_pilot (self, cpd) :
         """ Create a ComputePilot.
 
             Keyword arguments:
-            cpd     -- ComputePilot Description
-            context -- Security context (optional)
+            cpd -- L{ComputePilotDescription}
 
             Return value:
-            A ComputePilot handle
+            A L{ComputePilot} instance
 
-            A compute pilot description is used to instantiate a CP on the
-            CPS's resources.
-            
-            If those resources are not suitable to run the requested CP,
-            a BadParameter exception is raised.  Not raising this exception is
-            not a guarantee that the CP will in fact be (able to be) executed --
-            in that case, the returned CP will be moved to Failed state.
+            If the resource requirements defined in the cpd cannot be met by the
+            CPS, a BadParameter exception is raised.  Not raising this exception
+            is, however, not a guarantee that the CP will in fact be (able to
+            be) executed -- in that case, the returned CP will be moved to
+            Failed state.
             
             On success, the returned CP is in Pending state (or moved into any
             state downstream from Pending).
 
-            create_pilot will honor all attributes set on the CPD.  Attributes which
-            are not explicitly set are interpreted as having default values (see
-            documentation of CPD), or, where default values are not specified,
-            are ignored.
+            create_pilot() will honor all attributes set on the CPD.  Attributes
+            which are not explicitly set are interpreted as having default
+            values (see documentation of L{ComputePilotDescription}), or, where
+            default values are not specified, are ignored.
 
         """
         return self.engine_.call ('ComputePilotService', 'create_pilot', 
-                                  self, cpd, context)
+                                  self, cpd)
 
 
-    def list_pilots (self, context=None) :
-        """ list known ComputePilots.
-
-            Keyword arguments:
-            context -- Security context (optional)
+    def list_pilots (self) :
+        """ list managed L{ComputePilot}s.
 
             Return value:
-            A list of ComputePilot IDs
+            A list of L{ComputePilot} IDs
 
             The returned list can include pilots which have not been created by
-            this CPS instance, but also may be incomplete, and not include
+            this CPS instance.  The list may be incomplete, and may not include
             pilots created by the CPS.  There is no guarantee that pilots in the
             returned list can in fact be reconnected to.  Also, an inclusion in
             the list does not have any indication about the respective pilot's
             state.
 
         """
-        return self.engine_.call ('ComputePilotService', 'list_pilots', 
-                                  self, context)
+        return self.engine_.call ('ComputePilotService', 'list_pilots', self)
 
 
-    def get_pilot (self, cp_id, context=None) :
+    def get_pilot (self, cp_id) :
         """ Reconnect to a ComputePilot.
 
             Keyword arguments:
-            cp_id   -- ComputePilot's id
-            context -- Security context (optional)
+            cp_id   -- L{ComputePilot}'s id
 
             Return value:
-            A ComputePilot handle
+            A L{ComputePilot} instance
 
             The call behaves identically to::
 
-              cp = troy.pilot.ComputePilot (id, context)
+              cp = troy.pilot.ComputePilot (cp_id)
 
         """
-        return self.engine_.call ('ComputePilotService', 'get_pilot', 
-                                         self, cp_id, context)
+        return self.engine_.call ('ComputePilotService', 'get_pilot', self, cp_id)
+
+
+    def submit_compute_unit (self, cud) :
+        """ Submit a CU to this ComputePilotService.
+
+            Keyword argument:
+            cud -- The L{ComputeUnitDescription} from the application
+
+            Return:
+            L{ComputeUnit} object
+
+            The CUD is (possibly translated and) passed on to the CPS backend,
+            which will attempt to instantiate the described workload process on
+            any of its compute pilots.  If no suitable pilot is found,
+            a L{Error.BadParameter} exception is raised.  Not raising this
+            exception is not a guarantee that the CU will in fact be (able to
+            be) executed -- in that case, the returned CU will later be moved to
+            Failed state.
+            
+            On success, the returned CU is in Pending state (or moved into any
+            state downstream from Pending).
+
+            The call will will honor all attributes set on the cud.  Attributes which
+            are not explicitly set are interpreted as having default values (see
+            documentation of CUD), or, where default values are not specified,
+            are ignored.
+
+        """
+        return self.engine_.call ('ComputePilotService', 'submit_compute_unit', self, cud)
+            
+
+    def list_compute_units (self) :
+        """ list managed L{ComputeUnit}s.
+
+            Return value:
+            A list of L{ComputeUnit} IDs
+
+            The returned list can include units which have not been created by
+            this CPS instance.  The list may be incomplete, and may not include
+            units created by the CPS.  There is no guarantee that units in the
+            returned list can in fact be reconnected to.  Also, an inclusion in
+            the list does not have any indication about the respective unit's
+            state.
+
+        """
+        return self.engine_.call ('ComputePilotService', 'list_compute_units', self)
+
+
+    def get_compute_unit (self, cu_id) :
+        """ Reconnect to a ComputeUnit.
+
+            Keyword arguments:
+            cu_id   -- L{ComputeUnit}'s id
+
+            Return value:
+            A L{ComputeUnit} instance
+
+            The call behaves identically to::
+
+              cu = troy.pilot.ComputeUnit (cu_id)
+
+        """
+        return self.engine_.call ('ComputePilotService', 'get_compute_unit', self, cu_id)
+
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

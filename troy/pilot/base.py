@@ -27,9 +27,14 @@ class Base:
                     level instance data, for example to cache connections.  The
                     keys for those adaptor instance data SHOULD be the adaptor
                     name.
+      - contexts  : a list of context dicts which are specified by the
+                    application, and used by the adaptors, as pointer to
+                    security tokens to be used for backend operations.
 
-    The described members marked as private, as they are not part of the API.
-    They are intended to be used by the API implementation only. 
+    The first three members marked as private, as they are not part of the API
+    -- they are intended to be used by the API implementation only.  The context
+    list is public, and applications are explicitly able and encouraged to
+    access it.
 
     """
     
@@ -38,6 +43,7 @@ class Base:
         self.engine_   = engine.Engine ()  # engine singleton to handle adaptors
         self.adaptors_ = {}                # sorted list of used adaptors
         self.idata_    = {}                # adaptor specific instance data
+        self.contexts  = []                # list of security context dicts
 
         
     def get_idata_ (self, id = 'api') :

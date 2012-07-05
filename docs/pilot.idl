@@ -18,3 +18,7 @@ package pilot
 
 } // package pilot
 
+include pilot.compute.idl
+include pilot.data.idl
+include pilot.compute_data.idl
+

@@ -72,12 +72,11 @@ class xyz_cps (troy.interface.iComputePilotService) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def create_pilot (self, cpd, context=None) :
+    def create_pilot (self, cpd) :
         """ Create a ComputePilot.
 
             Keyword arguments:
             cpd     -- ComputePilot Description
-            context -- Security context (optional)
 
             Return value:
             A ComputePilot handle
@@ -224,12 +223,11 @@ class xyz_dps (troy.interface.iDataPilotService) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def create_pilot (self, dpd, context=None) :
+    def create_pilot (self, dpd) :
         """ Create a DataPilot.
 
             Keyword arguments:
             cpd     -- DataPilot Description
-            context -- Security context (optional)
 
             Return value:
             A DataPilot handle

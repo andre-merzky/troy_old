@@ -31,7 +31,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://andre-merzky.github.com/troy">Troy</a></th>
+            ><a class="navbar" target="_top" href="http://saga-project.github.com/troy/">Troy</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -56,27 +56,45 @@
 <h1 class="epydoc">Class ComputePilotService</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.compute_pilot_service-pysrc.html#ComputePilotService">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_pil_8" name="uml_class_diagram_for_troy_pil_8">
-<area shape="rect" id="node131" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#__init__" title="Create a ComputePilotService object" alt="" coords="17,153,240,172"/>
-<area shape="rect" id="node131" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#create_pilot" title="Create a ComputePilot." alt="" coords="17,172,240,191"/>
-<area shape="rect" id="node131" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#list_pilots" title="list known ComputePilots." alt="" coords="17,191,240,209"/>
-<area shape="rect" id="node131" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#get_pilot" title="Reconnect to a ComputePilot." alt="" coords="17,209,240,228"/>
-<area shape="rect" id="node1" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html" title="ComputePilotService (CPS)" alt="" coords="5,121,251,234"/>
-<area shape="rect" id="node132" href="troy.pilot.base.Base-class.html#get_idata_" title="Get instance data dict entry." alt="" coords="40,39,219,57"/>
-<area shape="rect" id="node132" href="troy.pilot.base.Base-class.html#set_idata_" title="Set instance data dict entry." alt="" coords="40,57,219,76"/>
-<area shape="rect" id="node132" href="troy.pilot.base.Base-class.html#dump_" title="Dump dumps." alt="" coords="40,76,219,95"/>
-<area shape="rect" id="node2" href="troy.pilot.base.Base-class.html" title="All Troy API classes inherit from this base class, which provides support for adaptor management and the management of class instance data." alt="" coords="28,6,231,101"/>
+<area shape="rect" id="node131" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#__init__" title="Create a ComputePilotService object" alt="" coords="17,153,207,172"/>
+<area shape="rect" id="node131" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#create_pilot" title="Create a ComputePilot." alt="" coords="17,172,207,191"/>
+<area shape="rect" id="node131" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#list_pilots" title="list managed ComputePilots." alt="" coords="17,191,207,209"/>
+<area shape="rect" id="node131" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#get_pilot" title="Reconnect to a ComputePilot." alt="" coords="17,209,207,228"/>
+<area shape="rect" id="node131" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#submit_compute_unit" title="Submit a CU to this ComputePilotService." alt="" coords="17,228,207,247"/>
+<area shape="rect" id="node131" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#list_compute_units" title="list managed ComputeUnits." alt="" coords="17,247,207,265"/>
+<area shape="rect" id="node131" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#get_compute_unit" title="Reconnect to a ComputeUnit." alt="" coords="17,265,207,284"/>
+<area shape="rect" id="node1" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html" title="ComputePilotService (CPS)" alt="" coords="5,121,219,290"/>
+<area shape="rect" id="node132" href="troy.pilot.base.Base-class.html#get_idata_" title="Get instance data dict entry." alt="" coords="23,39,201,57"/>
+<area shape="rect" id="node132" href="troy.pilot.base.Base-class.html#set_idata_" title="Set instance data dict entry." alt="" coords="23,57,201,76"/>
+<area shape="rect" id="node132" href="troy.pilot.base.Base-class.html#dump_" title="Dump dumps." alt="" coords="23,76,201,95"/>
+<area shape="rect" id="node2" href="troy.pilot.base.Base-class.html" title="All Troy API classes inherit from this base class, which provides support for adaptor management and the management of class instance data." alt="" coords="11,6,213,101"/>
 </map>
   <img src="uml_class_diagram_for_troy_pil_8.gif" alt='' usemap="#uml_class_diagram_for_troy_pil_8" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
 <p>ComputePilotService (CPS)</p>
-  <p>The ComputePilotService is a factory for ComputePilots.</p>
-  <p>A CPS instance represents a specific resource or set of resources, 
-  identified by the ctor's rm url parameter.  The CPS can be asked to 
-  instantiate a CP, according to a CP description.  A CPS can also be asked
-  to list (the IDs) of pilots on its (set of) resources.  Finally, the CPS 
-  can reconnect to a pilot on these resources.</p>
+  <p>The ComputePilotService is a ComputePilot manager.</p>
+  <p>A CPS acts as the interface to an underlying pilot job framework -- it
+  creates and manages <a 
+  href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+  class="link">ComputePilot</a> instances within that framework, and can 
+  scheduler <a href="troy.pilot.compute_unit.ComputeUnit-class.html" 
+  class="link">ComputeUnit</a>s amongst those pilots.</p>
+  <p>The class is stateful, and instances are identified by an url, and can
+  be reconnected to.  A CPS can be added to a <a 
+  href="troy.pilot.compute_unit_service.ComputeUnitService-class.html" 
+  class="link">ComputeUnitService</a>, whose scheduler will then be able to
+  utilize the CPS's pilots for <a 
+  href="troy.pilot.compute_unit.ComputeUnit-class.html" 
+  class="link">ComputeUnit</a> execution.</p>
+  <p>Properties:</p>
+<pre class="literalblock">
+ - id:
+   The returned ID can be used to connect to the CPs instance later 
+   on, for example from within a different application instance.  
+   type: string (url)
+</pre>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -93,7 +111,7 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">rm</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+        <span class="summary-sig-arg">url</span>)</span><br />
       Create a ComputePilotService object</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.compute_pilot_service-pysrc.html#ComputePilotService.__init__">source&nbsp;code</a></span>
@@ -111,8 +129,7 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#create_pilot" class="summary-sig-name">create_pilot</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">cpd</span>,
-        <span class="summary-sig-arg">context</span>=<span class="summary-sig-default">None</span>)</span><br />
+        <span class="summary-sig-arg">cpd</span>)</span><br />
       Create a ComputePilot.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.compute_pilot_service-pysrc.html#ComputePilotService.create_pilot">source&nbsp;code</a></span>
@@ -129,9 +146,10 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#list_pilots" class="summary-sig-name">list_pilots</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">context</span>=<span class="summary-sig-default">None</span>)</span><br />
-      list known ComputePilots.</td>
+          <td><span class="summary-sig"><a href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#list_pilots" class="summary-sig-name">list_pilots</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      list managed <a 
+      href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+      class="link">ComputePilot</a>s.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.compute_pilot_service-pysrc.html#ComputePilotService.list_pilots">source&nbsp;code</a></span>
             
@@ -148,11 +166,64 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#get_pilot" class="summary-sig-name">get_pilot</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">cp_id</span>,
-        <span class="summary-sig-arg">context</span>=<span class="summary-sig-default">None</span>)</span><br />
+        <span class="summary-sig-arg">cp_id</span>)</span><br />
       Reconnect to a ComputePilot.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot.compute_pilot_service-pysrc.html#ComputePilotService.get_pilot">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#submit_compute_unit" class="summary-sig-name">submit_compute_unit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cud</span>)</span><br />
+      Submit a CU to this ComputePilotService.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.compute_pilot_service-pysrc.html#ComputePilotService.submit_compute_unit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#list_compute_units" class="summary-sig-name">list_compute_units</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      list managed <a href="troy.pilot.compute_unit.ComputeUnit-class.html"
+      class="link">ComputeUnit</a>s.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.compute_pilot_service-pysrc.html#ComputePilotService.list_compute_units">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.compute_pilot_service.ComputePilotService-class.html#get_compute_unit" class="summary-sig-name">get_compute_unit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cu_id</span>)</span><br />
+      Reconnect to a ComputeUnit.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.compute_pilot_service-pysrc.html#ComputePilotService.get_compute_unit">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -235,7 +306,7 @@
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">rm</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span>
+        <span class="sig-arg">url</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
@@ -244,6 +315,12 @@
   </tr></table>
   
   <p>Create a ComputePilotService object</p>
+  <p>Keyword arguments: url: url identifying the backend CPS.</p>
+  <p>Note that the URL may be incomplete, if a new CPS instance is to be 
+  created -- for example, it may contain only a hint about what pilot 
+  framework is to be used on what resource.  On inspection, the CPS will 
+  always return a fully qualified URL, which will not change over the 
+  lifetime of the CPS.</p>
   <dl class="fields">
     <dt>Overrides:
         <a href="troy.pilot.base.Base-class.html#__init__">base.Base.__init__</a>
@@ -259,8 +336,7 @@
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">create_pilot</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">cpd</span>,
-        <span class="sig-arg">context</span>=<span class="sig-default">None</span>)</span>
+        <span class="sig-arg">cpd</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="troy.pilot.compute_pilot_service-pysrc.html#ComputePilotService.create_pilot">source&nbsp;code</a></span>&nbsp;
@@ -268,21 +344,25 @@
   </tr></table>
   
   <p>Create a ComputePilot.</p>
-  <p>Keyword arguments: cpd     -- ComputePilot Description context -- 
-  Security context (optional)</p>
-  <p>Return value: A ComputePilot handle</p>
-  <p>A compute pilot description is used to instantiate a CP on the CPS's 
-  resources.</p>
-  <p>If those resources are not suitable to run the requested CP, a 
-  BadParameter exception is raised.  Not raising this exception is not a 
-  guarantee that the CP will in fact be (able to be) executed -- in that 
-  case, the returned CP will be moved to Failed state.</p>
+  <p>Keyword arguments: cpd -- <a 
+  href="troy.pilot.compute_pilot_description.ComputePilotDescription-class.html"
+  class="link">ComputePilotDescription</a></p>
+  <p>Return value: A <a 
+  href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+  class="link">ComputePilot</a> instance</p>
+  <p>If the resource requirements defined in the cpd cannot be met by the 
+  CPS, a BadParameter exception is raised.  Not raising this exception is, 
+  however, not a guarantee that the CP will in fact be (able to be) 
+  executed -- in that case, the returned CP will be moved to Failed 
+  state.</p>
   <p>On success, the returned CP is in Pending state (or moved into any 
   state downstream from Pending).</p>
-  <p>create_pilot will honor all attributes set on the CPD.  Attributes 
+  <p>create_pilot() will honor all attributes set on the CPD.  Attributes 
   which are not explicitly set are interpreted as having default values 
-  (see documentation of CPD), or, where default values are not specified, 
-  are ignored.</p>
+  (see documentation of <a 
+  href="troy.pilot.compute_pilot_description.ComputePilotDescription-class.html"
+  class="link">ComputePilotDescription</a>), or, where default values are 
+  not specified, are ignored.</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -294,22 +374,24 @@
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">list_pilots</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">context</span>=<span class="sig-default">None</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">list_pilots</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="troy.pilot.compute_pilot_service-pysrc.html#ComputePilotService.list_pilots">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>list known ComputePilots.</p>
-  <p>Keyword arguments: context -- Security context (optional)</p>
-  <p>Return value: A list of ComputePilot IDs</p>
+  <p>list managed <a 
+  href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+  class="link">ComputePilot</a>s.</p>
+  <p>Return value: A list of <a 
+  href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+  class="link">ComputePilot</a> IDs</p>
   <p>The returned list can include pilots which have not been created by 
-  this CPS instance, but also may be incomplete, and not include pilots 
-  created by the CPS.  There is no guarantee that pilots in the returned 
-  list can in fact be reconnected to.  Also, an inclusion in the list does 
-  not have any indication about the respective pilot's state.</p>
+  this CPS instance.  The list may be incomplete, and may not include 
+  pilots created by the CPS.  There is no guarantee that pilots in the 
+  returned list can in fact be reconnected to.  Also, an inclusion in the 
+  list does not have any indication about the respective pilot's state.</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -322,8 +404,7 @@
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">get_pilot</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">cp_id</span>,
-        <span class="sig-arg">context</span>=<span class="sig-default">None</span>)</span>
+        <span class="sig-arg">cp_id</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="troy.pilot.compute_pilot_service-pysrc.html#ComputePilotService.get_pilot">source&nbsp;code</a></span>&nbsp;
@@ -331,12 +412,112 @@
   </tr></table>
   
   <p>Reconnect to a ComputePilot.</p>
-  <p>Keyword arguments: cp_id   -- ComputePilot's id context -- Security 
-  context (optional)</p>
-  <p>Return value: A ComputePilot handle</p>
+  <p>Keyword arguments: cp_id   -- <a 
+  href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+  class="link">ComputePilot</a>'s id</p>
+  <p>Return value: A <a 
+  href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+  class="link">ComputePilot</a> instance</p>
   <p>The call behaves identically to:</p>
 <pre class="literalblock">
- cp = troy.pilot.ComputePilot (id, context)
+ cp = troy.pilot.ComputePilot (cp_id)
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="submit_compute_unit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">submit_compute_unit</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cud</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.compute_pilot_service-pysrc.html#ComputePilotService.submit_compute_unit">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Submit a CU to this ComputePilotService.</p>
+  <p>Keyword argument: cud -- The <a 
+  href="troy.pilot.compute_unit_description.ComputeUnitDescription-class.html"
+  class="link">ComputeUnitDescription</a> from the application</p>
+  <p>Return: <a href="troy.pilot.compute_unit.ComputeUnit-class.html" 
+  class="link">ComputeUnit</a> object</p>
+  <p>The CUD is (possibly translated and) passed on to the CPS backend, 
+  which will attempt to instantiate the described workload process on any 
+  of its compute pilots.  If no suitable pilot is found, a <a 
+  href="troy.pilot.exception.Error-class.html#BadParameter" 
+  class="link">Error.BadParameter</a> exception is raised.  Not raising 
+  this exception is not a guarantee that the CU will in fact be (able to 
+  be) executed -- in that case, the returned CU will later be moved to 
+  Failed state.</p>
+  <p>On success, the returned CU is in Pending state (or moved into any 
+  state downstream from Pending).</p>
+  <p>The call will will honor all attributes set on the cud.  Attributes 
+  which are not explicitly set are interpreted as having default values 
+  (see documentation of CUD), or, where default values are not specified, 
+  are ignored.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="list_compute_units"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">list_compute_units</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.compute_pilot_service-pysrc.html#ComputePilotService.list_compute_units">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>list managed <a href="troy.pilot.compute_unit.ComputeUnit-class.html" 
+  class="link">ComputeUnit</a>s.</p>
+  <p>Return value: A list of <a 
+  href="troy.pilot.compute_unit.ComputeUnit-class.html" 
+  class="link">ComputeUnit</a> IDs</p>
+  <p>The returned list can include units which have not been created by 
+  this CPS instance.  The list may be incomplete, and may not include units
+  created by the CPS.  There is no guarantee that units in the returned 
+  list can in fact be reconnected to.  Also, an inclusion in the list does 
+  not have any indication about the respective unit's state.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_compute_unit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_compute_unit</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cu_id</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.compute_pilot_service-pysrc.html#ComputePilotService.get_compute_unit">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Reconnect to a ComputeUnit.</p>
+  <p>Keyword arguments: cu_id   -- <a 
+  href="troy.pilot.compute_unit.ComputeUnit-class.html" 
+  class="link">ComputeUnit</a>'s id</p>
+  <p>Return value: A <a 
+  href="troy.pilot.compute_unit.ComputeUnit-class.html" 
+  class="link">ComputeUnit</a> instance</p>
+  <p>The call behaves identically to:</p>
+<pre class="literalblock">
+ cu = troy.pilot.ComputeUnit (cu_id)
 </pre>
   <dl class="fields">
   </dl>
@@ -364,7 +545,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            ><a class="navbar" target="_top" href="http://andre-merzky.github.com/troy">Troy</a></th>
+            ><a class="navbar" target="_top" href="http://saga-project.github.com/troy/">Troy</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -372,7 +553,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Fri Jun 22 10:52:18 2012</a>
+    3.0.1 on Thu Jul  5 14:34:03 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

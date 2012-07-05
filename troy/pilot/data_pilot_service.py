@@ -26,18 +26,16 @@ class DataPilotService (Base) :
 
 
 
-    def create_pilot (self, dpd, context=None) :
+    def create_pilot (self, dpd) :
         """ Create a DataPilot.
 
             Keyword arguments:
             cpd     -- DataPilot Description
-            context -- Security context (optional)
 
             Return value:
             A DataPilot handle
         """
-        return self.engine_.call ('DataPilotService', 'create_pilot', 
-                                        self, dpd, context)
+        return self.engine_.call ('DataPilotService', 'create_pilot', self, dpd)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

@@ -20,12 +20,11 @@ class iComputePilotService (iBase) :
 
 
 
-    def create_pilot (self, cpd, context=None) :
+    def create_pilot (self, cpd) :
         """ Create a ComputePilot
 
             Keyword arguments:
             cpd     -- ComputePilot Description
-            context -- Security context (optional)
 
             Return value:
             A ComputePilot handle

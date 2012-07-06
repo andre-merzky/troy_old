@@ -9,3 +9,7 @@ clean:
 	@rm -rf /tmp/peejay/*
 	@rm -rf $(HOME)/.bigjob/
 
+sync:
+	@git rebase devel gh-pages
+	@git push
+

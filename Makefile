@@ -10,6 +10,7 @@ clean:
 	@rm -rf $(HOME)/.bigjob/
 
 sync:
+	@git co devel
 	@git rebase devel gh-pages
 	@git push
 

@@ -9,7 +9,7 @@ class ComputePilotDescription (dict):
     A ComputePilotDescription (CPD) describes a L{ComputePilot} to be
     submitted to a resource.  A well defined set of attributes can be set on
     a CPD to specify the pilot's properties, and the resource requirements
-    for the pilot::
+    for the pilot:
 
       - 'size':
           - maximum number of processes the pilot is expected to host at any point

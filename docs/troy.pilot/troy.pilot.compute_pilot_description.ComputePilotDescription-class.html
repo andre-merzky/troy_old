@@ -100,73 +100,184 @@
   class="link">ComputePilot</a> to be submitted to a resource.  A well 
   defined set of attributes can be set on a CPD to specify the pilot's 
   properties, and the resource requirements for the pilot:</p>
-<pre class="literalblock">
- - 'size':
-     - maximum number of processes the pilot is expected to host at any point
-       in time (usually translates to number of CPU process slots managed by
-       the pilot).  
-     - type   : integer
-     - default: 1
-
- - 'environment':
-     - a set of key/value pairs, to be exported into the environment of 
-       L{ComputeUnit}s on that pilot.
-     - type   : dictionary
-     - default: {}
-
- - 'queue':
-     - the name of the queue the pilot should be submitted to.
-     - type   : string
-     - default: &quot;&quot;
-
- - 'project':
-     - the project ID used for accounting of the pilot's resource
-       consumption.
-     - type   : string
-     - default: &quot;&quot;
-
- - 'candidate_hosts':
-     - a list of hostnames on any of which the pilot may be run.
-     - type   : string
-     - default: &quot;&quot;
-
- - 'cpu_architecture':
-     - the CPU architecture the pilot is expected to run on..
-     - type   : string, values as defined by GLUE.v2
-     - default: &quot;&quot;
-
- - 'operating_system_type':
-     - the operating system the pilot is expected to run on.
-     - type   : string, values as defined by GLUE.v2
-     - default: &quot;&quot;
-
- - 'total_physical_memory':
-     - the maximum amount of memory the pilot is expected to allocate, in
-       total (in MByte).
-     - type   : int
-     - default: &quot;&quot;
-
- - 'total_cpu_time':
-     - the maximum number of CPU hours the pilot is expected to consume, in
-       total.
-     - type   : float (number of CPU hours)
-     - default: &quot;&quot;
-
- - 'wall_time_limit':
-     - the maximum time the pilot is expected to run, in hours.
-     - type   : float (number of hours)
-     - default: &quot;&quot;
-
- - 'start_time':
-     - the point in time when the pilot is expected to become active.
-     - type   : time (number of seconds since epoch) or class time.struct_time
-     - default: &quot;&quot;
-
- - 'contact':
-     - a (email, sms, IM) contact URL to notify on pilot state changes.
-     - type   : string
-     - default: &quot;&quot;
-</pre>
+  <ul>
+    <li>
+      'size':
+      <ul>
+        <li>
+          maximum number of processes the pilot is expected to host at any 
+          point in time (usually translates to number of CPU process slots 
+          managed by the pilot).
+        </li>
+        <li>
+          type   : integer
+        </li>
+        <li>
+          default: 1
+        </li>
+      </ul>
+    </li>
+    <li>
+      'environment':
+      <ul>
+        <li>
+          a set of key/value pairs, to be exported into the environment of 
+          <a href="troy.pilot.compute_unit.ComputeUnit-class.html" 
+          class="link">ComputeUnit</a>s on that pilot.
+        </li>
+        <li>
+          type   : dictionary
+        </li>
+        <li>
+          default: {}
+        </li>
+      </ul>
+    </li>
+    <li>
+      'queue':
+      <ul>
+        <li>
+          the name of the queue the pilot should be submitted to.
+        </li>
+        <li>
+          type   : string
+        </li>
+        <li>
+          default: &quot;&quot;
+        </li>
+      </ul>
+    </li>
+    <li>
+      'project':
+      <ul>
+        <li>
+          the project ID used for accounting of the pilot's resource 
+          consumption.
+        </li>
+        <li>
+          type   : string
+        </li>
+        <li>
+          default: &quot;&quot;
+        </li>
+      </ul>
+    </li>
+    <li>
+      'candidate_hosts':
+      <ul>
+        <li>
+          a list of hostnames on any of which the pilot may be run.
+        </li>
+        <li>
+          type   : string
+        </li>
+        <li>
+          default: &quot;&quot;
+        </li>
+      </ul>
+    </li>
+    <li>
+      'cpu_architecture':
+      <ul>
+        <li>
+          the CPU architecture the pilot is expected to run on..
+        </li>
+        <li>
+          type   : string, values as defined by GLUE.v2
+        </li>
+        <li>
+          default: &quot;&quot;
+        </li>
+      </ul>
+    </li>
+    <li>
+      'operating_system_type':
+      <ul>
+        <li>
+          the operating system the pilot is expected to run on.
+        </li>
+        <li>
+          type   : string, values as defined by GLUE.v2
+        </li>
+        <li>
+          default: &quot;&quot;
+        </li>
+      </ul>
+    </li>
+    <li>
+      'total_physical_memory':
+      <ul>
+        <li>
+          the maximum amount of memory the pilot is expected to allocate, 
+          in total (in MByte).
+        </li>
+        <li>
+          type   : int
+        </li>
+        <li>
+          default: &quot;&quot;
+        </li>
+      </ul>
+    </li>
+    <li>
+      'total_cpu_time':
+      <ul>
+        <li>
+          the maximum number of CPU hours the pilot is expected to consume,
+          in total.
+        </li>
+        <li>
+          type   : float (number of CPU hours)
+        </li>
+        <li>
+          default: &quot;&quot;
+        </li>
+      </ul>
+    </li>
+    <li>
+      'wall_time_limit':
+      <ul>
+        <li>
+          the maximum time the pilot is expected to run, in hours.
+        </li>
+        <li>
+          type   : float (number of hours)
+        </li>
+        <li>
+          default: &quot;&quot;
+        </li>
+      </ul>
+    </li>
+    <li>
+      'start_time':
+      <ul>
+        <li>
+          the point in time when the pilot is expected to become active.
+        </li>
+        <li>
+          type   : time (number of seconds since epoch) or class 
+          time.struct_time
+        </li>
+        <li>
+          default: &quot;&quot;
+        </li>
+      </ul>
+    </li>
+    <li>
+      'contact':
+      <ul>
+        <li>
+          a (email, sms, IM) contact URL to notify on pilot state changes.
+        </li>
+        <li>
+          type   : string
+        </li>
+        <li>
+          default: &quot;&quot;
+        </li>
+      </ul>
+    </li>
+  </ul>
   <p>Affinity:</p>
   <p>These labels should get assigned by the backend, but are exposed on 
   API level for the benefit of application level schedulers:</p>
@@ -513,7 +624,7 @@ new empty dictionary
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Thu Jul  5 14:37:13 2012</a>
+    3.0.1 on Sat Jul  7 00:16:03 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -3,51 +3,44 @@
 #
 #
 #
-class State ():
-    """
-    The State class is really an enum, or what python uses as an enum.
-    That enum describes the state model for various components of the P* model,
-    and thus of the pilot API::
+class State (): 
+    """ 
+    The State class is really an enum, or what python uses as an enum.  That
+    enum describes the state model for various components of the P* model, and
+    thus of the pilot API, and is exposed as property of the following classes::
 
         troy.pilot.compute_pilot
         troy.pilot.compute_unit
         troy.pilot.data_pilot
         troy.pilot.data_unit
-        troy.pilot.compute_data_pilot
         troy.pilot.compute_data_unit
 
-    Those components have the following life cycle:  
-
-    An api instance is created via a creation request, like::
+    For example, an L{ComputePilot} instance is created via a creation request::
 
         cpd = troy.pilot.compute_pilot_description ()
         cps = troy.pilot.compute_pilot_service ()
-        cp  = cps.create_pilot (cpd)
+        cp  = cps.create_compute_pilot (cpd)
 
     That compute pilot has, at this point, the state 'New', so the Troy
-    implementation has accepted the creation request, but it was not yet passed
-    on to a backend which actually instantiates a compute pilot on some
+    implementation has accepted the creation request, but it was not necessarily
+    passed on to a backend which actually instantiates a compute pilot on some
     resource.
 
-    Once the request is actually passed on to the backend, and was accepted by
-    it, the cp will have 'Pending' state.  That state will eventually transition
-    to 'Running', when the backend actually instantiated the compute pilot
-    process/agent/...  Resources are only consumed during the 'Running' state, 
+    Once the request is passed on to the backend, and was accepted by it, the cp
+    will have 'Pending' state.  That state will eventually transition to
+    'Running', when the backend instantiated the compute pilot process/agent/...
+    Resources are only consumed during the 'Running' state, 
 
     There are three options to leave the 'Running' state: 'Done', as successful
-    and planed end of operation of the instance; 'Failed', as premature or
+    and planned end of operation of the instance; 'Failed', as premature or
     unexpected end of operation (e.g. due to an error condition); and
     'Canceled', as premature and expected end of operation, due to user request.
 
-
-    Some service objects of the pilot API may also have state, but in general
-    only expose 'Running' and 'Unknown' (i.e. not-Running).  Those service
-    states may disappear in the future.  
-
-
     Note that all stateful objects of the Pilot API will, additionally to the
     state enum, expose a 'state_detail' (string), which is, in general, the
-    native backend state.
+    native backend state -- Troy does not assume any semantic meaning on
+    state_detail values.
+
     """
 
     Unknown  = "Unknown"    """ The state of the backend instance is not known.  Duh! """

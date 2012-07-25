@@ -1,12 +1,12 @@
 
-from ..    import engine
+from troy  import engine
 from state import State
 
 ########################################################################
 #
 #
 #
-class Base:
+class Base (object):
 
     """ 
 

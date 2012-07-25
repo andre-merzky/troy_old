@@ -54,12 +54,9 @@
 <h1 class="epydoc">Class peejay_dps</h1><p class="nomargin-top"><span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_dps">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_ada_9" name="uml_class_diagram_for_troy_ada_9">
-<area shape="rect" id="node191" href="troy_adaptor_peejay.peejay_dps-class.html#__init__" title="Create a DataPilotService object" alt="" coords="85,180,243,199"/>
-<area shape="rect" id="node191" href="troy_adaptor_peejay.peejay_dps-class.html#create_pilot" title="Add a DataPilot to the DataPilotService" alt="" coords="85,199,243,217"/>
-<area shape="rect" id="node1" href="troy_adaptor_peejay.peejay_dps-class.html" title="troy_adaptor_peejay.peejay_dps" alt="" coords="73,147,255,223"/>
-<area shape="rect" id="node2" href="troy.interface.data_pilot_service.iDataPilotService-class.html" title="DataPilotService (DPS)" alt="" coords="5,83,320,127"/>
-<area shape="rect" id="node193" href="troy.interface.base.iBase-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="91,39,237,57"/>
-<area shape="rect" id="node3" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="79,6,249,63"/>
+<area shape="rect" id="node85" href="troy_adaptor_peejay.peejay_dps-class.html#__init__" title="troy_adaptor_peejay.peejay_dps.__init__" alt="" coords="17,39,175,57"/>
+<area shape="rect" id="node85" href="troy_adaptor_peejay.peejay_dps-class.html#create_pilot" title="Add a DataPilot to the DataPilotService" alt="" coords="17,57,175,76"/>
+<area shape="rect" id="node1" href="troy_adaptor_peejay.peejay_dps-class.html" title="troy_adaptor_peejay.peejay_dps" alt="" coords="5,6,187,82"/>
 </map>
   <img src="uml_class_diagram_for_troy_ada_9.gif" alt='' usemap="#uml_class_diagram_for_troy_ada_9" ismap="ismap" class="graph-without-title" />
 </center>
@@ -79,10 +76,9 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy_adaptor_peejay.peejay_dps-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a name="__init__"></a><span class="summary-sig-name">__init__</span>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">api</span>,
-        <span class="summary-sig-arg">adaptor</span>)</span><br />
-      Create a DataPilotService object</td>
+        <span class="summary-sig-arg">adaptor</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_dps.__init__">source&nbsp;code</a></span>
             
@@ -110,24 +106,6 @@
       
     </td>
   </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="troy.interface.base.iBase-class.html#init_" class="summary-sig-name">init_</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      dummy method to make sure the backend can initialize the object.
-      <em>(Inherited from <a href="troy.interface.base.iBase-class.html">troy.interface.base.iBase</a>)</em></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.base-pysrc.html#iBase.init_">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
 </table>
 <!-- ==================== METHOD DETAILS ==================== -->
 <a name="section-MethodDetails"></a>
@@ -138,32 +116,6 @@
     <span class="table-header">Method Details</span></td>
 </tr>
 </table>
-<a name="__init__"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">api</span>,
-        <span class="sig-arg">adaptor</span>)</span>
-    <br /><em class="fname">(Constructor)</em>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_dps.__init__">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Create a DataPilotService object</p>
-  <p>Keyword arguments: dps_id -- restore from dps_id</p>
-  <dl class="fields">
-    <dt>Overrides:
-        <a href="troy.interface.base.iBase-class.html#__init__">troy.interface.base.iBase.__init__</a>
-    </dt>
-  </dl>
-</td></tr></table>
-</div>
 <a name="create_pilot"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -183,9 +135,6 @@
   <p>Keyword arguments: cpd     -- DataPilot Description</p>
   <p>Return value: A DataPilot handle</p>
   <dl class="fields">
-    <dt>Overrides:
-        <a href="troy.interface.data_pilot_service.iDataPilotService-class.html#create_pilot">troy.interface.data_pilot_service.iDataPilotService.create_pilot</a>
-    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -219,7 +168,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Sat Jul  7 00:16:04 2012</a>
+    3.0.1 on Wed Jul 25 21:11:39 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

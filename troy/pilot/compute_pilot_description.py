@@ -12,9 +12,9 @@ class ComputePilotDescription (dict):
     for the pilot:
 
       - 'size':
-          - maximum number of processes the pilot is expected to host at any point
-            in time (usually translates to number of CPU process slots managed by
-            the pilot).  
+          - minimum number of processes the pilot is expected to manage at any
+            point in time (usually translates to number of CPU process slots
+            managed by the pilot).  
           - type   : integer
           - default: 1
 
@@ -36,7 +36,7 @@ class ComputePilotDescription (dict):
           - default: ""
 
       - 'candidate_hosts':
-          - a list of hostnames on any of which the pilot may be run.
+          - a list of hostnames on any of which the pilot may be operate.
           - type   : string
           - default: ""
 
@@ -63,7 +63,8 @@ class ComputePilotDescription (dict):
           - default: ""
 
       - 'wall_time_limit':
-          - the maximum time the pilot is expected to run, in hours.
+          - the maximum time the pilot is expected to operate, in hours.
+            If unspecified, the pilot is assumed to live forever.
           - type   : float (number of hours)
           - default: ""
 
@@ -85,13 +86,13 @@ class ComputePilotDescription (dict):
     level for the benefit of application level schedulers::
 
       - 'affinity_datacenter_label':
-          - pilot jobs sharing the same label are located in the same data
+          - pilots sharing the same label are located in the same data
             center          .
           - type   : string
           - default: ""
 
       - 'affinity_machine_label':
-          - pilot jobs sharing the same label are located on the same machine.
+          - pilots sharing the same label are located on the same machine.
           - type   : string
           - default: ""
 
@@ -121,7 +122,6 @@ class ComputePilotDescription (dict):
 
 
     def __init__ (self) :
-        print "cpd: init"
 
         # assign defaults
         self['size'] = 1
@@ -130,11 +130,13 @@ class ComputePilotDescription (dict):
     
     
     def __setattr__ (self, attr, value) :
+        # TODO: type checks
         self[attr]=value
         
     
     def __getattr__ (self, attr) :
         return self[attr]
     
+
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

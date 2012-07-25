@@ -6,31 +6,42 @@ abstractions.  Most prominently, pilot abstractions cover PilotJobs, a well
 known mechanism for application level job management, which is usually employed
 for HTC type applications on HPC type resources (amongst others).  Another pilot
 abstraction is PilotData, which, in a similar fashion as PilotJobs, decouples
-system level and application level data management.  Finally, the Pilot API
-exposes the ability to handle Compute and Data workloads concurrently, by
-interleaving PilotJobs and PilotData concepts.
+system level and application level data management.  
 
-The main concepts and classes exposed by the Compute part of the API are:
+The Pilot API exposes the ability to handle Compute and Data workloads
+concurrently, by interleaving PilotJobs and PilotData concepts.
 
-    - L{ComputePilot} (CP): 
-          a pilot job, which can execute some compute workload (L{ComputeUnit}).
+The main concepts and classes of the API are:
 
-    - L{ComputePilotService} (CPS): 
-          manages multiple \L{ComputePilot}s.  A 'submit' method accepts
-          requests for work units (L{ComputeUnit}s), to be scheduled over all
-          pilots.
+    - L{ComputePilot} (CP) / L{DataPilot} (DP):
+      a pilot, which manages a (compute or data) resource slice for the
+      application
 
-    - L{ComputeUnit} (CU): 
-          a work item executed on a L{ComputePilot}.
+    - L{ComputePilotService} (CPS) / L{DataPilotservice} (DPS): 
+      creates and manages pilots, according to application specified resource
+      requirements.  Also, 'submit_xxx_unit()' methods accept work descriptions
+      of L{ComputeUnit}s and L{DataUnit}s to be executed on its pilots.
 
-    - L{ComputeUnitService} (CUS):
-          a service which can map L{ComputeUnit} requests to a set of
-          L{ComputePilotService}s or L{ComputePilot}s.
+    - L{ComputeUnitDescription} (CUD) / L{DataUnitDescription} (DUD) / 
+      L{ComputeDataUnitDescription} (CDUD) :
+      describes a piece of (compute or data or combination thereof) workload, to
+      be managed by a (set of) pilot(s).
 
-The L{ComputeUnitService} is what the application will mostly work with: it takes
-care of proper work item distribution, and will in fact enact the applications
-compute workload.  The set of L{ComputePilot}s available to the CUS can be changed
-during the application's runtime.  A simple example (on 'Hello World' level)
+    - L{ComputeUnit} (CU) / L{DataUnit} (DU) / L{ComputeDataUnit} (CDU):
+      represents an instance of a piece of (compute or data) workload, which was
+      created according to a L{ComputeUnitDescription} / L{DataUnitDescription}
+      / L{ComputeDataUnitDescription}
+
+    - L{ComputeUnitService} (CUS) / DataUnitService (DUS) / 
+      ComputeDataUnitService (CDUS):
+      an application level scheduler which can instantiate L{ComputeUnit}s, 
+      L{DataUnit}s and L{ComputeDataUnit}s on a set of L{ComputePilotService}s 
+      and L{DataPilotService}s, and their pilots.
+
+The UnitService's is what the application will mostly work with: it takes care
+of proper work item distribution, and will in fact enact the applications
+workload.  The set of pilots available to the UnitService can be changed during
+the application's runtime.  A simple (compute) example on 'Hello World' level
 would be (some details left out for brevity)::
 
     ----------------------------------------------------------------
@@ -38,58 +49,30 @@ would be (some details left out for brevity)::
 
     # create on ComputePilot from a BigJob ComputePilotservice
     cps = troy,pilot.ComputePilotService ('bigjob://')
-    cp  = cps.create_pilot ([some compute pilot description])
+    cps.create_pilot ([some compute pilot description])
 
     # create a work unit service with one ComputePilot resource, to submit work
     # items to
     cus = troy.pilot.ComputeUnitService ()
-    cus.add_pilot (cp)
+    cus.add_compute_pilot_service (cps)
 
-    # submit some compute work item
-    cu  = cus.submit ([some work unit description])
+    # submit a compute work item
+    cu = cus.submit_compute_unit ([some compute unit description])
 
     cu.wait ()     # wait 'til work is done
 
-    cp.cancel  ()  # terminate compute pilots
     cus.cancel ()  # terminate cus
+    cps.cancel ()  # terminate compute pilots
     ----------------------------------------------------------------
 
-
-The Data side of the Pilot API looks symmetric to the compute side.  The exposed
-classes are:
-
-    - L{DataPilot} (DP): 
-          a pilot store, which can manage some data workload (L{DataUnit})
-
-    - L{DataPilotService} (DPS): 
-          a factory (service) which can create L{DataPilot}s according to some
-          specification
-
-    - L{DataUnit} (DU): 
-          a data item managed by a L{DataPilot}
-
-    - L{DataUnitService} (DUS):
-          a service which can map L{DataUnit} requests to a set of
-          L{DataPilot}s
-
-
-Finally, the API exposes two additional classes:
-
-    - L{ComputeDataUnit} (CDU):
-          a combination of data and compute workload which the application
-          requests to be handled via the Pilot API
-
-    - L{ComputeDataUnitService} (CDUS)
-          a service which can map CDUs to a set of L{ComputePilot}s and
-          L{DataPilot}s.
-
-So, the CDUS combines the abilities of the CUS and DUS, but at the same time
-allows for a richer semantics -- for example, the CDUS will transparently be
-able to support data-compute-colocation for the requested data-compute workload
-units.
+The Data side of the Pilot API looks symmetric to the compute side.  The
+combination of data and compute focused entities in the ComputeData-type classes
+allows Troy to perform cross-cutting scheduling and optimization, prominently
+compute-data co-scheduling.
 
 """
 
+#
 # For the sake of code organization, each API class is defined in a separate
 # file.  Alas, python's module naming rules then introduce an additional
 # element, that file's name, so that, for example, the ComputePilot class would
@@ -111,7 +94,6 @@ from troy.pilot.compute_pilot_service          import ComputePilotService
 from troy.pilot.compute_unit_description       import ComputeUnitDescription     
 from troy.pilot.compute_unit                   import ComputeUnit                 
 from troy.pilot.compute_unit_service           import ComputeUnitService         
-
 
 from troy.pilot.data_pilot_description         import DataPilotDescription       
 from troy.pilot.data_pilot                     import DataPilot                   

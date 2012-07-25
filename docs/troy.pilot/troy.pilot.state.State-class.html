@@ -54,44 +54,44 @@
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
 <h1 class="epydoc">Class State</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.state-pysrc.html#State">source&nbsp;code</a></span></p>
-<p>The State class is really an enum, or what python uses as an enum. 
+<p>The State class is really an enum, or what python uses as an enum.  
   That enum describes the state model for various components of the P* 
-  model, and thus of the pilot API:</p>
+  model, and thus of the pilot API, and is exposed as property of the 
+  following classes:</p>
 <pre class="literalblock">
    troy.pilot.compute_pilot
    troy.pilot.compute_unit
    troy.pilot.data_pilot
    troy.pilot.data_unit
-   troy.pilot.compute_data_pilot
    troy.pilot.compute_data_unit
 </pre>
-  <p>Those components have the following life cycle:</p>
-  <p>An api instance is created via a creation request, like:</p>
+  <p>For example, an <a 
+  href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+  class="link">ComputePilot</a> instance is created via a creation 
+  request:</p>
 <pre class="literalblock">
    cpd = troy.pilot.compute_pilot_description ()
    cps = troy.pilot.compute_pilot_service ()
-   cp  = cps.create_pilot (cpd)
+   cp  = cps.create_compute_pilot (cpd)
 </pre>
   <p>That compute pilot has, at this point, the state 'New', so the Troy 
-  implementation has accepted the creation request, but it was not yet 
-  passed on to a backend which actually instantiates a compute pilot on 
-  some resource.</p>
-  <p>Once the request is actually passed on to the backend, and was 
-  accepted by it, the cp will have 'Pending' state.  That state will 
-  eventually transition to 'Running', when the backend actually 
-  instantiated the compute pilot process/agent/...  Resources are only 
-  consumed during the 'Running' state,</p>
+  implementation has accepted the creation request, but it was not 
+  necessarily passed on to a backend which actually instantiates a compute 
+  pilot on some resource.</p>
+  <p>Once the request is passed on to the backend, and was accepted by it, 
+  the cp will have 'Pending' state.  That state will eventually transition 
+  to 'Running', when the backend instantiated the compute pilot 
+  process/agent/... Resources are only consumed during the 'Running' 
+  state,</p>
   <p>There are three options to leave the 'Running' state: 'Done', as 
-  successful and planed end of operation of the instance; 'Failed', as 
+  successful and planned end of operation of the instance; 'Failed', as 
   premature or unexpected end of operation (e.g. due to an error 
   condition); and 'Canceled', as premature and expected end of operation, 
   due to user request.</p>
-  <p>Some service objects of the pilot API may also have state, but in 
-  general only expose 'Running' and 'Unknown' (i.e. not-Running).  Those 
-  service states may disappear in the future.</p>
   <p>Note that all stateful objects of the Pilot API will, additionally to 
   the state enum, expose a 'state_detail' (string), which is, in general, 
-  the native backend state.</p>
+  the native backend state -- Troy does not assume any semantic meaning on 
+  state_detail values.</p>
 
 <!-- ==================== CLASS VARIABLES ==================== -->
 <a name="section-ClassVariables"></a>
@@ -105,51 +105,53 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="troy.pilot.state.State-class.html#Unknown" class="summary-name">Unknown</a> = <code title="'Unknown The state of the backend instance is not known.  Duh! '"><code class="variable-quote">'</code><code class="variable-string">Unknown The state of the backend instance is not kn</code><code class="variable-ellipsis">...</code></code>
+        <a href="troy.pilot.state.State-class.html#Unknown" class="summary-name">Unknown</a> = <code title="&quot;Unknown&quot; &quot;&quot;&quot; The state of the backend instance is not known.  Duh! &quot;&quot;\
+&quot;">&quot;Unknown&quot; &quot;&quot;&quot; The state of the backend instance is n<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="troy.pilot.state.State-class.html#New" class="summary-name">New</a> = <code title="'New The creation request was accepted, but did not yet reach the back\
-end. '"><code class="variable-quote">'</code><code class="variable-string">New The creation request was accepted, but did not yet </code><code class="variable-ellipsis">...</code></code>
+        <a href="troy.pilot.state.State-class.html#New" class="summary-name">New</a> = <code title="&quot;New&quot; &quot;&quot;&quot; The creation request was accepted, but did not yet reach the\
+ backend. &quot;&quot;&quot;">&quot;New&quot; &quot;&quot;&quot; The creation request was accepted, but did not<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="troy.pilot.state.State-class.html#Pending" class="summary-name">Pending</a> = <code title="'Pending The backend accepted a creation request, but did not yet enac\
-t it. '"><code class="variable-quote">'</code><code class="variable-string">Pending The backend accepted a creation request, bu</code><code class="variable-ellipsis">...</code></code>
+        <a href="troy.pilot.state.State-class.html#Pending" class="summary-name">Pending</a> = <code title="&quot;Pending&quot; &quot;&quot;&quot; The backend accepted a creation request, but did not yet\
+ enact it. &quot;&quot;&quot;">&quot;Pending&quot; &quot;&quot;&quot; The backend accepted a creation reques<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="Running"></a><span class="summary-name">Running</span> = <code title="'Running The backend instance is created and active. '"><code class="variable-quote">'</code><code class="variable-string">Running The backend instance is created and active. </code><code class="variable-quote">'</code></code>
+        <a href="troy.pilot.state.State-class.html#Running" class="summary-name">Running</a> = <code title="&quot;Running&quot; &quot;&quot;&quot; The backend instance is created and active. &quot;&quot;&quot;">&quot;Running&quot; &quot;&quot;&quot; The backend instance is created and ac<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="Done"></a><span class="summary-name">Done</span> = <code title="'Done The backend instance finished successfully. '"><code class="variable-quote">'</code><code class="variable-string">Done The backend instance finished successfully. </code><code class="variable-quote">'</code></code>
+        <a name="Done"></a><span class="summary-name">Done</span> = <code title="&quot;Done&quot; &quot;&quot;&quot; The backend instance finished successfully. &quot;&quot;&quot;">&quot;Done&quot; &quot;&quot;&quot; The backend instance finished successfully. &quot;&quot;&quot;</code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="troy.pilot.state.State-class.html#Canceled" class="summary-name">Canceled</a> = <code title="'Canceled The backend instance finished due to a user request. '"><code class="variable-quote">'</code><code class="variable-string">Canceled The backend instance finished due to a us</code><code class="variable-ellipsis">...</code></code>
+        <a href="troy.pilot.state.State-class.html#Canceled" class="summary-name">Canceled</a> = <code title="&quot;Canceled&quot; &quot;&quot;&quot; The backend instance finished due to a user request. &quot;&quot;\
+&quot;">&quot;Canceled&quot; &quot;&quot;&quot; The backend instance finished due to<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="troy.pilot.state.State-class.html#Failed" class="summary-name">Failed</a> = <code title="'Failed The backend instance finished on an error condition. '"><code class="variable-quote">'</code><code class="variable-string">Failed The backend instance finished on an error con</code><code class="variable-ellipsis">...</code></code>
+        <a href="troy.pilot.state.State-class.html#Failed" class="summary-name">Failed</a> = <code title="&quot;Failed&quot; &quot;&quot;&quot; The backend instance finished on an error condition. &quot;&quot;&quot;">&quot;Failed&quot; &quot;&quot;&quot; The backend instance finished on an erro<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 </table>
@@ -174,7 +176,8 @@ t it. '"><code class="variable-quote">'</code><code class="variable-string">Pend
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-<code class="variable-quote">'</code><code class="variable-string">Unknown The state of the backend instance is not known.  Duh! </code><code class="variable-quote">'</code>
+&quot;Unknown&quot; &quot;&quot;&quot; The state of the backend instance is not known.  Duh! &quot;&quot;<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+&quot;
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -192,8 +195,8 @@ t it. '"><code class="variable-quote">'</code><code class="variable-string">Pend
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-<code class="variable-quote">'</code><code class="variable-string">New The creation request was accepted, but did not yet reach the back</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-<code class="variable-string">end. </code><code class="variable-quote">'</code>
+&quot;New&quot; &quot;&quot;&quot; The creation request was accepted, but did not yet reach the<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ backend. &quot;&quot;&quot;
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -211,8 +214,26 @@ t it. '"><code class="variable-quote">'</code><code class="variable-string">Pend
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-<code class="variable-quote">'</code><code class="variable-string">Pending The backend accepted a creation request, but did not yet enac</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-<code class="variable-string">t it. </code><code class="variable-quote">'</code>
+&quot;Pending&quot; &quot;&quot;&quot; The backend accepted a creation request, but did not yet<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ enact it. &quot;&quot;&quot;
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="Running"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">Running</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+&quot;Running&quot; &quot;&quot;&quot; The backend instance is created and active. &quot;&quot;&quot;
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -230,7 +251,8 @@ t it. '"><code class="variable-quote">'</code><code class="variable-string">Pend
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-<code class="variable-quote">'</code><code class="variable-string">Canceled The backend instance finished due to a user request. </code><code class="variable-quote">'</code>
+&quot;Canceled&quot; &quot;&quot;&quot; The backend instance finished due to a user request. &quot;&quot;<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+&quot;
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -248,7 +270,7 @@ t it. '"><code class="variable-quote">'</code><code class="variable-string">Pend
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-<code class="variable-quote">'</code><code class="variable-string">Failed The backend instance finished on an error condition. </code><code class="variable-quote">'</code>
+&quot;Failed&quot; &quot;&quot;&quot; The backend instance finished on an error condition. &quot;&quot;&quot;
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -284,7 +306,7 @@ t it. '"><code class="variable-quote">'</code><code class="variable-string">Pend
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Sat Jul  7 00:16:03 2012</a>
+    3.0.1 on Wed Jul 25 21:11:38 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

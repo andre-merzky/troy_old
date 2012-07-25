@@ -67,9 +67,9 @@
 <a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">    for the pilot:</tt> </tt>
 <a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
 <a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">      - 'size':</tt> </tt>
-<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">          - maximum number of processes the pilot is expected to host at any point</tt> </tt>
-<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">            in time (usually translates to number of CPU process slots managed by</tt> </tt>
-<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">            the pilot).  </tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">          - minimum number of processes the pilot is expected to manage at any</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">            point in time (usually translates to number of CPU process slots</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">            managed by the pilot).  </tt> </tt>
 <a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">          - type   : integer</tt> </tt>
 <a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">          - default: 1</tt> </tt>
 <a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
@@ -91,7 +91,7 @@
 <a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">          - default: ""</tt> </tt>
 <a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
 <a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">      - 'candidate_hosts':</tt> </tt>
-<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">          - a list of hostnames on any of which the pilot may be run.</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">          - a list of hostnames on any of which the pilot may be operate.</tt> </tt>
 <a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">          - type   : string</tt> </tt>
 <a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">          - default: ""</tt> </tt>
 <a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
@@ -118,66 +118,66 @@
 <a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">          - default: ""</tt> </tt>
 <a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
 <a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">      - 'wall_time_limit':</tt> </tt>
-<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">          - the maximum time the pilot is expected to run, in hours.</tt> </tt>
-<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">          - type   : float (number of hours)</tt> </tt>
-<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">          - default: ""</tt> </tt>
-<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">      - 'start_time':</tt> </tt>
-<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">          - the point in time when the pilot is expected to become active.</tt> </tt>
-<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">          - type   : time (number of seconds since epoch) or class time.struct_time</tt> </tt>
-<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">          - default: ""</tt> </tt>
-<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">      - 'contact':</tt> </tt>
-<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">          - a (email, sms, IM) contact URL to notify on pilot state changes.</tt> </tt>
-<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">          - type   : string</tt> </tt>
-<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">          - default: ""</tt> </tt>
-<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">      </tt> </tt>
-<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">    Affinity:</tt> </tt>
-<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">    These labels should get assigned by the backend, but are exposed on API</tt> </tt>
-<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">    level for the benefit of application level schedulers::</tt> </tt>
-<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">      - 'affinity_datacenter_label':</tt> </tt>
-<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">          - pilot jobs sharing the same label are located in the same data</tt> </tt>
-<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">            center          .</tt> </tt>
-<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">          - type   : string</tt> </tt>
-<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">          - default: ""</tt> </tt>
-<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring">      - 'affinity_machine_label':</tt> </tt>
-<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">          - pilot jobs sharing the same label are located on the same machine.</tt> </tt>
-<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">          - type   : string</tt> </tt>
-<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">          - default: ""</tt> </tt>
-<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">          - the maximum time the pilot is expected to operate, in hours.</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">            If unspecified, the pilot is assumed to live forever.</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">          - type   : float (number of hours)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">          - default: ""</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">      - 'start_time':</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">          - the point in time when the pilot is expected to become active.</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">          - type   : time (number of seconds since epoch) or class time.struct_time</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">          - default: ""</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">      - 'contact':</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">          - a (email, sms, IM) contact URL to notify on pilot state changes.</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">          - type   : string</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">          - default: ""</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">      </tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">    Affinity:</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">    These labels should get assigned by the backend, but are exposed on API</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring">    level for the benefit of application level schedulers::</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">      - 'affinity_datacenter_label':</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">          - pilots sharing the same label are located in the same data</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">            center          .</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">          - type   : string</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">          - default: ""</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">      - 'affinity_machine_label':</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">          - pilots sharing the same label are located on the same machine.</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">          - type   : string</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">          - default: ""</tt> </tt>
 <a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">    Note that the CPD does not describe how the pilot is instantiated in</tt> </tt>
-<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">    detail (e.g.executable name of pilot instance) -- that is left to the</tt> </tt>
-<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">    backend to decide, and may (or may not) be configurable out-of-band.</tt> </tt>
-<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">      </tt> </tt>
-<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
-<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
-<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-comment"># Class members</tt> </tt>
-<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-name">__slots__</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt> </tt>
-<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-string">'size'</tt><tt class="py-op">,</tt>                     <tt class="py-comment"># int</tt> </tt>
-<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-string">'queue'</tt><tt class="py-op">,</tt>                    <tt class="py-comment"># string</tt> </tt>
-<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-string">'project'</tt><tt class="py-op">,</tt>                  <tt class="py-comment"># string</tt> </tt>
-<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-string">'candidate_hosts'</tt><tt class="py-op">,</tt>          <tt class="py-comment"># string vec</tt> </tt>
-<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-string">'cpu_architecture'</tt><tt class="py-op">,</tt>         <tt class="py-comment"># string / enum</tt> </tt>
-<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-string">'operating_system_type'</tt><tt class="py-op">,</tt>    <tt class="py-comment"># string / enum</tt> </tt>
-<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-string">'total_physical_memory'</tt><tt class="py-op">,</tt>    <tt class="py-comment"># int</tt> </tt>
-<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-string">'total_cpu_time'</tt><tt class="py-op">,</tt>           <tt class="py-comment"># time</tt> </tt>
-<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-string">'wall_time_limit'</tt><tt class="py-op">,</tt>          <tt class="py-comment"># time</tt> </tt>
-<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-string">'start_time'</tt><tt class="py-op">,</tt>               <tt class="py-comment"># time</tt> </tt>
-<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-string">'contact'</tt><tt class="py-op">,</tt>                  <tt class="py-comment"># string vec</tt> </tt>
-<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt class="py-string">'affinity_datacenter_label'</tt><tt class="py-op">,</tt><tt class="py-comment"># string</tt> </tt>
-<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt class="py-string">'affinity_machine_label'</tt><tt class="py-op">,</tt>   <tt class="py-comment"># string</tt> </tt>
-<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-op">)</tt> </tt>
-<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">    Note that the CPD does not describe how the pilot is instantiated in</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">    detail (e.g.executable name of pilot instance) -- that is left to the</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">    backend to decide, and may (or may not) be configurable out-of-band.</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">      </tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-comment"># Class members</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-name">__slots__</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-string">'size'</tt><tt class="py-op">,</tt>                     <tt class="py-comment"># int</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-string">'queue'</tt><tt class="py-op">,</tt>                    <tt class="py-comment"># string</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-string">'project'</tt><tt class="py-op">,</tt>                  <tt class="py-comment"># string</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-string">'candidate_hosts'</tt><tt class="py-op">,</tt>          <tt class="py-comment"># string vec</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-string">'cpu_architecture'</tt><tt class="py-op">,</tt>         <tt class="py-comment"># string / enum</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-string">'operating_system_type'</tt><tt class="py-op">,</tt>    <tt class="py-comment"># string / enum</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-string">'total_physical_memory'</tt><tt class="py-op">,</tt>    <tt class="py-comment"># int</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-string">'total_cpu_time'</tt><tt class="py-op">,</tt>           <tt class="py-comment"># time</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-string">'wall_time_limit'</tt><tt class="py-op">,</tt>          <tt class="py-comment"># time</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-string">'start_time'</tt><tt class="py-op">,</tt>               <tt class="py-comment"># time</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt class="py-string">'contact'</tt><tt class="py-op">,</tt>                  <tt class="py-comment"># string vec</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt class="py-string">'affinity_datacenter_label'</tt><tt class="py-op">,</tt><tt class="py-comment"># string</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-string">'affinity_machine_label'</tt><tt class="py-op">,</tt>   <tt class="py-comment"># string</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">    <tt class="py-op">)</tt> </tt>
 <a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"> </tt>
-<a name="ComputePilotDescription.__init__"></a><div id="ComputePilotDescription.__init__-def"><a name="L123"></a><tt class="py-lineno">123</tt> <a class="py-toggle" href="#" id="ComputePilotDescription.__init__-toggle" onclick="return toggle('ComputePilotDescription.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.compute_pilot_description.ComputePilotDescription-class.html#__init__">__init__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="ComputePilotDescription.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ComputePilotDescription.__init__-expanded"><a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"cpd: init"</tt> </tt>
-<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<a name="ComputePilotDescription.__init__"></a><div id="ComputePilotDescription.__init__-def"><a name="L124"></a><tt class="py-lineno">124</tt> <a class="py-toggle" href="#" id="ComputePilotDescription.__init__-toggle" onclick="return toggle('ComputePilotDescription.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.compute_pilot_description.ComputePilotDescription-class.html#__init__">__init__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="ComputePilotDescription.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ComputePilotDescription.__init__-expanded"><a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
 <a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-comment"># assign defaults</tt> </tt>
 <a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">[</tt><tt class="py-string">'size'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
 <a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">         </tt>
@@ -185,14 +185,16 @@
 </div><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">     </tt>
 <a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">     </tt>
 <a name="ComputePilotDescription.__setattr__"></a><div id="ComputePilotDescription.__setattr__-def"><a name="L132"></a><tt class="py-lineno">132</tt> <a class="py-toggle" href="#" id="ComputePilotDescription.__setattr__-toggle" onclick="return toggle('ComputePilotDescription.__setattr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.compute_pilot_description.ComputePilotDescription-class.html#__setattr__">__setattr__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">attr</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="ComputePilotDescription.__setattr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ComputePilotDescription.__setattr__-expanded"><a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">[</tt><tt class="py-name">attr</tt><tt class="py-op">]</tt><tt class="py-op">=</tt><tt class="py-name">value</tt> </tt>
-</div><a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">         </tt>
-<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">     </tt>
-<a name="ComputePilotDescription.__getattr__"></a><div id="ComputePilotDescription.__getattr__-def"><a name="L136"></a><tt class="py-lineno">136</tt> <a class="py-toggle" href="#" id="ComputePilotDescription.__getattr__-toggle" onclick="return toggle('ComputePilotDescription.__getattr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.compute_pilot_description.ComputePilotDescription-class.html#__getattr__">__getattr__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">attr</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="ComputePilotDescription.__getattr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ComputePilotDescription.__getattr__-expanded"><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">[</tt><tt class="py-name">attr</tt><tt class="py-op">]</tt> </tt>
-</div></div><a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">     </tt>
-<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-comment"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</tt> </tt>
-<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+</div><div id="ComputePilotDescription.__setattr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ComputePilotDescription.__setattr__-expanded"><a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt class="py-comment"># TODO: type checks</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">[</tt><tt class="py-name">attr</tt><tt class="py-op">]</tt><tt class="py-op">=</tt><tt class="py-name">value</tt> </tt>
+</div><a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">         </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">     </tt>
+<a name="ComputePilotDescription.__getattr__"></a><div id="ComputePilotDescription.__getattr__-def"><a name="L137"></a><tt class="py-lineno">137</tt> <a class="py-toggle" href="#" id="ComputePilotDescription.__getattr__-toggle" onclick="return toggle('ComputePilotDescription.__getattr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.compute_pilot_description.ComputePilotDescription-class.html#__getattr__">__getattr__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">attr</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="ComputePilotDescription.__getattr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ComputePilotDescription.__getattr__-expanded"><a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">[</tt><tt class="py-name">attr</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">     </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-comment"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -228,7 +230,7 @@ expandto(location.href);
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Sat Jul  7 00:16:05 2012</a>
+    3.0.1 on Wed Jul 25 21:11:39 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

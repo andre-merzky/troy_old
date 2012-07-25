@@ -294,4 +294,46 @@ Misc:
 
   - TODO ANDRE: need to define / document context class
 
-  - call July 
+  - du.chunk (data_parser_class, int number) ? // see haddoop
+
+
+  - naming: I think this is totally cumbersome:
+
+      ComputePilotService.create_compute_pilot()
+      ComputeUnitservice.add_compute_pilot_service()
+      ComputeUnitservice.submit_compute_unit()
+
+    would very much prefer either
+
+      ComputePilotService.create()
+      ComputeUnitService.add_resources() / add_pilots() / add()
+      ComputeUnitService.submit()
+
+    or (better)
+
+      compute.PilotService.create()
+      compute.UnitService.add_resources() / add_pilots() / add()
+      compute.UnitService.submit()
+
+  - <rant> 
+      I know that python does not easily lend itself to object hierarchies, but
+      I always cringe inside if I implement things like 'ComputeUnit.get_id()'
+      and 5 minutes later implement 'DataUnit.get_id()' - I want my
+      'WorkUnit.get_id()' and proper inheritance!! Bwaahaaa!  I feel that 
+      otherwise, API symmetry is just a farce...  But yes yes - python is all 
+      "by convention" *sigh* 
+    </rant>
+
+  - TODO AM: replace slots with @properties (?)
+
+  - have idata as class to control state management?  
+    I know, ducks quack, but...
+
+  - we have a ComputeDataScheduler_ class - should we also have a DataScheduler_
+    class,  and a ComputeScheduler_ class?
+
+  - properties:
+    http://adam.gomaa.us/blog/2008/aug/11/the-python-property-builtin/
+    http://stackoverflow.com/questions/10149344/python-generic-getters-and-setters
+    http://stackoverflow.com/questions/3336767/overriding-inherited-properties-getters-and-setters-in-python
+

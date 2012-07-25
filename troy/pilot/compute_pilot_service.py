@@ -35,7 +35,7 @@ class ComputePilotService (Base) :
 
     # Class members
     __slots__ = (
-        'id',             # Reference to this CPS
+        'url',  # Reference to this CPS
     )
 
 
@@ -57,14 +57,16 @@ class ComputePilotService (Base) :
         Base.__init__ (self)
 
         # prepare instance data
-        idata = { 'url' : url } 
+        idata = { 
+                  'url'    : url 
+                } 
         self.set_idata_ (idata)
 
         # initialize adaptor class 
         self.engine_.call ('ComputePilotService', 'init_', self)
 
 
-    def create_pilot (self, cpd) :
+    def create_compute_pilot (self, cpd) :
         """ Create a ComputePilot.
 
             Keyword arguments:
@@ -82,17 +84,16 @@ class ComputePilotService (Base) :
             On success, the returned CP is in Pending state (or moved into any
             state downstream from Pending).
 
-            create_pilot() will honor all attributes set on the CPD.  Attributes
-            which are not explicitly set are interpreted as having default
-            values (see documentation of L{ComputePilotDescription}), or, where
-            default values are not specified, are ignored.
+            create_compute_pilot() will honor all attributes set on the CPD.
+            Attributes which are not explicitly set are interpreted as having
+            default values (see documentation of L{ComputePilotDescription}),
+            or, where default values are not specified, are ignored.
 
         """
-        return self.engine_.call ('ComputePilotService', 'create_pilot', 
-                                  self, cpd)
+        return self.engine_.call ('ComputePilotService', 'create_compute_pilot', self, cpd)
 
 
-    def list_pilots (self) :
+    def list_compute_pilots (self) :
         """ list managed L{ComputePilot}s.
 
             Return value:
@@ -109,7 +110,7 @@ class ComputePilotService (Base) :
         return self.engine_.call ('ComputePilotService', 'list_pilots', self)
 
 
-    def get_pilot (self, cp_id) :
+    def get_compute_pilot (self, cp_id) :
         """ Reconnect to a ComputePilot.
 
             Keyword arguments:

@@ -1,6 +1,7 @@
 
 from base               import Base
     
+
 ########################################################################
 #
 #
@@ -101,6 +102,8 @@ class ComputePilot (Base) :
 
 
 
+    ############################################################################
+    #
     def reinitialize (self, cpd) :
         """ Re-Initialize the ComputePilot to the (new) ComputePilotDescription.
         
@@ -123,8 +126,7 @@ class ComputePilot (Base) :
             backend may achieve this by aborting the units, and resubmitting
             them to the re-initialized pilot.
         """
-        return self.engine_.call ('ComputePilot', 'reinitialize', 
-                                  self, cpd)
+        return self.engine_.call ('ComputePilot', 'reinitialize', self, cpd)
 
 
     def submit_compute_unit (self, cud) :
@@ -138,7 +140,7 @@ class ComputePilot (Base) :
 
             The CUD is (possibly translated and) passed on to the CPS backend,
             which will attempt to instantiate the described workload process on
-            the ComputePilot.  If the pilot's resource is not suitable to run
+            the ComputePilot.  If the pilot's resource is not suitable to create
             the requested CU, a L{Error.BadParameter} exception is raised.  Not
             raising this exception is not a guarantee that the CU will in fact
             be (able to be) executed -- in that case, the returned CU will later

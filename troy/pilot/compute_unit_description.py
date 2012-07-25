@@ -53,6 +53,7 @@ class ComputeUnitDescription (dict) :
 
 
     def __setattr__ (self, attr, value) :
+        # TODO: key checks, type checks
         self[attr]=value
         
     

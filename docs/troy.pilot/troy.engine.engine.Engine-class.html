@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>troy.interface.compute_pilot_service.iComputePilotService</title>
+  <title>troy.engine.engine.Engine</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -40,9 +40,9 @@
     <td width="100%">
       <span class="breadcrumbs">
         Package&nbsp;troy ::
-        <a href="troy.interface-module.html">Package&nbsp;interface</a> ::
-        <a href="troy.interface.compute_pilot_service-module.html">Module&nbsp;compute_pilot_service</a> ::
-        Class&nbsp;iComputePilotService
+        <a href="troy.engine-module.html">Package&nbsp;engine</a> ::
+        <a href="troy.engine.engine-module.html">Module&nbsp;engine</a> ::
+        Class&nbsp;Engine
       </span>
     </td>
     <td>
@@ -53,22 +53,17 @@
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class iComputePilotService</h1><p class="nomargin-top"><span class="codelink"><a href="troy.interface.compute_pilot_service-pysrc.html#iComputePilotService">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class Engine</h1><p class="nomargin-top"><span class="codelink"><a href="troy.engine.engine-pysrc.html#Engine">source&nbsp;code</a></span></p>
 <center>
-<center>  <map id="uml_class_diagram_for_troy_int_5" name="uml_class_diagram_for_troy_int_5">
-<area shape="rect" id="node13" href="troy.interface.compute_pilot_service.iComputePilotService-class.html#__init__" title="Create a ComputePilotService object" alt="" coords="17,116,175,135"/>
-<area shape="rect" id="node13" href="troy.interface.compute_pilot_service.iComputePilotService-class.html#create_pilot" title="Create a ComputePilot" alt="" coords="17,135,175,153"/>
-<area shape="rect" id="node1" href="troy.interface.compute_pilot_service.iComputePilotService-class.html" title="ComputePilotService (CPS)" alt="" coords="5,83,187,159"/>
-<area shape="rect" id="node14" href="troy.interface.base.iBase-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="63,39,129,57"/>
-<area shape="rect" id="node2" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="51,6,141,63"/>
+<center>  <map id="uml_class_diagram_for_troy_eng" name="uml_class_diagram_for_troy_eng">
+<area shape="rect" id="node0" href="troy.engine.engine.Engine-class.html#__init__" title="x.__init__(...) initializes x; see x.__class__.__doc__ for signature" alt="" coords="17,39,403,57"/>
+<area shape="rect" id="node0" href="troy.engine.engine.Engine-class.html#call" title="call an adaptor function, for the given class/method, and give as args the &#160;object state (extracted from api_class), and the method args" alt="" coords="17,57,403,76"/>
+<area shape="rect" id="node1" href="troy.engine.engine.Engine-class.html" title="troy.engine.engine.Engine" alt="" coords="5,6,413,82"/>
 </map>
-  <img src="uml_class_diagram_for_troy_int_5.gif" alt='' usemap="#uml_class_diagram_for_troy_int_5" ismap="ismap" class="graph-without-title" />
+  <img src="uml_class_diagram_for_troy_eng.gif" alt='' usemap="#uml_class_diagram_for_troy_eng" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
-<p>ComputePilotService (CPS)</p>
-  <p>The ComputePilotService is in fact a factory for ComputePilots.</p>
-
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -83,12 +78,10 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">obj</span>,
-        <span class="summary-sig-arg">adaptor</span>)</span><br />
-      Create a ComputePilotService object</td>
+          <td><span class="summary-sig"><a href="troy.engine.engine.Engine-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      x.__init__(...) initializes x; see x.__class__.__doc__ for signature</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.compute_pilot_service-pysrc.html#iComputePilotService.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.engine.engine-pysrc.html#Engine.__init__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -102,11 +95,16 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#create_pilot" class="summary-sig-name">create_pilot</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">cpd</span>)</span><br />
-      Create a ComputePilot</td>
+          <td><span class="summary-sig"><a name="call"></a><span class="summary-sig-name">call</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">class_name</span>,
+        <span class="summary-sig-arg">method_name</span>,
+        <span class="summary-sig-arg">api_class</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      call an adaptor function, for the given class/method, and give as 
+      args the object state (extracted from api_class), and the method args</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.compute_pilot_service-pysrc.html#iComputePilotService.create_pilot">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.engine.engine-pysrc.html#Engine.call">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -114,22 +112,38 @@
       
     </td>
   </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="troy.interface.base.iBase-class.html#init_" class="summary-sig-name">init_</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      dummy method to make sure the backend can initialize the object.
-      <em>(Inherited from <a href="troy.interface.base.iBase-class.html">troy.interface.base.iBase</a>)</em></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.base-pysrc.html#iBase.init_">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
     </td>
   </tr>
 </table>
@@ -149,43 +163,21 @@
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">obj</span>,
-        <span class="sig-arg">adaptor</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.interface.compute_pilot_service-pysrc.html#iComputePilotService.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.engine.engine-pysrc.html#Engine.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Create a ComputePilotService object</p>
+  <p>x.__init__(...) initializes x; see x.__class__.__doc__ for 
+  signature</p>
   <dl class="fields">
     <dt>Overrides:
-        <a href="troy.interface.base.iBase-class.html#__init__">base.iBase.__init__</a>
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
-  </dl>
-</td></tr></table>
-</div>
-<a name="create_pilot"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">create_pilot</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">cpd</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.interface.compute_pilot_service-pysrc.html#iComputePilotService.create_pilot">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Create a ComputePilot</p>
-  <p>Keyword arguments: cpd     -- ComputePilot Description</p>
-  <p>Return value: A ComputePilot handle</p>
-  <dl class="fields">
   </dl>
 </td></tr></table>
 </div>

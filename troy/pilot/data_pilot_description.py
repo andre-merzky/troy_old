@@ -3,32 +3,97 @@
 # 
 #
 #
-class DataPilotDescription (dict) :
+class DataPilotDescription (dict):
     """ DataPilotDescription.
 
-        A DataPilotDescription describes the DataPilot to be submitted to
-        a resource.
+    A DataPilotDescription (DPD) describes a L{DataPilot} to be
+    submitted to a resource.  A well defined set of attributes can be set on
+    a DPD to specify the pilot's properties, and the resource requirements
+    for the pilot:
+
+      - 'size':
+          - minimum size of storage the pilot is expected to manage at any 
+            point in time (usually translates to number of bytes of storage 
+            allocated by the pilot).
+          - type   : integer
+          - default: 1024 * 1024 * 1024 (1GB)
+
+      - 'project':
+          - the project ID used for accounting of the pilot's resource
+            consumption.
+          - type   : string
+          - default: ""
+
+      - 'candidate_hosts':
+          - a list of hostnames on any of which the pilot may be operate.
+          - type   : string
+          - default: ""
+
+      - 'wall_time_limit':
+          - the maximum time the pilot is expected to operate, in hours.
+            If unspecified, the pilot is assumed to live forever.
+          - type   : float (number of hours)
+          - default: ""
+
+      - 'start_time':
+          - the point in time when the pilot is expected to become active.
+          - type   : time (number of seconds since epoch) or class time.struct_time
+          - default: ""
+
+      - 'contact':
+          - a (email, sms, IM) contact URL to notify on pilot state changes.
+          - type   : string
+          - default: ""
+
+
+
+    Affinity:
+
+    These labels should get assigned by the backend, but are exposed on API
+    level for the benefit of application level schedulers::
+
+      - 'affinity_datacenter_label':
+          - pilots sharing the same label are located in the same data
+            center          .
+          - type   : string
+          - default: ""
+
+      - 'affinity_machine_label':
+          - pilots sharing the same label are located on the same machine.
+          - type   : string
+          - default: ""
+
+
+    Note that the DPD does not describe how the pilot is instantiated in
+    detail (e.g.executable name of pilot instance) -- that is left to the
+    backend to decide, and may (or may not) be configurable out-of-band.
+
     """
     
     # Class members
     __slots__ = (
-        'rm',          # url
-        'dp_type',     # string
-        # Pilot / Agent description
-        'service_url', # "ssh://localhost/tmp/datapilot/",
-        'size',        # 100, size in MegaByte
-            
-        # Affinity labels
-        'affinity_datacenter_label',    # DataPilot sharing that label are located in the same data center
-        'affinity_machine_label',       # DataPilot sharing that label are located on the same machine
+        'size',                     # int
+        'queue',                    # string
+        'project',                  # string
+        'candidate_hosts',          # string vec
+        'wall_time_limit',          # time
+        'start_time',               # time
+        'contact',                  # string vec
+        'affinity_datacenter_label',# string
+        'affinity_machine_label',   # string
     )
 
 
     def __init__ (self) :
+
+        # assign defaults
+        self['size'] = 1
+        
         pass
     
 
     def __setattr__ (self, attr, value) :
+        # TODO: type checks
         self[attr]=value
         
     

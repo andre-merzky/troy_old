@@ -13,13 +13,13 @@ class ComputeDataScheduler_ (Base) :
         to Troy.  In particular, it will schedule compute_data units over a set of
         compute_data pilots.  To do that, the scheduler implementation (adaptor) will
         need to pull various information from the backend.  See adaptor level 
-        documentation for more details (TODO: link)
+        documentation for more details (TODO: link).
     """
 
     # Class members
     __slots__ = (
-        'id',             # Reference to this CDS
-        'service_url',    # ComputeDataScheduler URL
+        'id',             # Reference to this    CDS
+        'policy',         # scheduler policy
     )
 
 
@@ -30,7 +30,7 @@ class ComputeDataScheduler_ (Base) :
             policy -- scheduling policy to be provided
 
             The given policy determines what backend (adaptor) should be used
-            for scheduling.  'None' leaves the scheduler selection to the
+            for scheduling.  'None' leaves the scheduler selection to the Troy
             implementation.
 
         """
@@ -40,6 +40,7 @@ class ComputeDataScheduler_ (Base) :
 
         # prepare instance data
         idata = {
+                  'id'     : None,
                   'policy' : policy,
                 }
         self.set_idata_ (idata)

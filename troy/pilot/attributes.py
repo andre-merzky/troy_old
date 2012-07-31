@@ -4,6 +4,8 @@ import inspect
 # FIXME: add a tagging 'Monitorable' interface, which enables callbacks.
 # FIXME: add a flag to mark attributes as fixed, so that app cannot change flags (type...)
 # FIXME: implement URL parser checks (or Troy URL class, or use some python URL class)
+# FIXME: add an instance_data_ attribute registration to all Troy classes, and
+#        document usage for adaptor developers.
 
 ################################################################################
 #

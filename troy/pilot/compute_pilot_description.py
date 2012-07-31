@@ -1,9 +1,11 @@
 
+from attributes import Attributes
+
 ########################################################################
 #
 #
 #
-class ComputePilotDescription (dict):
+class ComputePilotDescription (Attributes) :
     """ ComputePilotDescription.
 
     A ComputePilotDescription (CPD) describes a L{ComputePilot} to be
@@ -14,12 +16,12 @@ class ComputePilotDescription (dict):
       - 'size':
           - minimum number of processes the pilot is expected to manage at any
             point in time (usually translates to number of CPU process slots
-            managed by the pilot).  
+            managed by the pilot).
           - type   : integer
           - default: 1
 
       - 'environment':
-          - a set of key/value pairs, to be exported into the environment of 
+          - a set of key/value pairs, to be exported into the environment of
             L{ComputeUnit}s on that pilot.
           - type   : dictionary
           - default: {}
@@ -55,7 +57,7 @@ class ComputePilotDescription (dict):
             total (in MByte).
           - type   : int
           - default: ""
-  
+
       - 'total_cpu_time':
           - the maximum number of CPU hours the pilot is expected to consume, in
             total.
@@ -78,7 +80,7 @@ class ComputePilotDescription (dict):
           - type   : string
           - default: ""
 
-      
+
 
     Affinity:
 
@@ -100,43 +102,40 @@ class ComputePilotDescription (dict):
     Note that the CPD does not describe how the pilot is instantiated in
     detail (e.g.executable name of pilot instance) -- that is left to the
     backend to decide, and may (or may not) be configurable out-of-band.
-      
+
     """
-
-    # Class members
-    __slots__ = (
-        'size',                     # int
-        'queue',                    # string
-        'project',                  # string
-        'candidate_hosts',          # string vec
-        'cpu_architecture',         # string / enum
-        'operating_system_type',    # string / enum
-        'total_physical_memory',    # int
-        'total_cpu_time',           # time
-        'wall_time_limit',          # time
-        'start_time',               # time
-        'contact',                  # string vec
-        'affinity_datacenter_label',# string
-        'affinity_machine_label',   # string
-    )
-
 
     def __init__ (self) :
 
-        # assign defaults
-        self['size'] = 1
-        
-        pass
-    
-    
+        # prepare instance data
+        self.attribute_register_  ('size',                     1,    self.Int,    self.Scalar, self.Writeable)
+        self.attribute_register_  ('queue',                    None, self.String, self.Scalar, self.Writeable)
+        self.attribute_register_  ('project',                  None, self.String, self.Scalar, self.Writeable)
+        self.attribute_register_  ('candidate_hosts',          None, self.String, self.Vector, self.Writeable)
+        self.attribute_register_  ('cpu_architecture',         None, self.Enum,   self.Scalar, self.Writeable)
+        self.attribute_register_  ('operating_system_type',    None, self.Enum,   self.Scalar, self.Writeable)
+        self.attribute_register_  ('total_physical_memory',    None, self.Int,    self.Scalar, self.Writeable)
+        self.attribute_register_  ('total_cpu_time',           None, self.Time,   self.Scalar, self.Writeable)
+        self.attribute_register_  ('wall_time_limit',          None, self.Time,   self.Scalar, self.Writeable)
+        self.attribute_register_  ('start_time',               None, self.Time,   self.Scalar, self.Writeable)
+        self.attribute_register_  ('contact',                  None, self.String, self.Vector, self.Writeable)
+        self.attribute_register_  ('affinity_datacenter_label',None, self.String, self.Scalar, self.Writeable)
+        self.attribute_register_  ('affinity_machine_label',   None, self.String, self.Scalar, self.Writeable)
+
+        # custom attributes are not allowed.
+        self.attribute_extensible_ (False)
+
+        self.set_idata_ ()
+
+
     def __setattr__ (self, attr, value) :
         # TODO: type checks
         self[attr]=value
-        
-    
+
+
     def __getattr__ (self, attr) :
         return self[attr]
-    
+
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

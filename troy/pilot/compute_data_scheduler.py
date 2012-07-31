@@ -7,61 +7,70 @@ from base import Base
 #
 class ComputeDataScheduler_ (Base) :
 
-    """ ComputeDataScheduler_ (CDS)
-    
-        The CS is a troy-internal object which provides scheduling capabilities
-        to Troy.  In particular, it will schedule compute_data units over a set of
-        compute_data pilots.  To do that, the scheduler implementation (adaptor) will
-        need to pull various information from the backend.  See adaptor level 
-        documentation for more details (TODO: link).
+    """
+    ComputeDataScheduler_ (CDS)
+
+    The CS is a troy-internal object which provides scheduling capabilities to
+    Troy.  In particular, it will schedule compute_data units over a set of compute_data
+    pilots.  To do that, the scheduler implementation (adaptor) will need to
+    pull various information from the backend.
     """
 
     # Class members
     __slots__ = (
-        'id',             # Reference to this    CDS
-        'policy',         # scheduler policy
+        'id',             # Reference to this CDS
     )
 
 
     def __init__ (self, policy=None) :
-        """ Create a ComputeDataScheduler -- private, only called by CDUS
+        """
+        Create a ComputeDataScheduler -- private, only called by CDUS
 
-            Keyword arguments:
-            policy -- scheduling policy to be provided
+        Keyword arguments:
+        policy -- scheduling policy to be provided
 
-            The given policy determines what backend (adaptor) should be used
-            for scheduling.  'None' leaves the scheduler selection to the Troy
-            implementation.
-
+        The given policy determines what backend (adaptor) should be used for
+        scheduling.  'None' leaves the scheduler selection to the
+        implementation.
         """
 
         # init api base
         Base.__init__ (self)
 
         # prepare instance data
-        idata = {
-                  'id'     : None,
-                  'policy' : policy,
-                }
-        self.set_idata_ (idata)
+        self.attribute_register_  ('id',     None,  self.String, self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('policy', 'Any', self.String, self.Scalar, self.Writeable)
 
-        # initialize adaptor class 
+        self.set_idata_ ()
+
+
+        # initialize adaptor class
         self.engine_.call ('ComputeDataScheduler', 'init_', self)
 
 
-    def schedule (self, thing, cdud) :
+    def schedule (self, cdus, cdud) :
         """
+        Schedule a compute data unit.
 
-        This is the main method: for a given 'thing', schedule a given
-        ComputeDataUnit.  A thing can actually only be a CDUS in this case.
-        
-        The method returns the CDU, which is at that point bound to (i.e.
-        scheduled on) a specific resource.
-        
-        On Error (no scheduling possible), 'None' is returned.  
+        A compute data unit description is used to instantiate a CDU on the
+        resource managed by a specific set of compute and data pilots.  The
+        scheduler can operate over all pilot services known to the CDUS, and
+        their pilots.
+
+        If the scheduler cannot find suitable resources for the requested CDU,
+        a BadParameter exception is raised.  Not raising this exception is not
+        a guarantee that the CDU will in fact be (able to be) enacted -- in that
+        case, the returned CDU will later be moved to Failed state.
+
+        On success, the returned CDU is in Pending state (or moved into any state
+        downstream from Pending).
+
+        schedule() will honor all attributes set on the cdud.  Attributes which
+        are not explicitly set are interpreted as having default values (see
+        documentation of CDUD), or, where default values are not specified, are
+        ignored.
         """
-        return self.engine_.call ('ComputeDataScheduler', 'schedule', 
-                                  self, thing, cdud)
+        return self.engine_.call ('ComputeDataScheduler', 'schedule', self, cdus, cdud)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

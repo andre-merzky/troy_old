@@ -1,9 +1,11 @@
 
+from attributes import Attributes
+
 ########################################################################
-# 
 #
 #
-class DataPilotDescription (dict):
+#
+class DataPilotDescription (Attributes) :
     """ DataPilotDescription.
 
     A DataPilotDescription (DPD) describes a L{DataPilot} to be
@@ -12,8 +14,8 @@ class DataPilotDescription (dict):
     for the pilot:
 
       - 'size':
-          - minimum size of storage the pilot is expected to manage at any 
-            point in time (usually translates to number of bytes of storage 
+          - minimum size of storage the pilot is expected to manage at any
+            point in time (usually translates to number of bytes of storage
             allocated by the pilot).
           - type   : integer
           - default: 1024 * 1024 * 1024 (1GB)
@@ -69,37 +71,24 @@ class DataPilotDescription (dict):
     backend to decide, and may (or may not) be configurable out-of-band.
 
     """
-    
-    # Class members
-    __slots__ = (
-        'size',                     # int
-        'queue',                    # string
-        'project',                  # string
-        'candidate_hosts',          # string vec
-        'wall_time_limit',          # time
-        'start_time',               # time
-        'contact',                  # string vec
-        'affinity_datacenter_label',# string
-        'affinity_machine_label',   # string
-    )
-
 
     def __init__ (self) :
 
-        # assign defaults
-        self['size'] = 1
-        
-        pass
-    
+        # prepare instance data
+        self.attribute_register_  ('size',                     1,    self.Int,    self.Scalar, self.Writeable)
+        self.attribute_register_  ('queue',                    None, self.String, self.Scalar, self.Writeable)
+        self.attribute_register_  ('project',                  None, self.String, self.Scalar, self.Writeable)
+        self.attribute_register_  ('candidate_hosts',          None, self.String, self.Vector, self.Writeable)
+        self.attribute_register_  ('wall_time_limit',          None, self.Time,   self.Scalar, self.Writeable)
+        self.attribute_register_  ('start_time',               None, self.Time,   self.Scalar, self.Writeable)
+        self.attribute_register_  ('contact',                  None, self.String, self.Vector, self.Writeable)
+        self.attribute_register_  ('affinity_datacenter_label',None, self.String, self.Scalar, self.Writeable)
+        self.attribute_register_  ('affinity_machine_label',   None, self.String, self.Scalar, self.Writeable)
 
-    def __setattr__ (self, attr, value) :
-        # TODO: type checks
-        self[attr]=value
-        
-    
-    def __getattr__ (self, attr) :
-        return self[attr]
+        # custom attributes are not allowed.
+        self.attribute_extensible_ (False)
 
+        self.set_idata_ ()
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

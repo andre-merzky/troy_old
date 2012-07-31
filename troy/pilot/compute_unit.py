@@ -1,50 +1,42 @@
 
 from base import Base
-    
 
 ########################################################################
 #
 #  ComputeUnit (CU)
-# 
+#
 class ComputeUnit (Base) :
 
-    """ ComputeUnit
-    
-        This is the object that is returned by the ComputeUnitService when a 
-        new ComputeUnit is created based on a ComputeUnitDescription.
+    """
+    ComputeUnit
 
-        The ComputeUnit object can be used by the application to keep track 
-        of ComputeUnits that are active.
+    This is the object that is returned by the ComputeUnitService when a new
+    ComputeUnit is created based on a ComputeUnitDescription.
 
-        A ComputeUnit has state, can be queried and can be cancelled.
+    The ComputeUnit object can be used by the application to keep track of
+    ComputeUnits that are active.
+
+    A ComputeUnit has state, can be queried and can be cancelled.
     """
 
-    # Class members
-    __slots__ = (
-        'id',           # Reference 
-        'state',        # State
-        'state_detail', # Backend specific state of the DataUnit
-
-        'description',  # Description
-    )
-
-    def __init__ (self, cu_id=None) :
-        print "cu : init"
+    def __init__ (self, cu_id) :
 
         # init api base
         Base.__init__ (self)
 
         # prepare instance data
-        idata = {
-                  'id' : cu_id,
-                }
-        self.set_idata_ (idata)
+        self.attribute_register_  ('id',             cu_id,     self.Url,    self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('state',          State.New, self.Enum,   self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('state_detail',   None,      self.String, self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('description',    None,      self.Any,    self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('service_url',    None,      self.Url,    self.Scalar, self.ReadOnly)
 
-        # initialize adaptor class 
+        self.set_idata_ ()
+
+        # initialize adaptor class
         self.engine_.call ('ComputeUnit', 'init_', self)
 
 
-    
     def wait (self) :
         """ Wait until CU enters a final state """
         return self.engine_.call ('ComputeUnit', 'wait', self)
@@ -54,27 +46,6 @@ class ComputeUnit (Base) :
         """ Cancel the CU """
         return self.engine_.call ('ComputeUnit', 'cancel', self)
 
-    
-    def set_callback (self, member, cb) :
-        """ Set a callback function for a member.
-
-            Keyword arguments:
-            member -- The member to set the callback for (state / state_detail).
-            cb     -- The callback object to call.
-        """
-        return self.engine_.call ('ComputeUnit', 'set_callback', 
-                                        self, member, cb)
-
-    
-    def unset_callback (self, member) :
-        """ Unset a callback function from a member
-
-            Keyword arguments:
-            member -- The member to unset the callback from.
-        """
-        return self.engine_.call ('ComputeUnit', 'unset_callback', 
-                                  self, member)
-        pass
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

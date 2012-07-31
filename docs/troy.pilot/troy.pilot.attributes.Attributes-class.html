@@ -1,0 +1,1103 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>troy.pilot.attributes.Attributes</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://saga-project.github.com/troy/">Troy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;troy ::
+        <a href="troy.pilot-module.html">Package&nbsp;pilot</a> ::
+        <a href="troy.pilot.attributes-module.html">Module&nbsp;attributes</a> ::
+        Class&nbsp;Attributes
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Attributes</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_troy_pil" name="uml_class_diagram_for_troy_pil">
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#Any" title="troy.pilot.attributes.Attributes.Any" alt="" coords="1275,383,1863,401"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#URL" title="troy.pilot.attributes.Attributes.URL" alt="" coords="1275,401,1863,420"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#Int" title="troy.pilot.attributes.Attributes.Int" alt="" coords="1275,420,1863,439"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#Float" title="troy.pilot.attributes.Attributes.Float" alt="" coords="1275,439,1863,457"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#String" title="troy.pilot.attributes.Attributes.String" alt="" coords="1275,457,1863,476"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#Bool" title="troy.pilot.attributes.Attributes.Bool" alt="" coords="1275,476,1863,495"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#Enum" title="troy.pilot.attributes.Attributes.Enum" alt="" coords="1275,495,1863,513"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#Time" title="troy.pilot.attributes.Attributes.Time" alt="" coords="1275,513,1863,532"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#Writeable" title="troy.pilot.attributes.Attributes.Writeable" alt="" coords="1275,532,1863,551"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#ReadOnly" title="troy.pilot.attributes.Attributes.ReadOnly" alt="" coords="1275,551,1863,569"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#Final" title="troy.pilot.attributes.Attributes.Final" alt="" coords="1275,569,1863,588"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#Extended" title="troy.pilot.attributes.Attributes.Extended" alt="" coords="1275,588,1863,607"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#NotExtended" title="troy.pilot.attributes.Attributes.NotExtended" alt="" coords="1275,607,1863,625"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#Scalar" title="troy.pilot.attributes.Attributes.Scalar" alt="" coords="1275,625,1863,644"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#Vector" title="troy.pilot.attributes.Attributes.Vector" alt="" coords="1275,644,1863,663"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#__init__" title="This method is not supposed to be directly called by the consumer of this &#160;API &#45;&#45; it is called indirectly via derived object construction." alt="" coords="1275,665,1863,684"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#attribute_init_" title="This method is not supposed to be directly called by the consumer of this &#160;API." alt="" coords="1275,684,1863,703"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#attribute_extensible_" title="Allow (or forbid) the on&#45;the&#45;fly creation of new attributes." alt="" coords="1275,703,1863,721"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#attribute_register_" title="Register a new attribute." alt="" coords="1275,721,1863,740"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#attribute_unregister_" title="Unregister an attribute." alt="" coords="1275,740,1863,759"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#attribute_set_final_" title="This method will set the &#39;final&#39; flag for an attribute, signalling that the attribute will never change again." alt="" coords="1275,759,1863,777"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#attribute_set_" title="This method will set an attribute, irrespectively of its mode." alt="" coords="1275,777,1863,796"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#attribute_is_final" title="This method will query the &#39;final&#39; flag for an attribute, which signals &#160;that the attribute will never change again." alt="" coords="1275,796,1863,815"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#attribute_register_cb" title="For any attribute change, the API will check if any callbacks are &#160;registered for that attribute." alt="" coords="1275,815,1863,833"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#attribute_unregister_cb" title="This method allows to unregister a previously registered callback, by &#160;providing its id." alt="" coords="1275,833,1863,852"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#attribute_call_cb_" title="This internal function is not to be used by the consumer of this API." alt="" coords="1275,852,1863,871"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#__getattr__" title="This internal method should not be explicitly called by consumers of this &#160;API, but is implicitly used via the dictionary interface." alt="" coords="1275,871,1863,889"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#__setattr__" title="This internal method should not be explicitly called by consumers of this &#160;API, but is implicitly used via the dictionary interface." alt="" coords="1275,889,1863,908"/>
+<area shape="rect" id="node99" href="troy.pilot.attributes.Attributes-class.html#attribute_conversion_" title="This is an internal method, and should not be called outside this interface implementation." alt="" coords="1275,908,1863,927"/>
+<area shape="rect" id="node1" href="troy.pilot.attributes.Attributes-class.html" title="Attribute Interface Class" alt="" coords="1263,358,1873,933"/>
+<area shape="rect" id="node7" href="troy.pilot.compute_unit_description.ComputeUnitDescription-class.html" title="ComputeUnitDescription (CUD)" alt="" coords="240,953,571,991"/>
+<area shape="rect" id="node8" href="troy.pilot.base.Base-class.html" title="All Troy API classes inherit from this base class, which provides support for adaptor management and the management of class instance data." alt="" coords="1520,953,1619,991"/>
+<area shape="rect" id="node9" href="troy.pilot.data_unit_description.DataUnitDescription-class.html" title="DataUnitDescription (DUD)" alt="" coords="1007,953,1287,991"/>
+<area shape="rect" id="node14" href="troy.pilot.compute_pilot_description.ComputePilotDescription-class.html" title="ComputePilotDescription." alt="" coords="1648,953,1984,991"/>
+<area shape="rect" id="node15" href="troy.pilot.data_pilot_description.DataPilotDescription-class.html" title="DataPilotDescription." alt="" coords="2013,953,2299,991"/>
+<area shape="rect" id="node100" href="javascript:void(0);" title="hash(x)" alt="" coords="1509,31,1629,49"/>
+<area shape="rect" id="node100" href="javascript:void(0);" title="cmp(x,y)" alt="" coords="1509,52,1629,71"/>
+<area shape="rect" id="node100" href="javascript:void(0);" title="dict.__contains__" alt="" coords="1509,71,1629,89"/>
+<area shape="rect" id="node100" href="javascript:void(0);" title="del x[y]" alt="" coords="1509,89,1629,108"/>
+<area shape="rect" id="node100" href="javascript:void(0);" title="x==y" alt="" coords="1509,108,1629,127"/>
+<area shape="rect" id="node100" href="javascript:void(0);" title="x&gt;=y" alt="" coords="1509,127,1629,145"/>
+<area shape="rect" id="node100" href="javascript:void(0);" title="x.__getattribute__(&#39;name&#39;) &lt;==&gt; x.name" alt="" coords="1509,145,1629,164"/>
+<area shape="rect" id="node100" href="javascript:void(0);" title="x[y]" alt="" coords="1509,164,1629,183"/>
+<area shape="rect" id="node100" href="javascript:void(0);" title="x&gt;y" alt="" coords="1509,183,1629,201"/>
+<area shape="rect" id="node100" href="javascript:void(0);" title="iter(x)" alt="" coords="1509,201,1629,220"/>
+<area shape="rect" id="node100" href="javascript:void(0);" title="x&lt;=y" alt="" coords="1509,220,1629,239"/>
+<area shape="rect" id="node100" href="javascript:void(0);" title="len(x)" alt="" coords="1509,239,1629,257"/>
+<area shape="rect" id="node100" href="javascript:void(0);" title="x&lt;y" alt="" coords="1509,257,1629,276"/>
+<area shape="rect" id="node100" href="javascript:void(0);" title="x!=y" alt="" coords="1509,276,1629,295"/>
+<area shape="rect" id="node100" href="javascript:void(0);" title="dict.values" alt="" coords="1509,313,1629,332"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="dict() &#45;&gt; new empty dictionary dict(mapping) &#45;&gt; new dictionary initialized from a mapping object&#39;s (key, value) pairs dict(iterable) &#45;&gt; new dictionary initialized as if via: d = {} for k, v in iterable: d[k] = v dict(**kwargs) &#45;&gt; new dictionary initialized with the name=value pairs in the keyword argument list." alt="" coords="1497,6,1641,338"/>
+<area shape="rect" id="node3" href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html" title="ComputeDataUnitService.(CDUS)" alt="" coords="2828,1070,3177,1109"/>
+<area shape="rect" id="node4" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html" title="ComputeUnitService (CUS)" alt="" coords="3005,1011,3293,1050"/>
+<area shape="rect" id="node5" href="troy.pilot.data_unit.DataUnit-class.html" title="DataUnit." alt="" coords="427,1011,571,1050"/>
+<area shape="rect" id="node17" href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html" title="ComputeDataUnit." alt="" coords="783,1070,1039,1109"/>
+<area shape="rect" id="node6" href="troy.pilot.compute_pilot_service.ComputePilotService-class.html" title="ComputePilotService (CPS)" alt="" coords="600,1011,893,1050"/>
+<area shape="rect" id="node21" href="troy.pilot.compute_data_unit_description.ComputeDataUnitDescription-class.html" title="ComputeDataUnitDescription (CDUD)" alt="" coords="5,1011,397,1050"/>
+<area shape="rect" id="node10" href="troy.pilot.compute_scheduler.ComputeScheduler_-class.html" title="ComputeScheduler_ (CS)" alt="" coords="923,1011,1195,1050"/>
+<area shape="rect" id="node11" href="troy.pilot.compute_unit.ComputeUnit-class.html" title="ComputeUnit" alt="" coords="1224,1011,1419,1050"/>
+<area shape="rect" id="node12" href="troy.pilot.data_pilot_service.DataPilotService-class.html" title="DataPilotService (DPS)" alt="" coords="1448,1011,1691,1050"/>
+<area shape="rect" id="node13" href="troy.pilot.compute_data_scheduler.ComputeDataScheduler_-class.html" title="ComputeDataScheduler_ (CDS)" alt="" coords="1720,1011,2051,1050"/>
+<area shape="rect" id="node16" href="troy.pilot.compute_pilot.ComputePilot-class.html" title="ComputePilot (PilotJob)" alt="" coords="2080,1011,2280,1050"/>
+<area shape="rect" id="node18" href="troy.pilot.data_scheduler.DataScheduler_-class.html" title="DataScheduler_ (DS)" alt="" coords="2309,1011,2531,1050"/>
+<area shape="rect" id="node19" href="troy.pilot.data_pilot.DataPilot-class.html" title="DataPilot (PilotStore)" alt="" coords="2560,1011,2709,1050"/>
+<area shape="rect" id="node20" href="troy.pilot.data_unit_service.DataUnitService-class.html" title="DataUnitService (DUS)" alt="" coords="2739,1011,2976,1050"/>
+</map>
+  <img src="uml_class_diagram_for_troy_pil.gif" alt='' usemap="#uml_class_diagram_for_troy_pil" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Attribute Interface Class</p>
+  <p>The Attributes interface has a very simple API -- it can be used as a 
+  Python dictionary.  In fact, in inherits from 'dict', and can thus 
+  interchangeably used.  By overloading the dictionary setter and getter 
+  methods it provides, however, some additional semantics.</p>
+  <p>In particular, a class which uses this interface can internally 
+  specify which attributes can be set, and what type they have.  Also, 
+  default values can be specified, and the class provides a rudimentary 
+  support for converting scalar attributes into vector attributes and 
+  back.</p>
+  <p>Also, the consumer of this API can register callbacks, which get 
+  triggered on changes to specific attribute values.</p>
+  <p>Example use case:</p>
+<pre class="literalblock">
+   class Transliterator ( Attributes ) :
+
+       def __init__ (self) :
+           self.attribute_register_   ('apple', 'Appel', self.String, self.Scalar, self.Writeable)
+           self.attribute_register_   ('plum',  'Pruim', self.String, self.Scalar, self.ReadOnly)
+           self.attribute_extensible_ (True)
+
+
+   if __name__ == &quot;__main__&quot;:
+
+       def cb (key, val, obj) :
+           print &quot;called: %s - %s - %s&quot;  %  (key, val, type (obj))
+
+       trans = Transliterator ()
+
+       print &quot; -- apple&quot;
+       print trans.apple
+       trans.apple = 'Apfel'
+       print trans.apple
+
+       trans.attribute_register_cb ('apple', cb)
+       trans.apple = 'Apfel'
+
+       .apple = 'Abbel'
+       print trans.apple
+
+
+       print &quot;\n -- plum&quot;
+       print trans.plum
+     # trans.plum = 'Pflaume'  # raises exception
+       print trans.plum
+
+       print &quot;\n -- peach&quot;
+       print trans.peach       # rases exception
+       trans.peach = 'Birne'
+       print trans.peach
+</pre>
+  <p>This example will result in:</p>
+<pre class="literalblock">
+   -- apple
+   Appel
+   Apfel
+   called: apple - Apfel - &lt;class '__main__.Foo'&gt;
+   called: apple - Apfel - &lt;class '__main__.Foo'&gt;
+   Apfel
+
+    -- plum
+   Pruim
+   Pruim
+
+    -- peach
+   None
+   Birne
+</pre>
+  <p>Note that using this interface *and* inheriting from Python's dict 
+  object (or any other base classes which define / overload dictionary 
+  setters and getters) is probably a bad idea.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><pre class="literalblock">
+new empty dictionary
+
+</pre></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.attributes.Attributes-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      This method is not supposed to be directly called by the consumer of 
+      this API -- it is called indirectly via derived object construction.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.attributes.Attributes-class.html#attribute_init_" class="summary-sig-name">attribute_init_</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      This method is not supposed to be directly called by the consumer of 
+      this API.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_init_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.attributes.Attributes-class.html#attribute_extensible_" class="summary-sig-name">attribute_extensible_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">e</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Allow (or forbid) the on-the-fly creation of new attributes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_extensible_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.attributes.Attributes-class.html#attribute_register_" class="summary-sig-name">attribute_register_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">default</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">typ</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">string</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">flavor</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">scalar</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">mode</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">writeable</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">ext</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Register a new attribute.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_register_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.attributes.Attributes-class.html#attribute_unregister_" class="summary-sig-name">attribute_unregister_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>)</span><br />
+      Unregister an attribute.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_unregister_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.attributes.Attributes-class.html#attribute_set_final_" class="summary-sig-name">attribute_set_final_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">val</span>=<span class="summary-sig-default">None</span>)</span><br />
+      This method will set the 'final' flag for an attribute, signalling 
+      that the attribute will never change again.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_set_final_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.attributes.Attributes-class.html#attribute_set_" class="summary-sig-name">attribute_set_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">val</span>=<span class="summary-sig-default">None</span>)</span><br />
+      This method will set an attribute, irrespectively of its mode.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_set_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="attribute_is_final"></a><span class="summary-sig-name">attribute_is_final</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>)</span><br />
+      This method will query the 'final' flag for an attribute, which 
+      signals that the attribute will never change again.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_is_final">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.attributes.Attributes-class.html#attribute_register_cb" class="summary-sig-name">attribute_register_cb</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">cb</span>)</span><br />
+      For any attribute change, the API will check if any callbacks are 
+      registered for that attribute.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_register_cb">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.attributes.Attributes-class.html#attribute_unregister_cb" class="summary-sig-name">attribute_unregister_cb</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">id</span>=<span class="summary-sig-default">None</span>)</span><br />
+      This method allows to unregister a previously registered callback, by
+      providing its id.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_unregister_cb">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.attributes.Attributes-class.html#attribute_call_cb_" class="summary-sig-name">attribute_call_cb_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>)</span><br />
+      This internal function is not to be used by the consumer of this API.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_call_cb_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.attributes.Attributes-class.html#__getattr__" class="summary-sig-name">__getattr__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>)</span><br />
+      This internal method should not be explicitly called by consumers of 
+      this API, but is implicitly used via the dictionary interface.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.__getattr__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.attributes.Attributes-class.html#__setattr__" class="summary-sig-name">__setattr__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">val</span>)</span><br />
+      This internal method should not be explicitly called by consumers of 
+      this API, but is implicitly used via the dictionary interface.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.__setattr__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.attributes.Attributes-class.html#attribute_conversion_" class="summary-sig-name">attribute_conversion_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">val</span>)</span><br />
+      This is an internal method, and should not be called outside this 
+      interface implementation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_conversion_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>dict</code></b>:
+      <code>__cmp__</code>,
+      <code>__contains__</code>,
+      <code>__delitem__</code>,
+      <code>__eq__</code>,
+      <code>__ge__</code>,
+      <code>__getattribute__</code>,
+      <code>__getitem__</code>,
+      <code>__gt__</code>,
+      <code>__iter__</code>,
+      <code>__le__</code>,
+      <code>__len__</code>,
+      <code>__lt__</code>,
+      <code>__ne__</code>,
+      <code>__new__</code>,
+      <code>__repr__</code>,
+      <code>__setitem__</code>,
+      <code>__sizeof__</code>,
+      <code>clear</code>,
+      <code>copy</code>,
+      <code>fromkeys</code>,
+      <code>get</code>,
+      <code>has_key</code>,
+      <code>items</code>,
+      <code>iteritems</code>,
+      <code>iterkeys</code>,
+      <code>itervalues</code>,
+      <code>keys</code>,
+      <code>pop</code>,
+      <code>popitem</code>,
+      <code>setdefault</code>,
+      <code>update</code>,
+      <code>values</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Any"></a><span class="summary-name">Any</span> = <code title="'any'"><code class="variable-quote">'</code><code class="variable-string">any</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="URL"></a><span class="summary-name">URL</span> = <code title="'url'"><code class="variable-quote">'</code><code class="variable-string">url</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Int"></a><span class="summary-name">Int</span> = <code title="'int'"><code class="variable-quote">'</code><code class="variable-string">int</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Float"></a><span class="summary-name">Float</span> = <code title="'float'"><code class="variable-quote">'</code><code class="variable-string">float</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="String"></a><span class="summary-name">String</span> = <code title="'string'"><code class="variable-quote">'</code><code class="variable-string">string</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Bool"></a><span class="summary-name">Bool</span> = <code title="'bool'"><code class="variable-quote">'</code><code class="variable-string">bool</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Enum"></a><span class="summary-name">Enum</span> = <code title="'enum'"><code class="variable-quote">'</code><code class="variable-string">enum</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Time"></a><span class="summary-name">Time</span> = <code title="'time'"><code class="variable-quote">'</code><code class="variable-string">time</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Writeable"></a><span class="summary-name">Writeable</span> = <code title="'writeable'"><code class="variable-quote">'</code><code class="variable-string">writeable</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ReadOnly"></a><span class="summary-name">ReadOnly</span> = <code title="'readonly'"><code class="variable-quote">'</code><code class="variable-string">readonly</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Final"></a><span class="summary-name">Final</span> = <code title="'final'"><code class="variable-quote">'</code><code class="variable-string">final</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Extended"></a><span class="summary-name">Extended</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="NotExtended"></a><span class="summary-name">NotExtended</span> = <code title="False">False</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Scalar"></a><span class="summary-name">Scalar</span> = <code title="'scalar'"><code class="variable-quote">'</code><code class="variable-string">scalar</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Vector"></a><span class="summary-name">Vector</span> = <code title="'vector'"><code class="variable-quote">'</code><code class="variable-string">vector</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>dict</code></b>:
+      <code>__hash__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method is not supposed to be directly called by the consumer of 
+  this API -- it is called indirectly via derived object construction.</p>
+  <p>init makes sure that the basic structures are in place on the 
+  attribute dictionary - this saves us ton of safety checks later on.</p>
+  <dl class="fields">
+    <dt>Returns: <pre class="literalblock">
+new empty dictionary
+
+</pre></dt>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="attribute_init_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">attribute_init_</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method is not supposed to be directly called by the consumer of 
+  this API.</p>
+  <p>The attribute_init_ method initializes the interface's internal data 
+  structures.  We always need the attribute dict, and the extensible flag. 
+  Everything else can be added on the fly.  The method makes not to 
+  overwrite any settings -- initialization occurs only once!</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="attribute_extensible_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">attribute_extensible_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">e</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_extensible_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Allow (or forbid) the on-the-fly creation of new attributes. This 
+  method should only be called within derived classes.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="attribute_register_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">attribute_register_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">default</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">typ</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">string</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">flavor</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">scalar</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">mode</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">writeable</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">ext</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_register_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Register a new attribute.</p>
+  <p>This function ignores the extensible, final and readonly flag, and is 
+  supposed to be used by derived classes, not by the consumer of the 
+  API.</p>
+  <p>Note that the given attribute will overwrite any previously existing 
+  attribute w/o warning (even if that one was final).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="attribute_unregister_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">attribute_unregister_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_unregister_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Unregister an attribute.</p>
+  <p>This function ignores the extensible, final and readonly flag, and is 
+  supposed to be used by derived classes, not by the consumer of the 
+  API.</p>
+  <p>Note that unregistering is different from setting the value to 'None' 
+  -- all meta information about the attribute will be removed.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="attribute_set_final_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">attribute_set_final_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">val</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_set_final_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method will set the 'final' flag for an attribute, signalling 
+  that the attribute will never change again.  A final value can optionally
+  be provided -- otherwise the attribute is frozen with its current 
+  value.</p>
+  <p>Note that attribute_set_final() will trigger callbacks, if a new value
+  is  given.</p>
+  <p>This function ignores the readonly flag, and is supposed to be used by
+  derived classes, not by the consumer of the API.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="attribute_set_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">attribute_set_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">val</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_set_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method will set an attribute, irrespectively of its mode.</p>
+  <p>if no value is provided, the attribute's value is set to 'None'.  Note
+  that attribute_set_() will trigger callbacks, if a new value (different 
+  from the old value) is given.</p>
+  <p>Note that new attributes are silently created, irrespectively of the 
+  'extensible' flag.</p>
+  <p>This function ignores the readonly flag, and is supposed to be used by
+  derived classes, not by the consumer of the API.  It should be used to 
+  change attributes which are marked as 'readonly' to the consumer.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="attribute_register_cb"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">attribute_register_cb</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">cb</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_register_cb">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>For any attribute change, the API will check if any callbacks are 
+  registered for that attribute.  If so, those callbacks will be called in 
+  order of registration.  This registration function will return an id 
+  (cookie) identifying the callback -- that id can be used to unregister 
+  the callback.</p>
+  <p>A callback is any callable python construct, and MUST accept three 
+  arguments:</p>
+<pre class="literalblock">
+   - String key: the name of the attribute which changed
+   - Any    val: the new value of the attribute
+   - Any    obj: the object on which this attribute interface was called
+</pre>
+  <p>The 'obj' can be any python object type, but is guaranteed to expose 
+  this attribute interface.</p>
+  <p>The callback SHOULD return 'True' or 'False' -- on 'True', the 
+  callback will remain registered, and will thus be called again on the 
+  next attribute change.  On returning 'False', the callback will be 
+  unregistered, and will thus not be called again.  Returning nothing is 
+  interpreted as 'False', other return values lead to undefined 
+  behavior.</p>
+  <p>Note that callbacks will not be called on 'Final' attributes.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="attribute_unregister_cb"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">attribute_unregister_cb</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">id</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_unregister_cb">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method allows to unregister a previously registered callback, by 
+  providing its id.  It is not an error to remove a non-existing cb, but a 
+  valid ID MUST be provided -- otherwise, an AttributeError is raised.</p>
+  <p>If no ID is provided (id == None), all callbacks are removed for this 
+  attribute.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="attribute_call_cb_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">attribute_call_cb_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_call_cb_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This internal function is not to be used by the consumer of this 
+  API.</p>
+  <p>It triggers the invocation of all callbacks for a given attribute. 
+  Callbacks returning False (or nothing at all) will be unregistered after 
+  their invocation.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__getattr__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__getattr__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>)</span>
+    <br /><em class="fname">(Qualification operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.__getattr__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This internal method should not be explicitly called by consumers of 
+  this API, but is implicitly used via the dictionary interface.</p>
+  <p>The getattr method returns the value of the specified attribute.  If 
+  that attribute does not exist, an AttributeError is raised.  It is not an
+  error to query an unset attribute though -- that will result in 'None' to
+  be returned.</p>
+  <p>Note that this method is not performing any checks or conversions -- 
+  those are all performed when *setting* an attribute.  So, any attribute 
+  flags (type, mode, flavor) are evaluated on setting, not on getting.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__setattr__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__setattr__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">val</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.__setattr__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This internal method should not be explicitly called by consumers of 
+  this API, but is implicitly used via the dictionary interface.</p>
+  <p>The setattr method sets the value of the specified attribute.  If that
+  attribute does not exist, an AttributeError is raised -- unless the 
+  attribute set is marked 'extensible' -- in that case, the attribute is 
+  created and set on the fly.  It is not an error to query unset attribute 
+  though -- that is done by setting it to 'None'.  If a default is 
+  specified for an attribute, setting 'None' will in fact restore the 
+  default value.</p>
+  <p>Note that this method is performing a number of checks and 
+  conversions, to match the value type to the attribute flags (type, mode, 
+  flavor). Those conversions are not guaranteed to yield the expected 
+  result -- for example, the conversion from 'scalar' to 'vector' is, for 
+  complex types, ambiguous at best, and very likely stupid.  The consumer 
+  of the API SHOULD ensure correct attribute values.  The conversions are 
+  intended to support the most trivial and simple use cases (int to string 
+  etc). Failed conversions will result in an Attribute Error.</p>
+  <p>Note:</p>
+<pre class="literalblock">
+   Conversions and checks are incomplete at this point!
+   See code documentation (FIXMEs) for details.
+</pre>
+  <p>Attempts to set a 'final' attribute are silently ignored.  Attempts to
+  set a 'readonly' attribute will result in an AttributeError being 
+  raised.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__setattr__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="attribute_conversion_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">attribute_conversion_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">val</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.attributes-pysrc.html#Attributes.attribute_conversion_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This is an internal method, and should not be called outside this 
+  interface implementation.</p>
+  <p>The method checks a given attribute value against the attribute's 
+  flags, and performs some simple type conversion as needed.  Also, the 
+  method will restore a 'None' value to the attribute's default value.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://saga-project.github.com/troy/">Troy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Tue Jul 31 12:34:24 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

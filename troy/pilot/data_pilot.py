@@ -3,20 +3,20 @@ from base            import Base
 
 
 ########################################################################
-# 
+#
 #
 #
 class DataPilot (Base) :
 
     """ DataPilot (PilotStore)
 
-        This is the object that is returned by the DataPilotService when a 
+        This is the object that is returned by the DataPilotService when a
         new DataPilot is created based on a DataPilotDescription.
 
-        The DataPilot object can be used by the application to keep track 
+        The DataPilot object can be used by the application to keep track
         of DataPilots that are active.
-        
-        A DataPilot has state, can be queried, can be cancelled and 
+
+        A DataPilot has state, can be queried, can be cancelled and
         re-initialized.
 
 
@@ -33,8 +33,8 @@ class DataPilot (Base) :
 
           - id:
             The id may be 'None' if the Pilot is not yet in Running state.
-            The returned ID can be used to connect to the DP instance later 
-            on, for example from within a different application instance.  
+            The returned ID can be used to connect to the DP instance later
+            on, for example from within a different application instance.
             type: string (url)
 
           - description:
@@ -50,7 +50,7 @@ class DataPilot (Base) :
             type: string (url)
 
           - wall_time_left:
-            The estimated remaining life time of this pilot.  
+            The estimated remaining life time of this pilot.
             The availability of this property is not guaranteed, and depends on
             both the backend pilot framework, and on the type of pilot (not all
             pilots have a finite lifetime).
@@ -59,20 +59,6 @@ class DataPilot (Base) :
             type: int
     """
 
-    # Class members
-    __slots__ = (
-        'id',           # Reference to this DP
-        'state',        # State of the DataPilot
-        'state_detail', # Backend specific state of the DataPilot
-
-        'description',  # Description of DataPilot
-        'service_url',  # DataPilotService URL
-
-        'space_left'    # Remaining space allocation
-    )
-
-
-    
     def __init__ (self, dp_id) :
         """ Create a DataPilot
 
@@ -92,12 +78,19 @@ class DataPilot (Base) :
         Base.__init__ (self)
 
         # prepare instance data
-        idata = {
-                  'id'        : dp_id,
-                }
-        self.set_idata_ (idata)
+        self.attribute_register_  ('id',             dp_id,     self.Url,    self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('state',          State.New, self.Enum,   self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('state_detail',   None,      self.String, self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('description',    None,      self.Any,    self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('service_url',    None,      self.Url,    self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('space_left',     -1,        self.Int,    self.Scalar, self.ReadOnly)
 
-        # initialize adaptor class 
+        # custom attributes are not allowed.
+        self.attribute_extensible_ (False)
+
+        self.set_idata_ ()
+
+        # initialize adaptor class
         self.engine_.call ('DataPilot', 'init_', self)
 
 
@@ -106,7 +99,7 @@ class DataPilot (Base) :
     #
     def reinitialize (self, dpd) :
         """ Re-Initialize the DataPilot to the (new) DataPilotDescription.
-        
+
             Keyword arguments:
             dpd -- A DataPilotDescription
 
@@ -145,7 +138,7 @@ class DataPilot (Base) :
             raising this exception is not a guarantee that the DU will in fact
             be (able to be) executed -- in that case, the returned DU will later
             be moved to Failed state.
-            
+
             On success, the returned DU is in Pending state (or moved into any
             state downstream from Pending).
 
@@ -155,7 +148,7 @@ class DataPilot (Base) :
             are ignored.
         """
         return self.engine_.call ('DataPilot', 'submit_data_unit', self, dud)
-            
+
 
 
     def list_data_units (self) :
@@ -195,11 +188,11 @@ class DataPilot (Base) :
 
 
     def wait (self) :
-        """ Wait until DP enters a final state 
+        """ Wait until DP enters a final state
 
         It is not an error to call wait() in a final state -- the call simply
         returns immediately.
-        
+
         """
         return self.engine_.call ('DataPilot', 'wait', self)
 
@@ -209,12 +202,12 @@ class DataPilot (Base) :
         """ Move the pilot into Canceled state, releasing all resources.
 
         The will block until the pilot reaches Canceled state and resources have
-        been released.  
+        been released.
 
         It is not an error to call the method in a final state -- it will simple
         return immediately.  The pilot's state will not be changed in that case
         though.
-        
+
         """
         return self.engine_.call ('DataPilot', 'cancel', self)
 

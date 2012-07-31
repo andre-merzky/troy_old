@@ -1,24 +1,24 @@
 
+from attributes import Attributes
+
 ########################################################################
 #
 #  ComuteUnitDescription
-# 
-class ComputeUnitDescription (dict) :
-    """  ComputeUnitDescription.
-    
-        The ComputeUnitDescription is a job/task/call description based on 
-        SAGA Job Description. 
-        
+#
+class ComputeUnitDescription (Attributes) :
     """
+    ComputeUnitDescription (CUD)
 
-    # Class members
-    __slots__ = (
+    The ComputeUnitDescription is a job/task description based on SAGA Job
+    Description.  It describes a (set of) compute activities to be enacted via
+    a L{ComputeUnitService}, and to be managed by a L{ComputePilot}::
+
         # Action description
         'executable',           # The "action" to execute
         'arguments',            # Arguments to the "action"
         'cleanup',
         'environment',          # "environment" settings for the "action"
-        'interactive', 
+        'interactive',
         'contact',
         'project',
         'start_time',
@@ -45,18 +45,57 @@ class ComputeUnitDescription (dict) :
         'total_cpu_time',
         'wall_time_limit',
         'queue'
-    )
+    """
 
 
     def __init__ (self) :
-        pass
+
+        # prepare instance data
+
+        # Action description
+        self.attribute_register ('executable',            None, self.String, self.Scalar, self.Writeable)
+        self.attribute_register ('arguments',             None, self.String, self.Vector, self.Writeable)
+        self.attribute_register ('cleanup',               None, self.Bool,   self.Scalar, self.Writeable)
+        self.attribute_register ('environment',           None, self.String, self.Vector, self.Writeable)
+        self.attribute_register ('interactive',           None, self.Bool,   self.Scalar, self.Writeable)
+        self.attribute_register ('contact',               None, self.String, self.Vector, self.Writeable)
+        self.attribute_register ('project',               None, self.String, self.Scalar, self.Writeable)
+        self.attribute_register ('start_time',            None, self.Time,   self.Scalar, self.Writeable)
+        self.attribute_register ('working_directory',     None, self.String, self.Scalar, self.Writeable)
+
+        # I/O
+        self.attribute_register ('input',                 None, self.Url,    self.Scalar, self.Writeable)
+        self.attribute_register ('error',                 None, self.Url,    self.Scalar, self.Writeable)
+        self.attribute_register ('output',                None, self.Url,    self.Scalar, self.Writeable)
+        self.attribute_register ('file_transfer',         None, self.String, self.Vector, self.Writeable)
+
+        # Parallelism
+        self.attribute_register ('number_of_processes',   None, self.Int,    self.Scalar, self.Writeable)
+        self.attribute_register ('processes_per_host',    None, self.Int,    self.Scalar, self.Writeable)
+        self.attribute_register ('threads_per_process',   None, self.Int,    self.Scalar, self.Writeable)
+        self.attribute_register ('total_core_count',      None, self.Int,    self.Scalar, self.Writeable)
+        self.attribute_register ('spmd_variation',        None, self.Enum,   self.Scalar, self.Writeable)
+
+        # Requirements
+        self.attribute_register ('candidate_hosts',       None, self.String, self.Vector, self.Writeable)
+        self.attribute_register ('cpu_architecture',      None, self.Enum,   self.Scalar, self.Writeable)
+        self.attribute_register ('operating_system_type', None, self.Enum,   self.Scalar, self.Writeable)
+        self.attribute_register ('total_physical_memory', None, self.int,    self.Scalar, self.Writeable)
+        self.attribute_register ('total_cpu_time',        None, self.Time,   self.Scalar, self.Writeable)
+        self.attribute_register ('wall_time_limit',       None, self.Time,   self.Scalar, self.Writeable)
+        self.attribute_register ('queue',                 None, self.String, self.Scalar, self.Writeable)
+
+        # custom attributes are not allowed.
+        self.attribute_extensible_ (False)
+
+        self.set_idata_ ()
 
 
     def __setattr__ (self, attr, value) :
         # TODO: key checks, type checks
         self[attr]=value
-        
-    
+
+
     def __getattr__ (self, attr) :
         return self[attr]
 

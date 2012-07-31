@@ -6,7 +6,7 @@ abstractions.  Most prominently, pilot abstractions cover PilotJobs, a well
 known mechanism for application level job management, which is usually employed
 for HTC type applications on HPC type resources (amongst others).  Another pilot
 abstraction is PilotData, which, in a similar fashion as PilotJobs, decouples
-system level and application level data management.  
+system level and application level data management.
 
 The Pilot API exposes the ability to handle Compute and Data workloads
 concurrently, by interleaving PilotJobs and PilotData concepts.
@@ -17,12 +17,12 @@ The main concepts and classes of the API are:
       a pilot, which manages a (compute or data) resource slice for the
       application
 
-    - L{ComputePilotService} (CPS) / L{DataPilotservice} (DPS): 
+    - L{ComputePilotService} (CPS) / L{DataPilotService} (DPS):
       creates and manages pilots, according to application specified resource
       requirements.  Also, 'submit_xxx_unit()' methods accept work descriptions
       of L{ComputeUnit}s and L{DataUnit}s to be executed on its pilots.
 
-    - L{ComputeUnitDescription} (CUD) / L{DataUnitDescription} (DUD) / 
+    - L{ComputeUnitDescription} (CUD) / L{DataUnitDescription} (DUD) /
       L{ComputeDataUnitDescription} (CDUD) :
       describes a piece of (compute or data or combination thereof) workload, to
       be managed by a (set of) pilot(s).
@@ -32,10 +32,10 @@ The main concepts and classes of the API are:
       created according to a L{ComputeUnitDescription} / L{DataUnitDescription}
       / L{ComputeDataUnitDescription}
 
-    - L{ComputeUnitService} (CUS) / DataUnitService (DUS) / 
+    - L{ComputeUnitService} (CUS) / DataUnitService (DUS) /
       ComputeDataUnitService (CDUS):
-      an application level scheduler which can instantiate L{ComputeUnit}s, 
-      L{DataUnit}s and L{ComputeDataUnit}s on a set of L{ComputePilotService}s 
+      an application level scheduler which can instantiate L{ComputeUnit}s,
+      L{DataUnit}s and L{ComputeDataUnit}s on a set of L{ComputePilotService}s
       and L{DataPilotService}s, and their pilots.
 
 The UnitService's is what the application will mostly work with: it takes care
@@ -84,27 +84,28 @@ compute-data co-scheduling.
 
 
 
-from troy.pilot.state                          import State                        
-from troy.pilot.callback                       import Callback                     
+from troy.pilot.config                         import Config_
+from troy.pilot.state                          import State
+from troy.pilot.attributes                     import Callback, Attributes
 from troy.pilot.exception                      import TroyException, Error
 
-from troy.pilot.compute_pilot_description      import ComputePilotDescription    
-from troy.pilot.compute_pilot                  import ComputePilot                
-from troy.pilot.compute_pilot_service          import ComputePilotService        
-from troy.pilot.compute_unit_description       import ComputeUnitDescription     
-from troy.pilot.compute_unit                   import ComputeUnit                 
-from troy.pilot.compute_unit_service           import ComputeUnitService         
+from troy.pilot.compute_pilot_description      import ComputePilotDescription
+from troy.pilot.compute_pilot                  import ComputePilot
+from troy.pilot.compute_pilot_service          import ComputePilotService
+from troy.pilot.compute_unit_description       import ComputeUnitDescription
+from troy.pilot.compute_unit                   import ComputeUnit
+from troy.pilot.compute_unit_service           import ComputeUnitService
 
-from troy.pilot.data_pilot_description         import DataPilotDescription       
-from troy.pilot.data_pilot                     import DataPilot                   
-from troy.pilot.data_pilot_service             import DataPilotService           
-from troy.pilot.data_unit_description          import DataUnitDescription        
-from troy.pilot.data_unit                      import DataUnit                    
-from troy.pilot.data_unit_service              import DataUnitService            
+from troy.pilot.data_pilot_description         import DataPilotDescription
+from troy.pilot.data_pilot                     import DataPilot
+from troy.pilot.data_pilot_service             import DataPilotService
+from troy.pilot.data_unit_description          import DataUnitDescription
+from troy.pilot.data_unit                      import DataUnit
+from troy.pilot.data_unit_service              import DataUnitService
 
 from troy.pilot.compute_data_unit_description  import ComputeDataUnitDescription
-from troy.pilot.compute_data_unit              import ComputeDataUnit            
-from troy.pilot.compute_data_unit_service      import ComputeDataUnitService    
+from troy.pilot.compute_data_unit              import ComputeDataUnit
+from troy.pilot.compute_data_unit_service      import ComputeDataUnitService
 
 from troy.pilot.compute_scheduler              import ComputeScheduler_
 from troy.pilot.data_scheduler                 import DataScheduler_

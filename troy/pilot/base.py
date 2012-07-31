@@ -1,27 +1,28 @@
 
-from troy  import engine
-from state import State
+from troy       import engine
+from state      import State
+from attributes import Attributes
 
 ########################################################################
 #
 #
 #
-class Base (object):
+class Base (Attributes, object):
 
-    """ 
+    """
 
     All Troy API classes inherit  from this base class, which provides support
-    for adaptor management and the management of class instance data.  
+    for adaptor management and the management of class instance data.
 
     In particular, this base class provides the following class members to all
     API classes:
 
-      - engine_   : a reference to the engine singleton, which manages adaptors 
+      - engine_   : a reference to the engine singleton, which manages adaptors
                     and call forwarding
       - adaptors_ : a sorted list of used adaptors, which can be used by the
                     engine to optimize adaptor invocation (previously successful
                     adaptors are most likely to succeed again)
-      - idata_    : a dict of dicts, for class instance state data management.  
+      - idata_    : a dict of dicts, for class instance state data management.
                     The dict under idata_['api'] holds the actual class instance
                     data (documented for each class), all other keys hold adaptor
                     level instance data, for example to cache connections.  The
@@ -37,7 +38,7 @@ class Base (object):
     access it.
 
     """
-    
+
 
     def __init__ (self) :
         self.engine_   = engine.Engine ()  # engine singleton to handle adaptors
@@ -45,11 +46,11 @@ class Base (object):
         self.idata_    = {}                # adaptor specific instance data
         self.contexts  = []                # list of security context dicts
 
-        
+
     def get_idata_ (self, id = 'api') :
-        """ 
+        """
         Get instance data dict entry.
-        
+
         By default, this returns the class instance data, otherwise the instance
         data of the specified adaptor.
         """
@@ -57,9 +58,9 @@ class Base (object):
 
 
     def set_idata_ (self, data, id='api') :
-        """ 
+        """
         Set instance data dict entry.
-        
+
         By default, this sets the class instance data, otherwise the instance
         data of the specified adaptor.
         """

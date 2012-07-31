@@ -55,18 +55,23 @@
 <!-- ==================== CLASS DESCRIPTION ==================== -->
 <h1 class="epydoc">Class iComputeUnitService</h1><p class="nomargin-top"><span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService">source&nbsp;code</a></span></p>
 <center>
-<center>  <map id="uml_class_diagram_for_troy_int_8" name="uml_class_diagram_for_troy_int_8">
-<area shape="rect" id="node19" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#__init__" title="Create a ComputeUnitService object" alt="" coords="17,103,207,121"/>
-<area shape="rect" id="node19" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#init_" title="dummy method to make sure the backend can initialize the object" alt="" coords="17,121,207,140"/>
-<area shape="rect" id="node19" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#add_compute_pilot" title="Add a ComputePilot to this WUS." alt="" coords="17,140,207,159"/>
-<area shape="rect" id="node19" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#list_compute_pilots" title="List all CPs of CUS" alt="" coords="17,159,207,177"/>
-<area shape="rect" id="node19" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#remove_compute_pilot" title="Remove a ComputePilot" alt="" coords="17,177,207,196"/>
-<area shape="rect" id="node19" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#submit_compute_unit" title="Submit a CU to this ComputeUnitService." alt="" coords="17,196,207,215"/>
-<area shape="rect" id="node19" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#get_id" title="get instance id" alt="" coords="17,215,207,233"/>
-<area shape="rect" id="node1" href="troy.interface.compute_unit_service.iComputeUnitService-class.html" title="ComputeUnitService (CUS)" alt="" coords="5,70,219,239"/>
-<area shape="rect" id="node2" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="67,6,157,50"/>
+<center>  <map id="uml_class_diagram_for_troy_int_10" name="uml_class_diagram_for_troy_int_10">
+<area shape="rect" id="node1" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="317,6,408,50"/>
+<area shape="rect" id="node68" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#__init__" title="Create a ComputeUnitService object" alt="" coords="268,103,457,121"/>
+<area shape="rect" id="node68" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#add_compute_pilot" title="Add a ComputePilot to this WUS." alt="" coords="268,121,457,140"/>
+<area shape="rect" id="node68" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#get_id" title="get instance id" alt="" coords="268,140,457,159"/>
+<area shape="rect" id="node68" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#init_" title="dummy method to make sure the backend can initialize the object" alt="" coords="268,159,457,177"/>
+<area shape="rect" id="node68" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#list_compute_pilots" title="List all CPs of CUS" alt="" coords="268,177,457,196"/>
+<area shape="rect" id="node68" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#remove_compute_pilot" title="Remove a ComputePilot" alt="" coords="268,196,457,215"/>
+<area shape="rect" id="node68" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#submit_compute_unit" title="Submit a CU to this ComputeUnitService." alt="" coords="268,215,457,233"/>
+<area shape="rect" id="node5" href="troy.interface.compute_unit_service.iComputeUnitService-class.html" title="ComputeUnitService (CUS)" alt="" coords="256,70,469,239"/>
+<area shape="rect" id="node2" href="troy_adaptor_skeleton.xyz_cus-class.html" title="troy_adaptor_skeleton.xyz_cus" alt="" coords="5,259,221,298"/>
+<area shape="rect" id="node3" href="troy_adaptor_peejay.peejay_cus-class.html" title="troy_adaptor_peejay.peejay_cus" alt="" coords="251,259,475,298"/>
+<area shape="rect" id="node4" href="troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html" title="ComputeDataUnitService." alt="" coords="504,259,856,298"/>
+<area shape="rect" id="node6" href="troy_adaptor_skeleton.xyz_dcus-class.html" title="troy_adaptor_skeleton.xyz_dcus" alt="" coords="440,318,664,357"/>
+<area shape="rect" id="node7" href="troy_adaptor_peejay.peejay_dcus-class.html" title="troy_adaptor_peejay.peejay_dcus" alt="" coords="693,318,923,357"/>
 </map>
-  <img src="uml_class_diagram_for_troy_int_8.gif" alt='' usemap="#uml_class_diagram_for_troy_int_8" ismap="ismap" class="graph-without-title" />
+  <img src="uml_class_diagram_for_troy_int_10.gif" alt='' usemap="#uml_class_diagram_for_troy_int_10" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
@@ -111,10 +116,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#init_" class="summary-sig-name">init_</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      dummy method to make sure the backend can initialize the object</td>
+          <td><span class="summary-sig"><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#add_compute_pilot" class="summary-sig-name">add_compute_pilot</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cp</span>)</span><br />
+      Add a ComputePilot to this WUS.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.init_">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.add_compute_pilot">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -128,11 +134,27 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#add_compute_pilot" class="summary-sig-name">add_compute_pilot</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">cp</span>)</span><br />
-      Add a ComputePilot to this WUS.</td>
+          <td><span class="summary-sig"><a name="get_id"></a><span class="summary-sig-name">get_id</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      get instance id</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.add_compute_pilot">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.get_id">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#init_" class="summary-sig-name">init_</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      dummy method to make sure the backend can initialize the object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.init_">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -193,23 +215,6 @@
       
     </td>
   </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="get_id"></a><span class="summary-sig-name">get_id</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      get instance id</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.get_id">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
 </table>
 <!-- ==================== METHOD DETAILS ==================== -->
 <a name="section-MethodDetails"></a>
@@ -245,28 +250,6 @@
   </dl>
 </td></tr></table>
 </div>
-<a name="init_"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">init_</span>(<span class="sig-arg">self</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.init_">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>dummy method to make sure the backend can initialize the object</p>
-  <dl class="fields">
-    <dt>Overrides:
-        <a href="troy.interface.base.iBase-class.html#init_">base.iBase.init_</a>
-    </dt>
-  </dl>
-</td></tr></table>
-</div>
 <a name="add_compute_pilot"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -286,6 +269,28 @@
   <p>Keyword arguments: cp -- The ComputePilot to which this 
   ComputeUnitService will connect.</p>
   <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="init_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">init_</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.interface.compute_unit_service-pysrc.html#iComputeUnitService.init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>dummy method to make sure the backend can initialize the object</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.base.iBase-class.html#init_">base.iBase.init_</a>
+    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -365,7 +370,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Wed Jul 25 21:11:37 2012</a>
+    3.0.1 on Tue Jul 31 12:34:24 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

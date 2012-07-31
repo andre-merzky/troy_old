@@ -28,7 +28,7 @@ class TroyException (Exception) :
     'import as' directives (as I learned the hard way...).  That is why the
     class is named TroyException for now -- that may change in the future.
     """
-    
+
 
     def __init__ (self, error, msg) :
 
@@ -47,6 +47,6 @@ class TroyException (Exception) :
     def get_trace (self) :
         return self.trace
 
- 
+
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

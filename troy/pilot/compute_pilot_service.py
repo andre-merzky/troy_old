@@ -1,8 +1,7 @@
 
-from base               import Base
-from state              import State
-from compute_pilot      import ComputePilot
-    
+from base          import Base
+from compute_pilot import ComputePilot
+
 ########################################################################
 #
 #  ComputePilotService (CPS)
@@ -12,7 +11,7 @@ class ComputePilotService (Base) :
     """  ComputePilotService (CPS)
 
         The ComputePilotService is a ComputePilot manager.
-        
+
         A CPS acts as the interface to an underlying pilot job framework -- it
         creates and manages L{ComputePilot} instances within that framework, and
         can scheduler L{ComputeUnit}s amongst those pilots.
@@ -20,24 +19,15 @@ class ComputePilotService (Base) :
         The class is stateful, and instances are identified by an url, and can
         be reconnected to.  A CPS can be added to a L{ComputeUnitService}, whose
         scheduler will then be able to utilize the CPS's pilots for
-        L{ComputeUnit} execution.  
+        L{ComputeUnit} execution.
 
         Properties::
 
           - id:
-            The returned ID can be used to connect to the CPs instance later 
-            on, for example from within a different application instance.  
+            The returned ID can be used to connect to the CPs instance later
+            on, for example from within a different application instance.
             type: string (url)
-
     """
-
-    # FIXME: mirror the API on DPS
-
-    # Class members
-    __slots__ = (
-        'url',  # Reference to this CPS
-    )
-
 
     def __init__ (self, url) :
         """ Create a ComputePilotService object
@@ -57,12 +47,11 @@ class ComputePilotService (Base) :
         Base.__init__ (self)
 
         # prepare instance data
-        idata = { 
-                  'url'    : url 
-                } 
-        self.set_idata_ (idata)
+        self.attribute_register_  ('id', None,  self.Url, self.Scalar, self.ReadOnly)
 
-        # initialize adaptor class 
+        self.set_idata_ ()
+
+        # initialize adaptor class
         self.engine_.call ('ComputePilotService', 'init_', self)
 
 
@@ -80,7 +69,7 @@ class ComputePilotService (Base) :
             is, however, not a guarantee that the CP will in fact be (able to
             be) executed -- in that case, the returned CP will be moved to
             Failed state.
-            
+
             On success, the returned CP is in Pending state (or moved into any
             state downstream from Pending).
 
@@ -143,7 +132,7 @@ class ComputePilotService (Base) :
             exception is not a guarantee that the CU will in fact be (able to
             be) executed -- in that case, the returned CU will later be moved to
             Failed state.
-            
+
             On success, the returned CU is in Pending state (or moved into any
             state downstream from Pending).
 
@@ -154,7 +143,7 @@ class ComputePilotService (Base) :
 
         """
         return self.engine_.call ('ComputePilotService', 'submit_compute_unit', self, cud)
-            
+
 
     def list_compute_units (self) :
         """ list managed L{ComputeUnit}s.

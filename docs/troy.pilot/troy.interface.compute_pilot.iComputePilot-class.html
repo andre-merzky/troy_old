@@ -55,20 +55,22 @@
 <!-- ==================== CLASS DESCRIPTION ==================== -->
 <h1 class="epydoc">Class iComputePilot</h1><p class="nomargin-top"><span class="codelink"><a href="troy.interface.compute_pilot-pysrc.html#iComputePilot">source&nbsp;code</a></span></p>
 <center>
-<center>  <map id="uml_class_diagram_for_troy_int_4" name="uml_class_diagram_for_troy_int_4">
-<area shape="rect" id="node11" href="troy.interface.compute_pilot.iComputePilot-class.html#__init__" title="Create a ComputePilot" alt="" coords="17,103,207,121"/>
-<area shape="rect" id="node11" href="troy.interface.compute_pilot.iComputePilot-class.html#submit_compute_unit" title="Submit a CU to this ComputePilot." alt="" coords="17,121,207,140"/>
-<area shape="rect" id="node11" href="troy.interface.compute_pilot.iComputePilot-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="17,140,207,159"/>
-<area shape="rect" id="node11" href="troy.interface.compute_pilot.iComputePilot-class.html#get_id" title="get instance id" alt="" coords="17,159,207,177"/>
-<area shape="rect" id="node11" href="troy.interface.compute_pilot.iComputePilot-class.html#wait" title="Wait until CP enters a final state" alt="" coords="17,177,207,196"/>
-<area shape="rect" id="node11" href="troy.interface.compute_pilot.iComputePilot-class.html#cancel" title="Remove the ComputePilot from the ComputePilot Service." alt="" coords="17,196,207,215"/>
-<area shape="rect" id="node11" href="troy.interface.compute_pilot.iComputePilot-class.html#reinitialize" title="Re&#45;Initialize the ComputePilot to the (new) ComputePilotDescription." alt="" coords="17,215,207,233"/>
-<area shape="rect" id="node11" href="troy.interface.compute_pilot.iComputePilot-class.html#set_callback" title="Set a callback function for a member." alt="" coords="17,233,207,252"/>
-<area shape="rect" id="node11" href="troy.interface.compute_pilot.iComputePilot-class.html#unset_callback" title="Unset a callback function from a member" alt="" coords="17,252,207,271"/>
-<area shape="rect" id="node1" href="troy.interface.compute_pilot.iComputePilot-class.html" title="ComputePilot (PilotJob)" alt="" coords="5,70,219,277"/>
-<area shape="rect" id="node2" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="67,6,157,50"/>
+<center>  <map id="uml_class_diagram_for_troy_int_6" name="uml_class_diagram_for_troy_int_6">
+<area shape="rect" id="node51" href="troy.interface.compute_pilot.iComputePilot-class.html#__init__" title="Create a ComputePilot" alt="" coords="137,103,327,121"/>
+<area shape="rect" id="node51" href="troy.interface.compute_pilot.iComputePilot-class.html#cancel" title="Remove the ComputePilot from the ComputePilot Service." alt="" coords="137,121,327,140"/>
+<area shape="rect" id="node51" href="troy.interface.compute_pilot.iComputePilot-class.html#get_id" title="get instance id" alt="" coords="137,140,327,159"/>
+<area shape="rect" id="node51" href="troy.interface.compute_pilot.iComputePilot-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="137,159,327,177"/>
+<area shape="rect" id="node51" href="troy.interface.compute_pilot.iComputePilot-class.html#reinitialize" title="Re&#45;Initialize the ComputePilot to the (new) ComputePilotDescription." alt="" coords="137,177,327,196"/>
+<area shape="rect" id="node51" href="troy.interface.compute_pilot.iComputePilot-class.html#set_callback" title="Set a callback function for a member." alt="" coords="137,196,327,215"/>
+<area shape="rect" id="node51" href="troy.interface.compute_pilot.iComputePilot-class.html#submit_compute_unit" title="Submit a CU to this ComputePilot." alt="" coords="137,215,327,233"/>
+<area shape="rect" id="node51" href="troy.interface.compute_pilot.iComputePilot-class.html#unset_callback" title="Unset a callback function from a member" alt="" coords="137,233,327,252"/>
+<area shape="rect" id="node51" href="troy.interface.compute_pilot.iComputePilot-class.html#wait" title="Wait until CP enters a final state" alt="" coords="137,252,327,271"/>
+<area shape="rect" id="node1" href="troy.interface.compute_pilot.iComputePilot-class.html" title="ComputePilot (PilotJob)" alt="" coords="125,70,339,277"/>
+<area shape="rect" id="node3" href="troy_adaptor_skeleton.xyz_cp-class.html" title="troy_adaptor_skeleton.xyz_cp" alt="" coords="5,297,216,335"/>
+<area shape="rect" id="node4" href="troy_adaptor_peejay.peejay_cp-class.html" title="troy_adaptor_peejay.peejay_cp" alt="" coords="245,297,461,335"/>
+<area shape="rect" id="node2" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="187,6,277,50"/>
 </map>
-  <img src="uml_class_diagram_for_troy_int_4.gif" alt='' usemap="#uml_class_diagram_for_troy_int_4" ismap="ismap" class="graph-without-title" />
+  <img src="uml_class_diagram_for_troy_int_6.gif" alt='' usemap="#uml_class_diagram_for_troy_int_6" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
@@ -113,28 +115,10 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.interface.compute_pilot.iComputePilot-class.html#submit_compute_unit" class="summary-sig-name">submit_compute_unit</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">cud</span>)</span><br />
-      Submit a CU to this ComputePilot.</td>
+          <td><span class="summary-sig"><a name="cancel"></a><span class="summary-sig-name">cancel</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Remove the ComputePilot from the ComputePilot Service.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.compute_pilot-pysrc.html#iComputePilot.submit_compute_unit">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="troy.interface.compute_pilot.iComputePilot-class.html#init_" class="summary-sig-name">init_</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      dummy method to make sure the backend can initialize the object.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.compute_pilot-pysrc.html#iComputePilot.init_">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.interface.compute_pilot-pysrc.html#iComputePilot.cancel">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -165,27 +149,10 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="wait"></a><span class="summary-sig-name">wait</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      Wait until CP enters a final state</td>
+          <td><span class="summary-sig"><a href="troy.interface.compute_pilot.iComputePilot-class.html#init_" class="summary-sig-name">init_</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      dummy method to make sure the backend can initialize the object.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.compute_pilot-pysrc.html#iComputePilot.wait">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="cancel"></a><span class="summary-sig-name">cancel</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      Remove the ComputePilot from the ComputePilot Service.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.compute_pilot-pysrc.html#iComputePilot.cancel">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.interface.compute_pilot-pysrc.html#iComputePilot.init_">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -236,11 +203,46 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
+          <td><span class="summary-sig"><a href="troy.interface.compute_pilot.iComputePilot-class.html#submit_compute_unit" class="summary-sig-name">submit_compute_unit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cud</span>)</span><br />
+      Submit a CU to this ComputePilot.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_pilot-pysrc.html#iComputePilot.submit_compute_unit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
           <td><span class="summary-sig"><a href="troy.interface.compute_pilot.iComputePilot-class.html#unset_callback" class="summary-sig-name">unset_callback</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">member</span>)</span><br />
       Unset a callback function from a member</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.interface.compute_pilot-pysrc.html#iComputePilot.unset_callback">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="wait"></a><span class="summary-sig-name">wait</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Wait until CP enters a final state</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_pilot-pysrc.html#iComputePilot.wait">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -280,29 +282,6 @@
     <dt>Overrides:
         <a href="troy.interface.base.iBase-class.html#__init__">base.iBase.__init__</a>
     </dt>
-  </dl>
-</td></tr></table>
-</div>
-<a name="submit_compute_unit"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">submit_compute_unit</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">cud</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.interface.compute_pilot-pysrc.html#iComputePilot.submit_compute_unit">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Submit a CU to this ComputePilot.</p>
-  <p>Keyword argument: cud -- The ComputeUnitDescription from the 
-  application</p>
-  <p>Return: ComputeUnit object</p>
-  <dl class="fields">
   </dl>
 </td></tr></table>
 </div>
@@ -375,6 +354,29 @@
   </dl>
 </td></tr></table>
 </div>
+<a name="submit_compute_unit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">submit_compute_unit</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cud</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.interface.compute_pilot-pysrc.html#iComputePilot.submit_compute_unit">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Submit a CU to this ComputePilot.</p>
+  <p>Keyword argument: cud -- The ComputeUnitDescription from the 
+  application</p>
+  <p>Return: ComputeUnit object</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
 <a name="unset_callback"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -427,7 +429,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Wed Jul 25 21:11:37 2012</a>
+    3.0.1 on Tue Jul 31 12:34:23 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -73,10 +73,11 @@
     <li>
       <a 
       href="troy.pilot.compute_pilot_service.ComputePilotService-class.html"
-      class="link">ComputePilotService</a> (CPS) / <code 
-      class="link">DataPilotservice</code> (DPS): creates and manages 
-      pilots, according to application specified resource requirements.  
-      Also, 'submit_xxx_unit()' methods accept work descriptions of <a 
+      class="link">ComputePilotService</a> (CPS) / <a 
+      href="troy.pilot.data_pilot_service.DataPilotService-class.html" 
+      class="link">DataPilotService</a> (DPS): creates and manages pilots, 
+      according to application specified resource requirements.  Also, 
+      'submit_xxx_unit()' methods accept work descriptions of <a 
       href="troy.pilot.compute_unit.ComputeUnit-class.html" 
       class="link">ComputeUnit</a>s and <a 
       href="troy.pilot.data_unit.DataUnit-class.html" 
@@ -170,8 +171,8 @@
 </tr>
   <tr><td class="summary">
   <ul class="nomargin">
+    <li> <strong class="uidlink"><a href="troy.pilot.attributes-module.html">troy.pilot.attributes</a></strong>    </li>
     <li> <strong class="uidlink"><a href="troy.pilot.base-module.html">troy.pilot.base</a></strong>    </li>
-    <li> <strong class="uidlink"><a href="troy.pilot.callback-module.html">troy.pilot.callback</a></strong>    </li>
     <li> <strong class="uidlink"><a href="troy.pilot.compute_data_scheduler-module.html">troy.pilot.compute_data_scheduler</a></strong>    </li>
     <li> <strong class="uidlink"><a href="troy.pilot.compute_data_unit-module.html">troy.pilot.compute_data_unit</a></strong>    </li>
     <li> <strong class="uidlink"><a href="troy.pilot.compute_data_unit_description-module.html">troy.pilot.compute_data_unit_description</a></strong>    </li>
@@ -183,6 +184,7 @@
     <li> <strong class="uidlink"><a href="troy.pilot.compute_unit-module.html">troy.pilot.compute_unit</a></strong>    </li>
     <li> <strong class="uidlink"><a href="troy.pilot.compute_unit_description-module.html">troy.pilot.compute_unit_description</a></strong>    </li>
     <li> <strong class="uidlink"><a href="troy.pilot.compute_unit_service-module.html">troy.pilot.compute_unit_service</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="troy.pilot.config-module.html">troy.pilot.config</a></strong>    </li>
     <li> <strong class="uidlink"><a href="troy.pilot.data_pilot-module.html">troy.pilot.data_pilot</a></strong>    </li>
     <li> <strong class="uidlink"><a href="troy.pilot.data_pilot_description-module.html">troy.pilot.data_pilot_description</a></strong>    </li>
     <li> <strong class="uidlink"><a href="troy.pilot.data_pilot_service-module.html">troy.pilot.data_pilot_service</a></strong>    </li>
@@ -196,9 +198,27 @@
 </table>
 
 <br />
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'troy.pilot'"><code class="variable-quote">'</code><code class="variable-string">troy.pilot</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
 <p class="indent-wrapped-lines"><b>Imports:</b>
+  <a href="troy.pilot.config.Config_-class.html" title="troy.pilot.config.Config_">Config_</a>,
   <a href="troy.pilot.state.State-class.html" title="troy.pilot.state.State">State</a>,
-  <a href="troy.pilot.callback.Callback-class.html" title="troy.pilot.callback.Callback">Callback</a>,
+  <a href="troy.pilot.attributes.Callback-class.html" title="troy.pilot.attributes.Callback">Callback</a>,
+  <a href="troy.pilot.attributes.Attributes-class.html" title="troy.pilot.attributes.Attributes">Attributes</a>,
   <a href="troy.pilot.exception.TroyException-class.html" title="troy.pilot.exception.TroyException">TroyException</a>,
   <a href="troy.pilot.exception.Error-class.html" title="troy.pilot.exception.Error">Error</a>,
   <a href="troy.pilot.compute_pilot_description.ComputePilotDescription-class.html" title="troy.pilot.compute_pilot_description.ComputePilotDescription">ComputePilotDescription</a>,
@@ -218,7 +238,30 @@
   <a href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html" title="troy.pilot.compute_data_unit_service.ComputeDataUnitService">ComputeDataUnitService</a>,
   <a href="troy.pilot.compute_scheduler.ComputeScheduler_-class.html" title="troy.pilot.compute_scheduler.ComputeScheduler_">ComputeScheduler_</a>,
   <a href="troy.pilot.data_scheduler.DataScheduler_-class.html" title="troy.pilot.data_scheduler.DataScheduler_">DataScheduler_</a>,
-  <a href="troy.pilot.compute_data_scheduler.ComputeDataScheduler_-class.html" title="troy.pilot.compute_data_scheduler.ComputeDataScheduler_">ComputeDataScheduler_</a>
+  <a href="troy.pilot.compute_data_scheduler.ComputeDataScheduler_-class.html" title="troy.pilot.compute_data_scheduler.ComputeDataScheduler_">ComputeDataScheduler_</a>,
+  <a href="troy.pilot.attributes-module.html" title="troy.pilot.attributes">attributes</a>,
+  <a href="troy.pilot.base-module.html" title="troy.pilot.base">base</a>,
+  <a href="troy.pilot.compute_data_scheduler-module.html" title="troy.pilot.compute_data_scheduler">compute_data_scheduler</a>,
+  <a href="troy.pilot.compute_data_unit-module.html" title="troy.pilot.compute_data_unit">compute_data_unit</a>,
+  <a href="troy.pilot.compute_data_unit_description-module.html" title="troy.pilot.compute_data_unit_description">compute_data_unit_description</a>,
+  <a href="troy.pilot.compute_data_unit_service-module.html" title="troy.pilot.compute_data_unit_service">compute_data_unit_service</a>,
+  <a href="troy.pilot.compute_pilot-module.html" title="troy.pilot.compute_pilot">compute_pilot</a>,
+  <a href="troy.pilot.compute_pilot_description-module.html" title="troy.pilot.compute_pilot_description">compute_pilot_description</a>,
+  <a href="troy.pilot.compute_pilot_service-module.html" title="troy.pilot.compute_pilot_service">compute_pilot_service</a>,
+  <a href="troy.pilot.compute_scheduler-module.html" title="troy.pilot.compute_scheduler">compute_scheduler</a>,
+  <a href="troy.pilot.compute_unit-module.html" title="troy.pilot.compute_unit">compute_unit</a>,
+  <a href="troy.pilot.compute_unit_description-module.html" title="troy.pilot.compute_unit_description">compute_unit_description</a>,
+  <a href="troy.pilot.compute_unit_service-module.html" title="troy.pilot.compute_unit_service">compute_unit_service</a>,
+  <a href="troy.pilot.config-module.html" title="troy.pilot.config">config</a>,
+  <a href="troy.pilot.data_pilot-module.html" title="troy.pilot.data_pilot">data_pilot</a>,
+  <a href="troy.pilot.data_pilot_description-module.html" title="troy.pilot.data_pilot_description">data_pilot_description</a>,
+  <a href="troy.pilot.data_pilot_service-module.html" title="troy.pilot.data_pilot_service">data_pilot_service</a>,
+  <a href="troy.pilot.data_scheduler-module.html" title="troy.pilot.data_scheduler">data_scheduler</a>,
+  <a href="troy.pilot.data_unit-module.html" title="troy.pilot.data_unit">data_unit</a>,
+  <a href="troy.pilot.data_unit_description-module.html" title="troy.pilot.data_unit_description">data_unit_description</a>,
+  <a href="troy.pilot.data_unit_service-module.html" title="troy.pilot.data_unit_service">data_unit_service</a>,
+  <a href="troy.pilot.exception-module.html" title="troy.pilot.exception">exception</a>,
+  <a href="troy.pilot.state-module.html" title="troy.pilot.state">state</a>
 </p><br />
 <!-- ==================== NAVIGATION BAR ==================== -->
 <table class="navbar" border="0" width="100%" cellpadding="0"
@@ -249,7 +292,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Wed Jul 25 21:11:37 2012</a>
+    3.0.1 on Tue Jul 31 12:34:23 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

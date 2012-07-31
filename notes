@@ -337,3 +337,14 @@ Misc:
     http://stackoverflow.com/questions/10149344/python-generic-getters-and-setters
     http://stackoverflow.com/questions/3336767/overriding-inherited-properties-getters-and-setters-in-python
 
+  - ComputeDataUnitDescription:
+    Couldn't that be better, and more generic, be rendered as a set of CUDs and
+    DUDs?  Once that set is submitted, one would still obtain a single handle to
+    a CDU.
+
+  - The Troy API is not DRY, at all.  One reason is the absence of real
+    inheritance.
+
+  - FIXME: all classes need internal ctors which init the attributes, but do not
+           require an ID.
+

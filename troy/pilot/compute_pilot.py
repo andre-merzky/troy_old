@@ -1,6 +1,6 @@
 
-from base               import Base
-    
+from base import Base
+
 
 ########################################################################
 #
@@ -9,18 +9,24 @@ from base               import Base
 class ComputePilot (Base) :
 
     """ ComputePilot (PilotJob)
-    
-        This is the object that is returned by the ComputePilotService when a 
+
+        This is the object that is returned by the ComputePilotService when a
         new ComputePilot is created based on a ComputePilotDescription.
 
-        The ComputePilot object can be used by the application to keep track 
+        The ComputePilot object can be used by the application to keep track
         of ComputePilots that are active.
-        
-        A ComputePilot has state, can be queried, can be cancelled and be 
+
+        A ComputePilot has state, can be queried, can be cancelled and be
         re-initialized.
 
 
         Properties::
+
+          - id:
+            The id may be 'None' if the Pilot is not yet in Running state.
+            The returned ID can be used to connect to the CP instance later
+            on, for example from within a different application instance.
+            type: string (url)
 
           - state:
             The state of the pilot.
@@ -30,12 +36,6 @@ class ComputePilot (Base) :
             The backend state of the pilot.  The value of this property is not
             interpreted by Troy, and is up to the backend pilot framework.
             type: string
-
-          - id:
-            The id may be 'None' if the Pilot is not yet in Running state.
-            The returned ID can be used to connect to the CP instance later 
-            on, for example from within a different application instance.  
-            type: string (url)
 
           - description:
             The ComputePilotDescription used to create this pilot.
@@ -50,7 +50,7 @@ class ComputePilot (Base) :
             type: string (url)
 
           - wall_time_left:
-            The estimated remaining life time of this pilot.  
+            The estimated remaining life time of this pilot.
             The availability of this property is not guaranteed, and depends on
             both the backend pilot framework, and on the type of pilot (not all
             pilots have a finite lifetime).
@@ -58,20 +58,6 @@ class ComputePilot (Base) :
             A negative value indicates that the pilot has an unlimited lifetime.
             type: int
     """
-
-    # Class members
-    __slots__ = (
-        'id',             # Reference to this CP
-        'state',          # State of the ComputePilot
-        'state_detail',   # Backend specific state of the ComputePilot
-
-        'description',    # Description of ComputePilot
-        'service_url',    # ComputePilotService URL
-
-        'wall_time_left'  # Remaining time allocation
-    )
-
-
 
     def __init__ (self, cp_id) :
         """ Create a ComputePilot
@@ -92,12 +78,19 @@ class ComputePilot (Base) :
         Base.__init__ (self)
 
         # prepare instance data
-        idata = {
-                  'id'        : cp_id
-                }
-        self.set_idata_ (idata)
+        self.attribute_register_  ('id',             cp_id,     self.Url,    self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('state',          State.New, self.Enum,   self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('state_detail',   None,      self.String, self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('description',    None,      self.Any,    self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('service_url',    None,      self.Url,    self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('wall_time_left', -1,        self.Time,   self.Scalar, self.ReadOnly)
 
-        # initialize adaptor class 
+        # custom attributes are not allowed.
+        self.attribute_extensible_ (False)
+
+        self.set_idata_ ()
+
+        # initialize adaptor class
         self.engine_.call ('ComputePilot', 'init_', self)
 
 
@@ -106,7 +99,7 @@ class ComputePilot (Base) :
     #
     def reinitialize (self, cpd) :
         """ Re-Initialize the ComputePilot to the (new) ComputePilotDescription.
-        
+
             Keyword arguments:
             cpd -- A ComputePilotDescription
 
@@ -145,7 +138,7 @@ class ComputePilot (Base) :
             raising this exception is not a guarantee that the CU will in fact
             be (able to be) executed -- in that case, the returned CU will later
             be moved to Failed state.
-            
+
             On success, the returned CU is in Pending state (or moved into any
             state downstream from Pending).
 
@@ -155,7 +148,7 @@ class ComputePilot (Base) :
             are ignored.
         """
         return self.engine_.call ('ComputePilot', 'submit_compute_unit', self, cud)
-            
+
 
 
     def list_compute_units (self) :
@@ -195,11 +188,11 @@ class ComputePilot (Base) :
 
 
     def wait (self) :
-        """ Wait until CP enters a final state 
+        """ Wait until CP enters a final state
 
         It is not an error to call wait() in a final state -- the call simply
         returns immediately.
-        
+
         """
         return self.engine_.call ('ComputePilot', 'wait', self)
 
@@ -209,12 +202,12 @@ class ComputePilot (Base) :
         """ Move the pilot into Canceled state, releasing all resources.
 
         The will block until the pilot reaches Canceled state and resources have
-        been released.  
+        been released.
 
         It is not an error to call the method in a final state -- it will simple
         return immediately.  The pilot's state will not be changed in that case
         though.
-        
+
         """
         return self.engine_.call ('ComputePilot', 'cancel', self)
 

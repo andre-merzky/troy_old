@@ -7,31 +7,31 @@ from base import Base
 #
 class DataScheduler_ (Base) :
 
-    """ DataScheduler_ (DS)
+    """ 
+    DataScheduler_ (DS)
     
-        The DS is a troy-internal object which provides scheduling capabilities
-        to Troy.  In particular, it will schedule data units over a set of
-        data pilots.  To do that, the scheduler implementation (adaptor) will
-        need to pull various information from the backend.
+    The DS is a troy-internal object which provides scheduling capabilities to
+    Troy.  In particular, it will schedule data units over a set of data 
+    pilots. To do that, the scheduler implementation (adaptor) will need to 
+    pull various information from the backend.  
     """
 
     # Class members
     __slots__ = (
-        'id',             # Reference to this DS
-        'service_url',    # DataScheduler URL
+        'id',   # Reference to this DS
     )
 
 
     def __init__ (self, policy=None):
-        """ Create a DataScheduler -- private, only called by DUS
+        """ 
+        Create a DataScheduler -- private, only called by DUS
 
-            Keyword arguments:
-            policy -- scheduling policy to be provided
+        Keyword arguments:
+        policy -- scheduling policy to be provided
 
-            The given policy determines what backend (adaptor) should be used
-            for scheduling.  'None' leaves the scheduler selection to the
-            implementation.
-
+        The given policy determines what backend (adaptor) should be used for
+        scheduling.  'None' leaves the scheduler selection to the
+        implementation.
         """
 
         # init api base
@@ -39,6 +39,7 @@ class DataScheduler_ (Base) :
 
         # prepare instance data
         idata = {
+                  'id'     : None,
                   'policy' : policy,
                 }
         self.set_idata_ (idata)
@@ -47,19 +48,28 @@ class DataScheduler_ (Base) :
         self.engine_.call ('DataScheduler', 'init', self)
 
 
-    def schedule (self, thing, dud):
-        """
+    def schedule (self, dus, dud):
+        """ 
+        Schedule a data unit.
 
-        This is the main method: for a given 'thing', schedule a given
-        DataUnit.  A thing can be a DUS, DPS or DP.
+        A data unit description is used to instantiate a DU on the resource
+        managed by a specific data pilot.  The scheduler can operate over all
+        pilot services known to the DUS, and their pilots.
         
-        The method returns the DU, which is at that point bound to (i.e.
-        scheduled on) a specific DPS or DP.
+        If the scheduler cannot find suitable resources for the requested DU,
+        a BadParameter exception is raised.  Not raising this exception is not
+        a guarantee that the DU will in fact be (able to be) enacted -- in that
+        case, the returned DU will later be moved to Failed state.
         
-        On Error (no scheduling possible), 'None' is returned.  
+        On success, the returned DU is in Pending state (or moved into any state
+        downstream from Pending).
+
+        schedule() will honor all attributes set on the dud.  Attributes which
+        are not explicitly set are interpreted as having default values (see
+        documentation of DUD), or, where default values are not specified, are
+        ignored.
         """
-        return self.engine_.call ('DataScheduler', 'schedule', 
-                                        self, thing, dud)
+        return self.engine_.call ('DataScheduler', 'schedule', self, dus, dud)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

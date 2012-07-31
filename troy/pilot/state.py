@@ -3,8 +3,8 @@
 #
 #
 #
-class State (): 
-    """ 
+class State ():
+    """
     The State class is really an enum, or what python uses as an enum.  That
     enum describes the state model for various components of the P* model, and
     thus of the pilot API, and is exposed as property of the following classes::
@@ -29,7 +29,7 @@ class State ():
     Once the request is passed on to the backend, and was accepted by it, the cp
     will have 'Pending' state.  That state will eventually transition to
     'Running', when the backend instantiated the compute pilot process/agent/...
-    Resources are only consumed during the 'Running' state, 
+    Resources are only consumed during the 'Running' state,
 
     There are three options to leave the 'Running' state: 'Done', as successful
     and planned end of operation of the instance; 'Failed', as premature or

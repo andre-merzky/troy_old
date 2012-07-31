@@ -1,51 +1,44 @@
 
-from base               import Base
-from compute_unit       import ComputeUnit
-    
+from base         import Base
+from compute_unit import ComputeUnit
+
 ########################################################################
 #
 #  ComputeUnitService
-# 
+#
 class ComputeUnitService (Base) :
 
     """  ComputeUnitService (CUS)
-    
+
         The ComputeUnitService is the application's interface to submit
         ComputeUnits to Pilot-Managers in the P* Model.  The PilotManagers are
         represented by L{ComputePilotService} instances -- those instances can
         be added to L{ComputeUnitService} instances, and are then used for
         scheduling L{ComputeUnit}s.
 
-        The implementation of the ComputeUnitService is generally within Troy --
-        as such, it represents and facilitates the application level scheduling
-        capabilities of Troy.  The CUS will use Troy level or application
-        provided scheduling algorithms to control the distribution of the
-        L{ComputeUnit}s over the set of participating L{ComputePilotService}s
-        and their L{ComputePilot}s.
+        The implementation of the ComputeUnitService is generally within
+        Troy -- as such, it represents and facilitates the application level
+        scheduling capabilities of Troy.  The CUS will use Troy level or
+        application provided scheduling algorithms to control the distribution
+        of the L{ComputeUnit}s over the set of participating
+        L{ComputePilotService}s and their L{ComputePilot}s.
 
         Properties::
 
           - id:
-            The returned ID can be used to connect to the CPs instance later 
-            on, for example from within a different application instance.  
+            The returned ID can be used to connect to the CUS instance later
+            on, for example from within a different application instance.
             type: string (url)
 
         FIXME: we might want to expose scheduler state and statistics as
         properties?  Or expose the scheduler as opaque object which can be
         inspected?
-
     """
 
-    # Class members
-    __slots__ = (
-        'id' # Reference to this CUS
-    )
-
-
-    def __init__ (self, cus_id) :
-        """ 
+    def __init__ (self, cus_id=None) :
+        """
         Create a ComputeUnitService object
-    
+
         Keyword arguments:
         cus_id: string identifying the CUS instance.
 
@@ -58,18 +51,17 @@ class ComputeUnitService (Base) :
         # init api base
         Base.__init__ (self)
 
-        # prepare instance data
         # FIXME: the scheduler type to be used is hard coded.  IMHO, that should
         # be variable via the API.
-        idata = {
-                  'id'        : cus_id,
-                  'cps'       : [],       # set of compute pilot service to be
-                                          # used for scheduling
-                  'scheduler' : 'Random'  
-                }
-        self.set_idata_ (idata)
 
-        # initialize adaptor class 
+        # prepare instance data
+        self.attribute_register_  ('id',        cus_id,   self.Url,    self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('cps',       [],       self.Url,    self.Vector, self.Writeable)
+        self.attribute_register_  ('scheduler', 'Random', self.String, self.Scalar, self.Writeable)
+
+        self.set_idata_ ()
+
+        # initialize adaptor class
         self.engine_.call ('ComputeUnitService', 'init_', self)
 
         pass
@@ -144,11 +136,11 @@ class ComputeUnitService (Base) :
     def remove_compute_pilot_service (self, cps) :
         """ Remove a ComputePilotService
 
-            Note that it won't cancel the ComputePilotService's Pilots, it will just no
+            Note that it won't cancel the ComputePilotService's Pilots, they will just no
             longer receive new CUs.
 
             Keyword arguments:
-            cps -- The ComputePilotService to remove 
+            cps -- The ComputePilotService to remove
         """
         return self.engine_.call ('ComputeUnitService', 'remove_compute_pilot_service', self, cp)
 

@@ -26,7 +26,7 @@ Questions / comments about API, to be discussed
 
     - why specify rm *and* backend type?  Shouldn't rm suffice?  What happens on
       mismatch?
-      TODO
+      DONE AM
 
   ------------------------------------------------------------------------------
   
@@ -42,10 +42,12 @@ Questions / comments about API, to be discussed
     - the returned pilot is in what state?
       TODO: Pending?  
       -> Why do we have a New state? (same for XXXUnits)
+      DONE AM
 
     - has state after all, and represents the P* level queue over multiple
       pilots.  It needs submit, list_units, inspection, ...
       That scheduling will *not* be handled by Troy.
+      DONE AM
 
 
   ------------------------------------------------------------------------------
@@ -71,19 +73,19 @@ Questions / comments about API, to be discussed
 
   - ComputeUnitService:
 
-    - remove_compute_pilot
-      - will that kill CUs on pilots? (no?)     TODO
-      - will that kill pilots?        (no?)     TODO
-      - can I re-add after remove?    (yes?)    TODO
-      - param is id or instance?      (id?)     TODO
-      - What is to be returned?       (None?)   TODO
+    - remove_compute_pilot_service
+      - will that kill CUs on pilots? (no?)     DONE AM
+      - will that kill pilots?        (no?)     DONE AM
+      - can I re-add after remove?    (yes?)    DONE AM
+      - param is id or instance?      (id?)     DONE AM
+      - What is to be returned?       (None?)   DONE AM
 
     - CUS has state 
-      - what are the states?                    (none really?) TODO
-      - what calls can I call in which state?   TODO
-      - how are state transitions triggered?    TODO
+      - what are the states?                    (none really?) DONE AM
+      - what calls can I call in which state?   DONE AM
+      - how are state transitions triggered?    DONE AM
       - is state bound to object instance?  
-        Backend instance?                       TODO
+        Backend instance?                       DONE AM
 
 
   ------------------------------------------------------------------------------
@@ -92,10 +94,10 @@ Questions / comments about API, to be discussed
 
     - I can reconnect.  After reconnect, 
       - how can I (scheduler) inspect
-        - get_description ()  DONE: add         DONE
+        - get_description ()  DONE: add         DONE AM
       - how can I (scheduler) find out where it runs?
-        - get_pilot ()        DONE: add         DONE
-        - get_cus ()          DONE: add         DONE
+        - get_pilot ()        DONE: add         DONE AM
+        - get_cus ()          DONE: add         DONE AM
 
 
   ------------------------------------------------------------------------------

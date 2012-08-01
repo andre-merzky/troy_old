@@ -10,10 +10,10 @@ clean:
 	@rm -rf $(HOME)/.bigjob/
 
 sync:
-	@git co devel
-	@git ci -am 'sync with gh-pages'
-	@git pull
-	@git push
+	-@git co devel
+	-@git ci -am 'sync with gh-pages'
+	-@git pull
+	-@git push
 	@git co gh-pages
 	@git merge devel
 	@git push origin gh-pages

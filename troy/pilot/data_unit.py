@@ -39,6 +39,7 @@ class DataUnit (Base) :
         self.attribute_register_  ('state_detail',   None,      self.String, self.Scalar, self.ReadOnly)
         self.attribute_register_  ('description',    None,      self.Any,    self.Scalar, self.ReadOnly)
         self.attribute_register_  ('service_url',    None,      self.Url,    self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('pilot_id',       None,      self.Url,    self.Scalar, self.ReadOnly)
 
         self.set_idata_ ()
 

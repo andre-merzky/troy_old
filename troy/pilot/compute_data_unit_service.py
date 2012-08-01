@@ -71,6 +71,18 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
         pass
 
 
+    def set_scheduler (self, s) :
+        """
+        Set a scheduler for submitted work units
+
+        The scheduler 's' can either be a string, identifying a backend or
+        adaptor level scheduler to be used, or a class instance which derives
+        from L{troy.pilot.ComputeDataScheduler}.
+        """
+
+        return self.engine_.call ('ComputeDataUnitService', 'set_scheduler', self, s)
+
+
     def submit_compute_data_unit (self, cdud) :
         """ Submit a CDU to this ComputeDataUnitService.
 

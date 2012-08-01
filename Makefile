@@ -11,6 +11,11 @@ clean:
 
 sync:
 	@git co devel
-	@git rebase devel gh-pages
+	@git ci -am 'sync with gh-pages'
+	@git pull
 	@git push
+	@git co gh-pages
+	@git merge devel
+	@git push origin gh-pages
+	@git co devel
 

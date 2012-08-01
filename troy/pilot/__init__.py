@@ -107,9 +107,9 @@ from troy.pilot.compute_data_unit_description  import ComputeDataUnitDescription
 from troy.pilot.compute_data_unit              import ComputeDataUnit
 from troy.pilot.compute_data_unit_service      import ComputeDataUnitService
 
-from troy.pilot.compute_scheduler              import ComputeScheduler_
-from troy.pilot.data_scheduler                 import DataScheduler_
-from troy.pilot.compute_data_scheduler         import ComputeDataScheduler_
+from troy.pilot.compute_scheduler              import ComputeScheduler
+from troy.pilot.data_scheduler                 import DataScheduler
+from troy.pilot.compute_data_scheduler         import ComputeDataScheduler
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

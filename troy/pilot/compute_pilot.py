@@ -122,18 +122,6 @@ class ComputePilot (Base) :
         return self.engine_.call ('ComputePilot', 'reinitialize', self, cpd)
 
 
-    def set_scheduler (self, s) :
-        """
-        Set a scheduler for submitted work units
-
-        The scheduler 's' can either be a string, identifying a backend or
-        adaptor level scheduler to be used, or a class instance which derives
-        from L{troy.pilot.ComputeScheduler}.
-        """
-
-        return self.engine_.call ('ComputePilot', 'set_scheduler', self, s)
-
-
     def submit_compute_unit (self, cud) :
         """ Submit a CU to this ComputePilotService.
 

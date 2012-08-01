@@ -5,22 +5,16 @@ from base import Base
 #
 #
 #
-class DataScheduler_ (Base) :
+class DataScheduler (Base) :
 
     """ 
-    DataScheduler_ (DS)
+    DataScheduler (DS)
     
     The DS is a troy-internal object which provides scheduling capabilities to
     Troy.  In particular, it will schedule data units over a set of data 
     pilots. To do that, the scheduler implementation (adaptor) will need to 
     pull various information from the backend.  
     """
-
-    # Class members
-    __slots__ = (
-        'id',   # Reference to this DS
-    )
-
 
     def __init__ (self, policy=None):
         """ 
@@ -38,11 +32,10 @@ class DataScheduler_ (Base) :
         Base.__init__ (self)
 
         # prepare instance data
-        idata = {
-                  'id'     : None,
-                  'policy' : policy,
-                }
-        self.set_idata_ (idata)
+        self.attribute_register_  ('id',     None,  self.Url,    self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('policy', None,  self.String, self.Scalar, self.ReadOnly)
+
+        self.set_idata_ ()
 
         # initialize adaptor class 
         self.engine_.call ('DataScheduler', 'init', self)

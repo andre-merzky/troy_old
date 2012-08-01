@@ -2,7 +2,7 @@
 from base                    import Base
 from compute_unit_service    import ComputeUnitService
 from data_unit_service       import DataUnitService
-from compute_data_scheduler  import ComputeDataScheduler_
+from compute_data_scheduler  import ComputeDataScheduler
 
 
 ########################################################################

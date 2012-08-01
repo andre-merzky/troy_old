@@ -122,18 +122,6 @@ class DataPilot (Base) :
         return self.engine_.call ('DataPilot', 'reinitialize', self, dpd)
 
 
-    def set_scheduler (self, s) :
-        """
-        Set a scheduler for submitted work units
-
-        The scheduler 's' can either be a string, identifying a backend or
-        adaptor level scheduler to be used, or a class instance which derives
-        from L{troy.pilot.DataScheduler}.
-        """
-
-        return self.engine_.call ('DataPilot', 'set_scheduler', self, s)
-
-
     def submit_data_unit (self, dud) :
         """ Submit a DU to this DataPilot.
 

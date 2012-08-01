@@ -5,22 +5,16 @@ from base import Base
 #
 #
 #
-class ComputeDataScheduler_ (Base) :
+class ComputeDataScheduler (Base) :
 
     """
-    ComputeDataScheduler_ (CDS)
+    ComputeDataScheduler (CDS)
 
     The CS is a troy-internal object which provides scheduling capabilities to
     Troy.  In particular, it will schedule compute_data units over a set of compute_data
     pilots.  To do that, the scheduler implementation (adaptor) will need to
     pull various information from the backend.
     """
-
-    # Class members
-    __slots__ = (
-        'id',             # Reference to this CDS
-    )
-
 
     def __init__ (self, policy=None) :
         """
@@ -38,11 +32,10 @@ class ComputeDataScheduler_ (Base) :
         Base.__init__ (self)
 
         # prepare instance data
-        self.attribute_register_  ('id',     None,  self.String, self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('policy', 'Any', self.String, self.Scalar, self.Writeable)
+        self.attribute_register_  ('id',     None,  self.Url,    self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('policy', None,  self.String, self.Scalar, self.ReadOnly)
 
         self.set_idata_ ()
-
 
         # initialize adaptor class
         self.engine_.call ('ComputeDataScheduler', 'init_', self)

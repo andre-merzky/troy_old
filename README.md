@@ -11,6 +11,3 @@ Quick links:
   api documentation:  https://saga-project,github.com/troy/docs/troy.pilot/ <br>
   wiki etc:           https://github.com/saga-project/troy/wiki/            <br>
 
-
-
-

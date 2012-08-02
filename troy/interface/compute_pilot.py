@@ -8,86 +8,99 @@ from troy.pilot.exception import TroyException, Error
 #
 #
 class iComputePilot (iBase) :
+    """ L{ComputePilot} interface """
 
-    """ ComputePilot (PilotJob)
-    
-        This is the object that is returned by the ComputePilotService when a 
-        new ComputePilot is created based on a ComputePilotDescription.
-
-        The ComputePilot object can be used by the application to keep track 
-        of ComputePilots that are active.
-        
-        A ComputePilot has state, can be queried, can be cancelled and be 
-        re-initialized.
-    """
-
+    ############################################################################
+    #
     def __init__ (self, obj, adaptor) :
         """ Create a ComputePilot """
+        raise TroyException (Error.NotImplemented, "interface not implemented!")
         pass
 
 
 
     ############################################################################
     #
-    def submit_compute_unit (self, cud) :
-        """ Submit a CU to this ComputePilot.
-    
-            Keyword argument:
-            cud -- The ComputeUnitDescription from the application
-    
-            Return:
-            ComputeUnit object
-        """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
-
-
     def init_ (self) :
         """ dummy method to make sure the backend can initialize the object.
             This method should *not* be implemented in the adaptor!"""
         pass
 
 
-    def get_id (self) :
-        """ get instance id """
+
+    ############################################################################
+    #
+    def reinitialize (self, cpd) :
+        """ 
+        Re-Initialize the ComputePilot to the (new) ComputePilotDescription.
+
+        Keyword arguments:
+        cpd -- A ComputePilotDescription
+        """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
+
+    ############################################################################
+    #
+    def submit_unit (self, cud) :
+        """ 
+        Submit a CU to this ComputePilot.
+    
+        Keyword argument:
+        cud -- The L{ComputeUnitDescription} from the application
+    
+        Return:
+        L{ComputeUnit} object
+        """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
+
+
+
+    ############################################################################
+    #
+    def list_units (self) :
+        """ 
+        list managed L{ComputeUnit}s.
+
+        Return value:
+        A list of L{ComputeUnit} IDs
+        """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
+
+
+
+    ############################################################################
+    #
+    def get_unit (self, cu_id) :
+        """ 
+        Reconnect to a ComputeUnit.
+
+        Keyword arguments:
+        cu_id   -- L{ComputeUnit}'s id
+
+        Return value:
+        A L{ComputeUnit} instance
+        """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
+
+
+
+    ############################################################################
+    #
     def wait (self) :
         """ Wait until CP enters a final state """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
+
+    ############################################################################
+    #
     def cancel (self) :
-        """ Remove the ComputePilot from the ComputePilot Service.
-        """
+        """ Cancel CP.  """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-    def reinitialize (self, cpd) :
-        """ Re-Initialize the ComputePilot to the (new) ComputePilotDescription.
-        
-            Keyword arguments:
-            cpd -- A ComputePilotDescription
-        """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
 
-
-    def set_callback (self, member, cb) :
-        """ Set a callback function for a member.
-
-            Keyword arguments:
-            member -- The member to set the callback for (state / state_detail / wall_time_left).
-            cb     -- The callback object to call.
-        """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
-
-
-    def unset_callback (self, member) :
-        """ Unset a callback function from a member
-
-            Keyword arguments:
-            member -- The member to unset the callback for (state / state_detail / wall_tim_left).
-        """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
-    
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

@@ -55,7 +55,7 @@ class DataPilotService (Base) :
         self.engine_.call ('DataPilotService', 'init_', self)
 
 
-    def create_data_pilot (self, dpd) :
+    def submit_pilot (self, dpd) :
         """ Create a DataPilot.
 
             Keyword arguments:
@@ -73,16 +73,16 @@ class DataPilotService (Base) :
             On success, the returned DP is in Pending state (or moved into any
             state downstream from Pending).
 
-            create_data_pilot() will honor all attributes set on the DPD.
+            create_pilot() will honor all attributes set on the DPD.
             Attributes which are not explicitly set are interpreted as having
             default values (see documentation of L{DataPilotDescription}),
             or, where default values are not specified, are ignored.
 
         """
-        return self.engine_.call ('DataPilotService', 'create_data_pilot', self, dpd)
+        return self.engine_.call ('DataPilotService', 'submit_pilot', self, dpd)
 
 
-    def list_data_pilots (self) :
+    def list_pilots (self) :
         """ list managed L{DataPilot}s.
 
             Return value:
@@ -99,7 +99,7 @@ class DataPilotService (Base) :
         return self.engine_.call ('DataPilotService', 'list_pilots', self)
 
 
-    def get_data_pilot (self, dp_id) :
+    def get_pilot (self, dp_id) :
         """ Reconnect to a DataPilot.
 
             Keyword arguments:
@@ -116,7 +116,7 @@ class DataPilotService (Base) :
         return self.engine_.call ('DataPilotService', 'get_pilot', self, dp_id)
 
 
-    def submit_data_unit (self, dud) :
+    def submit_unit (self, dud) :
         """ Submit a DU to this DataPilotService.
 
             Keyword argument:
@@ -142,10 +142,10 @@ class DataPilotService (Base) :
             are ignored.
 
         """
-        return self.engine_.call ('DataPilotService', 'submit_data_unit', self, dud)
+        return self.engine_.call ('DataPilotService', 'submit_unit', self, dud)
 
 
-    def list_data_units (self) :
+    def list_units (self) :
         """ list managed L{DataUnit}s.
 
             Return value:
@@ -159,10 +159,10 @@ class DataPilotService (Base) :
             state.
 
         """
-        return self.engine_.call ('DataPilotService', 'list_data_units', self)
+        return self.engine_.call ('DataPilotService', 'list_units', self)
 
 
-    def get_data_unit (self, du_id) :
+    def get_unit (self, du_id) :
         """ Reconnect to a DataUnit.
 
             Keyword arguments:
@@ -176,7 +176,7 @@ class DataPilotService (Base) :
               du = troy.pilot.DataUnit (du_id)
 
         """
-        return self.engine_.call ('DataPilotService', 'get_data_unit', self, du_id)
+        return self.engine_.call ('DataPilotService', 'get_unit', self, du_id)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

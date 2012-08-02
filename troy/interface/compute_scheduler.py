@@ -8,27 +8,32 @@ from troy.pilot.exception import TroyException, Error
 #
 #
 class iComputeScheduler (iBase) :
+    """ L{ComputeScheduler} interface """
 
-    """ ComputeScheduler (CS)
-    
-        The CS is a troy-internal object which provides scheduling capabilities
-        to Troy.  In particular, it will schedule compute units over a set of
-        compute pilots.  To do that, the scheduler implementation (adaptor) will
-        need to pull various information from the backend.
-    """
 
+    ############################################################################
+    #
     def __init__ (self, obj, adaptor) :
         """ Create a ComputeScheduler """
         pass
 
 
+
+    ############################################################################
+    #
     def init_ (self) :
         """ dummy method to make sure the backend can initialize the object.
             This method should *not* be implemented in the adaptor!"""
         pass
 
 
-    def schedule (self, thing, cud) :
-        """ schedule a cu/cud on a cus/cps/cp """
+
+    ############################################################################
+    #
+    def schedule (self, cus, cud) :
+        """ schedule a cu on a cus """
         raise TroyException (Error.NotImplemented, "method not implemented!")
+
+
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

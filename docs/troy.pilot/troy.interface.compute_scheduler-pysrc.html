@@ -64,30 +64,35 @@ troy.pilot.base" class="py-name" href="#" onclick="return doclink('link-1', 'bas
 <a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
 <a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
 <a name="iComputeScheduler"></a><div id="iComputeScheduler-def"><a name="L10"></a><tt class="py-lineno">10</tt> <a class="py-toggle" href="#" id="iComputeScheduler-toggle" onclick="return toggle('iComputeScheduler');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="troy.interface.compute_scheduler.iComputeScheduler-class.html">iComputeScheduler</a> <tt class="py-op">(</tt><tt class="py-base-class">iBase</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="iComputeScheduler-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="iComputeScheduler-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
-<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt class="py-docstring">""" ComputeScheduler (CS)</tt> </tt>
-<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
-<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">        The CS is a troy-internal object which provides scheduling capabilities</tt> </tt>
-<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">        to Troy.  In particular, it will schedule compute units over a set of</tt> </tt>
-<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">        compute pilots.  To do that, the scheduler implementation (adaptor) will</tt> </tt>
-<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">        need to pull various information from the backend.</tt> </tt>
-<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
-<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
-<a name="iComputeScheduler.__init__"></a><div id="iComputeScheduler.__init__-def"><a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="iComputeScheduler.__init__-toggle" onclick="return toggle('iComputeScheduler.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.interface.compute_scheduler.iComputeScheduler-class.html#__init__">__init__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">obj</tt><tt class="py-op">,</tt> <tt class="py-param">adaptor</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="iComputeScheduler.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="iComputeScheduler.__init__-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-docstring">""" Create a ComputeScheduler """</tt> </tt>
-<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
-</div><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
-<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
-<a name="iComputeScheduler.init_"></a><div id="iComputeScheduler.init_-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="iComputeScheduler.init_-toggle" onclick="return toggle('iComputeScheduler.init_');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.interface.compute_scheduler.iComputeScheduler-class.html#init_">init_</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="iComputeScheduler.init_-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="iComputeScheduler.init_-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-docstring">""" dummy method to make sure the backend can initialize the object.</tt> </tt>
-<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-docstring">            This method should *not* be implemented in the adaptor!"""</tt> </tt>
-<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
-</div><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+</div><div id="iComputeScheduler-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="iComputeScheduler-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">    <tt class="py-docstring">""" L{ComputeScheduler} interface """</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
+<a name="iComputeScheduler.__init__"></a><div id="iComputeScheduler.__init__-def"><a name="L16"></a><tt class="py-lineno">16</tt> <a class="py-toggle" href="#" id="iComputeScheduler.__init__-toggle" onclick="return toggle('iComputeScheduler.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.interface.compute_scheduler.iComputeScheduler-class.html#__init__">__init__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">obj</tt><tt class="py-op">,</tt> <tt class="py-param">adaptor</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="iComputeScheduler.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="iComputeScheduler.__init__-expanded"><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-docstring">""" Create a ComputeScheduler """</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
+<a name="iComputeScheduler.init_"></a><div id="iComputeScheduler.init_-def"><a name="L24"></a><tt class="py-lineno">24</tt> <a class="py-toggle" href="#" id="iComputeScheduler.init_-toggle" onclick="return toggle('iComputeScheduler.init_');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.interface.compute_scheduler.iComputeScheduler-class.html#init_">init_</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="iComputeScheduler.init_-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="iComputeScheduler.init_-expanded"><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-docstring">""" dummy method to make sure the backend can initialize the object.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-docstring">            This method should *not* be implemented in the adaptor!"""</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
 <a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
-<a name="iComputeScheduler.schedule"></a><div id="iComputeScheduler.schedule-def"><a name="L31"></a><tt class="py-lineno">31</tt> <a class="py-toggle" href="#" id="iComputeScheduler.schedule-toggle" onclick="return toggle('iComputeScheduler.schedule');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.interface.compute_scheduler.iComputeScheduler-class.html#schedule">schedule</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">thing</tt><tt class="py-op">,</tt> <tt class="py-param">cud</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="iComputeScheduler.schedule-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="iComputeScheduler.schedule-expanded"><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-docstring">""" schedule a cu/cud on a cus/cps/cp """</tt> </tt>
-<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt id="link-7" class="py-name"><a title="troy.pilot.exception.TroyException" class="py-name" href="#" onclick="return doclink('link-7', 'TroyException', 'link-5');">TroyException</a></tt> <tt class="py-op">(</tt><tt id="link-8" class="py-name"><a title="troy.pilot.exception.Error" class="py-name" href="#" onclick="return doclink('link-8', 'Error', 'link-6');">Error</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Variable troy.pilot.exception.Error.NotImplemented=troy.pilot.exception.Error-class.html#NotImplemented"><a title="troy.pilot.exception.Error.NotImplemented" class="py-name" href="#" onclick="return doclink('link-9', 'NotImplemented', 'link-9');">NotImplemented</a></tt><tt class="py-op">,</tt> <tt class="py-string">"method not implemented!"</tt><tt class="py-op">)</tt> </tt>
-</div></div><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
+<a name="iComputeScheduler.schedule"></a><div id="iComputeScheduler.schedule-def"><a name="L33"></a><tt class="py-lineno">33</tt> <a class="py-toggle" href="#" id="iComputeScheduler.schedule-toggle" onclick="return toggle('iComputeScheduler.schedule');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.interface.compute_scheduler.iComputeScheduler-class.html#schedule">schedule</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">cus</tt><tt class="py-op">,</tt> <tt class="py-param">cud</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="iComputeScheduler.schedule-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="iComputeScheduler.schedule-expanded"><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-docstring">""" schedule a cu on a cus """</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt id="link-7" class="py-name"><a title="troy.pilot.exception.TroyException" class="py-name" href="#" onclick="return doclink('link-7', 'TroyException', 'link-5');">TroyException</a></tt> <tt class="py-op">(</tt><tt id="link-8" class="py-name"><a title="troy.pilot.exception.Error" class="py-name" href="#" onclick="return doclink('link-8', 'Error', 'link-6');">Error</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Variable troy.pilot.exception.Error.NotImplemented=troy.pilot.exception.Error-class.html#NotImplemented"><a title="troy.pilot.exception.Error.NotImplemented" class="py-name" href="#" onclick="return doclink('link-9', 'NotImplemented', 'link-9');">NotImplemented</a></tt><tt class="py-op">,</tt> <tt class="py-string">"method not implemented!"</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt class="py-comment"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -123,7 +128,7 @@ expandto(location.href);
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Wed Aug  1 21:19:25 2012</a>
+    3.0.1 on Thu Aug  2 20:21:19 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -5,26 +5,31 @@ from troy.interface.data_unit    import iDataUnit
 from troy.interface.base         import iBase
 from troy.pilot.exception        import TroyException, Error
 
+
 ########################################################################
 #
 #
 #
 class iComputeDataUnit (iComputeUnit, iDataUnit) :
+    """ L{ComputeDataUnit} interface """
 
-    """ ComputeDataUnit.
-    
-        The ComputeDataUnit is the application's interface to submit 
-        ComputeDataUnits to the Pilot-Manager 
-        in the P* Model.        
-    """
-   
 
-    def __init__ (self, cdu_id = None):
-        """ Create a Compute Data Unit  object.
-
-            Keyword arguments:
-            cdu_id -- Reconnect to an existing CDU (optional).
-        """
+    ############################################################################
+    #
+    def __init__ (self, obj, adaptor) :
+        """ Create a Compute Data Unit """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
         pass   
 
+
+
+    ############################################################################
+    #
+    def init_ (self) :
+        """ dummy method to make sure the backend can initialize the object.
+            This method should *not* be implemented in the adaptor!"""
+        pass
+
+
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

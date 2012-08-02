@@ -56,33 +56,28 @@
 <h1 class="epydoc">Class iDataUnitService</h1><p class="nomargin-top"><span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_int_15" name="uml_class_diagram_for_troy_int_15">
-<area shape="rect" id="node92" href="troy.interface.data_unit_service.iDataUnitService-class.html#__init__" title="Create a DataUnitService object" alt="" coords="245,116,488,135"/>
-<area shape="rect" id="node92" href="troy.interface.data_unit_service.iDataUnitService-class.html#add_data_pilot" title="Add a DataPilot" alt="" coords="245,135,488,153"/>
-<area shape="rect" id="node92" href="troy.interface.data_unit_service.iDataUnitService-class.html#cancel" title="Cancel the DUS." alt="" coords="245,153,488,172"/>
-<area shape="rect" id="node92" href="troy.interface.data_unit_service.iDataUnitService-class.html#list_data_pilots" title="List all DPs of DUS" alt="" coords="245,172,488,191"/>
-<area shape="rect" id="node92" href="troy.interface.data_unit_service.iDataUnitService-class.html#remove_data_pilot" title="Remove a DataPilot" alt="" coords="245,191,488,209"/>
-<area shape="rect" id="node92" href="troy.interface.data_unit_service.iDataUnitService-class.html#submit_data_unit" title="Submit a DU to this DataUnitService." alt="" coords="245,209,488,228"/>
-<area shape="rect" id="node92" href="troy.interface.data_unit_service.iDataUnitService-class.html#wait" title="Wait until DUS enters a final state" alt="" coords="245,228,488,247"/>
-<area shape="rect" id="node1" href="troy.interface.data_unit_service.iDataUnitService-class.html" title="DataUnitService (DUS)" alt="" coords="233,83,500,253"/>
-<area shape="rect" id="node3" href="troy_adaptor_peejay.peejay_dus-class.html" title="troy_adaptor_peejay.peejay_dus" alt="" coords="5,273,229,311"/>
-<area shape="rect" id="node6" href="troy_adaptor_skeleton.xyz_dus-class.html" title="troy_adaptor_skeleton.xyz_dus" alt="" coords="259,273,475,311"/>
-<area shape="rect" id="node7" href="troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html" title="ComputeDataUnitService." alt="" coords="504,273,856,311"/>
-<area shape="rect" id="node93" href="troy.interface.base.iBase-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="333,39,400,57"/>
-<area shape="rect" id="node2" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="321,6,412,63"/>
-<area shape="rect" id="node4" href="troy_adaptor_skeleton.xyz_dcus-class.html" title="troy_adaptor_skeleton.xyz_dcus" alt="" coords="440,331,664,370"/>
-<area shape="rect" id="node5" href="troy_adaptor_peejay.peejay_dcus-class.html" title="troy_adaptor_peejay.peejay_dcus" alt="" coords="693,331,923,370"/>
+<area shape="rect" id="node92" href="troy.interface.data_unit_service.iDataUnitService-class.html#__init__" title="Create a DataUnitService" alt="" coords="284,103,441,121"/>
+<area shape="rect" id="node92" href="troy.interface.data_unit_service.iDataUnitService-class.html#add_pilot" title="Add a DataPilot to this DUS." alt="" coords="284,121,441,140"/>
+<area shape="rect" id="node92" href="troy.interface.data_unit_service.iDataUnitService-class.html#get_unit" title="Reconnect to a DataUnit." alt="" coords="284,140,441,159"/>
+<area shape="rect" id="node92" href="troy.interface.data_unit_service.iDataUnitService-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="284,159,441,177"/>
+<area shape="rect" id="node92" href="troy.interface.data_unit_service.iDataUnitService-class.html#list_pilots" title="List all DPs of DUS" alt="" coords="284,177,441,196"/>
+<area shape="rect" id="node92" href="troy.interface.data_unit_service.iDataUnitService-class.html#list_units" title="list managed DataUnits." alt="" coords="284,196,441,215"/>
+<area shape="rect" id="node92" href="troy.interface.data_unit_service.iDataUnitService-class.html#remove_pilot" title="Remove a DataPilot" alt="" coords="284,215,441,233"/>
+<area shape="rect" id="node92" href="troy.interface.data_unit_service.iDataUnitService-class.html#submit_unit" title="Submit a DU to this DataUnitService." alt="" coords="284,233,441,252"/>
+<area shape="rect" id="node1" href="troy.interface.data_unit_service.iDataUnitService-class.html" title="DataUnitService interface" alt="" coords="272,70,453,258"/>
+<area shape="rect" id="node3" href="troy_adaptor_skeleton.xyz_dus-class.html" title="troy_adaptor_skeleton.xyz_dus" alt="" coords="5,278,221,317"/>
+<area shape="rect" id="node4" href="troy_adaptor_peejay.peejay_dus-class.html" title="troy_adaptor_peejay.peejay_dus" alt="" coords="251,278,475,317"/>
+<area shape="rect" id="node5" href="troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html" title="ComputeDataUnitService interface" alt="" coords="504,278,856,317"/>
+<area shape="rect" id="node2" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="317,6,408,50"/>
+<area shape="rect" id="node6" href="troy_adaptor_skeleton.xyz_dcus-class.html" title="troy_adaptor_skeleton.xyz_dcus" alt="" coords="440,337,664,375"/>
+<area shape="rect" id="node7" href="troy_adaptor_peejay.peejay_dcus-class.html" title="troy_adaptor_peejay.peejay_dcus" alt="" coords="693,337,923,375"/>
 </map>
   <img src="uml_class_diagram_for_troy_int_15.gif" alt='' usemap="#uml_class_diagram_for_troy_int_15" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
-<p>DataUnitService (DUS)</p>
-  <p>The DataUnitService is the application's interface to submit DataUnits
-  to the Pilot-Manager in the P* Model.</p>
-  <p>It can provide the application with a list of DataUnits that are 
-  managed by the Pilot-Manager.</p>
-  <p>The DataUnitService is linked to a DataPilotService for the actual 
-  execution of the DataUnits.</p>
+<p><a href="troy.pilot.data_unit_service.DataUnitService-class.html" 
+  class="link">DataUnitService</a> interface</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -100,9 +95,8 @@
         <tr>
           <td><span class="summary-sig"><a href="troy.interface.data_unit_service.iDataUnitService-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">obj</span>,
-        <span class="summary-sig-arg">adaptor</span>,
-        <span class="summary-sig-arg">dus_id</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Create a DataUnitService object</td>
+        <span class="summary-sig-arg">adaptor</span>)</span><br />
+      Create a DataUnitService</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.__init__">source&nbsp;code</a></span>
             
@@ -118,11 +112,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.interface.data_unit_service.iDataUnitService-class.html#add_data_pilot" class="summary-sig-name">add_data_pilot</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="troy.interface.data_unit_service.iDataUnitService-class.html#add_pilot" class="summary-sig-name">add_pilot</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">dp</span>)</span><br />
-      Add a DataPilot</td>
+      Add a DataPilot to this DUS.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.add_data_pilot">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.add_pilot">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -136,10 +130,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.interface.data_unit_service.iDataUnitService-class.html#cancel" class="summary-sig-name">cancel</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Cancel the DUS.</td>
+          <td><span class="summary-sig"><a href="troy.interface.data_unit_service.iDataUnitService-class.html#get_unit" class="summary-sig-name">get_unit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cu_id</span>)</span><br />
+      Reconnect to a DataUnit.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.cancel">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.get_unit">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -153,10 +148,27 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="list_data_pilots"></a><span class="summary-sig-name">list_data_pilots</span>(<span class="summary-sig-arg">self</span>)</span><br />
+          <td><span class="summary-sig"><a href="troy.interface.data_unit_service.iDataUnitService-class.html#init_" class="summary-sig-name">init_</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      dummy method to make sure the backend can initialize the object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.init_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="list_pilots"></a><span class="summary-sig-name">list_pilots</span>(<span class="summary-sig-arg">self</span>)</span><br />
       List all DPs of DUS</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.list_data_pilots">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.list_pilots">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -170,11 +182,29 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.interface.data_unit_service.iDataUnitService-class.html#remove_data_pilot" class="summary-sig-name">remove_data_pilot</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="troy.interface.data_unit_service.iDataUnitService-class.html#list_units" class="summary-sig-name">list_units</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      list managed <a href="troy.pilot.data_unit.DataUnit-class.html" 
+      class="link">DataUnit</a>s.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.list_units">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.data_unit_service.iDataUnitService-class.html#remove_pilot" class="summary-sig-name">remove_pilot</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">dp</span>)</span><br />
       Remove a DataPilot</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.remove_data_pilot">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.remove_pilot">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -188,40 +218,16 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.interface.data_unit_service.iDataUnitService-class.html#submit_data_unit" class="summary-sig-name">submit_data_unit</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="troy.interface.data_unit_service.iDataUnitService-class.html#submit_unit" class="summary-sig-name">submit_unit</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">dud</span>)</span><br />
       Submit a DU to this DataUnitService.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.submit_data_unit">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.submit_unit">source&nbsp;code</a></span>
             
           </td>
         </tr>
       </table>
       
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="wait"></a><span class="summary-sig-name">wait</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      Wait until DUS enters a final state</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.wait">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="troy.interface.base.iBase-class.html">base.iBase</a></code></b>:
-      <code><a href="troy.interface.base.iBase-class.html#init_">init_</a></code>
-      </p>
     </td>
   </tr>
 </table>
@@ -243,8 +249,7 @@
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">obj</span>,
-        <span class="sig-arg">adaptor</span>,
-        <span class="sig-arg">dus_id</span>=<span class="sig-default">None</span>)</span>
+        <span class="sig-arg">adaptor</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
@@ -252,9 +257,7 @@
     </td>
   </tr></table>
   
-  <p>Create a DataUnitService object</p>
-  <p>Keyword arguments: dus_id -- Reconnect to an existing 
-  DataUnitService</p>
+  <p>Create a DataUnitService</p>
   <dl class="fields">
     <dt>Overrides:
         <a href="troy.interface.base.iBase-class.html#__init__">base.iBase.__init__</a>
@@ -262,83 +265,132 @@
   </dl>
 </td></tr></table>
 </div>
-<a name="add_data_pilot"></a>
+<a name="add_pilot"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">add_data_pilot</span>(<span class="sig-arg">self</span>,
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">add_pilot</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">dp</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.add_data_pilot">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.add_pilot">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Add a DataPilot</p>
+  <p>Add a DataPilot to this DUS.</p>
   <p>Keyword arguments: dp -- The DataPilot to which this DataUnitService 
   will connect.</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
 </div>
-<a name="cancel"></a>
+<a name="get_unit"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">cancel</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_unit</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cu_id</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.cancel">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.get_unit">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Cancel the DUS.</p>
-  <p>Cancelling the DUS also cancels all the DUs submitted to it.</p>
+  <p>Reconnect to a DataUnit.</p>
+  <p>Keyword arguments: cu_id   -- <a 
+  href="troy.pilot.data_unit.DataUnit-class.html" 
+  class="link">DataUnit</a>'s id</p>
+  <p>Return value: A <a href="troy.pilot.data_unit.DataUnit-class.html" 
+  class="link">DataUnit</a> instance</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
 </div>
-<a name="remove_data_pilot"></a>
+<a name="init_"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">remove_data_pilot</span>(<span class="sig-arg">self</span>,
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">init_</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>dummy method to make sure the backend can initialize the object. This 
+  method should *not* be implemented in the adaptor!</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.base.iBase-class.html#init_">base.iBase.init_</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="list_units"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">list_units</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.list_units">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>list managed <a href="troy.pilot.data_unit.DataUnit-class.html" 
+  class="link">DataUnit</a>s.</p>
+  <p>Return value: A list of <a 
+  href="troy.pilot.data_unit.DataUnit-class.html" class="link">DataUnit</a>
+  IDs</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="remove_pilot"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">remove_pilot</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">dp</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.remove_data_pilot">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.remove_pilot">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
   <p>Remove a DataPilot</p>
-  <p>Note that it won't cancel the DataPilot, it will just no longer 
-  receive any DUs.</p>
   <p>Keyword arguments: dp -- The DataPilot to remove</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
 </div>
-<a name="submit_data_unit"></a>
+<a name="submit_unit"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">submit_data_unit</span>(<span class="sig-arg">self</span>,
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">submit_unit</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">dud</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.submit_data_unit">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.interface.data_unit_service-pysrc.html#iDataUnitService.submit_unit">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -380,7 +432,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Wed Aug  1 21:19:22 2012</a>
+    3.0.1 on Thu Aug  2 20:21:16 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -56,33 +56,24 @@
 <h1 class="epydoc">Class iDataUnit</h1><p class="nomargin-top"><span class="codelink"><a href="troy.interface.data_unit-pysrc.html#iDataUnit">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_int_14" name="uml_class_diagram_for_troy_int_14">
-<area shape="rect" id="node86" href="troy.interface.base.iBase-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="341,39,408,57"/>
-<area shape="rect" id="node1" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="329,6,420,63"/>
-<area shape="rect" id="node85" href="troy.interface.data_unit.iDataUnit-class.html#__init__" title="troy.interface.data_unit.iDataUnit.__init__" alt="" coords="273,116,476,135"/>
-<area shape="rect" id="node85" href="troy.interface.data_unit.iDataUnit-class.html#cancel" title="Cancel the DU" alt="" coords="273,135,476,153"/>
-<area shape="rect" id="node85" href="troy.interface.data_unit.iDataUnit-class.html#data_export" title="copies content of DU to a directory on the local machine" alt="" coords="273,153,476,172"/>
-<area shape="rect" id="node85" href="troy.interface.data_unit.iDataUnit-class.html#data_import" title="copies content from a directory on the local machine to DU" alt="" coords="273,172,476,191"/>
-<area shape="rect" id="node85" href="troy.interface.data_unit.iDataUnit-class.html#list_files" title="list files managed by the DU" alt="" coords="273,191,476,209"/>
-<area shape="rect" id="node85" href="troy.interface.data_unit.iDataUnit-class.html#set_callback" title="Set a callback function for a member." alt="" coords="273,209,476,228"/>
-<area shape="rect" id="node85" href="troy.interface.data_unit.iDataUnit-class.html#unset_callback" title="Unset a callback function from a member" alt="" coords="273,228,476,247"/>
-<area shape="rect" id="node85" href="troy.interface.data_unit.iDataUnit-class.html#wait" title="Wait until DU enters a final state" alt="" coords="273,247,476,265"/>
-<area shape="rect" id="node4" href="troy.interface.data_unit.iDataUnit-class.html" title="DataUnit." alt="" coords="261,83,488,271"/>
-<area shape="rect" id="node2" href="troy_adaptor_skeleton.xyz_du-class.html" title="troy_adaptor_skeleton.xyz_du" alt="" coords="5,291,216,330"/>
-<area shape="rect" id="node3" href="troy.interface.compute_data_unit.iComputeDataUnit-class.html" title="ComputeDataUnit." alt="" coords="245,291,504,330"/>
-<area shape="rect" id="node5" href="troy_adaptor_skeleton.xyz_dcu-class.html" title="troy_adaptor_skeleton.xyz_dcu" alt="" coords="141,350,357,389"/>
-<area shape="rect" id="node6" href="troy_adaptor_peejay.peejay_dcu-class.html" title="troy_adaptor_peejay.peejay_dcu" alt="" coords="387,350,611,389"/>
-<area shape="rect" id="node7" href="troy_adaptor_peejay.peejay_du-class.html" title="troy_adaptor_peejay.peejay_du" alt="" coords="533,291,749,330"/>
+<area shape="rect" id="node1" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="329,6,420,50"/>
+<area shape="rect" id="node85" href="troy.interface.data_unit.iDataUnit-class.html#__init__" title="troy.interface.data_unit.iDataUnit.__init__" alt="" coords="296,103,453,121"/>
+<area shape="rect" id="node85" href="troy.interface.data_unit.iDataUnit-class.html#cancel" title="Cancel the DU" alt="" coords="296,121,453,140"/>
+<area shape="rect" id="node85" href="troy.interface.data_unit.iDataUnit-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="296,140,453,159"/>
+<area shape="rect" id="node85" href="troy.interface.data_unit.iDataUnit-class.html#wait" title="Wait until DU enters a final state" alt="" coords="296,159,453,177"/>
+<area shape="rect" id="node4" href="troy.interface.data_unit.iDataUnit-class.html" title="DataUnit interface" alt="" coords="284,70,465,183"/>
+<area shape="rect" id="node2" href="troy_adaptor_skeleton.xyz_du-class.html" title="troy_adaptor_skeleton.xyz_du" alt="" coords="5,203,216,242"/>
+<area shape="rect" id="node3" href="troy_adaptor_skeleton.xyz_dcu-class.html" title="troy_adaptor_skeleton.xyz_dcu" alt="" coords="141,262,357,301"/>
+<area shape="rect" id="node6" href="troy.interface.compute_data_unit.iComputeDataUnit-class.html" title="ComputeDataUnit interface" alt="" coords="245,203,504,242"/>
+<area shape="rect" id="node7" href="troy_adaptor_peejay.peejay_du-class.html" title="troy_adaptor_peejay.peejay_du" alt="" coords="533,203,749,242"/>
+<area shape="rect" id="node5" href="troy_adaptor_peejay.peejay_dcu-class.html" title="troy_adaptor_peejay.peejay_dcu" alt="" coords="387,262,611,301"/>
 </map>
   <img src="uml_class_diagram_for_troy_int_14.gif" alt='' usemap="#uml_class_diagram_for_troy_int_14" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
-<p>DataUnit.</p>
-  <p>This is the object that is returned by the DataUnitService when a new 
-  DataUnit is created based on a DataUnitDescription.</p>
-  <p>The DataUnit object can be used by the application to keep track of 
-  DataUnits that are active.</p>
-  <p>A DataUnit has state, can be queried and can be cancelled.</p>
+<p><a href="troy.pilot.data_unit.DataUnit-class.html" 
+  class="link">DataUnit</a> interface</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -133,83 +124,10 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="data_export"></a><span class="summary-sig-name">data_export</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">target_directory</span>)</span><br />
-      copies content of DU to a directory on the local machine</td>
+          <td><span class="summary-sig"><a href="troy.interface.data_unit.iDataUnit-class.html#init_" class="summary-sig-name">init_</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      dummy method to make sure the backend can initialize the object.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.data_unit-pysrc.html#iDataUnit.data_export">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="data_import"></a><span class="summary-sig-name">data_import</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">src_directory</span>)</span><br />
-      copies content from a directory on the local machine to DU</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.data_unit-pysrc.html#iDataUnit.data_import">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="list_files"></a><span class="summary-sig-name">list_files</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      list files managed by the DU</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.data_unit-pysrc.html#iDataUnit.list_files">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="troy.interface.data_unit.iDataUnit-class.html#set_callback" class="summary-sig-name">set_callback</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">member</span>,
-        <span class="summary-sig-arg">cb</span>)</span><br />
-      Set a callback function for a member.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.data_unit-pysrc.html#iDataUnit.set_callback">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="troy.interface.data_unit.iDataUnit-class.html#unset_callback" class="summary-sig-name">unset_callback</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">member</span>)</span><br />
-      Unset a callback function from a member</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="troy.interface.data_unit-pysrc.html#iDataUnit.unset_callback">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.interface.data_unit-pysrc.html#iDataUnit.init_">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -232,13 +150,6 @@
         </tr>
       </table>
       
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="troy.interface.base.iBase-class.html">base.iBase</a></code></b>:
-      <code><a href="troy.interface.base.iBase-class.html#init_">init_</a></code>
-      </p>
     </td>
   </tr>
 </table>
@@ -276,48 +187,26 @@
   </dl>
 </td></tr></table>
 </div>
-<a name="set_callback"></a>
+<a name="init_"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_callback</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">member</span>,
-        <span class="sig-arg">cb</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">init_</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.interface.data_unit-pysrc.html#iDataUnit.set_callback">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.interface.data_unit-pysrc.html#iDataUnit.init_">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Set a callback function for a member.</p>
-  <p>Keyword arguments: member -- The member to set the callback for (state
-  / state_detail). cb     -- The callback object to call.</p>
+  <p>dummy method to make sure the backend can initialize the object. This 
+  method should *not* be implemented in the adaptor!</p>
   <dl class="fields">
-  </dl>
-</td></tr></table>
-</div>
-<a name="unset_callback"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">unset_callback</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">member</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.interface.data_unit-pysrc.html#iDataUnit.unset_callback">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Unset a callback function from a member</p>
-  <p>Keyword arguments: member -- The member to unset the callback 
-  from.</p>
-  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.base.iBase-class.html#init_">base.iBase.init_</a>
+    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -351,7 +240,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Wed Aug  1 21:19:22 2012</a>
+    3.0.1 on Thu Aug  2 20:21:16 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -80,7 +80,7 @@ class DataUnitService (Base) :
         return self.engine_.call ('DataUnitService', 'set_scheduler', self, s)
 
 
-    def submit_data_unit (self, dud) :
+    def submit_unit (self, dud) :
         """ Submit a CU to this DataUnitService.
 
             Keyword argument:
@@ -95,7 +95,7 @@ class DataUnitService (Base) :
         return du
 
 
-    def list_data_units (self) :
+    def list_units (self) :
         """ list managed L{DataUnit}s.
 
             Return value:
@@ -109,11 +109,11 @@ class DataUnitService (Base) :
             state.
 
         """
-        return self.engine_.call ('DataUnitService', 'list_data_units', self)
+        return self.engine_.call ('DataUnitService', 'list_units', self)
 
 
 
-    def get_data_unit (self, du_id) :
+    def get_unit (self, du_id) :
         """ Reconnect to a DataUnit.
 
             Keyword arguments:
@@ -127,26 +127,26 @@ class DataUnitService (Base) :
               du = troy.pilot.DataUnit (du_id)
 
         """
-        return self.engine_.call ('DataUnitService', 'get_data_unit', self, du_id)
+        return self.engine_.call ('DataUnitService', 'get_unit', self, du_id)
 
 
 
-    def add_data_pilot_service (self, dps) :
+    def add_pilot_service (self, dps) :
         # FIXME: dp: id or instance?
         """ Add a DataPilotService to this DUS.
 
             Keyword arguments:
             dps -- The DataPilotService which this DataUnitService will utilize.
         """
-        return self.engine_.call ('DataUnitService', 'add_data_pilot_service', self, dps)
+        return self.engine_.call ('DataUnitService', 'add_pilot_service', self, dps)
 
 
-    def list_data_pilots_services (self) :
+    def list_pilot_services (self) :
         """ List all DPS IDs of this DUS """
-        return self.engine_.call ('DataUnitService', 'list_data_pilot_services', self)
+        return self.engine_.call ('DataUnitService', 'list_pilot_services', self)
 
 
-    def remove_data_pilot_service (self, dps) :
+    def remove_pilot_service (self, dps) :
         """ Remove a DataPilotService
 
             Note that it won't cancel the DataPilotService's Pilots, they will just no
@@ -155,7 +155,7 @@ class DataUnitService (Base) :
             Keyword arguments:
             dps -- The DataPilotService to remove
         """
-        return self.engine_.call ('DataUnitService', 'remove_data_pilot_service', self, dp)
+        return self.engine_.call ('DataUnitService', 'remove_pilot_service', self, dp)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

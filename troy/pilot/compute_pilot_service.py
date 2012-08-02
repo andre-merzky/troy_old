@@ -55,7 +55,7 @@ class ComputePilotService (Base) :
         self.engine_.call ('ComputePilotService', 'init_', self)
 
 
-    def create_compute_pilot (self, cpd) :
+    def submit_pilot (self, cpd) :
         """ Create a ComputePilot.
 
             Keyword arguments:
@@ -79,10 +79,10 @@ class ComputePilotService (Base) :
             or, where default values are not specified, are ignored.
 
         """
-        return self.engine_.call ('ComputePilotService', 'create_compute_pilot', self, cpd)
+        return self.engine_.call ('ComputePilotService', 'submit_pilot', self, cpd)
 
 
-    def list_compute_pilots (self) :
+    def list_pilots (self) :
         """ list managed L{ComputePilot}s.
 
             Return value:
@@ -99,7 +99,7 @@ class ComputePilotService (Base) :
         return self.engine_.call ('ComputePilotService', 'list_pilots', self)
 
 
-    def get_compute_pilot (self, cp_id) :
+    def get_pilot (self, cp_id) :
         """ Reconnect to a ComputePilot.
 
             Keyword arguments:
@@ -116,7 +116,7 @@ class ComputePilotService (Base) :
         return self.engine_.call ('ComputePilotService', 'get_pilot', self, cp_id)
 
 
-    def submit_compute_unit (self, cud) :
+    def submit_unit (self, cud) :
         """ Submit a CU to this ComputePilotService.
 
             Keyword argument:
@@ -142,10 +142,10 @@ class ComputePilotService (Base) :
             are ignored.
 
         """
-        return self.engine_.call ('ComputePilotService', 'submit_compute_unit', self, cud)
+        return self.engine_.call ('ComputePilotService', 'submit_unit', self, cud)
 
 
-    def list_compute_units (self) :
+    def list_units (self) :
         """ list managed L{ComputeUnit}s.
 
             Return value:
@@ -159,10 +159,10 @@ class ComputePilotService (Base) :
             state.
 
         """
-        return self.engine_.call ('ComputePilotService', 'list_compute_units', self)
+        return self.engine_.call ('ComputePilotService', 'list_units', self)
 
 
-    def get_compute_unit (self, cu_id) :
+    def get_unit (self, cu_id) :
         """ Reconnect to a ComputeUnit.
 
             Keyword arguments:
@@ -176,7 +176,7 @@ class ComputePilotService (Base) :
               cu = troy.pilot.ComputeUnit (cu_id)
 
         """
-        return self.engine_.call ('ComputePilotService', 'get_compute_unit', self, cu_id)
+        return self.engine_.call ('ComputePilotService', 'get_unit', self, cu_id)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

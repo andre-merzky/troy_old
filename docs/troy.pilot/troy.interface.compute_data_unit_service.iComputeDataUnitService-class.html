@@ -56,33 +56,28 @@
 <h1 class="epydoc">Class iComputeDataUnitService</h1><p class="nomargin-top"><span class="codelink"><a href="troy.interface.compute_data_unit_service-pysrc.html#iComputeDataUnitService">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_int_5" name="uml_class_diagram_for_troy_int_5">
-<area shape="rect" id="node48" href="troy.interface.data_unit_service.iDataUnitService-class.html#add_data_pilot" title="Add a DataPilot" alt="" coords="17,103,224,121"/>
-<area shape="rect" id="node48" href="troy.interface.data_unit_service.iDataUnitService-class.html#cancel" title="Cancel the DUS." alt="" coords="17,121,224,140"/>
-<area shape="rect" id="node48" href="troy.interface.data_unit_service.iDataUnitService-class.html#list_data_pilots" title="List all DPs of DUS" alt="" coords="17,140,224,159"/>
-<area shape="rect" id="node48" href="troy.interface.data_unit_service.iDataUnitService-class.html#remove_data_pilot" title="Remove a DataPilot" alt="" coords="17,159,224,177"/>
-<area shape="rect" id="node48" href="troy.interface.data_unit_service.iDataUnitService-class.html#submit_data_unit" title="Submit a DU to this DataUnitService." alt="" coords="17,177,224,196"/>
-<area shape="rect" id="node48" href="troy.interface.data_unit_service.iDataUnitService-class.html#wait" title="Wait until DUS enters a final state" alt="" coords="17,196,224,215"/>
-<area shape="rect" id="node1" href="troy.interface.data_unit_service.iDataUnitService-class.html" title="DataUnitService (DUS)" alt="" coords="5,70,235,221"/>
-<area shape="rect" id="node45" href="troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html#__init__" title="Create a Compute Data Unit Service object." alt="" coords="176,273,349,292"/>
-<area shape="rect" id="node5" href="troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html" title="ComputeDataUnitService." alt="" coords="164,241,361,298"/>
-<area shape="rect" id="node46" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#add_compute_pilot" title="Add a ComputePilot to this WUS." alt="" coords="276,103,533,121"/>
-<area shape="rect" id="node46" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#get_id" title="get instance id" alt="" coords="276,121,533,140"/>
-<area shape="rect" id="node46" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#init_" title="dummy method to make sure the backend can initialize the object" alt="" coords="276,140,533,159"/>
-<area shape="rect" id="node46" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#list_compute_pilots" title="List all CPs of CUS" alt="" coords="276,159,533,177"/>
-<area shape="rect" id="node46" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#remove_compute_pilot" title="Remove a ComputePilot" alt="" coords="276,177,533,196"/>
-<area shape="rect" id="node46" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#submit_compute_unit" title="Submit a CU to this ComputeUnitService." alt="" coords="276,196,533,215"/>
-<area shape="rect" id="node2" href="troy.interface.compute_unit_service.iComputeUnitService-class.html" title="ComputeUnitService (CUS)" alt="" coords="264,70,544,221"/>
-<area shape="rect" id="node3" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="217,6,308,50"/>
-<area shape="rect" id="node4" href="troy_adaptor_skeleton.xyz_dcus-class.html" title="troy_adaptor_skeleton.xyz_dcus" alt="" coords="23,318,247,357"/>
-<area shape="rect" id="node6" href="troy_adaptor_peejay.peejay_dcus-class.html" title="troy_adaptor_peejay.peejay_dcus" alt="" coords="276,318,505,357"/>
+<area shape="rect" id="node1" href="troy.interface.data_unit_service.iDataUnitService-class.html" title="DataUnitService interface" alt="" coords="5,133,235,177"/>
+<area shape="rect" id="node45" href="troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html#__init__" title="Create a ComputeDataUnitService" alt="" coords="184,292,341,311"/>
+<area shape="rect" id="node4" href="troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html" title="ComputeDataUnitService interface" alt="" coords="172,259,353,317"/>
+<area shape="rect" id="node46" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#add_pilot" title="Add a ComputePilot to this CUS." alt="" coords="276,103,533,121"/>
+<area shape="rect" id="node46" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#get_unit" title="Reconnect to a ComputeUnit." alt="" coords="276,121,533,140"/>
+<area shape="rect" id="node46" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="276,140,533,159"/>
+<area shape="rect" id="node46" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#list_pilots" title="List all CPs of CUS" alt="" coords="276,159,533,177"/>
+<area shape="rect" id="node46" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#list_units" title="list managed ComputeUnits." alt="" coords="276,177,533,196"/>
+<area shape="rect" id="node46" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#remove_pilot" title="Remove a ComputePilot" alt="" coords="276,196,533,215"/>
+<area shape="rect" id="node46" href="troy.interface.compute_unit_service.iComputeUnitService-class.html#submit_unit" title="Submit a CU to this ComputeUnitService." alt="" coords="276,215,533,233"/>
+<area shape="rect" id="node2" href="troy.interface.compute_unit_service.iComputeUnitService-class.html" title="ComputeUnitService interface" alt="" coords="264,70,544,239"/>
+<area shape="rect" id="node3" href="troy_adaptor_skeleton.xyz_dcus-class.html" title="troy_adaptor_skeleton.xyz_dcus" alt="" coords="23,337,247,375"/>
+<area shape="rect" id="node6" href="troy_adaptor_peejay.peejay_dcus-class.html" title="troy_adaptor_peejay.peejay_dcus" alt="" coords="276,337,505,375"/>
+<area shape="rect" id="node5" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="217,6,308,50"/>
 </map>
   <img src="uml_class_diagram_for_troy_int_5.gif" alt='' usemap="#uml_class_diagram_for_troy_int_5" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
-<p>ComputeDataUnitService.</p>
-  <p>The ComputeDataUnitService is the application's interface to submit 
-  ComputeDataUnits to the Pilot-Manager in the P* Model.</p>
+<p><a 
+  href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html"
+  class="link">ComputeDataUnitService</a> interface</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -99,8 +94,9 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">cdus_id</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Create a Compute Data Unit Service object.</td>
+        <span class="summary-sig-arg">obj</span>,
+        <span class="summary-sig-arg">adaptor</span>)</span><br />
+      Create a ComputeDataUnitService</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.interface.compute_data_unit_service-pysrc.html#iComputeDataUnitService.__init__">source&nbsp;code</a></span>
             
@@ -113,20 +109,13 @@
   <tr>
     <td colspan="2" class="summary">
     <p class="indent-wrapped-lines"><b>Inherited from <code><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html">compute_unit_service.iComputeUnitService</a></code></b>:
-      <code><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#add_compute_pilot">add_compute_pilot</a></code>,
-      <code><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#get_id">get_id</a></code>,
+      <code><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#add_pilot">add_pilot</a></code>,
+      <code><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#get_unit">get_unit</a></code>,
       <code><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#init_">init_</a></code>,
-      <code><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#list_compute_pilots">list_compute_pilots</a></code>,
-      <code><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#remove_compute_pilot">remove_compute_pilot</a></code>,
-      <code><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#submit_compute_unit">submit_compute_unit</a></code>
-      </p>
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="troy.interface.data_unit_service.iDataUnitService-class.html">data_unit_service.iDataUnitService</a></code></b>:
-      <code><a href="troy.interface.data_unit_service.iDataUnitService-class.html#add_data_pilot">add_data_pilot</a></code>,
-      <code><a href="troy.interface.data_unit_service.iDataUnitService-class.html#cancel">cancel</a></code>,
-      <code><a href="troy.interface.data_unit_service.iDataUnitService-class.html#list_data_pilots">list_data_pilots</a></code>,
-      <code><a href="troy.interface.data_unit_service.iDataUnitService-class.html#remove_data_pilot">remove_data_pilot</a></code>,
-      <code><a href="troy.interface.data_unit_service.iDataUnitService-class.html#submit_data_unit">submit_data_unit</a></code>,
-      <code><a href="troy.interface.data_unit_service.iDataUnitService-class.html#wait">wait</a></code>
+      <code><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#list_pilots">list_pilots</a></code>,
+      <code><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#list_units">list_units</a></code>,
+      <code><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#remove_pilot">remove_pilot</a></code>,
+      <code><a href="troy.interface.compute_unit_service.iComputeUnitService-class.html#submit_unit">submit_unit</a></code>
       </p>
     </td>
   </tr>
@@ -148,7 +137,8 @@
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">cdus_id</span>=<span class="sig-default">None</span>)</span>
+        <span class="sig-arg">obj</span>,
+        <span class="sig-arg">adaptor</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
@@ -156,9 +146,7 @@
     </td>
   </tr></table>
   
-  <p>Create a Compute Data Unit Service object.</p>
-  <p>Keyword arguments: cdus_id -- Reconnect to an existing CDUS 
-  (optional).</p>
+  <p>Create a ComputeDataUnitService</p>
   <dl class="fields">
     <dt>Overrides:
         <a href="troy.interface.data_unit_service.iDataUnitService-class.html#__init__">data_unit_service.iDataUnitService.__init__</a>
@@ -196,7 +184,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Wed Aug  1 21:19:22 2012</a>
+    3.0.1 on Thu Aug  2 20:21:15 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

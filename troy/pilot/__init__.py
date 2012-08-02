@@ -54,10 +54,10 @@ would be (some details left out for brevity)::
     # create a work unit service with one ComputePilot resource, to submit work
     # items to
     cus = troy.pilot.ComputeUnitService ()
-    cus.add_compute_pilot_service (cps)
+    cus.add_pilot_service (cps)
 
     # submit a compute work item
-    cu = cus.submit_compute_unit ([some compute unit description])
+    cu = cus.submit_unit ([some compute unit description])
 
     cu.wait ()     # wait 'til work is done
 

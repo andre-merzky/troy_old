@@ -79,7 +79,7 @@ class ComputeUnitService (Base) :
         return self.engine_.call ('ComputeUnitService', 'set_scheduler', self, s)
 
 
-    def submit_compute_unit (self, cud) :
+    def submit_unit (self, cud) :
         """ Submit a CU to this ComputeUnitService.
 
             Keyword argument:
@@ -94,7 +94,7 @@ class ComputeUnitService (Base) :
         return cu
 
 
-    def list_compute_units (self) :
+    def list_units (self) :
         """ list managed L{ComputeUnit}s.
 
             Return value:
@@ -108,11 +108,11 @@ class ComputeUnitService (Base) :
             state.
 
         """
-        return self.engine_.call ('ComputeUnitService', 'list_compute_units', self)
+        return self.engine_.call ('ComputeUnitService', 'list_units', self)
 
 
 
-    def get_compute_unit (self, cu_id) :
+    def get_unit (self, cu_id) :
         """ Reconnect to a ComputeUnit.
 
             Keyword arguments:
@@ -126,26 +126,26 @@ class ComputeUnitService (Base) :
               cu = troy.pilot.ComputeUnit (cu_id)
 
         """
-        return self.engine_.call ('ComputeUnitService', 'get_compute_unit', self, cu_id)
+        return self.engine_.call ('ComputeUnitService', 'get_unit', self, cu_id)
 
 
 
-    def add_compute_pilot_service (self, cps) :
+    def add_pilot_service (self, cps) :
         # FIXME: cp: id or instance?
         """ Add a ComputePilotService to this CUS.
 
             Keyword arguments:
             cps -- The ComputePilotService which this ComputeUnitService will utilize.
         """
-        return self.engine_.call ('ComputeUnitService', 'add_compute_pilot_service', self, cps)
+        return self.engine_.call ('ComputeUnitService', 'add_pilot_service', self, cps)
 
 
-    def list_compute_pilots_services (self) :
+    def list_pilot_services (self) :
         """ List all CPS IDs of this CUS """
-        return self.engine_.call ('ComputeUnitService', 'list_compute_pilot_services', self)
+        return self.engine_.call ('ComputeUnitService', 'list_pilot_services', self)
 
 
-    def remove_compute_pilot_service (self, cps) :
+    def remove_pilot_service (self, cps) :
         """ Remove a ComputePilotService
 
             Note that it won't cancel the ComputePilotService's Pilots, they will just no
@@ -154,7 +154,7 @@ class ComputeUnitService (Base) :
             Keyword arguments:
             cps -- The ComputePilotService to remove
         """
-        return self.engine_.call ('ComputeUnitService', 'remove_compute_pilot_service', self, cp)
+        return self.engine_.call ('ComputeUnitService', 'remove_pilot_service', self, cp)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

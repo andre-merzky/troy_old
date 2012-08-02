@@ -56,14 +56,14 @@
 <h1 class="epydoc">Class ComputePilot</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.compute_pilot-pysrc.html#ComputePilot">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_pil_7" name="uml_class_diagram_for_troy_pil_7">
-<area shape="rect" id="node157" href="troy.pilot.compute_pilot.ComputePilot-class.html#__init__" title="Create a ComputePilot" alt="" coords="217,1081,407,1100"/>
-<area shape="rect" id="node157" href="troy.pilot.compute_pilot.ComputePilot-class.html#reinitialize" title="Re&#45;Initialize the ComputePilot to the (new) ComputePilotDescription." alt="" coords="217,1100,407,1119"/>
-<area shape="rect" id="node157" href="troy.pilot.compute_pilot.ComputePilot-class.html#submit_compute_unit" title="Submit a CU to this ComputePilotService." alt="" coords="217,1119,407,1137"/>
-<area shape="rect" id="node157" href="troy.pilot.compute_pilot.ComputePilot-class.html#list_compute_units" title="list managed ComputeUnits." alt="" coords="217,1137,407,1156"/>
-<area shape="rect" id="node157" href="troy.pilot.compute_pilot.ComputePilot-class.html#get_compute_unit" title="Reconnect to a ComputeUnit." alt="" coords="217,1156,407,1175"/>
-<area shape="rect" id="node157" href="troy.pilot.compute_pilot.ComputePilot-class.html#wait" title="Wait until CP enters a final state" alt="" coords="217,1175,407,1193"/>
-<area shape="rect" id="node157" href="troy.pilot.compute_pilot.ComputePilot-class.html#cancel" title="Move the pilot into Canceled state, releasing all resources." alt="" coords="217,1193,407,1212"/>
-<area shape="rect" id="node1" href="troy.pilot.compute_pilot.ComputePilot-class.html" title="ComputePilot (PilotJob)" alt="" coords="205,1049,419,1218"/>
+<area shape="rect" id="node157" href="troy.pilot.compute_pilot.ComputePilot-class.html#__init__" title="Create a ComputePilot" alt="" coords="245,1081,377,1100"/>
+<area shape="rect" id="node157" href="troy.pilot.compute_pilot.ComputePilot-class.html#reinitialize" title="Re&#45;Initialize the ComputePilot to the (new) ComputePilotDescription." alt="" coords="245,1100,377,1119"/>
+<area shape="rect" id="node157" href="troy.pilot.compute_pilot.ComputePilot-class.html#submit_unit" title="Submit a CU to this ComputePilot." alt="" coords="245,1119,377,1137"/>
+<area shape="rect" id="node157" href="troy.pilot.compute_pilot.ComputePilot-class.html#list_units" title="list managed ComputeUnits." alt="" coords="245,1137,377,1156"/>
+<area shape="rect" id="node157" href="troy.pilot.compute_pilot.ComputePilot-class.html#get_unit" title="Reconnect to a ComputeUnit." alt="" coords="245,1156,377,1175"/>
+<area shape="rect" id="node157" href="troy.pilot.compute_pilot.ComputePilot-class.html#wait" title="Wait until CP enters a final state" alt="" coords="245,1175,377,1193"/>
+<area shape="rect" id="node157" href="troy.pilot.compute_pilot.ComputePilot-class.html#cancel" title="Move the pilot into Canceled state, releasing all resources." alt="" coords="245,1193,377,1212"/>
+<area shape="rect" id="node1" href="troy.pilot.compute_pilot.ComputePilot-class.html" title="ComputePilot (PilotJob)" alt="" coords="233,1049,388,1218"/>
 <area shape="rect" id="node158" href="troy.pilot.base.Base-class.html#get_idata_" title="Get instance data dict entry." alt="" coords="223,967,401,985"/>
 <area shape="rect" id="node158" href="troy.pilot.base.Base-class.html#set_idata_" title="Set instance data dict entry." alt="" coords="223,985,401,1004"/>
 <area shape="rect" id="node158" href="troy.pilot.base.Base-class.html#dump_" title="Dump dumps." alt="" coords="223,1004,401,1023"/>
@@ -128,9 +128,9 @@
   <p>Properties:</p>
 <pre class="literalblock">
  - id:
-   The id may be 'None' if the Pilot is not yet in Running state.
-   The returned ID can be used to connect to the CP instance later
-   on, for example from within a different application instance.
+   The id may be 'None' if the Pilot is not yet in Running state.  The
+   returned ID can be used to connect to the CP instance later on, for
+   example from within a different application instance.  
    type: string (url)
 
  - state:
@@ -143,11 +143,10 @@
    type: string
 
  - description:
-   The ComputePilotDescription used to create this pilot.
-   That description is not guaranteed to be available, nor is it
-   guaranteed to be complete -- in particular for reconnected pilots.
-   Its existence and completeness depends on the ability to inspect
-   backend pilot instances.
+   The ComputePilotDescription used to create this pilot.  That description
+   is not guaranteed to be available, nor is it guaranteed to be complete
+   -- in particular for reconnected pilots.  Its existence and completeness
+   depends on the ability to inspect backend pilot instances.
    type: L{troy.pilot.ComputePilotDescription}
 
  - service_url:
@@ -156,9 +155,9 @@
 
  - wall_time_left:
    The estimated remaining life time of this pilot.
-   The availability of this property is not guaranteed, and depends on
-   both the backend pilot framework, and on the type of pilot (not all
-   pilots have a finite lifetime).
+   The availability of this property is not guaranteed, and depends on both
+   the backend pilot framework, and on the type of pilot (not all pilots
+   have a finite lifetime).
    A value of 'None' indicates that the remaining wall time is unknown.
    A negative value indicates that the pilot has an unlimited lifetime.
    type: int
@@ -217,11 +216,11 @@ new empty dictionary
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.compute_pilot.ComputePilot-class.html#submit_compute_unit" class="summary-sig-name">submit_compute_unit</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="troy.pilot.compute_pilot.ComputePilot-class.html#submit_unit" class="summary-sig-name">submit_unit</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">cud</span>)</span><br />
-      Submit a CU to this ComputePilotService.</td>
+      Submit a CU to this ComputePilot.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.compute_pilot-pysrc.html#ComputePilot.submit_compute_unit">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.compute_pilot-pysrc.html#ComputePilot.submit_unit">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -235,11 +234,11 @@ new empty dictionary
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.compute_pilot.ComputePilot-class.html#list_compute_units" class="summary-sig-name">list_compute_units</a>(<span class="summary-sig-arg">self</span>)</span><br />
+          <td><span class="summary-sig"><a href="troy.pilot.compute_pilot.ComputePilot-class.html#list_units" class="summary-sig-name">list_units</a>(<span class="summary-sig-arg">self</span>)</span><br />
       list managed <a href="troy.pilot.compute_unit.ComputeUnit-class.html"
       class="link">ComputeUnit</a>s.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.compute_pilot-pysrc.html#ComputePilot.list_compute_units">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.compute_pilot-pysrc.html#ComputePilot.list_units">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -253,11 +252,11 @@ new empty dictionary
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.compute_pilot.ComputePilot-class.html#get_compute_unit" class="summary-sig-name">get_compute_unit</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="troy.pilot.compute_pilot.ComputePilot-class.html#get_unit" class="summary-sig-name">get_unit</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">cu_id</span>)</span><br />
       Reconnect to a ComputeUnit.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.compute_pilot-pysrc.html#ComputePilot.get_compute_unit">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.compute_pilot-pysrc.html#ComputePilot.get_unit">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -492,22 +491,22 @@ new empty dictionary
   </dl>
 </td></tr></table>
 </div>
-<a name="submit_compute_unit"></a>
+<a name="submit_unit"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">submit_compute_unit</span>(<span class="sig-arg">self</span>,
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">submit_unit</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">cud</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.pilot.compute_pilot-pysrc.html#ComputePilot.submit_compute_unit">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.pilot.compute_pilot-pysrc.html#ComputePilot.submit_unit">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Submit a CU to this ComputePilotService.</p>
+  <p>Submit a CU to this ComputePilot.</p>
   <p>Keyword argument: cud -- The <a 
   href="troy.pilot.compute_unit_description.ComputeUnitDescription-class.html"
   class="link">ComputeUnitDescription</a> from the application</p>
@@ -532,17 +531,17 @@ new empty dictionary
   </dl>
 </td></tr></table>
 </div>
-<a name="list_compute_units"></a>
+<a name="list_units"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">list_compute_units</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">list_units</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.pilot.compute_pilot-pysrc.html#ComputePilot.list_compute_units">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.pilot.compute_pilot-pysrc.html#ComputePilot.list_units">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -560,18 +559,18 @@ new empty dictionary
   </dl>
 </td></tr></table>
 </div>
-<a name="get_compute_unit"></a>
+<a name="get_unit"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_compute_unit</span>(<span class="sig-arg">self</span>,
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_unit</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">cu_id</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.pilot.compute_pilot-pysrc.html#ComputePilot.get_compute_unit">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.pilot.compute_pilot-pysrc.html#ComputePilot.get_unit">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -584,7 +583,7 @@ new empty dictionary
   class="link">ComputeUnit</a> instance</p>
   <p>The call behaves identically to:</p>
 <pre class="literalblock">
- cu = troy.pilot.ComputeUnit (cu_id)
+   cu = troy.pilot.ComputeUnit (cu_id)
 </pre>
   <dl class="fields">
   </dl>
@@ -665,7 +664,7 @@ new empty dictionary
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Wed Aug  1 21:19:23 2012</a>
+    3.0.1 on Thu Aug  2 20:21:16 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

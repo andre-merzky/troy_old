@@ -56,30 +56,23 @@
 <h1 class="epydoc">Class iComputeDataUnit</h1><p class="nomargin-top"><span class="codelink"><a href="troy.interface.compute_data_unit-pysrc.html#iComputeDataUnit">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_int_4" name="uml_class_diagram_for_troy_int_4">
-<area shape="rect" id="node39" href="troy.interface.compute_data_unit.iComputeDataUnit-class.html#__init__" title="Create a Compute Data Unit &#160;object." alt="" coords="153,268,320,287"/>
-<area shape="rect" id="node1" href="troy.interface.compute_data_unit.iComputeDataUnit-class.html" title="ComputeDataUnit." alt="" coords="141,235,331,293"/>
-<area shape="rect" id="node4" href="troy_adaptor_skeleton.xyz_dcu-class.html" title="troy_adaptor_skeleton.xyz_dcu" alt="" coords="5,313,221,351"/>
-<area shape="rect" id="node6" href="troy_adaptor_peejay.peejay_dcu-class.html" title="troy_adaptor_peejay.peejay_dcu" alt="" coords="251,313,475,351"/>
-<area shape="rect" id="node40" href="troy.interface.compute_unit.iComputeUnit-class.html#cancel" title="Cancel the CU" alt="" coords="20,116,207,135"/>
-<area shape="rect" id="node40" href="troy.interface.compute_unit.iComputeUnit-class.html#init" title="dummy method to make sure the backend can initialize the object." alt="" coords="20,135,207,153"/>
-<area shape="rect" id="node40" href="troy.interface.compute_unit.iComputeUnit-class.html#set_callback" title="Set a callback function for a member." alt="" coords="20,153,207,172"/>
-<area shape="rect" id="node40" href="troy.interface.compute_unit.iComputeUnit-class.html#unset_callback" title="Unset a callback function from a member" alt="" coords="20,172,207,191"/>
-<area shape="rect" id="node40" href="troy.interface.compute_unit.iComputeUnit-class.html#wait" title="Wait until CU enters a final state" alt="" coords="20,191,207,209"/>
-<area shape="rect" id="node2" href="troy.interface.compute_unit.iComputeUnit-class.html" title="ComputeUnit" alt="" coords="8,83,219,215"/>
-<area shape="rect" id="node41" href="troy.interface.base.iBase-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="204,39,271,57"/>
-<area shape="rect" id="node3" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="192,6,283,63"/>
-<area shape="rect" id="node42" href="troy.interface.data_unit.iDataUnit-class.html#data_export" title="copies content of DU to a directory on the local machine" alt="" coords="260,135,463,153"/>
-<area shape="rect" id="node42" href="troy.interface.data_unit.iDataUnit-class.html#data_import" title="copies content from a directory on the local machine to DU" alt="" coords="260,153,463,172"/>
-<area shape="rect" id="node42" href="troy.interface.data_unit.iDataUnit-class.html#list_files" title="list files managed by the DU" alt="" coords="260,172,463,191"/>
-<area shape="rect" id="node5" href="troy.interface.data_unit.iDataUnit-class.html" title="DataUnit." alt="" coords="248,102,475,197"/>
+<area shape="rect" id="node39" href="troy.interface.compute_data_unit.iComputeDataUnit-class.html#__init__" title="Create a Compute Data Unit" alt="" coords="159,199,316,217"/>
+<area shape="rect" id="node39" href="troy.interface.compute_data_unit.iComputeDataUnit-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="159,217,316,236"/>
+<area shape="rect" id="node1" href="troy.interface.compute_data_unit.iComputeDataUnit-class.html" title="ComputeDataUnit interface" alt="" coords="147,166,328,242"/>
+<area shape="rect" id="node4" href="troy_adaptor_skeleton.xyz_dcu-class.html" title="troy_adaptor_skeleton.xyz_dcu" alt="" coords="5,262,221,301"/>
+<area shape="rect" id="node5" href="troy_adaptor_peejay.peejay_dcu-class.html" title="troy_adaptor_peejay.peejay_dcu" alt="" coords="251,262,475,301"/>
+<area shape="rect" id="node40" href="troy.interface.compute_unit.iComputeUnit-class.html#cancel" title="Cancel the CU" alt="" coords="60,103,224,121"/>
+<area shape="rect" id="node40" href="troy.interface.compute_unit.iComputeUnit-class.html#wait" title="Wait until CU enters a final state" alt="" coords="60,121,224,140"/>
+<area shape="rect" id="node2" href="troy.interface.compute_unit.iComputeUnit-class.html" title="ComputeUnit" alt="" coords="48,70,235,146"/>
+<area shape="rect" id="node3" href="troy.interface.data_unit.iDataUnit-class.html" title="DataUnit interface" alt="" coords="264,86,403,130"/>
+<area shape="rect" id="node6" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="192,6,283,50"/>
 </map>
   <img src="uml_class_diagram_for_troy_int_4.gif" alt='' usemap="#uml_class_diagram_for_troy_int_4" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
-<p>ComputeDataUnit.</p>
-  <p>The ComputeDataUnit is the application's interface to submit 
-  ComputeDataUnits to the Pilot-Manager in the P* Model.</p>
+<p><a href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html" 
+  class="link">ComputeDataUnit</a> interface</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -96,10 +89,28 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="troy.interface.compute_data_unit.iComputeDataUnit-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">cdu_id</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Create a Compute Data Unit  object.</td>
+        <span class="summary-sig-arg">obj</span>,
+        <span class="summary-sig-arg">adaptor</span>)</span><br />
+      Create a Compute Data Unit</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.interface.compute_data_unit-pysrc.html#iComputeDataUnit.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.compute_data_unit.iComputeDataUnit-class.html#init_" class="summary-sig-name">init_</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      dummy method to make sure the backend can initialize the object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_data_unit-pysrc.html#iComputeDataUnit.init_">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -111,18 +122,7 @@
     <td colspan="2" class="summary">
     <p class="indent-wrapped-lines"><b>Inherited from <code><a href="troy.interface.compute_unit.iComputeUnit-class.html">compute_unit.iComputeUnit</a></code></b>:
       <code><a href="troy.interface.compute_unit.iComputeUnit-class.html#cancel">cancel</a></code>,
-      <code><a href="troy.interface.compute_unit.iComputeUnit-class.html#init">init</a></code>,
-      <code><a href="troy.interface.compute_unit.iComputeUnit-class.html#set_callback">set_callback</a></code>,
-      <code><a href="troy.interface.compute_unit.iComputeUnit-class.html#unset_callback">unset_callback</a></code>,
       <code><a href="troy.interface.compute_unit.iComputeUnit-class.html#wait">wait</a></code>
-      </p>
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="troy.interface.base.iBase-class.html">base.iBase</a></code></b>:
-      <code><a href="troy.interface.base.iBase-class.html#init_">init_</a></code>
-      </p>
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="troy.interface.data_unit.iDataUnit-class.html">data_unit.iDataUnit</a></code></b>:
-      <code><a href="troy.interface.data_unit.iDataUnit-class.html#data_export">data_export</a></code>,
-      <code><a href="troy.interface.data_unit.iDataUnit-class.html#data_import">data_import</a></code>,
-      <code><a href="troy.interface.data_unit.iDataUnit-class.html#list_files">list_files</a></code>
       </p>
     </td>
   </tr>
@@ -144,7 +144,8 @@
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">cdu_id</span>=<span class="sig-default">None</span>)</span>
+        <span class="sig-arg">obj</span>,
+        <span class="sig-arg">adaptor</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
@@ -152,12 +153,33 @@
     </td>
   </tr></table>
   
-  <p>Create a Compute Data Unit  object.</p>
-  <p>Keyword arguments: cdu_id -- Reconnect to an existing CDU 
-  (optional).</p>
+  <p>Create a Compute Data Unit</p>
   <dl class="fields">
     <dt>Overrides:
         <a href="troy.interface.data_unit.iDataUnit-class.html#__init__">data_unit.iDataUnit.__init__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="init_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">init_</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.interface.compute_data_unit-pysrc.html#iComputeDataUnit.init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>dummy method to make sure the backend can initialize the object. This 
+  method should *not* be implemented in the adaptor!</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.data_unit.iDataUnit-class.html#init_">data_unit.iDataUnit.init_</a>
     </dt>
   </dl>
 </td></tr></table>
@@ -192,7 +214,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Wed Aug  1 21:19:22 2012</a>
+    3.0.1 on Thu Aug  2 20:21:15 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

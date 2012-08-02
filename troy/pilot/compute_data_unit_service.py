@@ -83,7 +83,7 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
         return self.engine_.call ('ComputeDataUnitService', 'set_scheduler', self, s)
 
 
-    def submit_compute_data_unit (self, cdud) :
+    def submit_unit (self, cdud) :
         """ Submit a CDU to this ComputeDataUnitService.
 
             Keyword argument:
@@ -98,7 +98,7 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
         return cdu
 
 
-    def list_compute_data_units (self) :
+    def list_units (self) :
         """ list managed L{ComputeUnit}s.
 
             Return value:
@@ -112,11 +112,11 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
             state.
 
         """
-        return self.engine_.call ('ComputeDataUnitService', 'list_compute_data_units', self)
+        return self.engine_.call ('ComputeDataUnitService', 'list_units', self)
 
 
 
-    def get_compute_data_unit (self, cdu_id) :
+    def get_unit (self, cdu_id) :
         """ Reconnect to a ComputeDataUnit.
 
             Keyword arguments:
@@ -130,7 +130,7 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
               cdu = troy.pilot.ComputeDataUnit (cdu_id)
 
         """
-        return self.engine_.call ('ComputeDataUnitService', 'get_compute_data_unit', self, cdu_id)
+        return self.engine_.call ('ComputeDataUnitService', 'get_unit', self, cdu_id)
 
 
     # The methods for adding/removing pilot services to the CDUS are inherited

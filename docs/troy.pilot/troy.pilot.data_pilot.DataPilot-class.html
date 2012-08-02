@@ -56,14 +56,14 @@
 <h1 class="epydoc">Class DataPilot</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_pil_15" name="uml_class_diagram_for_troy_pil_15">
-<area shape="rect" id="node187" href="troy.pilot.data_pilot.DataPilot-class.html#__init__" title="Create a DataPilot" alt="" coords="229,1081,393,1100"/>
-<area shape="rect" id="node187" href="troy.pilot.data_pilot.DataPilot-class.html#reinitialize" title="Re&#45;Initialize the DataPilot to the (new) DataPilotDescription." alt="" coords="229,1100,393,1119"/>
-<area shape="rect" id="node187" href="troy.pilot.data_pilot.DataPilot-class.html#submit_data_unit" title="Submit a DU to this DataPilot." alt="" coords="229,1119,393,1137"/>
-<area shape="rect" id="node187" href="troy.pilot.data_pilot.DataPilot-class.html#list_data_units" title="list managed DataUnits." alt="" coords="229,1137,393,1156"/>
-<area shape="rect" id="node187" href="troy.pilot.data_pilot.DataPilot-class.html#get_data_unit" title="Reconnect to a DataUnit." alt="" coords="229,1156,393,1175"/>
-<area shape="rect" id="node187" href="troy.pilot.data_pilot.DataPilot-class.html#wait" title="Wait until DP enters a final state" alt="" coords="229,1175,393,1193"/>
-<area shape="rect" id="node187" href="troy.pilot.data_pilot.DataPilot-class.html#cancel" title="Move the pilot into Canceled state, releasing all resources." alt="" coords="229,1193,393,1212"/>
-<area shape="rect" id="node1" href="troy.pilot.data_pilot.DataPilot-class.html" title="DataPilot (PilotStore)" alt="" coords="217,1049,404,1218"/>
+<area shape="rect" id="node187" href="troy.pilot.data_pilot.DataPilot-class.html#__init__" title="Create a DataPilot" alt="" coords="245,1081,377,1100"/>
+<area shape="rect" id="node187" href="troy.pilot.data_pilot.DataPilot-class.html#reinitialize" title="Re&#45;Initialize the DataPilot to the (new) DataPilotDescription." alt="" coords="245,1100,377,1119"/>
+<area shape="rect" id="node187" href="troy.pilot.data_pilot.DataPilot-class.html#submit_unit" title="Submit a DU to this DataPilot." alt="" coords="245,1119,377,1137"/>
+<area shape="rect" id="node187" href="troy.pilot.data_pilot.DataPilot-class.html#list_units" title="list managed DataUnits." alt="" coords="245,1137,377,1156"/>
+<area shape="rect" id="node187" href="troy.pilot.data_pilot.DataPilot-class.html#get_unit" title="Reconnect to a DataUnit." alt="" coords="245,1156,377,1175"/>
+<area shape="rect" id="node187" href="troy.pilot.data_pilot.DataPilot-class.html#wait" title="Wait until DP enters a final state" alt="" coords="245,1175,377,1193"/>
+<area shape="rect" id="node187" href="troy.pilot.data_pilot.DataPilot-class.html#cancel" title="Move the pilot into Canceled state, releasing all resources." alt="" coords="245,1193,377,1212"/>
+<area shape="rect" id="node1" href="troy.pilot.data_pilot.DataPilot-class.html" title="DataPilot (PilotStore)" alt="" coords="233,1049,388,1218"/>
 <area shape="rect" id="node188" href="troy.pilot.base.Base-class.html#get_idata_" title="Get instance data dict entry." alt="" coords="223,967,401,985"/>
 <area shape="rect" id="node188" href="troy.pilot.base.Base-class.html#set_idata_" title="Set instance data dict entry." alt="" coords="223,985,401,1004"/>
 <area shape="rect" id="node188" href="troy.pilot.base.Base-class.html#dump_" title="Dump dumps." alt="" coords="223,1004,401,1023"/>
@@ -127,6 +127,12 @@
   re-initialized.</p>
   <p>Properties:</p>
 <pre class="literalblock">
+ - id:
+   The id may be 'None' if the Pilot is not yet in Running state.  The
+   returned ID can be used to connect to the CP instance later on, for
+   example from within a different application instance.  
+   type: string (url)
+
  - state:
    The state of the pilot.
    type: L{troy.pilot.State} (enum)
@@ -136,18 +142,11 @@
    interpreted by Troy, and is up to the backend pilot framework.
    type: string
 
- - id:
-   The id may be 'None' if the Pilot is not yet in Running state.
-   The returned ID can be used to connect to the DP instance later
-   on, for example from within a different application instance.
-   type: string (url)
-
  - description:
-   The DataPilotDescription used to create this pilot.
-   That description is not guaranteed to be available, nor is it
-   guaranteed to be complete -- in particular for reconnected pilots.
-   Its existence and completeness depends on the ability to inspect
-   backend pilot instances.
+   The DataPilotDescription used to create this pilot.  That description 
+   is not guaranteed to be available, nor is it guaranteed to be complete 
+   -- in particular for reconnected pilots.  Its existence and completeness
+   depends on the ability to inspect backend pilot instances.
    type: L{troy.pilot.DataPilotDescription}
 
  - service_url:
@@ -156,9 +155,9 @@
 
  - wall_time_left:
    The estimated remaining life time of this pilot.
-   The availability of this property is not guaranteed, and depends on
-   both the backend pilot framework, and on the type of pilot (not all
-   pilots have a finite lifetime).
+   The availability of this property is not guaranteed, and depends on both
+   the backend pilot framework, and on the type of pilot (not all pilots
+   have a finite lifetime).
    A value of 'None' indicates that the remaining wall time is unknown.
    A negative value indicates that the pilot has an unlimited lifetime.
    type: int
@@ -217,11 +216,11 @@ new empty dictionary
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.data_pilot.DataPilot-class.html#submit_data_unit" class="summary-sig-name">submit_data_unit</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="troy.pilot.data_pilot.DataPilot-class.html#submit_unit" class="summary-sig-name">submit_unit</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">dud</span>)</span><br />
       Submit a DU to this DataPilot.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.submit_data_unit">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.submit_unit">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -235,11 +234,11 @@ new empty dictionary
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.data_pilot.DataPilot-class.html#list_data_units" class="summary-sig-name">list_data_units</a>(<span class="summary-sig-arg">self</span>)</span><br />
+          <td><span class="summary-sig"><a href="troy.pilot.data_pilot.DataPilot-class.html#list_units" class="summary-sig-name">list_units</a>(<span class="summary-sig-arg">self</span>)</span><br />
       list managed <a href="troy.pilot.data_unit.DataUnit-class.html" 
       class="link">DataUnit</a>s.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.list_data_units">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.list_units">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -253,11 +252,11 @@ new empty dictionary
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="troy.pilot.data_pilot.DataPilot-class.html#get_data_unit" class="summary-sig-name">get_data_unit</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="troy.pilot.data_pilot.DataPilot-class.html#get_unit" class="summary-sig-name">get_unit</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">du_id</span>)</span><br />
       Reconnect to a DataUnit.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.get_data_unit">source&nbsp;code</a></span>
+            <span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.get_unit">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -491,18 +490,18 @@ new empty dictionary
   </dl>
 </td></tr></table>
 </div>
-<a name="submit_data_unit"></a>
+<a name="submit_unit"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">submit_data_unit</span>(<span class="sig-arg">self</span>,
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">submit_unit</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">dud</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.submit_data_unit">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.submit_unit">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -512,7 +511,7 @@ new empty dictionary
   <p>Return: <a href="troy.pilot.data_unit.DataUnit-class.html" 
   class="link">DataUnit</a> object</p>
   <p>The DUD is (possibly translated and) passed on to the DPS backend, 
-  which will attempt to instantiate the described data unit on the 
+  which will attempt to instantiate the described data workload unit on the
   DataPilot.  If the pilot's resource is not suitable to create the 
   requested DU, a <a 
   href="troy.pilot.exception.Error-class.html#BadParameter" 
@@ -530,17 +529,17 @@ new empty dictionary
   </dl>
 </td></tr></table>
 </div>
-<a name="list_data_units"></a>
+<a name="list_units"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">list_data_units</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">list_units</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.list_data_units">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.list_units">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -558,18 +557,18 @@ new empty dictionary
   </dl>
 </td></tr></table>
 </div>
-<a name="get_data_unit"></a>
+<a name="get_unit"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_data_unit</span>(<span class="sig-arg">self</span>,
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_unit</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">du_id</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.get_data_unit">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="troy.pilot.data_pilot-pysrc.html#DataPilot.get_unit">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -581,7 +580,7 @@ new empty dictionary
   class="link">DataUnit</a> instance</p>
   <p>The call behaves identically to:</p>
 <pre class="literalblock">
- du = troy.pilot.DataUnit (du_id)
+   du = troy.pilot.DataUnit (du_id)
 </pre>
   <dl class="fields">
   </dl>
@@ -662,7 +661,7 @@ new empty dictionary
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Wed Aug  1 21:19:23 2012</a>
+    3.0.1 on Thu Aug  2 20:21:17 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

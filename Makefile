@@ -11,11 +11,7 @@ clean:
 
 sync:
 	-@git co devel
-	-@git ci -am 'sync with gh-pages'
-	-@git pull
+	-@git branch -D gh-pages
+	-@git branch gh-pages
 	-@git push
-	@git co gh-pages
-	@git merge devel
-	@git push origin gh-pages
-	@git co devel
 

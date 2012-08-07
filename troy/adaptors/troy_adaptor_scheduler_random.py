@@ -75,11 +75,10 @@ class scheduler_data_random (troy.interface.iDataScheduler) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.idata   = self.api.get_idata_ ()
 
         # we MUST interpret policy, if present
-        if 'policy' in self.idata :
-            if self.idata['policy'] != 'Random' :
+        if 'policy' in self.api.idata_ :
+            if self.api.idata_['policy'] != 'Random' :
                 raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess,
                       "Cannot provide the requested scheduling policy!")
 
@@ -105,11 +104,10 @@ class scheduler_compute_random (troy.interface.iComputeScheduler) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.idata   = self.api.get_idata_ ()
 
         # we MUST interpret policy, if present
-        if 'policy' in self.idata :
-            if self.idata['policy'] != 'Random' :
+        if 'policy' in self.api.idata_ :
+            if self.api.idata_['policy'] != 'Random' :
                 raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess,
                       "Cannot provide the requested scheduling policy!")
 
@@ -141,11 +139,10 @@ class scheduler_compute_data_random (troy.interface.iComputeDataScheduler) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.idata   = self.api.get_idata_ ()
 
         # we MUST interpret policy, if present
-        if 'policy' in self.idata :
-            if self.idata['policy'] != 'Random' :
+        if 'policy' in self.api.idata_ :
+            if self.api.idata_['policy'] != 'Random' :
                 raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess,
                       "Cannot provide the requested scheduling policy!")
 

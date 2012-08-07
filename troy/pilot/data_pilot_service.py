@@ -46,10 +46,8 @@ class DataPilotService (Base) :
         # init api base
         Base.__init__ (self)
 
-        # prepare instance data
+        # prepare supported attributes
         self.attribute_register_  ('id', None,  self.Url, self.Scalar, self.ReadOnly)
-
-        self.set_idata_ ()
 
         # initialize adaptor class
         self.engine_.call ('DataPilotService', 'init_', self)

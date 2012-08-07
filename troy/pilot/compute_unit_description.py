@@ -50,7 +50,7 @@ class ComputeUnitDescription (Attributes) :
 
     def __init__ (self) :
 
-        # prepare instance data
+        # define supported attributes
 
         # Action description
         self.attribute_register ('executable',            None, self.String, self.Scalar, self.Writeable)
@@ -88,16 +88,7 @@ class ComputeUnitDescription (Attributes) :
         # custom attributes are not allowed.
         self.attribute_extensible_ (False)
 
-        self.set_idata_ ()
 
-
-    def __setattr__ (self, attr, value) :
-        # TODO: key checks, type checks
-        self[attr]=value
-
-
-    def __getattr__ (self, attr) :
-        return self[attr]
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

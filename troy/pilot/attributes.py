@@ -54,7 +54,7 @@ class Callback ():
 
           mcb = MyCallback ("Hello Pilot, how is your state?")
 
-          cp.attribute_register_cb ('state', mcb)
+          cp.attributes_register_cb ('state', mcb)
 
     See documentation of the L{Attributes} interface for further details and
     examples.
@@ -99,8 +99,19 @@ class Callback ():
 #
 #
 #
-class Attributes (dict):
+class AttributesBase_ (object):
+    """ 
+    This class only exists to host properties -- as object itself does *not* have
+    properties!  This class is not part of the public Troy API.
     """
+    def __init__ (self):
+        pass
+
+
+class Attributes (AttributesBase_):
+    """
+    This base class implements most of the semantics of the L{Attributes}
+    interface.  That interface
     Attribute Interface Class
 
     The Attributes interface has a very simple API -- it can be used as a Python
@@ -118,59 +129,88 @@ class Attributes (dict):
 
     Example use case::
 
-        class Transliterator ( Attributes ) :
 
-            def __init__ (self) :
-                self.attribute_register_   ('apple', 'Appel', self.String, self.Scalar, self.Writeable)
-                self.attribute_register_   ('plum',  'Pruim', self.String, self.Scalar, self.ReadOnly)
-                self.attribute_extensible_ (True)
-
-
+        ###########################################
+        class Transliterator ( pilot.Attributes ) :
+            
+            def __init__ (self, *args, **kwargs) :
+              # setting attribs to non-extensible will cause the cal to init below to
+              # complain if attributes are specified.  Default is extensible.
+              # self.attributes_extensible_ (False)
+        
+                # pass args to base class init (implies extensible)
+                super (Transliterator, self).__init__ (*args, **kwargs)
+        
+                # setup class attribs
+                self.attributes_register_   ('apple', 'Appel', self.Url,    self.Scalar, self.Writeable)
+                self.attributes_register_   ('plum',  'Pruim', self.String, self.Scalar, self.ReadOnly)
+        
+              # setting attribs to non-extensible at *this* point will have allowed
+              # custom user attribs on __init__ time (via args), but will then forbid
+              # any additional custom attributes
+              # self.attributes_extensible_ (False)
+        
+        
+        ###########################################
         if __name__ == "__main__":
-
+        
             def cb (key, val, obj) :
                 print "called: %s - %s - %s"  %  (key, val, type (obj))
-
-            trans = Transliterator ()
-
-            print " -- apple"
-            print trans.apple
+                return True
+        
+            trans = Transliterator (cherry='Kersche')
+        
+            print "\\n -- apple"
+            print trans.apple 
+            print trans['apple']
+            trans.apple = 'Abbel'
+            print trans.apple 
+        
+            trans.attributes_register_cb ('apple', cb)
+            trans.apple = ['Abbel', 'Appel']
             trans.apple = 'Apfel'
-            print trans.apple
-
-            trans.attribute_register_cb ('apple', cb)
-            trans.apple = 'Apfel'
-
-            .apple = 'Abbel'
-            print trans.apple
-
-
+        
+            trans.attributes_set_final_ ('apple')
+            trans.apple = 'Abbel'
+            print trans.apple 
+        
             print "\\n -- plum"
             print trans.plum
-          # trans.plum = 'Pflaume'  # raises exception
+          # trans.plum    = 'Pflaume'  # raises readonly exception
+          # trans['plum'] = 'Pflaume'  # raises readonly exception
             print trans.plum
-
+        
+            print "\\n -- cherry"
+            print trans.cherry
+        
             print "\\n -- peach"
-            print trans.peach       # rases exception
+            trans['peach'] = 'Berne'
+            print trans.peach
             trans.peach = 'Birne'
             print trans.peach
+
 
     This example will result in::
 
         -- apple
         Appel
+        Appel
         Apfel
-        called: apple - Apfel - <class '__main__.Foo'>
-        called: apple - Apfel - <class '__main__.Foo'>
+        called: apple - ['Boskop', 'Jonas'] - <class '__main__.Transliterator'>
         Apfel
-
-         -- plum
+        
+        -- plum
         Pruim
         Pruim
-
-         -- peach
-        None
+        
+        -- cherry
+        Kersche
+        
+        -- peach
+        Berne
         Birne
+
+
 
     Note that using this interface *and* inheriting from Python's dict object
     (or any other base classes which define / overload dictionary setters and
@@ -190,7 +230,7 @@ class Attributes (dict):
     #
     # type enums
     Any         = 'any'        # any python type can be set
-    URL         = 'url'        # URL type (string + URL parser checks)
+    Url         = 'url'        # URL type (string + URL parser checks)
     Int         = 'int'        # Integer type
     Float       = 'float'      # float type
     String      = 'string'     # string, duh!
@@ -218,12 +258,11 @@ class Attributes (dict):
 
 
 
-
     ############################################################################
     #
     #
     #
-    def __init__(self):
+    def __init__ (self, *args, **kwargs) :
         """
         This method is not supposed to be directly called by the consumer of
         this API -- it is called indirectly via derived object construction.
@@ -231,49 +270,68 @@ class Attributes (dict):
         init makes sure that the basic structures are in place on the attribute
         dictionary - this saves us ton of safety checks later on.
         """
-        self.attribute_init_ ()
+
+        # self.attributes_dump_ ("init")
+
+        # initialize state
+        d = self.attributes_init_ ()
+
+        # call to update and the args/kwargs handling seems to be part of the
+        # dict interface conventions
+        self.update (*args, **kwargs)
 
 
     ############################################################################
     #
     #
     #
-    def attribute_init_ (self) :
+    def attributes_init_ (self) :
         """
         This method is not supposed to be directly called by the consumer of
         this API.
 
-        The attribute_init_ method initializes the interface's internal data
+        The attributes_init_ method initializes the interface's internal data
         structures.  We always need the attribute dict, and the extensible flag.
-        Everything else can be added on the fly.  The method makes not to
-        overwrite any settings -- initialization occurs only once!
+        Everything else can be added on the fly.  The method will not overwrite
+        any settings -- initialization occurs only once!
         """
 
-        if not 'attributes_' in self :
-            self['attributes_'] = {}
+        d = {}
 
-        if not 'extensible_' in self :
-            self['extensible_'] = False
+        try :
+            d = AttributesBase_.__getattribute__ (self, 'd_')
+        except :
+            # need to initialize -- any exceptions in the code below should fall through
+            d['attributes_']  = {}
+            d['extensible_']  = True
+            AttributesBase_.__setattr__ (self, 'd_', d)
+
+            # print "after init %s : %s"  %  (str (self), str (d))
+
+        return d
 
 
     ############################################################################
     #
     #
     #
-    def attribute_extensible_ (self, e=True) :
+    def attributes_extensible_ (self, e=True) :
         """
         Allow (or forbid) the on-the-fly creation of new attributes.
         This method should only be called within derived classes.
         """
 
-        self['extensible_'] = e
+        d = self.attributes_init_()
+        d['extensible_'] = e
+
+        # self.attributes_dump_ ("ext")
 
 
     ############################################################################
     #
     #
     #
-    def attribute_register_ (self, key, default=None, typ=String, flavor=Scalar, mode=Writeable, ext=False) :
+    def attributes_register_ (self, key, default=None, typ=String, flavor=Scalar, mode=Writeable, ext=False) :
         """
         Register a new attribute.
 
@@ -286,27 +344,27 @@ class Attributes (dict):
                 # FIXME: check for correct mode and flavor settings
 
         # make sure interface is ready to use
-        self.attribute_init_ ()
+        d = self.attributes_init_ ()
 
         # remove any old instance of this attribute
-        self.attribute_unregister_ (key)
+        self.attributes_unregister_ (key)
 
         # register the attribute and properties
-        self['attributes_'][key]              = {}
-        self['attributes_'][key]['value']     = default
-        self['attributes_'][key]['default']   = default
-        self['attributes_'][key]['type']      = typ
-        self['attributes_'][key]['flavor']    = flavor
-        self['attributes_'][key]['mode']      = mode
-        self['attributes_'][key]['extended']  = ext
-        self['attributes_'][key]['callbacks'] = []
+        d['attributes_'][key]              = {}
+        d['attributes_'][key]['value']     = default
+        d['attributes_'][key]['default']   = default
+        d['attributes_'][key]['type']      = typ
+        d['attributes_'][key]['flavor']    = flavor
+        d['attributes_'][key]['mode']      = mode
+        d['attributes_'][key]['extended']  = ext
+        d['attributes_'][key]['callbacks'] = []
 
 
     ############################################################################
     #
     #
     #
-    def attribute_unregister_ (self, key) :
+    def attributes_unregister_ (self, key) :
         """
         Unregister an attribute.
 
@@ -319,24 +377,24 @@ class Attributes (dict):
         """
 
         # make sure interface is ready to use
-        self.attribute_init_ ()
+        d = self.attributes_init_ ()
 
         # if the attribute exists, purge it
-        if key in self['attributes_'] :
-            del (self['attributes_'][key])
+        if key in d['attributes_'] :
+            del (d['attributes_'][key])
 
 
     ############################################################################
     #
     #
     #
-    def attribute_set_final_ (self, key, val=None) :
+    def attributes_set_final_ (self, key, val=None) :
         """
         This method will set the 'final' flag for an attribute, signalling that
         the attribute will never change again.  A final value can optionally be
         provided -- otherwise the attribute is frozen with its current value.
 
-        Note that attribute_set_final() will trigger callbacks, if a new value
+        Note that attributes_set_final() will trigger callbacks, if a new value
         is  given.
 
         This function ignores the readonly flag, and is supposed to be used by
@@ -345,31 +403,32 @@ class Attributes (dict):
         """
 
         # make sure interface is ready to use
-        self.attribute_init_ ()
+        d = self.attributes_init_ ()
 
         # check if we know about that attribute
-        if not key in self['attributes_'] :
+        if not key in d['attributes_'] :
             raise AttributeError(" attribute %s is not set"  %  key)
 
         if None == val :
             # freeze at current value unless indicated otherwise
-            val = self['attributes_'][key]['value']
+            val = d['attributes_'][key]['value']
 
-        # set the final value, and flag as final.
-        self.attribute_set_ (key, val)
-        self['attributes_'][key]['mode'] = self.Final
+        # flag as final, and set the final value (this order to avoid races in
+        # callbacks)
+        d['attributes_'][key]['mode'] = self.Final
+        self.attributes_set_ (key, val)
 
 
     ############################################################################
     #
     #
     #
-    def attribute_set_ (self, key, val=None) :
+    def attributes_set_ (self, key, val=None) :
         """
         This method will set an attribute, irrespectively of its mode.
 
         if no value is provided, the attribute's value is set to 'None'.  Note
-        that attribute_set_() will trigger callbacks, if a new value (different
+        that attributes_set_() will trigger callbacks, if a new value (different
         from the old value) is given.
 
         Note that new attributes are silently created, irrespectively of the
@@ -381,32 +440,40 @@ class Attributes (dict):
         """
 
         # make sure interface is ready to use
-        self.attribute_init_ ()
+        d = self.attributes_init_ ()
 
         # apply any attribute conversion
-        val = self.attribute_conversion_ (key, val)
+        val = self.attributes_conversion_ (key, val)
 
-        self.__setattr__ (key, val)
+        # make sure the later comparison if does not throw
+        if not 'value' in d['attributes_'][key] :
+            d['attributes_'][key]['value'] = None
+
+        # only actually change the attribute when the new value differs --
+        # and only then invoke any callbacks.
+        if val != d['attributes_'][key]['value'] :
+            d['attributes_'][key]['value'] = val
+            self.attributes_call_cb_ (key)
 
 
     ############################################################################
     #
     #
     #
-    def attribute_is_final (self, key) :
+    def attributes_is_final (self, key) :
         """
         This method will query the 'final' flag for an attribute, which signals that
         the attribute will never change again.
         """
 
         # make sure interface is ready to use
-        self.attribute_init_ ()
+        d = self.attributes_init_ ()
 
         # check if we know about that attribute
-        if not key in self['attributes_'] :
+        if not key in d['attributes_'] :
             raise AttributeError(" attribute %s is not set"  %  key)
 
-        if self.Final == self['attributes_'][key]['mode'] :
+        if self.Final == d['attributes_'][key]['mode'] :
              return True
 
         # no final flag found -- assume non-finality!
@@ -419,7 +486,30 @@ class Attributes (dict):
     #
     #
     #
-    def attribute_register_cb (self, key, cb) :
+    def attributes_exists (self, key) :
+        """
+        This method will check if the given key is registered.  The call will
+        also return 'True' if the value for that key is 'None'
+        """
+
+        # make sure interface is ready to use
+        d = self.attributes_init_ ()
+
+        # check if we know about that attribute
+        if key in d['attributes_'] :
+            return True
+
+        return False
+
+
+    # FIXME: add other inspection methods (is_string, ..., is, writeable, ...)
+
+
+    ############################################################################
+    #
+    #
+    #
+    def attributes_register_cb (self, key, cb) :
         """
         For any attribute change, the API will check if any callbacks are
         registered for that attribute.  If so, those callbacks will be called
@@ -447,20 +537,20 @@ class Attributes (dict):
         """
 
         # make sure interface is ready to use
-        self.attribute_init_ ()
+        d = self.attributes_init_ ()
 
-        if not key in self['attributes_'] :
+        if not key in d['attributes_'] :
             raise AttributeError(" attribute %s is not set"  %  key)
 
-        self['attributes_'][key]['callbacks'].append (cb)
-        return len (self['attributes_'][key]['callbacks']) - 1
+        d['attributes_'][key]['callbacks'].append (cb)
+        return len (d['attributes_'][key]['callbacks']) - 1
 
 
     ############################################################################
     #
     #
     #
-    def attribute_unregister_cb (self, key, id=None) :
+    def attributes_unregister_cb (self, key, id=None) :
         """
         This method allows to unregister a previously registered callback, by
         providing its id.  It is not an error to remove a non-existing cb, but
@@ -471,26 +561,26 @@ class Attributes (dict):
         """
 
         # make sure interface is ready to use
-        self.attribute_init_ ()
+        d = self.attributes_init_ ()
 
-        if not key in self['attributes_'] :
+        if not key in d['attributes_'] :
             raise AttributeError(" attribute %s is not set"  %  key)
 
         # id == None: remove all callbacks
         if not id :
-            self['attributes_'][key]['callbacks'] = []
+            d['attributes_'][key]['callbacks'] = []
         else :
-            if len (self['attributes_'][key]['callbacks']) < id :
+            if len (d['attributes_'][key]['callbacks']) < id :
                 raise AttributeError(" invalid callback cookie"  %  key)
             else :
-                self['attributes_'][key]['callbacks'][id] = undef
+                d['attributes_'][key]['callbacks'][id] = undef
 
 
     ############################################################################
     #
     #
     #
-    def attribute_call_cb_ (self, key) :
+    def attributes_call_cb_ (self, key) :
         """
         This internal function is not to be used by the consumer of this API.
 
@@ -500,13 +590,13 @@ class Attributes (dict):
         """
 
         # make sure interface is ready to use
-        self.attribute_init_ ()
+        d = self.attributes_init_ ()
 
-        if not key in self['attributes_'] :
+        if not key in d['attributes_'] :
             raise AttributeError(" attribute %s is not set"  %  key)
 
-        for id in range (len(self['attributes_'][key]['callbacks'])) :
-            cb = self['attributes_'][key]['callbacks'][id]
+        for id in range (len(d['attributes_'][key]['callbacks'])) :
+            cb = d['attributes_'][key]['callbacks'][id]
 
             ret = False
             if inspect.isclass (cb) and \
@@ -517,7 +607,7 @@ class Attributes (dict):
 
             # remove callbacks which return 'False'
             if not ret :
-                self.attribute_unregister_cb (key, id)
+                self.attributes_unregister_cb (key, id)
 
 
     ############################################################################
@@ -540,15 +630,15 @@ class Attributes (dict):
         """
 
         # make sure interface is ready to use
-        self.attribute_init_ ()
+        d = self.attributes_init_ ()
 
-        if not key in self['attributes_'] :
+        if not key in d['attributes_'] :
             raise AttributeError(" attribute %s is not set"  %  key)
 
-        if not 'value' in self['attributes_'][key] :
+        if not 'value' in d['attributes_'][key] :
             return None
 
-        return self['attributes_'][key]['value']
+        return d['attributes_'][key]['value']
 
 
     ############################################################################
@@ -588,43 +678,34 @@ class Attributes (dict):
         """
 
         # make sure interface is ready to use
-        self.attribute_init_ ()
+        d = self.attributes_init_ ()
 
         # if the key is not known
-        if not key in self['attributes_'] :
-            if not self['extensible_'] :
+        if not key in d['attributes_'] :
+            if not d['extensible_'] :
                 # we cannot add new keys on non-extensible sets
                 raise AttributeError(" attribute set is not extensible (key %s)"  %  key)
             else :
                 # if the set is extensible, we can register the new key.  It
                 # won't have any callbacks at this point.
-                self.attribute_register_ (key, val, self.Any, self.Scalar, self.Writeable, self.Extended)
+                self.attributes_register_ (key, val, self.Any, self.Scalar, self.Writeable, self.Extended)
 
         # known attribute - attempt to set if
         else:
 
             # check if we are allowed to change the attribute - complain if not.
             # Also, simply ignore write attempts to finalized keys.
-            if 'mode' in  self['attributes_'][key] :
+            if 'mode' in  d['attributes_'][key] :
 
-                mode = self['attributes_'][key]['mode']
+                mode = d['attributes_'][key]['mode']
 
                 if   self.Final == mode :
                     return
                 elif self.Writeable != mode :
                     raise AttributeError(" attribute %s is not writeable"  %  key)
 
-            val = self.attribute_conversion_ (key, val)
-
-            # make sure the later comparison if does not throw
-            if not 'value' in self['attributes_'][key] :
-                self['attributes_'][key]['value'] = None
-
-            # only actually change the attribute when the new value differs --
-            # and only then invoke any callbacks.
-            if val != self['attributes_'][key]['value'] :
-                self['attributes_'][key]['value'] = val
-                self.attribute_call_cb_ (key)
+            # set the attribute with conversion etc.
+            self.attributes_set_ (key, val)
 
 
 
@@ -632,7 +713,7 @@ class Attributes (dict):
     #
     #
     #
-    def attribute_conversion_ (self, key, val) :
+    def attributes_conversion_ (self, key, val) :
         """
         This is an internal method, and should not be called outside this
         interface implementation.
@@ -642,27 +723,27 @@ class Attributes (dict):
         method will restore a 'None' value to the attribute's default value.
         """
         # make sure interface is ready to use
-        self.attribute_init_ ()
+        d = self.attributes_init_ ()
 
         # if the key is not known
-        if not key in self['attributes_'] :
+        if not key in d['attributes_'] :
             # cannot handle unknown attributes
             return val
 
         # check if a value is given.  If not, revert to the default value
         # (if available)
         if val == None :
-            if 'default' in self['attributes_'][key] :
-                val = self['attributes_'][key]['default']
+            if 'default' in d['attributes_'][key] :
+                val = d['attributes_'][key]['default']
 
 
         # check if the value has the correct flavor - if not, attempt to
         # convert
         # FIXME: there are certainly nicer and more reversible ways to
         #        convert the flavors...
-        if 'flavor' in  self['attributes_'][key] :
+        if 'flavor' in  d['attributes_'][key] :
 
-            flavor = self['attributes_'][key]['flavor']
+            flavor = d['attributes_'][key]['flavor']
 
             # wrap value into a list if needed
             # TODO: consider splitting strings?
@@ -679,5 +760,50 @@ class Attributes (dict):
 
         return val
 
+    ###########################################################################
+    #
+    #
+    #
+    def attributes_dump_ (self, msg=None) :
+        """ debugging dump to stderr """
+
+        if msg :
+            print "dump: %s"  %  msg
+
+        d = self.attributes_init_ ()
+
+        print "%s : %s"  %  (str (self), str (d))
+
+
+
+    ###########################################################################
+    #
+    # the dict interface
+    # 
+   
+    def __getitem__ (self, key):
+        return self.__getattr__ (key)
+   
+    def __setitem__ (self, key, val):
+        return self.__setattr__ (key, val)
+   
+    def __delitem__ (self, key):
+        return self.attributes_unregister_ (key)
+   
+    def __contains__ (self, key):
+        return self.attributes_exists (key)
+   
+    def update (self, *args, **kwargs):
+        # self.attributes_dump_ ("update")
+        if args:
+            if len (args) > 1:
+                raise TypeError("update expected at most 1 arguments, got %d" % len (args))
+            other = dict (args[0])
+            for key in other:
+                self[key] = other[key]
+        for key in kwargs:
+            self[key] = kwargs[key]
+   
+   
 ################################################################################
 

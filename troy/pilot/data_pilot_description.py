@@ -74,7 +74,7 @@ class DataPilotDescription (Attributes) :
 
     def __init__ (self) :
 
-        # prepare instance data
+        # define supported attributes
         self.attribute_register_  ('size',                     1,    self.Int,    self.Scalar, self.Writeable)
         self.attribute_register_  ('queue',                    None, self.String, self.Scalar, self.Writeable)
         self.attribute_register_  ('project',                  None, self.String, self.Scalar, self.Writeable)
@@ -88,7 +88,7 @@ class DataPilotDescription (Attributes) :
         # custom attributes are not allowed.
         self.attribute_extensible_ (False)
 
-        self.set_idata_ ()
+
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

@@ -77,7 +77,7 @@ class ComputePilot (Base) :
         # init api base
         Base.__init__ (self)
 
-        # prepare instance data
+        # prepare supported attributes
         self.attribute_register_  ('id',             cp_id,     self.Url,    self.Scalar, self.ReadOnly)
         self.attribute_register_  ('state',          State.New, self.Enum,   self.Scalar, self.ReadOnly)
         self.attribute_register_  ('state_detail',   None,      self.String, self.Scalar, self.ReadOnly)
@@ -87,8 +87,6 @@ class ComputePilot (Base) :
 
         # custom attributes are not allowed.
         self.attribute_extensible_ (False)
-
-        self.set_idata_ ()
 
         # initialize adaptor class
         self.engine_.call ('ComputePilot', 'init_', self)

@@ -90,7 +90,7 @@ class adaptor (troy.interface.aBase) :
     # one api class instance).
     def register_adata (self) :
 
-        self.api.set_idata_ (self.adata, self.get_name ())
+        self.api.idata_[self.get_name ()] = self.adata
         return self.adata
 
 
@@ -108,13 +108,11 @@ class bigjob_cps (troy.interface.iComputePilotService) :
         print "bj cps ctor"
         self.api     = api 
         self.adaptor = adaptor
-        self.idata   = self.api.get_idata_ ()
 
         # FIXME: check if we need to reconnect to an ID
 
-
-        if 'rm' in self.idata :
-            self.rm = self.idata['rm']
+        if 'rm' in self.api.idata_ :
+            self.rm = self.api.idata_['rm']
         else :
             self.rm = ''
 
@@ -165,10 +163,9 @@ class bigjob_cp (troy.interface.iComputePilot) :
         print "bj cp ctor"
         self.api     = api 
         self.adaptor = adaptor
-        self.idata   = self.api.get_idata_ ()
 
-        if 'id' in self.idata :
-            self.id = self.idata['id']
+        if 'id' in self.api.idata_ :
+            self.id = self.iapi.data_['id']
         else :
             raise troy.pilot.TroyException (troy.pilot.Error.BadParameter,
                     "cannot create ComputePilot w/o ID")
@@ -248,9 +245,8 @@ class bigjob_cus (troy.interface.iComputeUnitService) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.idata   = self.api.get_idata_ ()
 
-        id = self.idata['id']
+        id = self.api.idata_['id']
 
         # we will only handle this api class if its ID is 'None', or was issued
         # by this adaptor -- otherwise a different adaptor already manages it.
@@ -273,9 +269,9 @@ class bigjob_cus (troy.interface.iComputeUnitService) :
         # id is none - init new instance
         else :
             # create the cus, and assign id
-            self.cus         = self.adaptor.bj_module.ComputeDataService ()
-            cus_id           = self.cus.get_id ()
-            self.idata['id'] = cus_id
+            self.cus              = self.adaptor.bj_module.ComputeDataService ()
+            cus_id                = self.cus.get_id ()
+            self.api.idata_['id'] = cus_id
             self.adaptor.adata['cus'][cus_id] = self.cus
 
 

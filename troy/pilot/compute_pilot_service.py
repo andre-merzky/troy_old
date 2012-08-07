@@ -46,10 +46,9 @@ class ComputePilotService (Base) :
         # init api base
         Base.__init__ (self)
 
-        # prepare instance data
+        # prepare supported attributes
         self.attribute_register_  ('id', None,  self.Url, self.Scalar, self.ReadOnly)
-
-        self.set_idata_ ()
+        self.attribute_set_       ('id', url)
 
         # initialize adaptor class
         self.engine_.call ('ComputePilotService', 'init_', self)

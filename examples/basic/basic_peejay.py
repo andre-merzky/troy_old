@@ -9,29 +9,29 @@ def test_compute ():
         cpd = troy.pilot.ComputePilotDescription ()
 
         cps = troy.pilot.ComputePilotService ('peejay://')
-        cp1 = cps.create_pilot (cpd)
-        cp2 = cps.create_pilot (cpd)
-
-        cus = troy.pilot.ComputeUnitService ()
-        cus.add_compute_pilot (cp1)
-        cus.add_compute_pilot (cp2)
-
-        print str(cus.list_compute_pilots ())
-
-        cud = troy.pilot.ComputeUnitDescription ()
-
-        cud['executable'] = '/bin/sh'
-        cud['arguments']  = ['-c', 'touch /tmp/hello_troy_pj && sleep 10']
-
-        cu  = cus.submit_compute_unit (cud)
-
-        cu.wait ()
-
-        cp1.cancel ()
-        cp2.cancel ()
+#       cp1 = cps.create_pilot (cpd)
+#       cp2 = cps.create_pilot (cpd)
  
-    # except Exception, e:
-        # print str (e)
+#       cus = troy.pilot.ComputeUnitService ()
+#       cus.add_compute_pilot (cp1)
+#       cus.add_compute_pilot (cp2)
+#
+#       print str(cus.list_compute_pilots ())
+#
+#       cud = troy.pilot.ComputeUnitDescription ()
+#
+#       cud['executable'] = '/bin/sh'
+#       cud['arguments']  = ['-c', 'touch /tmp/hello_troy_pj && sleep 10']
+#
+#       cu  = cus.submit_compute_unit (cud)
+#
+#       cu.wait ()
+#
+#       cp1.cancel ()
+#       cp2.cancel ()
+#
+#   # except Exception, e:
+#       # print str (e)
 
 
 def test_data ():

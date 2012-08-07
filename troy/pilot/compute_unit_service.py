@@ -54,12 +54,10 @@ class ComputeUnitService (Base) :
         # FIXME: the scheduler type to be used is hard coded.  IMHO, that should
         # be variable via the API.
 
-        # prepare instance data
+        # prepare supported attributes
         self.attribute_register_  ('id',        cus_id,   self.Url,    self.Scalar, self.ReadOnly)
         self.attribute_register_  ('cps',       [],       self.Url,    self.Vector, self.Writeable)
         self.attribute_register_  ('scheduler', 'Random', self.String, self.Scalar, self.Writeable)
-
-        self.set_idata_ ()
 
         # initialize adaptor class
         self.engine_.call ('ComputeUnitService', 'init_', self)
@@ -89,8 +87,7 @@ class ComputeUnitService (Base) :
             ComputeUnit object
         """
 
-        idata = self.get_idata_ ()
-        cu    = idata['scheduler'].schedule (self, cud)
+        cu    = self.scheduler.schedule (self, cud)
         return cu
 
 

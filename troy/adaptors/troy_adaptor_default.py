@@ -65,9 +65,8 @@ class default_cus (troy.interface.iComputeUnitService) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.idata   = self.api.get_idata_ ()
 
-        id = self.idata['id']
+        id = self.api.idata_['id']
 
         # we will only handle this api class if its ID is 'None', or was issued
         # by this adaptor -- otherwise a different adaptor already manages it.
@@ -90,7 +89,7 @@ class default_cus (troy.interface.iComputeUnitService) :
 
             # assign an id
             id = 'troy_adaptor_default_cus ' + str (self.adaptor.get_serial_ ())
-            self.idata['id'] = id
+            self.api.idata_['id'] = id
 
             # if we got this far, we can now register this class instance with the
             # adaptor, to get some persistent state -- for example, to reconnect to
@@ -104,7 +103,7 @@ class default_cus (troy.interface.iComputeUnitService) :
         # get a scheduler instance, as requested via idata.  We always get that
         # scheduler instance, even if taking over a CUS created by a foreign
         # adaptor...
-        self.scheduler = troy.pilot.compute_scheduler.ComputeScheduler_ (self.idata['scheduler'])
+        self.scheduler = troy.pilot.compute_scheduler.ComputeScheduler (self.api.idata_['scheduler'])
 
 
     def add_compute_pilot (self, cp) :
@@ -113,13 +112,13 @@ class default_cus (troy.interface.iComputeUnitService) :
             Keyword arguments:
             cp -- The ComputePilot to which this ComputeUnitService will connect.
         """
-        self.idata['pilots'].append (cp)
+        self.api.idata_['pilots'].append (cp)
 
 
     def list_compute_pilots (self) :
 
         ret = []
-        for cp in self.idata['pilots'] :
+        for cp in self.api.idata_['pilots'] :
             ret.append (cp.get_id ())
 
         return ret
@@ -134,7 +133,7 @@ class default_cus (troy.interface.iComputeUnitService) :
             Keyword arguments:
             cp -- The ComputePilot to remove 
         """
-        self.idata['pilots'].remove (cp)
+        self.api.idata_['pilots'].remove (cp)
 
 
 

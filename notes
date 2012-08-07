@@ -143,7 +143,7 @@ Questions / comments about API, to be discussed
 
   ------------------------------------------------------------------------------
 
-  - DataComputeUnitDescription
+  - ComputeDataUnitDescription
 
     - why does it exist?  There is no submit_data_compute_unit
       anywhere?
@@ -296,14 +296,14 @@ Misc:
 
   - TODO ANDRE: need to define / document context class
 
-  - du.chunk (data_parser_class, int number) ? // see haddoop
+  - du.chunk (data_parser_class, int number) ? // see Hadoop
 
 
   - naming: I think this is totally cumbersome:
 
       ComputePilotService.create_compute_pilot()
-      ComputeUnitservice.add_compute_pilot_service()
-      ComputeUnitservice.submit_compute_unit()
+      ComputeUnitService.add_compute_pilot_service()
+      ComputeUnitService.submit_compute_unit()
 
     would very much prefer either
 
@@ -349,4 +349,38 @@ Misc:
 
   - FIXME: all classes need internal ctors which init the attributes, but do not
            require an ID.
+
+  - API simplification:
+
+    I think, after all is said, what the API *really* should look like is:
+
+    -------------------------------------------------------------------------
+    Attributes
+        register_callback, unregister_callback
+
+        Struct PilotDescription
+            Struct ComputePilotDescription
+            Struct DataPilotDescription
+        Struct UnitDescription
+            Struct ComputeUnitDescription
+            Struct DataUnitDescription
+
+
+        Base
+            Class Pilot
+                Attributes:   id, state, description, service_url, glue
+                wait, cancel, (reconfigure?)
+                submit_unit,  list_units,  get_unit
+            Class PilotService
+                Attributes: id, backend_url, glue
+                submit_unit,  list_units,  get_unit
+                submit_pilot, list_pilots, get_pilot
+            Class Unit
+                Attributes:   id, state, description, pilot_url, glue
+                wait, cancel
+            Class UnitService
+                Attributes:   id, glue
+                submit_unit,  list_units,  get_unit
+                add_pilot,    list_pilots, get_pilot, remove_pilot (also accepts pilot services)
+    -------------------------------------------------------------------------
 

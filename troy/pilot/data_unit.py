@@ -33,15 +33,13 @@ class DataUnit (Base) :
         # init api base
         Base.__init__ (self)
 
-        # prepare instance data
+        # prepare supported attributes
         self.attribute_register_  ('id',             du_id,     self.Url,    self.Scalar, self.ReadOnly)
         self.attribute_register_  ('state',          State.New, self.Enum,   self.Scalar, self.ReadOnly)
         self.attribute_register_  ('state_detail',   None,      self.String, self.Scalar, self.ReadOnly)
         self.attribute_register_  ('description',    None,      self.Any,    self.Scalar, self.ReadOnly)
         self.attribute_register_  ('service_url',    None,      self.Url,    self.Scalar, self.ReadOnly)
         self.attribute_register_  ('pilot_id',       None,      self.Url,    self.Scalar, self.ReadOnly)
-
-        self.set_idata_ ()
 
         # initialize adaptor class
         self.engine_.call ('DataUnit', 'init_', self)

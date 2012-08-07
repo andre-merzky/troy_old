@@ -51,7 +51,6 @@ class adaptor (troy.interface.aBase) :
     def get_name (self) :
         return self.name
 
-
     def get_registry (self) :
         return self.registry
 
@@ -81,7 +80,7 @@ class adaptor (troy.interface.aBase) :
     # one api class instance).
     def register_adata (self, api) :
 
-        api.set_idata_ (self.adata, self.get_name ())
+        self.api.idata_[self.get_name ()] = self.adata
         return self.adata
 
 
@@ -97,14 +96,15 @@ class peejay_cps (troy.interface.iComputePilotService) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.idata   = self.api.get_idata_ ()
         self.peejay  = self.adaptor.module
 
         # we MUST interpret cps_id, if present
         self.master  = self.peejay.master ()
 
-        if 'rm' in self.idata :
-            self.rm = self.idata['rm']
+        print "idata: " + str (self.api)
+
+        if 'rm' in self.api.idata_ :
+            self.rm = self.api.idata_['rm']
         else :
             self.rm = ''
 
@@ -152,16 +152,15 @@ class peejay_cp (troy.interface.iComputePilot) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.idata   = self.api.get_idata_ ()
         self.peejay  = self.adaptor.module
 
         # we MUST interpret cps_id, if present.  In fact, we need to have an id,
         # as creation is always done in the CPS
-        if not 'id' in self.idata :
+        if not 'id' in self.api.idata_ :
             raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
                     "peejay needs an id to reconnect to a pilot")
 
-        self.id      = self.idata['id']
+        self.id      = self.api.idata_['id']
         self.pilot   = self.peejay.pilot (self.id)
         self.running = 1
 
@@ -280,7 +279,6 @@ class peejay_cus (troy.interface.iComputeUnitService) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.idata   = self.api.get_idata_ ()
         self.peejay  = self.adaptor.module
         self.cp      = []  # list of associated compute pilots
 
@@ -292,8 +290,8 @@ class peejay_cus (troy.interface.iComputeUnitService) :
         # have a CUS, so we cannot, ever, reconnect to a CUS.  So, we have to
         # throw if an id is present
         # as creation is always done in the CPS
-        if 'id' in self.idata :
-            if self.idata['id'] :
+        if 'id' in self.api.idata_ :
+            if self.api.idata_['id'] :
                 raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, "peejay cannot reconnect to CUS!")
 
         print " === peejay cus init done"
@@ -357,16 +355,15 @@ class peejay_cu (troy.interface.iComputeUnit) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.idata   = self.api.get_idata_ ()
         self.peejay  = self.adaptor.module
 
         # we MUST interpret cu_id, if present.  In fact, we need to have an id,
         # as creation is always done in the CUS
-        if not 'id' in self.idata :
+        if not 'id' in self.api.idata_ :
             raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
                     "peejay needs an id to reconnect to a cu")
 
-        self.id = self.idata['id']
+        self.id = self.api.idata_['id']
 
         print " === peejay cu init done"
 

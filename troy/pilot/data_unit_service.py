@@ -55,12 +55,10 @@ class DataUnitService (Base) :
         # FIXME: the scheduler type to be used is hard coded.  IMHO, that should
         # be variable via the API.
 
-        # prepare instance data
+        # prepare supported attributes
         self.attribute_register_  ('id',        cus_id,   self.Url,    self.Scalar, self.ReadOnly)
         self.attribute_register_  ('dps',       [],       self.Url,    self.Vector, self.Writeable)
         self.attribute_register_  ('scheduler', 'Random', self.String, self.Scalar, self.Writeable)
-
-        self.set_idata_ ()
 
         # initialize adaptor class
         self.engine_.call ('DataUnitService', 'init_', self)
@@ -90,8 +88,7 @@ class DataUnitService (Base) :
             DataUnit object
         """
 
-        idata = self.get_idata_ ()
-        du    = idata['scheduler'].schedule (self, dud)
+        du    = self.scheduler.schedule (self, dud)
         return du
 
 

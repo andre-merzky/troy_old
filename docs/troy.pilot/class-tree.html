@@ -212,97 +212,15 @@
     <li> <strong class="uidlink">object</strong>:
       <em class="summary">The most base type</em>
     <ul>
-    <li> <strong class="uidlink"><a href="troy.pilot.base.Base-class.html">troy.pilot.base.Base</a></strong>:
-      <em class="summary">All Troy API classes inherit  from this base class, which provides 
-        support for adaptor management and the management of class instance
-        data.</em>
-    <ul>
-    <li> <strong class="uidlink"><a href="troy.pilot.compute_data_scheduler.ComputeDataScheduler-class.html">troy.pilot.compute_data_scheduler.ComputeDataScheduler</a></strong>:
-      <em class="summary">ComputeDataScheduler (CDS)</em>
-    </li>
-    <li> <strong class="uidlink"><a href="troy.pilot.compute_pilot.ComputePilot-class.html">troy.pilot.compute_pilot.ComputePilot</a></strong>:
-      <em class="summary">ComputePilot (PilotJob)</em>
-    </li>
-    <li> <strong class="uidlink"><a href="troy.pilot.compute_pilot_service.ComputePilotService-class.html">troy.pilot.compute_pilot_service.ComputePilotService</a></strong>:
-      <em class="summary">ComputePilotService (CPS)</em>
-    </li>
-    <li> <strong class="uidlink"><a href="troy.pilot.compute_scheduler.ComputeScheduler-class.html">troy.pilot.compute_scheduler.ComputeScheduler</a></strong>:
-      <em class="summary">ComputeScheduler (CS)</em>
-    </li>
-    <li> <strong class="uidlink"><a href="troy.pilot.compute_unit.ComputeUnit-class.html">troy.pilot.compute_unit.ComputeUnit</a></strong>:
-      <em class="summary">ComputeUnit</em>
-    <ul>
-    <li> <strong class="uidlink"><a href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html">troy.pilot.compute_data_unit.ComputeDataUnit</a></strong>:
-      <em class="summary">ComputeDataUnit.</em>
-    </li>
-    </ul>
-    </li>
-    <li> <strong class="uidlink"><a href="troy.pilot.compute_unit_service.ComputeUnitService-class.html">troy.pilot.compute_unit_service.ComputeUnitService</a></strong>:
-      <em class="summary">ComputeUnitService (CUS)</em>
-    <ul>
-    <li> <strong class="uidlink"><a href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html">troy.pilot.compute_data_unit_service.ComputeDataUnitService</a></strong>:
-      <em class="summary">ComputeDataUnitService.(CDUS)</em>
-    </li>
-    </ul>
-    </li>
-    <li> <strong class="uidlink"><a href="troy.pilot.data_pilot.DataPilot-class.html">troy.pilot.data_pilot.DataPilot</a></strong>:
-      <em class="summary">DataPilot (PilotStore)</em>
-    </li>
-    <li> <strong class="uidlink"><a href="troy.pilot.data_pilot_service.DataPilotService-class.html">troy.pilot.data_pilot_service.DataPilotService</a></strong>:
-      <em class="summary">DataPilotService (DPS)</em>
-    </li>
-    <li> <strong class="uidlink"><a href="troy.pilot.data_scheduler.DataScheduler-class.html">troy.pilot.data_scheduler.DataScheduler</a></strong>:
-      <em class="summary">DataScheduler (DS)</em>
-    </li>
-    <li> <strong class="uidlink"><a href="troy.pilot.data_unit.DataUnit-class.html">troy.pilot.data_unit.DataUnit</a></strong>:
-      <em class="summary">DataUnit.</em>
-    <ul>
-    <li> <strong class="uidlink"><a href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html">troy.pilot.compute_data_unit.ComputeDataUnit</a></strong>:
-      <em class="summary">ComputeDataUnit.</em>
-    </li>
-    </ul>
-    </li>
-    <li> <strong class="uidlink"><a href="troy.pilot.data_unit_service.DataUnitService-class.html">troy.pilot.data_unit_service.DataUnitService</a></strong>:
-      <em class="summary">DataUnitService (DUS)</em>
-    <ul>
-    <li> <strong class="uidlink"><a href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html">troy.pilot.compute_data_unit_service.ComputeDataUnitService</a></strong>:
-      <em class="summary">ComputeDataUnitService.(CDUS)</em>
-    </li>
-    </ul>
-    </li>
-    </ul>
-    </li>
-    <li> <strong class="uidlink">exceptions.BaseException</strong>:
-      <em class="summary">Common base class for all exceptions</em>
-    <ul>
-    <li> <strong class="uidlink">exceptions.Exception</strong>:
-      <em class="summary">Common base class for all non-exit exceptions.</em>
-    <ul>
-    <li> <strong class="uidlink"><a href="troy.pilot.exception.TroyException-class.html">troy.pilot.exception.TroyException</a></strong>:
-      <em class="summary">The TROY exception class is (obviously) used to signal error 
-        conditions to the user of TROY's pilot API.</em>
-    </li>
-    </ul>
-    </li>
-    </ul>
-    </li>
-    <li> <strong class="uidlink"><a href="troy.pilot.config.Config_-class.html">troy.pilot.config.Config_</a></strong>:
-      <em class="summary">The Config class acts, as the name suggests, as a configuration 
-        point for the Troy implementation.</em>
-    </li>
-    <li> <strong class="uidlink">dict</strong>:
-      <em class="summary">dict() -&gt; new empty dictionary
-dict(mapping) -&gt; new dictionary initialized from a mapping object's
-    (key, value) pairs
-dict(iterable) -&gt; new dictionary initialized as if via:
-    d = {}
-    for k, v in iterable:
-        d[k] = v
-dict(**kwargs) -&gt; new dictionary initialized with the name=value pairs
-    in the keyword argument list.</em>
+    <li> <strong class="uidlink"><a href="troy.pilot.attributes.AttributesBase_-class.html">troy.pilot.attributes.AttributesBase_</a></strong>:
+      <em class="summary">This class only exists to host properties -- as object itself does 
+        *not* have properties!  This class is not part of the public Troy 
+        API.</em>
     <ul>
     <li> <strong class="uidlink"><a href="troy.pilot.attributes.Attributes-class.html">troy.pilot.attributes.Attributes</a></strong>:
-      <em class="summary">Attribute Interface Class</em>
+      <em class="summary">This base class implements most of the semantics of the <a 
+        href="troy.pilot.attributes.Attributes-class.html" 
+        class="link">Attributes</a> interface.</em>
     <ul>
     <li> <strong class="uidlink"><a href="troy.pilot.base.Base-class.html">troy.pilot.base.Base</a></strong>:
       <em class="summary">All Troy API classes inherit  from this base class, which provides 
@@ -390,6 +308,84 @@ dict(**kwargs) -&gt; new dictionary initialized with the name=value pairs
     </li>
     </ul>
     </li>
+    <li> <strong class="uidlink"><a href="troy.pilot.base.Base-class.html">troy.pilot.base.Base</a></strong>:
+      <em class="summary">All Troy API classes inherit  from this base class, which provides 
+        support for adaptor management and the management of class instance
+        data.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy.pilot.compute_data_scheduler.ComputeDataScheduler-class.html">troy.pilot.compute_data_scheduler.ComputeDataScheduler</a></strong>:
+      <em class="summary">ComputeDataScheduler (CDS)</em>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.pilot.compute_pilot.ComputePilot-class.html">troy.pilot.compute_pilot.ComputePilot</a></strong>:
+      <em class="summary">ComputePilot (PilotJob)</em>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.pilot.compute_pilot_service.ComputePilotService-class.html">troy.pilot.compute_pilot_service.ComputePilotService</a></strong>:
+      <em class="summary">ComputePilotService (CPS)</em>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.pilot.compute_scheduler.ComputeScheduler-class.html">troy.pilot.compute_scheduler.ComputeScheduler</a></strong>:
+      <em class="summary">ComputeScheduler (CS)</em>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.pilot.compute_unit.ComputeUnit-class.html">troy.pilot.compute_unit.ComputeUnit</a></strong>:
+      <em class="summary">ComputeUnit</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html">troy.pilot.compute_data_unit.ComputeDataUnit</a></strong>:
+      <em class="summary">ComputeDataUnit.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.pilot.compute_unit_service.ComputeUnitService-class.html">troy.pilot.compute_unit_service.ComputeUnitService</a></strong>:
+      <em class="summary">ComputeUnitService (CUS)</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html">troy.pilot.compute_data_unit_service.ComputeDataUnitService</a></strong>:
+      <em class="summary">ComputeDataUnitService.(CDUS)</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.pilot.data_pilot.DataPilot-class.html">troy.pilot.data_pilot.DataPilot</a></strong>:
+      <em class="summary">DataPilot (PilotStore)</em>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.pilot.data_pilot_service.DataPilotService-class.html">troy.pilot.data_pilot_service.DataPilotService</a></strong>:
+      <em class="summary">DataPilotService (DPS)</em>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.pilot.data_scheduler.DataScheduler-class.html">troy.pilot.data_scheduler.DataScheduler</a></strong>:
+      <em class="summary">DataScheduler (DS)</em>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.pilot.data_unit.DataUnit-class.html">troy.pilot.data_unit.DataUnit</a></strong>:
+      <em class="summary">DataUnit.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html">troy.pilot.compute_data_unit.ComputeDataUnit</a></strong>:
+      <em class="summary">ComputeDataUnit.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.pilot.data_unit_service.DataUnitService-class.html">troy.pilot.data_unit_service.DataUnitService</a></strong>:
+      <em class="summary">DataUnitService (DUS)</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html">troy.pilot.compute_data_unit_service.ComputeDataUnitService</a></strong>:
+      <em class="summary">ComputeDataUnitService.(CDUS)</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">exceptions.BaseException</strong>:
+      <em class="summary">Common base class for all exceptions</em>
+    <ul>
+    <li> <strong class="uidlink">exceptions.Exception</strong>:
+      <em class="summary">Common base class for all non-exit exceptions.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="troy.pilot.exception.TroyException-class.html">troy.pilot.exception.TroyException</a></strong>:
+      <em class="summary">The TROY exception class is (obviously) used to signal error 
+        conditions to the user of TROY's pilot API.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="troy.pilot.config.Config_-class.html">troy.pilot.config.Config_</a></strong>:
+      <em class="summary">The Config class acts, as the name suggests, as a configuration 
+        point for the Troy implementation.</em>
+    </li>
     </ul>
     </li>
 </ul>
@@ -422,7 +418,7 @@ dict(**kwargs) -&gt; new dictionary initialized with the name=value pairs
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Thu Aug  2 20:21:15 2012</a>
+    3.0.1 on Tue Aug  7 15:46:23 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -10,7 +10,6 @@ from attributes import Attributes
 class Base (Attributes, object):
 
     """
-
     All Troy API classes inherit  from this base class, which provides support
     for adaptor management and the management of class instance data.
 
@@ -41,30 +40,16 @@ class Base (Attributes, object):
 
 
     def __init__ (self) :
-        self.engine_   = engine.Engine ()  # engine singleton to handle adaptors
-        self.adaptors_ = {}                # sorted list of used adaptors
-        self.idata_    = {}                # adaptor specific instance data
-        self.contexts  = []                # list of security context dicts
 
+        # engine_   : engine singleton to handle adaptors 
+        # adaptors_ : sorted list of used adaptors        
+        # idata_    : adaptor specific instance data      
+        # contexts_ : list of security context dicts      
 
-    def get_idata_ (self, id = 'api') :
-        """
-        Get instance data dict entry.
-
-        By default, this returns the class instance data, otherwise the instance
-        data of the specified adaptor.
-        """
-        return self.idata_[id]
-
-
-    def set_idata_ (self, data, id='api') :
-        """
-        Set instance data dict entry.
-
-        By default, this sets the class instance data, otherwise the instance
-        data of the specified adaptor.
-        """
-        self.idata_[id] = data
+        self.attribute_register_  ('engine_',   engine.Engine(), self.Any, self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('adaptors_', {},              self.Any, self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('idata_',    {},              self.Any, self.Scalar, self.ReadOnly)
+        self.attribute_register_  ('contexts_', [],              self.Any, self.Scalar, self.ReadOnly)
 
 
     def dump_ (self) :

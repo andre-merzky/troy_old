@@ -7,10 +7,22 @@ import troy.pilot as pilot
 #
 class Transliterator ( pilot.Attributes ) :
     
-    def __init__ (self) :
-        self.attribute_register_   ('apple', 'Appel', self.String, self.Scalar, self.Writeable)
-        self.attribute_register_   ('plum',  'Pruim', self.String, self.Scalar, self.ReadOnly)
-        self.attribute_extensible_ (True)
+    def __init__ (self, *args, **kwargs) :
+      # setting attribs to non-extensible will cause the cal to init below to
+      # complain if attributes are specified.  Default is extensible.
+      # self.attributes_extensible_ (False)
+
+        # pass args to base class init (implies extensible)
+        super (Transliterator, self).__init__ (*args, **kwargs)
+
+        # setup class attribs
+        self.attributes_register_   ('apple', 'Appel', self.Url,    self.Scalar, self.Writeable)
+        self.attributes_register_   ('plum',  'Pruim', self.String, self.Scalar, self.ReadOnly)
+
+      # setting attribs to non-extensible at *this* point will have allowed
+      # custom user attribs on __init__ time (via args), but will then forbid
+      # any additional custom attributes
+      # self.attributes_extensible_ (False)
 
 
 ################################################################################
@@ -21,20 +33,23 @@ if __name__ == "__main__":
 
     def cb (key, val, obj) :
         print "called: %s - %s - %s"  %  (key, val, type (obj))
+        return True
 
-    trans = Transliterator ()
+    trans = Transliterator (cherry='Kersche')
+
+    # trans.attributes_dump_ ()
 
     print " -- apple"
     print trans.apple 
-    trans.apple = 'Apfel'
+    print trans['apple']
+    trans.apple = 'Abbel'
     print trans.apple 
 
-    trans.attribute_register_cb ('apple', cb)
-    trans.apple = ['Boskop', 'Jonas']
-    trans.apple = 'Apfel'
+    trans.attributes_register_cb ('apple', cb)
+    trans.apple = ['Abbel', 'Appel']
 
-    trans.attribute_set_final_ ('apple')
-    trans.apple = 'Abbel'
+    trans.attributes_set_final_ ('apple', 'Appel')
+    trans.apple = 'Abbel'  # this will be ignored, attrib is 'final'
     print trans.apple 
 
 
@@ -43,8 +58,12 @@ if __name__ == "__main__":
   # trans.plum = 'Pflaume'  # raises exception
     print trans.plum
 
+    print "\n -- cherry"
+    print trans.cherry
+
     print "\n -- peach"
-  # print trans.peach       # raises exception
+    trans['peach'] = 'Berne'
+    print trans.peach
     trans.peach = 'Birne'
     print trans.peach
 

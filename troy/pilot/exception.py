@@ -14,6 +14,8 @@ class Error:
     BadParameter   = 'BadParameter'   # """ operation cannot handle parameter type or value. """
     IncorrectState = 'IncorrectState' # """ operation not allowed in current object state. """
     NotImplemented = 'NotImplemented' # """ operation is not implemented. """
+    DoesNotExist   = 'DoesNotExist'   # """ operation target is missing. """
+    AlreadyExists  = 'DoesNotExist'   # """ operation target is already present. """
 
 
 

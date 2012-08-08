@@ -45,7 +45,7 @@ if __name__ == "__main__":
     trans.apple = 'Abbel'
     print trans.apple 
 
-    trans.attributes_register_cb ('apple', cb)
+    trans.add_callback ('apple', cb)
     trans.apple = ['Abbel', 'Appel']
 
     trans.attributes_set_final_ ('apple', 'Appel')

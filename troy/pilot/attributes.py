@@ -662,6 +662,157 @@ class Attributes (AttributesBase_) :
 
 
     ####################################
+    def attributes_i_list_ (self) :
+        """
+        List all attributes which have been set explicitly -- registration alone
+        does not qualify.
+        """
+
+        # make sure interface is ready to use
+        d = self.attributes_t_init_ ()
+
+        ret = []
+
+        for key in sorted(d['attributes_'].iterkeys()) :
+            if d['attributes_'][key]['exists'] :
+                ret.append (key)
+
+        return ret
+
+
+    ####################################
+    def attributes_i_find_ (self, pattern) :
+        """
+        Similar to list(), but also grep for a given attribute name pattern.
+        That pattern is of the form 'key=val', where both 'key' and 'val' can
+        contain POSIX shell wildcards.  Vor non-string typed attributes, the
+        pattern is applied to a string serialization of the typed value, if that
+        exists.
+        """
+
+        # make sure interface is ready to use
+        d = self.attributes_t_init_ ()
+
+
+        # separate key and value pattern
+        p_key  = ""    # string pattern
+        p_val  = ""    # string pattern
+        pc_key = None  # compiled pattern
+        pc_val = None  # compiled pattern
+
+
+        if pattern[0] == '=' :
+            p_val = pattern[1:]
+        else :
+          p = re.compile (r'[^\]=')
+          tmp = p.split (pattern, 2)
+          if len (tmp) > 0 : p_key = tmp[0]
+          if len (tmp) > 1 : p_val = tmp[1]
+
+        # compile the found pattern
+        if len(p_key) : pc_key = re.compile (p_key)
+        if len(p_val) : pc_val = re.compile (p_val)
+
+        # now dig out matching keys
+        matches = []
+        for key in self.attributes_i_list_ () :
+            val = str(self.attributes_i_get_ (key))
+
+            if ( (pc_key == None) or pc_key.search (key) ) and \
+               ( (pc_val == None) or pc_val.search (val) )     :
+                matches.append (key)
+
+        return matches
+
+
+    ####################################
+    def attributes_i_exists_ (self, key) :
+        """
+        This method will check if the given key is known and was set explicitly.
+        The call will also return 'True' if the value for that key is 'None'.
+        """
+
+        # make sure interface is ready to use
+        d = self.attributes_t_init_ ()
+
+        # check if we know about that attribute
+        if  d['attributes_'][key]['exists'] :
+            return True
+
+        return False
+
+
+    ####################################
+    def attributes_i_is_readonly_ (self, key) :
+        """
+        This method will check if the given key is readonly, i.e. cannot be
+        'set'.  The call will also return 'True' if the attribute is final
+        """
+
+        # make sure interface is ready to use
+        d = self.attributes_t_init_ (key)
+
+        # check if we know about that attribute
+        if  d['attributes_'][key]['mode'] == self.Final or \
+            d['attributes_'][key]['mode'] == self.ReadOnly :
+            return True
+
+        return False
+
+
+    ####################################
+    def attributes_i_is_writable_ (self, key) :
+        """
+        This method will check if the given key is writable - i.e. not readonly.
+        """
+
+        return not self.attributes_i_is_readonly_ (key)
+
+
+    ####################################
+    def attributes_i_is_removable_ (self, key) :
+        """
+        Removability is actually ill-defined in GFD.90 - so we return 
+        'True' if the attrib is Writeable
+        """
+
+        return self.attributes_i_is_writable_ (key)
+
+
+    ####################################
+    def attributes_i_is_vector_ (self, key) :
+        """
+        Check if the attribute has scalar or vector typed values.
+        """
+
+        # make sure interface is ready to use
+        d = self.attributes_t_init_ (key)
+
+        # check if we know about that attribute
+        if  d['attributes_'][key]['flavor'] == self.Vector :
+            return True
+
+        return False
+
+
+    ####################################
+    def attributes_i_is_final_ (self, key) :
+        """
+        This method will query the 'final' flag for an attribute, which signals that
+        the attribute will never change again.
+        """
+
+        # make sure interface is ready to use
+        d = self.attributes_t_init_ (key)
+
+        if self.Final == d['attributes_'][key]['mode'] :
+             return True
+
+        # no final flag found -- assume non-finality!
+        return False
+
+
+    ####################################
     def attributes_i_add_cb_ (self, key, cb) :
         """
         For any attribute change, the API will check if any callbacks are
@@ -719,44 +870,6 @@ class Attributes (AttributesBase_) :
             else :
                 d['attributes_'][key]['callbacks'][id] = undef
 
-
-    ####################################
-    def attributes_i_exists_ (self, key) :
-        """
-        This method will check if the given key is registered.  The call will
-        also return 'True' if the value for that key is 'None'
-        """
-
-        # make sure interface is ready to use
-        d = self.attributes_t_init_ ()
-
-        # check if we know about that attribute
-        if key in d['attributes_'] :
-            if  d['attributes_'][key]['exists'] :
-                return True
-
-        return False
-
-
-    ####################################
-    def attributes_i_is_final (self, key) :
-        """
-        This method will query the 'final' flag for an attribute, which signals that
-        the attribute will never change again.
-        """
-
-        # make sure interface is ready to use
-        d = self.attributes_t_init_ (key)
-
-        if self.Final == d['attributes_'][key]['mode'] :
-             return True
-
-        # no final flag found -- assume non-finality!
-        return False
-
-
-    ####################################
-    # FIXME: add other inspection methods (is_writeable, is_vector, ...)
 
 
     ############################################################################
@@ -1023,14 +1136,27 @@ class Attributes (AttributesBase_) :
         return self.attributes_i_get_ (us_key)
 
     ####################################
+    def set_vector_attribute (self, key, val) :
+        us_key = self.attributes_t_underscore_ (key)
+        return self.attributes_i_set_ (us_key, val)
+
+    ####################################
     def get_vector_attribute (self, key) :
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_i_get_ (us_key)
 
     ####################################
-    def set_vector_attribute (self, key, val) :
+    def remove_attribute (self, key) :
         us_key = self.attributes_t_underscore_ (key)
-        return self.attributes_i_set_ (us_key, val)
+        return self.attributes_unregister_ (us_key)
+
+    ####################################
+    def list_attributes (self) :
+        return self.attributes_i_list_ ()
+
+    ####################################
+    def find_attributes (self, pattern) :
+        return self.attributes_i_find_ (pattern)
 
     ####################################
     def attribute_exists (self, key) :
@@ -1038,10 +1164,27 @@ class Attributes (AttributesBase_) :
         return self.attributes_i_exists_ (us_key)
 
     ####################################
-    def remove_attribute (self, key) :
+    def attribute_is_readonly (self, key) :
         us_key = self.attributes_t_underscore_ (key)
-        return self.attributes_unregister_ (us_key)
+        return self.attributes_i_is_readonly_ (us_key)
 
+    ####################################
+    def attribute_is_writable (self, key) :
+        us_key = self.attributes_t_underscore_ (key)
+        return self.attributes_i_is_writable_ (us_key)
+
+    ####################################
+    def attribute_is_removable (self, key) :
+        us_key = self.attributes_t_underscore_ (key)
+        return self.attributes_i_is_removable_ (us_key)
+
+    ####################################
+    def attribute_is_vector (self, key) :
+        us_key = self.attributes_t_underscore_ (key)
+        return self.attributes_i_is_vector_ (us_key)
+
+    ####################################
+    # fold the GFD.90 monitoring API into the attributes API
     ####################################
     def add_callback (self, key, cb) :
         us_key = self.attributes_t_underscore_ (key)
@@ -1119,17 +1262,13 @@ class Attributes (AttributesBase_) :
         arbitrarily defined as to make the bliss attribute unit tests happy:
         we ignore unset values and extended values.  
         """
-        # FIXME: make serialization somewhat more meaningful
 
         # make sure interface is ready to use
         d = self.attributes_t_init_ ()
 
         tmp = {}
 
-        for key in sorted(d['attributes_'].iterkeys()) :
-            if not d['attributes_'][key]['extended'] and \
-                   d['attributes_'][key]['exists']   and \
-                   d['attributes_'][key]['value']    :
+        for key in self.attributes_i_list_ () :
                 tmp[key] = d['attributes_'][key]['value']
 
         return str (tmp)

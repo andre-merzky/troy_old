@@ -1,5 +1,7 @@
 
 import inspect
+import copy
+import re
 
 # FIXME: add a tagging 'Monitorable' interface, which enables callbacks.
 # FIXME: add a flag to mark attributes as fixed, so that app cannot change flags (type...)
@@ -257,6 +259,9 @@ class Attributes (AttributesBase_):
     Vector      = 'vector'     # the attribute value is a list of data elements
 
 
+    camel_case_regex_1_ = re.compile('(.)([A-Z][a-z]+)')
+    camel_case_regex_2_ = re.compile('([a-z0-9])([A-Z])')
+
 
     ############################################################################
     #
@@ -304,11 +309,57 @@ class Attributes (AttributesBase_):
             # need to initialize -- any exceptions in the code below should fall through
             d['attributes_']  = {}
             d['extensible_']  = True
+            d['camelcasing_'] = False
+            d['camelcases_']  = {}
+            d['underscores_'] = {}
+
             AttributesBase_.__setattr__ (self, 'd_', d)
 
             # print "after init %s : %s"  %  (str (self), str (d))
 
         return d
+
+
+    ###########################################################################
+    #
+    #
+    #
+    def attributes_deep_copy_ (self, other) :
+        
+        # make sure interface is ready to use
+        d = self.attributes_init_ ()
+
+        other_d = {}
+
+        other_d['extensible_']  = d['extensible_']
+        other_d['camelcasing_'] = d['camelcasing_']
+
+        other_d['camelcases_']  = copy.deepcopy (d['camelcases_'])
+        other_d['underscores_'] = copy.deepcopy (d['underscores_'])
+
+        # for some reason, deep copy won't work on the 'attributes_' dict
+        other_d['attributes_'] = {}
+        for key in d['attributes_'] :
+            other_d['attributes_'][key] = {}
+            other_d['attributes_'][key]['value']      = d['attributes_'][key]['value']     
+            other_d['attributes_'][key]['default']    = d['attributes_'][key]['default']   
+            other_d['attributes_'][key]['type']       = d['attributes_'][key]['type']      
+            other_d['attributes_'][key]['flavor']     = d['attributes_'][key]['flavor']    
+            other_d['attributes_'][key]['mode']       = d['attributes_'][key]['mode']      
+            other_d['attributes_'][key]['extended']   = d['attributes_'][key]['extended']  
+            other_d['attributes_'][key]['callbacks']  = d['attributes_'][key]['callbacks'] 
+            other_d['attributes_'][key]['camelcase']  = d['attributes_'][key]['camelcase'] 
+            other_d['attributes_'][key]['underscore'] = d['attributes_'][key]['underscore']
+
+        AttributeInterface.attributes_set_d_ (other, other_d)
+
+    ###########################################################################
+    #
+    #
+    #
+    def attributes_set_d_ (self, other_d) :
+        
+        AttributesBase_.__setattr__ (self, 'd_', other_d)
 
 
     ############################################################################
@@ -324,7 +375,19 @@ class Attributes (AttributesBase_):
         d = self.attributes_init_()
         d['extensible_'] = e
 
-        # self.attributes_dump_ ("ext")
+
+    ############################################################################
+    #
+    #
+    #
+    def attributes_camelcasing_ (self, c=True) :
+        """
+        use 'CamelCase' for dict entries, but 'under_score' for properties.
+        This method should only be called within derived classes.
+        """
+
+        d = self.attributes_init_()
+        d['camelcasing_'] = c
 
 
     ############################################################################
@@ -346,18 +409,29 @@ class Attributes (AttributesBase_):
         # make sure interface is ready to use
         d = self.attributes_init_ ()
 
+        # we expect keys to be registered as CamelCase (in those cases where
+        # that matters).  But we store lookup in booth directions, and use the
+        # 'under_score' version as primary key
+        cc_key = key
+        us_key = self.attributes_underscore_ (key)
+
         # remove any old instance of this attribute
-        self.attributes_unregister_ (key)
+        self.attributes_unregister_ (us_key)
 
         # register the attribute and properties
-        d['attributes_'][key]              = {}
-        d['attributes_'][key]['value']     = default
-        d['attributes_'][key]['default']   = default
-        d['attributes_'][key]['type']      = typ
-        d['attributes_'][key]['flavor']    = flavor
-        d['attributes_'][key]['mode']      = mode
-        d['attributes_'][key]['extended']  = ext
-        d['attributes_'][key]['callbacks'] = []
+        d['attributes_'][us_key]               = {}
+        d['attributes_'][us_key]['value']      = default
+        d['attributes_'][us_key]['default']    = default
+        d['attributes_'][us_key]['type']       = typ
+        d['attributes_'][us_key]['flavor']     = flavor
+        d['attributes_'][us_key]['mode']       = mode
+        d['attributes_'][us_key]['extended']   = ext
+        d['attributes_'][us_key]['callbacks']  = []
+        d['attributes_'][us_key]['camelcase']  = key
+        d['attributes_'][us_key]['underscore'] = self.attributes_underscore_ (key)
+
+        d['underscores_'][cc_key] = us_key
+        d['camelcases_'][us_key]  = cc_key
 
 
     ############################################################################
@@ -486,6 +560,9 @@ class Attributes (AttributesBase_):
     #
     #
     #
+    def attribute_exists (self, key) :
+        return self.attributes_exists (key)
+
     def attributes_exists (self, key) :
         """
         This method will check if the given key is registered.  The call will
@@ -713,6 +790,32 @@ class Attributes (AttributesBase_):
     #
     #
     #
+    def attributes_underscore_ (self, key) :
+        """ 
+        This is an internal method, and should not be called outside this
+        interface implementation.
+
+        The method accepts a 'CamelCase'd word, and translates that into
+        'under_score' notation -- IFF 'camelcasing_' is set
+
+        Kudos: http://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-camel-case
+        """
+
+        # make sure interface is ready to use
+        d = self.attributes_init_ ()
+
+        if d['camelcasing_'] :
+            temp = AttributeInterface.camel_case_regex_1_.sub(r'\1_\2', key)
+            return AttributeInterface.camel_case_regex_2_.sub(r'\1_\2', temp).lower()
+        else :
+            return key
+
+
+
+    ###########################################################################
+    #
+    #
+    #
     def attributes_conversion_ (self, key, val) :
         """
         This is an internal method, and should not be called outside this
@@ -767,12 +870,23 @@ class Attributes (AttributesBase_):
     def attributes_dump_ (self, msg=None) :
         """ debugging dump to stderr """
 
-        if msg :
-            print "dump: %s"  %  msg
-
+        # make sure interface is ready to use
         d = self.attributes_init_ ()
 
-        print "%s : %s"  %  (str (self), str (d))
+        if msg :
+            print "---------------------------------------"
+            print msg
+
+        print "---------------------------------------"
+        print " %-30s : %s"  %  ("Extensible"  , d['extensible_'])
+        print " %-30s : %s"  %  ("CamelCasing" , d['camelcasing_'])
+        print "---------------------------------------"
+
+        # if the key is not known
+        for key in sorted(d['attributes_'].iterkeys()) :
+            print " %-30s : %s"  %  (key, d['attributes_'][key]['value'])
+
+        print "---------------------------------------"
 
 
 
@@ -780,18 +894,31 @@ class Attributes (AttributesBase_):
     #
     # the dict interface
     # 
+    # Note that, if the interface is supposed to support CamelCasing, the dict
+    # interface needs to convert all keys to underscore before lookup or store.
+    #
+   
+    def get_attribute (self, key) :
+        return self.__getitem__ (key)
+
+    def get_vector_attribute (self, key) :
+        return self.__getitem__ (key)
    
     def __getitem__ (self, key):
-        return self.__getattr__ (key)
+        us_key = self.attributes_underscore_ (key)
+        return self.__getattr__ (us_key)
    
     def __setitem__ (self, key, val):
-        return self.__setattr__ (key, val)
+        us_key = self.attributes_underscore_ (key)
+        return self.__setattr__ (us_key, val)
    
     def __delitem__ (self, key):
-        return self.attributes_unregister_ (key)
+        us_key = self.attributes_underscore_ (key)
+        return self.attributes_unregister_ (us_key)
    
     def __contains__ (self, key):
-        return self.attributes_exists (key)
+        us_key = self.attributes_underscore_ (key)
+        return self.attributes_exists (us_key)
    
     def update (self, *args, **kwargs):
         # self.attributes_dump_ ("update")
@@ -800,10 +927,13 @@ class Attributes (AttributesBase_):
                 raise TypeError("update expected at most 1 arguments, got %d" % len (args))
             other = dict (args[0])
             for key in other:
-                self[key] = other[key]
+                us_key = self.attributes_underscore_ (key)
+                self[us_key] = other[us_key]
         for key in kwargs:
-            self[key] = kwargs[key]
+            us_key = self.attributes_underscore_ (key)
+            self[us_key] = kwargs[us_key]
    
    
 ################################################################################
+
 

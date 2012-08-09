@@ -53,37 +53,37 @@ class ComputeUnitDescription (Attributes) :
         # define supported attributes
 
         # Action description
-        self.attribute_register ('executable',            None, self.String, self.Scalar, self.Writeable)
-        self.attribute_register ('arguments',             None, self.String, self.Vector, self.Writeable)
-        self.attribute_register ('cleanup',               None, self.Bool,   self.Scalar, self.Writeable)
-        self.attribute_register ('environment',           None, self.String, self.Vector, self.Writeable)
-        self.attribute_register ('interactive',           None, self.Bool,   self.Scalar, self.Writeable)
-        self.attribute_register ('contact',               None, self.String, self.Vector, self.Writeable)
-        self.attribute_register ('project',               None, self.String, self.Scalar, self.Writeable)
-        self.attribute_register ('start_time',            None, self.Time,   self.Scalar, self.Writeable)
-        self.attribute_register ('working_directory',     None, self.String, self.Scalar, self.Writeable)
+        self.attribute_register ('executable',            None, self.String, self.Scalar, self.Writable)
+        self.attribute_register ('arguments',             None, self.String, self.Vector, self.Writable)
+        self.attribute_register ('cleanup',               None, self.Bool,   self.Scalar, self.Writable)
+        self.attribute_register ('environment',           None, self.String, self.Vector, self.Writable)
+        self.attribute_register ('interactive',           None, self.Bool,   self.Scalar, self.Writable)
+        self.attribute_register ('contact',               None, self.String, self.Vector, self.Writable)
+        self.attribute_register ('project',               None, self.String, self.Scalar, self.Writable)
+        self.attribute_register ('start_time',            None, self.Time,   self.Scalar, self.Writable)
+        self.attribute_register ('working_directory',     None, self.String, self.Scalar, self.Writable)
 
         # I/O
-        self.attribute_register ('input',                 None, self.Url,    self.Scalar, self.Writeable)
-        self.attribute_register ('error',                 None, self.Url,    self.Scalar, self.Writeable)
-        self.attribute_register ('output',                None, self.Url,    self.Scalar, self.Writeable)
-        self.attribute_register ('file_transfer',         None, self.String, self.Vector, self.Writeable)
+        self.attribute_register ('input',                 None, self.Url,    self.Scalar, self.Writable)
+        self.attribute_register ('error',                 None, self.Url,    self.Scalar, self.Writable)
+        self.attribute_register ('output',                None, self.Url,    self.Scalar, self.Writable)
+        self.attribute_register ('file_transfer',         None, self.String, self.Vector, self.Writable)
 
         # Parallelism
-        self.attribute_register ('number_of_processes',   None, self.Int,    self.Scalar, self.Writeable)
-        self.attribute_register ('processes_per_host',    None, self.Int,    self.Scalar, self.Writeable)
-        self.attribute_register ('threads_per_process',   None, self.Int,    self.Scalar, self.Writeable)
-        self.attribute_register ('total_core_count',      None, self.Int,    self.Scalar, self.Writeable)
-        self.attribute_register ('spmd_variation',        None, self.Enum,   self.Scalar, self.Writeable)
+        self.attribute_register ('number_of_processes',   None, self.Int,    self.Scalar, self.Writable)
+        self.attribute_register ('processes_per_host',    None, self.Int,    self.Scalar, self.Writable)
+        self.attribute_register ('threads_per_process',   None, self.Int,    self.Scalar, self.Writable)
+        self.attribute_register ('total_core_count',      None, self.Int,    self.Scalar, self.Writable)
+        self.attribute_register ('spmd_variation',        None, self.Enum,   self.Scalar, self.Writable)
 
         # Requirements
-        self.attribute_register ('candidate_hosts',       None, self.String, self.Vector, self.Writeable)
-        self.attribute_register ('cpu_architecture',      None, self.Enum,   self.Scalar, self.Writeable)
-        self.attribute_register ('operating_system_type', None, self.Enum,   self.Scalar, self.Writeable)
-        self.attribute_register ('total_physical_memory', None, self.int,    self.Scalar, self.Writeable)
-        self.attribute_register ('total_cpu_time',        None, self.Time,   self.Scalar, self.Writeable)
-        self.attribute_register ('wall_time_limit',       None, self.Time,   self.Scalar, self.Writeable)
-        self.attribute_register ('queue',                 None, self.String, self.Scalar, self.Writeable)
+        self.attribute_register ('candidate_hosts',       None, self.String, self.Vector, self.Writable)
+        self.attribute_register ('cpu_architecture',      None, self.Enum,   self.Scalar, self.Writable)
+        self.attribute_register ('operating_system_type', None, self.Enum,   self.Scalar, self.Writable)
+        self.attribute_register ('total_physical_memory', None, self.int,    self.Scalar, self.Writable)
+        self.attribute_register ('total_cpu_time',        None, self.Time,   self.Scalar, self.Writable)
+        self.attribute_register ('wall_time_limit',       None, self.Time,   self.Scalar, self.Writable)
+        self.attribute_register ('queue',                 None, self.String, self.Scalar, self.Writable)
 
         # custom attributes are not allowed.
         self.attribute_extensible_ (False)

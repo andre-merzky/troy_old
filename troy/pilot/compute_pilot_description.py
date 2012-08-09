@@ -108,19 +108,19 @@ class ComputePilotDescription (Attributes) :
     def __init__ (self) :
 
         # define supported attributes
-        self.attribute_register_  ('size',                     1,    self.Int,    self.Scalar, self.Writeable)
-        self.attribute_register_  ('queue',                    None, self.String, self.Scalar, self.Writeable)
-        self.attribute_register_  ('project',                  None, self.String, self.Scalar, self.Writeable)
-        self.attribute_register_  ('candidate_hosts',          None, self.String, self.Vector, self.Writeable)
-        self.attribute_register_  ('cpu_architecture',         None, self.Enum,   self.Scalar, self.Writeable)
-        self.attribute_register_  ('operating_system_type',    None, self.Enum,   self.Scalar, self.Writeable)
-        self.attribute_register_  ('total_physical_memory',    None, self.Int,    self.Scalar, self.Writeable)
-        self.attribute_register_  ('total_cpu_time',           None, self.Time,   self.Scalar, self.Writeable)
-        self.attribute_register_  ('wall_time_limit',          None, self.Time,   self.Scalar, self.Writeable)
-        self.attribute_register_  ('start_time',               None, self.Time,   self.Scalar, self.Writeable)
-        self.attribute_register_  ('contact',                  None, self.String, self.Vector, self.Writeable)
-        self.attribute_register_  ('affinity_datacenter_label',None, self.String, self.Scalar, self.Writeable)
-        self.attribute_register_  ('affinity_machine_label',   None, self.String, self.Scalar, self.Writeable)
+        self.attribute_register_  ('size',                     1,    self.Int,    self.Scalar, self.Writable)
+        self.attribute_register_  ('queue',                    None, self.String, self.Scalar, self.Writable)
+        self.attribute_register_  ('project',                  None, self.String, self.Scalar, self.Writable)
+        self.attribute_register_  ('candidate_hosts',          None, self.String, self.Vector, self.Writable)
+        self.attribute_register_  ('cpu_architecture',         None, self.Enum,   self.Scalar, self.Writable)
+        self.attribute_register_  ('operating_system_type',    None, self.Enum,   self.Scalar, self.Writable)
+        self.attribute_register_  ('total_physical_memory',    None, self.Int,    self.Scalar, self.Writable)
+        self.attribute_register_  ('total_cpu_time',           None, self.Time,   self.Scalar, self.Writable)
+        self.attribute_register_  ('wall_time_limit',          None, self.Time,   self.Scalar, self.Writable)
+        self.attribute_register_  ('start_time',               None, self.Time,   self.Scalar, self.Writable)
+        self.attribute_register_  ('contact',                  None, self.String, self.Vector, self.Writable)
+        self.attribute_register_  ('affinity_datacenter_label',None, self.String, self.Scalar, self.Writable)
+        self.attribute_register_  ('affinity_machine_label',   None, self.String, self.Scalar, self.Writable)
 
         # custom attributes are not allowed.
         self.attribute_extensible_ (False)

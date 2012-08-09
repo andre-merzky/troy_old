@@ -56,8 +56,8 @@ class ComputeUnitService (Base) :
 
         # prepare supported attributes
         self.attribute_register_  ('id',        cus_id,   self.Url,    self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('cps',       [],       self.Url,    self.Vector, self.Writeable)
-        self.attribute_register_  ('scheduler', 'Random', self.String, self.Scalar, self.Writeable)
+        self.attribute_register_  ('cps',       [],       self.Url,    self.Vector, self.Writable)
+        self.attribute_register_  ('scheduler', 'Random', self.String, self.Scalar, self.Writable)
 
         # initialize adaptor class
         self.engine_.call ('ComputeUnitService', 'init_', self)

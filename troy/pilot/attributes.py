@@ -1137,8 +1137,10 @@ class Attributes (AttributesBase_) :
 
         # register the attribute and properties
         d['attributes_'][us_key]               = {}
-        d['attributes_'][us_key]['alias']      = us_alias   # aliased var
         d['attributes_'][us_key]['mode']       = self.Alias # alias
+        d['attributes_'][us_key]['alias']      = us_alias   # aliased var
+        d['attributes_'][us_key]['camelcase']  = key        # keep original key name
+        d['attributes_'][us_key]['underscore'] = us_key     # keep under_scored name
 
 
 

@@ -1100,7 +1100,7 @@ class Attributes (AttributesBase_) :
 
         The first parameter is the old name of the attribute, the second
         parameter is the aliased new name.  Note that the new name needs to be
-        registered before (via L{attributes_register_)::
+        registered before (via L{attributes_register_})::
 
             # old code:
             self.attributes_register_ ('apple', 'Appel', self.String, self.Scalar, self.Writable)

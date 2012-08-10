@@ -10,7 +10,6 @@ from compute_data_scheduler  import ComputeDataScheduler
 # ComputeDataUnitService
 #
 class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
-
     """ ComputeDataUnitService.(CDUS)
 
         The ComputeDataUnitService provides the functionality of both the
@@ -38,6 +37,8 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
 
     """
 
+    ############################################################################
+    #
     def __init__ (self, cdus_id=None) :
         """
         Create a ComputeDataUnitService object
@@ -58,10 +59,10 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
         # be variable via the API.
 
         # prepare supported attributes
-        self.attribute_register_  ('id',        cus_id,   self.Url,    self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('cps',       [],       self.Url,    self.Vector, self.Writable)
-        self.attribute_register_  ('dps',       [],       self.Url,    self.Vector, self.Writable)
-        self.attribute_register_  ('scheduler', 'Random', self.String, self.Scalar, self.Writable)
+        self.attributes_register_  ('id',        cus_id,   self.Url,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('cps',       [],       self.Url,    self.Vector, self.Writable)
+        self.attributes_register_  ('dps',       [],       self.Url,    self.Vector, self.Writable)
+        self.attributes_register_  ('scheduler', 'Random', self.String, self.Scalar, self.Writable)
 
         # initialize adaptor class
         self.engine_.call ('ComputeDataUnitService', 'init_', self)
@@ -69,6 +70,8 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
         pass
 
 
+    ############################################################################
+    #
     def set_scheduler (self, s) :
         """
         Set a scheduler for submitted work units
@@ -81,6 +84,8 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
         return self.engine_.call ('ComputeDataUnitService', 'set_scheduler', self, s)
 
 
+    ############################################################################
+    #
     def submit_unit (self, cdud) :
         """ Submit a CDU to this ComputeDataUnitService.
 
@@ -95,6 +100,8 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
         return cdu
 
 
+    ############################################################################
+    #
     def list_units (self) :
         """ list managed L{ComputeUnit}s.
 
@@ -113,6 +120,8 @@ class ComputeDataUnitService (ComputeUnitService, DataUnitService) :
 
 
 
+    ############################################################################
+    #
     def get_unit (self, cdu_id) :
         """ Reconnect to a ComputeDataUnit.
 

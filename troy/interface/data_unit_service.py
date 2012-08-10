@@ -14,8 +14,6 @@ class iDataUnitService (iBase) :
     def __init__ (self, obj, adaptor) :
         """ Create a DataUnitService """
         raise TroyException (Error.NotImplemented, "interface not implemented!")
-        pass
-
 
 
     ############################################################################
@@ -28,80 +26,52 @@ class iDataUnitService (iBase) :
 
     ############################################################################
     #
-    def add_pilot (self, dp) :
-        """ 
-        Add a DataPilot to this DUS.
-
-        Keyword arguments:
-        dp -- The DataPilot to which this DataUnitService will connect.
-        """
+    def set_scheduler (self, s) :
+        """ Set a scheduler for submitted work units """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
-
-    ############################################################################
-    #
-    def list_pilots (self) :
-        """ List all DPs of DUS """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
-    
-
-    ############################################################################
-    #
-    def remove_pilot (self, dp) :
-        """ 
-        Remove a DataPilot
-            
-        Keyword arguments:
-        dp -- The DataPilot to remove 
-        """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
-    
-    
 
     ############################################################################
     #
     def submit_unit (self, dud) :
-        """ 
-        Submit a DU to this DataUnitService.
-
-        Keyword argument:
-        dud -- The DataUnitDescription from the application
-
-        Return:
-        DataUnit object
-        """
+        """ Submit a DU to this DataUnitService """
         raise TroyException (Error.NotImplemented, "method not implemented!")
-
 
 
     ############################################################################
     #
     def list_units (self) :
-        """ 
-        list managed L{DataUnit}s.
-
-        Return value:
-        A list of L{DataUnit} IDs
-        """
+        """ list managed L{DataUnit}s """
         raise TroyException (Error.NotImplemented, "method not implemented!")
-
 
 
     ############################################################################
     #
-    def get_unit (self, cu_id) :
-        """ 
-        Reconnect to a DataUnit.
-
-        Keyword arguments:
-        cu_id   -- L{DataUnit}'s id
-
-        Return value:
-        A L{DataUnit} instance
-        """
+    def get_unit (self, du_id) :
+        """ Reconnect to a L{DataUnit} """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
+    ############################################################################
+    #
+    def add_pilot_service (self, dps) :
+        """ Add a DataPilotService to this DUS """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
+
+
+    ############################################################################
+    #
+    def list_pilot_services (self) :
+        """ List all DPS IDs of this DUS """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
+    
+
+    ############################################################################
+    #
+    def remove_pilot_service (self, dps) :
+        """ Remove a DataPilotService """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
+    
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

@@ -1,13 +1,12 @@
 
 from base          import Base
-from compute_pilot import ComputePilot
+
 
 ########################################################################
 #
 #  ComputePilotService (CPS)
 #
 class ComputePilotService (Base) :
-
     """  ComputePilotService (CPS)
 
         The ComputePilotService is a ComputePilot manager.
@@ -29,6 +28,8 @@ class ComputePilotService (Base) :
             type: string (url)
     """
 
+    ############################################################################
+    #
     def __init__ (self, url) :
         """ Create a ComputePilotService object
 
@@ -47,13 +48,15 @@ class ComputePilotService (Base) :
         Base.__init__ (self)
 
         # prepare supported attributes
-        self.attribute_register_  ('id', None,  self.Url, self.Scalar, self.ReadOnly)
-        self.attribute_set_       ('id', url)
+        self.attributes_register_  ('id', None,  self.Url, self.Scalar, self.ReadOnly)
+        self.id = url
 
         # initialize adaptor class
         self.engine_.call ('ComputePilotService', 'init_', self)
 
 
+    ############################################################################
+    #
     def submit_pilot (self, cpd) :
         """ Create a ComputePilot.
 
@@ -81,6 +84,8 @@ class ComputePilotService (Base) :
         return self.engine_.call ('ComputePilotService', 'submit_pilot', self, cpd)
 
 
+    ############################################################################
+    #
     def list_pilots (self) :
         """ list managed L{ComputePilot}s.
 
@@ -98,6 +103,8 @@ class ComputePilotService (Base) :
         return self.engine_.call ('ComputePilotService', 'list_pilots', self)
 
 
+    ############################################################################
+    #
     def get_pilot (self, cp_id) :
         """ Reconnect to a ComputePilot.
 
@@ -115,6 +122,8 @@ class ComputePilotService (Base) :
         return self.engine_.call ('ComputePilotService', 'get_pilot', self, cp_id)
 
 
+    ############################################################################
+    #
     def submit_unit (self, cud) :
         """ Submit a CU to this ComputePilotService.
 
@@ -144,6 +153,8 @@ class ComputePilotService (Base) :
         return self.engine_.call ('ComputePilotService', 'submit_unit', self, cud)
 
 
+    ############################################################################
+    #
     def list_units (self) :
         """ list managed L{ComputeUnit}s.
 
@@ -161,6 +172,8 @@ class ComputePilotService (Base) :
         return self.engine_.call ('ComputePilotService', 'list_units', self)
 
 
+    ############################################################################
+    #
     def get_unit (self, cu_id) :
         """ Reconnect to a ComputeUnit.
 

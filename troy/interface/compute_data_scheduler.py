@@ -15,22 +15,20 @@ class iComputeDataScheduler (iBase) :
     #
     def __init__ (self, obj, adaptor):
         """ Create a ComputeDataScheduler """
-        pass
-
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     ############################################################################
     #
-    def init (self) :
+    def init_ (self) :
         """ dummy method to make sure the backend can initialize the object.
             This method should *not* be implemented in the adaptor!"""
         pass
 
 
-
     ############################################################################
     #
-    def schedule (self, cdus, cdud):
+    def schedule (self, cdus, cdud) :
         """ schedule a cdu on a cdus """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 

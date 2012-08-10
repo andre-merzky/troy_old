@@ -2,9 +2,6 @@
 from troy.interface.compute_unit import iComputeUnit
 from troy.interface.data_unit    import iDataUnit
 
-from troy.interface.base         import iBase
-from troy.pilot.exception        import TroyException, Error
-
 
 ########################################################################
 #
@@ -19,8 +16,6 @@ class iComputeDataUnit (iComputeUnit, iDataUnit) :
     def __init__ (self, obj, adaptor) :
         """ Create a Compute Data Unit """
         raise TroyException (Error.NotImplemented, "method not implemented!")
-        pass   
-
 
 
     ############################################################################

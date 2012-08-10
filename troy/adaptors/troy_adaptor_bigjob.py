@@ -127,7 +127,7 @@ class bigjob_cps (troy.interface.iComputePilotService) :
         self.adaptor.adata['cps'][self.id] = self.cps
 
 
-    def create_pilot (self, cpd) :
+    def submit_pilot (self, cpd) :
         """ Create a ComputePilot
 
             Keyword arguments:
@@ -149,7 +149,7 @@ class bigjob_cps (troy.interface.iComputePilotService) :
         cpd_copy = cpd
         cpd_copy['resource_url'] = cpd_copy['rm']
 
-        pilot     = self.cps.create_pilot (cpd['rm'], cpd)
+        pilot     = self.cps.submit_pilot (cpd['rm'], cpd)
         pilot_id  = pilot.id
         self.adaptor.adata['cp'][pilot_id] = pilot
 
@@ -363,7 +363,7 @@ class bigjob_dps (troy.interface.iDataPilotService) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def create_pilot (self, dpd) :
+    def submit_pilot (self, dpd) :
         """ Create a DataPilot.
 
             Keyword arguments:

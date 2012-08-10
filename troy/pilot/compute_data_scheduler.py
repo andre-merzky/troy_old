@@ -6,7 +6,6 @@ from base import Base
 #
 #
 class ComputeDataScheduler (Base) :
-
     """
     ComputeDataScheduler (CDS)
 
@@ -16,6 +15,8 @@ class ComputeDataScheduler (Base) :
     pull various information from the backend.
     """
 
+    ############################################################################
+    #
     def __init__ (self, policy=None) :
         """
         Create a ComputeDataScheduler -- private, only called by CDUS
@@ -32,13 +33,15 @@ class ComputeDataScheduler (Base) :
         Base.__init__ (self)
 
         # prepare supported attributes
-        self.attribute_register_  ('id',     None,  self.Url,    self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('policy', None,  self.String, self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('id',     None,  self.Url,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('policy', None,  self.String, self.Scalar, self.ReadOnly)
 
         # initialize adaptor class
         self.engine_.call ('ComputeDataScheduler', 'init_', self)
 
 
+    ############################################################################
+    #
     def schedule (self, cdus, cdud) :
         """
         Schedule a compute data unit.

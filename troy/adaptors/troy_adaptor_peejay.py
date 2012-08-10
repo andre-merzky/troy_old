@@ -80,7 +80,7 @@ class adaptor (troy.interface.aBase) :
     # one api class instance).
     def register_adata (self, api) :
 
-        self.api.idata_[self.get_name ()] = self.adata
+        api.idata_[self.get_name ()] = self.adata
         return self.adata
 
 
@@ -101,27 +101,23 @@ class peejay_cps (troy.interface.iComputePilotService) :
         # we MUST interpret cps_id, if present
         self.master  = self.peejay.master ()
 
-        print "idata: " + str (self.api)
-
-        if 'rm' in self.api.idata_ :
-            self.rm = self.api.idata_['rm']
+        if 'id' in self.api :
+            self.rm = self.api.id
         else :
             self.rm = ''
 
         elems = urlparse.urlparse (self.rm)
-        if elems.scheme != 'peejay' :
+        if elems.scheme != '' and   \
+           elems.scheme != 'peejay' :
             raise troy.pilot.TroyException (troy.pilot.Error.BadParameter, 
                   "can only handle peejay:// URLs, not " + elems.scheme + "://")
-
-
-        print " === peejay cps init done"
 
         # if we got this far, we can now register adaptor level instance data in
         # the api.  
         self.adata = self.adaptor.register_adata (self.api)
 
 
-    def create_pilot (self, cpd) :
+    def submit_pilot (self, cpd) :
         """ Add a ComputePilot to the ComputePilotService
 
             Keyword arguments:
@@ -415,7 +411,7 @@ class peejay_dps (troy.interface.iDataPilotService) :
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
-    def create_pilot (self, dpd) :
+    def submit_pilot (self, dpd) :
         """ Add a DataPilot to the DataPilotService
 
             Keyword arguments:

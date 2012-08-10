@@ -54,7 +54,7 @@ class Callback () :
 
           cpd = troy.pilot.compute_pilot_description ()
           cps = troy.pilot.compute_pilot_service ()
-          cp  = cps.create_pilot (cpd)
+          cp  = cps.submit_pilot (cpd)
 
           mcb = MyCallback ("Hello Pilot, how is your state?")
 
@@ -277,6 +277,8 @@ class Attributes (AttributesBase_) :
                                # implementation can still change it.
     Final       = 'final'      # neither consumer nor implementation can
                                # change the value anymore
+    Alias       = 'alias'      # variable is deprecated, and alias'ed to
+                               # a different variable.
 
     # extensible enum
     Extended    = True         # new attributes can be added on the fly
@@ -323,6 +325,7 @@ class Attributes (AttributesBase_) :
     #
     # Naming: attributes_t_*_
     #
+    ####################################
     def attributes_t_init_ (self, key=None) :
         """
         This internal function is not to be used by the consumer of this API.
@@ -358,8 +361,45 @@ class Attributes (AttributesBase_) :
             if not key in d['attributes_'] :
                 raise MyException ("attribute key is invalid: %s"  %  (key),
                                    MyError.DoesNotExist)
+
         # all is well
         return d
+
+
+    ####################################
+    def attributes_t_keycheck_ (self, key) :
+        """
+        This internal function is not to be used by the consumer of this API.
+
+        For the given key, check if the key name is valid, and/or if it is
+        aliased.  
+        
+        If the does not yet exist, the validity check is performed, and allows
+        to limit dynamically added attribute names (for 'extensible' sets).
+        
+        if the key does exist, the alias check triggers a deprecation warning,
+        and returns the aliased key for transparent operation.
+        """
+
+        # make sure interface is ready to use
+        d = self.attributes_t_init_ ()
+
+        # perform name validity checks if key is new
+        if not key in d['attributes_'] :
+            # FIXME: we actually don't have any tests, yet.  We should allow to
+            # configure such via, say, attributes_namecheck_add_ (callable (key))
+            pass
+
+
+        # if key is known, check for aliasing
+        else: 
+            # check if we know about the given attribute
+            if d['attributes_'][key]['mode'] == self.Alias :
+                alias = d['attributes_'][key]['alias']
+                print "attribute key / property name '%s' is deprecated - use '%s'"  %  (key, alias)
+                key   = alias
+
+        return key
 
 
     ####################################
@@ -1043,6 +1083,66 @@ class Attributes (AttributesBase_) :
 
 
     ####################################
+    def attributes_register_deprecated_ (self, key, alias) :
+        """
+        Often enough, there is the need to use change attribute names.  It is
+        good practice to not simply rename attributes, and thus effectively
+        remove old ones, as that is likely to break existing code.  Instead, new
+        names are added, and old names are kept for a certain time for backward
+        compatibility.  To support migration to the new names, the old names
+        should be marked as 'deprecated' though - which can be configured to
+        print a warning whenever an old, deprecated attribute is used.
+
+        This method allows to register such deprecated attribute names.  They
+        can thus be used just like new ones, and in fact are implemented as
+        aliases to the new ones -- but they will print a deprecated warning on
+        usage.
+
+        The first parameter is the old name of the attribute, the second
+        parameter is the aliased new name.  Note that the new name needs to be
+        registered before (via L{attributes_register_)::
+
+            # old code:
+            self.attributes_register_ ('apple', 'Appel', self.String, self.Scalar, self.Writable)
+
+            # new code
+            self.attributes_register_ ('fruit', 'Appel', self.String, self.Scalar, self.Writable)
+            self.attributes_register_deprecated_ ('apple', 'fruit)
+
+        In some cases, you may want to deprecate a variable and not replace it
+        with a new one.  In order to keep this interface simple, this can be
+        achieved via::
+
+            # new code
+            self.attributes_register_ ('deprecated_apple', 'Appel', self.String, self.Scalar, self.Writable)
+            self.attributes_register_deprecated_ ('apple', 'deprecated_apple)
+
+        This way, the user will either see a warning, or has to explicitly use
+        'deprecated_apple' as attribute name -- which should be warning enough,
+        at least for the programmer ;o)
+        """
+
+        # we expect keys to be registered as CamelCase (in those cases where
+        # that matters).  But we store attributes in 'under_score' version.
+        us_alias = self.attributes_t_underscore_ (alias)
+        us_key   = self.attributes_t_underscore_ (key)
+
+        # make sure interface is ready to use
+        # This check will throw if 'alias' was not registered before.
+        d = self.attributes_t_init_ (us_alias)
+
+        # remove any old instance of this attribute
+        if us_key in  d['attributes_'] :
+            self.attributes_unregister_ (us_key)
+
+        # register the attribute and properties
+        d['attributes_'][us_key]               = {}
+        d['attributes_'][us_key]['alias']      = us_alias   # aliased var
+        d['attributes_'][us_key]['mode']       = self.Alias # alias
+
+
+
+    ####################################
     def attributes_unregister_ (self, key) :
         """ 
         This interface method is not part of the public consumer API, but can
@@ -1195,6 +1295,9 @@ class Attributes (AttributesBase_) :
         keys_all   = sorted (d['attributes_'].iterkeys ())
         keys_exist = sorted (self.attributes_i_list_   ())
 
+        print "---------------------------------------"
+        print str (type (self))
+
         if msg :
             print "---------------------------------------"
             print msg
@@ -1341,9 +1444,12 @@ class Attributes (AttributesBase_) :
         Note that attributes_i_set_() will trigger callbacks, if a new value
         (different from the old value) is given.  
         """
+
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_i_set_ (us_key, val)
    
+
     ####################################
     def get_attribute (self, key) :
         """
@@ -1354,8 +1460,11 @@ class Attributes (AttributesBase_) :
         error to query an existing, but unset attribute though -- that will
         result in 'None' to be returned (or the default value, if available).
         """
+
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_i_get_ (us_key)
+
 
     ####################################
     def set_vector_attribute (self, key, val) :
@@ -1368,8 +1477,11 @@ class Attributes (AttributesBase_) :
         is in fact not very useful.  For that reason, it maps internally to the
         set_attribute method.
         """
+
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_i_set_ (us_key, val)
+
 
     ####################################
     def get_vector_attribute (self, key) :
@@ -1382,8 +1494,11 @@ class Attributes (AttributesBase_) :
         is in fact not very useful.  For that reason, it maps internally to the
         get_attribute method.
         """
+
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_i_get_ (us_key)
+
 
     ####################################
     def remove_attribute (self, key) :
@@ -1394,8 +1509,11 @@ class Attributes (AttributesBase_) :
         setting it to 'None'.  On remove, all traces of the attribute are
         purged, and the key will not be listed on L{list_attributes}() anymore.
         """
+
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_remove_ (us_key)
+
 
     ####################################
     def list_attributes (self) :
@@ -1404,7 +1522,9 @@ class Attributes (AttributesBase_) :
 
         List all attributes which have been explicitly set. 
         """
+
         return self.attributes_i_list_ ()
+
 
     ####################################
     def find_attributes (self, pattern) :
@@ -1416,7 +1536,9 @@ class Attributes (AttributesBase_) :
         POSIX shell wildcards.  For non-string typed attributes, the pattern is
         applied to a string serialization of the typed value, if that exists.
         """
+
         return self.attributes_i_find_ (pattern)
+
 
     ####################################
     def attribute_exists (self, key) :
@@ -1427,8 +1549,10 @@ class Attributes (AttributesBase_) :
         The call will also return 'True' if the value for that key is 'None'.
         """
 
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_i_exists_ (us_key)
+
 
     ####################################
     def attribute_is_readonly (self, key) :
@@ -1439,8 +1563,10 @@ class Attributes (AttributesBase_) :
         'set'.  The call will also return 'True' if the attribute is final
         """
 
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_i_is_readonly_ (us_key)
+
 
     ####################################
     def attribute_is_writable (self, key) :
@@ -1450,8 +1576,10 @@ class Attributes (AttributesBase_) :
         This method will check if the given key is writable - i.e. not readonly.
         """
 
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_i_is_writable_ (us_key)
+
 
     ####################################
     def attribute_is_removable (self, key) :
@@ -1461,8 +1589,10 @@ class Attributes (AttributesBase_) :
         This method will check if the given key can be removed.
         """
 
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_i_is_removable_ (us_key)
+
 
     ####################################
     def attribute_is_vector (self, key) :
@@ -1472,8 +1602,10 @@ class Attributes (AttributesBase_) :
         This method will check if the given attribute has a vector value type.
         """
 
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_i_is_vector_ (us_key)
+
 
     ####################################
     # fold the GFD.90 monitoring API into the attributes API
@@ -1508,8 +1640,10 @@ class Attributes (AttributesBase_) :
         be called once as that attribute enters finality).
         """
 
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_i_add_cb_ (us_key, cb)
+
 
     ####################################
     def remove_callback (self, key, id) :
@@ -1524,6 +1658,7 @@ class Attributes (AttributesBase_) :
         attribute.
         """
 
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_i_del_cb_ (us_key, id)
 
@@ -1538,17 +1673,25 @@ class Attributes (AttributesBase_) :
     ####################################
     def __getattr__ (self, key) :
         """ see L{get_attribute} (key) for details. """
-        return self.attributes_i_get_ (key)
+        
+        key  = self.attributes_t_keycheck_ (key)
+        return self.attributes_i_get_      (key)
+
 
     ####################################
     def __setattr__ (self, key, val) :
         """ see L{set_attribute} (key, val) for details. """
-        return self.attributes_i_set_ (key, val)
+        
+        key  = self.attributes_t_keycheck_ (key)
+        return self.attributes_i_set_      (key, val)
+
 
     ####################################
     def __delattr__ (self, key) :
         """ see L{remove_attribute} (key) for details. """
-        return self.attributes_remove_ (key)
+        
+        key  = self.attributes_t_keycheck_ (key)
+        return self.attributes_remove_     (key)
 
    
    
@@ -1562,30 +1705,43 @@ class Attributes (AttributesBase_) :
     ####################################
     def __getitem__ (self, key) :
         """ see L{get_attribute} (key) for details. """
+        
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_i_get_ (us_key)
-   
+
+
     ####################################
     def __setitem__ (self, key, val) :
         """ see L{set_attribute} (key, val) for details. """
+        
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_i_set_ (us_key, val)
-   
+
+
     ####################################
     def __delitem__ (self, key) :
         """ see L{remove_attribute} (key) for details. """
+        
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_remove_ (us_key)
-   
+
+
     ####################################
     def __contains__ (self, key) :
         """ see L{attribute_exists} (key) for details. """
+        
+        key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
         return self.attributes_i_exists_ (us_key)
-   
+
+
     ####################################
     def update (self, *args, **kwargs) :
         """ Initialize attributes from a dictionary or named parameters """
+        
         if args:
             if len (args) > 1:
                 raise TypeError("update expected at most 1 arguments, got %d" % len (args))
@@ -1595,10 +1751,13 @@ class Attributes (AttributesBase_) :
         for key in kwargs:
             self.attributes_i_set_ (key, kwargs[key])
 
+
     ####################################
     def iterkeys (self) :
         """ see L{list_attributes} () for details. """
+        
         return self.attributes_i_list_ ()
+
 
     ####################################
     def __str__ (self) :

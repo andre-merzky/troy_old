@@ -23,7 +23,7 @@ class DataUnitDescription (Attributes) :
     def __init__ (self) :
 
         # define supported attributes
-        self.attribute_register_  ('urls', [], self.Url, self.Vector, self.Writable)
+        self.attributes_register_  ('urls', [], self.Url, self.Vector, self.Writable)
 
 
 

@@ -15,8 +15,7 @@ class iComputeScheduler (iBase) :
     #
     def __init__ (self, obj, adaptor) :
         """ Create a ComputeScheduler """
-        pass
-
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     ############################################################################
@@ -25,7 +24,6 @@ class iComputeScheduler (iBase) :
         """ dummy method to make sure the backend can initialize the object.
             This method should *not* be implemented in the adaptor!"""
         pass
-
 
 
     ############################################################################

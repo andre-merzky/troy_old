@@ -15,8 +15,6 @@ class iDataPilotService (iBase) :
     def __init__ (self, obj, adaptor) :
         """ Create a DataPilotService """
         raise TroyException (Error.NotImplemented, "interface not implemented!")
-        pass
-
 
 
     ############################################################################
@@ -27,50 +25,46 @@ class iDataPilotService (iBase) :
         pass
 
 
+    ############################################################################
+    #
+    def submit_pilot (self, dpd) :
+        """ Create a DataPilot """  
+        raise TroyException (Error.NotImplemented, "method not implemented!")
+
 
     ############################################################################
     #
-    def submit_unit (self, cud) :
-        """ 
-        Submit a CU to this DataPilotService.
-    
-        Keyword argument:
-        cud -- The L{DataUnitDescription} from the application
-    
-        Return:
-        L{DataUnit} object
-        """
+    def list_pilots (self) :
+        """ list managed L{DataPilot}s """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
+
+    ############################################################################
+    #
+    def get_pilot (self, dp_id) :
+        """ Reconnect to a DataPilot """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
+
+
+    ############################################################################
+    #
+    def submit_unit (self, dud) :
+        """ Submit a CU to this DataPilotService """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     ############################################################################
     #
     def list_units (self) :
-        """ 
-        list managed L{DataUnit}s.
-
-        Return value:
-        A list of L{DataUnit} IDs
-        """
+        """ list managed L{DataUnit}s """
         raise TroyException (Error.NotImplemented, "method not implemented!")
-
 
 
     ############################################################################
     #
     def get_unit (self, cu_id) :
-        """ 
-        Reconnect to a DataUnit.
-
-        Keyword arguments:
-        cu_id   -- L{DataUnit}'s id
-
-        Return value:
-        A L{DataUnit} instance
-        """
+        """ Reconnect to a DataUnit """
         raise TroyException (Error.NotImplemented, "method not implemented!")
-
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

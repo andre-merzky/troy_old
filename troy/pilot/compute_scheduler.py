@@ -1,12 +1,12 @@
 
 from base import Base
 
+
 ########################################################################
 #
 #
 #
 class ComputeScheduler (Base) :
-
     """ 
     ComputeScheduler (CS)
     
@@ -16,6 +16,8 @@ class ComputeScheduler (Base) :
     pull various information from the backend.  
     """
 
+    ############################################################################
+    #
     def __init__ (self, policy=None) :
         """ 
         Create a ComputeScheduler -- private, only called by CUS
@@ -32,13 +34,15 @@ class ComputeScheduler (Base) :
         Base.__init__ (self)
 
         # prepare supported attributes
-        self.attribute_register_  ('id',     None,  self.Url,    self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('policy', None,  self.String, self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('id',     None,  self.Url,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('policy', None,  self.String, self.Scalar, self.ReadOnly)
 
         # initialize adaptor class 
         self.engine_.call ('ComputeScheduler', 'init_', self)
 
 
+    ############################################################################
+    #
     def schedule (self, cus, cud) :
         """ 
         Schedule a compute unit.

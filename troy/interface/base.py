@@ -18,7 +18,6 @@ class iBase:
         pass
 
 
-
     ############################################################################
     #
     def init_ (self) :
@@ -26,7 +25,6 @@ class iBase:
             This method should *not* be implemented in the adaptor!"""
         print "iBase: dummy init method called"
         pass
-
 
 
 ########################################################################
@@ -59,12 +57,10 @@ class aBase:
         return self.registry
 
 
-
     ############################################################################
     #
     def get_order (self) :
         return 1000  # low adaptor priority by default
-
 
 
     ############################################################################

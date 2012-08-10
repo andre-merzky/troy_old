@@ -49,7 +49,7 @@ would be (some details left out for brevity)::
 
     # create on ComputePilot from a BigJob ComputePilotservice
     cps = troy,pilot.ComputePilotService ('bigjob://')
-    cps.create_pilot ([some compute pilot description])
+    cps.submit_pilot ([some compute pilot description])
 
     # create a work unit service with one ComputePilot resource, to submit work
     # items to

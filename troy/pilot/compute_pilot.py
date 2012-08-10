@@ -1,5 +1,6 @@
 
-from base import Base
+from base  import Base
+from state import State
 
 
 ########################################################################
@@ -78,15 +79,15 @@ class ComputePilot (Base) :
         Base.__init__ (self)
 
         # prepare supported attributes
-        self.attribute_register_  ('id',             cp_id,     self.Url,    self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('state',          State.New, self.Enum,   self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('state_detail',   None,      self.String, self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('description',    None,      self.Any,    self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('service_url',    None,      self.Url,    self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('wall_time_left', -1,        self.Time,   self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('id',             cp_id,     self.Url,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('state',          State.New, self.Enum,   self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('state_detail',   None,      self.String, self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('description',    None,      self.Any,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('service_url',    None,      self.Url,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('wall_time_left', -1,        self.Time,   self.Scalar, self.ReadOnly)
 
         # custom attributes are not allowed.
-        self.attribute_extensible_ (False)
+        self.attributes_extensible_ (False)
 
         # initialize adaptor class
         self.engine_.call ('ComputePilot', 'init_', self)

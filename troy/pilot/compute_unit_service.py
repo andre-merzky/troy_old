@@ -1,13 +1,12 @@
 
 from base         import Base
-from compute_unit import ComputeUnit
+
 
 ########################################################################
 #
 #  ComputeUnitService
 #
 class ComputeUnitService (Base) :
-
     """  ComputeUnitService (CUS)
 
         The ComputeUnitService is the application's interface to submit
@@ -35,6 +34,8 @@ class ComputeUnitService (Base) :
         inspected?
     """
 
+    ############################################################################
+    #
     def __init__ (self, cus_id=None) :
         """
         Create a ComputeUnitService object
@@ -55,9 +56,9 @@ class ComputeUnitService (Base) :
         # be variable via the API.
 
         # prepare supported attributes
-        self.attribute_register_  ('id',        cus_id,   self.Url,    self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('cps',       [],       self.Url,    self.Vector, self.Writable)
-        self.attribute_register_  ('scheduler', 'Random', self.String, self.Scalar, self.Writable)
+        self.attributes_register_  ('id',        cus_id,   self.Url,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('cps',       [],       self.Url,    self.Vector, self.Writable)
+        self.attributes_register_  ('scheduler', 'Random', self.String, self.Scalar, self.Writable)
 
         # initialize adaptor class
         self.engine_.call ('ComputeUnitService', 'init_', self)
@@ -65,6 +66,8 @@ class ComputeUnitService (Base) :
         pass
 
 
+    ############################################################################
+    #
     def set_scheduler (self, s) :
         """
         Set a scheduler for submitted work units
@@ -77,6 +80,8 @@ class ComputeUnitService (Base) :
         return self.engine_.call ('ComputeUnitService', 'set_scheduler', self, s)
 
 
+    ############################################################################
+    #
     def submit_unit (self, cud) :
         """ Submit a CU to this ComputeUnitService.
 
@@ -91,6 +96,8 @@ class ComputeUnitService (Base) :
         return cu
 
 
+    ############################################################################
+    #
     def list_units (self) :
         """ list managed L{ComputeUnit}s.
 
@@ -108,7 +115,8 @@ class ComputeUnitService (Base) :
         return self.engine_.call ('ComputeUnitService', 'list_units', self)
 
 
-
+    ############################################################################
+    #
     def get_unit (self, cu_id) :
         """ Reconnect to a ComputeUnit.
 
@@ -127,6 +135,8 @@ class ComputeUnitService (Base) :
 
 
 
+    ############################################################################
+    #
     def add_pilot_service (self, cps) :
         # FIXME: cp: id or instance?
         """ Add a ComputePilotService to this CUS.
@@ -137,11 +147,15 @@ class ComputeUnitService (Base) :
         return self.engine_.call ('ComputeUnitService', 'add_pilot_service', self, cps)
 
 
+    ############################################################################
+    #
     def list_pilot_services (self) :
         """ List all CPS IDs of this CUS """
         return self.engine_.call ('ComputeUnitService', 'list_pilot_services', self)
 
 
+    ############################################################################
+    #
     def remove_pilot_service (self, cps) :
         """ Remove a ComputePilotService
 

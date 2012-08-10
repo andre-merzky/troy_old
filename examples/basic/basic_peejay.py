@@ -9,8 +9,8 @@ def test_compute ():
         cpd = troy.pilot.ComputePilotDescription ()
 
         cps = troy.pilot.ComputePilotService ('peejay://')
-#       cp1 = cps.create_pilot (cpd)
-#       cp2 = cps.create_pilot (cpd)
+        cp1 = cps.submit_pilot (cpd)
+#       cp2 = cps.submit_pilot (cpd)
  
 #       cus = troy.pilot.ComputeUnitService ()
 #       cus.add_compute_pilot (cp1)
@@ -38,7 +38,7 @@ def test_data ():
     # try:
         dpd = troy.pilot.DataPilotDescription ()
         dps = troy.pilot.DataPilotService ('file://localhost')
-        dp  = dps.create_pilot (dpd)
+        dp  = dps.submit_pilot (dpd)
 
         dus = troy.pilot.DataUnitService ()
         dus.add_data_pilot (dp)
@@ -54,7 +54,7 @@ def test_pilot ():
     # try:
         cpd = troy.pilot.ComputePilotDescription ()
         cps = troy.pilot.ComputePilotService ('fork://localhost')
-        cp  = cps.create_pilot (cpd)
+        cp  = cps.submit_pilot (cpd)
 
         cus = troy.pilot.ComputeUnitService ()
         cus.add_compute_pilot (cp)

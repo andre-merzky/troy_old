@@ -1,12 +1,12 @@
 
 from base import Base
 
+
 ########################################################################
 #
 #  ComputeUnit (CU)
 #
 class ComputeUnit (Base) :
-
     """
     ComputeUnit
 
@@ -19,28 +19,34 @@ class ComputeUnit (Base) :
     A ComputeUnit has state, can be queried and can be cancelled.
     """
 
+    ############################################################################
+    #
     def __init__ (self, cu_id) :
 
         # init api base
         Base.__init__ (self)
 
         # prepare supported attributes
-        self.attribute_register_  ('id',             cu_id,     self.Url,    self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('state',          State.New, self.Enum,   self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('state_detail',   None,      self.String, self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('description',    None,      self.Any,    self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('service_id',     None,      self.Url,    self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('pilot_id',       None,      self.Url,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('id',             cu_id,     self.Url,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('state',          State.New, self.Enum,   self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('state_detail',   None,      self.String, self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('description',    None,      self.Any,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('service_id',     None,      self.Url,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('pilot_id',       None,      self.Url,    self.Scalar, self.ReadOnly)
 
         # initialize adaptor class
         self.engine_.call ('ComputeUnit', 'init_', self)
 
 
+    ############################################################################
+    #
     def wait (self) :
         """ Wait until CU enters a final state """
         return self.engine_.call ('ComputeUnit', 'wait', self)
 
 
+    ############################################################################
+    #
     def cancel (self) :
         """ Cancel the CU """
         return self.engine_.call ('ComputeUnit', 'cancel', self)

@@ -78,19 +78,18 @@ class DataPilot (Base) :
         Base.__init__ (self)
 
         # prepare supported attributes
-        self.attribute_register_  ('id',             dp_id,     self.Url,    self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('state',          State.New, self.Enum,   self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('state_detail',   None,      self.String, self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('description',    None,      self.Any,    self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('service_url',    None,      self.Url,    self.Scalar, self.ReadOnly)
-        self.attribute_register_  ('space_left',     -1,        self.Int,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('id',             dp_id,     self.Url,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('state',          State.New, self.Enum,   self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('state_detail',   None,      self.String, self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('description',    None,      self.Any,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('service_url',    None,      self.Url,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('space_left',     -1,        self.Int,    self.Scalar, self.ReadOnly)
 
         # custom attributes are not allowed.
-        self.attribute_extensible_ (False)
+        self.attributes_extensible_ (False)
 
         # initialize adaptor class
         self.engine_.call ('DataPilot', 'init_', self)
-
 
 
     ############################################################################
@@ -118,7 +117,6 @@ class DataPilot (Base) :
         re-initialized pilot.
         """
         return self.engine_.call ('DataPilot', 'reinitialize', self, dpd)
-
 
 
     ############################################################################
@@ -152,7 +150,6 @@ class DataPilot (Base) :
         return self.engine_.call ('DataPilot', 'submit_unit', self, dud)
 
 
-
     ############################################################################
     #
     def list_units (self) :
@@ -169,7 +166,6 @@ class DataPilot (Base) :
         not have any indication about the respective unit's state.
         """
         return self.engine_.call ('DataPilot', 'list_units', self)
-
 
 
     ############################################################################
@@ -192,7 +188,6 @@ class DataPilot (Base) :
         return self.engine_.call ('DataPilot', 'get_unit', self, du_id)
 
 
-
     ############################################################################
     #
     def wait (self) :
@@ -203,7 +198,6 @@ class DataPilot (Base) :
         returns immediately.
         """
         return self.engine_.call ('DataPilot', 'wait', self)
-
 
 
     ############################################################################

@@ -10,13 +10,12 @@ from troy.pilot.exception import TroyException, Error
 class iComputeUnitService (iBase) :
     """  L{ComputeUnitService} interface """
 
+
     ############################################################################
     #
     def __init__ (self, obj, adaptor) :
         """ Create a ComputeUnitService """
         raise TroyException (Error.NotImplemented, "interface not implemented!")
-        pass
-
 
 
     ############################################################################
@@ -29,79 +28,51 @@ class iComputeUnitService (iBase) :
 
     ############################################################################
     #
-    def add_pilot (self, cp) :
-        """ 
-        Add a ComputePilot to this CUS.
-
-        Keyword arguments:
-        cp -- The ComputePilot to which this ComputeUnitService will connect.
-        """
+    def set_scheduler (self, s) :
+        """ Set a scheduler for submitted work units """
         raise TroyException (Error.NotImplemented, "method not implemented!")
-
-
-    ############################################################################
-    #
-    def list_pilots (self) :
-        """ List all CPs of CUS """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
-
-
-    ############################################################################
-    #
-    def remove_pilot (self, cp) :
-        """ 
-        Remove a ComputePilot
-
-        Keyword arguments:
-        cp -- The ComputePilot to remove 
-        """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
-
 
 
     ############################################################################
     #
     def submit_unit (self, cud) :
-        """ 
-        Submit a CU to this ComputeUnitService.
-    
-        Keyword argument:
-        cud -- The ComputeUnitDescription from the application
-    
-        Return:
-        ComputeUnit object
-        """
+        """ Submit a CU to this ComputeUnitService """
         raise TroyException (Error.NotImplemented, "method not implemented!")
-
 
 
     ############################################################################
     #
     def list_units (self) :
-        """ 
-        list managed L{ComputeUnit}s.
-
-        Return value:
-        A list of L{ComputeUnit} IDs
-        """
+        """ list managed L{ComputeUnit}s """
         raise TroyException (Error.NotImplemented, "method not implemented!")
-
 
 
     ############################################################################
     #
     def get_unit (self, cu_id) :
-        """ 
-        Reconnect to a ComputeUnit.
-
-        Keyword arguments:
-        cu_id   -- L{ComputeUnit}'s id
-
-        Return value:
-        A L{ComputeUnit} instance
-        """
+        """ Reconnect to a ComputeUnit """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
+    
+    
+    ############################################################################
+    #
+    def add_pilot_service (self, cps) :
+        """ Add a ComputePilotService to this CUS """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
+
+    ############################################################################
+    #
+    def list_pilot_services (self) :
+        """ List all CPSs of CUS """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
+
+
+    ############################################################################
+    #
+    def remove_pilot_service (self, cps) :
+        """ Remove a ComputePilotService """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

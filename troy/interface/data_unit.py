@@ -10,12 +10,11 @@ from troy.pilot.exception import TroyException, Error
 class iDataUnit (iBase) :
     """ L{DataUnit} interface """
 
+
     ############################################################################
     #
     def __init__ (self, obj, adaptor) :
         raise TroyException (Error.NotImplemented, "method not implemented!")
-        pass
-
 
 
     ############################################################################
@@ -26,20 +25,19 @@ class iDataUnit (iBase) :
         pass
 
 
-
     ############################################################################
     #
-    def wait (self):
+    def wait (self) :
         """ Wait until DU enters a final state """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
-
     ############################################################################
     #
-    def cancel (self):
+    def cancel (self) :
         """ Cancel the DU """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
+

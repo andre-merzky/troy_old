@@ -16,6 +16,8 @@ class Transliterator ( pilot.Attributes ) :
         self.attributes_register_   ('apple', 'Appel', self.Url,    self.Scalar, self.Writable)
         self.attributes_register_   ('plum',  'Pruim', self.String, self.Scalar, self.ReadOnly)
 
+        self.attributes_register_deprecated_ ('Plum',  'plum')
+
       # setting attribs to non-extensible at *this* point will have allowed
       # custom user attribs on __init__ time (via args), but will then forbid
       # any additional custom attributes
@@ -72,6 +74,9 @@ if __name__ == "__main__":
   # trans.plum    = 'Pflaume'  # raises readonly exception
   # trans['plum'] = 'Pflaume'  # raises readonly exception
     print trans.plum
+
+    # lets see what happens if we use the deprecated name
+    print trans.Plum
 
     # check if the 'cherry' attribute exists, which got created on
     # instantiation time.

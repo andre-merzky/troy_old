@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>troy.pilot.compute_data_unit_service.ComputeDataUnitService</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://saga-project.github.com/troy/">Troy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;troy ::
+        <a href="troy.pilot-module.html">Package&nbsp;pilot</a> ::
+        <a href="troy.pilot.compute_data_unit_service-module.html">Module&nbsp;compute_data_unit_service</a> ::
+        Class&nbsp;ComputeDataUnitService
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ComputeDataUnitService</h1><p class="nomargin-top"><span class="codelink"><a href="troy.pilot.compute_data_unit_service-pysrc.html#ComputeDataUnitService">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_troy_pil_7" name="uml_class_diagram_for_troy_pil_7">
+<area shape="rect" id="node172" href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#__init__" title="Create a ComputeDataUnitService object" alt="" coords="199,908,372,927"/>
+<area shape="rect" id="node172" href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#set_scheduler" title="Set a scheduler for submitted work units" alt="" coords="199,927,372,945"/>
+<area shape="rect" id="node172" href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#submit_unit" title="Submit a CDU to this ComputeDataUnitService." alt="" coords="199,945,372,964"/>
+<area shape="rect" id="node172" href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#list_units" title="list managed ComputeUnits." alt="" coords="199,964,372,983"/>
+<area shape="rect" id="node172" href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#get_unit" title="Reconnect to a ComputeDataUnit." alt="" coords="199,983,372,1001"/>
+<area shape="rect" id="node1" href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html" title="ComputeDataUnitService.(CDUS)" alt="" coords="187,875,384,1007"/>
+<area shape="rect" id="node173" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#add_pilot_service" title="Add a ComputePilotService to this CUS." alt="" coords="17,793,272,812"/>
+<area shape="rect" id="node173" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#list_pilot_services" title="List all CPS IDs of this CUS" alt="" coords="17,812,272,831"/>
+<area shape="rect" id="node173" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#remove_pilot_service" title="Remove a ComputePilotService" alt="" coords="17,831,272,849"/>
+<area shape="rect" id="node2" href="troy.pilot.compute_unit_service.ComputeUnitService-class.html" title="ComputeUnitService (CUS)" alt="" coords="5,761,283,855"/>
+<area shape="rect" id="node175" href="troy.pilot.base.Base-class.html#dump_" title="Dump dumps." alt="" coords="247,716,323,735"/>
+<area shape="rect" id="node3" href="troy.pilot.base.Base-class.html" title="All Troy API classes inherit from this base class, which provides support for adaptor management and the management of class instance data." alt="" coords="235,683,333,741"/>
+<area shape="rect" id="node6" href="troy.pilot.data_unit_service.DataUnitService-class.html" title="DataUnitService (DUS)" alt="" coords="312,786,539,830"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#Any" title="troy.pilot.attributes.Attributes.Any" alt="" coords="149,95,421,113"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#Url" title="troy.pilot.attributes.Attributes.Url" alt="" coords="149,113,421,132"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#Int" title="troy.pilot.attributes.Attributes.Int" alt="" coords="149,132,421,151"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#Float" title="troy.pilot.attributes.Attributes.Float" alt="" coords="149,151,421,169"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#String" title="troy.pilot.attributes.Attributes.String" alt="" coords="149,169,421,188"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#Bool" title="troy.pilot.attributes.Attributes.Bool" alt="" coords="149,188,421,207"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#Enum" title="troy.pilot.attributes.Attributes.Enum" alt="" coords="149,207,421,225"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#Time" title="troy.pilot.attributes.Attributes.Time" alt="" coords="149,225,421,244"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#Writable" title="troy.pilot.attributes.Attributes.Writable" alt="" coords="149,244,421,263"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#ReadOnly" title="troy.pilot.attributes.Attributes.ReadOnly" alt="" coords="149,263,421,281"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#Final" title="troy.pilot.attributes.Attributes.Final" alt="" coords="149,281,421,300"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#Alias" title="troy.pilot.attributes.Attributes.Alias" alt="" coords="149,300,421,319"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#Extended" title="troy.pilot.attributes.Attributes.Extended" alt="" coords="149,319,421,337"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#camel_case_regex_2_" title="troy.pilot.attributes.Attributes.camel_case_regex_2_" alt="" coords="149,356,421,375"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#attributes_t_init_" title="This internal function is not to be used by the consumer of this API." alt="" coords="149,377,421,396"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#attributes_t_keycheck_" title="This internal function is not to be used by the consumer of this API." alt="" coords="149,396,421,415"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#attributes_t_call_cb_" title="This internal function is not to be used by the consumer of this API." alt="" coords="149,415,421,433"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#attributes_t_underscore_" title="This internal function is not to be used by the consumer of this API." alt="" coords="149,433,421,452"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#attributes_t_conversion_" title="This internal function is not to be used by the consumer of this API." alt="" coords="149,452,421,471"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#attributes_t_conversion_flavor_" title="This internal function is not to be used by the consumer of this API." alt="" coords="149,471,421,489"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#attributes_t_conversion_type_" title="This internal function is not to be used by the consumer of this API." alt="" coords="149,489,421,508"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#attributes_t_wildcard2regex_" title="This internal function is not to be used by the consumer of this API." alt="" coords="149,508,421,527"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#attributes_i_set_" title="This internal method should not be explicitly called by consumers of this &#160;API, but is indirectly used via the different public interfaces." alt="" coords="149,527,421,545"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#attributes_i_get_" title="This internal method should not be explicitly called by consumers of this &#160;API, but is indirectly used via the different public interfaces." alt="" coords="149,545,421,564"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#attributes_i_list_" title="This internal method should not be explicitly called by consumers of this &#160;API, but is indirectly used via the different public interfaces." alt="" coords="149,564,421,583"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#attributes_i_find_" title="This internal method should not be explicitly called by consumers of this &#160;API, but is indirectly used via the different public interfaces." alt="" coords="149,583,421,601"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#attributes_i_exists_" title="This internal method should not be explicitly called by consumers of this &#160;API, but is indirectly used via the different public interfaces." alt="" coords="149,601,421,620"/>
+<area shape="rect" id="node176" href="troy.pilot.attributes.Attributes-class.html#__str__" title="The string representation of the attributes is, right now, somewhat &#160;arbitrarily defined as to make the bliss attribute unit tests happy: we &#160;ignore unset values and extended values." alt="" coords="149,639,421,657"/>
+<area shape="rect" id="node4" href="troy.pilot.attributes.Attributes-class.html" title="Attribute Interface Class" alt="" coords="137,70,433,663"/>
+<area shape="rect" id="node5" href="troy.pilot.attributes.AttributesBase_-class.html" title="This class only exists to host properties &#45;&#45; as object itself does *not* have properties! This class is not part of the public attribute API." alt="" coords="196,6,372,50"/>
+</map>
+  <img src="uml_class_diagram_for_troy_pil_7.gif" alt='' usemap="#uml_class_diagram_for_troy_pil_7" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>ComputeDataUnitService.(CDUS)</p>
+  <p>The ComputeDataUnitService provides the functionality of both the <a 
+  href="troy.pilot.compute_unit_service.ComputeUnitService-class.html" 
+  class="link">ComputeUnitService</a> and the <a 
+  href="troy.pilot.data_unit_service.DataUnitService-class.html" 
+  class="link">DataUnitService</a> -- as such, it can enact a combination 
+  of <a href="troy.pilot.compute_unit.ComputeUnit-class.html" 
+  class="link">ComputeUnit</a>s and <a 
+  href="troy.pilot.data_unit.DataUnit-class.html" 
+  class="link">DataUnit</a>s, i.e. the <a 
+  href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html" 
+  class="link">ComputeDataUnit</a>s, on a set of <a 
+  href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+  class="link">ComputePilot</a>s and <a 
+  href="troy.pilot.data_pilot.DataPilot-class.html" 
+  class="link">DataPilot</a>s.</p>
+  <p>The implementation of the ComputeDataUnitService is generally within 
+  Troy -- as such, it represents and facilitates the application level 
+  scheduling capabilities of Troy.  The CDUS will use Troy level or 
+  application provided scheduling algorithms to control the distribution of
+  the work nits over the set of participating pilot dervices and their 
+  pilots.</p>
+  <p>Properties:</p>
+<pre class="literalblock">
+ - id:
+   The returned ID can be used to connect to the CDUS instance later
+   on, for example from within a different application instance.
+   type: string (url)
+</pre>
+  <p>FIXME: we might want to expose scheduler state and statistics as 
+  properties?  Or expose the scheduler as opaque object which can be 
+  inspected?</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cdus_id</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Create a ComputeDataUnitService object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.compute_data_unit_service-pysrc.html#ComputeDataUnitService.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#set_scheduler" class="summary-sig-name">set_scheduler</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">s</span>)</span><br />
+      Set a scheduler for submitted work units</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.compute_data_unit_service-pysrc.html#ComputeDataUnitService.set_scheduler">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#submit_unit" class="summary-sig-name">submit_unit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cdud</span>)</span><br />
+      Submit a CDU to this ComputeDataUnitService.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.compute_data_unit_service-pysrc.html#ComputeDataUnitService.submit_unit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#list_units" class="summary-sig-name">list_units</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      list managed <a href="troy.pilot.compute_unit.ComputeUnit-class.html"
+      class="link">ComputeUnit</a>s.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.compute_data_unit_service-pysrc.html#ComputeDataUnitService.list_units">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#get_unit" class="summary-sig-name">get_unit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cdu_id</span>)</span><br />
+      Reconnect to a ComputeDataUnit.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.pilot.compute_data_unit_service-pysrc.html#ComputeDataUnitService.get_unit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="troy.pilot.compute_unit_service.ComputeUnitService-class.html">compute_unit_service.ComputeUnitService</a></code></b>:
+      <code><a href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#add_pilot_service">add_pilot_service</a></code>,
+      <code><a href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#list_pilot_services">list_pilot_services</a></code>,
+      <code><a href="troy.pilot.compute_unit_service.ComputeUnitService-class.html#remove_pilot_service">remove_pilot_service</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="troy.pilot.base.Base-class.html">base.Base</a></code></b>:
+      <code><a href="troy.pilot.base.Base-class.html#dump_">dump_</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="troy.pilot.attributes.Attributes-class.html">attributes.Attributes</a></code></b>:
+      <code><a href="troy.pilot.attributes.Attributes-class.html#__contains__">__contains__</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#__delattr__">__delattr__</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#__delitem__">__delitem__</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#__getattr__">__getattr__</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#__getitem__">__getitem__</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#__setattr__">__setattr__</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#__setitem__">__setitem__</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#__str__">__str__</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#add_callback">add_callback</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attribute_exists">attribute_exists</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attribute_is_readonly">attribute_is_readonly</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attribute_is_removable">attribute_is_removable</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attribute_is_vector">attribute_is_vector</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attribute_is_writable">attribute_is_writable</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_camelcasing_">attributes_camelcasing_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_check_add_">attributes_check_add_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_deep_copy_">attributes_deep_copy_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_dump_">attributes_dump_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_extensible_">attributes_extensible_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_i_add_cb_">attributes_i_add_cb_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_i_del_cb_">attributes_i_del_cb_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_i_exists_">attributes_i_exists_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_i_find_">attributes_i_find_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_i_get_">attributes_i_get_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_i_is_extended_">attributes_i_is_extended_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_i_is_final_">attributes_i_is_final_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_i_is_readonly_">attributes_i_is_readonly_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_i_is_removable_">attributes_i_is_removable_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_i_is_vector_">attributes_i_is_vector_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_i_is_writable_">attributes_i_is_writable_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_i_list_">attributes_i_list_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_i_set_">attributes_i_set_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_register_">attributes_register_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_register_deprecated_">attributes_register_deprecated_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_remove_">attributes_remove_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_set_enum_">attributes_set_enum_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_set_final_">attributes_set_final_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_t_call_cb_">attributes_t_call_cb_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_t_conversion_">attributes_t_conversion_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_t_conversion_flavor_">attributes_t_conversion_flavor_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_t_conversion_type_">attributes_t_conversion_type_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_t_init_">attributes_t_init_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_t_keycheck_">attributes_t_keycheck_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_t_underscore_">attributes_t_underscore_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_t_wildcard2regex_">attributes_t_wildcard2regex_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#attributes_unregister_">attributes_unregister_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#find_attributes">find_attributes</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#get_attribute">get_attribute</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#get_vector_attribute">get_vector_attribute</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#iterkeys">iterkeys</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#list_attributes">list_attributes</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#remove_attribute">remove_attribute</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#remove_callback">remove_callback</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#set_attribute">set_attribute</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#set_vector_attribute">set_vector_attribute</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#update">update</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="troy.pilot.attributes.Attributes-class.html">attributes.Attributes</a></code></b>:
+      <code><a href="troy.pilot.attributes.Attributes-class.html#Alias">Alias</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#Any">Any</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#Bool">Bool</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#Enum">Enum</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#Extended">Extended</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#Final">Final</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#Float">Float</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#Int">Int</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#NotExtended">NotExtended</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#ReadOnly">ReadOnly</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#Scalar">Scalar</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#String">String</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#Time">Time</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#Url">Url</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#Vector">Vector</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#Writable">Writable</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#camel_case_regex_1_">camel_case_regex_1_</a></code>,
+      <code><a href="troy.pilot.attributes.Attributes-class.html#camel_case_regex_2_">camel_case_regex_2_</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cdus_id</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.compute_data_unit_service-pysrc.html#ComputeDataUnitService.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Create a ComputeDataUnitService object</p>
+  <p>Keyword arguments: cdus_id: string identifying the CDUS instance.</p>
+  <p>Note that the cdus_id will in general not be an URL pointing to a 
+  remote service, but will rather point to an application level entity -- 
+  although there is technically no reason not to implement this class as a 
+  stateful backend service at some point.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_scheduler"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_scheduler</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">s</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.compute_data_unit_service-pysrc.html#ComputeDataUnitService.set_scheduler">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set a scheduler for submitted work units</p>
+  <p>The scheduler 's' can either be a string, identifying a backend or 
+  adaptor level scheduler to be used, or a class instance which derives 
+  from <a 
+  href="troy.pilot.compute_data_scheduler.ComputeDataScheduler-class.html" 
+  class="link">troy.pilot.ComputeDataScheduler</a>.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.pilot.data_unit_service.DataUnitService-class.html#set_scheduler">data_unit_service.DataUnitService.set_scheduler</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="submit_unit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">submit_unit</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cdud</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.compute_data_unit_service-pysrc.html#ComputeDataUnitService.submit_unit">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Submit a CDU to this ComputeDataUnitService.</p>
+  <p>Keyword argument: cdud -- The ComputeDataUnitDescription from the 
+  application</p>
+  <p>Return: ComputeDataUnit object</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.pilot.data_unit_service.DataUnitService-class.html#submit_unit">data_unit_service.DataUnitService.submit_unit</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="list_units"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">list_units</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.compute_data_unit_service-pysrc.html#ComputeDataUnitService.list_units">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>list managed <a href="troy.pilot.compute_unit.ComputeUnit-class.html" 
+  class="link">ComputeUnit</a>s.</p>
+  <p>Return value: A list of <a 
+  href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html" 
+  class="link">ComputeDataUnit</a> IDs</p>
+  <p>The returned list can include units which have not been created by 
+  this CDUS instance.  The list may be incomplete, and may not include 
+  units created by the CDUS.  There is no guarantee that units in the 
+  returned list can in fact be reconnected to.  Also, an inclusion in the 
+  list does not have any indication about the respective unit's state.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.pilot.data_unit_service.DataUnitService-class.html#list_units">data_unit_service.DataUnitService.list_units</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_unit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_unit</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cdu_id</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.pilot.compute_data_unit_service-pysrc.html#ComputeDataUnitService.get_unit">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Reconnect to a ComputeDataUnit.</p>
+  <p>Keyword arguments: cdu_id   -- <a 
+  href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html" 
+  class="link">ComputeDataUnit</a>'s id</p>
+  <p>Return value: A <a 
+  href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html" 
+  class="link">ComputeDataUnit</a> instance</p>
+  <p>The call behaves identically to:</p>
+<pre class="literalblock">
+ cdu = troy.pilot.ComputeDataUnit (cdu_id)
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.pilot.data_unit_service.DataUnitService-class.html#get_unit">data_unit_service.DataUnitService.get_unit</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://saga-project.github.com/troy/">Troy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Fri Aug 10 21:14:44 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

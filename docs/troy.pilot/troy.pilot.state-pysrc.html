@@ -96,18 +96,40 @@
 <a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"><tt class="py-docstring">    native backend state -- Troy does not assume any semantic meaning on</tt> </tt>
 <a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt class="py-docstring">    state_detail values.</tt> </tt>
 <a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
-<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"> </tt>
-<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">    <tt id="link-0" class="py-name" targets="Variable troy.pilot.state.State.Unknown=troy.pilot.state.State-class.html#Unknown"><a title="troy.pilot.state.State.Unknown" class="py-name" href="#" onclick="return doclink('link-0', 'Unknown', 'link-0');">Unknown</a></tt>  <tt class="py-op">=</tt> <tt class="py-string">"Unknown"</tt>    <tt class="py-string">""" The state of the backend instance is not known.  Duh! """</tt> </tt>
-<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">    <tt id="link-1" class="py-name" targets="Variable troy.pilot.state.State.New=troy.pilot.state.State-class.html#New"><a title="troy.pilot.state.State.New" class="py-name" href="#" onclick="return doclink('link-1', 'New', 'link-1');">New</a></tt>      <tt class="py-op">=</tt> <tt class="py-string">"New"</tt>        <tt class="py-string">""" The creation request was accepted, but did not yet reach the backend. """</tt> </tt>
-<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">    <tt id="link-2" class="py-name" targets="Variable troy.pilot.state.State.Pending=troy.pilot.state.State-class.html#Pending"><a title="troy.pilot.state.State.Pending" class="py-name" href="#" onclick="return doclink('link-2', 'Pending', 'link-2');">Pending</a></tt>  <tt class="py-op">=</tt> <tt class="py-string">"Pending"</tt>    <tt class="py-string">""" The backend accepted a creation request, but did not yet enact it. """</tt> </tt>
-<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">    <tt id="link-3" class="py-name" targets="Variable troy.pilot.state.State.Running=troy.pilot.state.State-class.html#Running"><a title="troy.pilot.state.State.Running" class="py-name" href="#" onclick="return doclink('link-3', 'Running', 'link-3');">Running</a></tt>  <tt class="py-op">=</tt> <tt class="py-string">"Running"</tt>    <tt class="py-string">""" The backend instance is created and active. """</tt> </tt>
-<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">    <tt id="link-4" class="py-name" targets="Variable troy.pilot.state.State.Done=troy.pilot.state.State-class.html#Done"><a title="troy.pilot.state.State.Done" class="py-name" href="#" onclick="return doclink('link-4', 'Done', 'link-4');">Done</a></tt>     <tt class="py-op">=</tt> <tt class="py-string">"Done"</tt>       <tt class="py-string">""" The backend instance finished successfully. """</tt> </tt>
-<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">    <tt id="link-5" class="py-name" targets="Variable troy.pilot.state.State.Canceled=troy.pilot.state.State-class.html#Canceled"><a title="troy.pilot.state.State.Canceled" class="py-name" href="#" onclick="return doclink('link-5', 'Canceled', 'link-5');">Canceled</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Canceled"</tt>   <tt class="py-string">""" The backend instance finished due to a user request. """</tt> </tt>
-<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">    <tt id="link-6" class="py-name" targets="Variable troy.pilot.state.State.Failed=troy.pilot.state.State-class.html#Failed"><a title="troy.pilot.state.State.Failed" class="py-name" href="#" onclick="return doclink('link-6', 'Failed', 'link-6');">Failed</a></tt>   <tt class="py-op">=</tt> <tt class="py-string">"Failed"</tt>     <tt class="py-string">""" The backend instance finished on an error condition. """</tt> </tt>
-</div><a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"> </tt>
-<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"><tt class="py-comment"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</tt> </tt>
-<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt class="py-docstring">    Available states::</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"><tt class="py-docstring">        - Unknown</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"><tt class="py-docstring">          The state of the backend instance is not known.  Duh! </tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"><tt class="py-docstring">        - New         </tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"><tt class="py-docstring">          The creation request was accepted, but did not yet reach the backend. </tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"><tt class="py-docstring">        - Pending     </tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"><tt class="py-docstring">          The backend accepted a creation request, but did not yet enact it. </tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"><tt class="py-docstring">        - Running     </tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"><tt class="py-docstring">          The backend instance is created and active. </tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"><tt class="py-docstring">        - Done        </tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"><tt class="py-docstring">          The backend instance finished successfully. </tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"><tt class="py-docstring">        - Canceled    </tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"><tt class="py-docstring">          The backend instance finished due to a user request. </tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"><tt class="py-docstring">        - Failed      </tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"><tt class="py-docstring">          The backend instance finished on an error condition. </tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">    <tt id="link-0" class="py-name" targets="Variable troy.pilot.state.State.Unknown=troy.pilot.state.State-class.html#Unknown"><a title="troy.pilot.state.State.Unknown" class="py-name" href="#" onclick="return doclink('link-0', 'Unknown', 'link-0');">Unknown</a></tt>  <tt class="py-op">=</tt> <tt class="py-string">"Unknown"</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">    <tt id="link-1" class="py-name" targets="Variable troy.pilot.state.State.New=troy.pilot.state.State-class.html#New"><a title="troy.pilot.state.State.New" class="py-name" href="#" onclick="return doclink('link-1', 'New', 'link-1');">New</a></tt>      <tt class="py-op">=</tt> <tt class="py-string">"New"</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">    <tt id="link-2" class="py-name" targets="Variable troy.pilot.state.State.Pending=troy.pilot.state.State-class.html#Pending"><a title="troy.pilot.state.State.Pending" class="py-name" href="#" onclick="return doclink('link-2', 'Pending', 'link-2');">Pending</a></tt>  <tt class="py-op">=</tt> <tt class="py-string">"Pending"</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">    <tt id="link-3" class="py-name" targets="Variable troy.pilot.state.State.Running=troy.pilot.state.State-class.html#Running"><a title="troy.pilot.state.State.Running" class="py-name" href="#" onclick="return doclink('link-3', 'Running', 'link-3');">Running</a></tt>  <tt class="py-op">=</tt> <tt class="py-string">"Running"</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">    <tt id="link-4" class="py-name" targets="Variable troy.pilot.state.State.Done=troy.pilot.state.State-class.html#Done"><a title="troy.pilot.state.State.Done" class="py-name" href="#" onclick="return doclink('link-4', 'Done', 'link-4');">Done</a></tt>     <tt class="py-op">=</tt> <tt class="py-string">"Done"</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">    <tt id="link-5" class="py-name" targets="Variable troy.pilot.state.State.Canceled=troy.pilot.state.State-class.html#Canceled"><a title="troy.pilot.state.State.Canceled" class="py-name" href="#" onclick="return doclink('link-5', 'Canceled', 'link-5');">Canceled</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Canceled"</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">    <tt id="link-6" class="py-name" targets="Variable troy.pilot.state.State.Failed=troy.pilot.state.State-class.html#Failed"><a title="troy.pilot.state.State.Failed" class="py-name" href="#" onclick="return doclink('link-6', 'Failed', 'link-6');">Failed</a></tt>   <tt class="py-op">=</tt> <tt class="py-string">"Failed"</tt> </tt>
+</div><a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line"> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line"><tt class="py-comment"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -143,7 +165,7 @@ expandto(location.href);
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Fri Aug 10 21:40:53 2012</a>
+    3.0.1 on Mon Aug 13 21:50:21 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -80,7 +80,7 @@ class ComputeUnitDescription (Attributes) :
         self.attributes_register_ ('candidate_hosts',       None, self.String, self.Vector, self.Writable)
         self.attributes_register_ ('cpu_architecture',      None, self.Enum,   self.Scalar, self.Writable)
         self.attributes_register_ ('operating_system_type', None, self.Enum,   self.Scalar, self.Writable)
-        self.attributes_register_ ('total_physical_memory', None, self.int,    self.Scalar, self.Writable)
+        self.attributes_register_ ('total_physical_memory', None, self.Int,    self.Scalar, self.Writable)
         self.attributes_register_ ('total_cpu_time',        None, self.Time,   self.Scalar, self.Writable)
         self.attributes_register_ ('wall_time_limit',       None, self.Time,   self.Scalar, self.Writable)
         self.attributes_register_ ('queue',                 None, self.String, self.Scalar, self.Writable)

@@ -89,6 +89,9 @@ class ComputePilot (Base) :
         # custom attributes are not allowed.
         self.attributes_extensible_ (False)
 
+        self.id    = cp_id
+        self.state = State.New
+
         # initialize adaptor class
         self.engine_.call ('ComputePilot', 'init_', self)
 

@@ -119,7 +119,7 @@ class default_cus (troy.interface.iComputeUnitService) :
 
         ret = []
         for cp in self.api.idata_['pilots'] :
-            ret.append (cp.get_id ())
+            ret.append (cp.id)
 
         return ret
 

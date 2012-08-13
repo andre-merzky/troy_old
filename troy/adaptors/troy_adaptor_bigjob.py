@@ -200,11 +200,6 @@ class bigjob_cp (troy.interface.iComputePilot) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
-    def get_id (self) :
-        """ get instance id """
-        return self.id
-
-
     def reinitialize (self, cpd) :
         """ Re-Initialize the ComputePilot to the (new) ComputePilotDescription.
         
@@ -270,7 +265,7 @@ class bigjob_cus (troy.interface.iComputeUnitService) :
         else :
             # create the cus, and assign id
             self.cus              = self.adaptor.bj_module.ComputeDataService ()
-            cus_id                = self.cus.get_id ()
+            cus_id                = self.cus.id
             self.api.idata_['id'] = cus_id
             self.adaptor.adata['cus'][cus_id] = self.cus
 

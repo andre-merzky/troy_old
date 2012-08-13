@@ -41,15 +41,37 @@ class State ():
     native backend state -- Troy does not assume any semantic meaning on
     state_detail values.
 
+    Available states::
+
+        - Unknown
+          The state of the backend instance is not known.  Duh! 
+
+        - New         
+          The creation request was accepted, but did not yet reach the backend. 
+
+        - Pending     
+          The backend accepted a creation request, but did not yet enact it. 
+
+        - Running     
+          The backend instance is created and active. 
+
+        - Done        
+          The backend instance finished successfully. 
+
+        - Canceled    
+          The backend instance finished due to a user request. 
+
+        - Failed      
+          The backend instance finished on an error condition. 
     """
 
-    Unknown  = "Unknown"    """ The state of the backend instance is not known.  Duh! """
-    New      = "New"        """ The creation request was accepted, but did not yet reach the backend. """
-    Pending  = "Pending"    """ The backend accepted a creation request, but did not yet enact it. """
-    Running  = "Running"    """ The backend instance is created and active. """
-    Done     = "Done"       """ The backend instance finished successfully. """
-    Canceled = "Canceled"   """ The backend instance finished due to a user request. """
-    Failed   = "Failed"     """ The backend instance finished on an error condition. """
+    Unknown  = "Unknown"
+    New      = "New"
+    Pending  = "Pending"
+    Running  = "Running"
+    Done     = "Done"
+    Canceled = "Canceled"
+    Failed   = "Failed"
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

@@ -1,6 +1,7 @@
 
 import imp
 import urlparse
+import traceback
 
 import troy
 import troy.interface
@@ -80,6 +81,9 @@ class adaptor (troy.interface.aBase) :
     # one api class instance).
     def register_adata (self, api) :
 
+        if not 'idata_' in api :
+            api.idata_ = {}
+
         api.idata_[self.get_name ()] = self.adata
         return self.adata
 
@@ -98,19 +102,35 @@ class peejay_cps (troy.interface.iComputePilotService) :
         self.adaptor = adaptor
         self.peejay  = self.adaptor.module
 
-        # we MUST interpret cps_id, if present
-        self.master  = self.peejay.master ()
+        # we accept two types of id URLs: complete and incomplete ones.
+        # Complete ones (peejay:///path) are interpreted as ID, and are used to
+        # reconnect to a master.  Incomplete ones (peejay://) are interpreted as
+        # request to create a new master.
+
+        id = 'peejay://'  # default on empty id
 
         if 'id' in self.api :
-            self.rm = self.api.id
-        else :
-            self.rm = ''
+            id = self.api.id
 
-        elems = urlparse.urlparse (self.rm)
+        elems = urlparse.urlparse (id)
         if elems.scheme != '' and   \
            elems.scheme != 'peejay' :
             raise troy.pilot.TroyException (troy.pilot.Error.BadParameter, 
                   "can only handle peejay:// URLs, not " + elems.scheme + "://")
+
+        if elems.path != '' :
+            # we MUST interpret cps_id, if present
+            if not id in self.adaptor.adata['cps'] :
+                raise troy.pilot.TroyException (troy.pilot.Error.BadParameter, 
+                      "cannot reconnect to CPS - invalid id")
+            self.master = self.adaptor.adata['cps'][id]
+
+        else :
+            # Otherwise, we go ahead and create a new master
+
+            self.master = self.peejay.master ()
+            self.api.id = 'peejay:///' + self.master.get_id ()
+            self.adaptor.adata['cps'][self.api.id] = self.master
 
         # if we got this far, we can now register adaptor level instance data in
         # the api.  
@@ -127,17 +147,18 @@ class peejay_cps (troy.interface.iComputePilotService) :
             A ComputePilot handle
         """
 
-        print ' === self     :' + str (self    ) 
-        print ' === cpd      :' + str (cpd     ) 
-
         # FIXME: add param checks
         pilot     = self.master.run_pilot ()
-        pilot_id  = str (pilot.get_id ())
+        pilot_id  = 'peejay:///' + str (pilot.get_id ())
 
         # register pilot for later use
         self.adata['cp'][pilot_id] = pilot
 
         return troy.pilot.ComputePilot (pilot_id)
+
+    def list_pilots (self) :
+        ids = self.adata['cp'].keys ()
+        return self.adata['cp'].keys ()
 
 
 
@@ -152,26 +173,32 @@ class peejay_cp (troy.interface.iComputePilot) :
 
         # we MUST interpret cps_id, if present.  In fact, we need to have an id,
         # as creation is always done in the CPS
-        if not 'id' in self.api.idata_ :
+        if not 'id' in self.api or not self.api.id :
             raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
                     "peejay needs an id to reconnect to a pilot")
 
-        self.id      = self.api.idata_['id']
-        self.pilot   = self.peejay.pilot (self.id)
-        self.running = 1
+        self.id = self.api.id
 
-        print " === peejay cp init done"
+        elems = urlparse.urlparse (self.api.id)
+        if elems.scheme != '' and   \
+           elems.scheme != 'peejay' :
+            raise troy.pilot.TroyException (troy.pilot.Error.BadParameter, 
+                  "can only handle peejay:// URLs, not " + elems.scheme + "://")
+
+        if elems.path == '' :
+            # we MUST have an ID to connect to
+            raise troy.pilot.TroyException (troy.pilot.Error.BadParameter, 
+                "cannot reconnect to CP - invalid id")
+
+        self.pilot   = self.peejay.pilot (elems.path)
+        self.running = 1
 
         # if we got this far, we can now register adaptor level instance data in
         # the api.  
         self.adata = self.adaptor.register_adata (self.api)
 
 
-    def get_id (self) :
-        return self.id
-   
-
-    def submit_compute_unit (self, cud) :
+    def submit_unit (self, cud) :
         """ Submit a CU to this Pilot.
 
             Keyword argument:
@@ -198,7 +225,7 @@ class peejay_cp (troy.interface.iComputePilot) :
 
         if 'arguments' in cud :
             for arg in cud['arguments'] :
-                cmd += ' ' + arg
+                cmd += ' "' + arg + '"'
 
         job      = self.pilot.job_submit (cmd)
         job_id   = str (job.get_id ())
@@ -276,7 +303,7 @@ class peejay_cus (troy.interface.iComputeUnitService) :
         self.api     = api 
         self.adaptor = adaptor
         self.peejay  = self.adaptor.module
-        self.cp      = []  # list of associated compute pilots
+        self.cps     = []  # list of associated compute pilot services
 
 
         peejay_cus.cus_index += 1
@@ -286,17 +313,15 @@ class peejay_cus (troy.interface.iComputeUnitService) :
         # have a CUS, so we cannot, ever, reconnect to a CUS.  So, we have to
         # throw if an id is present
         # as creation is always done in the CPS
-        if 'id' in self.api.idata_ :
-            if self.api.idata_['id'] :
-                raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, "peejay cannot reconnect to CUS!")
-
-        print " === peejay cus init done"
+        if 'id' in self.api and self.api.id :
+            raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
+                                            "peejay cannot reconnect to CUS!")
 
         # we need a scheduler.  There is no way for the API to re-init or
         # re-assign a scheduler after the CUS has been created -- the scheduler
         # is fully internal -- so we can just create it here.  For now, we use
         # the 'Random' scheduler
-        self.scheduler = troy.pilot.ComputeScheduler_ ('Random')
+        self.scheduler = troy.pilot.ComputeScheduler ('Random')
 
         # if we got this far, we can now register adaptor level instance data in
         # the api.  
@@ -310,36 +335,38 @@ class peejay_cus (troy.interface.iComputeUnitService) :
     def get_id (self) :
         return self.id
 
+    # def submit_unit (self, cud) :
+    #     self.scheduler.schedule (self.api, cud)
 
 
-    def add_compute_pilot (self, cp) :
-        """ Add a ComputePilot to this CUS.
+    def add_pilot_service (self, cps) :
+        """ Add a ComputePilotService to this CUS.
 
             Keyword arguments:
-            cp -- The ComputePilot to which this ComputeUnitService will connect.
+            cps -- The ComputePilotService to which this ComputeUnitService will connect.
         """
-        self.cp.append (cp)
+        self.cps.append (cps)
 
 
-    def list_compute_pilots (self) :
-        """ List all CPs of CUS """
+    def list_pilot_services (self) :
+        """ List all CPSs of CUS """
 
         ret = []
 
-        for cp in self.cp :
-            ret.append (cp.get_id ())
+        for cps in self.cps :
+            ret.append (cps.id)
 
         return ret
 
 
-    def remove_compute_pilot (self, cp) :
-        """ Remove a ComputePilot
+    def remove_pilot_service (self, cps) :
+        """ Remove a ComputePilotService
 
-            Note that it won't cancel the ComputePilot, it will just no longer
+            Note that it won't cancel the ComputePilotService, it will just no longer
             receive any CUs.
 
             Keyword arguments:
-            cp -- The ComputePilot to remove 
+            cps -- The ComputePilotService to remove 
         """
         self.cp.remove (cp)
 
@@ -355,13 +382,11 @@ class peejay_cu (troy.interface.iComputeUnit) :
 
         # we MUST interpret cu_id, if present.  In fact, we need to have an id,
         # as creation is always done in the CUS
-        if not 'id' in self.api.idata_ :
+        if not 'id' in self.api or not self.api.id :
             raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
                     "peejay needs an id to reconnect to a cu")
 
-        self.id = self.api.idata_['id']
-
-        print " === peejay cu init done"
+        self.id = self.api.id
 
         # if we got this far, we can now register adaptor level instance data in
         # the api.  

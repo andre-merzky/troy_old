@@ -1,5 +1,6 @@
 
-from base import Base
+from base  import Base
+from state import State
 
 
 ########################################################################
@@ -27,12 +28,14 @@ class ComputeUnit (Base) :
         Base.__init__ (self)
 
         # prepare supported attributes
-        self.attributes_register_  ('id',             cu_id,     self.Url,    self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('id',             None,      self.Url,    self.Scalar, self.ReadOnly)
         self.attributes_register_  ('state',          State.New, self.Enum,   self.Scalar, self.ReadOnly)
         self.attributes_register_  ('state_detail',   None,      self.String, self.Scalar, self.ReadOnly)
         self.attributes_register_  ('description',    None,      self.Any,    self.Scalar, self.ReadOnly)
         self.attributes_register_  ('service_id',     None,      self.Url,    self.Scalar, self.ReadOnly)
         self.attributes_register_  ('pilot_id',       None,      self.Url,    self.Scalar, self.ReadOnly)
+
+        self.id = cu_id
 
         # initialize adaptor class
         self.engine_.call ('ComputeUnit', 'init_', self)

@@ -844,8 +844,9 @@ class Attributes (AttributesBase_) :
         d = self.attributes_t_init_ ()
 
         # check if we know about that attribute
-        if  d['attributes_'][key]['exists'] :
-            return True
+        if 'exists' in d['attributes_'][key] :
+            if  d['attributes_'][key]['exists'] :
+                return True
 
         return False
 
@@ -1063,13 +1064,16 @@ class Attributes (AttributesBase_) :
                     return True
 
                 us_key = self.attributes_t_underscore_ (key)
-                d    = self.attributes_t_init_ (us_key)
-                vals = d['attributes_'][us_key]['enums']
+                d      = self.attributes_t_init_       (us_key)
+                vals   = d['attributes_'][us_key]['enums']
 
+                # check if there is anything to check
+                if not vals :
+                    return True
+                
                 # value must be one of allowed enums
-                for v in vals :
-                    if v == val :
-                        return True
+                if val in vals :
+                    return True
 
                 # Houston, we got a problem...
                 return """
@@ -1737,6 +1741,7 @@ class Attributes (AttributesBase_) :
         
         key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
+
         return self.attributes_i_exists_ (us_key)
 
 

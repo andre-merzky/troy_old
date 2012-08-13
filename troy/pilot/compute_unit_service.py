@@ -1,5 +1,6 @@
 
-from base         import Base
+from base              import Base
+from compute_scheduler import ComputeScheduler
 
 
 ########################################################################
@@ -58,10 +59,13 @@ class ComputeUnitService (Base) :
         # prepare supported attributes
         self.attributes_register_  ('id',        cus_id,   self.Url,    self.Scalar, self.ReadOnly)
         self.attributes_register_  ('cps',       [],       self.Url,    self.Vector, self.Writable)
-        self.attributes_register_  ('scheduler', 'Random', self.String, self.Scalar, self.Writable)
+        self.attributes_register_  ('policy',    'Random', self.String, self.Scalar, self.Writable)
+        self.attributes_register_  ('scheduler', None,     self.Any,    self.Scalar, self.Writable)
 
         # initialize adaptor class
         self.engine_.call ('ComputeUnitService', 'init_', self)
+
+        self.scheduler = ComputeScheduler (self.policy)
 
         pass
 
@@ -92,7 +96,7 @@ class ComputeUnitService (Base) :
             ComputeUnit object
         """
 
-        cu    = self.scheduler.schedule (self, cud)
+        cu = self.scheduler.schedule (self, cud)
         return cu
 
 

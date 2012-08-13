@@ -54,16 +54,16 @@
 <h1 class="epydoc">Class peejay_cps</h1><p class="nomargin-top"><span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cps">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_ada_3" name="uml_class_diagram_for_troy_ada_3">
-<area shape="rect" id="node245" href="troy_adaptor_peejay.peejay_cps-class.html#__init__" title="Create a ComputePilotService" alt="" coords="111,273,268,292"/>
-<area shape="rect" id="node245" href="troy_adaptor_peejay.peejay_cps-class.html#submit_pilot" title="Add a ComputePilot to the ComputePilotService" alt="" coords="111,292,268,311"/>
-<area shape="rect" id="node1" href="troy_adaptor_peejay.peejay_cps-class.html" title="troy_adaptor_peejay.peejay_cps" alt="" coords="99,241,280,317"/>
+<area shape="rect" id="node245" href="troy_adaptor_peejay.peejay_cps-class.html#__init__" title="Create a ComputePilotService" alt="" coords="111,255,268,273"/>
+<area shape="rect" id="node245" href="troy_adaptor_peejay.peejay_cps-class.html#submit_pilot" title="Add a ComputePilot to the ComputePilotService" alt="" coords="111,273,268,292"/>
+<area shape="rect" id="node245" href="troy_adaptor_peejay.peejay_cps-class.html#list_pilots" title="list managed ComputePilots." alt="" coords="111,292,268,311"/>
+<area shape="rect" id="node1" href="troy_adaptor_peejay.peejay_cps-class.html" title="troy_adaptor_peejay.peejay_cps" alt="" coords="99,222,280,317"/>
 <area shape="rect" id="node246" href="troy.interface.compute_pilot_service.iComputePilotService-class.html#get_pilot" title="Reconnect to a ComputePilot." alt="" coords="17,103,360,121"/>
 <area shape="rect" id="node246" href="troy.interface.compute_pilot_service.iComputePilotService-class.html#get_unit" title="Reconnect to a ComputeUnit" alt="" coords="17,121,360,140"/>
 <area shape="rect" id="node246" href="troy.interface.compute_pilot_service.iComputePilotService-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="17,140,360,159"/>
-<area shape="rect" id="node246" href="troy.interface.compute_pilot_service.iComputePilotService-class.html#list_pilots" title="list managed ComputePilots." alt="" coords="17,159,360,177"/>
-<area shape="rect" id="node246" href="troy.interface.compute_pilot_service.iComputePilotService-class.html#list_units" title="list managed ComputeUnits" alt="" coords="17,177,360,196"/>
-<area shape="rect" id="node246" href="troy.interface.compute_pilot_service.iComputePilotService-class.html#submit_unit" title="Submit a CU to this ComputePilotService" alt="" coords="17,196,360,215"/>
-<area shape="rect" id="node2" href="troy.interface.compute_pilot_service.iComputePilotService-class.html" title="ComputePilotService interface" alt="" coords="5,70,371,221"/>
+<area shape="rect" id="node246" href="troy.interface.compute_pilot_service.iComputePilotService-class.html#list_units" title="list managed ComputeUnits" alt="" coords="17,159,360,177"/>
+<area shape="rect" id="node246" href="troy.interface.compute_pilot_service.iComputePilotService-class.html#submit_unit" title="Submit a CU to this ComputePilotService" alt="" coords="17,177,360,196"/>
+<area shape="rect" id="node2" href="troy.interface.compute_pilot_service.iComputePilotService-class.html" title="ComputePilotService interface" alt="" coords="5,70,371,202"/>
 <area shape="rect" id="node3" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="104,6,275,50"/>
 </map>
   <img src="uml_class_diagram_for_troy_ada_3.gif" alt='' usemap="#uml_class_diagram_for_troy_ada_3" ismap="ismap" class="graph-without-title" />
@@ -115,13 +115,31 @@
       
     </td>
   </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy_adaptor_peejay.peejay_cps-class.html#list_pilots" class="summary-sig-name">list_pilots</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      list managed <a 
+      href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+      class="link">ComputePilot</a>s.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cps.list_pilots">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
   <tr>
     <td colspan="2" class="summary">
     <p class="indent-wrapped-lines"><b>Inherited from <code><a href="troy.interface.compute_pilot_service.iComputePilotService-class.html">troy.interface.compute_pilot_service.iComputePilotService</a></code></b>:
       <code><a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#get_pilot">get_pilot</a></code>,
       <code><a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#get_unit">get_unit</a></code>,
       <code><a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#init_">init_</a></code>,
-      <code><a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#list_pilots">list_pilots</a></code>,
       <code><a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#list_units">list_units</a></code>,
       <code><a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#submit_unit">submit_unit</a></code>
       </p>
@@ -187,6 +205,31 @@
   </dl>
 </td></tr></table>
 </div>
+<a name="list_pilots"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">list_pilots</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy_adaptor_peejay-pysrc.html#peejay_cps.list_pilots">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>list managed <a 
+  href="troy.pilot.compute_pilot.ComputePilot-class.html" 
+  class="link">ComputePilot</a>s.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.compute_pilot_service.iComputePilotService-class.html#list_pilots">troy.interface.compute_pilot_service.iComputePilotService.list_pilots</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
 <br />
 <!-- ==================== NAVIGATION BAR ==================== -->
 <table class="navbar" border="0" width="100%" cellpadding="0"
@@ -217,7 +260,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Fri Aug 10 21:40:51 2012</a>
+    3.0.1 on Mon Aug 13 21:50:19 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -86,8 +86,7 @@ class scheduler_data_random (troy.interface.iDataScheduler) :
 
     def schedule (self, dus, dud) :
 
-        # print "=========== DUS submit"
-        dp_list = dus.list_data_pilots ()  # FIXME: check list size
+        dp_list = dus.list_pilot_services ()  # FIXME: check list size
         dp      = troy.pilot.DataPilot (dp_list[0])
         return dp.submit_data_unit_    (dud)
 
@@ -114,8 +113,13 @@ class scheduler_compute_random (troy.interface.iComputeScheduler) :
 
     def schedule (self, cus, cud) :
 
-        # print "=========== CUS submit"
-        pilots = cus.list_compute_pilots ()
+        pilot_services = cus.list_pilot_services ()
+
+        pilots = []
+
+        for id in pilot_services :
+            pilot_service = troy.pilot.ComputePilotService (id)
+            pilots.extend (pilot_service.list_pilots ())
 
         if len (pilots) == 0 :
             raise troy.pilot.TroyException (troy.pilot.Error.IncorrectState,
@@ -124,7 +128,7 @@ class scheduler_compute_random (troy.interface.iComputeScheduler) :
         idx = random.randint (0, len  (pilots) - 1)
         cp  = troy.pilot.ComputePilot (pilots[idx])
 
-        return cp.submit_compute_unit (cud)
+        return cp.submit_unit (cud)
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -149,7 +153,6 @@ class scheduler_compute_data_random (troy.interface.iComputeDataScheduler) :
 
     def schedule (self, dcus, dcud) :
 
-        # print "=========== DCUS submit"
         # Well, problem here is that we can't break the DCUS into DCPSs --
         # those do not exist in the troy API.  So, we would need to split
         # the dcud into a dud and cud.  That is waaaay to complicated for

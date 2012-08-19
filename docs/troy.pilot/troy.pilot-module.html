@@ -72,12 +72,12 @@
     </li>
     <li>
       <a 
-      href="troy.pilot.compute_pilot_service.ComputePilotService-class.html"
-      class="link">ComputePilotService</a> (CPS) / <a 
-      href="troy.pilot.data_pilot_service.DataPilotService-class.html" 
-      class="link">DataPilotService</a> (DPS): creates and manages pilots, 
-      according to application specified resource requirements.  Also, 
-      'submit_xxx_unit()' methods accept work descriptions of <a 
+      href="troy.pilot.compute_pilot_service.ComputePilotFramework-class.html"
+      class="link">ComputePilotFramework</a> (CPF) / <a 
+      href="troy.pilot.data_pilot_service.DataPilotFramework-class.html" 
+      class="link">DataPilotFramework</a> (DPS): creates and manages 
+      pilots, according to application specified resource requirements.  
+      Also, 'submit_xxx_unit()' methods accept work descriptions of <a 
       href="troy.pilot.compute_unit.ComputeUnit-class.html" 
       class="link">ComputeUnit</a>s and <a 
       href="troy.pilot.data_unit.DataUnit-class.html" 
@@ -122,10 +122,10 @@
       class="link">DataUnit</a>s and <a 
       href="troy.pilot.compute_data_unit.ComputeDataUnit-class.html" 
       class="link">ComputeDataUnit</a>s on a set of <a 
-      href="troy.pilot.compute_pilot_service.ComputePilotService-class.html"
-      class="link">ComputePilotService</a>s and <a 
-      href="troy.pilot.data_pilot_service.DataPilotService-class.html" 
-      class="link">DataPilotService</a>s, and their pilots.
+      href="troy.pilot.compute_pilot_service.ComputePilotFramework-class.html"
+      class="link">ComputePilotFramework</a>s and <a 
+      href="troy.pilot.data_pilot_service.DataPilotFramework-class.html" 
+      class="link">DataPilotFramework</a>s, and their pilots.
     </li>
   </ul>
   <p>The UnitService's is what the application will mostly work with: it 
@@ -138,14 +138,14 @@
    ----------------------------------------------------------------
    import troy
 
-   # create on ComputePilot from a BigJob ComputePilotservice
-   cps = troy,pilot.ComputePilotService ('bigjob://')
-   cps.submit_pilot ([some compute pilot description])
+   # create on ComputePilot from a BigJob ComputePilotFramework
+   cpf = troy,pilot.ComputePilotFramework ('bigjob://')
+   cpf.submit_pilot ([some compute pilot description])
 
    # create a work unit service with one ComputePilot resource, to submit work
    # items to
    cus = troy.pilot.ComputeUnitService ()
-   cus.add_pilot_service (cps)
+   cus.add_pilot_service (cpf)
 
    # submit a compute work item
    cu = cus.submit_unit ([some compute unit description])
@@ -153,7 +153,7 @@
    cu.wait ()     # wait 'til work is done
 
    cus.cancel ()  # terminate cus
-   cps.cancel ()  # terminate compute pilots
+   cpf.cancel ()  # terminate compute pilots
    ----------------------------------------------------------------
 </pre>
   <p>The Data side of the Pilot API looks symmetric to the compute side.  
@@ -223,13 +223,13 @@
   <a href="troy.pilot.exception.Error-class.html" title="troy.pilot.exception.Error">Error</a>,
   <a href="troy.pilot.compute_pilot_description.ComputePilotDescription-class.html" title="troy.pilot.compute_pilot_description.ComputePilotDescription">ComputePilotDescription</a>,
   <a href="troy.pilot.compute_pilot.ComputePilot-class.html" title="troy.pilot.compute_pilot.ComputePilot">ComputePilot</a>,
-  <a href="troy.pilot.compute_pilot_service.ComputePilotService-class.html" title="troy.pilot.compute_pilot_service.ComputePilotService">ComputePilotService</a>,
+  <a href="troy.pilot.compute_pilot_service.ComputePilotFramework-class.html" title="troy.pilot.compute_pilot_service.ComputePilotFramework">ComputePilotFramework</a>,
   <a href="troy.pilot.compute_unit_description.ComputeUnitDescription-class.html" title="troy.pilot.compute_unit_description.ComputeUnitDescription">ComputeUnitDescription</a>,
   <a href="troy.pilot.compute_unit.ComputeUnit-class.html" title="troy.pilot.compute_unit.ComputeUnit">ComputeUnit</a>,
   <a href="troy.pilot.compute_unit_service.ComputeUnitService-class.html" title="troy.pilot.compute_unit_service.ComputeUnitService">ComputeUnitService</a>,
   <a href="troy.pilot.data_pilot_description.DataPilotDescription-class.html" title="troy.pilot.data_pilot_description.DataPilotDescription">DataPilotDescription</a>,
   <a href="troy.pilot.data_pilot.DataPilot-class.html" title="troy.pilot.data_pilot.DataPilot">DataPilot</a>,
-  <a href="troy.pilot.data_pilot_service.DataPilotService-class.html" title="troy.pilot.data_pilot_service.DataPilotService">DataPilotService</a>,
+  <a href="troy.pilot.data_pilot_service.DataPilotFramework-class.html" title="troy.pilot.data_pilot_service.DataPilotFramework">DataPilotFramework</a>,
   <a href="troy.pilot.data_unit_description.DataUnitDescription-class.html" title="troy.pilot.data_unit_description.DataUnitDescription">DataUnitDescription</a>,
   <a href="troy.pilot.data_unit.DataUnit-class.html" title="troy.pilot.data_unit.DataUnit">DataUnit</a>,
   <a href="troy.pilot.data_unit_service.DataUnitService-class.html" title="troy.pilot.data_unit_service.DataUnitService">DataUnitService</a>,
@@ -292,7 +292,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Tue Aug 14 12:45:06 2012</a>
+    3.0.1 on Sun Aug 19 02:02:35 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -10,7 +10,7 @@ class DataPilot (Base) :
     """ 
     DataPilot (PilotStore)
 
-    This is the object that is returned by the DataPilotService when a
+    This is the object that is returned by the DataPilotFramework when a
     new DataPilot is created based on a DataPilotDescription.
 
     The DataPilot object can be used by the application to keep track
@@ -45,7 +45,7 @@ class DataPilot (Base) :
         type: L{troy.pilot.DataPilotDescription}
 
       - service_url:
-        The ID of the L{DataPilotService} which manages this pilot.
+        The ID of the L{DataPilotFramework} which manages this pilot.
         type: string (url)
 
       - wall_time_left:

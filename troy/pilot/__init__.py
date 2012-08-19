@@ -17,7 +17,7 @@ The main concepts and classes of the API are:
       a pilot, which manages a (compute or data) resource slice for the
       application
 
-    - L{ComputePilotService} (CPS) / L{DataPilotService} (DPS):
+    - L{ComputePilotFramework} (CPF) / L{DataPilotFramework} (DPS):
       creates and manages pilots, according to application specified resource
       requirements.  Also, 'submit_xxx_unit()' methods accept work descriptions
       of L{ComputeUnit}s and L{DataUnit}s to be executed on its pilots.
@@ -35,8 +35,8 @@ The main concepts and classes of the API are:
     - L{ComputeUnitService} (CUS) / DataUnitService (DUS) /
       ComputeDataUnitService (CDUS):
       an application level scheduler which can instantiate L{ComputeUnit}s,
-      L{DataUnit}s and L{ComputeDataUnit}s on a set of L{ComputePilotService}s
-      and L{DataPilotService}s, and their pilots.
+      L{DataUnit}s and L{ComputeDataUnit}s on a set of L{ComputePilotFramework}s
+      and L{DataPilotFramework}s, and their pilots.
 
 The UnitService's is what the application will mostly work with: it takes care
 of proper work item distribution, and will in fact enact the applications
@@ -47,14 +47,14 @@ would be (some details left out for brevity)::
     ----------------------------------------------------------------
     import troy
 
-    # create on ComputePilot from a BigJob ComputePilotservice
-    cps = troy,pilot.ComputePilotService ('bigjob://')
-    cps.submit_pilot ([some compute pilot description])
+    # create on ComputePilot from a BigJob ComputePilotFramework
+    cpf = troy,pilot.ComputePilotFramework ('bigjob://')
+    cpf.submit_pilot ([some compute pilot description])
 
     # create a work unit service with one ComputePilot resource, to submit work
     # items to
     cus = troy.pilot.ComputeUnitService ()
-    cus.add_pilot_service (cps)
+    cus.add_pilot_service (cpf)
 
     # submit a compute work item
     cu = cus.submit_unit ([some compute unit description])
@@ -62,7 +62,7 @@ would be (some details left out for brevity)::
     cu.wait ()     # wait 'til work is done
 
     cus.cancel ()  # terminate cus
-    cps.cancel ()  # terminate compute pilots
+    cpf.cancel ()  # terminate compute pilots
     ----------------------------------------------------------------
 
 The Data side of the Pilot API looks symmetric to the compute side.  The
@@ -91,14 +91,14 @@ from troy.pilot.exception                      import TroyException, Error
 
 from troy.pilot.compute_pilot_description      import ComputePilotDescription
 from troy.pilot.compute_pilot                  import ComputePilot
-from troy.pilot.compute_pilot_service          import ComputePilotService
+from troy.pilot.compute_pilot_service          import ComputePilotFramework
 from troy.pilot.compute_unit_description       import ComputeUnitDescription
 from troy.pilot.compute_unit                   import ComputeUnit
 from troy.pilot.compute_unit_service           import ComputeUnitService
 
 from troy.pilot.data_pilot_description         import DataPilotDescription
 from troy.pilot.data_pilot                     import DataPilot
-from troy.pilot.data_pilot_service             import DataPilotService
+from troy.pilot.data_pilot_service             import DataPilotFramework
 from troy.pilot.data_unit_description          import DataUnitDescription
 from troy.pilot.data_unit                      import DataUnit
 from troy.pilot.data_unit_service              import DataUnitService

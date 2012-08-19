@@ -4,20 +4,20 @@ from base          import Base
 
 ########################################################################
 #
-#  ComputePilotService (CPS)
+#  ComputePilotFramework (CPF)
 #
-class ComputePilotService (Base) :
-    """  ComputePilotService (CPS)
+class ComputePilotFramework (Base) :
+    """  ComputePilotFramework (CPF)
 
-        The ComputePilotService is a ComputePilot manager.
+        The ComputePilotFramework is a ComputePilot manager.
 
-        A CPS acts as the interface to an underlying pilot job framework -- it
+        A CPF acts as the interface to an underlying pilot job framework -- it
         creates and manages L{ComputePilot} instances within that framework, and
         can scheduler L{ComputeUnit}s amongst those pilots.
 
         The class is stateful, and instances are identified by an url, and can
-        be reconnected to.  A CPS can be added to a L{ComputeUnitService}, whose
-        scheduler will then be able to utilize the CPS's pilots for
+        be reconnected to.  A CPF can be added to a L{ComputeUnitService}, whose
+        scheduler will then be able to utilize the CPF's pilots for
         L{ComputeUnit} execution.
 
         Properties::
@@ -31,16 +31,16 @@ class ComputePilotService (Base) :
     ############################################################################
     #
     def __init__ (self, url) :
-        """ Create a ComputePilotService object
+        """ Create a ComputePilotFramework object
 
         Keyword arguments:
-        url: url identifying the backend CPS.
+        url: url identifying the backend CPF.
 
-        Note that the URL may be incomplete, if a new CPS instance is to be
+        Note that the URL may be incomplete, if a new CPF instance is to be
         created -- for example, it may contain only a hint about what pilot
-        framework is to be used on what resource.  On inspection, the CPS will
+        framework is to be used on what resource.  On inspection, the CPF will
         always return a fully qualified URL, which will not change over the
-        lifetime of the CPS.
+        lifetime of the CPF.
 
         """
 
@@ -52,7 +52,7 @@ class ComputePilotService (Base) :
         self.id = url
 
         # initialize adaptor class
-        self.engine_.call ('ComputePilotService', 'init_', self)
+        self.engine_.call ('ComputePilotFramework', 'init_', self)
 
 
     ############################################################################
@@ -67,7 +67,7 @@ class ComputePilotService (Base) :
             A L{ComputePilot} instance
 
             If the resource requirements defined in the cpd cannot be met by the
-            CPS, a BadParameter exception is raised.  Not raising this exception
+            CPF, a BadParameter exception is raised.  Not raising this exception
             is, however, not a guarantee that the CP will in fact be (able to
             be) executed -- in that case, the returned CP will be moved to
             Failed state.
@@ -81,7 +81,7 @@ class ComputePilotService (Base) :
             or, where default values are not specified, are ignored.
 
         """
-        return self.engine_.call ('ComputePilotService', 'submit_pilot', self, cpd)
+        return self.engine_.call ('ComputePilotFramework', 'submit_pilot', self, cpd)
 
 
     ############################################################################
@@ -93,14 +93,14 @@ class ComputePilotService (Base) :
             A list of L{ComputePilot} IDs
 
             The returned list can include pilots which have not been created by
-            this CPS instance.  The list may be incomplete, and may not include
-            pilots created by the CPS.  There is no guarantee that pilots in the
+            this CPF instance.  The list may be incomplete, and may not include
+            pilots created by the CPF.  There is no guarantee that pilots in the
             returned list can in fact be reconnected to.  Also, an inclusion in
             the list does not have any indication about the respective pilot's
             state.
 
         """
-        return self.engine_.call ('ComputePilotService', 'list_pilots', self)
+        return self.engine_.call ('ComputePilotFramework', 'list_pilots', self)
 
 
     ############################################################################
@@ -119,13 +119,13 @@ class ComputePilotService (Base) :
               cp = troy.pilot.ComputePilot (cp_id)
 
         """
-        return self.engine_.call ('ComputePilotService', 'get_pilot', self, cp_id)
+        return self.engine_.call ('ComputePilotFramework', 'get_pilot', self, cp_id)
 
 
     ############################################################################
     #
     def submit_unit (self, cud) :
-        """ Submit a CU to this ComputePilotService.
+        """ Submit a CU to this ComputePilotFramework.
 
             Keyword argument:
             cud -- The L{ComputeUnitDescription} from the application
@@ -133,7 +133,7 @@ class ComputePilotService (Base) :
             Return:
             L{ComputeUnit} object
 
-            The CUD is (possibly translated and) passed on to the CPS backend,
+            The CUD is (possibly translated and) passed on to the CPF backend,
             which will attempt to instantiate the described workload process on
             any of its compute pilots.  If no suitable pilot is found,
             a L{Error.BadParameter} exception is raised.  Not raising this
@@ -150,7 +150,7 @@ class ComputePilotService (Base) :
             are ignored.
 
         """
-        return self.engine_.call ('ComputePilotService', 'submit_unit', self, cud)
+        return self.engine_.call ('ComputePilotFramework', 'submit_unit', self, cud)
 
 
     ############################################################################
@@ -162,14 +162,14 @@ class ComputePilotService (Base) :
             A list of L{ComputeUnit} IDs
 
             The returned list can include units which have not been created by
-            this CPS instance.  The list may be incomplete, and may not include
-            units created by the CPS.  There is no guarantee that units in the
+            this CPF instance.  The list may be incomplete, and may not include
+            units created by the CPF.  There is no guarantee that units in the
             returned list can in fact be reconnected to.  Also, an inclusion in
             the list does not have any indication about the respective unit's
             state.
 
         """
-        return self.engine_.call ('ComputePilotService', 'list_units', self)
+        return self.engine_.call ('ComputePilotFramework', 'list_units', self)
 
 
     ############################################################################
@@ -188,7 +188,7 @@ class ComputePilotService (Base) :
               cu = troy.pilot.ComputeUnit (cu_id)
 
         """
-        return self.engine_.call ('ComputePilotService', 'get_unit', self, cu_id)
+        return self.engine_.call ('ComputePilotFramework', 'get_unit', self, cu_id)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

@@ -118,7 +118,7 @@ class scheduler_compute_random (troy.interface.iComputeScheduler) :
         pilots = []
 
         for id in pilot_services :
-            pilot_service = troy.pilot.ComputePilotService (id)
+            pilot_service = troy.pilot.ComputePilotFramework (id)
             pilots.extend (pilot_service.list_pilots ())
 
         if len (pilots) == 0 :
@@ -153,7 +153,7 @@ class scheduler_compute_data_random (troy.interface.iComputeDataScheduler) :
 
     def schedule (self, dcus, dcud) :
 
-        # Well, problem here is that we can't break the DCUS into DCPSs --
+        # Well, problem here is that we can't break the DCUS into DCPFs --
         # those do not exist in the troy API.  So, we would need to split
         # the dcud into a dud and cud.  That is waaaay to complicated for
         # this simple random scheduler - so we don't...

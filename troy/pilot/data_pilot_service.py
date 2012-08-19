@@ -4,13 +4,13 @@ from base               import Base
 
 ########################################################################
 #
-#  DataPilotService (DPS)
+#  DataPilotFramework (DPS)
 #
-class DataPilotService (Base) :
+class DataPilotFramework (Base) :
     """  
-    DataPilotService (DPS)
+    DataPilotFramework (DPS)
 
-    The DataPilotService is a DataPilot manager.
+    The DataPilotFramework is a DataPilot manager.
 
     A DPS acts as the interface to an underlying pilot data framework -- it
     creates and manages L{DataPilot} instances within that framework, and can
@@ -32,7 +32,7 @@ class DataPilotService (Base) :
     #
     def __init__ (self) :
         """ 
-        Create a DataPilotService object
+        Create a DataPilotFramework object
 
         Keyword arguments:
         url: url identifying the backend DPS.
@@ -51,7 +51,7 @@ class DataPilotService (Base) :
         self.attributes_register_  ('id', None,  self.Url, self.Scalar, self.ReadOnly)
 
         # initialize adaptor class
-        self.engine_.call ('DataPilotService', 'init_', self)
+        self.engine_.call ('DataPilotFramework', 'init_', self)
 
 
     ############################################################################
@@ -79,7 +79,7 @@ class DataPilotService (Base) :
         (see documentation of L{DataPilotDescription}), or, where default values
         are not specified, are ignored.
         """
-        return self.engine_.call ('DataPilotService', 'submit_pilot', self, dpd)
+        return self.engine_.call ('DataPilotFramework', 'submit_pilot', self, dpd)
 
 
     ############################################################################
@@ -97,7 +97,7 @@ class DataPilotService (Base) :
         list can in fact be reconnected to.  Also, an inclusion in the list does
         not have any indication about the respective pilot's state.
         """
-        return self.engine_.call ('DataPilotService', 'list_pilots', self)
+        return self.engine_.call ('DataPilotFramework', 'list_pilots', self)
 
 
     ############################################################################
@@ -116,14 +116,14 @@ class DataPilotService (Base) :
 
             dp = troy.pilot.DataPilot (dp_id)
         """
-        return self.engine_.call ('DataPilotService', 'get_pilot', self, dp_id)
+        return self.engine_.call ('DataPilotFramework', 'get_pilot', self, dp_id)
 
 
     ############################################################################
     #
     def submit_unit (self, dud) :
         """ 
-        Submit a DU to this DataPilotService.
+        Submit a DU to this DataPilotFramework.
 
         Keyword argument:
         dud -- The L{DataUnitDescription} from the application
@@ -146,7 +146,7 @@ class DataPilotService (Base) :
         (see documentation of DUD), or, where default values are not specified,
         are ignored.
         """
-        return self.engine_.call ('DataPilotService', 'submit_unit', self, dud)
+        return self.engine_.call ('DataPilotFramework', 'submit_unit', self, dud)
 
 
     ############################################################################
@@ -164,7 +164,7 @@ class DataPilotService (Base) :
         list can in fact be reconnected to.  Also, an inclusion in the list does
         not have any indication about the respective unit's state.
         """
-        return self.engine_.call ('DataPilotService', 'list_units', self)
+        return self.engine_.call ('DataPilotFramework', 'list_units', self)
 
 
     ############################################################################
@@ -183,7 +183,7 @@ class DataPilotService (Base) :
 
         du = troy.pilot.DataUnit (du_id)
         """
-        return self.engine_.call ('DataPilotService', 'get_unit', self, du_id)
+        return self.engine_.call ('DataPilotFramework', 'get_unit', self, du_id)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

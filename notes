@@ -367,20 +367,20 @@ Misc:
 
 
         Base
-            Class Pilot
-                Attributes:   id, state, description, service_url, glue
-                wait, cancel, (reconfigure?)
-                submit_unit,  list_units,  get_unit
-            Class PilotService
-                Attributes: id, backend_url, glue
-                submit_unit,  list_units,  get_unit
-                submit_pilot, list_pilots, get_pilot
-            Class Unit
-                Attributes:   id, state, description, pilot_url, glue
-                wait, cancel
             Class UnitService
                 Attributes:   id, glue
                 submit_unit,  list_units,  get_unit
-                add_pilot,    list_pilots, get_pilot, remove_pilot (also accepts pilot services)
+                add_pilot,    list_pilots, get_pilot, 
+                remove_pilot (also accepts pilot services)
+            Class PilotFramework
+                Attributes:   id, backend_url, glue
+                submit_unit,  list_units,  get_unit
+                submit_pilot, list_pilots, get_pilot
+            Class Pilot
+                Attributes:   id, pilot_service_url, state, description, glue
+                wait, cancel, (reconfigure?)
+                submit_unit,  list_units,  get_unit
+            Class Unit
+                Attributes:   id, state, description, pilot_url, glue
+                wait, cancel
     -------------------------------------------------------------------------
-

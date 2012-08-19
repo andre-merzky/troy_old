@@ -3,17 +3,18 @@
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
 
 import troy
+import time
 
 def test_compute ():
     try:
         cpd = troy.pilot.ComputePilotDescription ()
 
-        cps = troy.pilot.ComputePilotService ('peejay://')
-        cp1 = cps.submit_pilot (cpd)
-        cp2 = cps.submit_pilot (cpd)
+        cpf = troy.pilot.ComputePilotFramework ('peejay://')
+        cp1 = cpf.submit_pilot (cpd)
+        cp2 = cpf.submit_pilot (cpd)
  
         cus = troy.pilot.ComputeUnitService ()
-        cus.add_pilot_service (cps)
+        cus.add_pilot_service (cpf)
  
         print str(cus.list_pilot_services ())
  
@@ -23,8 +24,17 @@ def test_compute ():
         cud['arguments']  = ['-c', 'touch /tmp/hello_troy_pj && sleep 10']
  
         cu  = cus.submit_unit (cud)
- 
-        cu.wait ()
+
+        s = cu.state
+
+        while s != troy.pilot.State.Done and \
+              s != troy.pilot.State.Failed   :
+
+            print "cu : %s"  %  (str(s))
+            time.sleep (1)
+            s = cu.state
+
+        print "cu : %s"  %  (str(s))
  
         cp1.cancel ()
         cp2.cancel ()
@@ -36,7 +46,7 @@ def test_compute ():
 def test_data ():
     # try:
         dpd = troy.pilot.DataPilotDescription ()
-        dps = troy.pilot.DataPilotService ('file://localhost')
+        dps = troy.pilot.DataPilotFramework ('file://localhost')
         dp  = dps.submit_pilot (dpd)
 
         dus = troy.pilot.DataUnitService ()
@@ -52,11 +62,11 @@ def test_data ():
 def test_pilot ():
     # try:
         cpd = troy.pilot.ComputePilotDescription ()
-        cps = troy.pilot.ComputePilotService ('fork://localhost')
-        cp  = cps.submit_pilot (cpd)
+        cpf = troy.pilot.ComputePilotFramework ('fork://localhost')
+        cp  = cpf.submit_pilot (cpd)
 
         cus = troy.pilot.ComputeUnitService ()
-        cus.add_pilot_service (cps)
+        cus.add_pilot_service (cpf)
 
         cud = troy.pilot.ComputeUnitDescription ()
         cu  = cus.submit_unit (cud)

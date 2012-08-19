@@ -7,13 +7,13 @@ from troy.pilot.exception import TroyException, Error
 #
 #
 #
-class iDataPilotService (iBase) :
-    """  L{DataPilotService} interface """
+class iDataPilotFramework (iBase) :
+    """  L{DataPilotFramework} interface """
 
     ############################################################################
     #
     def __init__ (self, obj, adaptor) :
-        """ Create a DataPilotService """
+        """ Create a DataPilotFramework """
         raise TroyException (Error.NotImplemented, "interface not implemented!")
 
 
@@ -49,7 +49,7 @@ class iDataPilotService (iBase) :
     ############################################################################
     #
     def submit_unit (self, dud) :
-        """ Submit a CU to this DataPilotService """
+        """ Submit a CU to this DataPilotFramework """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 

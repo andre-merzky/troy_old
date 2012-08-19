@@ -11,7 +11,7 @@ class ComputePilot (Base) :
     """ 
     ComputePilot (PilotJob)
 
-    This is the object that is returned by the ComputePilotService when a new
+    This is the object that is returned by the ComputePilotFramework when a new
     ComputePilot is created based on a ComputePilotDescription.
 
     The ComputePilot object can be used by the application to keep track of
@@ -46,7 +46,7 @@ class ComputePilot (Base) :
         type: L{troy.pilot.ComputePilotDescription}
 
       - service_url:
-        The ID of the L{ComputePilotService} which manages this pilot.
+        The ID of the L{ComputePilotFramework} which manages this pilot.
         type: string (url)
 
       - wall_time_left:
@@ -137,7 +137,7 @@ class ComputePilot (Base) :
         Return:
         L{ComputeUnit} object
 
-        The CUD is (possibly translated and) passed on to the CPS backend, which
+        The CUD is (possibly translated and) passed on to the CPF backend, which
         will attempt to instantiate the described workload process on the
         ComputePilot.  If the pilot's resource is not suitable to create the
         requested CU, a L{Error.BadParameter} exception is raised.  Not raising

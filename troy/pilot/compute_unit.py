@@ -40,6 +40,16 @@ class ComputeUnit (Base) :
         # initialize adaptor class
         self.engine_.call ('ComputeUnit', 'init_', self)
 
+        self.attributes_poll_add_ ('state', self.get_state, self.Get)
+
+
+    ############################################################################
+    #
+    def get_state (self) :
+        """ return the current state """
+        print "getting polled for state"
+        return self.engine_.call ('ComputeUnit', 'get_state', self)
+
 
     ############################################################################
     #

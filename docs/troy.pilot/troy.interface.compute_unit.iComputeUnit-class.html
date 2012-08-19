@@ -56,17 +56,18 @@
 <h1 class="epydoc">Class iComputeUnit</h1><p class="nomargin-top"><span class="codelink"><a href="troy.interface.compute_unit-pysrc.html#iComputeUnit">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_troy_int_9" name="uml_class_diagram_for_troy_int_9">
-<area shape="rect" id="node1" href="troy_adaptor_skeleton.xyz_cu-class.html" title="troy_adaptor_skeleton.xyz_cu" alt="" coords="5,203,216,242"/>
-<area shape="rect" id="node2" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="308,6,399,50"/>
-<area shape="rect" id="node61" href="troy.interface.compute_unit.iComputeUnit-class.html#__init__" title="troy.interface.compute_unit.iComputeUnit.__init__" alt="" coords="275,103,432,121"/>
-<area shape="rect" id="node61" href="troy.interface.compute_unit.iComputeUnit-class.html#cancel" title="Cancel the CU" alt="" coords="275,121,432,140"/>
-<area shape="rect" id="node61" href="troy.interface.compute_unit.iComputeUnit-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="275,140,432,159"/>
-<area shape="rect" id="node61" href="troy.interface.compute_unit.iComputeUnit-class.html#wait" title="Wait until CU enters a final state" alt="" coords="275,159,432,177"/>
-<area shape="rect" id="node6" href="troy.interface.compute_unit.iComputeUnit-class.html" title="ComputeUnit" alt="" coords="263,70,444,183"/>
-<area shape="rect" id="node3" href="troy_adaptor_peejay.peejay_dcu-class.html" title="troy_adaptor_peejay.peejay_dcu" alt="" coords="383,262,607,301"/>
-<area shape="rect" id="node4" href="troy_adaptor_peejay.peejay_cu-class.html" title="troy_adaptor_peejay.peejay_cu" alt="" coords="245,203,461,242"/>
-<area shape="rect" id="node5" href="troy.interface.compute_data_unit.iComputeDataUnit-class.html" title="ComputeDataUnit interface" alt="" coords="491,203,749,242"/>
-<area shape="rect" id="node7" href="troy_adaptor_skeleton.xyz_dcu-class.html" title="troy_adaptor_skeleton.xyz_dcu" alt="" coords="636,262,852,301"/>
+<area shape="rect" id="node61" href="troy.interface.compute_unit.iComputeUnit-class.html#__init__" title="troy.interface.compute_unit.iComputeUnit.__init__" alt="" coords="277,103,435,121"/>
+<area shape="rect" id="node61" href="troy.interface.compute_unit.iComputeUnit-class.html#cancel" title="Cancel the CU" alt="" coords="277,121,435,140"/>
+<area shape="rect" id="node61" href="troy.interface.compute_unit.iComputeUnit-class.html#get_state" title="return the current state" alt="" coords="277,140,435,159"/>
+<area shape="rect" id="node61" href="troy.interface.compute_unit.iComputeUnit-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="277,159,435,177"/>
+<area shape="rect" id="node61" href="troy.interface.compute_unit.iComputeUnit-class.html#wait" title="Wait until CU enters a final state" alt="" coords="277,177,435,196"/>
+<area shape="rect" id="node1" href="troy.interface.compute_unit.iComputeUnit-class.html" title="ComputeUnit" alt="" coords="265,70,447,202"/>
+<area shape="rect" id="node3" href="troy_adaptor_peejay.peejay_cu-class.html" title="troy_adaptor_peejay.peejay_cu" alt="" coords="5,222,221,261"/>
+<area shape="rect" id="node4" href="troy_adaptor_skeleton.xyz_cu-class.html" title="troy_adaptor_skeleton.xyz_cu" alt="" coords="251,222,461,261"/>
+<area shape="rect" id="node6" href="troy.interface.compute_data_unit.iComputeDataUnit-class.html" title="ComputeDataUnit interface" alt="" coords="491,222,749,261"/>
+<area shape="rect" id="node2" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="311,6,401,50"/>
+<area shape="rect" id="node5" href="troy_adaptor_peejay.peejay_dcu-class.html" title="troy_adaptor_peejay.peejay_dcu" alt="" coords="383,281,607,319"/>
+<area shape="rect" id="node7" href="troy_adaptor_skeleton.xyz_dcu-class.html" title="troy_adaptor_skeleton.xyz_dcu" alt="" coords="636,281,852,319"/>
 </map>
   <img src="uml_class_diagram_for_troy_int_9.gif" alt='' usemap="#uml_class_diagram_for_troy_int_9" ismap="ismap" class="graph-without-title" />
 </center>
@@ -110,6 +111,23 @@
       Cancel the CU</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.interface.compute_unit-pysrc.html#iComputeUnit.cancel">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_state"></a><span class="summary-sig-name">get_state</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      return the current state</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.compute_unit-pysrc.html#iComputeUnit.get_state">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -239,7 +257,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Tue Aug 14 12:45:07 2012</a>
+    3.0.1 on Sun Aug 19 02:02:36 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

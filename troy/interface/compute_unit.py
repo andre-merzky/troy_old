@@ -27,6 +27,13 @@ class iComputeUnit (iBase) :
 
     ############################################################################
     #
+    def get_state (self) :
+        """ return the current state """
+        raise TroyException (Error.NotImplemented, "method not implemented!")
+
+
+    ############################################################################
+    #
     def wait (self) :
         """ Wait until CU enters a final state """
         raise TroyException (Error.NotImplemented, "method not implemented!")

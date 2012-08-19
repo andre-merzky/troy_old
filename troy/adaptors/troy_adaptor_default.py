@@ -14,7 +14,7 @@ from   troy.pilot.exception import TroyException, Error
 # XxxUnitService level, which is provided by the scheduler adaptors.  This
 # default XxxUnitService adaptor makes sure that the scheduler can actually be
 # invoked when no backend provides an XxxUnitService implementation (which is in
-# fact the interesting case).
+# fact the expected case).
 # 
 class adaptor (troy.interface.aBase) :
     
@@ -28,7 +28,7 @@ class adaptor (troy.interface.aBase) :
                          'ComputeDataUnitService'    : 'default_cdus'}
 
         # 'generator' for serial id's
-        self.serial_  = 0
+        self.serial_ = 0
 
         self.adata = { 
                        'cus'  : {},
@@ -46,7 +46,7 @@ class adaptor (troy.interface.aBase) :
         return 1000  # low adaptor priority
 
     def sanity_check (self) :
-        raise TroyException (Error.NoSuccess, "adaptor disabled")
+      # raise TroyException (Error.NoSuccess, "adaptor disabled")
         pass
 
     def get_serial_ (self) :
@@ -66,44 +66,41 @@ class default_cus (troy.interface.iComputeUnitService) :
         self.api     = api 
         self.adaptor = adaptor
 
-        id = self.api.idata_['id']
+        self.id = None
+        if 'id' in self.api :
+            self.id = self.api.id
 
         # we will only handle this api class if its ID is 'None', or was issued
         # by this adaptor -- otherwise a different adaptor already manages it.
-        if not id == None :
+        if self.id == None :
 
-            if not id in self.adaptor.adata['cus'] :
-                # So, the CUS instance was created by another adaptor.  We trust
-                # that the instance data reflect the actual state of the CUS,
-                # and can operate on the idata alone -- thus we accept that
-                # foreign instance anyway.
-                print "troy_adaptor_default_cus : will re-use existing id " + id
+            # id is none - init new instance.  assign an id
+            self.id = "troy_adaptor_default_cus_%d"  %  self.adaptor.get_serial_ ()
+            self.api['id'] = self.id
 
-            else : 
-                # we found the id, and reconnect to the class instance
-                # that basically means we just continue w/o creating a new id
-                print "troy_adaptor_default_cus : will re-use existing instance " + id
+            # get a scheduler instance, as requested via idata.  We always get that
+            # scheduler instance, even if taking over a CUS created by a foreign
+            # adaptor...
+            self.scheduler = troy.pilot.compute_scheduler.ComputeScheduler (self.api.idata_['scheduler'])
 
-        # id is none - init new instance
+            # register this class instance with the adaptor, to get some
+            # persistent state.
+            self.adaptor.adata['cus'][self.id]['scheduler'] = self.scheduler
+
         else :
 
-            # assign an id
-            id = 'troy_adaptor_default_cus ' + str (self.adaptor.get_serial_ ())
-            self.api.idata_['id'] = id
+            if self.id in self.adaptor.adata['cus'] :
+                # we found the id, and reconnect to the class instance, i.e.
+                # re-create the class state.
+                print "troy_adaptor_default_cus : will re-use existing instance " + id
+                self.scheduler = self.adaptor.adata['cus'][self.id]['scheduler']
 
-            # if we got this far, we can now register this class instance with the
-            # adaptor, to get some persistent state -- for example, to reconnect to
-            # a cus via its id)
-            print "id  : " + str (id)
-            print "self: " + str (self)
-            self.adaptor.adata['cus'][id] = self
+            else : 
+                # The CUS instance was created by another adaptor.
+                raise troy.pilot.TroyException (troy.pilot.Error.BadParameter, 
+                      "Cannot handle id")
 
-            print " === default cus init done"
 
-        # get a scheduler instance, as requested via idata.  We always get that
-        # scheduler instance, even if taking over a CUS created by a foreign
-        # adaptor...
-        self.scheduler = troy.pilot.compute_scheduler.ComputeScheduler (self.api.idata_['scheduler'])
 
 
     def add_compute_pilot (self, cp) :

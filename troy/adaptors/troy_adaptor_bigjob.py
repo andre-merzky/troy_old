@@ -36,12 +36,12 @@ class adaptor (troy.interface.aBase) :
 
         # registry maps api classes to adaptor classes implementing the
         # respective class interface.
-        self.registry = {'ComputePilotService'       : 'bigjob_cps' ,
+        self.registry = {'ComputePilotFramework'       : 'bigjob_cps' ,
                          'ComputePilot'              : 'bigjob_cp'  ,
                          'ComputeUnitService'        : 'bigjob_cus' ,
                          'ComputeUnit'               : 'bigjob_cu'  , 
 
-                         'DataPilotService'          : 'bigjob_dps' ,
+                         'DataPilotFramework'          : 'bigjob_dps' ,
                          'DataPilot'                 : 'bigjob_dp'  ,
                          'DataUnitService'           : 'bigjob_dus' ,
                          'DataUnit'                  : 'bigjob_du'  , 
@@ -51,7 +51,7 @@ class adaptor (troy.interface.aBase) :
 
         # The adaptor_data keeps links between all id's and backend instances.
         # It is also use to maintain any other adaptor level state.
-        self.adata = { 'cps' : {},
+        self.adata = { 'cpf' : {},
                        'cp'  : {}, 
                        'cus' : {},
                        'cu'  : {} }
@@ -101,11 +101,11 @@ class adaptor (troy.interface.aBase) :
 #
 
 ########################################################################
-class bigjob_cps (troy.interface.iComputePilotService) :
+class bigjob_cps (troy.interface.iComputePilotFramework) :
 
     def __init__ (self, api, adaptor) :
 
-        print "bj cps ctor"
+        print "bj cpf ctor"
         self.api     = api 
         self.adaptor = adaptor
 
@@ -121,10 +121,10 @@ class bigjob_cps (troy.interface.iComputePilotService) :
             raise troy.pilot.TroyException (troy.pilot.Error.BadParameter, 
                   "can only handle bigjob:// URLs, not " + elems.scheme + "://")
 
-        # all ok now, we can create and register the cps in the adaptor
-        self.cps = self.adaptor.bj_module.PilotComputeService (1)
-        self.id  = self.cps.id
-        self.adaptor.adata['cps'][self.id] = self.cps
+        # all ok now, we can create and register the cpf in the adaptor
+        self.cpf = self.adaptor.bj_module.PilotComputeService (1)
+        self.id  = self.cpf.id
+        self.adaptor.adata['cpf'][self.id] = self.cpf
 
 
     def submit_pilot (self, cpd) :
@@ -149,7 +149,7 @@ class bigjob_cps (troy.interface.iComputePilotService) :
         cpd_copy = cpd
         cpd_copy['resource_url'] = cpd_copy['rm']
 
-        pilot     = self.cps.submit_pilot (cpd['rm'], cpd)
+        pilot     = self.cpf.submit_pilot (cpd['rm'], cpd)
         pilot_id  = pilot.id
         self.adaptor.adata['cp'][pilot_id] = pilot
 
@@ -274,14 +274,14 @@ class bigjob_cus (troy.interface.iComputeUnitService) :
         """ Add a ComputePilot to this CUS.
 
             Keyword arguments:
-            cps -- The ComputePilot to which this ComputeUnitService will connect.
+            cpf -- The ComputePilot to which this ComputeUnitService will connect.
         """
         # we leave this to the default adaptor
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
     def list_compute_pilots (self) :
-        """ List all CPs of CUS """
+        """ List all cpf of CUS """
         # we leave this to the default adaptor
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
@@ -353,7 +353,7 @@ class bigjob_cu (troy.interface.iComputeUnit) :
 #
 
 ########################################################################
-class bigjob_dps (troy.interface.iDataPilotService) :
+class bigjob_dps (troy.interface.iDataPilotFramework) :
 
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")

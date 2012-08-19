@@ -32,12 +32,12 @@ class adaptor (troy.interface.aBase) :
 
         # registry maps api classes to adaptor classes implementing the
         # respective class interface.
-        self.registry = {'ComputePilotService'       : 'xyz_cps' ,
+        self.registry = {'ComputePilotFramework'       : 'xyz_cps' ,
                          'ComputePilot'              : 'xyz_cp'  ,
                          'ComputeUnitService'        : 'xyz_cus' ,
                          'ComputeUnit'               : 'xyz_cu'  , 
 
-                         'DataPilotService'          : 'xyz_dps' ,
+                         'DataPilotFramework'          : 'xyz_dps' ,
                          'DataPilot'                 : 'xyz_dp'  ,
                          'DataUnitService'           : 'xyz_dus' ,
                          'DataUnit'                  : 'xyz_du'  , 
@@ -66,7 +66,7 @@ class adaptor (troy.interface.aBase) :
 #
 
 ########################################################################
-class xyz_cps (troy.interface.iComputePilotService) :
+class xyz_cps (troy.interface.iComputePilotFramework) :
 
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
@@ -149,7 +149,7 @@ class xyz_cus (troy.interface.iComputeUnitService) :
 
 
     def list_compute_pilots (self) :
-        """ List all CPs of CUS """
+        """ List all CPF of CUS """
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
 
@@ -218,7 +218,7 @@ class xyz_cu (troy.interface.iComputeUnit) :
 #
 
 ########################################################################
-class xyz_dps (troy.interface.iDataPilotService) :
+class xyz_dps (troy.interface.iDataPilotFramework) :
 
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")

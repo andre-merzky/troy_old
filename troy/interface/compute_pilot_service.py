@@ -7,14 +7,14 @@ from troy.pilot.exception import TroyException, Error
 #
 #  
 #
-class iComputePilotService (iBase) :
-    """  L{ComputePilotService} interface """
+class iComputePilotFramework (iBase) :
+    """  L{ComputePilotFramework} interface """
 
 
     ############################################################################
     #
     def __init__ (self, obj, adaptor) :
-        """ Create a ComputePilotService """
+        """ Create a ComputePilotFramework """
         raise TroyException (Error.NotImplemented, "interface not implemented!")
 
 
@@ -50,7 +50,7 @@ class iComputePilotService (iBase) :
     ############################################################################
     #
     def submit_unit (self, cud) :
-        """ Submit a CU to this ComputePilotService """
+        """ Submit a CU to this ComputePilotFramework """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 

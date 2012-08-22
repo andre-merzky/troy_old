@@ -28,12 +28,12 @@ class adaptor (troy.interface.aBase) :
 
         # The registry maps api interface classes to the adaptor classes 
         # implementing them:
-        self.registry = {'ComputePilotFramework'       : 'peejay_cps' ,
+        self.registry = {'ComputePilotFramework'     : 'peejay_cpf' ,
                          'ComputePilot'              : 'peejay_cp'  ,
                         #'ComputeUnitService'        : 'peejay_cus' ,
                          'ComputeUnit'               : 'peejay_cu'  , 
 
-                         'DataPilotFramework'          : 'peejay_dps' ,
+                         'DataPilotFramework'        : 'peejay_dpf' ,
                          'DataPilot'                 : 'peejay_dp'  ,
                         #'DataUnitService'           : 'peejay_dus' ,
                          'DataUnit'                  : 'peejay_du'  , 
@@ -94,7 +94,7 @@ class adaptor (troy.interface.aBase) :
 #
 
 ########################################################################
-class peejay_cps (troy.interface.iComputePilotFramework) :
+class peejay_cpf (troy.interface.iComputePilotFramework) :
 
     def __init__ (self, api, adaptor) :
 
@@ -119,7 +119,7 @@ class peejay_cps (troy.interface.iComputePilotFramework) :
                   "can only handle peejay:// URLs, not " + elems.scheme + "://")
 
         if elems.path != '' :
-            # we MUST interpret cps_id, if present
+            # we MUST interpret cpf_id, if present
             if not id in self.adaptor.adata['cpf'] :
                 raise troy.pilot.TroyException (troy.pilot.Error.BadParameter, 
                       "cannot reconnect to CPF - invalid id")
@@ -171,7 +171,7 @@ class peejay_cp (troy.interface.iComputePilot) :
         self.adaptor = adaptor
         self.peejay  = self.adaptor.module
 
-        # we MUST interpret cps_id, if present.  In fact, we need to have an id,
+        # we MUST interpret cpf_id, if present.  In fact, we need to have an id,
         # as creation is always done in the CPF
         if not 'id' in self.api or not self.api.id :
             raise troy.pilot.TroyException (troy.pilot.Error.NoSuccess, 
@@ -339,7 +339,7 @@ class peejay_cus (troy.interface.iComputeUnitService) :
     #     self.scheduler.schedule (self.api, cud)
 
 
-    def add_pilot_service (self, cpf) :
+    def add_pilot_framework (self, cpf) :
         """ Add a ComputePilotFramework to this CUS.
 
             Keyword arguments:
@@ -348,7 +348,7 @@ class peejay_cus (troy.interface.iComputeUnitService) :
         self.cpf.append (cpf)
 
 
-    def list_pilot_services (self) :
+    def list_pilot_frameworks (self) :
         """ List all CPFs of CUS """
 
         ret = []
@@ -359,7 +359,7 @@ class peejay_cus (troy.interface.iComputeUnitService) :
         return ret
 
 
-    def remove_pilot_service (self, cpf) :
+    def remove_pilot_framework (self, cpf) :
         """ Remove a ComputePilotFramework
 
             Note that it won't cancel the ComputePilotFramework, it will just no longer
@@ -444,7 +444,7 @@ class peejay_cu (troy.interface.iComputeUnit) :
 #
 
 ########################################################################
-class peejay_dps (troy.interface.iDataPilotFramework) :
+class peejay_dpf (troy.interface.iDataPilotFramework) :
 
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
@@ -524,7 +524,7 @@ class peejay_dus (troy.interface.iDataUnitService) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
     
 
-    def remove_data_pilot_service (self, dps) :
+    def remove_data_pilot_framework (self, dpf) :
         """ Remove a DataPilotFramework 
 
             Note that it won't cancel the DataPilot, it will just no longer

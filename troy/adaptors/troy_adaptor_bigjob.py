@@ -36,12 +36,12 @@ class adaptor (troy.interface.aBase) :
 
         # registry maps api classes to adaptor classes implementing the
         # respective class interface.
-        self.registry = {'ComputePilotFramework'       : 'bigjob_cps' ,
+        self.registry = {'ComputePilotFramework'     : 'bigjob_cpf' ,
                          'ComputePilot'              : 'bigjob_cp'  ,
                          'ComputeUnitService'        : 'bigjob_cus' ,
                          'ComputeUnit'               : 'bigjob_cu'  , 
 
-                         'DataPilotFramework'          : 'bigjob_dps' ,
+                         'DataPilotFramework'        : 'bigjob_dpf' ,
                          'DataPilot'                 : 'bigjob_dp'  ,
                          'DataUnitService'           : 'bigjob_dus' ,
                          'DataUnit'                  : 'bigjob_du'  , 
@@ -101,7 +101,7 @@ class adaptor (troy.interface.aBase) :
 #
 
 ########################################################################
-class bigjob_cps (troy.interface.iComputePilotFramework) :
+class bigjob_cpf (troy.interface.iComputePilotFramework) :
 
     def __init__ (self, api, adaptor) :
 
@@ -353,7 +353,7 @@ class bigjob_cu (troy.interface.iComputeUnit) :
 #
 
 ########################################################################
-class bigjob_dps (troy.interface.iDataPilotFramework) :
+class bigjob_dpf (troy.interface.iDataPilotFramework) :
 
     def __init__ (self, api, adaptor) :
         raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")

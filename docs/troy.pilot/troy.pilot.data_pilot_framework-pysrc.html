@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>troy.pilot.data_pilot_service</title>
+  <title>troy.pilot.data_pilot_framework</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -41,7 +41,7 @@
       <span class="breadcrumbs">
         Package&nbsp;troy ::
         <a href="troy.pilot-module.html">Package&nbsp;pilot</a> ::
-        Module&nbsp;data_pilot_service
+        Module&nbsp;data_pilot_framework
       </span>
     </td>
     <td>
@@ -51,7 +51,7 @@
     </td>
   </tr>
 </table>
-<h1 class="epydoc">Source Code for <a href="troy.pilot.data_pilot_service-module.html">Module troy.pilot.data_pilot_service</a></h1>
+<h1 class="epydoc">Source Code for <a href="troy.pilot.data_pilot_framework-module.html">Module troy.pilot.data_pilot_framework</a></h1>
 <pre class="py-src">
 <a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"> </tt>
 <a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module troy.interface.base=troy.interface.base-module.html,Module troy.pilot.base=troy.pilot.base-module.html"><a title="troy.interface.base
@@ -60,21 +60,21 @@ troy.pilot.base" class="py-name" href="#" onclick="return doclink('link-0', 'bas
 <a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
 <a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment">########################################################################</tt> </tt>
 <a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
-<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#  DataPilotFramework (DPS)</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#  DataPilotFramework (DPF)</tt> </tt>
 <a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
-<a name="DataPilotFramework"></a><div id="DataPilotFramework-def"><a name="L9"></a><tt class="py-lineno">  9</tt> <a class="py-toggle" href="#" id="DataPilotFramework-toggle" onclick="return toggle('DataPilotFramework');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="troy.pilot.data_pilot_service.DataPilotFramework-class.html">DataPilotFramework</a> <tt class="py-op">(</tt><tt class="py-base-class">Base</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+<a name="DataPilotFramework"></a><div id="DataPilotFramework-def"><a name="L9"></a><tt class="py-lineno">  9</tt> <a class="py-toggle" href="#" id="DataPilotFramework-toggle" onclick="return toggle('DataPilotFramework');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="troy.pilot.data_pilot_framework.DataPilotFramework-class.html">DataPilotFramework</a> <tt class="py-op">(</tt><tt class="py-base-class">Base</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
 </div><div id="DataPilotFramework-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="DataPilotFramework-expanded"><a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line">    <tt class="py-docstring">"""  </tt> </tt>
-<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">    DataPilotFramework (DPS)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">    DataPilotFramework (DPF)</tt> </tt>
 <a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
 <a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">    The DataPilotFramework is a DataPilot manager.</tt> </tt>
 <a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">    A DPS acts as the interface to an underlying pilot data framework -- it</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">    A DPF acts as the interface to an underlying pilot data framework -- it</tt> </tt>
 <a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">    creates and manages L{DataPilot} instances within that framework, and can</tt> </tt>
 <a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">    scheduler L{DataUnit}s amongst those pilots.</tt> </tt>
 <a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
 <a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">    The class is stateful, and instances are identified by an url, and can be</tt> </tt>
-<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">    reconnected to.  A DPS can be added to a L{DataUnitService}, whose scheduler</tt> </tt>
-<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">    will then be able to utilize the DPS's pilots for L{DataUnit} enaction.</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">    reconnected to.  A DPF can be added to a L{DataUnitService}, whose scheduler</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">    will then be able to utilize the DPF's pilots for L{DataUnit} enaction.</tt> </tt>
 <a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
 <a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">    Properties::</tt> </tt>
 <a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
@@ -86,33 +86,33 @@ troy.pilot.base" class="py-name" href="#" onclick="return doclink('link-0', 'bas
 <a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
 <a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
 <a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
-<a name="DataPilotFramework.__init__"></a><div id="DataPilotFramework.__init__-def"><a name="L33"></a><tt class="py-lineno"> 33</tt> <a class="py-toggle" href="#" id="DataPilotFramework.__init__-toggle" onclick="return toggle('DataPilotFramework.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_pilot_service.DataPilotFramework-class.html#__init__">__init__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+<a name="DataPilotFramework.__init__"></a><div id="DataPilotFramework.__init__-def"><a name="L33"></a><tt class="py-lineno"> 33</tt> <a class="py-toggle" href="#" id="DataPilotFramework.__init__-toggle" onclick="return toggle('DataPilotFramework.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_pilot_framework.DataPilotFramework-class.html#__init__">__init__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
 </div><div id="DataPilotFramework.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DataPilotFramework.__init__-expanded"><a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
 <a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">        Create a DataPilotFramework object</tt> </tt>
 <a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
 <a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">        Keyword arguments:</tt> </tt>
-<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">        url: url identifying the backend DPS.</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">        url: url identifying the backend DPF.</tt> </tt>
 <a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">        Note that the URL may be incomplete, if a new DPS instance is to be</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">        Note that the URL may be incomplete, if a new DPF instance is to be</tt> </tt>
 <a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">        created -- for example, it may contain only a hint about what pilot</tt> </tt>
-<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">        framework is to be used on what resource.  On inspection, the DPS will</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">        framework is to be used on what resource.  On inspection, the DPF will</tt> </tt>
 <a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">        always return a fully qualified URL, which will not change over the</tt> </tt>
-<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">        lifetime of the DPS.</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">        lifetime of the DPF.</tt> </tt>
 <a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
 <a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
 <a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-comment"># init api base</tt> </tt>
-<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt id="link-2" class="py-name"><a title="troy.pilot.base.Base" class="py-name" href="#" onclick="return doclink('link-2', 'Base', 'link-1');">Base</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method troy.interface.base.aBase.__init__()=troy.interface.base.aBase-class.html#__init__,Method troy.interface.base.iBase.__init__()=troy.interface.base.iBase-class.html#__init__,Method troy.interface.compute_data_scheduler.iComputeDataScheduler.__init__()=troy.interface.compute_data_scheduler.iComputeDataScheduler-class.html#__init__,Method troy.interface.compute_data_unit.iComputeDataUnit.__init__()=troy.interface.compute_data_unit.iComputeDataUnit-class.html#__init__,Method troy.interface.compute_data_unit_service.iComputeDataUnitService.__init__()=troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html#__init__,Method troy.interface.compute_pilot.iComputePilot.__init__()=troy.interface.compute_pilot.iComputePilot-class.html#__init__,Method troy.interface.compute_pilot_service.iComputePilotFramework.__init__()=troy.interface.compute_pilot_service.iComputePilotFramework-class.html#__init__,Method troy.interface.compute_scheduler.iComputeScheduler.__init__()=troy.interface.compute_scheduler.iComputeScheduler-class.html#__init__,Method troy.interface.compute_unit.iComputeUnit.__init__()=troy.interface.compute_unit.iComputeUnit-class.html#__init__,Method troy.interface.compute_unit_service.iComputeUnitService.__init__()=troy.interface.compute_unit_service.iComputeUnitService-class.html#__init__,Method troy.interface.data_pilot.iDataPilot.__init__()=troy.interface.data_pilot.iDataPilot-class.html#__init__,Method troy.interface.data_pilot_service.iDataPilotFramework.__init__()=troy.interface.data_pilot_service.iDataPilotFramework-class.html#__init__,Method troy.interface.data_scheduler.iDataScheduler.__init__()=troy.interface.data_scheduler.iDataScheduler-class.html#__init__,Method troy.interface.data_unit.iDataUnit.__init__()=troy.interface.data_unit.iDataUnit-class.html#__init__,Method troy.interface.data_unit_service.iDataUnitService.__init__()=troy.interface.data_unit_service.iDataUnitService-class.html#__init__,Method troy.pilot.attributes.Attributes.__init__()=troy.pilot.attributes.Attributes-class.html#__init__,Method troy.pilot.attributes.AttributesBase_.__init__()=troy.pilot.attributes.AttributesBase_-class.html#__init__,Method troy.pilot.attributes.Callback.__init__()=troy.pilot.attributes.Callback-class.html#__init__,Method troy.pilot.base.Base.__init__()=troy.pilot.base.Base-class.html#__init__,Method troy.pilot.compute_data_scheduler.ComputeDataScheduler.__init__()=troy.pilot.compute_data_scheduler.ComputeDataScheduler-class.html#__init__,Method troy.pilot.compute_data_unit.ComputeDataUnit.__init__()=troy.pilot.compute_data_unit.ComputeDataUnit-class.html#__init__,Method troy.pilot.compute_data_unit_description.ComputeDataUnitDescription.__init__()=troy.pilot.compute_data_unit_description.ComputeDataUnitDescription-class.html#__init__,Method troy.pilot.compute_data_unit_service.ComputeDataUnitService.__init__()=troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#__init__,Method troy.pilot.compute_pilot.ComputePilot.__init__()=troy.pilot.compute_pilot.ComputePilot-class.html#__init__,Method troy.pilot.compute_pilot_description.ComputePilotDescription.__init__()=troy.pilot.compute_pilot_description.ComputePilotDescription-class.html#__init__,Method troy.pilot.compute_pilot_service.ComputePilotFramework.__init__()=troy.pilot.compute_pilot_service.ComputePilotFramework-class.html#__init__,Method troy.pilot.compute_scheduler.ComputeScheduler.__init__()=troy.pilot.compute_scheduler.ComputeScheduler-class.html#__init__,Method troy.pilot.compute_unit.ComputeUnit.__init__()=troy.pilot.compute_unit.ComputeUnit-class.html#__init__,Method troy.pilot.compute_unit_description.ComputeUnitDescription.__init__()=troy.pilot.compute_unit_description.ComputeUnitDescription-class.html#__init__,Method troy.pilot.compute_unit_service.ComputeUnitService.__init__()=troy.pilot.compute_unit_service.ComputeUnitService-class.html#__init__,Method troy.pilot.data_pilot.DataPilot.__init__()=troy.pilot.data_pilot.DataPilot-class.html#__init__,Method troy.pilot.data_pilot_description.DataPilotDescription.__init__()=troy.pilot.data_pilot_description.DataPilotDescription-class.html#__init__,Method troy.pilot.data_pilot_service.DataPilotFramework.__init__()=troy.pilot.data_pilot_service.DataPilotFramework-class.html#__init__,Method troy.pilot.data_scheduler.DataScheduler.__init__()=troy.pilot.data_scheduler.DataScheduler-class.html#__init__,Method troy.pilot.data_unit.DataUnit.__init__()=troy.pilot.data_unit.DataUnit-class.html#__init__,Method troy.pilot.data_unit_description.DataUnitDescription.__init__()=troy.pilot.data_unit_description.DataUnitDescription-class.html#__init__,Method troy.pilot.data_unit_service.DataUnitService.__init__()=troy.pilot.data_unit_service.DataUnitService-class.html#__init__,Method troy.pilot.exception.TroyException.__init__()=troy.pilot.exception.TroyException-class.html#__init__,Method troy_adaptor_peejay.adaptor.__init__()=troy_adaptor_peejay.adaptor-class.html#__init__,Method troy_adaptor_peejay.peejay_cp.__init__()=troy_adaptor_peejay.peejay_cp-class.html#__init__,Method troy_adaptor_peejay.peejay_cps.__init__()=troy_adaptor_peejay.peejay_cps-class.html#__init__,Method troy_adaptor_peejay.peejay_cu.__init__()=troy_adaptor_peejay.peejay_cu-class.html#__init__,Method troy_adaptor_peejay.peejay_cus.__init__()=troy_adaptor_peejay.peejay_cus-class.html#__init__,Method troy_adaptor_peejay.peejay_dcu.__init__()=troy_adaptor_peejay.peejay_dcu-class.html#__init__,Method troy_adaptor_peejay.peejay_dcus.__init__()=troy_adaptor_peejay.peejay_dcus-class.html#__init__,Method troy_adaptor_peejay.peejay_dp.__init__()=troy_adaptor_peejay.peejay_dp-class.html#__init__,Method troy_adaptor_peejay.peejay_dps.__init__()=troy_adaptor_peejay.peejay_dps-class.html#__init__,Method troy_adaptor_peejay.peejay_du.__init__()=troy_adaptor_peejay.peejay_du-class.html#__init__,Method troy_adaptor_peejay.peejay_dus.__init__()=troy_adaptor_peejay.peejay_dus-class.html#__init__,Method troy_adaptor_skeleton.adaptor.__init__()=troy_adaptor_skeleton.adaptor-class.html#__init__,Method troy_adaptor_skeleton.xyz_cp.__init__()=troy_adaptor_skeleton.xyz_cp-class.html#__init__,Method troy_adaptor_skeleton.xyz_cps.__init__()=troy_adaptor_skeleton.xyz_cps-class.html#__init__,Method troy_adaptor_skeleton.xyz_cu.__init__()=troy_adaptor_skeleton.xyz_cu-class.html#__init__,Method troy_adaptor_skeleton.xyz_cus.__init__()=troy_adaptor_skeleton.xyz_cus-class.html#__init__,Method troy_adaptor_skeleton.xyz_dcu.__init__()=troy_adaptor_skeleton.xyz_dcu-class.html#__init__,Method troy_adaptor_skeleton.xyz_dcus.__init__()=troy_adaptor_skeleton.xyz_dcus-class.html#__init__,Method troy_adaptor_skeleton.xyz_dp.__init__()=troy_adaptor_skeleton.xyz_dp-class.html#__init__,Method troy_adaptor_skeleton.xyz_dps.__init__()=troy_adaptor_skeleton.xyz_dps-class.html#__init__,Method troy_adaptor_skeleton.xyz_du.__init__()=troy_adaptor_skeleton.xyz_du-class.html#__init__,Method troy_adaptor_skeleton.xyz_dus.__init__()=troy_adaptor_skeleton.xyz_dus-class.html#__init__"><a title="troy.interface.base.aBase.__init__
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt id="link-2" class="py-name"><a title="troy.pilot.base.Base" class="py-name" href="#" onclick="return doclink('link-2', 'Base', 'link-1');">Base</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method troy.interface.base.aBase.__init__()=troy.interface.base.aBase-class.html#__init__,Method troy.interface.base.iBase.__init__()=troy.interface.base.iBase-class.html#__init__,Method troy.interface.compute_data_scheduler.iComputeDataScheduler.__init__()=troy.interface.compute_data_scheduler.iComputeDataScheduler-class.html#__init__,Method troy.interface.compute_data_unit.iComputeDataUnit.__init__()=troy.interface.compute_data_unit.iComputeDataUnit-class.html#__init__,Method troy.interface.compute_data_unit_service.iComputeDataUnitService.__init__()=troy.interface.compute_data_unit_service.iComputeDataUnitService-class.html#__init__,Method troy.interface.compute_pilot.iComputePilot.__init__()=troy.interface.compute_pilot.iComputePilot-class.html#__init__,Method troy.interface.compute_pilot_framework.iComputePilotFramework.__init__()=troy.interface.compute_pilot_framework.iComputePilotFramework-class.html#__init__,Method troy.interface.compute_scheduler.iComputeScheduler.__init__()=troy.interface.compute_scheduler.iComputeScheduler-class.html#__init__,Method troy.interface.compute_unit.iComputeUnit.__init__()=troy.interface.compute_unit.iComputeUnit-class.html#__init__,Method troy.interface.compute_unit_service.iComputeUnitService.__init__()=troy.interface.compute_unit_service.iComputeUnitService-class.html#__init__,Method troy.interface.data_pilot.iDataPilot.__init__()=troy.interface.data_pilot.iDataPilot-class.html#__init__,Method troy.interface.data_pilot_framework.iDataPilotFramework.__init__()=troy.interface.data_pilot_framework.iDataPilotFramework-class.html#__init__,Method troy.interface.data_scheduler.iDataScheduler.__init__()=troy.interface.data_scheduler.iDataScheduler-class.html#__init__,Method troy.interface.data_unit.iDataUnit.__init__()=troy.interface.data_unit.iDataUnit-class.html#__init__,Method troy.interface.data_unit_service.iDataUnitService.__init__()=troy.interface.data_unit_service.iDataUnitService-class.html#__init__,Method troy.pilot.attributes.Attributes.__init__()=troy.pilot.attributes.Attributes-class.html#__init__,Method troy.pilot.attributes.AttributesBase_.__init__()=troy.pilot.attributes.AttributesBase_-class.html#__init__,Method troy.pilot.attributes.Callback.__init__()=troy.pilot.attributes.Callback-class.html#__init__,Method troy.pilot.base.Base.__init__()=troy.pilot.base.Base-class.html#__init__,Method troy.pilot.compute_data_scheduler.ComputeDataScheduler.__init__()=troy.pilot.compute_data_scheduler.ComputeDataScheduler-class.html#__init__,Method troy.pilot.compute_data_unit.ComputeDataUnit.__init__()=troy.pilot.compute_data_unit.ComputeDataUnit-class.html#__init__,Method troy.pilot.compute_data_unit_description.ComputeDataUnitDescription.__init__()=troy.pilot.compute_data_unit_description.ComputeDataUnitDescription-class.html#__init__,Method troy.pilot.compute_data_unit_service.ComputeDataUnitService.__init__()=troy.pilot.compute_data_unit_service.ComputeDataUnitService-class.html#__init__,Method troy.pilot.compute_pilot.ComputePilot.__init__()=troy.pilot.compute_pilot.ComputePilot-class.html#__init__,Method troy.pilot.compute_pilot_description.ComputePilotDescription.__init__()=troy.pilot.compute_pilot_description.ComputePilotDescription-class.html#__init__,Method troy.pilot.compute_pilot_framework.ComputePilotFramework.__init__()=troy.pilot.compute_pilot_framework.ComputePilotFramework-class.html#__init__,Method troy.pilot.compute_scheduler.ComputeScheduler.__init__()=troy.pilot.compute_scheduler.ComputeScheduler-class.html#__init__,Method troy.pilot.compute_unit.ComputeUnit.__init__()=troy.pilot.compute_unit.ComputeUnit-class.html#__init__,Method troy.pilot.compute_unit_description.ComputeUnitDescription.__init__()=troy.pilot.compute_unit_description.ComputeUnitDescription-class.html#__init__,Method troy.pilot.compute_unit_service.ComputeUnitService.__init__()=troy.pilot.compute_unit_service.ComputeUnitService-class.html#__init__,Method troy.pilot.data_pilot.DataPilot.__init__()=troy.pilot.data_pilot.DataPilot-class.html#__init__,Method troy.pilot.data_pilot_description.DataPilotDescription.__init__()=troy.pilot.data_pilot_description.DataPilotDescription-class.html#__init__,Method troy.pilot.data_pilot_framework.DataPilotFramework.__init__()=troy.pilot.data_pilot_framework.DataPilotFramework-class.html#__init__,Method troy.pilot.data_scheduler.DataScheduler.__init__()=troy.pilot.data_scheduler.DataScheduler-class.html#__init__,Method troy.pilot.data_unit.DataUnit.__init__()=troy.pilot.data_unit.DataUnit-class.html#__init__,Method troy.pilot.data_unit_description.DataUnitDescription.__init__()=troy.pilot.data_unit_description.DataUnitDescription-class.html#__init__,Method troy.pilot.data_unit_service.DataUnitService.__init__()=troy.pilot.data_unit_service.DataUnitService-class.html#__init__,Method troy.pilot.exception.TroyException.__init__()=troy.pilot.exception.TroyException-class.html#__init__,Method troy_adaptor_peejay.adaptor.__init__()=troy_adaptor_peejay.adaptor-class.html#__init__,Method troy_adaptor_peejay.peejay_cp.__init__()=troy_adaptor_peejay.peejay_cp-class.html#__init__,Method troy_adaptor_peejay.peejay_cpf.__init__()=troy_adaptor_peejay.peejay_cpf-class.html#__init__,Method troy_adaptor_peejay.peejay_cu.__init__()=troy_adaptor_peejay.peejay_cu-class.html#__init__,Method troy_adaptor_peejay.peejay_cus.__init__()=troy_adaptor_peejay.peejay_cus-class.html#__init__,Method troy_adaptor_peejay.peejay_dcu.__init__()=troy_adaptor_peejay.peejay_dcu-class.html#__init__,Method troy_adaptor_peejay.peejay_dcus.__init__()=troy_adaptor_peejay.peejay_dcus-class.html#__init__,Method troy_adaptor_peejay.peejay_dp.__init__()=troy_adaptor_peejay.peejay_dp-class.html#__init__,Method troy_adaptor_peejay.peejay_dpf.__init__()=troy_adaptor_peejay.peejay_dpf-class.html#__init__,Method troy_adaptor_peejay.peejay_du.__init__()=troy_adaptor_peejay.peejay_du-class.html#__init__,Method troy_adaptor_peejay.peejay_dus.__init__()=troy_adaptor_peejay.peejay_dus-class.html#__init__,Method troy_adaptor_skeleton.adaptor.__init__()=troy_adaptor_skeleton.adaptor-class.html#__init__,Method troy_adaptor_skeleton.xyz_cp.__init__()=troy_adaptor_skeleton.xyz_cp-class.html#__init__,Method troy_adaptor_skeleton.xyz_cpf.__init__()=troy_adaptor_skeleton.xyz_cpf-class.html#__init__,Method troy_adaptor_skeleton.xyz_cu.__init__()=troy_adaptor_skeleton.xyz_cu-class.html#__init__,Method troy_adaptor_skeleton.xyz_cus.__init__()=troy_adaptor_skeleton.xyz_cus-class.html#__init__,Method troy_adaptor_skeleton.xyz_dcu.__init__()=troy_adaptor_skeleton.xyz_dcu-class.html#__init__,Method troy_adaptor_skeleton.xyz_dcus.__init__()=troy_adaptor_skeleton.xyz_dcus-class.html#__init__,Method troy_adaptor_skeleton.xyz_dp.__init__()=troy_adaptor_skeleton.xyz_dp-class.html#__init__,Method troy_adaptor_skeleton.xyz_dpf.__init__()=troy_adaptor_skeleton.xyz_dpf-class.html#__init__,Method troy_adaptor_skeleton.xyz_du.__init__()=troy_adaptor_skeleton.xyz_du-class.html#__init__,Method troy_adaptor_skeleton.xyz_dus.__init__()=troy_adaptor_skeleton.xyz_dus-class.html#__init__"><a title="troy.interface.base.aBase.__init__
 troy.interface.base.iBase.__init__
 troy.interface.compute_data_scheduler.iComputeDataScheduler.__init__
 troy.interface.compute_data_unit.iComputeDataUnit.__init__
 troy.interface.compute_data_unit_service.iComputeDataUnitService.__init__
 troy.interface.compute_pilot.iComputePilot.__init__
-troy.interface.compute_pilot_service.iComputePilotFramework.__init__
+troy.interface.compute_pilot_framework.iComputePilotFramework.__init__
 troy.interface.compute_scheduler.iComputeScheduler.__init__
 troy.interface.compute_unit.iComputeUnit.__init__
 troy.interface.compute_unit_service.iComputeUnitService.__init__
 troy.interface.data_pilot.iDataPilot.__init__
-troy.interface.data_pilot_service.iDataPilotFramework.__init__
+troy.interface.data_pilot_framework.iDataPilotFramework.__init__
 troy.interface.data_scheduler.iDataScheduler.__init__
 troy.interface.data_unit.iDataUnit.__init__
 troy.interface.data_unit_service.iDataUnitService.__init__
@@ -126,14 +126,14 @@ troy.pilot.compute_data_unit_description.ComputeDataUnitDescription.__init__
 troy.pilot.compute_data_unit_service.ComputeDataUnitService.__init__
 troy.pilot.compute_pilot.ComputePilot.__init__
 troy.pilot.compute_pilot_description.ComputePilotDescription.__init__
-troy.pilot.compute_pilot_service.ComputePilotFramework.__init__
+troy.pilot.compute_pilot_framework.ComputePilotFramework.__init__
 troy.pilot.compute_scheduler.ComputeScheduler.__init__
 troy.pilot.compute_unit.ComputeUnit.__init__
 troy.pilot.compute_unit_description.ComputeUnitDescription.__init__
 troy.pilot.compute_unit_service.ComputeUnitService.__init__
 troy.pilot.data_pilot.DataPilot.__init__
 troy.pilot.data_pilot_description.DataPilotDescription.__init__
-troy.pilot.data_pilot_service.DataPilotFramework.__init__
+troy.pilot.data_pilot_framework.DataPilotFramework.__init__
 troy.pilot.data_scheduler.DataScheduler.__init__
 troy.pilot.data_unit.DataUnit.__init__
 troy.pilot.data_unit_description.DataUnitDescription.__init__
@@ -141,24 +141,24 @@ troy.pilot.data_unit_service.DataUnitService.__init__
 troy.pilot.exception.TroyException.__init__
 troy_adaptor_peejay.adaptor.__init__
 troy_adaptor_peejay.peejay_cp.__init__
-troy_adaptor_peejay.peejay_cps.__init__
+troy_adaptor_peejay.peejay_cpf.__init__
 troy_adaptor_peejay.peejay_cu.__init__
 troy_adaptor_peejay.peejay_cus.__init__
 troy_adaptor_peejay.peejay_dcu.__init__
 troy_adaptor_peejay.peejay_dcus.__init__
 troy_adaptor_peejay.peejay_dp.__init__
-troy_adaptor_peejay.peejay_dps.__init__
+troy_adaptor_peejay.peejay_dpf.__init__
 troy_adaptor_peejay.peejay_du.__init__
 troy_adaptor_peejay.peejay_dus.__init__
 troy_adaptor_skeleton.adaptor.__init__
 troy_adaptor_skeleton.xyz_cp.__init__
-troy_adaptor_skeleton.xyz_cps.__init__
+troy_adaptor_skeleton.xyz_cpf.__init__
 troy_adaptor_skeleton.xyz_cu.__init__
 troy_adaptor_skeleton.xyz_cus.__init__
 troy_adaptor_skeleton.xyz_dcu.__init__
 troy_adaptor_skeleton.xyz_dcus.__init__
 troy_adaptor_skeleton.xyz_dp.__init__
-troy_adaptor_skeleton.xyz_dps.__init__
+troy_adaptor_skeleton.xyz_dpf.__init__
 troy_adaptor_skeleton.xyz_du.__init__
 troy_adaptor_skeleton.xyz_dus.__init__" class="py-name" href="#" onclick="return doclink('link-3', '__init__', 'link-3');">__init__</a></tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 <a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"> </tt>
@@ -171,7 +171,7 @@ troy_adaptor_skeleton.xyz_dus.__init__" class="py-name" href="#" onclick="return
 <a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
 <a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
 <a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
-<a name="DataPilotFramework.submit_pilot"></a><div id="DataPilotFramework.submit_pilot-def"><a name="L59"></a><tt class="py-lineno"> 59</tt> <a class="py-toggle" href="#" id="DataPilotFramework.submit_pilot-toggle" onclick="return toggle('DataPilotFramework.submit_pilot');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_pilot_service.DataPilotFramework-class.html#submit_pilot">submit_pilot</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dpd</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+<a name="DataPilotFramework.submit_pilot"></a><div id="DataPilotFramework.submit_pilot-def"><a name="L59"></a><tt class="py-lineno"> 59</tt> <a class="py-toggle" href="#" id="DataPilotFramework.submit_pilot-toggle" onclick="return toggle('DataPilotFramework.submit_pilot');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_pilot_framework.DataPilotFramework-class.html#submit_pilot">submit_pilot</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dpd</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
 </div><div id="DataPilotFramework.submit_pilot-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DataPilotFramework.submit_pilot-expanded"><a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
 <a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">        Create a DataPilot.</tt> </tt>
 <a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
@@ -182,7 +182,7 @@ troy_adaptor_skeleton.xyz_dus.__init__" class="py-name" href="#" onclick="return
 <a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">        A L{DataPilot} instance</tt> </tt>
 <a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
 <a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">        If the resource requirements defined in the dpd cannot be met by the</tt> </tt>
-<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        DPS, a BadParameter exception is raised.  Not raising this exception is,</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        DPF, a BadParameter exception is raised.  Not raising this exception is,</tt> </tt>
 <a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">        however, not a guarantee that the DP will in fact be (able to be)</tt> </tt>
 <a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">        executed -- in that case, the returned DP will be moved to Failed state.</tt> </tt>
 <a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
@@ -199,7 +199,7 @@ troy_adaptor_skeleton.xyz_dus.__init__" class="py-name" href="#" onclick="return
 <a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
 <a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
 <a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
-<a name="DataPilotFramework.list_pilots"></a><div id="DataPilotFramework.list_pilots-def"><a name="L87"></a><tt class="py-lineno"> 87</tt> <a class="py-toggle" href="#" id="DataPilotFramework.list_pilots-toggle" onclick="return toggle('DataPilotFramework.list_pilots');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_pilot_service.DataPilotFramework-class.html#list_pilots">list_pilots</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+<a name="DataPilotFramework.list_pilots"></a><div id="DataPilotFramework.list_pilots-def"><a name="L87"></a><tt class="py-lineno"> 87</tt> <a class="py-toggle" href="#" id="DataPilotFramework.list_pilots-toggle" onclick="return toggle('DataPilotFramework.list_pilots');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_pilot_framework.DataPilotFramework-class.html#list_pilots">list_pilots</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
 </div><div id="DataPilotFramework.list_pilots-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DataPilotFramework.list_pilots-expanded"><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
 <a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">        list managed L{DataPilot}s.</tt> </tt>
 <a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
@@ -207,8 +207,8 @@ troy_adaptor_skeleton.xyz_dus.__init__" class="py-name" href="#" onclick="return
 <a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">        A list of L{DataPilot} IDs</tt> </tt>
 <a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
 <a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">        The returned list can include pilots which have not been created by this</tt> </tt>
-<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">        DPS instance.  The list may be incomplete, and may not include pilots</tt> </tt>
-<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">        created by the DPS.  There is no guarantee that pilots in the returned</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">        DPF instance.  The list may be incomplete, and may not include pilots</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">        created by the DPF.  There is no guarantee that pilots in the returned</tt> </tt>
 <a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">        list can in fact be reconnected to.  Also, an inclusion in the list does</tt> </tt>
 <a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">        not have any indication about the respective pilot's state.</tt> </tt>
 <a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
@@ -217,7 +217,7 @@ troy_adaptor_skeleton.xyz_dus.__init__" class="py-name" href="#" onclick="return
 <a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
 <a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
 <a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
-<a name="DataPilotFramework.get_pilot"></a><div id="DataPilotFramework.get_pilot-def"><a name="L105"></a><tt class="py-lineno">105</tt> <a class="py-toggle" href="#" id="DataPilotFramework.get_pilot-toggle" onclick="return toggle('DataPilotFramework.get_pilot');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_pilot_service.DataPilotFramework-class.html#get_pilot">get_pilot</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dp_id</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+<a name="DataPilotFramework.get_pilot"></a><div id="DataPilotFramework.get_pilot-def"><a name="L105"></a><tt class="py-lineno">105</tt> <a class="py-toggle" href="#" id="DataPilotFramework.get_pilot-toggle" onclick="return toggle('DataPilotFramework.get_pilot');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_pilot_framework.DataPilotFramework-class.html#get_pilot">get_pilot</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dp_id</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
 </div><div id="DataPilotFramework.get_pilot-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DataPilotFramework.get_pilot-expanded"><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
 <a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">        Reconnect to a DataPilot.</tt> </tt>
 <a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
@@ -236,7 +236,7 @@ troy_adaptor_skeleton.xyz_dus.__init__" class="py-name" href="#" onclick="return
 <a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"> </tt>
 <a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
 <a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
-<a name="DataPilotFramework.submit_unit"></a><div id="DataPilotFramework.submit_unit-def"><a name="L124"></a><tt class="py-lineno">124</tt> <a class="py-toggle" href="#" id="DataPilotFramework.submit_unit-toggle" onclick="return toggle('DataPilotFramework.submit_unit');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_pilot_service.DataPilotFramework-class.html#submit_unit">submit_unit</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dud</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+<a name="DataPilotFramework.submit_unit"></a><div id="DataPilotFramework.submit_unit-def"><a name="L124"></a><tt class="py-lineno">124</tt> <a class="py-toggle" href="#" id="DataPilotFramework.submit_unit-toggle" onclick="return toggle('DataPilotFramework.submit_unit');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_pilot_framework.DataPilotFramework-class.html#submit_unit">submit_unit</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dud</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
 </div><div id="DataPilotFramework.submit_unit-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DataPilotFramework.submit_unit-expanded"><a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
 <a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring">        Submit a DU to this DataPilotFramework.</tt> </tt>
 <a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
@@ -246,7 +246,7 @@ troy_adaptor_skeleton.xyz_dus.__init__" class="py-name" href="#" onclick="return
 <a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-docstring">        Return:</tt> </tt>
 <a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-docstring">        L{DataUnit} object</tt> </tt>
 <a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring">        The DUD is (possibly translated and) passed on to the DPS backend, which</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring">        The DUD is (possibly translated and) passed on to the DPF backend, which</tt> </tt>
 <a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">        will attempt to instantiate the described workload process on any of its</tt> </tt>
 <a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring">        data pilots.  If no suitable pilot is found, a L{Error.BadParameter}</tt> </tt>
 <a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring">        exception is raised.  Not raising this exception is not a guarantee that</tt> </tt>
@@ -266,7 +266,7 @@ troy_adaptor_skeleton.xyz_dus.__init__" class="py-name" href="#" onclick="return
 <a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"> </tt>
 <a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
 <a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
-<a name="DataPilotFramework.list_units"></a><div id="DataPilotFramework.list_units-def"><a name="L154"></a><tt class="py-lineno">154</tt> <a class="py-toggle" href="#" id="DataPilotFramework.list_units-toggle" onclick="return toggle('DataPilotFramework.list_units');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_pilot_service.DataPilotFramework-class.html#list_units">list_units</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+<a name="DataPilotFramework.list_units"></a><div id="DataPilotFramework.list_units-def"><a name="L154"></a><tt class="py-lineno">154</tt> <a class="py-toggle" href="#" id="DataPilotFramework.list_units-toggle" onclick="return toggle('DataPilotFramework.list_units');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_pilot_framework.DataPilotFramework-class.html#list_units">list_units</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
 </div><div id="DataPilotFramework.list_units-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DataPilotFramework.list_units-expanded"><a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
 <a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-docstring">        list managed L{DataUnit}s.</tt> </tt>
 <a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
@@ -274,8 +274,8 @@ troy_adaptor_skeleton.xyz_dus.__init__" class="py-name" href="#" onclick="return
 <a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring">        A list of L{DataUnit} IDs</tt> </tt>
 <a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
 <a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-docstring">        The returned list can include units which have not been created by this</tt> </tt>
-<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">        DPS instance.  The list may be incomplete, and may not include units</tt> </tt>
-<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">        created by the DPS.  There is no guarantee that units in the returned</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">        DPF instance.  The list may be incomplete, and may not include units</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">        created by the DPF.  There is no guarantee that units in the returned</tt> </tt>
 <a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring">        list can in fact be reconnected to.  Also, an inclusion in the list does</tt> </tt>
 <a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">        not have any indication about the respective unit's state.</tt> </tt>
 <a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
@@ -284,7 +284,7 @@ troy_adaptor_skeleton.xyz_dus.__init__" class="py-name" href="#" onclick="return
 <a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"> </tt>
 <a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
 <a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
-<a name="DataPilotFramework.get_unit"></a><div id="DataPilotFramework.get_unit-def"><a name="L172"></a><tt class="py-lineno">172</tt> <a class="py-toggle" href="#" id="DataPilotFramework.get_unit-toggle" onclick="return toggle('DataPilotFramework.get_unit');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_pilot_service.DataPilotFramework-class.html#get_unit">get_unit</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">du_id</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+<a name="DataPilotFramework.get_unit"></a><div id="DataPilotFramework.get_unit-def"><a name="L172"></a><tt class="py-lineno">172</tt> <a class="py-toggle" href="#" id="DataPilotFramework.get_unit-toggle" onclick="return toggle('DataPilotFramework.get_unit');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot.data_pilot_framework.DataPilotFramework-class.html#get_unit">get_unit</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">du_id</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
 </div><div id="DataPilotFramework.get_unit-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="DataPilotFramework.get_unit-expanded"><a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
 <a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-docstring">        Reconnect to a DataUnit.</tt> </tt>
 <a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
@@ -338,7 +338,7 @@ expandto(location.href);
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Sun Aug 19 13:10:14 2012</a>
+    3.0.1 on Wed Aug 22 22:15:21 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

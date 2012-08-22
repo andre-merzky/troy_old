@@ -4,19 +4,21 @@
 
 import troy
 import time
+import pdb
 
 def test_compute ():
-    try:
+    # try:
         cpd = troy.pilot.ComputePilotDescription ()
 
         cpf = troy.pilot.ComputePilotFramework ('peejay://')
         cp1 = cpf.submit_pilot (cpd)
+      # pdb.set_trace()
         cp2 = cpf.submit_pilot (cpd)
  
         cus = troy.pilot.ComputeUnitService ()
-        cus.add_pilot_service (cpf)
+        cus.add_pilot_framework (cpf)
  
-        print str(cus.list_pilot_services ())
+        print str(cus.list_pilot_frameworks ())
  
         cud = troy.pilot.ComputeUnitDescription ()
  
@@ -39,15 +41,15 @@ def test_compute ():
         cp1.cancel ()
         cp2.cancel ()
  
-    except Exception, e:
-        print str (e)
+    # except Exception, e:
+        # print str (e)
 
 
 def test_data ():
     # try:
         dpd = troy.pilot.DataPilotDescription ()
-        dps = troy.pilot.DataPilotFramework ('file://localhost')
-        dp  = dps.submit_pilot (dpd)
+        dpf = troy.pilot.DataPilotFramework ('file://localhost')
+        dp  = dpf.submit_pilot (dpd)
 
         dus = troy.pilot.DataUnitService ()
         dus.add_pilot (dp)
@@ -66,7 +68,7 @@ def test_pilot ():
         cp  = cpf.submit_pilot (cpd)
 
         cus = troy.pilot.ComputeUnitService ()
-        cus.add_pilot_service (cpf)
+        cus.add_pilot_framework (cpf)
 
         cud = troy.pilot.ComputeUnitDescription ()
         cu  = cus.submit_unit (cud)

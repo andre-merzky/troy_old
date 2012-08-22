@@ -4,21 +4,21 @@ from base               import Base
 
 ########################################################################
 #
-#  DataPilotFramework (DPS)
+#  DataPilotFramework (DPF)
 #
 class DataPilotFramework (Base) :
     """  
-    DataPilotFramework (DPS)
+    DataPilotFramework (DPF)
 
     The DataPilotFramework is a DataPilot manager.
 
-    A DPS acts as the interface to an underlying pilot data framework -- it
+    A DPF acts as the interface to an underlying pilot data framework -- it
     creates and manages L{DataPilot} instances within that framework, and can
     scheduler L{DataUnit}s amongst those pilots.
 
     The class is stateful, and instances are identified by an url, and can be
-    reconnected to.  A DPS can be added to a L{DataUnitService}, whose scheduler
-    will then be able to utilize the DPS's pilots for L{DataUnit} enaction.
+    reconnected to.  A DPF can be added to a L{DataUnitService}, whose scheduler
+    will then be able to utilize the DPF's pilots for L{DataUnit} enaction.
 
     Properties::
 
@@ -35,13 +35,13 @@ class DataPilotFramework (Base) :
         Create a DataPilotFramework object
 
         Keyword arguments:
-        url: url identifying the backend DPS.
+        url: url identifying the backend DPF.
 
-        Note that the URL may be incomplete, if a new DPS instance is to be
+        Note that the URL may be incomplete, if a new DPF instance is to be
         created -- for example, it may contain only a hint about what pilot
-        framework is to be used on what resource.  On inspection, the DPS will
+        framework is to be used on what resource.  On inspection, the DPF will
         always return a fully qualified URL, which will not change over the
-        lifetime of the DPS.
+        lifetime of the DPF.
         """
 
         # init api base
@@ -67,7 +67,7 @@ class DataPilotFramework (Base) :
         A L{DataPilot} instance
 
         If the resource requirements defined in the dpd cannot be met by the
-        DPS, a BadParameter exception is raised.  Not raising this exception is,
+        DPF, a BadParameter exception is raised.  Not raising this exception is,
         however, not a guarantee that the DP will in fact be (able to be)
         executed -- in that case, the returned DP will be moved to Failed state.
 
@@ -92,8 +92,8 @@ class DataPilotFramework (Base) :
         A list of L{DataPilot} IDs
 
         The returned list can include pilots which have not been created by this
-        DPS instance.  The list may be incomplete, and may not include pilots
-        created by the DPS.  There is no guarantee that pilots in the returned
+        DPF instance.  The list may be incomplete, and may not include pilots
+        created by the DPF.  There is no guarantee that pilots in the returned
         list can in fact be reconnected to.  Also, an inclusion in the list does
         not have any indication about the respective pilot's state.
         """
@@ -131,7 +131,7 @@ class DataPilotFramework (Base) :
         Return:
         L{DataUnit} object
 
-        The DUD is (possibly translated and) passed on to the DPS backend, which
+        The DUD is (possibly translated and) passed on to the DPF backend, which
         will attempt to instantiate the described workload process on any of its
         data pilots.  If no suitable pilot is found, a L{Error.BadParameter}
         exception is raised.  Not raising this exception is not a guarantee that
@@ -159,8 +159,8 @@ class DataPilotFramework (Base) :
         A list of L{DataUnit} IDs
 
         The returned list can include units which have not been created by this
-        DPS instance.  The list may be incomplete, and may not include units
-        created by the DPS.  There is no guarantee that units in the returned
+        DPF instance.  The list may be incomplete, and may not include units
+        created by the DPF.  There is no guarantee that units in the returned
         list can in fact be reconnected to.  Also, an inclusion in the list does
         not have any indication about the respective unit's state.
         """

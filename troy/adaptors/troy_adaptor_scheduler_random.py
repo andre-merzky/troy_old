@@ -86,7 +86,7 @@ class scheduler_data_random (troy.interface.iDataScheduler) :
 
     def schedule (self, dus, dud) :
 
-        dp_list = dus.list_pilot_services ()  # FIXME: check list size
+        dp_list = dus.list_pilot_frameworks ()  # FIXME: check list size
         dp      = troy.pilot.DataPilot (dp_list[0])
         return dp.submit_data_unit_    (dud)
 
@@ -113,13 +113,13 @@ class scheduler_compute_random (troy.interface.iComputeScheduler) :
 
     def schedule (self, cus, cud) :
 
-        pilot_services = cus.list_pilot_services ()
+        pilot_frameworks = cus.list_pilot_frameworks ()
 
         pilots = []
 
-        for id in pilot_services :
-            pilot_service = troy.pilot.ComputePilotFramework (id)
-            pilots.extend (pilot_service.list_pilots ())
+        for id in pilot_frameworks :
+            pilot_framework = troy.pilot.ComputePilotFramework (id)
+            pilots.extend (pilot_framework.list_pilots ())
 
         if len (pilots) == 0 :
             raise troy.pilot.TroyException (troy.pilot.Error.IncorrectState,

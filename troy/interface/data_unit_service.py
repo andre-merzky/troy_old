@@ -54,21 +54,21 @@ class iDataUnitService (iBase) :
 
     ############################################################################
     #
-    def add_pilot_service (self, dps) :
+    def add_pilot_framework (self, dpf) :
         """ Add a DataPilotFramework to this DUS """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     ############################################################################
     #
-    def list_pilot_services (self) :
-        """ List all DPS IDs of this DUS """
+    def list_pilot_frameworks (self) :
+        """ List all DPF IDs of this DUS """
         raise TroyException (Error.NotImplemented, "method not implemented!")
     
 
     ############################################################################
     #
-    def remove_pilot_service (self, dps) :
+    def remove_pilot_framework (self, dpf) :
         """ Remove a DataPilotFramework """
         raise TroyException (Error.NotImplemented, "method not implemented!")
     

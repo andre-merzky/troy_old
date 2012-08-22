@@ -6,13 +6,13 @@ from troy.interface.compute_data_unit_service      import iComputeDataUnitServic
 from troy.interface.compute_data_scheduler         import iComputeDataScheduler
 
 from troy.interface.compute_pilot                  import iComputePilot                
-from troy.interface.compute_pilot_service          import iComputePilotFramework        
+from troy.interface.compute_pilot_framework        import iComputePilotFramework        
 from troy.interface.compute_unit                   import iComputeUnit                 
 from troy.interface.compute_unit_service           import iComputeUnitService         
 from troy.interface.compute_scheduler              import iComputeScheduler         
 
 from troy.interface.data_pilot                     import iDataPilot                   
-from troy.interface.data_pilot_service             import iDataPilotFramework           
+from troy.interface.data_pilot_framework           import iDataPilotFramework           
 from troy.interface.data_unit                      import iDataUnit                    
 from troy.interface.data_unit_service              import iDataUnitService            
 from troy.interface.data_scheduler                 import iDataScheduler         

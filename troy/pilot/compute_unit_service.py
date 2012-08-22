@@ -105,8 +105,8 @@ class ComputeUnitService (Base) :
         if isinstance (s, basestring) :
             if s != self.policy :
                 self.policy    = s
-                self.scheduler = ComputeDataScheduler (self.policy)
-        elif isinstance (s, troy.pilot.ComputeDataScheduler) :
+                self.scheduler = ComputeScheduler (self.policy)
+        elif isinstance (s, ComputeScheduler) :
             if s != self.scheduler :
                 self.scheduler = s
                 self.pollicy   = s.policy
@@ -177,26 +177,26 @@ class ComputeUnitService (Base) :
 
     ############################################################################
     #
-    def add_pilot_service (self, cpf) :
+    def add_pilot_framework (self, cpf) :
         """ 
         Add a ComputePilotFramework to this CUS.
 
         Keyword arguments:
         cpf -- The ComputePilotFramework which this ComputeUnitService will utilize.
         """
-        return self.engine_.call ('ComputeUnitService', 'add_pilot_service', self, cpf)
+        return self.engine_.call ('ComputeUnitService', 'add_pilot_framework', self, cpf)
 
 
     ############################################################################
     #
-    def list_pilot_services (self) :
+    def list_pilot_frameworks (self) :
         """ List all CPF IDs of this CUS """
-        return self.engine_.call ('ComputeUnitService', 'list_pilot_services', self)
+        return self.engine_.call ('ComputeUnitService', 'list_pilot_frameworks', self)
 
 
     ############################################################################
     #
-    def remove_pilot_service (self, cpf) :
+    def remove_pilot_framework (self, cpf) :
         """ 
         Remove a ComputePilotFramework
 
@@ -204,9 +204,9 @@ class ComputeUnitService (Base) :
         longer receive new CUs.
 
         Keyword arguments:
-        cdps -- The ComputeDataPilotFramework to remove
+        cdpf -- The ComputeDataPilotFramework to remove
         """
-        return self.engine_.call ('ComputeUnitService', 'remove_pilot_service', self, cp)
+        return self.engine_.call ('ComputeUnitService', 'remove_pilot_framework', self, cp)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

@@ -68,7 +68,7 @@ class DataUnitService (Base) :
 
         # prepare supported attributes
         self.attributes_register_  ('id',        cus_id,   self.Url,    self.Scalar, self.ReadOnly)
-        self.attributes_register_  ('dps',       [],       self.Url,    self.Vector, self.Writable)
+        self.attributes_register_  ('dpf',       [],       self.Url,    self.Vector, self.Writable)
         self.attributes_register_  ('policy',    'Any',    self.String, self.Scalar, self.Writable)
         self.attributes_register_  ('scheduler', None,     self.Any,    self.Scalar, self.Writable)
 
@@ -175,26 +175,26 @@ class DataUnitService (Base) :
 
     ############################################################################
     #
-    def add_pilot_service (self, dps) :
+    def add_pilot_framework (self, dpf) :
         """ 
         Add a DataPilotFramework to this DUS.
 
         Keyword arguments:
-        dps -- The DataPilotFramework which this DataUnitService will utilize.
+        dpf -- The DataPilotFramework which this DataUnitService will utilize.
         """
-        return self.engine_.call ('DataUnitService', 'add_pilot_service', self, dps)
+        return self.engine_.call ('DataUnitService', 'add_pilot_framework', self, dpf)
 
 
     ############################################################################
     #
-    def list_pilot_services (self) :
-        """ List all DPS IDs of this DUS """
-        return self.engine_.call ('DataUnitService', 'list_pilot_services', self)
+    def list_pilot_frameworks (self) :
+        """ List all DPF IDs of this DUS """
+        return self.engine_.call ('DataUnitService', 'list_pilot_frameworks', self)
 
 
     ############################################################################
     #
-    def remove_pilot_service (self, dps) :
+    def remove_pilot_framework (self, dpf) :
         """ 
         Remove a DataPilotFramework
 
@@ -202,9 +202,9 @@ class DataUnitService (Base) :
         no longer receive new DUs.
 
         Keyword arguments:
-        dps -- The DataPilotFramework to remove
+        dpf -- The DataPilotFramework to remove
         """
-        return self.engine_.call ('DataUnitService', 'remove_pilot_service', self, dp)
+        return self.engine_.call ('DataUnitService', 'remove_pilot_framework', self, dp)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

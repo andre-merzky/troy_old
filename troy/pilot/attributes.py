@@ -55,8 +55,8 @@ class Callback () :
         def main () :
 
           cpd = troy.pilot.compute_pilot_description ()
-          cps = troy.pilot.compute_pilot_service ()
-          cp  = cps.submit_pilot (cpd)
+          cpf = troy.pilot.compute_pilot_framework ()
+          cp  = cpf.submit_pilot (cpd)
 
           mcb = MyCallback ("Hello Pilot, how is your state?")
 

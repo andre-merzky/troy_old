@@ -17,7 +17,7 @@ The main concepts and classes of the API are:
       a pilot, which manages a (compute or data) resource slice for the
       application
 
-    - L{ComputePilotFramework} (CPF) / L{DataPilotFramework} (DPS):
+    - L{ComputePilotFramework} (CPF) / L{DataPilotFramework} (DPF):
       creates and manages pilots, according to application specified resource
       requirements.  Also, 'submit_xxx_unit()' methods accept work descriptions
       of L{ComputeUnit}s and L{DataUnit}s to be executed on its pilots.
@@ -54,7 +54,7 @@ would be (some details left out for brevity)::
     # create a work unit service with one ComputePilot resource, to submit work
     # items to
     cus = troy.pilot.ComputeUnitService ()
-    cus.add_pilot_service (cpf)
+    cus.add_pilot_framework (cpf)
 
     # submit a compute work item
     cu = cus.submit_unit ([some compute unit description])
@@ -91,14 +91,14 @@ from troy.pilot.exception                      import TroyException, Error
 
 from troy.pilot.compute_pilot_description      import ComputePilotDescription
 from troy.pilot.compute_pilot                  import ComputePilot
-from troy.pilot.compute_pilot_service          import ComputePilotFramework
+from troy.pilot.compute_pilot_framework        import ComputePilotFramework
 from troy.pilot.compute_unit_description       import ComputeUnitDescription
 from troy.pilot.compute_unit                   import ComputeUnit
 from troy.pilot.compute_unit_service           import ComputeUnitService
 
 from troy.pilot.data_pilot_description         import DataPilotDescription
 from troy.pilot.data_pilot                     import DataPilot
-from troy.pilot.data_pilot_service             import DataPilotFramework
+from troy.pilot.data_pilot_framework           import DataPilotFramework
 from troy.pilot.data_unit_description          import DataUnitDescription
 from troy.pilot.data_unit                      import DataUnit
 from troy.pilot.data_unit_service              import DataUnitService

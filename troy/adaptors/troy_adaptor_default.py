@@ -81,11 +81,10 @@ class default_cus (troy.interface.iComputeUnitService) :
             # get a scheduler instance, as requested via idata.  We always get that
             # scheduler instance, even if taking over a CUS created by a foreign
             # adaptor...
-            self.scheduler = troy.pilot.compute_scheduler.ComputeScheduler (self.api.idata_['scheduler'])
+            self.scheduler = troy.pilot.compute_scheduler.ComputeScheduler (self.api.scheduler)
 
-            # register this class instance with the adaptor, to get some
-            # persistent state.
-            self.adaptor.adata['cus'][self.id]['scheduler'] = self.scheduler
+            # register this instance in the adaptor for state persistency
+            self.adaptor.adata['cus'][self.id] = self
 
         else :
 
@@ -93,14 +92,11 @@ class default_cus (troy.interface.iComputeUnitService) :
                 # we found the id, and reconnect to the class instance, i.e.
                 # re-create the class state.
                 print "troy_adaptor_default_cus : will re-use existing instance " + id
-                self.scheduler = self.adaptor.adata['cus'][self.id]['scheduler']
 
             else : 
                 # The CUS instance was created by another adaptor.
                 raise troy.pilot.TroyException (troy.pilot.Error.BadParameter, 
                       "Cannot handle id")
-
-
 
 
     def add_compute_pilot (self, cp) :

@@ -131,7 +131,7 @@ class DataPilot (Base) :
         Return:
         L{DataUnit} object
 
-        The DUD is (possibly translated and) passed on to the DPS backend, which
+        The DUD is (possibly translated and) passed on to the DPF backend, which
         will attempt to instantiate the described data workload unit on the
         DataPilot.  If the pilot's resource is not suitable to create the
         requested DU, a L{Error.BadParameter} exception is raised.  Not raising

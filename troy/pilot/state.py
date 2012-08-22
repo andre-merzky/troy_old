@@ -18,8 +18,8 @@ class State ():
     For example, an L{ComputePilot} instance is created via a creation request::
 
         cpd = troy.pilot.compute_pilot_description ()
-        cps = troy.pilot.compute_pilot_service ()
-        cp  = cps.create_compute_pilot (cpd)
+        cpf = troy.pilot.compute_pilot_framework ()
+        cp  = cpf.create_compute_pilot (cpd)
 
     That compute pilot has, at this point, the state 'New', so the Troy
     implementation has accepted the creation request, but it was not necessarily

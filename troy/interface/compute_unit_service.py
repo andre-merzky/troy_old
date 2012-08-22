@@ -56,21 +56,21 @@ class iComputeUnitService (iBase) :
     
     ############################################################################
     #
-    def add_pilot_service (self, cpf) :
+    def add_pilot_framework (self, cpf) :
         """ Add a ComputePilotFramework to this CUS """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     ############################################################################
     #
-    def list_pilot_services (self) :
+    def list_pilot_frameworks (self) :
         """ List all CPFs of CUS """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 
 
     ############################################################################
     #
-    def remove_pilot_service (self, cpf) :
+    def remove_pilot_framework (self, cpf) :
         """ Remove a ComputePilotFramework """
         raise TroyException (Error.NotImplemented, "method not implemented!")
 

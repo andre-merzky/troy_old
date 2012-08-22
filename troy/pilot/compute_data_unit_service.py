@@ -175,26 +175,26 @@ class ComputeDataUnitService (Base) :
 
     ############################################################################
     #
-    def add_pilot_service (self, cpf) :
+    def add_pilot_framework (self, cpf) :
         """ 
         Add a ComputeDataPilotFramework to this CDUS.
 
         Keyword arguments:
         cpds -- The ComputeDataPilotFramework which this ComputeDataUnitService will utilize.
         """
-        return self.engine_.call ('ComputeDataUnitService', 'add_pilot_service', self, cpf)
+        return self.engine_.call ('ComputeDataUnitService', 'add_pilot_framework', self, cpf)
 
 
     ############################################################################
     #
-    def list_pilot_services (self) :
-        """ List all CDPS IDs of this CDUS """
-        return self.engine_.call ('ComputeDataUnitService', 'list_pilot_services', self)
+    def list_pilot_frameworks (self) :
+        """ List all CDPF IDs of this CDUS """
+        return self.engine_.call ('ComputeDataUnitService', 'list_pilot_frameworks', self)
 
 
     ############################################################################
     #
-    def remove_pilot_service (self, cpf) :
+    def remove_pilot_framework (self, cpf) :
         """ 
         Remove a ComputeDataPilotFramework
 
@@ -202,9 +202,9 @@ class ComputeDataUnitService (Base) :
         longer receive new CDUs.
 
         Keyword arguments:
-        cdps -- The ComputeDataPilotFramework to remove
+        cdpf -- The ComputeDataPilotFramework to remove
         """
-        return self.engine_.call ('ComputeDataUnitService', 'remove_pilot_service', self, cp)
+        return self.engine_.call ('ComputeDataUnitService', 'remove_pilot_framework', self, cp)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

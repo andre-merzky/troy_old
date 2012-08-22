@@ -54,8 +54,8 @@ def test_compute ():
 def test_data ():
     # try:
         dpd = troy.pilot.DataPilotDescription ()
-        dps = troy.pilot.DataPilotFramework ('file://localhost')
-        dp  = dps.submit_pilot (dpd)
+        dpf = troy.pilot.DataPilotFramework ('file://localhost')
+        dp  = dpf.submit_pilot (dpd)
 
         dus = troy.pilot.DataUnitService ()
         dus.add_data_pilot (dp)

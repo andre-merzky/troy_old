@@ -3,8 +3,7 @@ import os
 import glob
 import imp
 
-from troy.pilot.exception import TroyException                         
-from troy.pilot.exception import Error                         
+import troy.exception 
 
 def singleton (type) :
 
@@ -81,7 +80,7 @@ class Engine (object) :
                                          'order'    : a_order,
                                          'registry' : a_registry}
 
-            except TroyException, e :
+            except Exception, e :
                 # this adaptor failed to load, or failed the sanity check - log
                 # error and continute.
                 print "engine: init: load adaptor: " + path + " failed:\n  " + str (e)
@@ -177,7 +176,7 @@ class Engine (object) :
 
             # this adaptor failed to successfully call the method - we log the
             # error and the next adaptor is tried
-            except TroyException as e :
+            except troy.Exception as e :
                 print "engine: call: " + a_name     + "." + a_cname + "."    + method_name + \
                                   " (" + str (args) + str (kwargs)  + ") : " + str (e)
                 e_stack += "  " + a_name + " \t: " + str (e) + "\n";
@@ -187,7 +186,7 @@ class Engine (object) :
         if e_stack == "" :
             e_stack = "  Bummer, no adaptors loaded.  None at all!"
 
-        raise TroyException (Error.NoSuccess, "no valid adaptor found:\n" + e_stack)        
+        raise troy.Exception (troy.Error.NoSuccess, "no valid adaptor found:\n" + e_stack)        
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

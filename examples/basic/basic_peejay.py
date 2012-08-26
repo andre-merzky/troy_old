@@ -8,79 +8,50 @@ import pdb
 
 def test_compute ():
     # try:
-        cpd = troy.pilot.ComputePilotDescription ()
+        t   = troy.Troy ()
+        pf  = troy.PilotFramework ('peejay://')
 
-        cpf = troy.pilot.ComputePilotFramework ('peejay://')
-        cp1 = cpf.submit_pilot (cpd)
-      # pdb.set_trace()
-        cp2 = cpf.submit_pilot (cpd)
+        t.add_pilot_framework (pf)
+
+        
+        s   = troy.Scheduler ('Random')
+        t.add_scheduler (s)
+
+
+        cpd  = troy.ComputePilotDescription ()
+        cp1  = pf.submit_pilot (cpd)
+        cp2  = pf.submit_pilot (cpd)
  
-        cus = troy.pilot.ComputeUnitService ()
-        cus.add_pilot_framework (cpf)
+        print str(t.list_pilot_frameworks ())
  
-        print str(cus.list_pilot_frameworks ())
- 
-        cud = troy.pilot.ComputeUnitDescription ()
+        cud  = troy.ComputeUnitDescription ()
  
         cud['executable'] = '/bin/sh'
         cud['arguments']  = ['-c', 'touch /tmp/hello_troy_pj && sleep 10']
  
-        cu  = cus.submit_unit (cud)
+        cu  = t.submit_unit (cud)
+        s_  = cu.state
 
-        s = cu.state
+        while s_ != troy.State.Done and \
+              s_ != troy.State.Failed   :
 
-        while s != troy.pilot.State.Done and \
-              s != troy.pilot.State.Failed   :
-
-            print "cu : %s"  %  (str(s))
+            print "u : %s"  %  (str(s))
             time.sleep (1)
-            s = cu.state
+            s_ = cu.state
 
         print "cu : %s"  %  (str(s))
  
         cp1.cancel ()
         cp2.cancel ()
+        pf.cancel ()
  
     # except Exception, e:
         # print str (e)
 
 
-def test_data ():
-    # try:
-        dpd = troy.pilot.DataPilotDescription ()
-        dpf = troy.pilot.DataPilotFramework ('file://localhost')
-        dp  = dpf.submit_pilot (dpd)
-
-        dus = troy.pilot.DataUnitService ()
-        dus.add_pilot (dp)
-
-        dud = troy.pilot.DataUnitDescription ()
-        du  = dus.submit_unit (dud)
- 
-    # except Exception, e:
-    #     print str (e)
-
-
-def test_pilot ():
-    # try:
-        cpd = troy.pilot.ComputePilotDescription ()
-        cpf = troy.pilot.ComputePilotFramework ('fork://localhost')
-        cp  = cpf.submit_pilot (cpd)
-
-        cus = troy.pilot.ComputeUnitService ()
-        cus.add_pilot_framework (cpf)
-
-        cud = troy.pilot.ComputeUnitDescription ()
-        cu  = cus.submit_unit (cud)
- 
-    # except Exception, e:
-    #     print str (e)
-
  
 def main():
     test_compute ()
-    # test_data    ()
-    # test_pilot   ()
 
 if __name__ == '__main__':
     main()

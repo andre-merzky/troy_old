@@ -1,6 +1,6 @@
 
 from troy.interface.base  import iBase
-from troy.pilot.exception import TroyException, Error
+from troy.exception       import Exception, Error
 
 
 ########################################################################
@@ -14,7 +14,7 @@ class iDataUnit (iBase) :
     ############################################################################
     #
     def __init__ (self, obj, adaptor) :
-        raise TroyException (Error.NotImplemented, "method not implemented!")
+        raise troy.Exception (Error.NotImplemented, "method not implemented!")
 
 
     ############################################################################
@@ -29,14 +29,14 @@ class iDataUnit (iBase) :
     #
     def wait (self) :
         """ Wait until DU enters a final state """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
+        raise troy.Exception (Error.NotImplemented, "method not implemented!")
 
 
     ############################################################################
     #
     def cancel (self) :
         """ Cancel the DU """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
+        raise troy.Exception (Error.NotImplemented, "method not implemented!")
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

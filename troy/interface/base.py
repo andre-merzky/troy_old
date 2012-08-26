@@ -1,5 +1,5 @@
 
-from troy.pilot.exception        import TroyException, Error
+from troy.exception import Exception, Error
 
 
 ########################################################################
@@ -24,50 +24,6 @@ class iBase:
         """ dummy method to make sure the backend can initialize the object.
             This method should *not* be implemented in the adaptor!"""
         print "iBase: dummy init method called"
-        pass
-
-
-########################################################################
-#
-# the base of all adaptor classes.
-#
-# FIXME: move to adaptors
-#
-class aBase:
-
-    ############################################################################
-    #
-    def __init__ (self) :
-        pass
-
-
-
-    ############################################################################
-    #
-    def get_name (self) :
-        raise TroyException (Error.NoSuccess, "adaptor disabled as it does not" \
-                                              "implement get_name!")
-
-
-    ############################################################################
-    #
-    def get_registry (self) :
-        raise TroyException (Error.NoSuccess, "adaptor disabled as it does not" \
-                                              "implement get_registry!")
-        return self.registry
-
-
-    ############################################################################
-    #
-    def get_order (self) :
-        return 1000  # low adaptor priority by default
-
-
-    ############################################################################
-    #
-    def sanity_check (self) :
-        raise TroyException (Error.NoSuccess, "adaptor disabled as it does not" \
-                                              "implement sanity check!")
         pass
 
 

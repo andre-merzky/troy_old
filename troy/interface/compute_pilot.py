@@ -1,6 +1,6 @@
 
 from troy.interface.base  import iBase
-from troy.pilot.exception import TroyException, Error
+from troy.exception       import Exception, Error
     
 
 ########################################################################
@@ -15,7 +15,7 @@ class iComputePilot (iBase) :
     #
     def __init__ (self, obj, adaptor) :
         """ Create a ComputePilot """
-        raise TroyException (Error.NotImplemented, "interface not implemented!")
+        raise troy.Exception (Error.NotImplemented, "interface not implemented!")
 
 
     ############################################################################
@@ -30,42 +30,35 @@ class iComputePilot (iBase) :
     #
     def reinitialize (self, cpd) :
         """ Re-Initialize the ComputePilot to the (new) ComputePilotDescription.  """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
+        raise troy.Exception (Error.NotImplemented, "method not implemented!")
 
 
     ############################################################################
     #
     def submit_unit (self, cud) :
         """ Submit a CU to this ComputePilot  """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
+        raise troy.Exception (Error.NotImplemented, "method not implemented!")
 
 
     ############################################################################
     #
     def list_units (self) :
         """ list managed L{ComputeUnit}s """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
-
-
-    ############################################################################
-    #
-    def get_unit (self, cu_id) :
-        """ Reconnect to a ComputeUnit """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
+        raise troy.Exception (Error.NotImplemented, "method not implemented!")
 
 
     ############################################################################
     #
     def wait (self) :
         """ Wait until CP enters a final state """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
+        raise troy.Exception (Error.NotImplemented, "method not implemented!")
 
 
     ############################################################################
     #
     def cancel (self) :
         """ Cancel CP.  """
-        raise TroyException (Error.NotImplemented, "method not implemented!")
+        raise troy.Exception (Error.NotImplemented, "method not implemented!")
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

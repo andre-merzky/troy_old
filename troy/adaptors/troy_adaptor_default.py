@@ -1,40 +1,27 @@
 
 import troy
-import troy.interface
-from   troy.pilot.exception import TroyException, Error
+import troy.exception
+from   troy.adaptors.base import aBase
 
 
 ########################################################################
 #
-# This default adaptor only implements the XxxUnitServices.  Those 'Services'
-# can trivially be implemented as a container of XxxPilots, where CUs are being
-# submitted to any one of the pilots.
+# This default adaptor only implements the Troy class.  
 #
-# A major motivation for Troy is to provide application level scheduling on
-# XxxUnitService level, which is provided by the scheduler adaptors.  This
-# default XxxUnitService adaptor makes sure that the scheduler can actually be
-# invoked when no backend provides an XxxUnitService implementation (which is in
-# fact the expected case).
+# A major motivation for Troy is to provide application level scheduling, 
+# which is provided by scheduler plugins.  This default Troy adaptor 
+# manages these plugins, and invokes them as needed.
 # 
-class adaptor (troy.interface.aBase) :
+class adaptor (aBase) :
     
+    # 'generator' for serial id's
+    serial_ = 0
+
     def __init__ (self) :
         
         self.name     = 'troy_adaptor_default'
-
-        # this adaptor only implements the XxxUnitService classes
-        self.registry = {'ComputeUnitService'        : 'default_cus' ,
-                         'DataUnitService'           : 'default_dus' ,
-                         'ComputeDataUnitService'    : 'default_cdus'}
-
-        # 'generator' for serial id's
-        self.serial_ = 0
-
-        self.adata = { 
-                       'cus'  : {},
-                       'dus'  : {},
-                       'cdus' : {} 
-                     }
+        self.registry = {'Troy' : 'default_troy'}
+        self.adata_   = { 'default_troy' : {} }
 
     def get_name (self) :
         return self.name
@@ -46,20 +33,16 @@ class adaptor (troy.interface.aBase) :
         return 1000  # low adaptor priority
 
     def sanity_check (self) :
-      # raise TroyException (Error.NoSuccess, "adaptor disabled")
+      # raise troy.Exception (Error.NoSuccess, "adaptor disabled")
         pass
 
     def get_serial_ (self) :
-        self.serial_ += 1
-        return self.serial_
+        adaptor.serial_ += 1
+        return adaptor.serial_
 
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
-# Compute API
-#
 ########################################################################
-class default_cus (troy.interface.iComputeUnitService) :
+class default_troy (troy.interface.iTroy) :
 
     def __init__ (self, api, adaptor) :
 
@@ -74,147 +57,187 @@ class default_cus (troy.interface.iComputeUnitService) :
         # by this adaptor -- otherwise a different adaptor already manages it.
         if self.id == None :
 
-            # id is none - init new instance.  assign an id
-            self.id = "troy_adaptor_default_cus_%d"  %  self.adaptor.get_serial_ ()
-            self.api['id'] = self.id
-
-            # get a scheduler instance, as requested via idata.  We always get that
-            # scheduler instance, even if taking over a CUS created by a foreign
-            # adaptor...
-            self.scheduler = troy.pilot.compute_scheduler.ComputeScheduler (self.api.scheduler)
+            # id is none - init new instance, assign an id
+            self.id = "default_troy_%d"  %  self.adaptor.get_serial_ ()
+            self.api.attributes_i_set_ ('id', self.id)
 
             # register this instance in the adaptor for state persistency
-            self.adaptor.adata['cus'][self.id] = self
+            self.adaptor.adata_['default_troy'][self.id] = self
 
         else :
 
-            if self.id in self.adaptor.adata['cus'] :
+            if self.id in self.adaptor.adata_['default_troy'] :
                 # we found the id, and reconnect to the class instance, i.e.
                 # re-create the class state.
-                print "troy_adaptor_default_cus : will re-use existing instance " + id
+                print "default_troy : will re-use existing instance " + id
+                old = self.adaptor.adata_['default_troy'][self.id]
+            
+                # sync all instance data from that registered version
+                self.api.attributes_i_set_ ('id', self.id)
+                self.api.attributes_i_set_ ('pilot_frameworks', old.api['pilot_frameworks'])
+                self.api.attributes_i_set_ ('schedulers',       old.api['schedulers'])
 
             else : 
                 # The CUS instance was created by another adaptor.
-                raise troy.pilot.TroyException (troy.pilot.Error.BadParameter, 
+                raise troy.Exception (troy.Error.BadParameter, 
                       "Cannot handle id")
 
 
-    def add_compute_pilot (self, cp) :
-        """ Add a ComputePilot to this CUS.
+    ############################################################################
+    def add_scheduler (self, bs) :
+        """ 
+        Add a Backend Scheduler to this Troy instance.
 
-            Keyword arguments:
-            cp -- The ComputePilot to which this ComputeUnitService will connect.
+        Keyword arguments:
+        bs -- Backend Scheduler to be used by this Troy instance.
+
+        FIXME: bs can be id or instance
         """
-        self.api.idata_['pilots'].append (cp)
+        if isinstance (bs, basestring) :
+            try :
+                instance = troy.BackendScheduler (bs)
+                self.api['schedulers'].append (instance)
+            except :
+                raise troy.Exception (troy.Error.BadParameter, 
+                      "Cannot handle bs id")
+        elif isinstance (bs, troy.Scheduler) :
+            self.api['schedulers'].append (bs)
+        else :
+            raise troy.Exception (troy.Error.BadParameter, 
+                "Cannot handle bs (expected string ID or troy.Scheduler type")
 
 
-    def list_compute_pilots (self) :
-
+    ############################################################################
+    def list_schedulers (self) :
+        """ List all Backend Scheduler IDs of this Troy instance """
         ret = []
-        for cp in self.api.idata_['pilots'] :
-            ret.append (cp.id)
+
+        for bs in self.api['schedulers'] :
+            ret.append (bs.id)
 
         return ret
 
 
-    def remove_compute_pilot (self, cp) :
-        """ Remove a ComputePilot
+    ############################################################################
+    def remove_scheduler (self, bs) :
+        """ 
+        Remove a Scheduler
 
-            Note that it won't cancel the ComputePilot, it will just no longer
-            receive any CUs
+        Note that it won't cancel the Scheduler nor its pilots -- it will
+        just no longer receive any work units from this Troy instance
+
+        Keyword arguments:
+        bs -- The Scheduler to remove 
+        """
+        if isinstance (bs, basestring) :
+            try :
+                instance = troy.scheduler (bs)
+                self.api['schedulers'].remove (instance)
+            except :
+                raise troy.Exception (troy.Error.BadParameter, 
+                      "Cannot handle bs id")
+        elif isinstance (bs, troy.Scheduler) :
+            self.api['schedulers'].remove (bs)
+        else :
+            raise troy.Exception (troy.Error.BadParameter, 
+                "Cannot handle scheduler (expected string ID or troy.Scheduler type")
+
+
+
+    ############################################################################
+    def add_pilot_framework (self, pf) :
+        """ Add a PilotFramework to this Troy instance.
 
             Keyword arguments:
-            cp -- The ComputePilot to remove 
+            pf -- PilotFramework to be used by this Troy instance.
+
+            FIXME: pf can be id or instance
         """
-        self.api.idata_['pilots'].remove (cp)
+        if isinstance (pf, basestring) :
+            try :
+                instance = troy.pilot_framework (pf)
+                self.api['pilot_frameworks'].append (instance)
+            except :
+                raise troy.Exception (troy.Error.BadParameter, 
+                      "Cannot handle pf id")
+        elif isinstance (pf, troy.PilotFramework) :
+            self.api['pilot_frameworks'].append (pf)
+        else :
+            raise troy.Exception (troy.Error.BadParameter, 
+                "Cannot handle pf (expected string ID or troy.PilotFramework type")
 
 
+    ############################################################################
+    def list_pilot_frameworks (self) :
+        """ List all PF IDs of this Troy instance """
+        ret = []
 
-    def submit_compute_unit (self, cud) :
-        """ Submit a CU to this ComputeUnitService.
+        for pf in self.api['pilot_frameworks'] :
+            ret.append (pf.id)
 
-            Keyword argument:
-            cud -- The ComputeUnitDescription from the application
+        return ret
 
-            Return:
-            ComputeUnit object
 
-            This method is not implemented
+    ############################################################################
+    def remove_pilot_framework (self, pf) :
+        """ 
+        Remove a PilotFramework
+
+        Note that it won't cancel the PilotFramework nor its pilots -- it will
+        just no longer receive any work units from this Troy instance
+
+        Keyword arguments:
+        pf -- The PilotFramework to remove 
         """
-        self.api.dump_ ()
-        return self.scheduler.schedule (self.api, cud)
+        if isinstance (pf, basestring) :
+            try :
+                instance = troy.pilot_framework (pf)
+                self.api['pilot_frameworks'].remove (instance)
+            except :
+                raise troy.Exception (troy.Error.BadParameter, 
+                      "Cannot handle pf id")
+        elif isinstance (pf, troy.PilotFramework) :
+            self.api['pilot_frameworks'].remove (pf)
+        else :
+            raise troy.Exception (troy.Error.BadParameter, 
+                "Cannot handle pf (expected string ID or troy.PilotFramework type")
 
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
-# Data API
-#
 
-########################################################################
-class default_dus (troy.interface.iDataUnitService) :
+    ############################################################################
+    def submit_unit (self, ud) :
+        """ 
+        Schedule a work unit.
 
-    def __init__ (self, api, adaptor) :
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+        Now, this adaptor tries one registered scheduler after the other, until
+        one is successfully able to submit the unit.  Schedulers MUST throw on
+        submission or scheduling failure
 
-    def add_data_pilot (self, dp) :
-        """ Add a DataPilot
-
-            Keyword arguments:
-            dp -- The DataPilotto which this DataUnitService will connect.
         """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
 
+        error = ""
+        for scheduler in self.api['schedulers'] :
+            try :
+                return scheduler.schedule (self.api, ud)
+            except troy.Exception as e :
+                error += "e.msg\n";
 
-    def list_data_pilots (self) :
-        """ List all DPs of DUS """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-    
+        raise troy.Exception (troy.Error.BadParameter, 
+            "No scheduler algorithm managed to assign the unit to any of the " + \
+            "registered pilot frameworks : " + error)
+ 
+                
+    ############################################################################
+    def list_units (self) :
+        """ list IDs of managed work units.  """
+        ret = []
 
-    def remove_data_pilot (self, dp) :
-        """ Remove a DataPilot 
+        for pf in self.api['pilot_frameworks'] :
+            ret += pf.list_units ()
 
-            Note that it won't cancel the DataPilot, it will just no longer
-            receive any DUs
-            
-            Keyword arguments:
-            dp -- The DataPilot to remove 
-        """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-    
-    
-    def submit_data_unit (self, dud) :
-        """ Submit a DU to this DataUnitService.
+        return ret
+                
+    ############################################################################
 
-            Keyword argument:
-            dud -- The DataUnitDescription from the application
-
-            Return:
-            DataUnit object
-        """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-
-    def wait (self) :
-        """ Wait until DUS enters a final state """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-    
-    def cancel (self) :
-        """ Cancel the DUS.
-            
-            Cancelling the DUS also cancels all the DUs submitted to it.
-        """
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
-
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
-# Compute-Data API
-#
-
-########################################################################
-class default_dcus (troy.interface.iComputeDataUnitService) :
-
-    def __init__ (self, api, adaptor) :
-        raise troy.pilot.TroyException (troy.pilot.Error.NotImplemented, "method not implemented!")
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

@@ -1,19 +1,11 @@
 
-from troy.interface.base                           import iBase, aBase
+from troy.interface.base             import iBase
 
-from troy.interface.compute_data_unit              import iComputeDataUnit            
-from troy.interface.compute_data_unit_service      import iComputeDataUnitService    
-from troy.interface.compute_data_scheduler         import iComputeDataScheduler
-
-from troy.interface.compute_pilot                  import iComputePilot                
-from troy.interface.compute_pilot_framework        import iComputePilotFramework        
-from troy.interface.compute_unit                   import iComputeUnit                 
-from troy.interface.compute_unit_service           import iComputeUnitService         
-from troy.interface.compute_scheduler              import iComputeScheduler         
-
-from troy.interface.data_pilot                     import iDataPilot                   
-from troy.interface.data_pilot_framework           import iDataPilotFramework           
-from troy.interface.data_unit                      import iDataUnit                    
-from troy.interface.data_unit_service              import iDataUnitService            
-from troy.interface.data_scheduler                 import iDataScheduler         
+from troy.interface.Troy             import iTroy
+from troy.interface.scheduler        import iScheduler
+from troy.interface.pilot_framework  import iPilotFramework        
+from troy.interface.compute_pilot    import iComputePilot                
+from troy.interface.compute_unit     import iComputeUnit                 
+from troy.interface.data_pilot       import iDataPilot                   
+from troy.interface.data_unit        import iDataUnit                    
 

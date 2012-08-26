@@ -2,9 +2,9 @@
 Quick links:
 ============
 
-  project page:       https://saga-project.github.com/troy/                 <br>
-  api documentation:  https://saga-project.github.com/troy/docs/troy/       <br>
-  wiki etc:           https://github.com/saga-project/troy/wiki/            <br>
+  project page:       http://saga-project.github.com/troy/             <br>
+  api documentation:  http://saga-project.github.com/troy/docs/troy/   <br>
+  wiki etc:           https://github.com/saga-project/troy/wiki/       <br>
 
 
 NOTE: the Troy development follows the 'git-flow' branching model:

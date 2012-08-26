@@ -2,8 +2,8 @@
 Quick links:
 ============
 
-  project page:       https://saga-project,github.com/troy/                 <br>
-  api documentation:  https://saga-project,github.com/troy/docs/troy/       <br>
+  project page:       https://saga-project.github.com/troy/                 <br>
+  api documentation:  https://saga-project.github.com/troy/docs/troy/       <br>
   wiki etc:           https://github.com/saga-project/troy/wiki/            <br>
 
 

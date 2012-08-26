@@ -1,5 +1,6 @@
 Version 0.1 
 ----------------------------------------------------------------------
 
-    * fork from bliss, start renaming and restructuring
+  * basic structure and API
+  * adaptor examples and default adaptors
 

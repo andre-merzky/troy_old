@@ -26,7 +26,21 @@ class PilotFramework (Base) :
         - id:
           The returned ID can be used to connect to the PF instance later on,
           for example from within a different application instance.
-          type: string (url)
+          Type: String
+
+        - pilots:
+          list of pilot id, representing pilots managed by this pilot framework
+          instance
+          Type: String list
+
+        - units:
+          A list of L{ComputeUnit} IDs, representing compute units managed by
+          this pilot.
+          Note: This list may or may not be complete.  In particular, the PF may
+          choose to not include units which are already assigned to a specific
+          pilot, and thus show up in that pilot's 'units' list.
+          Type: String list
+
     """
 
     ############################################################################
@@ -50,7 +64,9 @@ class PilotFramework (Base) :
         Base.__init__ (self)
 
         # prepare supported attributes
-        self.attributes_register_  ('id', None,  self.Url, self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('id',     None,  self.Url, self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('pilots', [],    self.Url, self.Vector, self.ReadOnly)
+        self.attributes_register_  ('units',  [],    self.Url, self.Vector, self.ReadOnly)
         self.id = url
 
         # initialize adaptor class

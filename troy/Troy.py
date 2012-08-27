@@ -25,18 +25,20 @@ class Troy (Base) :
         - id:
           The returned ID can be used to connect to the Service instance later
           on, for example from within a different application instance.  
-          type: String (url)
+          Type: String (url)
 
         - pilot_frameworks
-          An set of L{PilotFramework} instances, representing the set of
+          An set of L{PilotFramework} ids, representing the set of
           resources over which Troy can schedule work items.
-          type: Any
+          Note: these are instances, not IDs
+          Type: 'Any' list
 
         - schedulers
           An set of L{iScheduler} interface instances, internally used by this
           Scheduler to distribute the workload over the different pilot
           frameworks.
-          type: Any
+          Note: these are instances, not IDs
+          Type: Any
 
     FIXME: we might want to expose scheduler state and statistics as properties,
     for inspection and profiling?

@@ -2,6 +2,7 @@
 import os
 import glob
 import imp
+import traceback
 
 import troy.exception 
 
@@ -180,6 +181,9 @@ class Engine (object) :
                 print "engine: call: " + a_name     + "." + a_cname + "."    + method_name + \
                                   " (" + str (args) + str (kwargs)  + ") : " + str (e)
                 e_stack += "  " + a_name + " \t: " + str (e) + "\n";
+                print "  --- ~~~ --->"
+                traceback.print_exc ()
+                print " <--- ~~~ ---"
 
 
         # no adaptor succeeded

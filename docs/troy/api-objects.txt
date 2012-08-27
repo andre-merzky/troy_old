@@ -188,10 +188,10 @@ troy.adaptors.troy_adaptor_default.default_troy.submit_unit	troy.adaptors.troy_a
 troy.interface.Troy.iTroy.init_	troy.interface.Troy.iTroy-class.html#init_
 troy.adaptors.troy_adaptor_default.default_troy.remove_scheduler	troy.adaptors.troy_adaptor_default.default_troy-class.html#remove_scheduler
 troy.adaptors.troy_adaptor_peejay.adaptor	troy.adaptors.troy_adaptor_peejay.adaptor-class.html
+troy.adaptors.troy_adaptor_peejay.adaptor.peejay_watcher_	troy.adaptors.troy_adaptor_peejay.adaptor-class.html#peejay_watcher_
 troy.adaptors.troy_adaptor_peejay.adaptor.get_name	troy.adaptors.troy_adaptor_peejay.adaptor-class.html#get_name
 troy.adaptors.troy_adaptor_peejay.adaptor.get_order	troy.adaptors.troy_adaptor_peejay.adaptor-class.html#get_order
 troy.adaptors.troy_adaptor_peejay.adaptor.get_registry	troy.adaptors.troy_adaptor_peejay.adaptor-class.html#get_registry
-troy.adaptors.troy_adaptor_peejay.adaptor.register_adata	troy.adaptors.troy_adaptor_peejay.adaptor-class.html#register_adata
 troy.adaptors.troy_adaptor_peejay.adaptor.__init__	troy.adaptors.troy_adaptor_peejay.adaptor-class.html#__init__
 troy.adaptors.troy_adaptor_peejay.adaptor.sanity_check	troy.adaptors.troy_adaptor_peejay.adaptor-class.html#sanity_check
 troy.adaptors.troy_adaptor_peejay.peejay_cp	troy.adaptors.troy_adaptor_peejay.peejay_cp-class.html
@@ -200,6 +200,7 @@ troy.interface.compute_pilot.iComputePilot.init_	troy.interface.compute_pilot.iC
 troy.interface.compute_pilot.iComputePilot.list_units	troy.interface.compute_pilot.iComputePilot-class.html#list_units
 troy.adaptors.troy_adaptor_peejay.peejay_cp.unset_callback	troy.adaptors.troy_adaptor_peejay.peejay_cp-class.html#unset_callback
 troy.adaptors.troy_adaptor_peejay.peejay_cp.submit_unit	troy.adaptors.troy_adaptor_peejay.peejay_cp-class.html#submit_unit
+troy.adaptors.troy_adaptor_peejay.peejay_cp.get_state	troy.adaptors.troy_adaptor_peejay.peejay_cp-class.html#get_state
 troy.adaptors.troy_adaptor_peejay.peejay_cp.cancel	troy.adaptors.troy_adaptor_peejay.peejay_cp-class.html#cancel
 troy.adaptors.troy_adaptor_peejay.peejay_cp.reinitialize	troy.adaptors.troy_adaptor_peejay.peejay_cp-class.html#reinitialize
 troy.adaptors.troy_adaptor_peejay.peejay_cp.__init__	troy.adaptors.troy_adaptor_peejay.peejay_cp-class.html#__init__
@@ -227,6 +228,8 @@ troy.adaptors.troy_adaptor_scheduler_random.adaptor.get_name	troy.adaptors.troy_
 troy.adaptors.troy_adaptor_scheduler_random.adaptor.sanity_check	troy.adaptors.troy_adaptor_scheduler_random.adaptor-class.html#sanity_check
 troy.adaptors.troy_adaptor_scheduler_random.scheduler_random	troy.adaptors.troy_adaptor_scheduler_random.scheduler_random-class.html
 troy.interface.base.iBase.init_	troy.interface.base.iBase-class.html#init_
+troy.adaptors.troy_adaptor_scheduler_random.scheduler_random.ud_is_compute	troy.adaptors.troy_adaptor_scheduler_random.scheduler_random-class.html#ud_is_compute
+troy.adaptors.troy_adaptor_scheduler_random.scheduler_random.ud_is_data	troy.adaptors.troy_adaptor_scheduler_random.scheduler_random-class.html#ud_is_data
 troy.adaptors.troy_adaptor_scheduler_random.scheduler_random.__init__	troy.adaptors.troy_adaptor_scheduler_random.scheduler_random-class.html#__init__
 troy.adaptors.troy_adaptor_scheduler_random.scheduler_random.schedule	troy.adaptors.troy_adaptor_scheduler_random.scheduler_random-class.html#schedule
 troy.attributes.Attributes	troy.attributes.Attributes-class.html

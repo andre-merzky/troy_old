@@ -44,7 +44,8 @@ class Scheduler (Base) :
         - id:
           The ID can be used to connect to the Scheduler instance later on, for
           example from within a different application instance -- although the
-          ability to reconnect is not guaranteed.  type: String (url)
+          ability to reconnect is not guaranteed.  
+          Type: String (url)
 
     FIXME: we might want to expose scheduler state and statistics as properties,
     for inspection and profiling?

@@ -131,12 +131,10 @@ Terminology:
         Troy level sub scheduler, manager by the troy.Scheduler.
   
       - PilotFramework: 
-        representation of an instance of any pilot system, exposing the
+        representation of an instance of any pilot system, thus representing the
         UnitService (DataUnitService, ComputeUnitService, and
         ComputeDataUnitService) and PilotService (DataPilotService and
-        ComputePilotService) semantics.
-        [ MS: Does it really expose all these semantics? If so, why do we need
-        a different concept? ]
+        ComputePilotService) of that pilot system .  
   
       - ComputePilotDescription: as in P* / Pilot API
       - DataPilotDescription:    as in P* / Pilot API
@@ -166,30 +164,21 @@ Hello World:
   
       # add a Round Robin scheduling algorithm
       s = troy.Scheduler ('round_robin')
-      # [ MS: This looks weird. I guess I would expect something like
       # troy.Scheduler.RoundRobin or troy.RoundRobinScheduler probably ]
       t.add_scheduler (s)
-      # [ MS: Given that it is called "add", and not "select", does this mean
-      # there can be multiple schedulers? ]
   
       # create two ComputePilots from a BigJob PilotFramework
       pf = troy.PilotFramework ('bigjob://')
       pf.submit_pilot ([some compute pilot description])
       pf.submit_pilot ([some compute pilot description])
-      # [ MS: You think its a good idea to have one submit_pilot call for both
-      # data and compute? ]
   
       # add the bigjob PF to Troy, to submit work items to
       t.add_pilot_framework (pf)
-      # [ MS: And the pilot job framework will announce its capabilities to the
-      # system? ]
   
       # submit a compute work item
       cu = t.submit_unit ([some compute unit description])
-      # [ MS: Similar to submit pilot, good idea to have one? ]
   
       cu.wait ()     # wait 'til work is done
-
   
       pf.cancel ()   # terminate compute pilots and bigjob
       t.cancel ()    # terminate Troy
@@ -245,9 +234,6 @@ from troy.data_unit_description          import DataUnitDescription
 from troy.compute_unit                   import ComputeUnit
 from troy.data_unit                      import DataUnit
 
-
-# [ MS: The splitting of class:file (1:1) seems to be too rigorous and not
-# really pythonesqueue, but I'll leave that up to you ]
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

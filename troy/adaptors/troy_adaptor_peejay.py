@@ -11,7 +11,11 @@ from   troy.adaptors.base import aBase
 from   troy.exception     import Exception, Error
 
 
+########################################################################
+# 
 # FIXME: try/except on all backend interactions
+# 
+
 
 ########################################################################
 # 
@@ -32,12 +36,13 @@ class adaptor (aBase) :
     #
     def peejay_watcher_ (self) :
 
-        print "thread init"
-
         while True :
-            print " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-            print str(self.watch)
-            print " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            for pilot_id in self.watch['cp'] :
+                pilot = self.watch['cp'][pilot_id]
+                state = pilot._sync_backend_state () 
+            for job_id in self.watch['cu'] :
+                pilot = self.watch['cu'][job_id]
+                state = pilot._sync_backend_state () 
             sleep (1)
 
 
@@ -62,11 +67,9 @@ class adaptor (aBase) :
         self.watch = { 'cp' : {},
                        'cu' : {} }
 
-        print " ========= starting watcher thread for " + str(self)
         self.watcher = threading.Thread (target = self.peejay_watcher_)
-        self.watcher.setDaemon (True)
+      # self.watcher.setDaemon (True)
         self.watcher.start ()
-        print " ========= started  watcher thread for " + str(self)
 
 
 
@@ -137,15 +140,16 @@ class peejay_pf (troy.interface.iPilotFramework) :
             raise troy.Exception (troy.Error.BadParameter, 
                   "can only handle peejay:// URLs, not " + elems.scheme + "://")
 
-        if elems.path != '' :
+        master_id = elems.path.lstrip ('/')
+
+        if master_id != '' :
             # we MUST interpret pf_id, if present
             # FIXME: try/except
-            self.master = self.peejay.master (elems.path)
+            self.master = self.peejay.master (master_id)
 
             # we need to make sure that this CU instance has all required attributes
             self.api['pilots'] = self.master.list_pilots ()
             self.api['units']  = self.master.list_jobs ()
-
 
         else :
             # Otherwise, we go ahead and create a new master
@@ -180,6 +184,19 @@ class peejay_pf (troy.interface.iPilotFramework) :
         return self.api['pilots']
 
 
+    def cancel (self) :
+
+        for job_id in  self.api['units'] :
+            print " ---> " + job_id
+            job = troy.ComputeUnit (job_id)
+            job.cancel ()
+
+        for pilot_id in  self.api['pilots'] :
+            print " ---> " + pilot_id
+            pilot = troy.ComputePilot (pilot_id)
+            pilot.cancel ()
+
+
 
 ########################################################################
 class peejay_cp (troy.interface.iComputePilot) :
@@ -202,16 +219,18 @@ class peejay_cp (troy.interface.iComputePilot) :
             raise troy.Exception (troy.Error.BadParameter, 
                   "can only handle peejay:// URLs, not " + elems.scheme + "://")
 
-        if elems.path == '' :
+        pilot_id = elems.path.lstrip ('/')
+
+        if pilot_id == '' :
             # we MUST have an ID to connect to
             raise troy.Exception (troy.Error.BadParameter, 
-                "cannot reconnect to CP - invalid id")
+                "cannot reconnect to CP - invalid (empty) id")
 
-        self.pilot   = self.peejay.pilot (elems.path)
+        self.pilot   = self.peejay.pilot (pilot_id)
         self.running = 1
 
         # we need to make sure that this CU instance has all required attributes
-        self.get_state ()
+        self._sync_backend_state ()
         # sets self.api.state
         # sets self.api.state_detail
         
@@ -226,8 +245,8 @@ class peejay_cp (troy.interface.iComputePilot) :
             self.adaptor.watch['cp'][self.api.id] = self
 
 
-    def get_state (self) :
-        """ return the current state """
+    def _sync_backend_state (self) :
+        """ sync api level state with backend state """
         s = self.pilot.get_state ()
 
         if   s == self.peejay.state.Unknown  : ret = troy.State.Unknown 
@@ -273,8 +292,6 @@ class peejay_cp (troy.interface.iComputePilot) :
             for arg in cud['arguments'] :
                 cmd += ' "' + arg + '"'
 
-        print "peejay cmd: " + cmd 
-
         job      = self.pilot.job_submit (cmd)
         job_id   = str (job.get_id ())
 
@@ -318,33 +335,6 @@ class peejay_cp (troy.interface.iComputePilot) :
         raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
 
 
-    def set_callback (self, member, cb) :
-        """ Set a callback function for a member.
-
-            Keyword arguments:
-            member -- The member to set the callback for (state / state_detail / wall_time_left).
-            cb     -- The callback object to call.
-        """
-        if not self.running :
-            raise troy.Exception (troy.Error.IncorrectState, 
-                    "cannot attach callback to dead pilot!")
-
-        raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
-
-
-    def unset_callback (self, member) :
-        """ Unset a callback function from a member
-
-            Keyword arguments:
-            member -- The member to unset the callback for (state / state_detail / wall_tim_left).
-        """
-        if not self.running :
-            raise troy.Exception (troy.Error.IncorrectState, 
-                    "cannot remove callback from dead pilot!")
-
-        raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
-    
-
 ########################################################################
 class peejay_cu (troy.interface.iComputeUnit) :
 
@@ -360,12 +350,11 @@ class peejay_cu (troy.interface.iComputeUnit) :
             raise troy.Exception (troy.Error.NoSuccess, 
                     "peejay needs an id to reconnect to a cu")
 
-        print " @@@@@@@@@@@ " 
         self.api.attributes_dump_ ()
-        self.job = self.peejay.job (self.api.pilot, self.api.id, "")
+        self.job = self.peejay.job (self.api.id)
 
         # we need to make sure that this CU instance has all required attributes
-        self.get_state ()
+        self._sync_backend_state ()
         # sets self.api.state
         # sets self.api.state_detail
 
@@ -380,8 +369,8 @@ class peejay_cu (troy.interface.iComputeUnit) :
 
 
 
-    def get_state (self) :
-        """ return the current state """
+    def _sync_backend_state (self) :
+        """ sync api level state with backend state """
         s = self.job.get_state ()
 
         if   s == self.peejay.state.Unknown  : ret = troy.State.Unknown 

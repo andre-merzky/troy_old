@@ -54,5 +54,12 @@ class iPilotFramework (iBase) :
         raise troy.Exception (Error.NotImplemented, "method not implemented!")
 
 
+    ############################################################################
+    #
+    def cancel (self) :
+        """ cancel pilot framework, and all its pilots """
+        raise troy.Exception (Error.NotImplemented, "method not implemented!")
+
+
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

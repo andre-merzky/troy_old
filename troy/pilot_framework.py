@@ -67,6 +67,7 @@ class PilotFramework (Base) :
         self.attributes_register_  ('id',     None,  self.Url, self.Scalar, self.ReadOnly)
         self.attributes_register_  ('pilots', [],    self.Url, self.Vector, self.ReadOnly)
         self.attributes_register_  ('units',  [],    self.Url, self.Vector, self.ReadOnly)
+
         self.id = url
 
         # initialize adaptor class

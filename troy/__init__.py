@@ -1,4 +1,6 @@
 
+__version__ = '0.1.0'
+
 """  
 TROY: Tiered Resource Overlay
 =============================
@@ -17,6 +19,7 @@ Overview:
       utilization -- a workplan.  That workplan includes information about the
       required subset of resources, the kind of work planned, and any additional
       relevant or irrelevant information.
+      [ MS: Is the introduction of a 'workplan' really necessary? ]
     
       The resource manager can either decline to enact the requested workplan, or to
       enact it at some point in time, on some subset of its resources.  That
@@ -48,6 +51,7 @@ Overview:
   (instances of pilot frameworks), and supports the application level scheduling
   of workplans across those pilot systems (note that this Troy level scheduling
   process may in turn consist of multiple subprocesses, i.e.  subschedulers).
+  [ MS: I don't think the subschedulers add much clarity)
   Once the Troy level schedulers are done, the workplans are forwarded to the
   underlying pilot systems for further scheduling and enactment.  Any scheduler on
   Troy level may perform complete scheduling, i.e. schedule the workplan for
@@ -129,9 +133,10 @@ Terminology:
         Troy level sub scheduler, manager by the troy.Scheduler.
   
       - PilotFramework: 
-        representation of any pilot system, exposing the UnitService
-        (DataUnitService, ComputeUnitService, and ComputeDataUnitService) and
-        PilotService (DataPilotService and ComputePilotService) semantics.
+        representation of an instance of any pilot system, thus representing the
+        UnitService (DataUnitService, ComputeUnitService, and
+        ComputeDataUnitService) and PilotService (DataPilotService and
+        ComputePilotService) of that pilot system .  
   
       - ComputePilotDescription: as in P* / Pilot API
       - DataPilotDescription:    as in P* / Pilot API
@@ -151,6 +156,7 @@ Hello World:
   
   A simple Troy application scheduling a Compute centric workplan would be (on
   'Hello World' level, some details left out for brevity)::
+  [ MS: Please complete, hello world examples are by definition complete ]
   
       ----------------------------------------------------------------
       import troy
@@ -160,6 +166,7 @@ Hello World:
   
       # add a Round Robin scheduling algorithm
       s = troy.Scheduler ('round_robin')
+      # troy.Scheduler.RoundRobin or troy.RoundRobinScheduler probably ]
       t.add_scheduler (s)
   
       # create two ComputePilots from a BigJob PilotFramework

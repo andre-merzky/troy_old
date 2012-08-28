@@ -25,18 +25,20 @@ class Troy (Base) :
         - id:
           The returned ID can be used to connect to the Service instance later
           on, for example from within a different application instance.  
-          type: String (url)
+          Type: String (url)
 
         - pilot_frameworks
-          An set of L{PilotFramework} instances, representing the set of
+          An set of L{PilotFramework} ids, representing the set of
           resources over which Troy can schedule work items.
-          type: Any
+          Note: these are instances, not IDs
+          Type: 'Any' list
 
         - schedulers
           An set of L{iScheduler} interface instances, internally used by this
           Scheduler to distribute the workload over the different pilot
           frameworks.
-          type: Any
+          Note: these are instances, not IDs
+          Type: Any
 
     FIXME: we might want to expose scheduler state and statistics as properties,
     for inspection and profiling?
@@ -44,7 +46,7 @@ class Troy (Base) :
 
     ############################################################################
     #
-    def __init__ (self, troy_id=None) :
+    def __init__ (self, id=None) :
         """
         Create a Troy object
 
@@ -60,21 +62,43 @@ class Troy (Base) :
         # init api base
         Base.__init__ (self)
 
-        # RO attribute 'id'
-        self.attributes_register_  ('id', troy_id, self.Url,    
-                                    self.Scalar, self.ReadOnly)
+        # prepare supported attributes
+        self.attributes_register_  ('id',               None, self.Url, self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('pilot_frameworks', [],   self.Any, self.Vector, self.Writable)
+        self.attributes_register_  ('schedulers',       [],   self.Any, self.Vector, self.Writable)
 
-        # instance data: set of registered pilot frameworks
-        self.attributes_register_  ('pilot_frameworks', [], self.Any, self.Vector,    
-                                    self.Writable)
+        # we register callbacks to push and pull variable object state to the
+        # backend / adaptor.
+        self.attributes_set_getter_ ('pilot_frameworks', self._pull_state)
+        self.attributes_set_getter_ ('schedulers',       self._pull_state)
 
-        # instance data: set of registered schedulers
-        self.attributes_register_  ('schedulers', [], self.Any, self.Vector,    
-                                    self.Writable)
+        self.attributes_set_setter_ ('pilot_frameworks', self._push_state)
+        self.attributes_set_setter_ ('schedulers',       self._push_state)
+
+        # initialize id
+        self.id = id
 
         # find an adaptor and initialize
         self.engine_.call ('Troy', 'init_', self)
 
+
+
+    ############################################################################
+    #
+    def _push_state (self, obj, key) :
+        """
+        tell the adaptor to push state changes to the backend
+        """
+        return self.engine_.call ('Troy', '_push_state', self, obj, key)
+
+
+    ############################################################################
+    #
+    def _pull_state (self, obj, key) :
+        """
+        tell the adaptor to pull state changes from the backend
+        """
+        return self.engine_.call ('Troy', '_pull_state', self, obj, key)
 
 
     ############################################################################

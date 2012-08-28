@@ -84,6 +84,14 @@ class default_troy (troy.interface.iTroy) :
 
 
     ############################################################################
+    def _push_state (self, obj, key) :
+        pass
+
+    def _pull_state (self, obj, key) :
+        pass
+
+
+    ############################################################################
     def add_scheduler (self, bs) :
         """ 
         Add a Backend Scheduler to this Troy instance.

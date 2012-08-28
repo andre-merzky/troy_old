@@ -2,11 +2,19 @@
 import imp
 import urlparse
 import traceback
+import threading
+from   time import sleep
 
 import troy
 import troy.interface
 from   troy.adaptors.base import aBase
 from   troy.exception     import Exception, Error
+
+
+########################################################################
+# 
+# FIXME: try/except on all backend interactions
+# 
 
 
 ########################################################################
@@ -22,6 +30,22 @@ from   troy.exception     import Exception, Error
 #
 class adaptor (aBase) :
     
+    ########################################################################
+    # we need a thread per adaptor instance which watches (== polls) for pilot 
+    # and job state changes
+    #
+    def peejay_watcher_ (self) :
+
+        while True :
+            for pilot_id in self.watch['cp'] :
+                pilot = self.watch['cp'][pilot_id]
+                state = pilot._sync_backend_state () 
+            for job_id in self.watch['cu'] :
+                pilot = self.watch['cu'][job_id]
+                state = pilot._sync_backend_state () 
+            sleep (1)
+
+
     def __init__ (self) :
         
         # duh!
@@ -29,19 +53,27 @@ class adaptor (aBase) :
 
         # The registry maps api interface classes to the adaptor classes 
         # implementing them:
-        self.registry = {'PilotFramework'            : 'peejay_pf'  ,
-
-                         'ComputePilot'              : 'peejay_cp'  ,
-                         'ComputeUnit'               : 'peejay_cu'  , 
-
-                         'DataPilot'                 : 'peejay_dp'  ,
-                         'DataUnit'                  : 'peejay_du'  }
+        self.registry = {'PilotFramework' : 'peejay_pf' ,
+                         'ComputePilot'   : 'peejay_cp' ,
+                         'ComputeUnit'    : 'peejay_cu' ,
+                         'Base'           : 'peejay_pf' ,
+                         'Base'           : 'peejay_cp' ,
+                         'Base'           : 'peejay_cu' }
         
-        # The adaptor_data keeps links between all id's and backend instances.
-        # It is also use to maintain any other adaptor level state.
-        self.adata = { 'pf'  : {},
-                       'cp'  : {}, 
-                       'cu'  : {} }
+        # This adaptor does not keep state, as all peejay entities are easily
+        # and cheaply reconnectable.  
+        #
+        # self.adata = {}
+
+        # We keep, however, a list of peejay CUs and
+        # CPs watch in the watcher thread
+        self.watch = { 'cp' : {},
+                       'cu' : {} }
+
+        self.watcher = threading.Thread (target = self.peejay_watcher_)
+        self.watcher.setDaemon (True)
+        self.watcher.start ()
+
 
 
     def get_name (self) :
@@ -71,16 +103,13 @@ class adaptor (aBase) :
         # raise troy.Exception (Error.NoSuccess, 'disabling peejay adaptor')
     
 
-    # for each api object, we register our adaptor data.  That way, the adata
-    # will be available in all adaptor level calls (each belonging to exactly
-    # one api class instance).
-    def register_adata (self, api) :
-
-        if not 'idata_' in api :
-            api.idata_ = {}
-
-        api.idata_[self.get_name ()] = self.adata
-        return self.adata
+    # # for each api object, we register our adaptor data.  That way, the adata
+    # # will be available in all adaptor level calls (each belonging to exactly
+    # # one api class instance).
+    # def register_adata (self, api) :
+    #
+    #     api.idata_[self.get_name ()] = self.adata
+    #     return self.adata
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -90,6 +119,7 @@ class adaptor (aBase) :
 
 ########################################################################
 class peejay_pf (troy.interface.iPilotFramework) :
+
 
     def __init__ (self, api, adaptor) :
 
@@ -113,24 +143,32 @@ class peejay_pf (troy.interface.iPilotFramework) :
             raise troy.Exception (troy.Error.BadParameter, 
                   "can only handle peejay:// URLs, not " + elems.scheme + "://")
 
-        if elems.path != '' :
+        master_id = elems.path.lstrip ('/')
+
+        if master_id != '' :
             # we MUST interpret pf_id, if present
-            if not id in self.adaptor.adata['pf'] :
-                raise troy.Exception (troy.Error.BadParameter, 
-                      "cannot reconnect to PF - invalid id")
-            self.master = self.adaptor.adata['pf'][id]
+            # FIXME: try/except
+            self.master = self.peejay.master (master_id)
+
+            # we need to make sure that this CU instance has all required attributes
+            self.api['pilots'] = self.master.list_pilots ()
+            self.api['units']  = self.master.list_jobs ()
 
         else :
             # Otherwise, we go ahead and create a new master
 
             self.master = self.peejay.master ()
             self.api.id = 'peejay:///' + self.master.get_id ()
-            self.adaptor.adata['pf'][self.api.id] = self.master
 
-        # if we got this far, we can now register adaptor level instance data in
-        # the api.  
-        self.adata = self.adaptor.register_adata (self.api)
 
+    def _push_state (self, obj, key) :
+        pass
+
+    def _pull_state (self, obj, key) :
+        self._sync_backend_state ()
+
+    def _sync_backend_state (self) :
+        pass
 
     def submit_pilot (self, cpd) :
         """ Add a ComputePilot to the ComputePilotFramework
@@ -146,14 +184,28 @@ class peejay_pf (troy.interface.iPilotFramework) :
         pilot     = self.master.run_pilot ()
         pilot_id  = 'peejay:///' + str (pilot.get_id ())
 
-        # register pilot for later use
-        self.adata['cp'][pilot_id] = pilot
+        # create pilot, and register with framework
+        ret =  troy.ComputePilot (pilot_id)
+        self.api['pilots'].append (pilot_id)
 
-        return troy.ComputePilot (pilot_id)
+        return ret
+
 
     def list_pilots (self) :
-        ids = self.adata['cp'].keys ()
-        return self.adata['cp'].keys ()
+        return self.api['pilots']
+
+
+    def cancel (self) :
+
+        for job_id in  self.api['units'] :
+            print " ---> " + job_id
+            job = troy.ComputeUnit (job_id)
+            job.cancel ()
+
+        for pilot_id in  self.api['pilots'] :
+            print " ---> " + pilot_id
+            pilot = troy.ComputePilot (pilot_id)
+            pilot.cancel ()
 
 
 
@@ -172,26 +224,62 @@ class peejay_cp (troy.interface.iComputePilot) :
             raise troy.Exception (troy.Error.NoSuccess, 
                     "peejay needs an id to reconnect to a pilot")
 
-        self.id = self.api.id
-
         elems = urlparse.urlparse (self.api.id)
         if elems.scheme != '' and   \
            elems.scheme != 'peejay' :
             raise troy.Exception (troy.Error.BadParameter, 
                   "can only handle peejay:// URLs, not " + elems.scheme + "://")
 
-        if elems.path == '' :
+        pilot_id = elems.path.lstrip ('/')
+
+        if pilot_id == '' :
             # we MUST have an ID to connect to
             raise troy.Exception (troy.Error.BadParameter, 
-                "cannot reconnect to CP - invalid id")
+                "cannot reconnect to CP - invalid (empty) id")
 
-        self.pilot   = self.peejay.pilot (elems.path)
+        self.pilot   = self.peejay.pilot (pilot_id)
         self.running = 1
 
-        # if we got this far, we can now register adaptor level instance data in
-        # the api.  
-        self.adata = self.adaptor.register_adata (self.api)
+        # we need to make sure that this CU instance has all required attributes
+        self._sync_backend_state ()
+        # sets self.api.state
+        # sets self.api.state_detail
+        
+        self.api.framework   = self.pilot.get_master_id   ()
+        self.api.description = self.pilot.get_description ()
+        self.api.units       = self.pilot.list_jobs       ()
 
+
+        # make sure that this CP instance is watched by the adaptor's watcher
+        # thread
+        if not self.api.id in self.adaptor.watch['cp'] :
+            self.adaptor.watch['cp'][self.api.id] = self
+
+
+    def _push_state (self, obj, key) :
+        pass
+
+    def _pull_state (self, obj, key) :
+        self._sync_backend_state ()
+
+
+    def _sync_backend_state (self) :
+        """ sync api level state with backend state """
+        s = self.pilot.get_state ()
+
+        if   s == self.peejay.state.Unknown  : ret = troy.State.Unknown 
+        elif s == self.peejay.state.New      : ret = troy.State.New     
+        elif s == self.peejay.state.Pending  : ret = troy.State.Pending 
+        elif s == self.peejay.state.Running  : ret = troy.State.Running 
+        elif s == self.peejay.state.Done     : ret = troy.State.Done    
+        elif s == self.peejay.state.Canceled : ret = troy.State.Canceled
+        elif s == self.peejay.state.Failed   : ret = troy.State.Failed  
+        else                                 : ret = troy.State.Unknown 
+
+        self.api.state        = ret
+        self.api.state_detail = s
+
+        return ret
 
     def submit_unit (self, cud) :
         """ Submit a CU to this Pilot.
@@ -225,8 +313,14 @@ class peejay_cp (troy.interface.iComputePilot) :
         job      = self.pilot.job_submit (cmd)
         job_id   = str (job.get_id ())
 
+        # store description for the cu instance
+        job.description = cud
+        job.pilot       = self.api.id
+        job.framework   = self.api.framework
+
         # register cu for later state checks etc.
-        self.adata['cu'][job_id] = job
+        self.api.attributes_dump_ ()
+        self.api['units'].append (job_id)
 
         return troy.ComputeUnit (job_id)
 
@@ -259,113 +353,6 @@ class peejay_cp (troy.interface.iComputePilot) :
         raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
 
 
-    def set_callback (self, member, cb) :
-        """ Set a callback function for a member.
-
-            Keyword arguments:
-            member -- The member to set the callback for (state / state_detail / wall_time_left).
-            cb     -- The callback object to call.
-        """
-        if not self.running :
-            raise troy.Exception (troy.Error.IncorrectState, 
-                    "cannot attach callback to dead pilot!")
-
-        raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
-
-
-    def unset_callback (self, member) :
-        """ Unset a callback function from a member
-
-            Keyword arguments:
-            member -- The member to unset the callback for (state / state_detail / wall_tim_left).
-        """
-        if not self.running :
-            raise troy.Exception (troy.Error.IncorrectState, 
-                    "cannot remove callback from dead pilot!")
-
-        raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
-    
-
-
-
-# ########################################################################
-# class peejay_cus (troy.interface.iComputeUnitService) :
-# 
-#     cus_index = 0
-# 
-#     def __init__ (self, api, adaptor) :
-# 
-#         self.api     = api 
-#         self.adaptor = adaptor
-#         self.peejay  = self.adaptor.module
-#         self.cpf     = []  # list of associated compute pilot services
-# 
-# 
-#         peejay_cus.cus_index += 1
-#         self.id      = str (peejay_cus.cus_index)
-# 
-#         # we MUST interpret cus_id, if present.  But in fact, peejay does not
-#         # have a CUS, so we cannot, ever, reconnect to a CUS.  So, we have to
-#         # throw if an id is present
-#         # as creation is always done in the CPF
-#         if 'id' in self.api and self.api.id :
-#             raise troy.Exception (troy.Error.NoSuccess, 
-#                                             "peejay cannot reconnect to CUS!")
-# 
-#         # we need a scheduler.  There is no way for the API to re-init or
-#         # re-assign a scheduler after the CUS has been created -- the scheduler
-#         # is fully internal -- so we can just create it here.  For now, we use
-#         # the 'Random' scheduler
-#         self.scheduler = troy.ComputeScheduler ('Random')
-# 
-#         # if we got this far, we can now register adaptor level instance data in
-#         # the api.  
-#         self.adata = self.adaptor.register_adata (self.api)
-# 
-#         # register the pilot after creation
-#         self.adata ['cus'][self.id] = self
-# 
-# 
-# 
-#     def get_id (self) :
-#         return self.id
-# 
-#     # def submit_unit (self, cud) :
-#     #     self.scheduler.schedule (self.api, cud)
-# 
-# 
-#     def add_pilot_framework (self, cpf) :
-#         """ Add a ComputePilotFramework to this CUS.
-# 
-#             Keyword arguments:
-#             cpf -- The ComputePilotFramework to which this ComputeUnitService will connect.
-#         """
-#         self.cpf.append (cpf)
-# 
-# 
-#     def list_pilot_frameworks (self) :
-#         """ List all CPFs of CUS """
-# 
-#         ret = []
-# 
-#         for cpf in self.cpf :
-#             ret.append (cpf.id)
-# 
-#         return ret
-# 
-# 
-#     def remove_pilot_framework (self, cpf) :
-#         """ Remove a ComputePilotFramework
-# 
-#             Note that it won't cancel the ComputePilotFramework, it will just no longer
-#             receive any CUs.
-# 
-#             Keyword arguments:
-#             cpf -- The ComputePilotFramework to remove 
-#         """
-#         self.cp.remove (cp)
-
-
 ########################################################################
 class peejay_cu (troy.interface.iComputeUnit) :
 
@@ -381,27 +368,48 @@ class peejay_cu (troy.interface.iComputeUnit) :
             raise troy.Exception (troy.Error.NoSuccess, 
                     "peejay needs an id to reconnect to a cu")
 
-        self.id = self.api.id
+        self.api.attributes_dump_ ()
+        self.job = self.peejay.job (self.api.id)
 
-        # if we got this far, we can now register adaptor level instance data in
-        # the api.  
-        self.adata = self.adaptor.register_adata (self.api)
-        self.job   = self.adata['cu'][self.id]
+        # we need to make sure that this CU instance has all required attributes
+        self._sync_backend_state ()
+        # sets self.api.state
+        # sets self.api.state_detail
+
+        self.api.pilot       = self.job.get_pilot_id ()
+        self.api.framework   = self.job.get_master_id ()
+        self.api.description = self.job.get_description ()
+
+        # make sure that this CU instance is watched by the adaptor's watcher
+        # thread
+        if not self.api.id in self.adaptor.watch['cu'] :
+            self.adaptor.watch['cu'][self.api.id] = self
 
 
+    def _push_state (self, obj, key) :
+        pass
 
-    def get_state (self) :
-        """ return the current state """
+    def _pull_state (self, obj, key) :
+        self._sync_backend_state ()
+
+
+    def _sync_backend_state (self) :
+        """ sync api level state with backend state """
         s = self.job.get_state ()
 
-        if   s == self.peejay.state.Unknown  : return troy.State.Unknown 
-        elif s == self.peejay.state.New      : return troy.State.New     
-        elif s == self.peejay.state.Pending  : return troy.State.Pending 
-        elif s == self.peejay.state.Running  : return troy.State.Running 
-        elif s == self.peejay.state.Done     : return troy.State.Done    
-        elif s == self.peejay.state.Canceled : return troy.State.Canceled
-        elif s == self.peejay.state.Failed   : return troy.State.Failed  
-        else                                 : return troy.State.Unknown 
+        if   s == self.peejay.state.Unknown  : ret = troy.State.Unknown 
+        elif s == self.peejay.state.New      : ret = troy.State.New     
+        elif s == self.peejay.state.Pending  : ret = troy.State.Pending 
+        elif s == self.peejay.state.Running  : ret = troy.State.Running 
+        elif s == self.peejay.state.Done     : ret = troy.State.Done    
+        elif s == self.peejay.state.Canceled : ret = troy.State.Canceled
+        elif s == self.peejay.state.Failed   : ret = troy.State.Failed  
+        else                                 : ret = troy.State.Unknown 
+
+        self.api.state        = ret
+        self.api.state_detail = s
+
+        return ret
 
 
     def wait (self) :

@@ -1,5 +1,5 @@
 
-from troy.exception import Exception, Error
+import troy.exception
 
 
 ########################################################################
@@ -23,7 +23,6 @@ class iBase:
     def init_ (self) :
         """ dummy method to make sure the backend can initialize the object.
             This method should *not* be implemented in the adaptor!"""
-        print "iBase: dummy init method called"
         pass
 
 

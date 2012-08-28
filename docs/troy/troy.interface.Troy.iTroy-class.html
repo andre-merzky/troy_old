@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>troy.interface.Troy.iTroy</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="troy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://saga-project.github.com/troy/">Troy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="troy-module.html">Package&nbsp;troy</a> ::
+        <a href="troy.interface-module.html">Package&nbsp;interface</a> ::
+        <a href="troy.interface.Troy-module.html">Module&nbsp;Troy</a> ::
+        Class&nbsp;iTroy
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class iTroy</h1><p class="nomargin-top"><span class="codelink"><a href="troy.interface.Troy-pysrc.html#iTroy">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_troy_int" name="uml_class_diagram_for_troy_int">
+<area shape="rect" id="node98" href="troy.interface.Troy.iTroy-class.html#__init__" title="Create a Troy instance" alt="" coords="40,97,209,113"/>
+<area shape="rect" id="node98" href="troy.interface.Troy.iTroy-class.html#init_" title="dummy method to make sure the backend can initialize the object." alt="" coords="40,113,209,129"/>
+<area shape="rect" id="node98" href="troy.interface.Troy.iTroy-class.html#add_scheduler" title="Set a scheduler for submitted work units" alt="" coords="40,129,209,145"/>
+<area shape="rect" id="node98" href="troy.interface.Troy.iTroy-class.html#list_schedulers" title="return array of registered scheduler instances" alt="" coords="40,145,209,161"/>
+<area shape="rect" id="node98" href="troy.interface.Troy.iTroy-class.html#remove_scheduler" title="remove a previously registered scheduler instance" alt="" coords="40,161,209,177"/>
+<area shape="rect" id="node98" href="troy.interface.Troy.iTroy-class.html#add_pilot_framework" title="Add a PilotFramework to this Scheduler" alt="" coords="40,177,209,193"/>
+<area shape="rect" id="node98" href="troy.interface.Troy.iTroy-class.html#list_pilot_frameworks" title="List all CPFs of Scheduler" alt="" coords="40,193,209,209"/>
+<area shape="rect" id="node98" href="troy.interface.Troy.iTroy-class.html#remove_pilot_framework" title="Remove a PilotFramework" alt="" coords="40,209,209,225"/>
+<area shape="rect" id="node98" href="troy.interface.Troy.iTroy-class.html#submit_unit" title="Submit a CU to this Scheduler" alt="" coords="40,225,209,241"/>
+<area shape="rect" id="node98" href="troy.interface.Troy.iTroy-class.html#list_units" title="list managed work Unit" alt="" coords="40,241,209,257"/>
+<area shape="rect" id="node1" href="troy.interface.Troy.iTroy-class.html" title="Scheduler interface" alt="" coords="28,67,220,263"/>
+<area shape="rect" id="node3" href="troy.adaptors.troy_adaptor_default.default_troy-class.html" title="troy.adaptors.troy_adaptor_default.default_troy" alt="" coords="5,283,245,319"/>
+<area shape="rect" id="node2" href="troy.interface.base.iBase-class.html" title="troy.interface.base.iBase" alt="" coords="85,6,163,47"/>
+</map>
+  <img src="uml_class_diagram_for_troy_int.gif" alt='' usemap="#uml_class_diagram_for_troy_int" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p><a href="troy.scheduler.Scheduler-class.html" 
+  class="link">Scheduler</a> interface</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.Troy.iTroy-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">obj</span>,
+        <span class="summary-sig-arg">adaptor</span>)</span><br />
+      Create a Troy instance</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.Troy-pysrc.html#iTroy.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="troy.interface.Troy.iTroy-class.html#init_" class="summary-sig-name">init_</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      dummy method to make sure the backend can initialize the object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.Troy-pysrc.html#iTroy.init_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="add_scheduler"></a><span class="summary-sig-name">add_scheduler</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">s</span>)</span><br />
+      Set a scheduler for submitted work units</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.Troy-pysrc.html#iTroy.add_scheduler">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="list_schedulers"></a><span class="summary-sig-name">list_schedulers</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      return array of registered scheduler instances</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.Troy-pysrc.html#iTroy.list_schedulers">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="remove_scheduler"></a><span class="summary-sig-name">remove_scheduler</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">s</span>)</span><br />
+      remove a previously registered scheduler instance</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.Troy-pysrc.html#iTroy.remove_scheduler">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="add_pilot_framework"></a><span class="summary-sig-name">add_pilot_framework</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cpf</span>)</span><br />
+      Add a PilotFramework to this Scheduler</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.Troy-pysrc.html#iTroy.add_pilot_framework">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="list_pilot_frameworks"></a><span class="summary-sig-name">list_pilot_frameworks</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      List all CPFs of Scheduler</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.Troy-pysrc.html#iTroy.list_pilot_frameworks">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="remove_pilot_framework"></a><span class="summary-sig-name">remove_pilot_framework</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cpf</span>)</span><br />
+      Remove a PilotFramework</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.Troy-pysrc.html#iTroy.remove_pilot_framework">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="submit_unit"></a><span class="summary-sig-name">submit_unit</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cud</span>)</span><br />
+      Submit a CU to this Scheduler</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.Troy-pysrc.html#iTroy.submit_unit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="list_units"></a><span class="summary-sig-name">list_units</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      list managed work Unit</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="troy.interface.Troy-pysrc.html#iTroy.list_units">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">obj</span>,
+        <span class="sig-arg">adaptor</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.interface.Troy-pysrc.html#iTroy.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Create a Troy instance</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.base.iBase-class.html#__init__">base.iBase.__init__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="init_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">init_</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="troy.interface.Troy-pysrc.html#iTroy.init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>dummy method to make sure the backend can initialize the object. This 
+  method should *not* be implemented in the adaptor!</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="troy.interface.base.iBase-class.html#init_">base.iBase.init_</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="troy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://saga-project.github.com/troy/">Troy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Tue Aug 28 14:00:10 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

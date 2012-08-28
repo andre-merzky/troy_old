@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>troy.state.State</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="troy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://saga-project.github.com/troy/">Troy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="troy-module.html">Package&nbsp;troy</a> ::
+        <a href="troy.state-module.html">Module&nbsp;state</a> ::
+        Class&nbsp;State
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class State</h1><p class="nomargin-top"><span class="codelink"><a href="troy.state-pysrc.html#State">source&nbsp;code</a></span></p>
+<p>The State class is really an enum, or what python uses as an enum.  
+  That enum describes the state model for various components of the Troy 
+  API, and is exposed as property of the following classes:</p>
+<pre class="literalblock">
+   troy.compute_pilot
+   troy.compute_unit
+   troy.data_pilot
+   troy.data_unit
+</pre>
+  <p>For example, an <a href="troy.compute_pilot.ComputePilot-class.html" 
+  class="link">ComputePilot</a> instance is created via a creation 
+  request:</p>
+<pre class="literalblock">
+   cpd = troy.compute_pilot_description ()
+   pf  = troy.pilot_framework ()
+   cp  = pf.create_compute_pilot (cpd)
+</pre>
+  <p>That compute pilot has, at this point, the state 'New', so the Troy 
+  implementation has accepted the creation request, but it was not 
+  necessarily passed on to a backend which actually instantiates a compute 
+  pilot on some resource.</p>
+  <p>Once the request is passed on to the backend, and was accepted by it, 
+  the cp will have 'Pending' state.  That state will eventually transition 
+  to 'Running', when the backend instantiated the compute pilot 
+  process/agent/... Resources are only consumed during the 'Running' 
+  state,</p>
+  <p>There are three options to leave the 'Running' state: 'Done', as 
+  successful and planned end of operation of the instance; 'Failed', as 
+  premature or unexpected end of operation (e.g. due to an error 
+  condition); and 'Canceled', as premature and expected end of operation, 
+  due to user request.</p>
+  <p>Note that all stateful objects of the API will, additionally to the 
+  state enum, expose a 'state_detail' (string), which is, in general, the 
+  native backend state -- Troy does not assume any semantic meaning on 
+  state_detail values.</p>
+  <p>Available states:</p>
+<pre class="literalblock">
+   - Unknown
+     The state of the backend instance is not known.  Duh! 
+
+   - New         
+     The creation request was accepted, but did not yet reach the backend. 
+
+   - Pending     
+     The backend accepted a creation request, but did not yet enact it. 
+
+   - Running     
+     The backend instance is created and active. 
+
+   - Done        
+     The backend instance finished successfully. 
+
+   - Canceled    
+     The backend instance finished due to a user request. 
+
+   - Failed      
+     The backend instance finished on an error condition. 
+</pre>
+
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Unknown"></a><span class="summary-name">Unknown</span> = <code title="'Unknown'"><code class="variable-quote">'</code><code class="variable-string">Unknown</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="New"></a><span class="summary-name">New</span> = <code title="'New'"><code class="variable-quote">'</code><code class="variable-string">New</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Pending"></a><span class="summary-name">Pending</span> = <code title="'Pending'"><code class="variable-quote">'</code><code class="variable-string">Pending</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Running"></a><span class="summary-name">Running</span> = <code title="'Running'"><code class="variable-quote">'</code><code class="variable-string">Running</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Done"></a><span class="summary-name">Done</span> = <code title="'Done'"><code class="variable-quote">'</code><code class="variable-string">Done</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Canceled"></a><span class="summary-name">Canceled</span> = <code title="'Canceled'"><code class="variable-quote">'</code><code class="variable-string">Canceled</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="Failed"></a><span class="summary-name">Failed</span> = <code title="'Failed'"><code class="variable-quote">'</code><code class="variable-string">Failed</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="troy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://saga-project.github.com/troy/">Troy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    <a href="epydoc-log.html">Generated by Epydoc
+    3.0.1 on Tue Aug 28 14:00:11 2012</a>
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

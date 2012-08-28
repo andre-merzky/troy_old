@@ -67,7 +67,6 @@
 <area shape="rect" id="node1" href="troy.pilot_framework.PilotFramework-class.html" title="PilotFramework (PF)" alt="" coords="75,670,203,802"/>
 <area shape="rect" id="node131" href="troy.base.Base-class.html#dump_" title="Dump dumps." alt="" coords="108,628,172,644"/>
 <area shape="rect" id="node2" href="troy.base.Base-class.html" title="All Troy API classes inherit from this base class, which provides support for adaptor management and the management of class instance data." alt="" coords="96,598,184,650"/>
-<area shape="rect" id="node3" href="troy.attributes.AttributesBase_-class.html" title="This class only exists to host properties &#45;&#45; as object itself does *not* have properties! This class is not part of the public attribute API." alt="" coords="65,6,212,47"/>
 <area shape="rect" id="node132" href="troy.attributes.Attributes-class.html#Any" title="troy.attributes.Attributes.Any" alt="" coords="17,89,261,105"/>
 <area shape="rect" id="node132" href="troy.attributes.Attributes-class.html#Url" title="troy.attributes.Attributes.Url" alt="" coords="17,105,261,121"/>
 <area shape="rect" id="node132" href="troy.attributes.Attributes-class.html#Int" title="troy.attributes.Attributes.Int" alt="" coords="17,121,261,137"/>
@@ -93,10 +92,11 @@
 <area shape="rect" id="node132" href="troy.attributes.Attributes-class.html#attributes_t_conversion_flavor_" title="This internal function is not to be used by the consumer of this API." alt="" coords="17,460,261,476"/>
 <area shape="rect" id="node132" href="troy.attributes.Attributes-class.html#attributes_t_conversion_type_" title="This internal function is not to be used by the consumer of this API." alt="" coords="17,476,261,492"/>
 <area shape="rect" id="node132" href="troy.attributes.Attributes-class.html#attributes_t_wildcard2regex_" title="This internal function is not to be used by the consumer of this API." alt="" coords="17,492,261,508"/>
-<area shape="rect" id="node132" href="troy.attributes.Attributes-class.html#attributes_t_get_age_" title="get the age of the attribute, i.e." alt="" coords="17,508,261,524"/>
-<area shape="rect" id="node132" href="troy.attributes.Attributes-class.html#attributes_i_set_" title="This internal method should not be explicitly called by consumers of this &#160;API, but is indirectly used via the different public interfaces." alt="" coords="17,524,261,540"/>
+<area shape="rect" id="node132" href="troy.attributes.Attributes-class.html#attributes_i_set_" title="This internal method should not be explicitly called by consumers of this &#160;API, but is indirectly used via the different public interfaces." alt="" coords="17,508,261,524"/>
+<area shape="rect" id="node132" href="troy.attributes.Attributes-class.html#attributes_i_get_" title="This internal method should not be explicitly called by consumers of this &#160;API, but is indirectly used via the different public interfaces." alt="" coords="17,524,261,540"/>
 <area shape="rect" id="node132" href="troy.attributes.Attributes-class.html#__str__" title="The string representation of the attributes is, right now, somewhat &#160;arbitrarily defined as to make the bliss attribute unit tests happy: we &#160;ignore unset values and extended values." alt="" coords="17,556,261,572"/>
-<area shape="rect" id="node4" href="troy.attributes.Attributes-class.html" title="Attribute Interface Class" alt="" coords="5,67,272,578"/>
+<area shape="rect" id="node3" href="troy.attributes.Attributes-class.html" title="Attribute Interface Class" alt="" coords="5,67,272,578"/>
+<area shape="rect" id="node4" href="troy.attributes.AttributesBase_-class.html" title="This class only exists to host properties &#45;&#45; as object itself does *not* have properties! This class is not part of the public attribute API." alt="" coords="65,6,212,47"/>
 </map>
   <img src="uml_class_diagram_for_troy_pil.gif" alt='' usemap="#uml_class_diagram_for_troy_pil" ismap="ismap" class="graph-without-title" />
 </center>
@@ -121,7 +121,20 @@
    - id:
      The returned ID can be used to connect to the PF instance later on,
      for example from within a different application instance.
-     type: string (url)
+     Type: String
+
+   - pilots:
+     list of pilot id, representing pilots managed by this pilot framework
+     instance
+     Type: String list
+
+   - units:
+     A list of L{ComputeUnit} IDs, representing compute units managed by
+     this pilot.
+     Note: This list may or may not be complete.  In particular, the PF may
+     choose to not include units which are already assigned to a specific
+     pilot, and thus show up in that pilot's 'units' list.
+     Type: String list
 </pre>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
@@ -139,7 +152,7 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="troy.pilot_framework.PilotFramework-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">url</span>)</span><br />
+        <span class="summary-sig-arg">id</span>)</span><br />
       Create a PilotFramework object</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="troy.pilot_framework-pysrc.html#PilotFramework.__init__">source&nbsp;code</a></span>
@@ -257,8 +270,8 @@
       <code><a href="troy.attributes.Attributes-class.html#attribute_is_removable">attribute_is_removable</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attribute_is_vector">attribute_is_vector</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attribute_is_writable">attribute_is_writable</a></code>,
+      <code><a href="troy.attributes.Attributes-class.html#attributes_add_check_">attributes_add_check_</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attributes_camelcasing_">attributes_camelcasing_</a></code>,
-      <code><a href="troy.attributes.Attributes-class.html#attributes_check_add_">attributes_check_add_</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attributes_deep_copy_">attributes_deep_copy_</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attributes_dump_">attributes_dump_</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attributes_extensible_">attributes_extensible_</a></code>,
@@ -283,7 +296,6 @@
       <code><a href="troy.attributes.Attributes-class.html#attributes_set_getter_">attributes_set_getter_</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attributes_set_lister_">attributes_set_lister_</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attributes_set_setter_">attributes_set_setter_</a></code>,
-      <code><a href="troy.attributes.Attributes-class.html#attributes_set_ttl_">attributes_set_ttl_</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attributes_t_call_cb_">attributes_t_call_cb_</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attributes_t_call_getter_">attributes_t_call_getter_</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attributes_t_call_lister_">attributes_t_call_lister_</a></code>,
@@ -291,7 +303,6 @@
       <code><a href="troy.attributes.Attributes-class.html#attributes_t_conversion_">attributes_t_conversion_</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attributes_t_conversion_flavor_">attributes_t_conversion_flavor_</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attributes_t_conversion_type_">attributes_t_conversion_type_</a></code>,
-      <code><a href="troy.attributes.Attributes-class.html#attributes_t_get_age_">attributes_t_get_age_</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attributes_t_init_">attributes_t_init_</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attributes_t_keycheck_">attributes_t_keycheck_</a></code>,
       <code><a href="troy.attributes.Attributes-class.html#attributes_t_underscore_">attributes_t_underscore_</a></code>,
@@ -388,7 +399,7 @@
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">url</span>)</span>
+        <span class="sig-arg">id</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
@@ -397,7 +408,7 @@
   </tr></table>
   
   <p>Create a PilotFramework object</p>
-  <p>Keyword arguments: url: url identifying the backend PF.</p>
+  <p>Keyword arguments: id: url identifying the backend PF.</p>
   <p>Note that the URL may be incomplete, if a new PF instance is to be 
   created -- for example, it may contain only a hint about what pilot 
   framework is to be used on what resource.  On inspection, the PF will 
@@ -609,7 +620,7 @@
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Mon Aug 27 00:38:46 2012</a>
+    3.0.1 on Tue Aug 28 13:48:56 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

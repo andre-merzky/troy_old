@@ -2,6 +2,7 @@
 import os
 import glob
 import imp
+import traceback
 
 import troy.exception 
 
@@ -146,6 +147,9 @@ class Engine (object) :
                 adaptor    = self.adaptors[a_name]['adaptor']
                 module     = self.adaptors[a_name]['module']
                 a_registry = self.adaptors[a_name]['registry']
+
+                if class_name in a_registry :
+                    pass
                 a_cname    = a_registry[class_name]      # name of adaptor class
                                                          # implementing the requested 
                                                          # api class
@@ -180,6 +184,9 @@ class Engine (object) :
                 print "engine: call: " + a_name     + "." + a_cname + "."    + method_name + \
                                   " (" + str (args) + str (kwargs)  + ") : " + str (e)
                 e_stack += "  " + a_name + " \t: " + str (e) + "\n";
+                print "  --- ~~~ --->"
+                traceback.print_exc ()
+                print " <--- ~~~ ---"
 
 
         # no adaptor succeeded

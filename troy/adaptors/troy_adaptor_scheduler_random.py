@@ -70,25 +70,53 @@ class scheduler_random (troy.interface.iScheduler) :
                 raise troy.Exception (troy.Error.NoSuccess,
                       "Cannot provide the requested scheduling policy!")
 
+    def ud_is_compute (self, ud) :
+        if 'executable' in ud :
+            return True
+        return False
+
+    def ud_is_data (self, ud) :
+        if 'urls' in ud :
+            return True
+        return False
+
 
     def schedule (self, t, ud) :
 
-        pilot_frameworks = t.list_pilot_frameworks ()
-
+        pf_ids = t.list_pilot_frameworks ()
         pilots = []
 
-        for id in pilot_frameworks :
-            pilot_framework = troy.PilotFramework (id)
-            pilots.extend (pilot_framework.list_pilots ())
+        # gather all available pilots
+        for pf_id in pf_ids :
+            pf        = troy.PilotFramework (pf_id)
+            p_ids = pf.list_pilots ()
+
+            for p_id in p_ids :
+                try :
+                    if self.ud_is_compute (ud) :
+                        pilots.append (troy.ComputePilot (p_id))
+                        print "1"
+                    elif self.ud_is_data (ud) :
+                        pilots.append (troy.DataPilot (p_id))
+                    else :
+                        # ignore invalid ud's
+                        pass
+                except Exception as e:
+                    # print str(e)
+                    # ignore invalid pilot IDs (think race condition)
+                    pass
+
 
         if len (pilots) == 0 :
             raise troy.Exception (troy.Error.IncorrectState,
                   "Cannot schedule: no pilots available")
 
+        # select a random pilot
         idx = random.randint (0, len  (pilots) - 1)
-        cp  = troy.ComputePilot (pilots[idx])
+        p   = pilots[idx]
 
-        return cp.submit_unit (ud)
+        # and attempt to submit
+        return p.submit_unit (ud)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

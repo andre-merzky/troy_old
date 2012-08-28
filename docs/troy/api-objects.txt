@@ -1,5 +1,6 @@
 troy	troy-module.html
 troy.__package__	troy-module.html#__package__
+troy.__version__	troy-module.html#__version__
 troy.Troy'	troy.Troy%27-module.html
 troy.Troy'.__package__	troy.Troy%27-module.html#__package__
 troy.adaptors	troy.adaptors-module.html

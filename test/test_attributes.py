@@ -1,8 +1,10 @@
+#!/usr/bin/python
 
-import troy.pilot as pilot
+import datetime
+import troy
 
 ###########################################
-class Attributator ( pilot.Attributes ) :
+class Attributator ( troy.Attributes ) :
     
     def __init__ (self, *args, **kwargs) :
         # setting attribs to non-extensible will cause the cal to init below to
@@ -26,9 +28,25 @@ class Attributator ( pilot.Attributes ) :
         # register a getter poll for 'plum', so that we can change values on the fly.  The
         # use case would be to, at this point, ask some backend for value updates.
         #################################
-        def poller (key, val, obj) :
+        def poller_all (obj, key) :
             # the poller gets information about what attribute was changed
             # on what object:
+            val = obj[key]
+            print "POLLED: %s - %s - %s"  %  (key, str(val), type (obj))
+
+            if isinstance (val, basestring) :
+                obj.set_attribute (key, val + ' pie')
+
+            # recursion check
+            # obj.get_attribute (key)
+  
+            # returning True will keep the poller registered for further
+            return True
+        #################################
+        def poller (obj, key) :
+            # the poller gets information about what attribute was changed
+            # on what object:
+            val = obj[key]
             print "polled: %s - %s - %s"  %  (key, str(val), type (obj))
 
             if isinstance (val, basestring) :
@@ -40,7 +58,8 @@ class Attributator ( pilot.Attributes ) :
             # returning True will keep the poller registered for further
             return True
         #################################
-        self.attributes_poll_add_ ('apple', poller, self.Get)
+        self.attributes_set_getter_ (None,    poller_all)
+        self.attributes_set_getter_ ('apple', poller)
 
 
 ###########################################
@@ -49,7 +68,7 @@ if __name__ == "__main__":
     # attribute changes later.
 
     #################################
-    def cb (key, val, obj) :
+    def cb (obj, key, val) :
         # the callback gets information about what attribute was changed
         # on what object:
         print "called: %s - %s - %s"  %  (key, str(val), type (obj))
@@ -110,6 +129,16 @@ if __name__ == "__main__":
     print attr.peach
     attr.peach = 'Birne'
     print attr.peach
+
+    # start = datetime.datetime.now ()
+    # for i in range (20000) :
+    #     t = attr.peach
+    # end = datetime.datetime.now ()
+    # diff = end - start
+    # print str(diff)
+
+
+
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

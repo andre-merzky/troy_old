@@ -45,12 +45,12 @@ class PilotFramework (Base) :
 
     ############################################################################
     #
-    def __init__ (self, url) :
+    def __init__ (self, id) :
         """ 
         Create a PilotFramework object
 
         Keyword arguments:
-        url: url identifying the backend PF.
+        id: url identifying the backend PF.
 
         Note that the URL may be incomplete, if a new PF instance is to be
         created -- for example, it may contain only a hint about what pilot
@@ -68,10 +68,37 @@ class PilotFramework (Base) :
         self.attributes_register_  ('pilots', [],    self.Url, self.Vector, self.ReadOnly)
         self.attributes_register_  ('units',  [],    self.Url, self.Vector, self.ReadOnly)
 
-        self.id = url
+        # we register callbacks to push and pull variable object state to the
+        # backend / adaptor.
+        self.attributes_set_getter_ ('pilots', self._pull_state)
+        self.attributes_set_getter_ ('units',  self._pull_state)
+
+        self.attributes_set_setter_ ('pilots', self._push_state)
+        self.attributes_set_setter_ ('units',  self._push_state)
+
+        # initialize id
+        self.id = id
 
         # initialize adaptor class
         self.engine_.call ('PilotFramework', 'init_', self)
+
+
+    ############################################################################
+    #
+    def _push_state (self, obj, key) :
+        """
+        tell the adaptor to push state changes to the backend
+        """
+        return self.engine_.call ('PilotFramework', '_push_state', self, obj, key)
+
+
+    ############################################################################
+    #
+    def _pull_state (self, obj, key) :
+        """
+        tell the adaptor to pull state changes from the backend
+        """
+        return self.engine_.call ('PilotFramework', '_pull_state', self, obj, key)
 
 
     ############################################################################

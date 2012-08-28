@@ -1,6 +1,6 @@
 
-from troy.interface.base  import iBase
-from troy.exception       import Exception, Error
+from   troy.interface.base  import iBase
+import troy.exception
     
 
 ########################################################################
@@ -14,14 +14,14 @@ class iScheduler (iBase) :
     #
     def __init__ (self, obj, adaptor) :
         """ Create a Scheduler """
-        raise troy.Exception (Error.NotImplemented, "interface not implemented!")
+        raise troy.Exception (troy.Error.NotImplemented, "interface not implemented!")
 
 
     ############################################################################
     #
     def schedule (self, t, ud) :
         """ Schedule a work unit on Troy """
-        raise troy.Exception (Error.NotImplemented, "method not implemented!")
+        raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
 
 
 

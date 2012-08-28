@@ -1,5 +1,5 @@
 
-from troy.exception import Exception, Error
+import troy.exception
 
 
 ########################################################################

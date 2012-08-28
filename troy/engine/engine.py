@@ -147,6 +147,9 @@ class Engine (object) :
                 adaptor    = self.adaptors[a_name]['adaptor']
                 module     = self.adaptors[a_name]['module']
                 a_registry = self.adaptors[a_name]['registry']
+
+                if class_name in a_registry :
+                    pass
                 a_cname    = a_registry[class_name]      # name of adaptor class
                                                          # implementing the requested 
                                                          # api class

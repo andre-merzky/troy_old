@@ -104,12 +104,12 @@ troy.interface.base" class="py-name" href="#" onclick="return doclink('link-1', 
 <a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
 <a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
 <a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
-<a name="PilotFramework.__init__"></a><div id="PilotFramework.__init__-def"><a name="L48"></a><tt class="py-lineno"> 48</tt> <a class="py-toggle" href="#" id="PilotFramework.__init__-toggle" onclick="return toggle('PilotFramework.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot_framework.PilotFramework-class.html#__init__">__init__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">url</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+<a name="PilotFramework.__init__"></a><div id="PilotFramework.__init__-def"><a name="L48"></a><tt class="py-lineno"> 48</tt> <a class="py-toggle" href="#" id="PilotFramework.__init__-toggle" onclick="return toggle('PilotFramework.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot_framework.PilotFramework-class.html#__init__">__init__</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">id</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
 </div><div id="PilotFramework.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PilotFramework.__init__-expanded"><a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
 <a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">        Create a PilotFramework object</tt> </tt>
 <a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
 <a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">        Keyword arguments:</tt> </tt>
-<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">        url: url identifying the backend PF.</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">        id: url identifying the backend PF.</tt> </tt>
 <a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
 <a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">        Note that the URL may be incomplete, if a new PF instance is to be</tt> </tt>
 <a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">        created -- for example, it may contain only a hint about what pilot</tt> </tt>
@@ -158,132 +158,160 @@ troy.scheduler.Scheduler.__init__" class="py-name" href="#" onclick="return docl
 <a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method troy.attributes.Attributes.attributes_register_()=troy.attributes.Attributes-class.html#attributes_register_"><a title="troy.attributes.Attributes.attributes_register_" class="py-name" href="#" onclick="return doclink('link-5', 'attributes_register_', 'link-5');">attributes_register_</a></tt>  <tt class="py-op">(</tt><tt class="py-string">'id'</tt><tt class="py-op">,</tt>     <tt class="py-name">None</tt><tt class="py-op">,</tt>  <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Variable troy.attributes.Attributes.Url=troy.attributes.Attributes-class.html#Url"><a title="troy.attributes.Attributes.Url" class="py-name" href="#" onclick="return doclink('link-6', 'Url', 'link-6');">Url</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Variable troy.attributes.Attributes.Scalar=troy.attributes.Attributes-class.html#Scalar"><a title="troy.attributes.Attributes.Scalar" class="py-name" href="#" onclick="return doclink('link-7', 'Scalar', 'link-7');">Scalar</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Variable troy.attributes.Attributes.ReadOnly=troy.attributes.Attributes-class.html#ReadOnly"><a title="troy.attributes.Attributes.ReadOnly" class="py-name" href="#" onclick="return doclink('link-8', 'ReadOnly', 'link-8');">ReadOnly</a></tt><tt class="py-op">)</tt> </tt>
 <a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="troy.attributes.Attributes.attributes_register_" class="py-name" href="#" onclick="return doclink('link-9', 'attributes_register_', 'link-5');">attributes_register_</a></tt>  <tt class="py-op">(</tt><tt class="py-string">'pilots'</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">,</tt>    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="troy.attributes.Attributes.Url" class="py-name" href="#" onclick="return doclink('link-10', 'Url', 'link-6');">Url</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Variable troy.attributes.Attributes.Vector=troy.attributes.Attributes-class.html#Vector"><a title="troy.attributes.Attributes.Vector" class="py-name" href="#" onclick="return doclink('link-11', 'Vector', 'link-11');">Vector</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="troy.attributes.Attributes.ReadOnly" class="py-name" href="#" onclick="return doclink('link-12', 'ReadOnly', 'link-8');">ReadOnly</a></tt><tt class="py-op">)</tt> </tt>
 <a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="troy.attributes.Attributes.attributes_register_" class="py-name" href="#" onclick="return doclink('link-13', 'attributes_register_', 'link-5');">attributes_register_</a></tt>  <tt class="py-op">(</tt><tt class="py-string">'units'</tt><tt class="py-op">,</tt>  <tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">,</tt>    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="troy.attributes.Attributes.Url" class="py-name" href="#" onclick="return doclink('link-14', 'Url', 'link-6');">Url</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="troy.attributes.Attributes.Vector" class="py-name" href="#" onclick="return doclink('link-15', 'Vector', 'link-11');">Vector</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="troy.attributes.Attributes.ReadOnly" class="py-name" href="#" onclick="return doclink('link-16', 'ReadOnly', 'link-8');">ReadOnly</a></tt><tt class="py-op">)</tt> </tt>
-<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">id</tt> <tt class="py-op">=</tt> <tt class="py-name">url</tt> </tt>
-<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"> </tt>
-<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-comment"># initialize adaptor class</tt> </tt>
-<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'PilotFramework'</tt><tt class="py-op">,</tt> <tt class="py-string">'init_'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-comment"># we register callbacks to push and pull variable object state to the</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-comment"># backend / adaptor.</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Method troy.attributes.Attributes.attributes_set_getter_()=troy.attributes.Attributes-class.html#attributes_set_getter_"><a title="troy.attributes.Attributes.attributes_set_getter_" class="py-name" href="#" onclick="return doclink('link-17', 'attributes_set_getter_', 'link-17');">attributes_set_getter_</a></tt> <tt class="py-op">(</tt><tt class="py-string">'pilots'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pull_state</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="troy.attributes.Attributes.attributes_set_getter_" class="py-name" href="#" onclick="return doclink('link-18', 'attributes_set_getter_', 'link-17');">attributes_set_getter_</a></tt> <tt class="py-op">(</tt><tt class="py-string">'units'</tt><tt class="py-op">,</tt>  <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pull_state</tt><tt class="py-op">)</tt> </tt>
 <a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"> </tt>
-<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
-<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
-<a name="PilotFramework.submit_pilot"></a><div id="PilotFramework.submit_pilot-def"><a name="L78"></a><tt class="py-lineno"> 78</tt> <a class="py-toggle" href="#" id="PilotFramework.submit_pilot-toggle" onclick="return toggle('PilotFramework.submit_pilot');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot_framework.PilotFramework-class.html#submit_pilot">submit_pilot</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">pd</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="PilotFramework.submit_pilot-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PilotFramework.submit_pilot-expanded"><a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
-<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">        Create a Pilot.</tt> </tt>
-<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">        Keyword arguments:</tt> </tt>
-<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">        pd -- PilotDescription</tt> </tt>
-<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">        Return value:</tt> </tt>
-<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring">        A L{ComputePilot} or a L{DataPilot} instance, depending on type of pilot</tt> </tt>
-<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">        description.</tt> </tt>
-<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">        If the resource requirements defined in the pd cannot be met by the PF,</tt> </tt>
-<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">        a BadParameter exception is raised.  Not raising this exception is,</tt> </tt>
-<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">        however, not a guarantee that the pilot will in fact be (able to be)</tt> </tt>
-<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">        executed -- in that case, the returned pilot will be moved to Failed</tt> </tt>
-<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring">        state.</tt> </tt>
-<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">        On success, the returned pilot is in Pending state (or moved into any</tt> </tt>
-<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">        state downstream from Pending).</tt> </tt>
-<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">        submit_pilot() will honor all attributes set on the PD.  Attributes</tt> </tt>
-<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">        which are not explicitly set are interpreted as having default values</tt> </tt>
-<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">        (see documentation of L{ComputePilotDescription} and</tt> </tt>
-<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">        L{DataPilotDescription}), or, where default values are not specified,</tt> </tt>
-<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">        are ignored.</tt> </tt>
-<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">        Note: compared to the Pilot API, this PF combines the functionality of</tt> </tt>
-<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">        the UnitServices and the PilotServices.  Any backend level decomposition</tt> </tt>
-<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">        is considered a PF implementation detail, and, if needed, used only on</tt> </tt>
-<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">        adaptor level.</tt> </tt>
-<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt>  </tt>
-<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'PilotFramework'</tt><tt class="py-op">,</tt> <tt class="py-string">'submit_pilot'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">pd</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
-<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt>
-<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
-<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
-<a name="PilotFramework.list_pilots"></a><div id="PilotFramework.list_pilots-def"><a name="L114"></a><tt class="py-lineno">114</tt> <a class="py-toggle" href="#" id="PilotFramework.list_pilots-toggle" onclick="return toggle('PilotFramework.list_pilots');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot_framework.PilotFramework-class.html#list_pilots">list_pilots</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="PilotFramework.list_pilots-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PilotFramework.list_pilots-expanded"><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
-<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">        List managed pilots.</tt> </tt>
-<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">        Return value:</tt> </tt>
-<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">        A list of L{ComputePilot} and L{DataPilot} IDs.</tt> </tt>
-<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">        The returned list can include pilots which have not been created by this</tt> </tt>
-<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring">        PF instance.  The list may be incomplete, and may not include pilots</tt> </tt>
-<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">        created by the PF.  There is no guarantee that pilots in the returned</tt> </tt>
-<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-docstring">        list can in fact be reconnected to.  Also, an inclusion in the list does</tt> </tt>
-<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-docstring">        not have any indication about the respective pilot's state.</tt> </tt>
-<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
-<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'PilotFramework'</tt><tt class="py-op">,</tt> <tt class="py-string">'list_pilots'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
-<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt>
-<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
-<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
-<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
-<a name="PilotFramework.submit_unit"></a><div id="PilotFramework.submit_unit-def"><a name="L133"></a><tt class="py-lineno">133</tt> <a class="py-toggle" href="#" id="PilotFramework.submit_unit-toggle" onclick="return toggle('PilotFramework.submit_unit');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot_framework.PilotFramework-class.html#submit_unit">submit_unit</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">ud</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="PilotFramework.submit_unit-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PilotFramework.submit_unit-expanded"><a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
-<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">        Submit a work unit to this PilotFramework.</tt> </tt>
-<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring">        Keyword argument:</tt> </tt>
-<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring">        ud -- L{ComputeUnitDescription} or L{DataUnitDescription} to be enacted.</tt> </tt>
-<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-docstring">        Return:</tt> </tt>
-<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-docstring">        L{ComputeUnit} or L{DataUnit} instance, depending on type of</tt> </tt>
-<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring">        description.</tt> </tt>
-<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring">        The UD is passed on to the PF backend, which will attempt to instantiate</tt> </tt>
-<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring">        the described workload on any of its pilots.  If no suitable pilot is</tt> </tt>
-<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring">        found, a L{Error.BadParameter} exception is raised.  Not raising this</tt> </tt>
-<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring">        exception is not a guarantee that the work unit will in fact be (able to</tt> </tt>
-<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">        be) executed -- in that case, the returned work unit will later be moved</tt> </tt>
-<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring">        to Failed state.</tt> </tt>
-<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">        On success, the returned work unit is in Pending state (or moved into</tt> </tt>
-<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">        any state downstream from Pending).</tt> </tt>
-<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">        The call will will honor all attributes set on the UD.  Attributes which</tt> </tt>
-<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-docstring">        are not explicitly set are interpreted as having default values (see</tt> </tt>
-<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-docstring">        documentation of UD), or, where default values are not specified, are</tt> </tt>
-<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-docstring">        ignored.</tt> </tt>
-<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
-<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'PilotFramework'</tt><tt class="py-op">,</tt> <tt class="py-string">'submit_unit'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">ud</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"> </tt>
-<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"> </tt>
-<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
-<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
-<a name="PilotFramework.list_units"></a><div id="PilotFramework.list_units-def"><a name="L165"></a><tt class="py-lineno">165</tt> <a class="py-toggle" href="#" id="PilotFramework.list_units-toggle" onclick="return toggle('PilotFramework.list_units');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot_framework.PilotFramework-class.html#list_units">list_units</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="PilotFramework.list_units-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PilotFramework.list_units-expanded"><a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
-<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring">        list managed work units.</tt> </tt>
-<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">        Return value:</tt> </tt>
-<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-docstring">        A list of L{ComputeUnit} and L{DataUnit} IDs</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method troy.attributes.Attributes.attributes_set_setter_()=troy.attributes.Attributes-class.html#attributes_set_setter_"><a title="troy.attributes.Attributes.attributes_set_setter_" class="py-name" href="#" onclick="return doclink('link-19', 'attributes_set_setter_', 'link-19');">attributes_set_setter_</a></tt> <tt class="py-op">(</tt><tt class="py-string">'pilots'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_push_state</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="troy.attributes.Attributes.attributes_set_setter_" class="py-name" href="#" onclick="return doclink('link-20', 'attributes_set_setter_', 'link-19');">attributes_set_setter_</a></tt> <tt class="py-op">(</tt><tt class="py-string">'units'</tt><tt class="py-op">,</tt>  <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_push_state</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-comment"># initialize id</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">id</tt> <tt class="py-op">=</tt> <tt class="py-name">id</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-comment"># initialize adaptor class</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'PilotFramework'</tt><tt class="py-op">,</tt> <tt class="py-string">'init_'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
+<a name="PilotFramework._push_state"></a><div id="PilotFramework._push_state-def"><a name="L88"></a><tt class="py-lineno"> 88</tt> <a class="py-toggle" href="#" id="PilotFramework._push_state-toggle" onclick="return toggle('PilotFramework._push_state');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot_framework.PilotFramework-class.html#_push_state">_push_state</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">obj</tt><tt class="py-op">,</tt> <tt class="py-param">key</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="PilotFramework._push_state-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PilotFramework._push_state-expanded"><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">        tell the adaptor to push state changes to the backend</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'PilotFramework'</tt><tt class="py-op">,</tt> <tt class="py-string">'_push_state'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">obj</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
+<a name="PilotFramework._pull_state"></a><div id="PilotFramework._pull_state-def"><a name="L97"></a><tt class="py-lineno"> 97</tt> <a class="py-toggle" href="#" id="PilotFramework._pull_state-toggle" onclick="return toggle('PilotFramework._pull_state');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot_framework.PilotFramework-class.html#_pull_state">_pull_state</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">obj</tt><tt class="py-op">,</tt> <tt class="py-param">key</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="PilotFramework._pull_state-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PilotFramework._pull_state-expanded"><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">        tell the adaptor to pull state changes from the backend</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'PilotFramework'</tt><tt class="py-op">,</tt> <tt class="py-string">'_pull_state'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">obj</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
+<a name="PilotFramework.submit_pilot"></a><div id="PilotFramework.submit_pilot-def"><a name="L106"></a><tt class="py-lineno">106</tt> <a class="py-toggle" href="#" id="PilotFramework.submit_pilot-toggle" onclick="return toggle('PilotFramework.submit_pilot');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot_framework.PilotFramework-class.html#submit_pilot">submit_pilot</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">pd</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="PilotFramework.submit_pilot-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PilotFramework.submit_pilot-expanded"><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">        Create a Pilot.</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">        Keyword arguments:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">        pd -- PilotDescription</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">        Return value:</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">        A L{ComputePilot} or a L{DataPilot} instance, depending on type of pilot</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">        description.</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">        If the resource requirements defined in the pd cannot be met by the PF,</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">        a BadParameter exception is raised.  Not raising this exception is,</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">        however, not a guarantee that the pilot will in fact be (able to be)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring">        executed -- in that case, the returned pilot will be moved to Failed</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">        state.</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">        On success, the returned pilot is in Pending state (or moved into any</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-docstring">        state downstream from Pending).</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring">        submit_pilot() will honor all attributes set on the PD.  Attributes</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring">        which are not explicitly set are interpreted as having default values</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring">        (see documentation of L{ComputePilotDescription} and</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-docstring">        L{DataPilotDescription}), or, where default values are not specified,</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-docstring">        are ignored.</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-docstring">        Note: compared to the Pilot API, this PF combines the functionality of</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">        the UnitServices and the PilotServices.  Any backend level decomposition</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring">        is considered a PF implementation detail, and, if needed, used only on</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">        adaptor level.</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt>  </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'PilotFramework'</tt><tt class="py-op">,</tt> <tt class="py-string">'submit_pilot'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">pd</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
+<a name="PilotFramework.list_pilots"></a><div id="PilotFramework.list_pilots-def"><a name="L142"></a><tt class="py-lineno">142</tt> <a class="py-toggle" href="#" id="PilotFramework.list_pilots-toggle" onclick="return toggle('PilotFramework.list_pilots');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot_framework.PilotFramework-class.html#list_pilots">list_pilots</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="PilotFramework.list_pilots-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PilotFramework.list_pilots-expanded"><a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring">        List managed pilots.</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring">        Return value:</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring">        A list of L{ComputePilot} and L{DataPilot} IDs.</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring">        The returned list can include pilots which have not been created by this</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring">        PF instance.  The list may be incomplete, and may not include pilots</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">        created by the PF.  There is no guarantee that pilots in the returned</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">        list can in fact be reconnected to.  Also, an inclusion in the list does</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">        not have any indication about the respective pilot's state.</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'PilotFramework'</tt><tt class="py-op">,</tt> <tt class="py-string">'list_pilots'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
+<a name="PilotFramework.submit_unit"></a><div id="PilotFramework.submit_unit-def"><a name="L161"></a><tt class="py-lineno">161</tt> <a class="py-toggle" href="#" id="PilotFramework.submit_unit-toggle" onclick="return toggle('PilotFramework.submit_unit');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot_framework.PilotFramework-class.html#submit_unit">submit_unit</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">ud</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="PilotFramework.submit_unit-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PilotFramework.submit_unit-expanded"><a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">        Submit a work unit to this PilotFramework.</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">        Keyword argument:</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring">        ud -- L{ComputeUnitDescription} or L{DataUnitDescription} to be enacted.</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring">        Return:</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">        L{ComputeUnit} or L{DataUnit} instance, depending on type of</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-docstring">        description.</tt> </tt>
 <a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt class="py-docstring">        The returned list can include units which have not been created by this</tt> </tt>
-<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"><tt class="py-docstring">        PF instance.  The list may be incomplete, and may not include units</tt> </tt>
-<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-docstring">        created by the PF.  There is no guarantee that units in the returned</tt> </tt>
-<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-docstring">        list can in fact be reconnected to.  Also, an inclusion in the list does</tt> </tt>
-<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-docstring">        not have any indication about the respective unit's state.</tt> </tt>
-<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
-<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'PilotFramework'</tt><tt class="py-op">,</tt> <tt class="py-string">'list_units'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"> </tt>
-<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"> </tt>
-<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
-<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
-<a name="PilotFramework.cancel"></a><div id="PilotFramework.cancel-def"><a name="L183"></a><tt class="py-lineno">183</tt> <a class="py-toggle" href="#" id="PilotFramework.cancel-toggle" onclick="return toggle('PilotFramework.cancel');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot_framework.PilotFramework-class.html#cancel">cancel</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
-</div><div id="PilotFramework.cancel-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PilotFramework.cancel-expanded"><a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
-<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-docstring">        Cancel all work units, cancel all pilots, free all resources.  </tt> </tt>
-<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
-<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"><tt class="py-docstring">        The call will block until the above has been achieved.  It is not an</tt> </tt>
-<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"><tt class="py-docstring">        error to call the method twice -- it will then simply return</tt> </tt>
-<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"><tt class="py-docstring">        immediately.</tt> </tt>
-<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
-<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'PilotFramework'</tt><tt class="py-op">,</tt> <tt class="py-string">'cancel'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
-</div></div><a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"> </tt>
-<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"> </tt>
-<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-comment"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</tt> </tt>
-<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt class="py-docstring">        The UD is passed on to the PF backend, which will attempt to instantiate</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"><tt class="py-docstring">        the described workload on any of its pilots.  If no suitable pilot is</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-docstring">        found, a L{Error.BadParameter} exception is raised.  Not raising this</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-docstring">        exception is not a guarantee that the work unit will in fact be (able to</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-docstring">        be) executed -- in that case, the returned work unit will later be moved</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-docstring">        to Failed state.</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-docstring">        On success, the returned work unit is in Pending state (or moved into</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"><tt class="py-docstring">        any state downstream from Pending).</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-docstring">        The call will will honor all attributes set on the UD.  Attributes which</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"><tt class="py-docstring">        are not explicitly set are interpreted as having default values (see</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"><tt class="py-docstring">        documentation of UD), or, where default values are not specified, are</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-docstring">        ignored.</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'PilotFramework'</tt><tt class="py-op">,</tt> <tt class="py-string">'submit_unit'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">ud</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line"> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
+<a name="PilotFramework.list_units"></a><div id="PilotFramework.list_units-def"><a name="L193"></a><tt class="py-lineno">193</tt> <a class="py-toggle" href="#" id="PilotFramework.list_units-toggle" onclick="return toggle('PilotFramework.list_units');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot_framework.PilotFramework-class.html#list_units">list_units</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="PilotFramework.list_units-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PilotFramework.list_units-expanded"><a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"><tt class="py-docstring">        list managed work units.</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-docstring">        Return value:</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"><tt class="py-docstring">        A list of L{ComputeUnit} and L{DataUnit} IDs</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-docstring">        The returned list can include units which have not been created by this</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-docstring">        PF instance.  The list may be incomplete, and may not include units</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"><tt class="py-docstring">        created by the PF.  There is no guarantee that units in the returned</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"><tt class="py-docstring">        list can in fact be reconnected to.  Also, an inclusion in the list does</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line"><tt class="py-docstring">        not have any indication about the respective unit's state.</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'PilotFramework'</tt><tt class="py-op">,</tt> <tt class="py-string">'list_units'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line"> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line"> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">    <tt class="py-comment">############################################################################</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">    <tt class="py-comment">#</tt> </tt>
+<a name="PilotFramework.cancel"></a><div id="PilotFramework.cancel-def"><a name="L211"></a><tt class="py-lineno">211</tt> <a class="py-toggle" href="#" id="PilotFramework.cancel-toggle" onclick="return toggle('PilotFramework.cancel');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="troy.pilot_framework.PilotFramework-class.html#cancel">cancel</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="PilotFramework.cancel-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PilotFramework.cancel-expanded"><a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line"><tt class="py-docstring">        Cancel all work units, cancel all pilots, free all resources.  </tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line"><tt class="py-docstring">        The call will block until the above has been achieved.  It is not an</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line"><tt class="py-docstring">        error to call the method twice -- it will then simply return</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line"><tt class="py-docstring">        immediately.</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">engine_</tt><tt class="py-op">.</tt><tt class="py-name">call</tt> <tt class="py-op">(</tt><tt class="py-string">'PilotFramework'</tt><tt class="py-op">,</tt> <tt class="py-string">'cancel'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line"> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line"> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line"><tt class="py-comment"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -322,7 +350,7 @@ expandto(location.href);
   <tr>
     <td align="left" class="footer">
     <a href="epydoc-log.html">Generated by Epydoc
-    3.0.1 on Mon Aug 27 13:30:01 2012</a>
+    3.0.1 on Tue Aug 28 13:48:56 2012</a>
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

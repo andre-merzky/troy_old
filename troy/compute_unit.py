@@ -58,7 +58,7 @@ class ComputeUnit (Base) :
 
     ############################################################################
     #
-    def __init__ (self, cu_id) :
+    def __init__ (self, id) :
 
         # init api base
         Base.__init__ (self)
@@ -71,10 +71,34 @@ class ComputeUnit (Base) :
         self.attributes_register_  ('pilot',          None,      self.Url,    self.Scalar, self.ReadOnly)
         self.attributes_register_  ('framework',      None,      self.Url,    self.Scalar, self.ReadOnly)
 
-        self.id = cu_id
+        # we register callbacks to pull variable object state from the backend
+        # / adaptor.
+        self.attributes_set_getter_ ('state',           self._pull_state)
+        self.attributes_set_getter_ ('state_detail',    self._pull_state)
+
+        # initialize id
+        self.id = id
 
         # initialize adaptor class
         self.engine_.call ('ComputeUnit', 'init_', self)
+
+
+    ############################################################################
+    #
+    def _push_state (self, obj, key) :
+        """
+        tell the adaptor to push state changes to the backend
+        """
+        return self.engine_.call ('ComputeUnit', '_push_state', self, obj, key)
+
+
+    ############################################################################
+    #
+    def _pull_state (self, obj, key) :
+        """
+        tell the adaptor to pull state changes from the backend
+        """
+        return self.engine_.call ('ComputeUnit', '_pull_state', self, obj, key)
 
 
     ############################################################################

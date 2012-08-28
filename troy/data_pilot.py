@@ -93,8 +93,32 @@ class DataPilot (Base) :
         # custom attributes are not allowed.
         self.attributes_extensible_ (False)
 
+        # we register callbacks to pull variable object state from the backend
+        # / adaptor.
+        self.attributes_set_getter_ ('state',        self._pull_state)
+        self.attributes_set_getter_ ('state_detail', self._pull_state)
+        self.attributes_set_getter_ ('space_left',   self._pull_state)
+
         # initialize adaptor class
         self.engine_.call ('DataPilot', 'init_', self)
+
+
+    ############################################################################
+    #
+    def _push_state (self, obj, key) :
+        """
+        tell the adaptor to push state changes to the backend
+        """
+        return self.engine_.call ('DataPilot', '_push_state', self, obj, key)
+
+
+    ############################################################################
+    #
+    def _pull_state (self, obj, key) :
+        """
+        tell the adaptor to pull state changes from the backend
+        """
+        return self.engine_.call ('DataPilot', '_pull_state', self, obj, key)
 
 
     ############################################################################

@@ -1,6 +1,6 @@
 
-from troy.interface.base  import iBase
-from troy.exception       import Exception, Error
+from   troy.interface.base  import iBase
+import troy.exception
 
 
 ########################################################################
@@ -14,7 +14,7 @@ class iDataUnit (iBase) :
     ############################################################################
     #
     def __init__ (self, obj, adaptor) :
-        raise troy.Exception (Error.NotImplemented, "method not implemented!")
+        raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
 
 
     ############################################################################
@@ -27,16 +27,29 @@ class iDataUnit (iBase) :
 
     ############################################################################
     #
+    def _push_state (self, obj, key) :
+        """ tell the adaptor to push state changes to the backend """
+        raise troy.Exception (troy.Error.NotImplemented, "interface not implemented!")
+
+
+    ############################################################################
+    #
+    def _pull_state (self, obj, key) :
+        """ tell the adaptor to pull state changes from the backend """
+        raise troy.Exception (troy.Error.NotImplemented, "interface not implemented!")
+
+    ############################################################################
+    #
     def wait (self) :
         """ Wait until DU enters a final state """
-        raise troy.Exception (Error.NotImplemented, "method not implemented!")
+        raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
 
 
     ############################################################################
     #
     def cancel (self) :
         """ Cancel the DU """
-        raise troy.Exception (Error.NotImplemented, "method not implemented!")
+        raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

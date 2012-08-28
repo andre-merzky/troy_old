@@ -55,7 +55,10 @@ class adaptor (aBase) :
         # implementing them:
         self.registry = {'PilotFramework' : 'peejay_pf' ,
                          'ComputePilot'   : 'peejay_cp' ,
-                         'ComputeUnit'    : 'peejay_cu' }
+                         'ComputeUnit'    : 'peejay_cu' ,
+                         'Base'           : 'peejay_pf' ,
+                         'Base'           : 'peejay_cp' ,
+                         'Base'           : 'peejay_cu' }
         
         # This adaptor does not keep state, as all peejay entities are easily
         # and cheaply reconnectable.  
@@ -68,7 +71,7 @@ class adaptor (aBase) :
                        'cu' : {} }
 
         self.watcher = threading.Thread (target = self.peejay_watcher_)
-      # self.watcher.setDaemon (True)
+        self.watcher.setDaemon (True)
         self.watcher.start ()
 
 
@@ -158,6 +161,14 @@ class peejay_pf (troy.interface.iPilotFramework) :
             self.api.id = 'peejay:///' + self.master.get_id ()
 
 
+    def _push_state (self, obj, key) :
+        pass
+
+    def _pull_state (self, obj, key) :
+        self._sync_backend_state ()
+
+    def _sync_backend_state (self) :
+        pass
 
     def submit_pilot (self, cpd) :
         """ Add a ComputePilot to the ComputePilotFramework
@@ -243,6 +254,13 @@ class peejay_cp (troy.interface.iComputePilot) :
         # thread
         if not self.api.id in self.adaptor.watch['cp'] :
             self.adaptor.watch['cp'][self.api.id] = self
+
+
+    def _push_state (self, obj, key) :
+        pass
+
+    def _pull_state (self, obj, key) :
+        self._sync_backend_state ()
 
 
     def _sync_backend_state (self) :
@@ -367,6 +385,12 @@ class peejay_cu (troy.interface.iComputeUnit) :
         if not self.api.id in self.adaptor.watch['cu'] :
             self.adaptor.watch['cu'][self.api.id] = self
 
+
+    def _push_state (self, obj, key) :
+        pass
+
+    def _pull_state (self, obj, key) :
+        self._sync_backend_state ()
 
 
     def _sync_backend_state (self) :

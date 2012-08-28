@@ -1,4 +1,6 @@
 
+__version__ = '0.1.0'
+
 """  
 TROY: Tiered Resource Overlay
 =============================

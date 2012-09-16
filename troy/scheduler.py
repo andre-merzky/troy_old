@@ -21,25 +21,27 @@ class Scheduler (Base) :
     application, which can be handed to Troy and can be used in the same way as
     adaptor backed scheduler instances.
 
-    The class implements exactly one method: L{schedule (self, t, ud)}, which
-    accepts a L{Troy} instance and a workload description
-    (L{ComputeUnitDescription} or L{DataUnitDescription}).  The Troy instance
+    The class implements exactly one method: :func:`schedule (self, t, ud)`, which
+    accepts a :class:`troy.Troy` instance and a workload description
+    (:class:`troy.ComputeUnitDescription` or :class:`troy.DataUnitDescription`).  The Troy instance
     represents the set of resources to be scheduled over, the workload
     description represents the workplan to be scheduled on those resources.
 
-    The L{schedule()} method MUST throw a L{troy.Exception} if scheduling is not
+    The :func:`schedule()` method MUST throw a :class:`troy.troy.Exception` if scheduling is not
     possible, i.e. if the scheduler either detects contradictory scheduling
     constraints, or if it detects that applying the scheduling constraints on
     the set of Troy's resources results in an empty set.  If the method can
     schedule the work description for execution, i.e. if it hands it off to one
     of Troy's PilotFrameworks or Pilots, the Scheduler MUST return
-    a L{ComputeUnit} or L{DataUnit} instance (depending on the description
+    a :class:`troy.ComputeUnit` or :class:`troy.DataUnit` instance (depending on the description
     type).  Any other return type MAY result in the work unit being scheduled
     twice.  If the scheduler adds constraints, but can not conclusively schedule
     the unit on a pilot framework or pilot, it MUST return None -- not doing so
     may result in the work unit not being scheduled at all.
 
     Properties::
+
+
 
         - id:
           The ID can be used to connect to the Scheduler instance later on, for
@@ -85,14 +87,14 @@ class Scheduler (Base) :
         """ 
         Schedule a work unit.
 
-        A work unit description (L{ComputeUnitDescription} or
-        L{DataUnitDescription}) is provided, and passed to the backend
+        A work unit description (:class:`troy.ComputeUnitDescription` or
+        :class:`troy.DataUnitDescription`) is provided, and passed to the backend
         scheduler.  That one can either add constraints to the description, or
         pass it on to one of the registered pilot frameworks, or to one of their
         pilots.
 
         schedule() will raise a troy.exception if the scheduler cannot handle the
-        work unit.  It will return a L{ComputeUnit} or L{DataUnit} instance if
+        work unit.  It will return a :class:`troy.ComputeUnit` or :class:`troy.DataUnit` instance if
         the scheduler can schedule the unit for execution on a pilot backend.
         It will return None if the scheduler can merely add constraints (if
         that), but not schedule the unit for execution.

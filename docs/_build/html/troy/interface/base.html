@@ -1,0 +1,152 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Base &mdash; Troy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Troy 0.1 documentation" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Troy 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="base">
+<h1>Base<a class="headerlink" href="#base" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="troy.Base">
+<em class="property">class </em><tt class="descclassname">troy.</tt><tt class="descname">Base</tt><a class="headerlink" href="#troy.Base" title="Permalink to this definition">¶</a></dt>
+<dd><p>All Troy API classes inherit  from this base class, which provides support
+for adaptor management and the management of class instance data.</p>
+<p>In particular, this base class provides the following class members to all
+API classes:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt><a href="#id1"><span class="problematic" id="id2">engine_</span></a> <span class="classifier-delimiter">:</span> <span class="classifier">a reference to the engine singleton, which manages adaptors</span></dt>
+<dd><p class="first last">and call forwarding</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a href="#id3"><span class="problematic" id="id4">adaptors_</span></a> <span class="classifier-delimiter">:</span> <span class="classifier">a sorted list of used adaptors, which can be used by the</span></dt>
+<dd><p class="first last">engine to optimize adaptor invocation (previously successful
+adaptors are most likely to succeed again)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a href="#id5"><span class="problematic" id="id6">idata_</span></a> <span class="classifier-delimiter">:</span> <span class="classifier">a dict of dicts, for class instance state data management.</span></dt>
+<dd><p class="first last">The dict under idata_[&#8216;api&#8217;] holds the actual class instance
+data (documented for each class), all other keys hold adaptor
+level instance data, for example to cache connections.  The
+keys for those adaptor instance data SHOULD be the adaptor
+name.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>contexts <span class="classifier-delimiter">:</span> <span class="classifier">a list of context dicts which are specified by the</span></dt>
+<dd><p class="first last">application, and used by the adaptors, as pointer to
+security tokens to be used for backend operations.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>The first three members marked as private, as they are not part of the API
+&#8211; they are intended to be used by the API implementation only.  The context
+list is public, and applications are explicitly able and encouraged to
+access it.</p>
+<dl class="method">
+<dt id="troy.Base.dump_">
+<tt class="descname">dump_</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.Base.dump_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dump dumps.  Doh!</p>
+<p>But really, what did you expect a dump() method would do? ;-)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/troy/interface/base.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Troy 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Andre Merzky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

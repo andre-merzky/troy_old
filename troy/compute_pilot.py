@@ -11,8 +11,8 @@ class ComputePilot (Base) :
     """ 
     ComputePilot (PilotJob)
 
-    This is the object that is returned the L{PilotFramework} when a new
-    ComputePilot is created based on a L{ComputePilotDescription}.
+    This is the object that is returned the :class:`troy.PilotFramework` when a new
+    ComputePilot is created based on a :class:`troy.ComputePilotDescription`.
 
     The ComputePilot object can be used by the application to keep track of
     ComputePilots that are active.  A ComputePilot has state, can be queried,
@@ -21,20 +21,28 @@ class ComputePilot (Base) :
 
     Properties::
 
+
+
         - id:
           The id may be 'None' if the Pilot is not yet in Running state.  The
           returned ID can be used to connect to the CP instance later on, for
           example from within a different application instance.  
           Type: string (url)
 
+
+
         - state:
           The state of the pilot.
-          Type: L{troy.State} (enum)
+          Type: :func:`troy.State` (enum)
+
+
 
         - state_detail:
           The backend state of the pilot.  The value of this property is not
           interpreted by Troy, and is up to the backend pilot framework.
           Type: string
+
+
 
         - description:
           The ComputePilotDescription used to create this pilot.  That
@@ -42,16 +50,22 @@ class ComputePilot (Base) :
           be complete -- in particular for reconnected pilots.  Its existence
           and completeness depends on the ability to inspect backend pilot
           instances.
-          Type: L{troy.ComputePilotDescription}
+          Type: :class:`troy.troy.ComputePilotDescription`
+
+
 
         - framework:
-          The ID of the L{PilotFramework} which manages this pilot.
+          The ID of the :class:`troy.PilotFramework` which manages this pilot.
           Type: string (url)
 
+
+
         - units:
-          A list of L{ComputeUnit} IDs, representing compute units managed by
+          A list of :class:`troy.ComputeUnit` IDs, representing compute units managed by
           this pilot.
           Type: string (url)
+
+
 
         - wall_time_left:
           The estimated remaining life time of this pilot.
@@ -163,15 +177,15 @@ class ComputePilot (Base) :
         Submit a CU to this ComputePilot.
 
         Keyword argument:
-        cud -- The L{ComputeUnitDescription} from the application
+        cud -- The :class:`troy.ComputeUnitDescription` from the application
 
         Return:
-        L{ComputeUnit} object
+        :class:`troy.ComputeUnit` object
 
         The CUD is (possibly translated and) passed on to the PF backend, which
         will attempt to instantiate the described workload process on the
         ComputePilot.  If the pilot's resource is not suitable to create the
-        requested CU, a L{Error.BadParameter} exception is raised.  Not raising
+        requested CU, a :class:`troy.Error.BadParameter` exception is raised.  Not raising
         this exception is not a guarantee that the CU will in fact be (able to
         be) executed -- in that case, the returned CU will later be moved to
         Failed state.
@@ -192,10 +206,10 @@ class ComputePilot (Base) :
     #
     def list_units (self) :
         """ 
-        list managed L{ComputeUnit}s.
+        list managed :class:`troy.ComputeUnit`s.
 
         Return value:
-        A list of L{ComputeUnit} IDs
+        A list of :class:`troy.ComputeUnit` IDs
 
         The returned list can include units which have not been created by this
         CP instance.  The list may be incomplete, and may not include units

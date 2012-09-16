@@ -13,28 +13,34 @@ from troy.base import Base
 #
 class Troy (Base) :
     """
-    This class, L{troy.Troy}, is the user (or application) facing component of Troy.
+    This class, :class:`troy.troy.Troy`, is the user (or application) facing component of Troy.
     Its purpose is to manage a set of pilot systems (and their pilot resources), and
     to manage a set of scheduling subprocesses which perform scheduling over the
-    pilot resources, as described above.  As such, L{troy.Troy} has three distinct
+    pilot resources, as described above.  As such, :class:`troy.troy.Troy` has three distinct
     sets of methods: to manage pilot resources, to manage scheduling subprocesses,
     and to handle workplans to be scheduled on the pilot resources.
 
     Properties::
+
+
 
         - id:
           The returned ID can be used to connect to the Service instance later
           on, for example from within a different application instance.  
           Type: String (url)
 
+
+
         - pilot_frameworks
-          An set of L{PilotFramework} ids, representing the set of
+          An set of :class:`troy.PilotFramework` ids, representing the set of
           resources over which Troy can schedule work items.
           Note: these are instances, not IDs
           Type: 'Any' list
 
+
+
         - schedulers
-          An set of L{iScheduler} interface instances, internally used by this
+          An set of :class:`troy.iScheduler` interface instances, internally used by this
           Scheduler to distribute the workload over the different pilot
           frameworks.
           Note: these are instances, not IDs
@@ -113,8 +119,8 @@ class Troy (Base) :
 
         The scheduler 's' can either be a string, identifying a backend or
         adaptor level scheduler to be used, or a class instance which derives
-        from L{troy.iScheduler}.  For any later call on
-        L{troy.Scheduler.schedule()}, the registered scheduler instances are
+        from :class:`troy.troy.iScheduler`.  For any later call on
+        :func:`troy.Scheduler.schedule()`, the registered scheduler instances are
         invoked in order of registration.  
         
         """ 
@@ -185,8 +191,8 @@ class Troy (Base) :
         """ 
         Schedule a work unit.
 
-        A work unit description work (L{ComputeUnitDescription} or
-        L{DataUnitDescription}) is provided, and passed to the registered
+        A work unit description work (:class:`troy.ComputeUnitDescription` or
+        :class:`troy.DataUnitDescription`) is provided, and passed to the registered
         schedulers.  Those can either add constraints to the description, or
         pass it on to one of the registered pilot frameworks, or to one of their
         pilots.

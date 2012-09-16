@@ -1,0 +1,165 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ComputeUnit &mdash; Troy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Troy 0.1 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Troy 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="computeunit">
+<h1>ComputeUnit<a class="headerlink" href="#computeunit" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="troy.ComputeUnit">
+<em class="property">class </em><tt class="descclassname">troy.</tt><tt class="descname">ComputeUnit</tt><big>(</big><em>id</em><big>)</big><a class="headerlink" href="#troy.ComputeUnit" title="Permalink to this definition">¶</a></dt>
+<dd><p>ComputeUnit</p>
+<p>This is the object that is returned by <a class="reference internal" href="interface/Troy.html#troy.Troy" title="troy.Troy"><tt class="xref py py-class docutils literal"><span class="pre">troy.Troy</span></tt></a> or an <a class="reference internal" href="pilot_framework.html#troy.PilotFramework" title="troy.PilotFramework"><tt class="xref py py-class docutils literal"><span class="pre">troy.PilotFramework</span></tt></a> when
+a new ComputeUnit is created based on a <a class="reference internal" href="compute_unit_description.html#troy.ComputeUnitDescription" title="troy.ComputeUnitDescription"><tt class="xref py py-class docutils literal"><span class="pre">troy.ComputeUnitDescription</span></tt></a>.</p>
+<p>The ComputeUnit object can be used by the application to keep track of
+ComputeUnits that are active.  A ComputeUnit has state, can be queried and
+can be cancelled.</p>
+<p>Properties:</p>
+<div class="highlight-python"><pre>- id:
+  The id may be 'None' if the Unit is not yet in Running state.  The
+  returned ID can be used to connect to the CU instance later on, for
+  example from within a different application instance.  
+  Type: string (url)
+
+
+
+- state:
+  The state of the CU.
+  Type: :func:`troy.State` (enum)
+
+
+
+- state_detail:
+  The backend state of the CU.  The value of this property is not
+  interpreted by Troy, and is up to the backend pilot framework.
+  Type: string
+
+
+
+- description:
+  The ComputeUnitDescription used to create this pilot.  That
+  description is not guaranteed to be available, nor is it guaranteed to
+  be complete -- in particular for reconnected CUs.  Its existence
+  and completeness depends on the ability to inspect backend pilot
+  instances.
+  Type: :class:`troy.troy.ComputeUnitDescription`
+
+
+
+- pilot:
+  The ID of the pilot which manages this CU.  This ID may be None if the
+  CU is not yet bound to a specific pilot.
+  Type: string (url)
+
+
+
+- framework:
+  The ID of the pilot framework which manages this CU.  This ID may be 
+  None if the CU is not yet bound to a specific framework
+  Type: string (url)</pre>
+</div>
+<dl class="method">
+<dt id="troy.ComputeUnit.cancel">
+<tt class="descname">cancel</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.ComputeUnit.cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cancel the CU</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.ComputeUnit.wait">
+<tt class="descname">wait</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.ComputeUnit.wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait until CU enters a final state</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/troy/compute_unit.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Troy 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Andre Merzky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

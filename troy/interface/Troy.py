@@ -9,7 +9,7 @@ import troy.exception
 # 
 #
 class iTroy (iBase) :
-    """  L{Scheduler} interface """
+    """  :class:`troy.Scheduler` interface """
 
 
     ############################################################################

@@ -8,7 +8,7 @@ import troy.exception
 #  
 #
 class iPilotFramework (iBase) :
-    """ L{PilotFramework} interface """
+    """ :class:`troy.PilotFramework` interface """
 
 
     ############################################################################

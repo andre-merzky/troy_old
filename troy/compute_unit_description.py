@@ -11,7 +11,7 @@ class ComputeUnitDescription (Attributes) :
 
     The ComputeUnitDescription is a job/task description based on SAGA Job
     Description.  It describes a (set of) compute activities to be managed via
-    Troy and a L{PilotFramework}, and to be enacted on a L{ComputePilot}::
+    Troy and a :class:`troy.PilotFramework`, and to be enacted on a :class:`troy.ComputePilot`::
 
         # Action description
         'executable',           # The "action" to execute

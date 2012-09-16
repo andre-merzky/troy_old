@@ -10,7 +10,7 @@ class DataPilot (Base) :
     """ 
     DataPilot (PilotStore)
 
-    This is the object that is returned by the L{PilotFramework} when a new
+    This is the object that is returned by the :class:`troy.PilotFramework` when a new
     DataPilot is created based on a DataPilotDescription.
 
     The DataPilot object can be used by the application to keep track of
@@ -20,20 +20,28 @@ class DataPilot (Base) :
 
     Properties::
 
+
+
         - id:
           The id may be 'None' if the Pilot is not yet in Running state.  The
           returned ID can be used to connect to the CP instance later on, for
           example from within a different application instance.  
           Type: string (url)
 
+
+
         - state:
           The state of the pilot.
-          Type: L{troy.State} (enum)
+          Type: :func:`troy.State` (enum)
+
+
 
         - state_detail:
           The backend state of the pilot.  The value of this property is not
           interpreted by Troy, and is up to the backend pilot framework.
           Type: string
+
+
 
         - description:
           The DataPilotDescription used to create this pilot.  That description
@@ -41,16 +49,22 @@ class DataPilot (Base) :
           -- in particular for reconnected pilots.  Its existence and
           completeness depends on the ability to inspect backend pilot
           instances.
-          Type: L{troy.DataPilotDescription}
+          Type: :class:`troy.troy.DataPilotDescription`
+
+
 
         - framework:
-          The ID of the L{PilotFramework} which manages this pilot.
+          The ID of the :class:`troy.PilotFramework` which manages this pilot.
           Type: string (url)
 
+
+
         - units:
-          A list of L{DataUnit} IDs, representing compute units managed by this
+          A list of :class:`troy.DataUnit` IDs, representing compute units managed by this
           pilot.
           Type: string (url)
+
+
 
         - wall_time_left:
           The estimated remaining life time of this pilot.
@@ -158,12 +172,12 @@ class DataPilot (Base) :
         dud -- The DataUnitDescription from the application
 
         Return:
-        L{DataUnit} object
+        :class:`troy.DataUnit` object
 
         The DUD is (possibly translated and) passed on to the PF backend, which
         will attempt to instantiate the described data workload unit on the
         DataPilot.  If the pilot's resource is not suitable to create the
-        requested DU, a L{Error.BadParameter} exception is raised.  Not raising
+        requested DU, a :class:`troy.Error.BadParameter` exception is raised.  Not raising
         this exception is not a guarantee that the DU will in fact be (able to
         be) executed -- in that case, the returned DU will later be moved to
         Failed state.
@@ -183,10 +197,10 @@ class DataPilot (Base) :
     #
     def list_units (self) :
         """ 
-        list managed L{DataUnit}s.
+        list managed :class:`troy.DataUnit`s.
 
         Return value:
-        A list of L{DataUnit} IDs
+        A list of :class:`troy.DataUnit` IDs
 
         The returned list can include units which have not been created by this
         DP instance.  The list may be incomplete, and may not include units

@@ -8,7 +8,7 @@ import troy.exception
 #
 #
 class iComputePilot (iBase) :
-    """ L{ComputePilot} interface """
+    """ :class:`troy.ComputePilot` interface """
 
 
     ############################################################################
@@ -56,7 +56,7 @@ class iComputePilot (iBase) :
     ############################################################################
     #
     def list_units (self) :
-        """ list managed L{ComputeUnit}s """
+        """ list managed :class:`troy.ComputeUnit`s """
         raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
 
 

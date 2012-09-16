@@ -13,28 +13,34 @@ class PilotFramework (Base) :
     PilotFramework (PF)
 
     A PF acts as the interface to an underlying pilot job framework -- that
-    backend creates and manages pilot instances (L{ComputePilot}, L{DataPilot}),
-    and can schedule work unit amongst those pilots (L{ComputeUnit},
-    L{DataUnit}).
+    backend creates and manages pilot instances (:class:`troy.ComputePilot`, :class:`troy.DataPilot`),
+    and can schedule work unit amongst those pilots (:class:`troy.ComputeUnit`,
+    :class:`troy.DataUnit`).
 
     Class instances are identified by an url, and can be reconnected to.  A PF
-    can be added to a L{Troy} instance, which will then be able to utilize the
+    can be added to a :class:`troy.Troy` instance, which will then be able to utilize the
     PF's pilots for work unit scheduling and execution.
 
     Properties::
+
+
 
         - id:
           The returned ID can be used to connect to the PF instance later on,
           for example from within a different application instance.
           Type: String
 
+
+
         - pilots:
           list of pilot id, representing pilots managed by this pilot framework
           instance
           Type: String list
 
+
+
         - units:
-          A list of L{ComputeUnit} IDs, representing compute units managed by
+          A list of :class:`troy.ComputeUnit` IDs, representing compute units managed by
           this pilot.
           Note: This list may or may not be complete.  In particular, the PF may
           choose to not include units which are already assigned to a specific
@@ -111,7 +117,7 @@ class PilotFramework (Base) :
         pd -- PilotDescription
 
         Return value:
-        A L{ComputePilot} or a L{DataPilot} instance, depending on type of pilot
+        A :class:`troy.ComputePilot` or a :class:`troy.DataPilot` instance, depending on type of pilot
         description.
 
         If the resource requirements defined in the pd cannot be met by the PF,
@@ -125,8 +131,8 @@ class PilotFramework (Base) :
 
         submit_pilot() will honor all attributes set on the PD.  Attributes
         which are not explicitly set are interpreted as having default values
-        (see documentation of L{ComputePilotDescription} and
-        L{DataPilotDescription}), or, where default values are not specified,
+        (see documentation of :class:`troy.ComputePilotDescription` and
+        :class:`troy.DataPilotDescription`), or, where default values are not specified,
         are ignored.
 
         Note: compared to the Pilot API, this PF combines the functionality of
@@ -144,7 +150,7 @@ class PilotFramework (Base) :
         List managed pilots.
 
         Return value:
-        A list of L{ComputePilot} and L{DataPilot} IDs.
+        A list of :class:`troy.ComputePilot` and :class:`troy.DataPilot` IDs.
 
         The returned list can include pilots which have not been created by this
         PF instance.  The list may be incomplete, and may not include pilots
@@ -163,15 +169,15 @@ class PilotFramework (Base) :
         Submit a work unit to this PilotFramework.
 
         Keyword argument:
-        ud -- L{ComputeUnitDescription} or L{DataUnitDescription} to be enacted.
+        ud -- :class:`troy.ComputeUnitDescription` or :class:`troy.DataUnitDescription` to be enacted.
 
         Return:
-        L{ComputeUnit} or L{DataUnit} instance, depending on type of
+        :class:`troy.ComputeUnit` or :class:`troy.DataUnit` instance, depending on type of
         description.
 
         The UD is passed on to the PF backend, which will attempt to instantiate
         the described workload on any of its pilots.  If no suitable pilot is
-        found, a L{Error.BadParameter} exception is raised.  Not raising this
+        found, a :class:`troy.Error.BadParameter` exception is raised.  Not raising this
         exception is not a guarantee that the work unit will in fact be (able to
         be) executed -- in that case, the returned work unit will later be moved
         to Failed state.
@@ -195,7 +201,7 @@ class PilotFramework (Base) :
         list managed work units.
 
         Return value:
-        A list of L{ComputeUnit} and L{DataUnit} IDs
+        A list of :class:`troy.ComputeUnit` and :class:`troy.DataUnit` IDs
 
         The returned list can include units which have not been created by this
         PF instance.  The list may be incomplete, and may not include units

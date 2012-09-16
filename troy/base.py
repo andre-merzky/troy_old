@@ -16,17 +16,25 @@ class Base (Attributes, object):
     In particular, this base class provides the following class members to all
     API classes:
 
+
+
       - engine_   : a reference to the engine singleton, which manages adaptors
                     and call forwarding
+
+
       - adaptors_ : a sorted list of used adaptors, which can be used by the
                     engine to optimize adaptor invocation (previously successful
                     adaptors are most likely to succeed again)
+
+
       - idata_    : a dict of dicts, for class instance state data management.
                     The dict under idata_['api'] holds the actual class instance
                     data (documented for each class), all other keys hold adaptor
                     level instance data, for example to cache connections.  The
                     keys for those adaptor instance data SHOULD be the adaptor
                     name.
+
+
       - contexts  : a list of context dicts which are specified by the
                     application, and used by the adaptors, as pointer to
                     security tokens to be used for backend operations.

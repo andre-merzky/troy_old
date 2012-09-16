@@ -11,8 +11,8 @@ class DataUnit (Base) :
     """ 
     DataUnit.
 
-    This is the object that is returned by L{Troy} or an L{PilotFramework} when
-    a new DataUnit is created based on a L{DataUnitDescription}.
+    This is the object that is returned by :class:`troy.Troy` or an :class:`troy.PilotFramework` when
+    a new DataUnit is created based on a :class:`troy.DataUnitDescription`.
 
     The DataUnit object can be used by the application to keep track of
     DataUnits that are active.  A DataUnit has state, can be queried and can be

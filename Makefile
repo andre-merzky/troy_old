@@ -18,3 +18,8 @@ clean:
 	@rm -rf $(BUILDDIR)/html
 	@find . -name \*.pyc -exec rm {} \;
 
+sync:
+	@git branch -D gh-pages
+	@git branch gh-pages
+	@git push --all
+

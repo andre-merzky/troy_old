@@ -16,7 +16,7 @@ import sys, os
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath('.'))
 
 # -- General configuration -----------------------------------------------------
 
@@ -32,10 +32,11 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.coverage', 
               'sphinx.ext.pngmath', 
               'sphinx.ext.ifconfig', 
-              'sphinx.ext.viewcode']
+#             'sphinx.ext.viewcode'
+              ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+# templates_path = ['_templates']
 
 # The suffix of source filenames.
 source_suffix = '.rst'
@@ -71,7 +72,7 @@ release = '0.1'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build']
+exclude_patterns = ['html']
 
 # The reST default role (used for this markup: `text`) to use for all documents.
 #default_role = None
@@ -127,7 +128,7 @@ html_theme = 'default'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+# html_static_path = ['_static']
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -219,8 +220,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'troy', u'Troy Documentation',
-     [u'Andre Merzky'], 1)
+    ('index', 'troy', u'Troy Documentation', [u'Andre Merzky'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -233,9 +233,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'Troy', u'Troy Documentation',
-   u'Andre Merzky', 'Troy', 'One line description of project.',
-   'Miscellaneous'),
+  ('index', 'Troy', u'Troy Documentation', u'Andre Merzky', 'Troy', 'description of project.', 'Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.

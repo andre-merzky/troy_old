@@ -56,7 +56,7 @@ class iDataPilot (iBase) :
     ############################################################################
     #
     def list_units (self) :
-        """ list managed :class:`troy.DataUnit`s """
+        """ list managed :class:`troy.DataUnit` instances """
         raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
 
 

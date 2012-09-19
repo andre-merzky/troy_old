@@ -92,7 +92,7 @@ class ComputeUnit (Base) :
         self.id = id
 
         # initialize adaptor class
-        self.engine_.call ('ComputeUnit', 'init_', self)
+        self._engine.call ('ComputeUnit', 'init_', self)
 
 
     ############################################################################
@@ -101,7 +101,7 @@ class ComputeUnit (Base) :
         """
         tell the adaptor to push state changes to the backend
         """
-        return self.engine_.call ('ComputeUnit', '_push_state', self, obj, key)
+        return self._engine.call ('ComputeUnit', '_push_state', self, obj, key)
 
 
     ############################################################################
@@ -110,21 +110,21 @@ class ComputeUnit (Base) :
         """
         tell the adaptor to pull state changes from the backend
         """
-        return self.engine_.call ('ComputeUnit', '_pull_state', self, obj, key)
+        return self._engine.call ('ComputeUnit', '_pull_state', self, obj, key)
 
 
     ############################################################################
     #
     def wait (self) :
         """ Wait until CU enters a final state """
-        return self.engine_.call ('ComputeUnit', 'wait', self)
+        return self._engine.call ('ComputeUnit', 'wait', self)
 
 
     ############################################################################
     #
     def cancel (self) :
         """ Cancel the CU """
-        return self.engine_.call ('ComputeUnit', 'cancel', self)
+        return self._engine.call ('ComputeUnit', 'cancel', self)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

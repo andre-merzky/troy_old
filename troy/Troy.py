@@ -1,5 +1,5 @@
 
-from troy.base import Base
+from troy import Base
 
 ########################################################################
 #
@@ -13,10 +13,10 @@ from troy.base import Base
 #
 class Troy (Base) :
     """
-    This class, :class:`troy.troy.Troy`, is the user (or application) facing component of Troy.
+    This class, :class:`troy.Troy`, is the user (or application) facing component of Troy.
     Its purpose is to manage a set of pilot systems (and their pilot resources), and
     to manage a set of scheduling subprocesses which perform scheduling over the
-    pilot resources, as described above.  As such, :class:`troy.troy.Troy` has three distinct
+    pilot resources, as described above.  As such, :class:`troy.Troy` has three distinct
     sets of methods: to manage pilot resources, to manage scheduling subprocesses,
     and to handle workplans to be scheduled on the pilot resources.
 
@@ -85,7 +85,7 @@ class Troy (Base) :
         self.id = id
 
         # find an adaptor and initialize
-        self.engine_.call ('Troy', 'init_', self)
+        self._engine.call ('Troy', 'init_', self)
 
 
 
@@ -95,7 +95,7 @@ class Troy (Base) :
         """
         tell the adaptor to push state changes to the backend
         """
-        return self.engine_.call ('Troy', '_push_state', self, obj, key)
+        return self._engine.call ('Troy', '_push_state', self, obj, key)
 
 
     ############################################################################
@@ -104,7 +104,7 @@ class Troy (Base) :
         """
         tell the adaptor to pull state changes from the backend
         """
-        return self.engine_.call ('Troy', '_pull_state', self, obj, key)
+        return self._engine.call ('Troy', '_pull_state', self, obj, key)
 
 
     ############################################################################
@@ -119,12 +119,12 @@ class Troy (Base) :
 
         The scheduler 's' can either be a string, identifying a backend or
         adaptor level scheduler to be used, or a class instance which derives
-        from :class:`troy.troy.iScheduler`.  For any later call on
+        from :class:`troy.interface.iScheduler`.  For any later call on
         :func:`troy.Scheduler.schedule()`, the registered scheduler instances are
         invoked in order of registration.  
         
         """ 
-        return self.engine_.call ('Troy', 'add_scheduler', self, s)
+        return self._engine.call ('Troy', 'add_scheduler', self, s)
 
 
     ############################################################################
@@ -138,7 +138,7 @@ class Troy (Base) :
 
         # FIXME: change?
         """
-        return self.engine_.call ('Troy', 'list_schedulers', self)
+        return self._engine.call ('Troy', 'list_schedulers', self)
 
 
     ############################################################################
@@ -147,7 +147,7 @@ class Troy (Base) :
         """
         remove a previously registered scheduler instance
         """
-        return self.engine_.call ('Troy', 'remove_scheduler', self, s)
+        return self._engine.call ('Troy', 'remove_scheduler', self, s)
 
 
 
@@ -160,14 +160,14 @@ class Troy (Base) :
         Keyword arguments:
         pf -- The PilotFramework which this Troy instance will utilize.
         """
-        return self.engine_.call ('Troy', 'add_pilot_framework', self, pf)
+        return self._engine.call ('Troy', 'add_pilot_framework', self, pf)
 
 
     ############################################################################
     #
     def list_pilot_frameworks (self) :
         """ List all PF IDs of this Troy instance """
-        return self.engine_.call ('Troy', 'list_pilot_frameworks', self)
+        return self._engine.call ('Troy', 'list_pilot_frameworks', self)
 
 
     ############################################################################
@@ -182,7 +182,7 @@ class Troy (Base) :
         Keyword arguments:
         pf -- The PilotFramework to remove (either id or instance)
         """
-        return self.engine_.call ('Troy', 'remove_pilot_framework', self, pf)
+        return self._engine.call ('Troy', 'remove_pilot_framework', self, pf)
 
 
     ############################################################################
@@ -211,7 +211,7 @@ class Troy (Base) :
         (see documentation of unit descriptions), or, where default values are
         not specified, are ignored.
         """
-        return self.engine_.call ('Troy', 'submit_unit', self, ud)
+        return self._engine.call ('Troy', 'submit_unit', self, ud)
 
 
     ############################################################################
@@ -229,7 +229,7 @@ class Troy (Base) :
         can in fact be reconnected to.  Also, an inclusion in the list does not
         have any indication about the respective unit's state.
         """
-        return self.engine_.call ('Troy', 'list_units', self)
+        return self._engine.call ('Troy', 'list_units', self)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

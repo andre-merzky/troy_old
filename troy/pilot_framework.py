@@ -86,7 +86,7 @@ class PilotFramework (Base) :
         self.id = id
 
         # initialize adaptor class
-        self.engine_.call ('PilotFramework', 'init_', self)
+        self._engine.call ('PilotFramework', 'init_', self)
 
 
     ############################################################################
@@ -95,7 +95,7 @@ class PilotFramework (Base) :
         """
         tell the adaptor to push state changes to the backend
         """
-        return self.engine_.call ('PilotFramework', '_push_state', self, obj, key)
+        return self._engine.call ('PilotFramework', '_push_state', self, obj, key)
 
 
     ############################################################################
@@ -104,7 +104,7 @@ class PilotFramework (Base) :
         """
         tell the adaptor to pull state changes from the backend
         """
-        return self.engine_.call ('PilotFramework', '_pull_state', self, obj, key)
+        return self._engine.call ('PilotFramework', '_pull_state', self, obj, key)
 
 
     ############################################################################
@@ -140,7 +140,7 @@ class PilotFramework (Base) :
         is considered a PF implementation detail, and, if needed, used only on
         adaptor level.
         """ 
-        return self.engine_.call ('PilotFramework', 'submit_pilot', self, pd)
+        return self._engine.call ('PilotFramework', 'submit_pilot', self, pd)
 
 
     ############################################################################
@@ -158,7 +158,7 @@ class PilotFramework (Base) :
         list can in fact be reconnected to.  Also, an inclusion in the list does
         not have any indication about the respective pilot's state.
         """
-        return self.engine_.call ('PilotFramework', 'list_pilots', self)
+        return self._engine.call ('PilotFramework', 'list_pilots', self)
 
 
 
@@ -177,7 +177,7 @@ class PilotFramework (Base) :
 
         The UD is passed on to the PF backend, which will attempt to instantiate
         the described workload on any of its pilots.  If no suitable pilot is
-        found, a :class:`troy.Error.BadParameter` exception is raised.  Not raising this
+        found, a :attribute:`troy.Error.BadParameter` exception is raised.  Not raising this
         exception is not a guarantee that the work unit will in fact be (able to
         be) executed -- in that case, the returned work unit will later be moved
         to Failed state.
@@ -191,7 +191,7 @@ class PilotFramework (Base) :
         ignored.
 
         """
-        return self.engine_.call ('PilotFramework', 'submit_unit', self, ud)
+        return self._engine.call ('PilotFramework', 'submit_unit', self, ud)
 
 
     ############################################################################
@@ -209,7 +209,7 @@ class PilotFramework (Base) :
         list can in fact be reconnected to.  Also, an inclusion in the list does
         not have any indication about the respective unit's state.
         """
-        return self.engine_.call ('PilotFramework', 'list_units', self)
+        return self._engine.call ('PilotFramework', 'list_units', self)
 
 
     ############################################################################
@@ -222,7 +222,7 @@ class PilotFramework (Base) :
         error to call the method twice -- it will then simply return
         immediately.
         """
-        return self.engine_.call ('PilotFramework', 'cancel', self)
+        return self._engine.call ('PilotFramework', 'cancel', self)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

@@ -114,7 +114,7 @@ class DataPilot (Base) :
         self.attributes_set_getter_ ('space_left',   self._pull_state)
 
         # initialize adaptor class
-        self.engine_.call ('DataPilot', 'init_', self)
+        self._engine.call ('DataPilot', 'init_', self)
 
 
     ############################################################################
@@ -123,7 +123,7 @@ class DataPilot (Base) :
         """
         tell the adaptor to push state changes to the backend
         """
-        return self.engine_.call ('DataPilot', '_push_state', self, obj, key)
+        return self._engine.call ('DataPilot', '_push_state', self, obj, key)
 
 
     ############################################################################
@@ -132,7 +132,7 @@ class DataPilot (Base) :
         """
         tell the adaptor to pull state changes from the backend
         """
-        return self.engine_.call ('DataPilot', '_pull_state', self, obj, key)
+        return self._engine.call ('DataPilot', '_pull_state', self, obj, key)
 
 
     ############################################################################
@@ -159,7 +159,7 @@ class DataPilot (Base) :
         may achieve this by aborting the units, and resubmitting them to the
         re-initialized pilot.
         """
-        return self.engine_.call ('DataPilot', 'reinitialize', self, dpd)
+        return self._engine.call ('DataPilot', 'reinitialize', self, dpd)
 
 
     ############################################################################
@@ -177,7 +177,7 @@ class DataPilot (Base) :
         The DUD is (possibly translated and) passed on to the PF backend, which
         will attempt to instantiate the described data workload unit on the
         DataPilot.  If the pilot's resource is not suitable to create the
-        requested DU, a :class:`troy.Error.BadParameter` exception is raised.  Not raising
+        requested DU, a :attribute:`troy.Error.BadParameter` exception is raised.  Not raising
         this exception is not a guarantee that the DU will in fact be (able to
         be) executed -- in that case, the returned DU will later be moved to
         Failed state.
@@ -190,14 +190,14 @@ class DataPilot (Base) :
         (see documentation of DUD), or, where default values are not specified,
         are ignored.
         """
-        return self.engine_.call ('DataPilot', 'submit_unit', self, dud)
+        return self._engine.call ('DataPilot', 'submit_unit', self, dud)
 
 
     ############################################################################
     #
     def list_units (self) :
         """ 
-        list managed :class:`troy.DataUnit`s.
+        list managed :class:`troy.DataUnit` instances.
 
         Return value:
         A list of :class:`troy.DataUnit` IDs
@@ -208,7 +208,7 @@ class DataPilot (Base) :
         list can in fact be reconnected to.  Also, an inclusion in the list does
         not have any indication about the respective unit's state.
         """
-        return self.engine_.call ('DataPilot', 'list_units', self)
+        return self._engine.call ('DataPilot', 'list_units', self)
 
 
     ############################################################################
@@ -220,7 +220,7 @@ class DataPilot (Base) :
         It is not an error to call wait() in a final state -- the call simply
         returns immediately.
         """
-        return self.engine_.call ('DataPilot', 'wait', self)
+        return self._engine.call ('DataPilot', 'wait', self)
 
 
     ############################################################################
@@ -237,7 +237,7 @@ class DataPilot (Base) :
         though.
 
         """
-        return self.engine_.call ('DataPilot', 'cancel', self)
+        return self._engine.call ('DataPilot', 'cancel', self)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

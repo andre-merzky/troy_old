@@ -107,7 +107,7 @@ class Callback () :
 #
 #
 #
-class AttributesBase_ (object) :
+class _AttributesBase (object) :
     """ 
     This class only exists to host properties -- as object itself does *not* have
     properties!  This class is not part of the public attribute API.
@@ -115,8 +115,7 @@ class AttributesBase_ (object) :
     def __init__ (self) :
         pass
 
-
-class Attributes (AttributesBase_) :
+class Attributes (_AttributesBase) :
     """
     Attribute Interface Class
 
@@ -307,8 +306,9 @@ class Attributes (AttributesBase_) :
         This method is not supposed to be directly called by the consumer of
         this API -- it should be called via derived object construction.
 
-        attributes_t_init_ makes sure that the basic structures are in place on
-        the attribute dictionary - this saves us ton of safety checks later on.
+        :func:`troy.Attributes.attributes_t_init_` makes sure that the basic structures are in
+        place on the attribute dictionary - this saves us ton of safety checks
+        later on.
         """
 
         # initialize state
@@ -333,23 +333,23 @@ class Attributes (AttributesBase_) :
         """
         This internal function is not to be used by the consumer of this API.
 
-        The attributes_t_init_ method initializes the interface's internal data
-        structures.  We always need the attribute dict, and the extensible flag.
-        Everything else can be added on the fly.  The method will not overwrite
-        any settings -- initialization occurs only once!
+        The :func:`troy.Attributes.attributes_t_init_` method initializes the interface's
+        internal data structures.  We always need the attribute dict, and the
+        extensible flag.  Everything else can be added on the fly.  The method
+        will not overwrite any settings -- initialization occurs only once!
 
         If a key is given, the existence of this key is checked.  An exception
         is raised if the key does not exist.
 
-        The internal data are stored as property on the AttributesBase_ class.
-        Storing them as property on *this* class would obviously result in
-        recursion...
+        The internal data are stored as property on the :class:`troy._AttributesBase`
+        class.  Storing them as property on *this* class would obviously result
+        in recursion...  
         """
 
         d = {}
 
         try :
-            d = AttributesBase_.__getattribute__ (self, 'd_')
+            d = _AttributesBase.__getattribute__ (self, 'd_')
         except :
             # need to initialize -- any exceptions in the code below should fall through
             d['attributes']  = {}
@@ -360,7 +360,7 @@ class Attributes (AttributesBase_) :
             d['lister']      = None
             d['recursion']   = False
 
-            AttributesBase_.__setattr__ (self, 'd_', d)
+            _AttributesBase.__setattr__ (self, 'd_', d)
 
 
         # check if we know about the given attribute
@@ -579,7 +579,7 @@ class Attributes (AttributesBase_) :
         method will restore a 'None' value to the attribute's default value.
 
         A deriving class can add additional value checks for attributes by
-        calling :func:`attributes_add_check_` (key, check).
+        calling :func:`troy.Attributes.attributes_add_check_` (key, check).
         """
 
         # make sure interface is ready to use.  We do not check for keys, that
@@ -618,7 +618,7 @@ class Attributes (AttributesBase_) :
     def attributes_t_conversion_flavor_ (self, key, val) :
         """ 
         This internal function is not to be used by the consumer of this API.
-        This method should ONLY be called by attributes_t_conversion_! 
+        This method should ONLY be called by :func:`troy.Attributes.attributes_t_conversion_`! 
         """
         # FIXME: there are possibly nicer and more reversible ways to
         #        convert the flavors...
@@ -690,7 +690,7 @@ class Attributes (AttributesBase_) :
     def attributes_t_conversion_type_ (self, key, val) :
         """ 
         This internal function is not to be used by the consumer of this API.
-        This method should ONLY be called by attributes_t_conversion_!
+        This method should ONLY be called by :func:`troy.Attributes.attributes_t_conversion_`!
         """
 
         # make sure interface is ready to use.
@@ -782,10 +782,10 @@ class Attributes (AttributesBase_) :
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
 
-        See :func:`set_attribute` (key, val) for details.
+        See :func:`troy.Attributes.set_attribute` (key, val) for details.
 
         New value checks can be added dynamically, and per attribute, by calling
-        :func:`attributes_add_check_` (key, callable).
+        :func:`troy.Attributes.attributes_add_check_` (key, callable).
 
         Some internal methods can set the 'force' flag, and will be able to set
         attributes even in ReadOnly mode.  That is, for example, used for getter
@@ -850,7 +850,7 @@ class Attributes (AttributesBase_) :
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
 
-        see :func:`get_attribute` (key) for details.
+        see :func:`troy.Attributes.get_attribute` (key) for details.
 
         Note that this method is not performing any checks or conversions --
         those are all performed when *setting* an attribute.  So, any attribute
@@ -881,7 +881,7 @@ class Attributes (AttributesBase_) :
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
 
-        see :func:`list_attributes` () for details.
+        see :func:`troy.Attributes.list_attributes` () for details.
 
         Note that registration alone does not qualify for listing.  If 'ext' is
         True (default),extended attributes are listed, too.
@@ -910,7 +910,7 @@ class Attributes (AttributesBase_) :
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
 
-        see :func:`find_attributes` (pattern) for details.
+        see :func:`troy.Attributes.find_attributes` (pattern) for details.
         """
 
         # FIXME: wildcard-to-regex
@@ -964,7 +964,7 @@ class Attributes (AttributesBase_) :
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
 
-        see :func:`attribute_exists` (key) for details.
+        see :func:`troy.Attributes.attribute_exists` (key) for details.
 
         Registered keys which have never been explicitly set to a value do not
         exist for the purpose of this call.
@@ -1005,7 +1005,7 @@ class Attributes (AttributesBase_) :
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
 
-        see :func:`attribute_is_readonly` (key) for details.
+        see :func:`troy.Attributes.attribute_is_readonly` (key) for details.
 
         This method will check if the given key is readonly, i.e. cannot be
         'set'.  The call will also return 'True' if the attribute is final
@@ -1028,7 +1028,7 @@ class Attributes (AttributesBase_) :
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
 
-        see :func:`attribute_is_writable` (key) for details.
+        see :func:`troy.Attributes.attribute_is_writable` (key) for details.
 
         This method will check if the given key is writable - i.e. not readonly.
         """
@@ -1042,7 +1042,7 @@ class Attributes (AttributesBase_) :
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
 
-        see :func:`attribute_is_removable` (key) for details.
+        see :func:`troy.Attributes.attribute_is_removable` (key) for details.
 
         'True' if the attrib is Writable and Extended.
         """
@@ -1059,7 +1059,7 @@ class Attributes (AttributesBase_) :
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
 
-        see :func:`attribute_is_vector` (key) for details.
+        see :func:`troy.Attributes.attribute_is_vector` (key) for details.
         """
 
         # make sure interface is ready to use
@@ -1100,7 +1100,7 @@ class Attributes (AttributesBase_) :
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
 
-        see :func:`add_callback` (key, cb) for details.
+        see :func:`troy.Attributes.add_callback` (key, cb) for details.
         """
 
         # make sure interface is ready to use
@@ -1116,7 +1116,7 @@ class Attributes (AttributesBase_) :
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
 
-        see :func:`remove_callback` (key, cb) for details.
+        see :func:`troy.Attributes.remove_callback` (key, cb) for details.
         """
 
         # make sure interface is ready to use
@@ -1237,7 +1237,7 @@ class Attributes (AttributesBase_) :
 
         The first parameter is the old name of the attribute, the second
         parameter is the aliased new name.  Note that the new name needs to be
-        registered before (via :class:`troy.attributes_register_`)::
+        registered before (via :func:`troy.Attributes.attributes_register_`)::
 
             # old code:
             self.attributes_register_ ('apple', 'Appel', self.String, self.Scalar, self.Writable)
@@ -1433,7 +1433,7 @@ class Attributes (AttributesBase_) :
                 other_d['attributes'][key]['value']  =       d['attributes'][key]['value']
 
         # set the new dictionary as state for copied class
-        AttributesBase_.__setattr__ (other, 'd_', other_d)
+        _AttributesBase.__setattr__ (other, 'd_', other_d)
 
 
     ####################################
@@ -1652,7 +1652,7 @@ class Attributes (AttributesBase_) :
         This interface method is not part of the public consumer API, but can
         safely be called from within derived classes.
 
-        See documentation of :class:`troy.attributes_set_setter_ ` for details.
+        See documentation of :func:`troy.Attributes.attributes_set_setter_` for details.
         """
 
         if key != None :
@@ -1677,7 +1677,7 @@ class Attributes (AttributesBase_) :
         This interface method is not part of the public consumer API, but can
         safely be called from within derived classes.
 
-        See documentation of :class:`troy.attributes_set_setter_ ` for details.
+        See documentation of :func:`troy.Attributes.attributes_set_setter_` for details.
         """
 
         # make sure interface is ready to use
@@ -1750,7 +1750,7 @@ class Attributes (AttributesBase_) :
         """
         set_vector_attribute (key, val)
 
-        See also: :func:`set_attribute` (key, val).
+        See also: :func:`troy.Attributes.set_attribute` (key, val).
 
         As python can handle scalar and vector types transparently, this method
         is in fact not very useful.  For that reason, it maps internally to the
@@ -1767,7 +1767,7 @@ class Attributes (AttributesBase_) :
         """
         get_vector_attribute (key)
 
-        See also: :func:`get_attribute` (key).
+        See also: :func:`troy.Attributes.get_attribute` (key).
 
         As python can handle scalar and vector types transparently, this method
         is in fact not very useful.  For that reason, it maps internally to the
@@ -1786,7 +1786,7 @@ class Attributes (AttributesBase_) :
 
         Removing an attribute is actually different from unsetting it, or from
         setting it to 'None'.  On remove, all traces of the attribute are
-        purged, and the key will not be listed on :func:`list_attributes` () anymore.
+        purged, and the key will not be listed on :func:`troy.Attributes.list_attributes` () anymore.
         """
 
         key    = self.attributes_t_keycheck_   (key)
@@ -1953,7 +1953,7 @@ class Attributes (AttributesBase_) :
     #
     ####################################
     def __getattr__ (self, key) :
-        """ see :func:`get_attribute` (key) for details. """
+        """ see :func:`troy.Attributes.get_attribute` (key) for details. """
         
         key  = self.attributes_t_keycheck_ (key)
         return self.attributes_i_get_      (key)
@@ -1961,7 +1961,7 @@ class Attributes (AttributesBase_) :
 
     ####################################
     def __setattr__ (self, key, val) :
-        """ see :func:`set_attribute` (key, val) for details. """
+        """ see :func:`troy.Attributes.set_attribute` (key, val) for details. """
         
         key  = self.attributes_t_keycheck_ (key)
         return self.attributes_i_set_      (key, val)
@@ -1969,7 +1969,7 @@ class Attributes (AttributesBase_) :
 
     ####################################
     def __delattr__ (self, key) :
-        """ see :func:`remove_attribute` (key) for details. """
+        """ see :func:`troy.Attributes.remove_attribute` (key) for details. """
         
         key  = self.attributes_t_keycheck_ (key)
         return self.attributes_remove_     (key)
@@ -1985,7 +1985,7 @@ class Attributes (AttributesBase_) :
     #
     ####################################
     def __getitem__ (self, key) :
-        """ see :func:`get_attribute` (key) for details. """
+        """ see :func:`troy.Attributes.get_attribute` (key) for details. """
         
         key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
@@ -1994,7 +1994,7 @@ class Attributes (AttributesBase_) :
 
     ####################################
     def __setitem__ (self, key, val) :
-        """ see :func:`set_attribute` (key, val) for details. """
+        """ see :func:`troy.Attributes.set_attribute` (key, val) for details. """
         
         key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
@@ -2003,7 +2003,7 @@ class Attributes (AttributesBase_) :
 
     ####################################
     def __delitem__ (self, key) :
-        """ see :func:`remove_attribute` (key) for details. """
+        """ see :func:`troy.Attributes.remove_attribute` (key) for details. """
         
         key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
@@ -2012,7 +2012,7 @@ class Attributes (AttributesBase_) :
 
     ####################################
     def __contains__ (self, key) :
-        """ see :func:`attribute_exists` (key) for details. """
+        """ see :func:`troy.Attributes.attribute_exists` (key) for details. """
         
         key    = self.attributes_t_keycheck_   (key)
         us_key = self.attributes_t_underscore_ (key)
@@ -2035,7 +2035,7 @@ class Attributes (AttributesBase_) :
 
     ####################################
     def iterkeys (self) :
-        """ see :func:`list_attributes` () for details. """
+        """ see :func:`troy.Attributes.list_attributes` () for details. """
         
         return self.attributes_i_list_ ()
 

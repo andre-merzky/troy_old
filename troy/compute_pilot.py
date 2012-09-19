@@ -120,7 +120,7 @@ class ComputePilot (Base) :
         self.state = State.New
 
         # initialize adaptor class
-        self.engine_.call ('ComputePilot', 'init_', self)
+        self._engine.call ('ComputePilot', 'init_', self)
 
 
 
@@ -130,7 +130,7 @@ class ComputePilot (Base) :
         """
         tell the adaptor to push state changes to the backend
         """
-        return self.engine_.call ('ComputePilot', '_push_state', self, obj, key)
+        return self._engine.call ('ComputePilot', '_push_state', self, obj, key)
 
 
     ############################################################################
@@ -139,7 +139,7 @@ class ComputePilot (Base) :
         """
         tell the adaptor to pull state changes from the backend
         """
-        return self.engine_.call ('ComputePilot', '_pull_state', self, obj, key)
+        return self._engine.call ('ComputePilot', '_pull_state', self, obj, key)
 
 
     ############################################################################
@@ -166,7 +166,7 @@ class ComputePilot (Base) :
         may achieve this by aborting the units, and resubmitting them to the
         re-initialized pilot.
         """
-        return self.engine_.call ('ComputePilot', 'reinitialize', self, cpd)
+        return self._engine.call ('ComputePilot', 'reinitialize', self, cpd)
 
 
 
@@ -185,7 +185,7 @@ class ComputePilot (Base) :
         The CUD is (possibly translated and) passed on to the PF backend, which
         will attempt to instantiate the described workload process on the
         ComputePilot.  If the pilot's resource is not suitable to create the
-        requested CU, a :class:`troy.Error.BadParameter` exception is raised.  Not raising
+        requested CU, a :attribute:`troy.Error.BadParameter` exception is raised.  Not raising
         this exception is not a guarantee that the CU will in fact be (able to
         be) executed -- in that case, the returned CU will later be moved to
         Failed state.
@@ -198,7 +198,7 @@ class ComputePilot (Base) :
         (see documentation of CUD), or, where default values are not specified,
         are ignored.
         """
-        return self.engine_.call ('ComputePilot', 'submit_unit', self, cud)
+        return self._engine.call ('ComputePilot', 'submit_unit', self, cud)
 
 
 
@@ -206,7 +206,7 @@ class ComputePilot (Base) :
     #
     def list_units (self) :
         """ 
-        list managed :class:`troy.ComputeUnit`s.
+        list managed :class:`troy.ComputeUnit` instances.
 
         Return value:
         A list of :class:`troy.ComputeUnit` IDs
@@ -217,7 +217,7 @@ class ComputePilot (Base) :
         list can in fact be reconnected to.  Also, an inclusion in the list does
         not have any indication about the respective unit's state.
         """
-        return self.engine_.call ('ComputePilot', 'list_units', self)
+        return self._engine.call ('ComputePilot', 'list_units', self)
 
 
     ############################################################################
@@ -229,7 +229,7 @@ class ComputePilot (Base) :
         It is not an error to call wait() in a final state -- the call simply
         returns immediately.
         """
-        return self.engine_.call ('ComputePilot', 'wait', self)
+        return self._engine.call ('ComputePilot', 'wait', self)
 
 
     ############################################################################
@@ -246,7 +246,7 @@ class ComputePilot (Base) :
         though.
 
         """
-        return self.engine_.call ('ComputePilot', 'cancel', self)
+        return self._engine.call ('ComputePilot', 'cancel', self)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

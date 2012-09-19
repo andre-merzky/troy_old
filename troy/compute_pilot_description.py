@@ -19,21 +19,15 @@ class ComputePilotDescription (Attributes) :
           - minimum number of processes the pilot is expected to manage at any
             point in time (usually translates to number of CPU process slots
             managed by the pilot).
-
-
           - type   : integer
           - default: 1
 
 
-
       - 'environment':
           - a set of key/value pairs, to be exported into the environment of
-            :class:`troy.ComputeUnit`s on that pilot.
-
-
+            any :class:`troy.ComputeUnit` on that pilot.
           - type   : dictionary
           - default: {}
-
 
 
       - 'queue':
@@ -42,15 +36,11 @@ class ComputePilotDescription (Attributes) :
           - default: ""
 
 
-
       - 'project':
           - the project ID used for accounting of the pilot's resource
             consumption.
-
-
           - type   : string
           - default: ""
-
 
 
       - 'candidate_hosts':
@@ -59,12 +49,10 @@ class ComputePilotDescription (Attributes) :
           - default: ""
 
 
-
       - 'cpu_architecture':
           - the CPU architecture the pilot is expected to run on..
           - type   : string, values as defined by GLUE.v2
           - default: ""
-
 
 
       - 'operating_system_type':
@@ -73,35 +61,25 @@ class ComputePilotDescription (Attributes) :
           - default: ""
 
 
-
       - 'total_physical_memory':
           - the maximum amount of memory the pilot is expected to allocate, in
             total (in MByte).
-
-
           - type   : int
           - default: ""
-
 
 
       - 'total_cpu_time':
           - the maximum number of CPU hours the pilot is expected to consume, in
             total.
-
-
           - type   : float (number of CPU hours)
           - default: ""
-
 
 
       - 'wall_time_limit':
           - the maximum time the pilot is expected to operate, in hours.
             If unspecified, the pilot is assumed to live forever.
-
-
           - type   : float (number of hours)
           - default: ""
-
 
 
       - 'start_time':
@@ -110,12 +88,10 @@ class ComputePilotDescription (Attributes) :
           - default: ""
 
 
-
       - 'contact':
           - a (email, sms, IM) contact URL to notify on pilot state changes.
           - type   : string
           - default: ""
-
 
 
     Affinity:
@@ -128,11 +104,8 @@ class ComputePilotDescription (Attributes) :
       - 'affinity_datacenter_label':
           - pilots sharing the same label are located in the same data
             center          .
-
-
           - type   : string
           - default: ""
-
 
 
       - 'affinity_machine_label':

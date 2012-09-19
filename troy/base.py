@@ -18,17 +18,17 @@ class Base (Attributes, object):
 
 
 
-      - engine_   : a reference to the engine singleton, which manages adaptors
+      - _engine   : a reference to the engine singleton, which manages adaptors
                     and call forwarding
 
 
-      - adaptors_ : a sorted list of used adaptors, which can be used by the
+      - _adaptors : a sorted list of used adaptors, which can be used by the
                     engine to optimize adaptor invocation (previously successful
                     adaptors are most likely to succeed again)
 
 
-      - idata_    : a dict of dicts, for class instance state data management.
-                    The dict under idata_['api'] holds the actual class instance
+      - _idata    : a dict of dicts, for class instance state data management.
+                    The dict under _idata['api'] holds the actual class instance
                     data (documented for each class), all other keys hold adaptor
                     level instance data, for example to cache connections.  The
                     keys for those adaptor instance data SHOULD be the adaptor
@@ -49,15 +49,15 @@ class Base (Attributes, object):
 
     def __init__ (self) :
 
-        # engine_   : engine singleton to handle adaptors 
-        # adaptors_ : sorted list of used adaptors        
-        # idata_    : adaptor specific instance data      
-        # contexts_ : list of security context dicts      
+        # _engine   : engine singleton to handle adaptors 
+        # _adaptors : sorted list of used adaptors        
+        # _idata    : adaptor specific instance data      
+        # _contexts : list of security context dicts      
 
-        self.attributes_register_  ('engine_',   engine.Engine(), self.Any, self.Scalar, self.ReadOnly)
-        self.attributes_register_  ('adaptors_', {},              self.Any, self.Scalar, self.ReadOnly)
-        self.attributes_register_  ('idata_',    {},              self.Any, self.Scalar, self.ReadOnly)
-        self.attributes_register_  ('contexts_', [],              self.Any, self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('_engine',   engine.Engine(), self.Any, self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('_adaptors', {},              self.Any, self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('_idata',    {},              self.Any, self.Scalar, self.ReadOnly)
+        self.attributes_register_  ('_contexts', [],              self.Any, self.Scalar, self.ReadOnly)
 
 
     def dump_ (self) :
@@ -67,8 +67,8 @@ class Base (Attributes, object):
         But really, what did you expect a dump() method would do? ;-)
         """
         print "dumping " + str(self)
-        for key in self.idata_ :
-            print "  " + key + "\t : " + str (self.idata_[key])
+        for key in self._idata :
+            print "  " + key + "\t : " + str (self._idata[key])
 
 
 

@@ -56,7 +56,7 @@ class iComputePilot (iBase) :
     ############################################################################
     #
     def list_units (self) :
-        """ list managed :class:`troy.ComputeUnit`s """
+        """ list managed :class:`troy.ComputeUnit` instances """
         raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
 
 

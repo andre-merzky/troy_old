@@ -43,7 +43,7 @@ class DataUnit (Base) :
         self.id = id
 
         # initialize adaptor class
-        self.engine_.call ('DataUnit', 'init_', self)
+        self._engine.call ('DataUnit', 'init_', self)
 
 
     ############################################################################
@@ -52,7 +52,7 @@ class DataUnit (Base) :
         """
         tell the adaptor to push state changes to the backend
         """
-        return self.engine_.call ('DataUnit', '_push_state', self, obj, key)
+        return self._engine.call ('DataUnit', '_push_state', self, obj, key)
 
 
     ############################################################################
@@ -61,21 +61,21 @@ class DataUnit (Base) :
         """
         tell the adaptor to pull state changes from the backend
         """
-        return self.engine_.call ('DataUnit', '_pull_state', self, obj, key)
+        return self._engine.call ('DataUnit', '_pull_state', self, obj, key)
 
 
     ############################################################################
     #
     def wait (self) :
         """ Wait until DU enters a final state """
-        return self.engine_.call ('DataUnit', 'wait', self)
+        return self._engine.call ('DataUnit', 'wait', self)
 
 
     ############################################################################
     #
     def cancel (self) :
         """ Cancel the DU """
-        return self.engine_.call ('DataUnit', 'cancel', self)
+        return self._engine.call ('DataUnit', 'cancel', self)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

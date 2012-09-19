@@ -62,7 +62,7 @@ class iTroy (iBase) :
 
     ############################################################################
     #
-    def add_pilot_framework (self, cpf) :
+    def add_pilot_framewor (self, cpf) :
         """ Add a PilotFramework to this Scheduler """
         raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
 

@@ -2,7 +2,7 @@
 import traceback
 import StringIO
 
-class Error:
+class Error :
 
     """
     TROY's exception class instances have two attributes: an error code, and an

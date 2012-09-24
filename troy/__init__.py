@@ -286,7 +286,7 @@
     
 '''
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 # For the sake of code organization, each API class is defined in a separate
 # file.  Alas, python's module naming rules then introduce an additional

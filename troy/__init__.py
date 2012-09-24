@@ -63,8 +63,8 @@
     and to handle workplans to be scheduled on the pilot resources.
       
       
-    Terminology:
-    ============
+    Terminology
+    ===========
       
     For the purpose of Troy, all backend pilot frameworks are expected to implement
     the P* model of pilot abstractions [1], and to expose the Pilot API associated
@@ -180,8 +180,8 @@
     [1] http://radical.rutgers.edu/publications/#pstar12
     
     
-    Hello World:
-    ============
+    Hello World
+    ===========
       
     A simple Troy application scheduling a Compute centric workplan would be (on
     'Hello World' level, some details left out for brevity)::

@@ -1,0 +1,261 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>DataPilot &mdash; Troy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Troy 0.1 documentation" href="../index.html" />
+    <link rel="up" title="The Troy Framework and Library" href="__init__.html" />
+    <link rel="next" title="DataUnitDescription" href="data_unit_description.html" />
+    <link rel="prev" title="DataPilotDescription" href="data_pilot_description.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="data_unit_description.html" title="DataUnitDescription"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="data_pilot_description.html" title="DataPilotDescription"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Troy 0.1 documentation</a> &raquo;</li>
+          <li><a href="__init__.html" accesskey="U">The Troy Framework and Library</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="datapilot">
+<h1>DataPilot<a class="headerlink" href="#datapilot" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="troy.DataPilot">
+<em class="property">class </em><tt class="descclassname">troy.</tt><tt class="descname">DataPilot</tt><big>(</big><em>dp_id</em><big>)</big><a class="headerlink" href="#troy.DataPilot" title="Permalink to this definition">¶</a></dt>
+<dd><p>DataPilot (PilotStore)</p>
+<p>This is the object that is returned by the <a class="reference internal" href="pilot_framework.html#troy.PilotFramework" title="troy.PilotFramework"><tt class="xref py py-class docutils literal"><span class="pre">troy.PilotFramework</span></tt></a> when a new
+DataPilot is created based on a DataPilotDescription.</p>
+<p>The DataPilot object can be used by the application to keep track of
+DataPilots that are active.  A DataPilot has state, can be queried, can be
+cancelled and re-initialized.</p>
+<p>Properties:</p>
+<div class="highlight-python"><pre>- id:
+  The id may be 'None' if the Pilot is not yet in Running state.  The
+  returned ID can be used to connect to the CP instance later on, for
+  example from within a different application instance.  
+  Type: string (url)
+
+
+
+- state:
+  The state of the pilot.
+  Type: :func:`troy.State` (enum)
+
+
+
+- state_detail:
+  The backend state of the pilot.  The value of this property is not
+  interpreted by Troy, and is up to the backend pilot framework.
+  Type: string
+
+
+
+- description:
+  The DataPilotDescription used to create this pilot.  That description
+  is not guaranteed to be available, nor is it guaranteed to be complete
+  -- in particular for reconnected pilots.  Its existence and
+  completeness depends on the ability to inspect backend pilot
+  instances.
+  Type: :class:`troy.troy.DataPilotDescription`
+
+
+
+- framework:
+  The ID of the :class:`troy.PilotFramework` which manages this pilot.
+  Type: string (url)
+
+
+
+- units:
+  A list of :class:`troy.DataUnit` IDs, representing compute units managed by this
+  pilot.
+  Type: string (url)
+
+
+
+- wall_time_left:
+  The estimated remaining life time of this pilot.
+  The availability of this property is not guaranteed, and depends on
+  both the backend pilot framework, and on the type of pilot (not all
+  pilots have a finite lifetime).
+  A value of 'None' indicates that the remaining wall time is unknown.
+  A negative value indicates that the pilot has an unlimited lifetime.
+  Type: int</pre>
+</div>
+<dl class="method">
+<dt id="troy.DataPilot.cancel">
+<tt class="descname">cancel</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.DataPilot.cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move the pilot into Canceled state, releasing all resources.</p>
+<p>The will block until the pilot reaches Canceled state and resources have
+been released.</p>
+<p>It is not an error to call the method in a final state &#8211; it will simple
+return immediately.  The pilot&#8217;s state will not be changed in that case
+though.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.DataPilot.list_units">
+<tt class="descname">list_units</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.DataPilot.list_units" title="Permalink to this definition">¶</a></dt>
+<dd><p>list managed <a class="reference internal" href="data_unit.html#troy.DataUnit" title="troy.DataUnit"><tt class="xref py py-class docutils literal"><span class="pre">troy.DataUnit</span></tt></a> instances.</p>
+<p>Return value:
+A list of <a class="reference internal" href="data_unit.html#troy.DataUnit" title="troy.DataUnit"><tt class="xref py py-class docutils literal"><span class="pre">troy.DataUnit</span></tt></a> IDs</p>
+<p>The returned list can include units which have not been created by this
+DP instance.  The list may be incomplete, and may not include units
+created by the DP.  There is no guarantee that units in the returned
+list can in fact be reconnected to.  Also, an inclusion in the list does
+not have any indication about the respective unit&#8217;s state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.DataPilot.reinitialize">
+<tt class="descname">reinitialize</tt><big>(</big><em>dpd</em><big>)</big><a class="headerlink" href="#troy.DataPilot.reinitialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Re-Initialize the DataPilot to the (new) DataPilotDescription.</p>
+<p>Keyword arguments:
+dpd &#8211; A DataPilotDescription</p>
+<p>The reinitialize method is intended to change the amount of resources
+available to a pilot, without changing the pilot&#8217;s state otherwise.  The
+method can be called in any non-final state, and will automatically move
+the pilot to &#8216;Pending&#8217; state (if successful).  If reinitialization fails
+(for example, because no suitable resources have been found), the pilot
+is moved to &#8216;Failed&#8217; state.</p>
+<p>It is up to the backend is the pilot&#8217;s ID changes during the call to
+reinitialize(), but the implementation SHOULD attempt to keep the ID
+constant.</p>
+<p>Any data units running on the pilot remain running &#8211; but the backend
+may achieve this by aborting the units, and resubmitting them to the
+re-initialized pilot.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.DataPilot.submit_unit">
+<tt class="descname">submit_unit</tt><big>(</big><em>dud</em><big>)</big><a class="headerlink" href="#troy.DataPilot.submit_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit a DU to this DataPilot.</p>
+<p>Keyword argument:
+dud &#8211; The DataUnitDescription from the application</p>
+<p>Return:
+<a class="reference internal" href="data_unit.html#troy.DataUnit" title="troy.DataUnit"><tt class="xref py py-class docutils literal"><span class="pre">troy.DataUnit</span></tt></a> object</p>
+<p>The DUD is (possibly translated and) passed on to the PF backend, which
+will attempt to instantiate the described data workload unit on the
+DataPilot.  If the pilot&#8217;s resource is not suitable to create the
+requested DU, a <a href="#id1"><span class="problematic" id="id2">:attribute:`troy.Error.BadParameter`</span></a> exception is raised.  Not raising
+this exception is not a guarantee that the DU will in fact be (able to
+be) executed &#8211; in that case, the returned DU will later be moved to
+Failed state.</p>
+<p>On success, the returned DU is in Pending state (or moved into any state
+downstream from Pending).</p>
+<p>The call will will honor all attributes set on the dud.  Attributes
+which are not explicitly set are interpreted as having default values
+(see documentation of DUD), or, where default values are not specified,
+are ignored.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.DataPilot.wait">
+<tt class="descname">wait</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.DataPilot.wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait until DP enters a final state</p>
+<p>It is not an error to call wait() in a final state &#8211; the call simply
+returns immediately.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="data_pilot_description.html"
+                        title="previous chapter">DataPilotDescription</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="data_unit_description.html"
+                        title="next chapter">DataUnitDescription</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/troy/data_pilot.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="data_unit_description.html" title="DataUnitDescription"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="data_pilot_description.html" title="DataPilotDescription"
+             >previous</a> |</li>
+        <li><a href="../index.html">Troy 0.1 documentation</a> &raquo;</li>
+          <li><a href="__init__.html" >The Troy Framework and Library</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Andre Merzky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2pre.
+    </div>
+  </body>
+</html>

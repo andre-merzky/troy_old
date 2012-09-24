@@ -11,8 +11,8 @@ class ComputeUnit (Base) :
     """
     ComputeUnit
 
-    This is the object that is returned by L{Troy} or an L{PilotFramework} when
-    a new ComputeUnit is created based on a L{ComputeUnitDescription}.
+    This is the object that is returned by :class:`troy.Troy` or an :class:`troy.PilotFramework` when
+    a new ComputeUnit is created based on a :class:`troy.ComputeUnitDescription`.
 
     The ComputeUnit object can be used by the application to keep track of
     ComputeUnits that are active.  A ComputeUnit has state, can be queried and
@@ -21,20 +21,28 @@ class ComputeUnit (Base) :
 
     Properties::
 
+
+
         - id:
           The id may be 'None' if the Unit is not yet in Running state.  The
           returned ID can be used to connect to the CU instance later on, for
           example from within a different application instance.  
           Type: string (url)
 
+
+
         - state:
           The state of the CU.
-          Type: L{troy.State} (enum)
+          Type: :func:`troy.State` (enum)
+
+
 
         - state_detail:
           The backend state of the CU.  The value of this property is not
           interpreted by Troy, and is up to the backend pilot framework.
           Type: string
+
+
 
         - description:
           The ComputeUnitDescription used to create this pilot.  That
@@ -42,12 +50,16 @@ class ComputeUnit (Base) :
           be complete -- in particular for reconnected CUs.  Its existence
           and completeness depends on the ability to inspect backend pilot
           instances.
-          Type: L{troy.ComputeUnitDescription}
+          Type: :class:`troy.troy.ComputeUnitDescription`
+
+
 
         - pilot:
           The ID of the pilot which manages this CU.  This ID may be None if the
           CU is not yet bound to a specific pilot.
           Type: string (url)
+
+
 
         - framework:
           The ID of the pilot framework which manages this CU.  This ID may be 
@@ -80,7 +92,7 @@ class ComputeUnit (Base) :
         self.id = id
 
         # initialize adaptor class
-        self.engine_.call ('ComputeUnit', 'init_', self)
+        self._engine.call ('ComputeUnit', 'init_', self)
 
 
     ############################################################################
@@ -89,7 +101,7 @@ class ComputeUnit (Base) :
         """
         tell the adaptor to push state changes to the backend
         """
-        return self.engine_.call ('ComputeUnit', '_push_state', self, obj, key)
+        return self._engine.call ('ComputeUnit', '_push_state', self, obj, key)
 
 
     ############################################################################
@@ -98,21 +110,21 @@ class ComputeUnit (Base) :
         """
         tell the adaptor to pull state changes from the backend
         """
-        return self.engine_.call ('ComputeUnit', '_pull_state', self, obj, key)
+        return self._engine.call ('ComputeUnit', '_pull_state', self, obj, key)
 
 
     ############################################################################
     #
     def wait (self) :
         """ Wait until CU enters a final state """
-        return self.engine_.call ('ComputeUnit', 'wait', self)
+        return self._engine.call ('ComputeUnit', 'wait', self)
 
 
     ############################################################################
     #
     def cancel (self) :
         """ Cancel the CU """
-        return self.engine_.call ('ComputeUnit', 'cancel', self)
+        return self._engine.call ('ComputeUnit', 'cancel', self)
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

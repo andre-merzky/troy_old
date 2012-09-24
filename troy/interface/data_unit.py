@@ -8,7 +8,7 @@ import troy.exception
 # iDataUnit (DU)
 # 
 class iDataUnit (iBase) :
-    """ L{DataUnit} interface """
+    """ :class:`troy.DataUnit` interface """
 
 
     ############################################################################

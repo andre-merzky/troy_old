@@ -8,10 +8,12 @@ from troy.attributes import Attributes
 class ComputePilotDescription (Attributes) :
     """ ComputePilotDescription.
 
-    A ComputePilotDescription (CPD) describes a L{ComputePilot} to be
+    A ComputePilotDescription (CPD) describes a :class:`troy.ComputePilot` to be
     submitted to a resource.  A well defined set of attributes can be set on
     a CPD to specify the pilot's properties, and the resource requirements
     for the pilot:
+
+
 
       - 'size':
           - minimum number of processes the pilot is expected to manage at any
@@ -20,16 +22,19 @@ class ComputePilotDescription (Attributes) :
           - type   : integer
           - default: 1
 
+
       - 'environment':
           - a set of key/value pairs, to be exported into the environment of
-            L{ComputeUnit}s on that pilot.
+            any :class:`troy.ComputeUnit` on that pilot.
           - type   : dictionary
           - default: {}
+
 
       - 'queue':
           - the name of the queue the pilot should be submitted to.
           - type   : string
           - default: ""
+
 
       - 'project':
           - the project ID used for accounting of the pilot's resource
@@ -37,20 +42,24 @@ class ComputePilotDescription (Attributes) :
           - type   : string
           - default: ""
 
+
       - 'candidate_hosts':
           - a list of hostnames on any of which the pilot may be operate.
           - type   : string
           - default: ""
+
 
       - 'cpu_architecture':
           - the CPU architecture the pilot is expected to run on..
           - type   : string, values as defined by GLUE.v2
           - default: ""
 
+
       - 'operating_system_type':
           - the operating system the pilot is expected to run on.
           - type   : string, values as defined by GLUE.v2
           - default: ""
+
 
       - 'total_physical_memory':
           - the maximum amount of memory the pilot is expected to allocate, in
@@ -58,11 +67,13 @@ class ComputePilotDescription (Attributes) :
           - type   : int
           - default: ""
 
+
       - 'total_cpu_time':
           - the maximum number of CPU hours the pilot is expected to consume, in
             total.
           - type   : float (number of CPU hours)
           - default: ""
+
 
       - 'wall_time_limit':
           - the maximum time the pilot is expected to operate, in hours.
@@ -70,10 +81,12 @@ class ComputePilotDescription (Attributes) :
           - type   : float (number of hours)
           - default: ""
 
+
       - 'start_time':
           - the point in time when the pilot is expected to become active.
           - type   : time (number of seconds since epoch) or class time.struct_time
           - default: ""
+
 
       - 'contact':
           - a (email, sms, IM) contact URL to notify on pilot state changes.
@@ -81,17 +94,19 @@ class ComputePilotDescription (Attributes) :
           - default: ""
 
 
-
     Affinity:
 
     These labels should get assigned by the backend, but are exposed on API
     level for the benefit of application level schedulers::
+
+
 
       - 'affinity_datacenter_label':
           - pilots sharing the same label are located in the same data
             center          .
           - type   : string
           - default: ""
+
 
       - 'affinity_machine_label':
           - pilots sharing the same label are located on the same machine.

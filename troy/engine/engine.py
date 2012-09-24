@@ -6,21 +6,52 @@ import traceback
 
 import troy.exception 
 
-def singleton (type) :
+
+def _EngineSingleton (stype) : 
+    """
+    .. py:class:: troy.engine.Engine (object)
+
+       The Engine singleton class has exactly two tasks in Troy: to (i) load and
+       manage Troy adaptors, and to (ii) forward Troy API calls to those
+       adaptors.
+
+       The first task (adaptor loading) is performed during initialization (on
+       __init__): the engine will search a predefined path, and load all found
+       adaptors.  See the Troy `Adaptor Writers Guide`_ for more details on
+       adaptor loading and registration.
+
+
+       The second functionality (call forwarding) is provided by the engine's
+       only method, :func:`troy.engine.Engine.call()`, see below.
+
+       **TODO:** make engine search path configurable
+
+    .. py:method:: call (self, class_name, method_name, api_class, *args, **kwargs)
+
+       Call an adaptor methods, for the given class (*class_name*), a given
+       method (*method_name*), and pass the calling object's state (derived from
+       *api_class*) and method arguments (*\*args*, *\*\*kwargs*).  The Engine
+       will iterate over all adaptors registered for that *class_name*, and will
+       invoke the adaptor level method on each, until an invocation succeeds
+       (i.e. does not raise and exception).  
+
+    """
 
     instances = {}
-    
-    def getinstance () :
-        
-        if type not in instances :
-            instances[type] = type ()
-        
-        return instances[type]
-    
-    return getinstance
 
+    def _EngineSingleton () :
 
-@singleton
+        if stype not in instances :
+            instances[stype] = stype ()
+        
+        return instances[stype]
+
+    _EngineSingleton.__doc__  = stype.__doc__
+    _EngineSingleton.__repr__ = stype.__repr__
+    
+    return _EngineSingleton
+
+@_EngineSingleton
 class Engine (object) :
 
     ##########################################################################
@@ -29,7 +60,7 @@ class Engine (object) :
     #
     def __init__ (self) :
 
-        print " === init engine"
+        # print " === init engine"
         # __init__ loads all adaptors
         
         # self.adaptors is a dict of dicts.  The inner dicts have two elements:
@@ -98,7 +129,7 @@ class Engine (object) :
         '''
 
         # if the api_class is used the first time, sift through loaded adaptors (sorted list)
-        if 0 == len (api_class.adaptors_) :
+        if 0 == len (api_class._adaptors) :
 
             for a_name in self.adaptors.keys () :
 
@@ -112,10 +143,10 @@ class Engine (object) :
                     # class.  Initially, the adaptor does not create a adaptor
                     # class instance, so we set that to 'None' -- that is only
                     # created as needed, see below
-                    api_class.adaptors_ [a_name] = {}
-                    api_class.adaptors_ [a_name]['a_class'] = None
-                    api_class.adaptors_ [a_name]['success'] = 0
-                    api_class.adaptors_ [a_name]['order']   = a_order
+                    api_class._adaptors [a_name] = {}
+                    api_class._adaptors [a_name]['a_class'] = None
+                    api_class._adaptors [a_name]['success'] = 0
+                    api_class._adaptors [a_name]['order']   = a_order
 
 
         # create a log message container for logging failed adaptors
@@ -130,7 +161,7 @@ class Engine (object) :
         # attempt (where the success count is '0' for all adaptors, we use the
         # 'order' attribute, and thus sort for that one first (non-reversed).
 
-        ordered_adaptor_tuples = sorted (api_class.adaptors_.items (), 
+        ordered_adaptor_tuples = sorted (api_class._adaptors.items (), 
                                          key     = lambda x:x[1]['order'])
         ordered_adaptor_tuples = sorted (ordered_adaptor_tuples,
                                          key     = lambda x:x[1]['success'], 
@@ -153,7 +184,7 @@ class Engine (object) :
                 a_cname    = a_registry[class_name]      # name of adaptor class
                                                          # implementing the requested 
                                                          # api class
-                a_class    = api_class.adaptors_[a_name]['a_class'] # old adaptor class | None
+                a_class    = api_class._adaptors[a_name]['a_class'] # old adaptor class | None
 
                 # this module/adaptor combo can in principle work.  Now we have
                 # to check if the api class used that adaptor before - and if
@@ -163,16 +194,16 @@ class Engine (object) :
 
                     # adaptor has not been used for this api class - create new
                     # adaptor class, init it, and keep it in the api class' list
-                    api_class.adaptors_[a_name]['a_class'] = getattr (module, a_cname) (api_class, adaptor)
+                    api_class._adaptors[a_name]['a_class'] = getattr (module, a_cname) (api_class, adaptor)
 
                 # adaptor class now exists, and can be used.  We try to invoke
                 # the method, and to get something we can return.
-                ret = getattr (api_class.adaptors_[a_name]['a_class'], method_name) (*args, **kwargs)
+                ret = getattr (api_class._adaptors[a_name]['a_class'], method_name) (*args, **kwargs)
 
                 # so, this call was successful -- we move the adaptor to the
                 # first place in the adaptor list, so that it is the first one
                 # tried on the next method call on that api class instance
-                api_class.adaptors_[a_name]['success'] += 1
+                api_class._adaptors[a_name]['success'] += 1
 
                 print "engine: call: " + a_name     + "." + a_cname + "." + method_name + \
                                   " (" + str (args) + str (kwargs)  + ") = " + str (ret)

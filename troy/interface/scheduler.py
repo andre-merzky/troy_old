@@ -8,7 +8,7 @@ import troy.exception
 # 
 #
 class iScheduler (iBase) :
-    """  L{Scheduler} interface """
+    """  :class:`troy.Scheduler` interface """
 
     ############################################################################
     #

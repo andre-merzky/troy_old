@@ -1,0 +1,141 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>DataPilot &mdash; Troy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Troy 0.1 documentation" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Troy 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="datapilot">
+<h1>DataPilot<a class="headerlink" href="#datapilot" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="troy.interface.iDataPilot">
+<em class="property">class </em><tt class="descclassname">troy.interface.</tt><tt class="descname">iDataPilot</tt><big>(</big><em>obj</em>, <em>adaptor</em><big>)</big><a class="headerlink" href="#troy.interface.iDataPilot" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="../data_pilot.html#troy.DataPilot" title="troy.DataPilot"><tt class="xref py py-class docutils literal"><span class="pre">troy.DataPilot</span></tt></a> interface</p>
+<dl class="method">
+<dt id="troy.interface.iDataPilot.cancel">
+<tt class="descname">cancel</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.interface.iDataPilot.cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cancel DP</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.interface.iDataPilot.init_">
+<tt class="descname">init_</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.interface.iDataPilot.init_" title="Permalink to this definition">¶</a></dt>
+<dd><p>dummy method to make sure the backend can initialize the object.
+This method should <em>not</em> be implemented in the adaptor!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.interface.iDataPilot.list_units">
+<tt class="descname">list_units</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.interface.iDataPilot.list_units" title="Permalink to this definition">¶</a></dt>
+<dd><p>list managed <a class="reference internal" href="../data_unit.html#troy.DataUnit" title="troy.DataUnit"><tt class="xref py py-class docutils literal"><span class="pre">troy.DataUnit</span></tt></a> instances</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.interface.iDataPilot.reinitialize">
+<tt class="descname">reinitialize</tt><big>(</big><em>dpd</em><big>)</big><a class="headerlink" href="#troy.interface.iDataPilot.reinitialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Re-Initialize the DataPilot to the (new) DataPilotDescription.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.interface.iDataPilot.submit_unit">
+<tt class="descname">submit_unit</tt><big>(</big><em>dud</em><big>)</big><a class="headerlink" href="#troy.interface.iDataPilot.submit_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit a DU to this DataPilot</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.interface.iDataPilot.wait">
+<tt class="descname">wait</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.interface.iDataPilot.wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait until DP enters a final state</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/troy/interface/data_pilot.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Troy 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Andre Merzky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2pre.
+    </div>
+  </body>
+</html>

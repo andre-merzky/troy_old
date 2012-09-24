@@ -65,8 +65,8 @@ class scheduler_random (troy.interface.iScheduler) :
         self.adaptor = adaptor
 
         # we MUST interpret policy, if present
-        if 'policy' in self.api.idata_ :
-            if self.api.idata_['policy'] != 'Random' :
+        if 'policy' in self.api._idata :
+            if self.api._idata['policy'] != 'Random' :
                 raise troy.Exception (troy.Error.NoSuccess,
                       "Cannot provide the requested scheduling policy!")
 

@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Troy &mdash; Troy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Troy 0.1 documentation" href="../index.html" />
+    <link rel="up" title="The Troy Framework and Library" href="__init__.html" />
+    <link rel="next" title="Scheduler" href="scheduler.html" />
+    <link rel="prev" title="The Troy Framework and Library" href="__init__.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="scheduler.html" title="Scheduler"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="__init__.html" title="The Troy Framework and Library"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Troy 0.1 documentation</a> &raquo;</li>
+          <li><a href="__init__.html" accesskey="U">The Troy Framework and Library</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="troy">
+<h1>Troy<a class="headerlink" href="#troy" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="troy.Troy">
+<em class="property">class </em><tt class="descclassname">troy.</tt><tt class="descname">Troy</tt><big>(</big><em>id=None</em><big>)</big><a class="headerlink" href="#troy.Troy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">troy.base.Base</span></tt></p>
+<p>This class, <a class="reference internal" href="#troy.Troy" title="troy.Troy"><tt class="xref py py-class docutils literal"><span class="pre">troy.Troy</span></tt></a>, is the user (or application) facing component of Troy.
+Its purpose is to manage a set of pilot systems (and their pilot resources), and
+to manage a set of scheduling subprocesses which perform scheduling over the
+pilot resources, as described above.  As such, <a class="reference internal" href="#troy.Troy" title="troy.Troy"><tt class="xref py py-class docutils literal"><span class="pre">troy.Troy</span></tt></a> has three distinct
+sets of methods: to manage pilot resources, to manage scheduling subprocesses,
+and to handle workplans to be scheduled on the pilot resources.</p>
+<p>Properties:</p>
+<div class="highlight-python"><pre>- id:
+  The returned ID can be used to connect to the Service instance later
+  on, for example from within a different application instance.  
+  Type: String (url)
+
+
+
+- pilot_frameworks
+  An set of :class:`troy.PilotFramework` ids, representing the set of
+  resources over which Troy can schedule work items.
+  Note: these are instances, not IDs
+  Type: 'Any' list
+
+
+
+- schedulers
+  An set of :class:`troy.iScheduler` interface instances, internally used by this
+  Scheduler to distribute the workload over the different pilot
+  frameworks.
+  Note: these are instances, not IDs
+  Type: Any</pre>
+</div>
+<p>FIXME: we might want to expose scheduler state and statistics as properties,
+for inspection and profiling?</p>
+<dl class="method">
+<dt id="troy.Troy.add_pilot_framework">
+<tt class="descname">add_pilot_framework</tt><big>(</big><em>pf</em><big>)</big><a class="headerlink" href="#troy.Troy.add_pilot_framework" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a PilotFramework to this Troy instance.</p>
+<p>Keyword arguments:
+pf &#8211; The PilotFramework which this Troy instance will utilize.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.Troy.add_scheduler">
+<tt class="descname">add_scheduler</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#troy.Troy.add_scheduler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a scheduler for submitted work units.</p>
+<p>FIXME: Allow registration of callables or Scheduler instances
+FIXME: determine if we should have a default scheduler if this method
+is not called...</p>
+<p>The scheduler &#8216;s&#8217; can either be a string, identifying a backend or
+adaptor level scheduler to be used, or a class instance which derives
+from <a class="reference internal" href="interface/scheduler.html#troy.interface.iScheduler" title="troy.interface.iScheduler"><tt class="xref py py-class docutils literal"><span class="pre">troy.interface.iScheduler</span></tt></a>.  For any later call on
+<a class="reference internal" href="scheduler.html#troy.Scheduler.schedule" title="troy.Scheduler.schedule"><tt class="xref py py-func docutils literal"><span class="pre">troy.Scheduler.schedule()</span></tt></a>, the registered scheduler instances are
+invoked in order of registration.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.Troy.list_pilot_frameworks">
+<tt class="descname">list_pilot_frameworks</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.Troy.list_pilot_frameworks" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all PF IDs of this Troy instance</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.Troy.list_schedulers">
+<tt class="descname">list_schedulers</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.Troy.list_schedulers" title="Permalink to this definition">¶</a></dt>
+<dd><p>return array of registered scheduler instances</p>
+<p>Note that this call is not returning IDs, as scheduler instances are not
+reconnectable.</p>
+<p># FIXME: change?</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.Troy.list_units">
+<tt class="descname">list_units</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.Troy.list_units" title="Permalink to this definition">¶</a></dt>
+<dd><p>list managed work units.</p>
+<p>Return value:
+A list of work unit IDs</p>
+<p>The returned list can include units which have not been created by this
+Troy instance.  The list may be incomplete, and may not include units
+created by Troy.  There is no guarantee that units in the returned list
+can in fact be reconnected to.  Also, an inclusion in the list does not
+have any indication about the respective unit&#8217;s state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.Troy.remove_pilot_framework">
+<tt class="descname">remove_pilot_framework</tt><big>(</big><em>pf</em><big>)</big><a class="headerlink" href="#troy.Troy.remove_pilot_framework" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a PilotFramework</p>
+<p>Note that it won&#8217;t cancel the PilotFramework nor its Pilots &#8211; it will
+just no longer receive new work units from this Troy instance.</p>
+<p>Keyword arguments:
+pf &#8211; The PilotFramework to remove (either id or instance)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.Troy.remove_scheduler">
+<tt class="descname">remove_scheduler</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#troy.Troy.remove_scheduler" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove a previously registered scheduler instance</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="troy.Troy.submit_unit">
+<tt class="descname">submit_unit</tt><big>(</big><em>ud</em><big>)</big><a class="headerlink" href="#troy.Troy.submit_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Schedule a work unit.</p>
+<p>A work unit description work (<a class="reference internal" href="compute_unit_description.html#troy.ComputeUnitDescription" title="troy.ComputeUnitDescription"><tt class="xref py py-class docutils literal"><span class="pre">troy.ComputeUnitDescription</span></tt></a> or
+<a class="reference internal" href="data_unit_description.html#troy.DataUnitDescription" title="troy.DataUnitDescription"><tt class="xref py py-class docutils literal"><span class="pre">troy.DataUnitDescription</span></tt></a>) is provided, and passed to the registered
+schedulers.  Those can either add constraints to the description, or
+pass it on to one of the registered pilot frameworks, or to one of their
+pilots.</p>
+<p>If the scheduler cannot find suitable resources for the requested work
+unit, a BadParameter exception is raised.  Not raising this exception is
+not a guarantee that the work unit will in fact be (able to be) enacted
+&#8211; in that case, the returned work unit will later be moved to Failed
+state.</p>
+<p>On success, the returned work unit is in Pending state (or moved into
+any state downstream from Pending).</p>
+<p>schedule() will honor all attributes set on the description.  Attributes
+which are not explicitly set are interpreted as having default values
+(see documentation of unit descriptions), or, where default values are
+not specified, are ignored.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="__init__.html"
+                        title="previous chapter">The Troy Framework and Library</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scheduler.html"
+                        title="next chapter">Scheduler</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/troy/Troy.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="scheduler.html" title="Scheduler"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="__init__.html" title="The Troy Framework and Library"
+             >previous</a> |</li>
+        <li><a href="../index.html">Troy 0.1 documentation</a> &raquo;</li>
+          <li><a href="__init__.html" >The Troy Framework and Library</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Andre Merzky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2pre.
+    </div>
+  </body>
+</html>

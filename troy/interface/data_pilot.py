@@ -8,7 +8,7 @@ import troy.exception
 #
 #
 class iDataPilot (iBase) :
-    """ L{DataPilot} interface """
+    """ :class:`troy.DataPilot` interface """
 
 
     ############################################################################
@@ -56,7 +56,7 @@ class iDataPilot (iBase) :
     ############################################################################
     #
     def list_units (self) :
-        """ list managed L{DataUnit}s """
+        """ list managed :class:`troy.DataUnit` instances """
         raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
 
 

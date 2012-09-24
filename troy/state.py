@@ -14,7 +14,7 @@ class State ():
         troy.data_pilot
         troy.data_unit
 
-    For example, an L{ComputePilot} instance is created via a creation request::
+    For example, an :class:`troy.ComputePilot` instance is created via a creation request::
 
         cpd = troy.compute_pilot_description ()
         pf  = troy.pilot_framework ()
@@ -42,23 +42,37 @@ class State ():
 
     Available states::
 
+
+
         - Unknown
           The state of the backend instance is not known.  Duh! 
+
+
 
         - New         
           The creation request was accepted, but did not yet reach the backend. 
 
+
+
         - Pending     
           The backend accepted a creation request, but did not yet enact it. 
+
+
 
         - Running     
           The backend instance is created and active. 
 
+
+
         - Done        
           The backend instance finished successfully. 
 
+
+
         - Canceled    
           The backend instance finished due to a user request. 
+
+
 
         - Failed      
           The backend instance finished on an error condition. 

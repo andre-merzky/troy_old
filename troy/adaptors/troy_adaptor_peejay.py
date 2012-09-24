@@ -108,7 +108,7 @@ class adaptor (aBase) :
     # # one api class instance).
     # def register_adata (self, api) :
     #
-    #     api.idata_[self.get_name ()] = self.adata
+    #     api._idata[self.get_name ()] = self.adata
     #     return self.adata
 
 

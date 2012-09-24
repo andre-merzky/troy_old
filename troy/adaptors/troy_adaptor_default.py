@@ -1,6 +1,5 @@
 
 import troy
-import troy.exception
 from   troy.adaptors.base import aBase
 
 

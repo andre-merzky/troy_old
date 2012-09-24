@@ -1,20 +1,25 @@
+# Makefile for Sphinx documentation
+#
 
-all:
-	@make -C docs
+all: docs
+
+# You can set these variables from the command line.
+SPHINXBUILD   = sphinx-build -a -E -n -c docs/
+BUILDDIR      = docs/
+
+.PHONY: docs
+
+docs:
+	$(SPHINXBUILD) -b html . $(BUILDDIR)/html
+	@echo
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
 clean:
-	@find . -name \*.pyc      -exec rm {} \;
-	@find . -name .\*.sw[o-z] -exec rm {} \;
-	@rm -rf docs/troy/
-	@rm -rf /tmp/peejay/*
-	@rm -rf $(HOME)/.bigjob/
-	@ps -ef | grep basic_peejay.py | grep -v grep | cut -c 10-15 | xargs -r -t kill
-
+	@rm -rf $(BUILDDIR)/html
+	@find . -name \*.pyc -exec rm {} \;
 
 sync:
-	-@git co devel
-	-@git branch -D gh-pages
-	-@git branch gh-pages
-	-@git push
-
+	@git branch -D gh-pages
+	@git branch gh-pages
+	@git push --all
 

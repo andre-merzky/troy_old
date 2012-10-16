@@ -1,0 +1,182 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>troy.state &mdash; Troy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Troy 0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Troy 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for troy.state</h1><div class="highlight"><pre>
+<span class="c">########################################################################</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="k">class</span> <span class="nc">State</span> <span class="p">():</span>
+<div class="viewcode-block" id="State"><a class="viewcode-back" href="../../troy/state.html#troy.State">[docs]</a>    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The State class is really an enum, or what python uses as an enum.  That</span>
+<span class="sd">    enum describes the state model for various components of the Troy API, and</span>
+<span class="sd">    is exposed as property of the following classes::</span>
+
+<span class="sd">        troy.compute_pilot</span>
+<span class="sd">        troy.compute_unit</span>
+<span class="sd">        troy.data_pilot</span>
+<span class="sd">        troy.data_unit</span>
+
+<span class="sd">    For example, an :class:`troy.ComputePilot` instance is created via a creation request::</span>
+
+<span class="sd">        cpd = troy.compute_pilot_description ()</span>
+<span class="sd">        pf  = troy.pilot_framework ()</span>
+<span class="sd">        cp  = pf.create_compute_pilot (cpd)</span>
+
+<span class="sd">    That compute pilot has, at this point, the state &#39;New&#39;, so the Troy</span>
+<span class="sd">    implementation has accepted the creation request, but it was not necessarily</span>
+<span class="sd">    passed on to a backend which actually instantiates a compute pilot on some</span>
+<span class="sd">    resource.</span>
+
+<span class="sd">    Once the request is passed on to the backend, and was accepted by it, the cp</span>
+<span class="sd">    will have &#39;Pending&#39; state.  That state will eventually transition to</span>
+<span class="sd">    &#39;Running&#39;, when the backend instantiated the compute pilot process/agent/...</span>
+<span class="sd">    Resources are only consumed during the &#39;Running&#39; state,</span>
+
+<span class="sd">    There are three options to leave the &#39;Running&#39; state: &#39;Done&#39;, as successful</span>
+<span class="sd">    and planned end of operation of the instance; &#39;Failed&#39;, as premature or</span>
+<span class="sd">    unexpected end of operation (e.g. due to an error condition); and</span>
+<span class="sd">    &#39;Canceled&#39;, as premature and expected end of operation, due to user request.</span>
+
+<span class="sd">    Note that all stateful objects of the API will, additionally to the</span>
+<span class="sd">    state enum, expose a &#39;state_detail&#39; (string), which is, in general, the</span>
+<span class="sd">    native backend state -- Troy does not assume any semantic meaning on</span>
+<span class="sd">    state_detail values.</span>
+
+<span class="sd">    Available states::</span>
+
+
+
+<span class="sd">        - Unknown</span>
+<span class="sd">          The state of the backend instance is not known.  Duh! </span>
+
+
+
+<span class="sd">        - New         </span>
+<span class="sd">          The creation request was accepted, but did not yet reach the backend. </span>
+
+
+
+<span class="sd">        - Pending     </span>
+<span class="sd">          The backend accepted a creation request, but did not yet enact it. </span>
+
+
+
+<span class="sd">        - Running     </span>
+<span class="sd">          The backend instance is created and active. </span>
+
+
+
+<span class="sd">        - Done        </span>
+<span class="sd">          The backend instance finished successfully. </span>
+
+
+
+<span class="sd">        - Canceled    </span>
+<span class="sd">          The backend instance finished due to a user request. </span>
+
+
+
+<span class="sd">        - Failed      </span>
+<span class="sd">          The backend instance finished on an error condition. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Unknown</span>  <span class="o">=</span> <span class="s">&quot;Unknown&quot;</span>
+    <span class="n">New</span>      <span class="o">=</span> <span class="s">&quot;New&quot;</span>
+    <span class="n">Pending</span>  <span class="o">=</span> <span class="s">&quot;Pending&quot;</span>
+    <span class="n">Running</span>  <span class="o">=</span> <span class="s">&quot;Running&quot;</span>
+    <span class="n">Done</span>     <span class="o">=</span> <span class="s">&quot;Done&quot;</span>
+    <span class="n">Canceled</span> <span class="o">=</span> <span class="s">&quot;Canceled&quot;</span>
+    <span class="n">Failed</span>   <span class="o">=</span> <span class="s">&quot;Failed&quot;</span>
+
+<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Troy 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Andre Merzky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2pre.
+    </div>
+  </body>
+</html>

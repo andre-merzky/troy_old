@@ -75,16 +75,6 @@ class adaptor (aBase) :
         self.watcher.start ()
 
 
-
-    def get_name (self) :
-        return self.name
-
-    def get_registry (self) :
-        return self.registry
-
-    def get_order (self) :
-        return 2
-
     def sanity_check (self) :
         # raise troy.Exception (Error.NoSuccess, "adaptor disabled")
         

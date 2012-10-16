@@ -18,22 +18,31 @@ class aBase:
     ############################################################################
     #
     def get_name (self) :
-        raise troy.Exception (Error.NoSuccess, "adaptor disabled as it does not" \
-                                               "implement get_name!")
+
+        if not self.name :
+            raise troy.Exception (Error.NoSuccess, "adaptor disabled as it does not" \
+                                                   "define a name!")
+        return self.name
 
 
     ############################################################################
     #
     def get_registry (self) :
-        raise troy.Exception (Error.NoSuccess, "adaptor disabled as it does not" \
-                                               "implement get_registry!")
+
+        if not self.registry :
+            raise troy.Exception (Error.NoSuccess, "adaptor disabled as it does not" \
+                                                   "expose a registry!")
         return self.registry
 
 
     ############################################################################
     #
-    def get_order (self) :
-        return 1000  # low adaptor priority by default
+    def get_priority (self) :
+
+        if not self.priority :
+            self.priority = 0  # low adaptor priority by default
+
+        return 0  
 
 
     ############################################################################
@@ -41,8 +50,6 @@ class aBase:
     def sanity_check (self) :
         raise troy.Exception (Error.NoSuccess, "adaptor disabled as it does not" \
                                                "implement sanity check!")
-        pass
-
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

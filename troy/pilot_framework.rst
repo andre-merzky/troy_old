@@ -2,6 +2,6 @@
 PilotFramework
 ==============
 
-.. autoclass::  troy.PilotFramework
+.. autoclass::      troy.PilotFramework
    :members:
 

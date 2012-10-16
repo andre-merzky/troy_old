@@ -34,8 +34,6 @@ class Callback () :
 
     The cb instance receives three parameters upon invocation:
 
-
-
       - obj: the watched object instance
       - key: the watched attribute (e.g. 'state' or 'state_detail')
       - val: the new value of the watched attribute
@@ -52,7 +50,7 @@ class Callback () :
           self.msg_ = msg
 
         def cb (self, obj, key, val) :
-          print " %s\\n %s (%s) : %s"  %  self.msg_, obj, member, value
+          print " %s\\n %s (%s) : %s"  %  self._msg, obj, member, value
 
         def main () :
 
@@ -143,19 +141,19 @@ class Attributes (_AttributesBase) :
             def __init__ (self, *args, **kwargs) :
               # setting attribs to non-extensible will cause the cal to init below to
               # complain if attributes are specified.  Default is extensible.
-              # self.attributes_extensible_ (False)
+              # self._attributes_extensible (False)
         
                 # pass args to base class init (requires 'extensible')
                 super (Transliterator, self).__init__ (*args, **kwargs)
         
                 # setup class attribs
-                self.attributes_register_   ('apple', 'Appel', self.Url,    self.Scalar, self.Writable)
-                self.attributes_register_   ('plum',  'Pruim', self.String, self.Scalar, self.ReadOnly)
+                self._attributes_register   ('apple', 'Appel', self.Url,    self.Scalar, self.Writable)
+                self._attributes_register   ('plum',  'Pruim', self.String, self.Scalar, self.ReadOnly)
         
               # setting attribs to non-extensible at *this* point will have allowed
               # custom user attribs on __init__ time (via args), but will then forbid
                 # any additional custom attributes.
-              # self.attributes_extensible_ (False)
+              # self._attributes_extensible (False)
         
         
         ###########################################
@@ -198,8 +196,8 @@ class Attributes (_AttributesBase) :
             # Setting an attribute final is actually an internal method, used by
             # the implementation to signal that no further changes on that
             # attribute are expected.  We use that here for demonstrating the
-            # concept though.  Callback is invoked on set_final_.
-            trans.attributes_set_final_ ('apple')
+            # concept though.  Callback is invoked on set_final().
+            trans._attributes_set_final ('apple')
             trans.apple = 'Abbel'
             print trans.apple 
 
@@ -290,11 +288,12 @@ class Attributes (_AttributesBase) :
     # flavor enums
     Scalar      = 'scalar'     # the attribute value is a single data element
     Vector      = 'vector'     # the attribute value is a list of data elements
+    Dict        = 'dict'       # the attribute value is a dict of data elements
 
     # two regexes for converting CamelCase into under_score_casing, as static
     # class vars to avoid frequent recompilation
-    camel_case_regex_1_ = re.compile('(.)([A-Z][a-z]+)')
-    camel_case_regex_2_ = re.compile('([a-z0-9])([A-Z])')
+    _camel_case_regex_1 = re.compile('(.)([A-Z][a-z]+)')
+    _camel_case_regex_2 = re.compile('([a-z0-9])([A-Z])')
 
 
     ############################################################################
@@ -306,13 +305,13 @@ class Attributes (_AttributesBase) :
         This method is not supposed to be directly called by the consumer of
         this API -- it should be called via derived object construction.
 
-        :func:`troy.Attributes.attributes_t_init_` makes sure that the basic structures are in
+        :func:`troy.Attributes._attributes_t_init` makes sure that the basic structures are in
         place on the attribute dictionary - this saves us ton of safety checks
         later on.
         """
 
         # initialize state
-        d = self.attributes_t_init_ ()
+        d = self._attributes_t_init ()
 
         # call to update and the args/kwargs handling seems to be part of the
         # dict interface conventions *shrug*
@@ -326,14 +325,14 @@ class Attributes (_AttributesBase) :
     # These tools are only for internal use, and should never be called from 
     # outside of this module.
     #
-    # Naming: attributes_t_*_
+    # Naming: _attributes_t_*
     #
     ####################################
-    def attributes_t_init_ (self, key=None) :
+    def _attributes_t_init (self, key=None) :
         """
         This internal function is not to be used by the consumer of this API.
 
-        The :func:`troy.Attributes.attributes_t_init_` method initializes the interface's
+        The :func:`troy.Attributes._attributes_t_init` method initializes the interface's
         internal data structures.  We always need the attribute dict, and the
         extensible flag.  Everything else can be added on the fly.  The method
         will not overwrite any settings -- initialization occurs only once!
@@ -349,7 +348,7 @@ class Attributes (_AttributesBase) :
         d = {}
 
         try :
-            d = _AttributesBase.__getattribute__ (self, 'd_')
+            d = _AttributesBase.__getattribute__ (self, '_d')
         except :
             # need to initialize -- any exceptions in the code below should fall through
             d['attributes']  = {}
@@ -360,13 +359,13 @@ class Attributes (_AttributesBase) :
             d['lister']      = None
             d['recursion']   = False
 
-            _AttributesBase.__setattr__ (self, 'd_', d)
+            _AttributesBase.__setattr__ (self, '_d', d)
 
 
         # check if we know about the given attribute
         if key :
             if not key in d['attributes'] :
-                raise Exception ("attribute key is invalid (%s)"  %  (key),
+                raise Exception ("attribute key is invalid: %s"  %  (key),
                                  Error.DoesNotExist)
 
         # all is well
@@ -374,7 +373,7 @@ class Attributes (_AttributesBase) :
 
 
     ####################################
-    def attributes_t_keycheck_ (self, key) :
+    def _attributes_t_keycheck (self, key) :
         """
         This internal function is not to be used by the consumer of this API.
 
@@ -389,12 +388,12 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ ()
+        d = self._attributes_t_init ()
 
         # perform name validity checks if key is new
         if not key in d['attributes'] :
             # FIXME: we actually don't have any tests, yet.  We should allow to
-            # configure such via, say, attributes_add_check_ (callable (key))
+            # configure such via, say, _attributes_add_check (callable (key))
             pass
 
 
@@ -410,7 +409,7 @@ class Attributes (_AttributesBase) :
 
 
     ####################################
-    def attributes_t_call_cb_ (self, key, val) :
+    def _attributes_t_call_cb (self, key, val) :
         """
         This internal function is not to be used by the consumer of this API.
 
@@ -420,7 +419,7 @@ class Attributes (_AttributesBase) :
         """
         
         # make sure interface is ready to use
-        d = self.attributes_t_init_ (key)
+        d = self._attributes_t_init (key)
 
         # avoid recursion
         if d['attributes'][key]['recursion'] :
@@ -458,7 +457,7 @@ class Attributes (_AttributesBase) :
 
 
     ####################################
-    def attributes_t_call_setter_ (self, key) :
+    def _attributes_t_call_setter (self, key) :
         """
         This internal function is not to be used by the consumer of this API.
 
@@ -467,7 +466,7 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use.
-        d = self.attributes_t_init_ (key)
+        d = self._attributes_t_init (key)
 
         # avoid recursion
         if d['attributes'][key]['recursion'] :
@@ -480,15 +479,17 @@ class Attributes (_AttributesBase) :
             setter_all = d['setter']
             setter_key = d['attributes'][key]['setter']
 
-            if setter_all : setter_all (self, key)
-            if setter_key : setter_key (self, key)
+            val = d['attributes'][key]['value']
+
+            if setter_all : setter_all (self, key, val)
+            if setter_key : setter_key (self, key, val)
 
         finally :
             d['attributes'][key]['recursion'] = False
                        
 
     ####################################
-    def attributes_t_call_getter_ (self, key) :
+    def _attributes_t_call_getter (self, key) :
         """
         This internal function is not to be used by the consumer of this API.
 
@@ -497,7 +498,7 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use.
-        d = self.attributes_t_init_ (key)
+        d = self._attributes_t_init (key)
 
         # avoid recursion
         if d['attributes'][key]['recursion'] :
@@ -510,15 +511,25 @@ class Attributes (_AttributesBase) :
             getter_all = d['getter']
             getter_key = d['attributes'][key]['getter']
 
-            if getter_all : getter_all (self, key)
-            if getter_key : getter_key (self, key)
+            val = None
+            ok  = False
+
+            if getter_all : 
+                val = getter_all (self, key)
+                ok  = True
+            if getter_key : 
+                val = getter_key (self, key)
+                ok  = True 
+
+            if ok :
+                d['attributes'][key]['value'] = val
 
         finally :
             d['attributes'][key]['recursion'] = False
                        
 
     ####################################
-    def attributes_t_call_lister_ (self) :
+    def _attributes_t_call_lister (self) :
         """
         This internal function is not to be used by the consumer of this API.
 
@@ -527,7 +538,7 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use.
-        d = self.attributes_t_init_ ()
+        d = self._attributes_t_init ()
 
         # avoid recursion
         if d['recursion'] :
@@ -545,7 +556,7 @@ class Attributes (_AttributesBase) :
 
 
     ####################################
-    def attributes_t_underscore_ (self, key) :
+    def _attributes_t_underscore (self, key) :
         """ 
         This internal function is not to be used by the consumer of this API.
 
@@ -556,21 +567,21 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ ()
+        d = self._attributes_t_init ()
 
-        # camel_case_regex_1_ = re.compile('(.)([A-Z][a-z]+)')
-        # camel_case_regex_2_ = re.compile('([a-z0-9])([A-Z])')
+        # _camel_case_regex_1 = re.compile('(.)([A-Z][a-z]+)')
+        # _camel_case_regex_2 = re.compile('([a-z0-9])([A-Z])')
 
         if d['camelcasing'] :
-            temp = AttributeInterface.camel_case_regex_1_.sub(r'\1_\2', key)
-            return AttributeInterface.camel_case_regex_2_.sub(r'\1_\2', temp).lower()
+            temp = AttributeInterface._camel_case_regex_1.sub(r'\1_\2', key)
+            return AttributeInterface._camel_case_regex_2.sub(r'\1_\2', temp).lower()
         else :
             return key
 
 
 
     ####################################
-    def attributes_t_conversion_ (self, key, val) :
+    def _attributes_t_conversion (self, key, val) :
         """
         This internal function is not to be used by the consumer of this API.
 
@@ -579,13 +590,13 @@ class Attributes (_AttributesBase) :
         method will restore a 'None' value to the attribute's default value.
 
         A deriving class can add additional value checks for attributes by
-        calling :func:`troy.Attributes.attributes_add_check_` (key, check).
+        calling :func:`troy.Attributes._attributes_add_check` (key, check).
         """
 
         # make sure interface is ready to use.  We do not check for keys, that
         # needs to be done in the calling method.  For example, on 'set', type
         # conversions will be performed, but the key will not exist previously.
-        d = self.attributes_t_init_ ()
+        d = self._attributes_t_init ()
 
         # if the key is not known
         if not key in d['attributes'] :
@@ -601,7 +612,7 @@ class Attributes (_AttributesBase) :
 
 
         # perform flavor and type conversion
-        val = self.attributes_t_conversion_flavor_ (key, val)
+        val = self._attributes_t_conversion_flavor (key, val)
 
         # apply all value checks on the conversion result
         for check in d['attributes'][key]['checks'] :
@@ -615,10 +626,10 @@ class Attributes (_AttributesBase) :
 
 
     ####################################
-    def attributes_t_conversion_flavor_ (self, key, val) :
+    def _attributes_t_conversion_flavor (self, key, val) :
         """ 
         This internal function is not to be used by the consumer of this API.
-        This method should ONLY be called by :func:`troy.Attributes.attributes_t_conversion_`! 
+        This method should ONLY be called by :func:`troy.Attributes._attributes_t_conversion`! 
         """
         # FIXME: there are possibly nicer and more reversible ways to
         #        convert the flavors...
@@ -628,7 +639,7 @@ class Attributes (_AttributesBase) :
             return None
 
         # make sure interface is ready to use.
-        d = self.attributes_t_init_ (key)
+        d = self._attributes_t_init (key)
 
         # check if we need to serialize a list into a scalar
         f = d['attributes'][key]['flavor']
@@ -638,7 +649,7 @@ class Attributes (_AttributesBase) :
                 # val is already vec - apply type conversion on all elems
                 ret = []
                 for elem in val :
-                    ret.append (self.attributes_t_conversion_type_ (key, elem))
+                    ret.append (self._attributes_t_conversion_type (key, elem))
                 return ret
             else :
                 # need to create vec from scalar
@@ -648,12 +659,39 @@ class Attributes (_AttributesBase) :
                     vec = val.split ()
                     ret = []
                     for element in vec :
-                        ret.append (self.attributes_t_conversion_type_ (key, element))
+                        ret.append (self._attributes_t_conversion_type (key, element))
                     return ret
                 else :   
                     # all non-string types are interpreted as only element of
                     # a single-member list
-                    return [self.attributes_t_conversion_type_ (key, val)]
+                    return [self._attributes_t_conversion_type (key, val)]
+
+
+        elif f == self.Dict :
+            # we want a dictionary
+            if isinstance (val, dict) :
+                # match!
+                return val
+
+            elif isinstance (val, list) :
+                # val is already list - serialize entries to strings, split on
+                # '=' or ':', remove brackets
+                ret = {}
+                for elem in val :
+                    tmp = self._attributes_t_conversion_type (key, elem)
+                    vec = tmp.split ('=', 2)
+                    ret[vec[0]] = vec[1]
+
+                return ret
+            else :
+                # need to create dict from scalar val - serialize, split,
+                # convert to one dict enty
+                ret = {}
+                tmp = self._attributes_t_conversion_type (key, val)
+                vec = tmp.split ('=', 2)
+                ret[vec[0]] = vec[1]
+
+                return ret
 
 
         elif f == self.Scalar :
@@ -668,17 +706,17 @@ class Attributes (_AttributesBase) :
                     tmp = ""
                     for i in val :
                         tmp += str(i) + " "
-                    return self.attributes_t_conversion_type_ (key, tmp)
+                    return self._attributes_t_conversion_type (key, tmp)
                 elif len (val) == 1 :
                     # for single element lists, we simply use the one element as
                     # scalar value 
-                    return self.attributes_t_conversion_type_ (key, val[0])
+                    return self._attributes_t_conversion_type (key, val[0])
                 else :
                     # no value in list
                     return None
             else :
                 # scalar is already scalar, just do type conversion
-                return self.attributes_t_conversion_type_ (key, val)
+                return self._attributes_t_conversion_type (key, val)
 
 
         # we should never get here...
@@ -687,14 +725,14 @@ class Attributes (_AttributesBase) :
 
 
     ####################################
-    def attributes_t_conversion_type_ (self, key, val) :
+    def _attributes_t_conversion_type (self, key, val) :
         """ 
         This internal function is not to be used by the consumer of this API.
-        This method should ONLY be called by :func:`troy.Attributes.attributes_t_conversion_`!
+        This method should ONLY be called by :func:`troy.Attributes._attributes_t_conversion`!
         """
 
         # make sure interface is ready to use.
-        d = self.attributes_t_init_ (key)
+        d = self._attributes_t_init (key)
 
         # oh python, how about a decent switch statement???
         t   = d['attributes'][key]['type']
@@ -716,14 +754,12 @@ class Attributes (_AttributesBase) :
                           Error.NoSuccess)
 
     ####################################
-    def attributes_t_wildcard2regex_ (self, pattern) :
+    def _attributes_t_wildcard2regex (self, pattern) :
         """ 
         This internal function is not to be used by the consumer of this API.
 
         This method converts a string containing POSIX shell wildcards into
         a regular expression with the same matching properties::
-
-
 
             *       -> .*
             ?       -> .
@@ -774,10 +810,10 @@ class Attributes (_AttributesBase) :
     # sorted out before this internal interface is called.  All other tests,
     # verifications, and conversion are done here though.
     #
-    # Naming: attributes_i_*_
+    # Naming: _attributes_i_*
     #
     ####################################
-    def attributes_i_set_ (self, key, val=None, force=False) :
+    def _attributes_i_set (self, key, val=None, force=False) :
         """
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
@@ -785,7 +821,7 @@ class Attributes (_AttributesBase) :
         See :func:`troy.Attributes.set_attribute` (key, val) for details.
 
         New value checks can be added dynamically, and per attribute, by calling
-        :func:`troy.Attributes.attributes_add_check_` (key, callable).
+        :func:`troy.Attributes._attributes_add_check` (key, callable).
 
         Some internal methods can set the 'force' flag, and will be able to set
         attributes even in ReadOnly mode.  That is, for example, used for getter
@@ -794,7 +830,7 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ ()
+        d = self._attributes_t_init ()
 
         # if the key is not known
         if not key in d['attributes'] :
@@ -805,7 +841,7 @@ class Attributes (_AttributesBase) :
             else :
                 # if the set is extensible, we can register the new key.  It
                 # won't have any callbacks at this point.
-                self.attributes_register_ (key, None, self.Any, self.Scalar, self.Writable, self.Extended)
+                self._attributes_register (key, None, self.Any, self.Scalar, self.Writable, self.Extended)
 
         # known attribute - attempt to set its value
         else:
@@ -826,7 +862,7 @@ class Attributes (_AttributesBase) :
         # permissions are confirmed, set the attribute with conversion etc.
 
         # apply any attribute conversion
-        val = self.attributes_t_conversion_ (key, val)
+        val = self._attributes_t_conversion (key, val)
 
         # make sure the key's value entry exists
         if not 'value' in d['attributes'][key] :
@@ -840,12 +876,12 @@ class Attributes (_AttributesBase) :
         # and only then invoke any callbacks and hooked setters
         if val != d['attributes'][key]['value'] :
             d['attributes'][key]['value'] = val
-            self.attributes_t_call_setter_ (key)
-            self.attributes_t_call_cb_ (key, val)
+            self._attributes_t_call_setter (key)
+            self._attributes_t_call_cb (key, val)
 
 
     ####################################
-    def attributes_i_get_ (self, key) :
+    def _attributes_i_get (self, key) :
         """
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
@@ -861,9 +897,10 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ (key)
+        d = self._attributes_t_init (key)
 
-        self.attributes_t_call_getter_ (key)
+        # call any registered callbacks which could update the value
+        self._attributes_t_call_getter (key)
 
         if 'value' in d['attributes'][key] :
             return d['attributes'][key]['value']
@@ -876,7 +913,7 @@ class Attributes (_AttributesBase) :
 
 
     ####################################
-    def attributes_i_list_ (self, ext=True) :
+    def _attributes_i_list (self, ext=True) :
         """
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
@@ -888,10 +925,10 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ ()
+        d = self._attributes_t_init ()
 
         # call list hooks
-        self.attributes_t_call_lister_ ()
+        self._attributes_t_call_lister ()
 
         ret = []
 
@@ -899,13 +936,20 @@ class Attributes (_AttributesBase) :
             if d['attributes'][key]['mode'] != self.Alias :
                 if d['attributes'][key]['exists'] :
                     if ext or not d['attributes'][key]['extended'] :
-                        ret.append (key)
+                        # hide 'private' attributes
+                        # FIXME: make this configurable
+                        if not key.startswith ('_') :
+                            # return CamelCase'd keys, as those are used in the
+                            # attribute interface
+                            # FIXME: make this configurable, possibly only for
+                            # list_attributes()
+                            ret.append (d['attributes'][key]['camelcase'])
 
         return ret
 
 
     ####################################
-    def attributes_i_find_ (self, pattern) :
+    def _attributes_i_find (self, pattern) :
         """
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
@@ -916,7 +960,7 @@ class Attributes (_AttributesBase) :
         # FIXME: wildcard-to-regex
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ ()
+        d = self._attributes_t_init ()
 
 
         # separate key and value pattern
@@ -928,28 +972,28 @@ class Attributes (_AttributesBase) :
 
         if pattern[0] == '=' :
             # no key pattern present, only grep on values
-              p_val = self.attributes_t_wildcard2regex_ (pattern[1:])
+              p_val = self._attributes_t_wildcard2regex (pattern[1:])
         else :
           p = re.compile (r'[^\]=')
           tmp = p.split (pattern, 2)  # only split on first '='
           
           if len (tmp) >  0 : 
               # at least one elem: only key pattern present
-              p_key = self.attributes_t_wildcard2regex_ (tmp[0])  
+              p_key = self._attributes_t_wildcard2regex (tmp[0])  
           
           if len (tmp) == 2 :
               # two elems: val pattern is also present
-              p_val = self.attributes_t_wildcard2regex_ (tmp[1])
+              p_val = self._attributes_t_wildcard2regex (tmp[1])
 
         # compile the found pattern
         if len (p_key) : pc_key = re.compile (p_key)
         if len (p_val) : pc_val = re.compile (p_val)
 
         # now dig out matching keys. List hooks are triggered in
-        # attributes_i_list_().
+        # _attributes_i_list().
         matches = []
-        for key in self.attributes_i_list_ () :
-            val = str(self.attributes_i_get_ (key))
+        for key in self._attributes_i_list () :
+            val = str(self._attributes_i_get (key))
 
             if ( (pc_key == None) or pc_key.search (key) ) and \
                ( (pc_val == None) or pc_val.search (val) )     :
@@ -959,7 +1003,7 @@ class Attributes (_AttributesBase) :
 
 
     ####################################
-    def attributes_i_exists_ (self, key) :
+    def _attributes_i_exists (self, key) :
         """
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
@@ -971,18 +1015,19 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ ()
+        d = self._attributes_t_init ()
 
         # check if we know about that attribute
-        if 'exists' in d['attributes'][key] :
-            if  d['attributes'][key]['exists'] :
-                return True
+        if key in d['attributes'] :
+            if 'exists' in d['attributes'][key] :
+                if  d['attributes'][key]['exists'] :
+                    return True
 
         return False
 
 
     ####################################
-    def attributes_i_is_extended_ (self, key) :
+    def _attributes_i_is_extended (self, key) :
         """
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
@@ -994,13 +1039,13 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ (key)
+        d = self._attributes_t_init (key)
 
         return d['attributes'][key]['extended']
 
 
     ####################################
-    def attributes_i_is_readonly_ (self, key) :
+    def _attributes_i_is_readonly (self, key) :
         """
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
@@ -1012,7 +1057,7 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ (key)
+        d = self._attributes_t_init (key)
 
         # check if we know about that attribute
         if  d['attributes'][key]['mode'] == self.Final or \
@@ -1023,7 +1068,7 @@ class Attributes (_AttributesBase) :
 
 
     ####################################
-    def attributes_i_is_writable_ (self, key) :
+    def _attributes_i_is_writable (self, key) :
         """
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
@@ -1033,11 +1078,11 @@ class Attributes (_AttributesBase) :
         This method will check if the given key is writable - i.e. not readonly.
         """
 
-        return not self.attributes_i_is_readonly_ (key)
+        return not self._attributes_i_is_readonly (key)
 
 
     ####################################
-    def attributes_i_is_removable_ (self, key) :
+    def _attributes_i_is_removable (self, key) :
         """
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
@@ -1047,14 +1092,14 @@ class Attributes (_AttributesBase) :
         'True' if the attrib is Writable and Extended.
         """
 
-        if self.attributes_i_is_writable_ (key) and \
-           self.attributes_i_is_extended_ (key)     :
+        if self._attributes_i_is_writable (key) and \
+           self._attributes_i_is_extended (key)     :
             return True
 
         return False
 
     ####################################
-    def attributes_i_is_vector_ (self, key) :
+    def _attributes_i_is_vector (self, key) :
         """
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
@@ -1063,7 +1108,7 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ (key)
+        d = self._attributes_t_init (key)
 
         # check if we know about that attribute
         if  d['attributes'][key]['flavor'] == self.Vector :
@@ -1073,7 +1118,7 @@ class Attributes (_AttributesBase) :
 
 
     ####################################
-    def attributes_i_is_final_ (self, key) :
+    def _attributes_i_is_final (self, key) :
         """
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
@@ -1085,7 +1130,7 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ (key)
+        d = self._attributes_t_init (key)
 
         if self.Final == d['attributes'][key]['mode'] :
              return True
@@ -1095,7 +1140,7 @@ class Attributes (_AttributesBase) :
 
 
     ####################################
-    def attributes_i_add_cb_ (self, key, cb) :
+    def _attributes_i_add_cb (self, key, cb) :
         """
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
@@ -1104,14 +1149,14 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ (key)
+        d = self._attributes_t_init (key)
 
         d['attributes'][key]['callbacks'].append (cb)
         return len (d['attributes'][key]['callbacks']) - 1
 
 
     ####################################
-    def attributes_i_del_cb_ (self, key, id=None) :
+    def _attributes_i_del_cb (self, key, id=None) :
         """
         This internal method should not be explicitly called by consumers of
         this API, but is indirectly used via the different public interfaces.
@@ -1120,7 +1165,7 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ (key)
+        d = self._attributes_t_init (key)
 
         # id == None: remove all callbacks
         if not id :
@@ -1142,10 +1187,10 @@ class Attributes (_AttributesBase) :
     # Keys should be provided as CamelCase (only relevant if camelcasing is
     # set).
     #
-    # Naming: attributes_*_
+    # Naming: _attributes_*
     #
     ####################################
-    def attributes_register_ (self, key, default=None, typ=Any, flavor=Scalar, mode=Writable, ext=False) :
+    def _attributes_register (self, key, default=None, typ=Any, flavor=Scalar, mode=Writable, ext=False) :
         """
         This interface method is not part of the public consumer API, but can
         safely be called from within derived classes.
@@ -1160,15 +1205,15 @@ class Attributes (_AttributesBase) :
         # FIXME: check for valid mode and flavor settings
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ ()
+        d = self._attributes_t_init ()
 
         # we expect keys to be registered as CamelCase (in those cases where
         # that matters).  But we store attributes in 'under_score' version.
-        us_key = self.attributes_t_underscore_ (key)
+        us_key = self._attributes_t_underscore (key)
 
         # remove any old instance of this attribute
         if us_key in  d['attributes'] :
-            self.attributes_unregister_ (us_key)
+            self._attributes_unregister (us_key)
 
         # register the attribute and properties
         d['attributes'][us_key]               = {}
@@ -1191,13 +1236,13 @@ class Attributes (_AttributesBase) :
         # for enum types, we add a value checker
         if typ == self.Enum :
             ######################################
-            def enum_check_ (key, val) :
+            def _enum_check (key, val) :
                 if None == val  :
                     # None is always allowed
                     return True
 
-                us_key = self.attributes_t_underscore_ (key)
-                d      = self.attributes_t_init_       (us_key)
+                us_key = self._attributes_t_underscore (key)
+                d      = self._attributes_t_init       (us_key)
                 vals   = d['attributes'][us_key]['enums']
 
                 # check if there is anything to check
@@ -1215,12 +1260,12 @@ class Attributes (_AttributesBase) :
                 """  %  (str(val), key, str(vals))
             ######################################
 
-            self.attributes_add_check_ (key, enum_check_)
+            self._attributes_add_check (key, _enum_check)
 
 
 
     ####################################
-    def attributes_register_deprecated_ (self, key, alias) :
+    def _attributes_register_deprecated (self, key, alias) :
         """
         Often enough, there is the need to use change attribute names.  It is
         good practice to not simply rename attributes, and thus effectively
@@ -1237,22 +1282,22 @@ class Attributes (_AttributesBase) :
 
         The first parameter is the old name of the attribute, the second
         parameter is the aliased new name.  Note that the new name needs to be
-        registered before (via :func:`troy.Attributes.attributes_register_`)::
+        registered before (via :func:`troy.Attributes._attributes_register`)::
 
             # old code:
-            self.attributes_register_ ('apple', 'Appel', self.String, self.Scalar, self.Writable)
+            self._attributes_register ('apple', 'Appel', self.String, self.Scalar, self.Writable)
 
             # new code
-            self.attributes_register_ ('fruit', 'Appel', self.String, self.Scalar, self.Writable)
-            self.attributes_register_deprecated_ ('apple', 'fruit)
+            self._attributes_register ('fruit', 'Appel', self.String, self.Scalar, self.Writable)
+            self._attributes_register_deprecated ('apple', 'fruit)
 
         In some cases, you may want to deprecate a variable and not replace it
         with a new one.  In order to keep this interface simple, this can be
         achieved via::
 
             # new code
-            self.attributes_register_ ('deprecated_apple', 'Appel', self.String, self.Scalar, self.Writable)
-            self.attributes_register_deprecated_ ('apple', 'deprecated_apple)
+            self._attributes_register ('deprecated_apple', 'Appel', self.String, self.Scalar, self.Writable)
+            self._attributes_register_deprecated ('apple', 'deprecated_apple)
 
         This way, the user will either see a warning, or has to explicitly use
         'deprecated_apple' as attribute name -- which should be warning enough,
@@ -1261,16 +1306,16 @@ class Attributes (_AttributesBase) :
 
         # we expect keys to be registered as CamelCase (in those cases where
         # that matters).  But we store attributes in 'under_score' version.
-        us_alias = self.attributes_t_underscore_ (alias)
-        us_key   = self.attributes_t_underscore_ (key)
+        us_alias = self._attributes_t_underscore (alias)
+        us_key   = self._attributes_t_underscore (key)
 
         # make sure interface is ready to use
         # This check will throw if 'alias' was not registered before.
-        d = self.attributes_t_init_ (us_alias)
+        d = self._attributes_t_init (us_alias)
 
         # remove any old instance of this attribute
         if us_key in  d['attributes'] :
-            self.attributes_unregister_ (us_key)
+            self._attributes_unregister (us_key)
 
         # register the attribute and properties
         d['attributes'][us_key]               = {}
@@ -1282,7 +1327,7 @@ class Attributes (_AttributesBase) :
 
 
     ####################################
-    def attributes_unregister_ (self, key) :
+    def _attributes_unregister (self, key) :
         """ 
         This interface method is not part of the public consumer API, but can
         safely be called from within derived classes.
@@ -1300,8 +1345,8 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        us_key = self.attributes_t_underscore_ (key)
-        d = self.attributes_t_init_ (us_key)
+        us_key = self._attributes_t_underscore (key)
+        d = self._attributes_t_init (us_key)
 
         # if the attribute exists, purge it
         if us_key in d['attributes'] :
@@ -1309,7 +1354,7 @@ class Attributes (_AttributesBase) :
 
 
     ####################################
-    def attributes_remove_ (self, key) :
+    def _attributes_remove (self, key) :
         """
         This interface method is not part of the public consumer API, but can
         safely be called from within derived classes.
@@ -1321,15 +1366,15 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        us_key = self.attributes_t_underscore_ (key)
-        d = self.attributes_t_init_ (us_key)
+        us_key = self._attributes_t_underscore (key)
+        d = self._attributes_t_init (us_key)
 
-        if self.attributes_i_is_removable_ (key) :
+        if self._attributes_i_is_removable (key) :
             del (d['attributes'][us_key])
 
 
     ####################################
-    def attributes_set_enums_ (self, key, enums=None) :
+    def _attributes_set_enums (self, key, enums=None) :
         """
         This interface method is not part of the public consumer API, but can
         safely be called from within derived classes.
@@ -1338,14 +1383,14 @@ class Attributes (_AttributesBase) :
         set, or if list is None, any values are allowed.
         """
 
-        us_key = self.attributes_t_underscore_ (key)
-        d = self.attributes_t_init_ (us_key)
+        us_key = self._attributes_t_underscore (key)
+        d = self._attributes_t_init (us_key)
 
         d['attributes'][us_key]['enums'] = enums
 
 
     ####################################
-    def attributes_extensible_ (self, e=True) :
+    def _attributes_extensible (self, e=True) :
         """
         This interface method is not part of the public consumer API, but can
         safely be called from within derived classes.
@@ -1356,12 +1401,12 @@ class Attributes (_AttributesBase) :
         the creation of new extended attributes.
         """
 
-        d = self.attributes_t_init_ ()
+        d = self._attributes_t_init ()
         d['extensible'] = e
 
 
     ####################################
-    def attributes_camelcasing_ (self, c=True) :
+    def _attributes_camelcasing (self, c=True) :
         """
         This interface method is not part of the public consumer API, but can
         safely be called from within derived classes.
@@ -1373,12 +1418,12 @@ class Attributes (_AttributesBase) :
         is turned on, it stays on -- otherwise we would loose attributes...
         """
 
-        d = self.attributes_t_init_ ()
+        d = self._attributes_t_init ()
         d['camelcasing'] = c
 
 
     ####################################
-    def attributes_deep_copy_ (self, other) :
+    def _attributes_deep_copy (self, other) :
         """
         This interface method is not part of the public consumer API, but can
         safely be called from within derived classes.
@@ -1391,7 +1436,7 @@ class Attributes (_AttributesBase) :
 
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ ()
+        d = self._attributes_t_init ()
 
         other_d = {}
 
@@ -1433,11 +1478,11 @@ class Attributes (_AttributesBase) :
                 other_d['attributes'][key]['value']  =       d['attributes'][key]['value']
 
         # set the new dictionary as state for copied class
-        _AttributesBase.__setattr__ (other, 'd_', other_d)
+        _AttributesBase.__setattr__ (other, '_d', other_d)
 
 
     ####################################
-    def attributes_dump_ (self, msg=None) :
+    def _attributes_dump (self, msg=None) :
         """ 
         This interface method is not part of the public consumer API, but can
         safely be called from within derived classes.
@@ -1446,10 +1491,15 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ ()
+        d = self._attributes_t_init ()
 
         keys_all   = sorted (d['attributes'].iterkeys ())
-        keys_exist = sorted (self.attributes_i_list_   ())
+        keys_tmp   = sorted (self._attributes_i_list   ())
+        keys_exist = []
+
+        for key in keys_tmp :
+            keys_exist.append (self._attributes_t_underscore (key))
+
 
         print "---------------------------------------"
         print str (type (self))
@@ -1463,11 +1513,9 @@ class Attributes (_AttributesBase) :
         print " %-30s : %s"  %  ("CamelCasing" , d['camelcasing'])
         print "---------------------------------------"
 
-        print "'Registered' attributes"
-        for key in keys_all :
-            if key not in keys_exist :
-                if not  d['attributes'][key]['mode'] == self.Alias and \
-                   not  d['attributes'][key]['extended'] :
+        print "'Existing' attributes"
+        for key in keys_exist :
+            if not  d['attributes'][key]['mode'] == self.Alias :
                     print " %-30s [%-6s, %-6s, %-8s]: %s"  % \
                              (d['attributes'][key]['camelcase'],
                               d['attributes'][key]['type'],
@@ -1478,16 +1526,18 @@ class Attributes (_AttributesBase) :
 
         print "---------------------------------------"
 
-        print "'Existing' attributes"
-        for key in keys_exist :
-            if not  d['attributes'][key]['mode'] == self.Alias :
-                print " %-30s [%-6s, %-6s, %-8s]: %s"  % \
-                         (d['attributes'][key]['camelcase'],
-                          d['attributes'][key]['type'],
-                          d['attributes'][key]['flavor'],
-                          d['attributes'][key]['mode'],
-                          d['attributes'][key]['value']
-                          )
+        print "'Registered' attributes"
+        for key in keys_all :
+            if key  not in keys_exist :
+                if  not d['attributes'][key]['mode'] == self.Alias and \
+                    not d['attributes'][key]['extended'] :
+                    print " %-30s [%-6s, %-6s, %-8s]: %s"  % \
+                             (d['attributes'][key]['camelcase'],
+                              d['attributes'][key]['type'],
+                              d['attributes'][key]['flavor'],
+                              d['attributes'][key]['mode'],
+                              d['attributes'][key]['value']
+                              )
 
         print "---------------------------------------"
 
@@ -1520,7 +1570,7 @@ class Attributes (_AttributesBase) :
 
 
     ####################################
-    def attributes_set_final_ (self, key, val=None) :
+    def _attributes_set_final (self, key, val=None) :
         """
         This interface method is not part of the public consumer API, but can
         safely be called from within derived classes.
@@ -1535,8 +1585,8 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        us_key = self.attributes_t_underscore_ (key)
-        d = self.attributes_t_init_ (us_key)
+        us_key = self._attributes_t_underscore (key)
+        d = self._attributes_t_init (us_key)
 
         newval = val
         oldval = d['attributes'][us_key]['value']
@@ -1547,16 +1597,16 @@ class Attributes (_AttributesBase) :
         # flag as final, and set the final value (this order to avoid races in
         # callbacks)
         d['attributes'][us_key]['mode'] = self.Final
-        self.attributes_i_set_ (us_key, val)
+        self._attributes_i_set (us_key, val)
 
         # callbacks are not invoked if the value did not change -- we take care
         # of that here.
         if  None == newval or oldval == newval :
-            self.attributes_t_call_cb_ (key, val)
+            self._attributes_t_call_cb (key, val)
 
 
     ####################################
-    def attributes_add_check_ (self, key, check) :
+    def _attributes_add_check (self, key, check) :
         """
         This interface method is not part of the public consumer API, but can
         safely be called from within derived classes.
@@ -1573,15 +1623,15 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        us_key = self.attributes_t_underscore_ (key)
-        d = self.attributes_t_init_ (us_key)
+        us_key = self._attributes_t_underscore (key)
+        d = self._attributes_t_init (us_key)
 
         # register the attribute and properties
         d['attributes'][us_key]['checks'].append (check)
 
 
     ####################################
-    def attributes_set_getter_ (self, key, getter) :
+    def _attributes_set_getter (self, key, getter) :
         """
         This interface method is not part of the public consumer API, but can
         safely be called from within derived classes.
@@ -1632,57 +1682,57 @@ class Attributes (_AttributesBase) :
 
         if key != None :
             # make sure interface is ready to use
-            us_key = self.attributes_t_underscore_ (key)
-            d      = self.attributes_t_init_       (us_key)
+            us_key = self._attributes_t_underscore (key)
+            d      = self._attributes_t_init       (us_key)
 
             # register the attribute and properties
             d['attributes'][us_key]['getter'] = getter
 
         else :
             # make sure interface is ready to use
-            d = self.attributes_t_init_ ()
+            d = self._attributes_t_init ()
 
             # register the attribute and properties
             d['getter'] = getter
 
 
     ####################################
-    def attributes_set_setter_ (self, key, setter) :
+    def _attributes_set_setter (self, key, setter) :
         """
         This interface method is not part of the public consumer API, but can
         safely be called from within derived classes.
 
-        See documentation of :func:`troy.Attributes.attributes_set_setter_` for details.
+        See documentation of :func:`troy.Attributes._attributes_set_setter` for details.
         """
 
         if key != None :
             # make sure interface is ready to use
-            us_key = self.attributes_t_underscore_ (key)
-            d      = self.attributes_t_init_       (us_key)
+            us_key = self._attributes_t_underscore (key)
+            d      = self._attributes_t_init       (us_key)
 
             # register the attribute and properties
             d['attributes'][us_key]['setter'] = setter
 
         else :
             # make sure interface is ready to use
-            d = self.attributes_t_init_ ()
+            d = self._attributes_t_init ()
 
             # register the attribute and properties
             d['setter'] = setter
 
 
     ####################################
-    def attributes_set_lister_ (self, key, lister) :
+    def _attributes_set_lister (self, key, lister) :
         """
         This interface method is not part of the public consumer API, but can
         safely be called from within derived classes.
 
-        See documentation of :func:`troy.Attributes.attributes_set_setter_` for details.
+        See documentation of :func:`troy.Attributes._attributes_set_setter` for details.
         """
 
         # make sure interface is ready to use
-        us_key = self.attributes_t_underscore_ (key)
-        d      = self.attributes_t_init_       (us_key)
+        us_key = self._attributes_t_underscore (key)
+        d      = self._attributes_t_init       (us_key)
 
         # register the attribute and properties
         d['lister'] = lister
@@ -1720,13 +1770,13 @@ class Attributes (_AttributesBase) :
         set a 'readonly' attribute will result in an IncorrectState exception
         being raised.
 
-        Note that attributes_i_set_() will trigger callbacks, if a new value
+        Note that _attributes_i_set() will trigger callbacks, if a new value
         (different from the old value) is given.  
         """
 
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return self.attributes_i_set_ (us_key, val)
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        return self._attributes_i_set (us_key, val)
    
 
     ####################################
@@ -1740,9 +1790,9 @@ class Attributes (_AttributesBase) :
         result in 'None' to be returned (or the default value, if available).
         """
 
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return self.attributes_i_get_ (us_key)
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        return self._attributes_i_get (us_key)
 
 
     ####################################
@@ -1757,9 +1807,15 @@ class Attributes (_AttributesBase) :
         set_attribute method.
         """
 
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return self.attributes_i_set_ (us_key, val)
+        # convert scalar to vector
+        if   None   ==   val                        : val = None 
+        elif isinstance (val, types.StringTypes)    : val = [val]
+        elif isinstance (val, collections.Iterable) : val = val
+        else                                        : val = [val]
+
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        return self._attributes_i_set (us_key, val)
 
 
     ####################################
@@ -1774,9 +1830,15 @@ class Attributes (_AttributesBase) :
         get_attribute method.
         """
 
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return self.attributes_i_get_ (us_key)
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        ret    = self._attributes_i_get        (us_key)
+
+        # convert scalar to vector
+        if   None == ret                            : return [None]
+        elif isinstance (ret, types.StringTypes)    : return [ret]
+        elif isinstance (ret, collections.Iterable) : return ret
+        else                                        : return [ret]
 
 
     ####################################
@@ -1789,9 +1851,9 @@ class Attributes (_AttributesBase) :
         purged, and the key will not be listed on :func:`troy.Attributes.list_attributes` () anymore.
         """
 
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return self.attributes_remove_ (us_key)
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        return self._attributes_remove (us_key)
 
 
     ####################################
@@ -1802,7 +1864,7 @@ class Attributes (_AttributesBase) :
         List all attributes which have been explicitly set. 
         """
 
-        return self.attributes_i_list_ ()
+        return self._attributes_i_list ()
 
 
     ####################################
@@ -1816,7 +1878,7 @@ class Attributes (_AttributesBase) :
         applied to a string serialization of the typed value, if that exists.
         """
 
-        return self.attributes_i_find_ (pattern)
+        return self._attributes_i_find (pattern)
 
 
     ####################################
@@ -1828,9 +1890,9 @@ class Attributes (_AttributesBase) :
         The call will also return 'True' if the value for that key is 'None'.
         """
 
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return self.attributes_i_exists_ (us_key)
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        return self._attributes_i_exists (us_key)
 
 
     ####################################
@@ -1842,9 +1904,9 @@ class Attributes (_AttributesBase) :
         'set'.  The call will also return 'True' if the attribute is final
         """
 
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return self.attributes_i_is_readonly_ (us_key)
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        return self._attributes_i_is_readonly (us_key)
 
 
     ####################################
@@ -1855,9 +1917,9 @@ class Attributes (_AttributesBase) :
         This method will check if the given key is writable - i.e. not readonly.
         """
 
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return self.attributes_i_is_writable_ (us_key)
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        return self._attributes_i_is_writable (us_key)
 
 
     ####################################
@@ -1868,9 +1930,9 @@ class Attributes (_AttributesBase) :
         This method will check if the given key can be removed.
         """
 
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return self.attributes_i_is_removable_ (us_key)
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        return self._attributes_i_is_removable (us_key)
 
 
     ####################################
@@ -1881,9 +1943,9 @@ class Attributes (_AttributesBase) :
         This method will check if the given attribute has a vector value type.
         """
 
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return self.attributes_i_is_vector_ (us_key)
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        return self._attributes_i_is_vector (us_key)
 
 
     ####################################
@@ -1902,8 +1964,6 @@ class Attributes (_AttributesBase) :
         A callback is any callable python construct, and MUST accept three
         arguments::
 
-
-
             - String key: the name of the attribute which changed
             - Any    val: the new value of the attribute
             - Any    obj: the object on which this attribute interface was called
@@ -1921,9 +1981,9 @@ class Attributes (_AttributesBase) :
         be called once as that attribute enters finality).
         """
 
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return self.attributes_i_add_cb_ (us_key, cb)
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        return self._attributes_i_add_cb (us_key, cb)
 
 
     ####################################
@@ -1939,9 +1999,9 @@ class Attributes (_AttributesBase) :
         attribute.
         """
 
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return self.attributes_i_del_cb_ (us_key, id)
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        return self._attributes_i_del_cb (us_key, id)
 
 
 
@@ -1955,24 +2015,24 @@ class Attributes (_AttributesBase) :
     def __getattr__ (self, key) :
         """ see :func:`troy.Attributes.get_attribute` (key) for details. """
         
-        key  = self.attributes_t_keycheck_ (key)
-        return self.attributes_i_get_      (key)
+        key  = self._attributes_t_keycheck (key)
+        return self._attributes_i_get      (key)
 
 
     ####################################
     def __setattr__ (self, key, val) :
         """ see :func:`troy.Attributes.set_attribute` (key, val) for details. """
         
-        key  = self.attributes_t_keycheck_ (key)
-        return self.attributes_i_set_      (key, val)
+        key  = self._attributes_t_keycheck (key)
+        return self._attributes_i_set      (key, val)
 
 
     ####################################
     def __delattr__ (self, key) :
         """ see :func:`troy.Attributes.remove_attribute` (key) for details. """
         
-        key  = self.attributes_t_keycheck_ (key)
-        return self.attributes_remove_     (key)
+        key  = self._attributes_t_keycheck (key)
+        return self._attributes_remove     (key)
 
    
    
@@ -1987,36 +2047,36 @@ class Attributes (_AttributesBase) :
     def __getitem__ (self, key) :
         """ see :func:`troy.Attributes.get_attribute` (key) for details. """
         
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return   self.attributes_i_get_        (us_key)
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        return   self._attributes_i_get        (us_key)
 
 
     ####################################
     def __setitem__ (self, key, val) :
         """ see :func:`troy.Attributes.set_attribute` (key, val) for details. """
         
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return   self.attributes_i_set_        (us_key, val)
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        return   self._attributes_i_set        (us_key, val)
 
 
     ####################################
     def __delitem__ (self, key) :
         """ see :func:`troy.Attributes.remove_attribute` (key) for details. """
         
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return   self.attributes_remove_       (us_key)
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        return   self._attributes_remove       (us_key)
 
 
     ####################################
     def __contains__ (self, key) :
         """ see :func:`troy.Attributes.attribute_exists` (key) for details. """
         
-        key    = self.attributes_t_keycheck_   (key)
-        us_key = self.attributes_t_underscore_ (key)
-        return   self.attributes_i_exists_     (us_key)
+        key    = self._attributes_t_keycheck   (key)
+        us_key = self._attributes_t_underscore (key)
+        return   self._attributes_i_exists     (us_key)
 
 
     ####################################
@@ -2028,16 +2088,16 @@ class Attributes (_AttributesBase) :
                 raise TypeError("update expected at most 1 arguments, got %d" % len (args))
             other = dict (args[0])
             for key in other:
-                self.attributes_i_set_ (key, other[key])
+                self._attributes_i_set (key, other[key])
         for key in kwargs:
-            self.attributes_i_set_ (key, kwargs[key])
+            self._attributes_i_set (key, kwargs[key])
 
 
     ####################################
     def iterkeys (self) :
         """ see :func:`troy.Attributes.list_attributes` () for details. """
         
-        return self.attributes_i_list_ ()
+        return self._attributes_i_list ()
 
 
     ####################################
@@ -2049,12 +2109,13 @@ class Attributes (_AttributesBase) :
         """
 
         # make sure interface is ready to use
-        d = self.attributes_t_init_ ()
+        d = self._attributes_t_init ()
 
         tmp = {}
 
-        for key in self.attributes_i_list_ (ext=False) :
-                tmp[key] = d['attributes'][key]['value']
+        for key in self._attributes_i_list (ext=False) :
+            us_key = self._attributes_t_underscore (key)
+            tmp[us_key] = d['attributes'][us_key]['value']
 
         return str (tmp)
             

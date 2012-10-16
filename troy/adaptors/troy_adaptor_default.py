@@ -22,18 +22,11 @@ class adaptor (aBase) :
         self.registry = {'Troy' : 'default_troy'}
         self.adata_   = { 'default_troy' : {} }
 
-    def get_name (self) :
-        return self.name
-
-    def get_registry (self) :
-        return self.registry
-
-    def get_order (self) :
-        return 1000  # low adaptor priority
 
     def sanity_check (self) :
       # raise troy.Exception (Error.NoSuccess, "adaptor disabled")
         pass
+
 
     def get_serial_ (self) :
         adaptor.serial_ += 1

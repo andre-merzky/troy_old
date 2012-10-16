@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>troy.Troy &mdash; Troy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Troy 0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Troy 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for troy.Troy</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">troy</span> <span class="kn">import</span> <span class="n">Base</span>
+
+<span class="c">########################################################################</span>
+<span class="c">#</span>
+<span class="c"># Troy</span>
+<span class="c">#</span>
+<span class="c"># FIXME: do we need means to unschedule a work unit, to flush the queue, etc?</span>
+<span class="c"># Do we need a notion of queues in the first place?  Priorities?  Where to draw</span>
+<span class="c"># the line?</span>
+<span class="c">#</span>
+<span class="c"># FIXME: define inspection</span>
+<span class="c">#</span>
+<span class="k">class</span> <span class="nc">Troy</span> <span class="p">(</span><span class="n">Base</span><span class="p">)</span> <span class="p">:</span>
+<div class="viewcode-block" id="Troy"><a class="viewcode-back" href="../../troy/Troy.html#troy.Troy">[docs]</a>    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class, :class:`troy.Troy`, is the user (or application) facing component of Troy.</span>
+<span class="sd">    Its purpose is to manage a set of pilot systems (and their pilot resources), and</span>
+<span class="sd">    to manage a set of scheduling subprocesses which perform scheduling over the</span>
+<span class="sd">    pilot resources, as described above.  As such, :class:`troy.Troy` has three distinct</span>
+<span class="sd">    sets of methods: to manage pilot resources, to manage scheduling subprocesses,</span>
+<span class="sd">    and to handle workplans to be scheduled on the pilot resources.</span>
+
+<span class="sd">    Properties::</span>
+
+
+
+<span class="sd">        - id:</span>
+<span class="sd">          The returned ID can be used to connect to the Service instance later</span>
+<span class="sd">          on, for example from within a different application instance.  </span>
+<span class="sd">          Type: String (url)</span>
+
+
+
+<span class="sd">        - pilot_frameworks</span>
+<span class="sd">          An set of :class:`troy.PilotFramework` ids, representing the set of</span>
+<span class="sd">          resources over which Troy can schedule work items.</span>
+<span class="sd">          Note: these are instances, not IDs</span>
+<span class="sd">          Type: &#39;Any&#39; list</span>
+
+
+
+<span class="sd">        - schedulers</span>
+<span class="sd">          An set of :class:`troy.iScheduler` interface instances, internally used by this</span>
+<span class="sd">          Scheduler to distribute the workload over the different pilot</span>
+<span class="sd">          frameworks.</span>
+<span class="sd">          Note: these are instances, not IDs</span>
+<span class="sd">          Type: Any</span>
+
+<span class="sd">    FIXME: we might want to expose scheduler state and statistics as properties,</span>
+<span class="sd">    for inspection and profiling?</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span> <span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a Troy object</span>
+
+<span class="sd">        Keyword arguments:</span>
+<span class="sd">        troy_id:    string, identifying the Troy instance.</span>
+
+<span class="sd">        The troy_id will in general not be an URL pointing to a remote service,</span>
+<span class="sd">        but will rather point to an application level entity -- although there</span>
+<span class="sd">        is technically no reason not to implement this class as a stateful</span>
+<span class="sd">        backend service at some point.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c"># init api base</span>
+        <span class="n">Base</span><span class="o">.</span><span class="n">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c"># prepare supported attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes_register_</span>  <span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">,</span>               <span class="bp">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Scalar</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ReadOnly</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes_register_</span>  <span class="p">(</span><span class="s">&#39;pilot_frameworks&#39;</span><span class="p">,</span> <span class="p">[],</span>   <span class="bp">self</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Vector</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Writable</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes_register_</span>  <span class="p">(</span><span class="s">&#39;schedulers&#39;</span><span class="p">,</span>       <span class="p">[],</span>   <span class="bp">self</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Vector</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Writable</span><span class="p">)</span>
+
+        <span class="c"># we register callbacks to push and pull variable object state to the</span>
+        <span class="c"># backend / adaptor.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes_set_getter_</span> <span class="p">(</span><span class="s">&#39;pilot_frameworks&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pull_state</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes_set_getter_</span> <span class="p">(</span><span class="s">&#39;schedulers&#39;</span><span class="p">,</span>       <span class="bp">self</span><span class="o">.</span><span class="n">_pull_state</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes_set_setter_</span> <span class="p">(</span><span class="s">&#39;pilot_frameworks&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_push_state</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes_set_setter_</span> <span class="p">(</span><span class="s">&#39;schedulers&#39;</span><span class="p">,</span>       <span class="bp">self</span><span class="o">.</span><span class="n">_push_state</span><span class="p">)</span>
+
+        <span class="c"># initialize id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+
+        <span class="c"># find an adaptor and initialize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;Troy&#39;</span><span class="p">,</span> <span class="s">&#39;init_&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">_push_state</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        tell the adaptor to push state changes to the backend</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;Troy&#39;</span><span class="p">,</span> <span class="s">&#39;_push_state&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">_pull_state</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        tell the adaptor to pull state changes from the backend</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;Troy&#39;</span><span class="p">,</span> <span class="s">&#39;_pull_state&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">add_scheduler</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="p">:</span>
+<div class="viewcode-block" id="Troy.add_scheduler"><a class="viewcode-back" href="../../troy/Troy.html#troy.Troy.add_scheduler">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a scheduler for submitted work units.  </span>
+<span class="sd">        </span>
+<span class="sd">        FIXME: Allow registration of callables or Scheduler instances</span>
+<span class="sd">        FIXME: determine if we should have a default scheduler if this method</span>
+<span class="sd">        is not called...</span>
+
+<span class="sd">        The scheduler &#39;s&#39; can either be a string, identifying a backend or</span>
+<span class="sd">        adaptor level scheduler to be used, or a class instance which derives</span>
+<span class="sd">        from :class:`troy.interface.iScheduler`.  For any later call on</span>
+<span class="sd">        :func:`troy.Scheduler.schedule()`, the registered scheduler instances are</span>
+<span class="sd">        invoked in order of registration.  </span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;Troy&#39;</span><span class="p">,</span> <span class="s">&#39;add_scheduler&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">list_schedulers</span> <span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span></div>
+<div class="viewcode-block" id="Troy.list_schedulers"><a class="viewcode-back" href="../../troy/Troy.html#troy.Troy.list_schedulers">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return array of registered scheduler instances</span>
+
+<span class="sd">        Note that this call is not returning IDs, as scheduler instances are not</span>
+<span class="sd">        reconnectable.</span>
+
+<span class="sd">        # FIXME: change?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;Troy&#39;</span><span class="p">,</span> <span class="s">&#39;list_schedulers&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">remove_scheduler</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="p">:</span></div>
+<div class="viewcode-block" id="Troy.remove_scheduler"><a class="viewcode-back" href="../../troy/Troy.html#troy.Troy.remove_scheduler">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        remove a previously registered scheduler instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;Troy&#39;</span><span class="p">,</span> <span class="s">&#39;remove_scheduler&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">add_pilot_framework</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pf</span><span class="p">)</span> <span class="p">:</span></div>
+<div class="viewcode-block" id="Troy.add_pilot_framework"><a class="viewcode-back" href="../../troy/Troy.html#troy.Troy.add_pilot_framework">[docs]</a>        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Add a PilotFramework to this Troy instance.</span>
+
+<span class="sd">        Keyword arguments:</span>
+<span class="sd">        pf -- The PilotFramework which this Troy instance will utilize.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;Troy&#39;</span><span class="p">,</span> <span class="s">&#39;add_pilot_framework&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">pf</span><span class="p">)</span>
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">list_pilot_frameworks</span> <span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span></div>
+<div class="viewcode-block" id="Troy.list_pilot_frameworks"><a class="viewcode-back" href="../../troy/Troy.html#troy.Troy.list_pilot_frameworks">[docs]</a>        <span class="sd">&quot;&quot;&quot; List all PF IDs of this Troy instance &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;Troy&#39;</span><span class="p">,</span> <span class="s">&#39;list_pilot_frameworks&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">remove_pilot_framework</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pf</span><span class="p">)</span> <span class="p">:</span></div>
+<div class="viewcode-block" id="Troy.remove_pilot_framework"><a class="viewcode-back" href="../../troy/Troy.html#troy.Troy.remove_pilot_framework">[docs]</a>        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Remove a PilotFramework</span>
+
+<span class="sd">        Note that it won&#39;t cancel the PilotFramework nor its Pilots -- it will</span>
+<span class="sd">        just no longer receive new work units from this Troy instance.</span>
+
+<span class="sd">        Keyword arguments:</span>
+<span class="sd">        pf -- The PilotFramework to remove (either id or instance)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;Troy&#39;</span><span class="p">,</span> <span class="s">&#39;remove_pilot_framework&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">pf</span><span class="p">)</span>
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">submit_unit</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ud</span><span class="p">)</span> <span class="p">:</span></div>
+<div class="viewcode-block" id="Troy.submit_unit"><a class="viewcode-back" href="../../troy/Troy.html#troy.Troy.submit_unit">[docs]</a>        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Schedule a work unit.</span>
+
+<span class="sd">        A work unit description work (:class:`troy.ComputeUnitDescription` or</span>
+<span class="sd">        :class:`troy.DataUnitDescription`) is provided, and passed to the registered</span>
+<span class="sd">        schedulers.  Those can either add constraints to the description, or</span>
+<span class="sd">        pass it on to one of the registered pilot frameworks, or to one of their</span>
+<span class="sd">        pilots.</span>
+<span class="sd">            </span>
+<span class="sd">        If the scheduler cannot find suitable resources for the requested work</span>
+<span class="sd">        unit, a BadParameter exception is raised.  Not raising this exception is</span>
+<span class="sd">        not a guarantee that the work unit will in fact be (able to be) enacted</span>
+<span class="sd">        -- in that case, the returned work unit will later be moved to Failed</span>
+<span class="sd">        state.</span>
+<span class="sd">            </span>
+<span class="sd">        On success, the returned work unit is in Pending state (or moved into</span>
+<span class="sd">        any state downstream from Pending).</span>
+
+<span class="sd">        schedule() will honor all attributes set on the description.  Attributes</span>
+<span class="sd">        which are not explicitly set are interpreted as having default values</span>
+<span class="sd">        (see documentation of unit descriptions), or, where default values are</span>
+<span class="sd">        not specified, are ignored.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;Troy&#39;</span><span class="p">,</span> <span class="s">&#39;submit_unit&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">ud</span><span class="p">)</span>
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">list_units</span> <span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span></div>
+<div class="viewcode-block" id="Troy.list_units"><a class="viewcode-back" href="../../troy/Troy.html#troy.Troy.list_units">[docs]</a>        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        list managed work units.</span>
+
+<span class="sd">        Return value:</span>
+<span class="sd">        A list of work unit IDs</span>
+
+<span class="sd">        The returned list can include units which have not been created by this</span>
+<span class="sd">        Troy instance.  The list may be incomplete, and may not include units</span>
+<span class="sd">        created by Troy.  There is no guarantee that units in the returned list</span>
+<span class="sd">        can in fact be reconnected to.  Also, an inclusion in the list does not</span>
+<span class="sd">        have any indication about the respective unit&#39;s state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;Troy&#39;</span><span class="p">,</span> <span class="s">&#39;list_units&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+
+<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Troy 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Andre Merzky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2pre.
+    </div>
+  </body>
+</html>

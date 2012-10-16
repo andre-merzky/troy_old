@@ -31,14 +31,6 @@ class adaptor (aBase) :
         # implementing them:
         self.registry = { 'Scheduler' : 'scheduler_random' }
         
-    def get_name (self) :
-        return self.name
-
-    def get_registry (self) :
-        return self.registry
-
-    def get_order (self) :
-        return 4
 
     def sanity_check (self) :
         # raise troy.Exception (Error.NoSuccess, "adaptor disabled")

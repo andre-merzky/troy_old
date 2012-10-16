@@ -60,7 +60,7 @@
 <h1>PilotFramework<a class="headerlink" href="#pilotframework" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="troy.PilotFramework">
-<em class="property">class </em><tt class="descclassname">troy.</tt><tt class="descname">PilotFramework</tt><big>(</big><em>id</em><big>)</big><a class="headerlink" href="#troy.PilotFramework" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">troy.</tt><tt class="descname">PilotFramework</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/troy/pilot_framework.html#PilotFramework"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.PilotFramework" title="Permalink to this definition">¶</a></dt>
 <dd><p>PilotFramework (PF)</p>
 <p>A PF acts as the interface to an underlying pilot job framework &#8211; that
 backend creates and manages pilot instances (<a class="reference internal" href="compute_pilot.html#troy.ComputePilot" title="troy.ComputePilot"><tt class="xref py py-class docutils literal"><span class="pre">troy.ComputePilot</span></tt></a>, <a class="reference internal" href="data_pilot.html#troy.DataPilot" title="troy.DataPilot"><tt class="xref py py-class docutils literal"><span class="pre">troy.DataPilot</span></tt></a>),
@@ -94,7 +94,7 @@ PF&#8217;s pilots for work unit scheduling and execution.</p>
 </div>
 <dl class="method">
 <dt id="troy.PilotFramework.cancel">
-<tt class="descname">cancel</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.PilotFramework.cancel" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">cancel</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/troy/pilot_framework.html#PilotFramework.cancel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.PilotFramework.cancel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cancel all work units, cancel all pilots, free all resources.</p>
 <p>The call will block until the above has been achieved.  It is not an
 error to call the method twice &#8211; it will then simply return
@@ -103,7 +103,7 @@ immediately.</p>
 
 <dl class="method">
 <dt id="troy.PilotFramework.list_pilots">
-<tt class="descname">list_pilots</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.PilotFramework.list_pilots" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">list_pilots</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/troy/pilot_framework.html#PilotFramework.list_pilots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.PilotFramework.list_pilots" title="Permalink to this definition">¶</a></dt>
 <dd><p>List managed pilots.</p>
 <p>Return value:
 A list of <a class="reference internal" href="compute_pilot.html#troy.ComputePilot" title="troy.ComputePilot"><tt class="xref py py-class docutils literal"><span class="pre">troy.ComputePilot</span></tt></a> and <a class="reference internal" href="data_pilot.html#troy.DataPilot" title="troy.DataPilot"><tt class="xref py py-class docutils literal"><span class="pre">troy.DataPilot</span></tt></a> IDs.</p>
@@ -116,7 +116,7 @@ not have any indication about the respective pilot&#8217;s state.</p>
 
 <dl class="method">
 <dt id="troy.PilotFramework.list_units">
-<tt class="descname">list_units</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.PilotFramework.list_units" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">list_units</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/troy/pilot_framework.html#PilotFramework.list_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.PilotFramework.list_units" title="Permalink to this definition">¶</a></dt>
 <dd><p>list managed work units.</p>
 <p>Return value:
 A list of <a class="reference internal" href="compute_unit.html#troy.ComputeUnit" title="troy.ComputeUnit"><tt class="xref py py-class docutils literal"><span class="pre">troy.ComputeUnit</span></tt></a> and <a class="reference internal" href="data_unit.html#troy.DataUnit" title="troy.DataUnit"><tt class="xref py py-class docutils literal"><span class="pre">troy.DataUnit</span></tt></a> IDs</p>
@@ -129,7 +129,7 @@ not have any indication about the respective unit&#8217;s state.</p>
 
 <dl class="method">
 <dt id="troy.PilotFramework.submit_pilot">
-<tt class="descname">submit_pilot</tt><big>(</big><em>pd</em><big>)</big><a class="headerlink" href="#troy.PilotFramework.submit_pilot" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">submit_pilot</tt><big>(</big><em>pd</em><big>)</big><a class="reference internal" href="../_modules/troy/pilot_framework.html#PilotFramework.submit_pilot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.PilotFramework.submit_pilot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a Pilot.</p>
 <p>Keyword arguments:
 pd &#8211; PilotDescription</p>
@@ -156,7 +156,7 @@ adaptor level.</p>
 
 <dl class="method">
 <dt id="troy.PilotFramework.submit_unit">
-<tt class="descname">submit_unit</tt><big>(</big><em>ud</em><big>)</big><a class="headerlink" href="#troy.PilotFramework.submit_unit" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">submit_unit</tt><big>(</big><em>ud</em><big>)</big><a class="reference internal" href="../_modules/troy/pilot_framework.html#PilotFramework.submit_unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.PilotFramework.submit_unit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Submit a work unit to this PilotFramework.</p>
 <p>Keyword argument:
 ud &#8211; <a class="reference internal" href="compute_unit_description.html#troy.ComputeUnitDescription" title="troy.ComputeUnitDescription"><tt class="xref py py-class docutils literal"><span class="pre">troy.ComputeUnitDescription</span></tt></a> or <a class="reference internal" href="data_unit_description.html#troy.DataUnitDescription" title="troy.DataUnitDescription"><tt class="xref py py-class docutils literal"><span class="pre">troy.DataUnitDescription</span></tt></a> to be enacted.</p>

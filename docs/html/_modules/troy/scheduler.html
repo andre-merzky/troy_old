@@ -1,0 +1,210 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>troy.scheduler &mdash; Troy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Troy 0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Troy 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for troy.scheduler</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">troy.base</span> <span class="kn">import</span> <span class="n">Base</span>
+
+<span class="c">########################################################################</span>
+<span class="c">#</span>
+<span class="c"># Troy</span>
+<span class="c">#</span>
+<span class="c"># FIXME: do we need means to unschedule a work unit, to flush the queue, etc?</span>
+<span class="c"># Do we need a notion of queues in the first place?  Priorities?  Where to draw</span>
+<span class="c"># the line?</span>
+<span class="c">#</span>
+<span class="c"># FIXME: define inspection</span>
+<span class="c">#</span>
+<span class="k">class</span> <span class="nc">Scheduler</span> <span class="p">(</span><span class="n">Base</span><span class="p">)</span> <span class="p">:</span>
+<div class="viewcode-block" id="Scheduler"><a class="viewcode-back" href="../../troy/scheduler.html#troy.Scheduler">[docs]</a>    <span class="sd">&quot;&quot;&quot;  </span>
+<span class="sd">    Scheduler (S)</span>
+
+<span class="sd">    The Troy Scheduler class serves two purposes.  First, it is used as API</span>
+<span class="sd">    class within Troy, and represents an adaptor level scheduler.  Second, it</span>
+<span class="sd">    acts as a interface to support the implementation of schedulers on</span>
+<span class="sd">    application, which can be handed to Troy and can be used in the same way as</span>
+<span class="sd">    adaptor backed scheduler instances.</span>
+
+<span class="sd">    The class implements exactly one method: :func:`troy.Scheduler.schedule` (self, t, ud)`,</span>
+<span class="sd">    which accepts a :class:`troy.Troy` instance and a workload</span>
+<span class="sd">    description (:class:`troy.ComputeUnitDescription` or</span>
+<span class="sd">    :class:`troy.DataUnitDescription`).  The Troy instance represents the set of</span>
+<span class="sd">    resources to be scheduled over, the workload description represents the</span>
+<span class="sd">    workplan to be scheduled on those resources.</span>
+
+<span class="sd">    The :func:`troy.Scheduler.schedule()` method MUST throw</span>
+<span class="sd">    a :class:`troy.Exception` if scheduling is not possible, i.e. if the</span>
+<span class="sd">    scheduler either detects contradictory scheduling constraints, or if it</span>
+<span class="sd">    detects that applying the scheduling constraints on the set of Troy&#39;s</span>
+<span class="sd">    resources results in an empty set.  If the method can schedule the work</span>
+<span class="sd">    description for execution, i.e. if it hands it off to one of Troy&#39;s</span>
+<span class="sd">    PilotFrameworks or Pilots, the Scheduler MUST return</span>
+<span class="sd">    a :class:`troy.ComputeUnit` or :class:`troy.DataUnit` instance (depending on</span>
+<span class="sd">    the description type).  Any other return type MAY result in the work unit</span>
+<span class="sd">    being scheduled twice.  If the scheduler adds constraints, but can not</span>
+<span class="sd">    conclusively schedule the unit on a pilot framework or pilot, it MUST return</span>
+<span class="sd">    None -- not doing so may result in the work unit not being scheduled at all.</span>
+
+<span class="sd">    Properties::</span>
+
+
+
+<span class="sd">        - id:</span>
+<span class="sd">          The ID can be used to connect to the Scheduler instance later on, for</span>
+<span class="sd">          example from within a different application instance -- although the</span>
+<span class="sd">          ability to reconnect is not guaranteed.  </span>
+<span class="sd">          Type: String (url)</span>
+
+<span class="sd">    FIXME: we might want to expose scheduler state and statistics as properties,</span>
+<span class="sd">    for inspection and profiling?</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scheduler_id</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span> <span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a scheduler object</span>
+
+<span class="sd">        Keyword arguments:</span>
+<span class="sd">        scheduler_id:    string, identifying the Scheduler instance.</span>
+
+<span class="sd">        The scheduler_id will in general not be an URL pointing to a remote service,</span>
+<span class="sd">        but will rather point to an application level entity -- although there</span>
+<span class="sd">        is technically no reason not to implement this class as a stateful</span>
+<span class="sd">        backend service at some point.  If the ID is present, the Scheduler</span>
+<span class="sd">        implementation MUST reconnect to that specific scheduler instance -- if</span>
+<span class="sd">        that is not possible, init MUST fail with a BadParameter exception.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c"># init api base</span>
+        <span class="n">Base</span><span class="o">.</span><span class="n">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c"># RO attribute &#39;id&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes_register_</span>  <span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="n">scheduler_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Scalar</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ReadOnly</span><span class="p">)</span>
+
+        <span class="c"># find an adaptor and initialize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;Scheduler&#39;</span><span class="p">,</span> <span class="s">&#39;init_&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">schedule</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">ud</span><span class="p">)</span> <span class="p">:</span>
+<div class="viewcode-block" id="Scheduler.schedule"><a class="viewcode-back" href="../../troy/scheduler.html#troy.Scheduler.schedule">[docs]</a>        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Schedule a work unit.</span>
+
+<span class="sd">        A work unit description (:class:`troy.ComputeUnitDescription` or</span>
+<span class="sd">        :class:`troy.DataUnitDescription`) is provided, and passed to the backend</span>
+<span class="sd">        scheduler.  That one can either add constraints to the description, or</span>
+<span class="sd">        pass it on to one of the registered pilot frameworks, or to one of their</span>
+<span class="sd">        pilots.</span>
+
+<span class="sd">        schedule() will raise a troy.exception if the scheduler cannot handle the</span>
+<span class="sd">        work unit.  It will return a :class:`troy.ComputeUnit` or :class:`troy.DataUnit` instance if</span>
+<span class="sd">        the scheduler can schedule the unit for execution on a pilot backend.</span>
+<span class="sd">        It will return None if the scheduler can merely add constraints (if</span>
+<span class="sd">        that), but not schedule the unit for execution.</span>
+<span class="sd">            </span>
+<span class="sd">        On success, the returned work unit is in Pending state (or moved into</span>
+<span class="sd">        any state downstream from Pending).  The work unit instance will reveal</span>
+<span class="sd">        on inspection to what pilot (and thus to what pilot framework) it was</span>
+<span class="sd">        bound.</span>
+
+<span class="sd">        schedule() will honor all attributes set on the description.  Attributes</span>
+<span class="sd">        which are not explicitly set are interpreted as having default values</span>
+<span class="sd">        (see documentation of unit descriptions), or, where default values are</span>
+<span class="sd">        not specified, are ignored.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;Scheduler&#39;</span><span class="p">,</span> <span class="s">&#39;schedule&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">ud</span><span class="p">)</span>
+
+
+<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Troy 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Andre Merzky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2pre.
+    </div>
+  </body>
+</html>

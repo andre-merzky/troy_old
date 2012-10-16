@@ -30,9 +30,9 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.intersphinx', 
               'sphinx.ext.todo', 
               'sphinx.ext.coverage', 
+              'sphinx.ext.viewcode', 
               'sphinx.ext.pngmath', 
               'sphinx.ext.ifconfig', 
-#             'sphinx.ext.viewcode'
               ]
 
 # Add any paths that contain templates here, relative to this directory.

@@ -103,13 +103,13 @@ class Engine (object) :
                 # this will throw if the adaptor is not viable
                 adaptor.sanity_check ()
 
-                a_order    = adaptor.get_order    ()
+                a_priority = adaptor.get_priority ()
                 a_name     = adaptor.get_name     ()
                 a_registry = adaptor.get_registry ()
 
                 self.adaptors[a_name] = {'module'   : module, 
                                          'adaptor'  : adaptor,
-                                         'order'    : a_order,
+                                         'priority' : a_priority,
                                          'registry' : a_registry}
 
             except Exception, e :
@@ -134,7 +134,7 @@ class Engine (object) :
             for a_name in self.adaptors.keys () :
 
                 a_registry = self.adaptors[a_name]['registry']
-                a_order    = self.adaptors[a_name]['order']
+                a_priority = self.adaptors[a_name]['priority']
 
                 # did that adaptor register to handle the class?
                 if class_name in a_registry :
@@ -144,9 +144,9 @@ class Engine (object) :
                     # class instance, so we set that to 'None' -- that is only
                     # created as needed, see below
                     api_class._adaptors [a_name] = {}
-                    api_class._adaptors [a_name]['a_class'] = None
-                    api_class._adaptors [a_name]['success'] = 0
-                    api_class._adaptors [a_name]['order']   = a_order
+                    api_class._adaptors [a_name]['a_class']  = None
+                    api_class._adaptors [a_name]['success']  = 0
+                    api_class._adaptors [a_name]['priority'] = a_priority
 
 
         # create a log message container for logging failed adaptors
@@ -159,10 +159,10 @@ class Engine (object) :
         #
         # Note that we, however, sort the tuples *twice* -- for the initial
         # attempt (where the success count is '0' for all adaptors, we use the
-        # 'order' attribute, and thus sort for that one first (non-reversed).
+        # 'priority' attribute, and thus sort for that one first (non-reversed).
 
         ordered_adaptor_tuples = sorted (api_class._adaptors.items (), 
-                                         key     = lambda x:x[1]['order'])
+                                         key     = lambda x:x[1]['priority'])
         ordered_adaptor_tuples = sorted (ordered_adaptor_tuples,
                                          key     = lambda x:x[1]['success'], 
                                          reverse = True)

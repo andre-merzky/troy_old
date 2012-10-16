@@ -1,0 +1,321 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>troy.pilot_framework &mdash; Troy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="Troy 0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Troy 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for troy.pilot_framework</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">troy.base</span> <span class="kn">import</span> <span class="n">Base</span>
+
+<span class="c">########################################################################</span>
+<span class="c">#</span>
+<span class="c">#  PilotFramework (PF)</span>
+<span class="c">#</span>
+<span class="c"># FIXME: needs cancel, which will free all resources, and discard all unfinished</span>
+<span class="c"># work units.</span>
+<span class="c">#</span>
+<span class="k">class</span> <span class="nc">PilotFramework</span> <span class="p">(</span><span class="n">Base</span><span class="p">)</span> <span class="p">:</span>
+<div class="viewcode-block" id="PilotFramework"><a class="viewcode-back" href="../../troy/pilot_framework.html#troy.PilotFramework">[docs]</a>    <span class="sd">&quot;&quot;&quot;  </span>
+<span class="sd">    PilotFramework (PF)</span>
+
+<span class="sd">    A PF acts as the interface to an underlying pilot job framework -- that</span>
+<span class="sd">    backend creates and manages pilot instances (:class:`troy.ComputePilot`, :class:`troy.DataPilot`),</span>
+<span class="sd">    and can schedule work unit amongst those pilots (:class:`troy.ComputeUnit`,</span>
+<span class="sd">    :class:`troy.DataUnit`).</span>
+
+<span class="sd">    Class instances are identified by an url, and can be reconnected to.  A PF</span>
+<span class="sd">    can be added to a :class:`troy.Troy` instance, which will then be able to utilize the</span>
+<span class="sd">    PF&#39;s pilots for work unit scheduling and execution.</span>
+
+<span class="sd">    Properties::</span>
+
+
+
+<span class="sd">        - id:</span>
+<span class="sd">          The returned ID can be used to connect to the PF instance later on,</span>
+<span class="sd">          for example from within a different application instance.</span>
+<span class="sd">          Type: String</span>
+
+
+
+<span class="sd">        - pilots:</span>
+<span class="sd">          list of pilot id, representing pilots managed by this pilot framework</span>
+<span class="sd">          instance</span>
+<span class="sd">          Type: String list</span>
+
+
+
+<span class="sd">        - units:</span>
+<span class="sd">          A list of :class:`troy.ComputeUnit` IDs, representing compute units managed by</span>
+<span class="sd">          this pilot.</span>
+<span class="sd">          Note: This list may or may not be complete.  In particular, the PF may</span>
+<span class="sd">          choose to not include units which are already assigned to a specific</span>
+<span class="sd">          pilot, and thus show up in that pilot&#39;s &#39;units&#39; list.</span>
+<span class="sd">          Type: String list</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span> <span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Create a PilotFramework object</span>
+
+<span class="sd">        Keyword arguments:</span>
+<span class="sd">        id: url identifying the backend PF.</span>
+
+<span class="sd">        Note that the URL may be incomplete, if a new PF instance is to be</span>
+<span class="sd">        created -- for example, it may contain only a hint about what pilot</span>
+<span class="sd">        framework is to be used on what resource.  On inspection, the PF will</span>
+<span class="sd">        always return a fully qualified URL, which will not change over the</span>
+<span class="sd">        lifetime of the PF.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c"># init api base</span>
+        <span class="n">Base</span><span class="o">.</span><span class="n">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c"># prepare supported attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes_register_</span>  <span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">,</span>     <span class="bp">None</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">Url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Scalar</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ReadOnly</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes_register_</span>  <span class="p">(</span><span class="s">&#39;pilots&#39;</span><span class="p">,</span> <span class="p">[],</span>    <span class="bp">self</span><span class="o">.</span><span class="n">Url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Vector</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ReadOnly</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes_register_</span>  <span class="p">(</span><span class="s">&#39;units&#39;</span><span class="p">,</span>  <span class="p">[],</span>    <span class="bp">self</span><span class="o">.</span><span class="n">Url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Vector</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ReadOnly</span><span class="p">)</span>
+
+        <span class="c"># we register callbacks to push and pull variable object state to the</span>
+        <span class="c"># backend / adaptor.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes_set_getter_</span> <span class="p">(</span><span class="s">&#39;pilots&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pull_state</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes_set_getter_</span> <span class="p">(</span><span class="s">&#39;units&#39;</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">_pull_state</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes_set_setter_</span> <span class="p">(</span><span class="s">&#39;pilots&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_push_state</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes_set_setter_</span> <span class="p">(</span><span class="s">&#39;units&#39;</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">_push_state</span><span class="p">)</span>
+
+        <span class="c"># initialize id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+
+        <span class="c"># initialize adaptor class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;PilotFramework&#39;</span><span class="p">,</span> <span class="s">&#39;init_&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">_push_state</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        tell the adaptor to push state changes to the backend</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;PilotFramework&#39;</span><span class="p">,</span> <span class="s">&#39;_push_state&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">_pull_state</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        tell the adaptor to pull state changes from the backend</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;PilotFramework&#39;</span><span class="p">,</span> <span class="s">&#39;_pull_state&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">submit_pilot</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pd</span><span class="p">)</span> <span class="p">:</span>
+<div class="viewcode-block" id="PilotFramework.submit_pilot"><a class="viewcode-back" href="../../troy/pilot_framework.html#troy.PilotFramework.submit_pilot">[docs]</a>        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Create a Pilot.</span>
+
+<span class="sd">        Keyword arguments:</span>
+<span class="sd">        pd -- PilotDescription</span>
+
+<span class="sd">        Return value:</span>
+<span class="sd">        A :class:`troy.ComputePilot` or a :class:`troy.DataPilot` instance, depending on type of pilot</span>
+<span class="sd">        description.</span>
+
+<span class="sd">        If the resource requirements defined in the pd cannot be met by the PF,</span>
+<span class="sd">        a BadParameter exception is raised.  Not raising this exception is,</span>
+<span class="sd">        however, not a guarantee that the pilot will in fact be (able to be)</span>
+<span class="sd">        executed -- in that case, the returned pilot will be moved to Failed</span>
+<span class="sd">        state.</span>
+
+<span class="sd">        On success, the returned pilot is in Pending state (or moved into any</span>
+<span class="sd">        state downstream from Pending).</span>
+
+<span class="sd">        submit_pilot() will honor all attributes set on the PD.  Attributes</span>
+<span class="sd">        which are not explicitly set are interpreted as having default values</span>
+<span class="sd">        (see documentation of :class:`troy.ComputePilotDescription` and</span>
+<span class="sd">        :class:`troy.DataPilotDescription`), or, where default values are not specified,</span>
+<span class="sd">        are ignored.</span>
+
+<span class="sd">        Note: compared to the Pilot API, this PF combines the functionality of</span>
+<span class="sd">        the UnitServices and the PilotServices.  Any backend level decomposition</span>
+<span class="sd">        is considered a PF implementation detail, and, if needed, used only on</span>
+<span class="sd">        adaptor level.</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;PilotFramework&#39;</span><span class="p">,</span> <span class="s">&#39;submit_pilot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">pd</span><span class="p">)</span>
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">list_pilots</span> <span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span></div>
+<div class="viewcode-block" id="PilotFramework.list_pilots"><a class="viewcode-back" href="../../troy/pilot_framework.html#troy.PilotFramework.list_pilots">[docs]</a>        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        List managed pilots.</span>
+
+<span class="sd">        Return value:</span>
+<span class="sd">        A list of :class:`troy.ComputePilot` and :class:`troy.DataPilot` IDs.</span>
+
+<span class="sd">        The returned list can include pilots which have not been created by this</span>
+<span class="sd">        PF instance.  The list may be incomplete, and may not include pilots</span>
+<span class="sd">        created by the PF.  There is no guarantee that pilots in the returned</span>
+<span class="sd">        list can in fact be reconnected to.  Also, an inclusion in the list does</span>
+<span class="sd">        not have any indication about the respective pilot&#39;s state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;PilotFramework&#39;</span><span class="p">,</span> <span class="s">&#39;list_pilots&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">submit_unit</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ud</span><span class="p">)</span> <span class="p">:</span></div>
+<div class="viewcode-block" id="PilotFramework.submit_unit"><a class="viewcode-back" href="../../troy/pilot_framework.html#troy.PilotFramework.submit_unit">[docs]</a>        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Submit a work unit to this PilotFramework.</span>
+
+<span class="sd">        Keyword argument:</span>
+<span class="sd">        ud -- :class:`troy.ComputeUnitDescription` or :class:`troy.DataUnitDescription` to be enacted.</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">        :class:`troy.ComputeUnit` or :class:`troy.DataUnit` instance, depending on type of</span>
+<span class="sd">        description.</span>
+
+<span class="sd">        The UD is passed on to the PF backend, which will attempt to instantiate</span>
+<span class="sd">        the described workload on any of its pilots.  If no suitable pilot is</span>
+<span class="sd">        found, a :attribute:`troy.Error.BadParameter` exception is raised.  Not raising this</span>
+<span class="sd">        exception is not a guarantee that the work unit will in fact be (able to</span>
+<span class="sd">        be) executed -- in that case, the returned work unit will later be moved</span>
+<span class="sd">        to Failed state.</span>
+
+<span class="sd">        On success, the returned work unit is in Pending state (or moved into</span>
+<span class="sd">        any state downstream from Pending).</span>
+
+<span class="sd">        The call will will honor all attributes set on the UD.  Attributes which</span>
+<span class="sd">        are not explicitly set are interpreted as having default values (see</span>
+<span class="sd">        documentation of UD), or, where default values are not specified, are</span>
+<span class="sd">        ignored.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;PilotFramework&#39;</span><span class="p">,</span> <span class="s">&#39;submit_unit&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">ud</span><span class="p">)</span>
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">list_units</span> <span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span></div>
+<div class="viewcode-block" id="PilotFramework.list_units"><a class="viewcode-back" href="../../troy/pilot_framework.html#troy.PilotFramework.list_units">[docs]</a>        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        list managed work units.</span>
+
+<span class="sd">        Return value:</span>
+<span class="sd">        A list of :class:`troy.ComputeUnit` and :class:`troy.DataUnit` IDs</span>
+
+<span class="sd">        The returned list can include units which have not been created by this</span>
+<span class="sd">        PF instance.  The list may be incomplete, and may not include units</span>
+<span class="sd">        created by the PF.  There is no guarantee that units in the returned</span>
+<span class="sd">        list can in fact be reconnected to.  Also, an inclusion in the list does</span>
+<span class="sd">        not have any indication about the respective unit&#39;s state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;PilotFramework&#39;</span><span class="p">,</span> <span class="s">&#39;list_units&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+
+    <span class="c">############################################################################</span>
+    <span class="c">#</span>
+    <span class="k">def</span> <span class="nf">cancel</span> <span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span></div>
+<div class="viewcode-block" id="PilotFramework.cancel"><a class="viewcode-back" href="../../troy/pilot_framework.html#troy.PilotFramework.cancel">[docs]</a>        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Cancel all work units, cancel all pilots, free all resources.  </span>
+<span class="sd">        </span>
+<span class="sd">        The call will block until the above has been achieved.  It is not an</span>
+<span class="sd">        error to call the method twice -- it will then simply return</span>
+<span class="sd">        immediately.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">call</span> <span class="p">(</span><span class="s">&#39;PilotFramework&#39;</span><span class="p">,</span> <span class="s">&#39;cancel&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+
+<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Troy 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Andre Merzky.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2pre.
+    </div>
+  </body>
+</html>

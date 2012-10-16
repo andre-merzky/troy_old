@@ -60,7 +60,7 @@
 <h1>DataPilot<a class="headerlink" href="#datapilot" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="troy.DataPilot">
-<em class="property">class </em><tt class="descclassname">troy.</tt><tt class="descname">DataPilot</tt><big>(</big><em>dp_id</em><big>)</big><a class="headerlink" href="#troy.DataPilot" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">troy.</tt><tt class="descname">DataPilot</tt><big>(</big><em>dp_id</em><big>)</big><a class="reference internal" href="../_modules/troy/data_pilot.html#DataPilot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.DataPilot" title="Permalink to this definition">¶</a></dt>
 <dd><p>DataPilot (PilotStore)</p>
 <p>This is the object that is returned by the <a class="reference internal" href="pilot_framework.html#troy.PilotFramework" title="troy.PilotFramework"><tt class="xref py py-class docutils literal"><span class="pre">troy.PilotFramework</span></tt></a> when a new
 DataPilot is created based on a DataPilotDescription.</p>
@@ -123,7 +123,7 @@ cancelled and re-initialized.</p>
 </div>
 <dl class="method">
 <dt id="troy.DataPilot.cancel">
-<tt class="descname">cancel</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.DataPilot.cancel" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">cancel</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/troy/data_pilot.html#DataPilot.cancel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.DataPilot.cancel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move the pilot into Canceled state, releasing all resources.</p>
 <p>The will block until the pilot reaches Canceled state and resources have
 been released.</p>
@@ -134,7 +134,7 @@ though.</p>
 
 <dl class="method">
 <dt id="troy.DataPilot.list_units">
-<tt class="descname">list_units</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.DataPilot.list_units" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">list_units</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/troy/data_pilot.html#DataPilot.list_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.DataPilot.list_units" title="Permalink to this definition">¶</a></dt>
 <dd><p>list managed <a class="reference internal" href="data_unit.html#troy.DataUnit" title="troy.DataUnit"><tt class="xref py py-class docutils literal"><span class="pre">troy.DataUnit</span></tt></a> instances.</p>
 <p>Return value:
 A list of <a class="reference internal" href="data_unit.html#troy.DataUnit" title="troy.DataUnit"><tt class="xref py py-class docutils literal"><span class="pre">troy.DataUnit</span></tt></a> IDs</p>
@@ -147,7 +147,7 @@ not have any indication about the respective unit&#8217;s state.</p>
 
 <dl class="method">
 <dt id="troy.DataPilot.reinitialize">
-<tt class="descname">reinitialize</tt><big>(</big><em>dpd</em><big>)</big><a class="headerlink" href="#troy.DataPilot.reinitialize" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">reinitialize</tt><big>(</big><em>dpd</em><big>)</big><a class="reference internal" href="../_modules/troy/data_pilot.html#DataPilot.reinitialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.DataPilot.reinitialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Re-Initialize the DataPilot to the (new) DataPilotDescription.</p>
 <p>Keyword arguments:
 dpd &#8211; A DataPilotDescription</p>
@@ -167,7 +167,7 @@ re-initialized pilot.</p>
 
 <dl class="method">
 <dt id="troy.DataPilot.submit_unit">
-<tt class="descname">submit_unit</tt><big>(</big><em>dud</em><big>)</big><a class="headerlink" href="#troy.DataPilot.submit_unit" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">submit_unit</tt><big>(</big><em>dud</em><big>)</big><a class="reference internal" href="../_modules/troy/data_pilot.html#DataPilot.submit_unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.DataPilot.submit_unit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Submit a DU to this DataPilot.</p>
 <p>Keyword argument:
 dud &#8211; The DataUnitDescription from the application</p>
@@ -190,7 +190,7 @@ are ignored.</p>
 
 <dl class="method">
 <dt id="troy.DataPilot.wait">
-<tt class="descname">wait</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.DataPilot.wait" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">wait</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/troy/data_pilot.html#DataPilot.wait"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.DataPilot.wait" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wait until DP enters a final state</p>
 <p>It is not an error to call wait() in a final state &#8211; the call simply
 returns immediately.</p>

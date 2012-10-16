@@ -60,7 +60,7 @@
 <h1>ComputePilot<a class="headerlink" href="#computepilot" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="troy.ComputePilot">
-<em class="property">class </em><tt class="descclassname">troy.</tt><tt class="descname">ComputePilot</tt><big>(</big><em>cp_id</em><big>)</big><a class="headerlink" href="#troy.ComputePilot" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">troy.</tt><tt class="descname">ComputePilot</tt><big>(</big><em>cp_id</em><big>)</big><a class="reference internal" href="../_modules/troy/compute_pilot.html#ComputePilot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.ComputePilot" title="Permalink to this definition">¶</a></dt>
 <dd><p>ComputePilot (PilotJob)</p>
 <p>This is the object that is returned the <a class="reference internal" href="pilot_framework.html#troy.PilotFramework" title="troy.PilotFramework"><tt class="xref py py-class docutils literal"><span class="pre">troy.PilotFramework</span></tt></a> when a new
 ComputePilot is created based on a <a class="reference internal" href="compute_pilot_description.html#troy.ComputePilotDescription" title="troy.ComputePilotDescription"><tt class="xref py py-class docutils literal"><span class="pre">troy.ComputePilotDescription</span></tt></a>.</p>
@@ -123,7 +123,7 @@ can be cancelled and be re-initialized.</p>
 </div>
 <dl class="method">
 <dt id="troy.ComputePilot.cancel">
-<tt class="descname">cancel</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.ComputePilot.cancel" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">cancel</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/troy/compute_pilot.html#ComputePilot.cancel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.ComputePilot.cancel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move the pilot into Canceled state, releasing all resources.</p>
 <p>The will block until the pilot reaches Canceled state and resources have
 been released.</p>
@@ -134,7 +134,7 @@ though.</p>
 
 <dl class="method">
 <dt id="troy.ComputePilot.list_units">
-<tt class="descname">list_units</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.ComputePilot.list_units" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">list_units</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/troy/compute_pilot.html#ComputePilot.list_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.ComputePilot.list_units" title="Permalink to this definition">¶</a></dt>
 <dd><p>list managed <a class="reference internal" href="compute_unit.html#troy.ComputeUnit" title="troy.ComputeUnit"><tt class="xref py py-class docutils literal"><span class="pre">troy.ComputeUnit</span></tt></a> instances.</p>
 <p>Return value:
 A list of <a class="reference internal" href="compute_unit.html#troy.ComputeUnit" title="troy.ComputeUnit"><tt class="xref py py-class docutils literal"><span class="pre">troy.ComputeUnit</span></tt></a> IDs</p>
@@ -147,7 +147,7 @@ not have any indication about the respective unit&#8217;s state.</p>
 
 <dl class="method">
 <dt id="troy.ComputePilot.reinitialize">
-<tt class="descname">reinitialize</tt><big>(</big><em>cpd</em><big>)</big><a class="headerlink" href="#troy.ComputePilot.reinitialize" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">reinitialize</tt><big>(</big><em>cpd</em><big>)</big><a class="reference internal" href="../_modules/troy/compute_pilot.html#ComputePilot.reinitialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.ComputePilot.reinitialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Re-Initialize the ComputePilot to the (new) ComputePilotDescription.</p>
 <p>Keyword arguments:
 cpd &#8211; A ComputePilotDescription</p>
@@ -167,7 +167,7 @@ re-initialized pilot.</p>
 
 <dl class="method">
 <dt id="troy.ComputePilot.submit_unit">
-<tt class="descname">submit_unit</tt><big>(</big><em>cud</em><big>)</big><a class="headerlink" href="#troy.ComputePilot.submit_unit" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">submit_unit</tt><big>(</big><em>cud</em><big>)</big><a class="reference internal" href="../_modules/troy/compute_pilot.html#ComputePilot.submit_unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.ComputePilot.submit_unit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Submit a CU to this ComputePilot.</p>
 <p>Keyword argument:
 cud &#8211; The <a class="reference internal" href="compute_unit_description.html#troy.ComputeUnitDescription" title="troy.ComputeUnitDescription"><tt class="xref py py-class docutils literal"><span class="pre">troy.ComputeUnitDescription</span></tt></a> from the application</p>
@@ -190,7 +190,7 @@ are ignored.</p>
 
 <dl class="method">
 <dt id="troy.ComputePilot.wait">
-<tt class="descname">wait</tt><big>(</big><big>)</big><a class="headerlink" href="#troy.ComputePilot.wait" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">wait</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/troy/compute_pilot.html#ComputePilot.wait"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#troy.ComputePilot.wait" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wait until CP enters a final state</p>
 <p>It is not an error to call wait() in a final state &#8211; the call simply
 returns immediately.</p>

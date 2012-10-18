@@ -30,10 +30,9 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.intersphinx', 
               'sphinx.ext.todo', 
               'sphinx.ext.coverage', 
-              'sphinx.ext.viewcode', 
               'sphinx.ext.pngmath', 
               'sphinx.ext.ifconfig', 
-              ]
+              'sphinx.ext.viewcode']
 
 # Add any paths that contain templates here, relative to this directory.
 # templates_path = ['_templates']
@@ -72,17 +71,17 @@ release = '0.1'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['html']
+exclude_patterns = ['docs', 'examples', 'misc', 'test']
 
 # The reST default role (used for this markup: `text`) to use for all documents.
 #default_role = None
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
-#add_function_parentheses = True
+add_function_parentheses = True
 
 # If true, the current module name will be prepended to all description
 # unit titles (such as .. function::).
-#add_module_names = True
+add_module_names = True
 
 # If true, sectionauthor and moduleauthor directives will be shown in the
 # output. They are ignored by default.
@@ -155,7 +154,7 @@ html_theme = 'default'
 #html_split_index = False
 
 # If true, links to the reST sources are added to the pages.
-#html_show_sourcelink = True
+# html_show_sourcelink = False
 
 # If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
 #html_show_sphinx = True

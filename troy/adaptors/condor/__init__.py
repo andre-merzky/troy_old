@@ -1,0 +1,1 @@
+from condor_adaptor import CondorAdaptor

@@ -1,0 +1,25 @@
+# 
+# Troy configuration file
+#
+# There are sections per adaptor that have the 
+# prefix "troy.adaptors." followed by the name.
+#
+# The "DEFAULT" section applies to all other sections.
+#
+
+[DEFAULT]
+logging = true
+
+[troy.adaptors.bigjob]
+enabled = true
+coordination_url = redis://cyder.cct.lsu.edu:2525
+
+[troy.adaptors.diane]
+enabled = true
+#rundir_base = /home/marksant/diane/runs/
+rundir_base = /Users/mark/proj/diane/installation/runs/
+master_host = localhost
+master_port = 8000
+
+[troy.adaptors.condor]
+enabled   = false

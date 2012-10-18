@@ -1,0 +1,68 @@
+This assumes you have access to a OSG submit node, have a working X509 proxy,
+etc.
+
+Scenario 1: To run a DIANE master on the OSG submit host (Renci)
+================================================================
+
+Install DIANE
+-------------
+mkdir ~/diane
+cd ~/diane
+wget http://cern.ch/diane/packages/diane-install
+python diane-install 2.4
+$(~/diane/install/2.4/bin/diane-env)
+
+Get the CondorSubmitter.py from
+https://github.com/saga-project/troy/tree/master/troy/adaptors/diane/OSG
+and copy it to ~/diane/submitters.
+
+Create a hello world script and runfile as per the DIANE tutorial:
+https://twiki.cern.ch/twiki/bin/view/ArdaGrid/DIANETutorial
+
+Start the master:
+$ diane-run hello.run
+
+And in another window, start the worker:
+$ diane-submitter Condor
+
+After some time, the worker should start processing tasks from the master.
+
+
+Scenario 2: To run a DIANE master somewhere and submit remotely to OSG
+======================================================================
+
+(This scenario requires a ganga installation on the remote node, the 
+steps in Scenario 1 should suffice for that.)
+
+Install DIANE
+-------------
+mkdir ~/diane
+cd ~/diane
+wget http://cern.ch/diane/packages/diane-install
+python diane-install 2.4
+$(~/diane/install/2.4/bin/diane-env)
+
+Get the EngageSubmitter.py from
+https://github.com/saga-project/troy/tree/master/troy/adaptors/diane/OSG
+and copy it to ~/diane/submitters.
+
+Create a hello world script and runfile as per the DIANE tutorial:
+https://twiki.cern.ch/twiki/bin/view/ArdaGrid/DIANETutorial
+
+Start the master:
+$ diane-run hello.run
+
+And in another window, start the worker, using something similar as the
+convenience script "remote_ganga.sh".
+
+After some time, the worker should start processing tasks from the master.
+
+
+General
+=======
+
+Jobs are submitted through Ganga. Ganga gets installed through DIANE.
+You can use "ganga" to monitor your jobs progress.
+More information can be viewed at:
+~/gangadir/workspace/$USER/LocalXML/$JOBID
+You will find here files with stderr, stdout, etc.

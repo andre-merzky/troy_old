@@ -1,13 +1,17 @@
+TROY
+====
 
-Quick links:
-============
+Introduction
+------------
 
-  overview:           http://saga-project.github.com/troy/             <br>
-  wiki:   :           https://github.com/saga-project/troy/wiki/       <br>
-  documentation:      http://saga-project.github.com/troy/docs/html/   <br>
+This is TROY, the reference implementation of the P* model.
 
+Code
+----
 
-  NOTE: the Troy development follows the 'git-flow' branching model:
-  http://nvie.com/posts/a-successful-git-branching-model/
+https://github.com/saga-project/troy
 
+Help
+----
 
+For now, you're up to yourself!

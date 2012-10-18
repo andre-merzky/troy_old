@@ -1,0 +1,20 @@
+TROY Roadmap
+============
+
+0.1 Release - Early December 2011
+---------------------------------
+* Implements all basic functionality that the API provides
+* Initial website with documentation and examples
+* Packaging and distribution
+* BigJob and DIANE adaptors
+* Settle jobs vs core vs cpu discussion
+
+0.2 Release - Q1 2012
+---------------------
+* Active engine that enquires information from adaptors
+* Condor glidein adaptor
+* Integrate with PilotData?
+
+0.3 Release - Q2 2012
+---------------------
+?

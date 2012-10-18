@@ -1,0 +1,7 @@
+import troy_diane_backend as application
+
+import os,shutil
+
+def run(input,config):
+    config.MSGMonitoring.MSG_MONITORING_ENABLED = False
+    pass

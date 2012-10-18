@@ -19,7 +19,12 @@ clean:
 	@find . -name \*.pyc -exec rm {} \;
 
 sync:
-	@git branch -D gh-pages
-	@git branch gh-pages
-	@git push --all
+	# @git branch -D gh-pages
+	# @git branch gh-pages
+	# @git push --all
+	git co gh-pages
+	git merge master
+	git ci -am 'gh-pages sync with master'
+	git co master
+	git push --all
 

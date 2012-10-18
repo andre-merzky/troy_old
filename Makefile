@@ -24,7 +24,7 @@ sync:
 	# @git push --all
 	git co gh-pages
 	git merge master
-	git ci -am 'gh-pages sync with master'
+	-git ci -am 'gh-pages sync with master'
 	git co master
 	git push --all
 

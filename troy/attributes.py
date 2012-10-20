@@ -1111,7 +1111,8 @@ class Attributes (_AttributesBase) :
         d = self._attributes_t_init (key)
 
         # check if we know about that attribute
-        if  d['attributes'][key]['flavor'] == self.Vector :
+        if  d['attributes'][key]['flavor'] == self.Vector or \
+            d['attributes'][key]['flavor'] == self.Dict :
             return True
 
         return False

@@ -173,20 +173,25 @@
 \begin{frame}[fragile] 
  \frametitle{Troy API}
  {\footnotesize
-  \begin{block}{API Example}
-   \begin{verbatim}
-t   = troy.Troy ()
-t.PilotFramework ('bigjob//lonestar')
-t.PilotFramework ('bigjob//kraken')
+ \begin{block}{API Example}
 
-s   = troy.Scheduler ('Random')
-t.add_scheduler (s)
+\begin{verbatim}
+pf1 = troy.PilotFramework ('bigjob//lonestar')
+pf2 = troy.PilotFramework ('bigjob//kraken')
 
 cpd  = troy.ComputePilotDescription ()
 pf1.submit_pilot (cpd)
 pf2.submit_pilot (cpd)
-   \end{verbatim}
-  \end{block}
+
+t   = troy.Troy ()
+t.add_pilot_framework (pf1)
+t.add_pilot_framework (pf2)
+
+s   = troy.Scheduler ('Random')
+t.add_scheduler       (s)
+\end{verbatim}
+
+ \end{block}
  }
 \end{frame}
 
@@ -194,14 +199,14 @@ pf2.submit_pilot (cpd)
  \frametitle{Troy API}
  {\footnotesize
   \begin{block}{API Example Cont.}
-   \begin{verbatim}
-cud  = troy.ComputeUnitDescription ()
+\begin{verbatim}
+cud = troy.ComputeUnitDescription ()
 
 cud['executable'] = '/bin/sh'
 cud['arguments']  = ['-c', 'touch /tmp/hello_troy_pj && sleep 10']
 
 cu  = t.submit_unit (cud)
-   \end{verbatim}
+\end{verbatim}
   \end{block}
  }
 \end{frame}
@@ -210,23 +215,17 @@ cu  = t.submit_unit (cud)
  \frametitle{Troy API}
  {\footnotesize
   \begin{block}{API Example Cont.}
-   \begin{verbatim}
-s_  = cu.state
+\begin{verbatim}
+while cu.state not in (troy.Done, troy.Failed) :
 
-while s_ != troy.State.Done and \
-      s_ != troy.State.Failed   :
-
-    print "cu : %s"  %  (str(s_))
+    print "? cu %s: %s"  %  (cu.id, cu.state)
     time.sleep (1)
-    s_ = cu.state
 
-print "cu : %s"  %  (str(s_))
+print "! cu %s: %s"  %  (cu.id, cu.state)
 
-cp1.cancel ()
-cp2.cancel ()
-
-pf.cancel ()
-   \end{verbatim}
+pf1.cancel ()
+pf2.cancel ()
+\end{verbatim}
   \end{block}
  }
 \end{frame}
@@ -235,23 +234,21 @@ pf.cancel ()
  \frametitle{Troy API}
  {\footnotesize
   \begin{block}{Scheduler}
-   \begin{verbatim}
+\begin{verbatim}
 def my_scheduler (troy, ud) :
 
-    pf_ids = troy.list_pilot_frameworks ()
     pilots = []
 
-    for pf_id in pf_ids :
-        pf    = troy.PilotFramework (pf_id)
-        p_ids = pf.list_pilots ()
+    for pf_id in troy.list_pilot_frameworks () :
+        pf = troy.PilotFramework (pf_id)
 
-        for p_id in p_ids :
-            if _ud_is_compute (ud) :
-                pilots.append (troy.ComputePilot (p_id))
-            else :
-                # ignore non-compute ud's
-                pass
-   \end{verbatim}
+        for p_id in pf.list_pilots () :
+            p = troy.ComputePilot (p_id)
+            pilots.append (p)
+
+    tgt = pilots[random.randint (0, len (pilots) - 1)]
+    return tgt.submit_unit (ud)
+\end{verbatim}
   \end{block}
  }
 \end{frame}
@@ -261,8 +258,7 @@ def my_scheduler (troy, ud) :
  {\footnotesize
   \begin{block}{Scheduler  Cont.}
    \begin{verbatim}
-    idx = random.randint (0, len  (pilots) - 1)
-    p   = pilots[idx]
+    p   = pilots[random.randint (0, len  (pilots) - 1)]
 
     return p.submit_unit (ud)
    \end{verbatim}

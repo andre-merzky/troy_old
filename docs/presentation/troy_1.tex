@@ -253,19 +253,29 @@ def my_scheduler (troy, ud) :
  }
 \end{frame}
 
+
 \begin{frame}[fragile] 
  \frametitle{Troy API}
  {\footnotesize
-  \begin{block}{Scheduler  Cont.}
+  \begin{block}{API Example + Scheduler}
    \begin{verbatim}
-    p   = pilots[random.randint (0, len  (pilots) - 1)]
+pf1 = troy.PilotFramework ('bigjob//lonestar')
+pf2 = troy.PilotFramework ('bigjob//kraken')
 
-    return p.submit_unit (ud)
+cpd  = troy.ComputePilotDescription ()
+pf1.submit_pilot (cpd)
+pf2.submit_pilot (cpd)
+
+t   = troy.Troy ()
+t.add_pilot_framework (pf1)
+t.add_pilot_framework (pf2)
+
+s = troy.Scheduler ('Random')
+t.add_scheduler    (s)
    \end{verbatim}
   \end{block}
  }
 \end{frame}
-
 
 
 \begin{frame}[fragile] 
@@ -273,16 +283,19 @@ def my_scheduler (troy, ud) :
  {\footnotesize
   \begin{block}{API Example + Scheduler}
    \begin{verbatim}
-t   = troy.Troy ()
-pf  = troy.PilotFramework ('bigjob//')
-t.add_pilot_framework (pf)
-
-s   = troy.Scheduler ('Random')
-t.add_scheduler (s)
+pf1 = troy.PilotFramework ('bigjob//lonestar')
+pf2 = troy.PilotFramework ('bigjob//kraken')
 
 cpd  = troy.ComputePilotDescription ()
-cp1  = pf.submit_pilot (cpd)
-cp2  = pf.submit_pilot (cpd)
+pf1.submit_pilot (cpd)
+pf2.submit_pilot (cpd)
+
+t   = troy.Troy ()
+t.add_pilot_framework (pf1)
+t.add_pilot_framework (pf2)
+
+                               
+t.add_scheduler    (my_scheduler)
    \end{verbatim}
   \end{block}
  }
@@ -290,44 +303,17 @@ cp2  = pf.submit_pilot (cpd)
 
 
 
-% \begin{frame}[fragile] 
-%  \frametitle{Troy API}
-%  {\footnotesize
-%    \begin{block}{API Example + Scheduler}
-%     \code
-%   \begin{Verbatim}
-%  t   = troy.Troy ()
-%  pf  = troy.PilotFramework ('bigjob//')
-%  t.add_pilot_framework (pf)
-%  
-%  
-%  t.add_scheduler (my_scheduler)
-%  
-%  cpd  = troy.ComputePilotDescription ()
-%  cp1  = pf.submit_pilot (cpd)
-%  cp2  = pf.submit_pilot (cpd)
-%    \end{Verbatim}
-%   \end{block}
-%  }
-% \end{frame}
-
-
 \begin{frame}[fragile] 
  \frametitle{Troy API}
  {\footnotesize
-   \begin{block}{API Example + Scheduler}
-  \begin{verbatim}
-t   = troy.Troy ()
-pf  = troy.PilotFramework ('bigjob//')
-t.add_pilot_framework (pf)
-
-
-t.add_scheduler (my_scheduler)
-
-cpd  = troy.ComputePilotDescription ()
-cp1  = pf.submit_pilot (cpd)
-cp2  = pf.submit_pilot (cpd)
-   \end{verbatim}
+   \begin{block}{}
+   \centering
+     ~\\
+     ~\\
+     ~\\
+     \LARGE Questions?\\
+     ~\\
+     ~
   \end{block}
  }
 \end{frame}

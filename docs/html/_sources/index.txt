@@ -4,6 +4,7 @@ Quick links:
 
  - www:  http://saga-project.github.com/troy/
  - wiki: https://github.com/saga-project/troy/wiki/
+ - note: http://xkcd.com/293/
 
 
 Troy documentation

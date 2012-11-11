@@ -76,7 +76,7 @@ class Scheduler (Base) :
         Base.__init__ (self)
 
         # RO attribute 'id'
-        self.attributes_register_  ('id', scheduler_id, self.Url, self.Scalar, self.ReadOnly)
+        self._attributes_register  ('id', scheduler_id, self.Url, self.Scalar, self.ReadOnly)
 
         # find an adaptor and initialize
         self._engine.call ('Scheduler', 'init_', self)

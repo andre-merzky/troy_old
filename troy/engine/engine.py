@@ -116,6 +116,7 @@ class Engine (object) :
                 # this adaptor failed to load, or failed the sanity check - log
                 # error and continute.
                 print "engine: init: load adaptor: " + path + " failed:\n  " + str (e)
+                # traceback.print_exc ()
                 pass
             
 
@@ -215,9 +216,11 @@ class Engine (object) :
                 print "engine: call: " + a_name     + "." + a_cname + "."    + method_name + \
                                   " (" + str (args) + str (kwargs)  + ") : " + str (e)
                 e_stack += "  " + a_name + " \t: " + str (e) + "\n";
-                print "  --- ~~~ --->"
-                traceback.print_exc ()
-                print " <--- ~~~ ---"
+
+            except Exception as e :
+                print "Engine: call: " + a_name     + "." + a_cname + "."    + method_name + \
+                                  " (" + str (args) + str (kwargs)  + ") : " + str (e)
+                e_stack += "  " + a_name + " \t: " + str (e) + "\n";
 
 
         # no adaptor succeeded

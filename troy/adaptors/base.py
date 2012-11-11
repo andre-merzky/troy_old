@@ -39,7 +39,8 @@ class aBase:
     #
     def get_priority (self) :
 
-        if not self.priority :
+        if  not hasattr (self, 'property') or \
+            not self.priority           :
             self.priority = 0  # low adaptor priority by default
 
         return 0  

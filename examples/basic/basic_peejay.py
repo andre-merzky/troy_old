@@ -44,7 +44,7 @@ def test_compute ():
 
         print " 10 -------------------------------------------- "
         print str(cu)
-        cu.attributes_dump_ ()
+        cu._attributes_dump ()
 
         s_  = cu.state
 

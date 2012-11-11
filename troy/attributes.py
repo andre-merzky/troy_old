@@ -8,6 +8,9 @@ import traceback
 import inspect
 import re
 
+import pdb; 
+
+
 # FIXME: add a tagging 'Monitorable' interface, which enables callbacks.
 # FIXME: implement URL parser checks (or Troy URL class, or use some python URL class)
 # FIXME: add an instance_data_ attribute registration to all Troy classes, and
@@ -479,10 +482,8 @@ class Attributes (_AttributesBase) :
             setter_all = d['setter']
             setter_key = d['attributes'][key]['setter']
 
-            val = d['attributes'][key]['value']
-
-            if setter_all : setter_all (self, key, val)
-            if setter_key : setter_key (self, key, val)
+            if setter_all : setter_all (self, key)
+            if setter_key : setter_key (self, key)
 
         finally :
             d['attributes'][key]['recursion'] = False
@@ -511,18 +512,8 @@ class Attributes (_AttributesBase) :
             getter_all = d['getter']
             getter_key = d['attributes'][key]['getter']
 
-            val = None
-            ok  = False
-
-            if getter_all : 
-                val = getter_all (self, key)
-                ok  = True
-            if getter_key : 
-                val = getter_key (self, key)
-                ok  = True 
-
-            if ok :
-                d['attributes'][key]['value'] = val
+            if getter_all : getter_all (self, key)
+            if getter_key : getter_key (self, key)
 
         finally :
             d['attributes'][key]['recursion'] = False

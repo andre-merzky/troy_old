@@ -9,21 +9,21 @@ class Attributator ( troy.Attributes ) :
     def __init__ (self, *args, **kwargs) :
         # setting attribs to non-extensible will cause the cal to init below to
         # complain if attributes are specified.  Default is extensible.
-        # self.attributes_extensible_ (False)
+        # self._attributes_extensible (False)
 
         # pass args to base class init (implies extensible)
         super (Attributator, self).__init__ (*args, **kwargs)
 
         # setup class attribs
-        self.attributes_register_   ('apple', 'Appel', self.Url,    self.Scalar, self.Writable)
-        self.attributes_register_   ('plum',  'Pruim', self.String, self.Scalar, self.ReadOnly)
+        self._attributes_register   ('apple', 'Appel', self.Url,    self.Scalar, self.Writable)
+        self._attributes_register   ('plum',  'Pruim', self.String, self.Scalar, self.ReadOnly)
 
-        self.attributes_register_deprecated_ ('Plum',  'plum')
+        self._attributes_register_deprecated ('Plum',  'plum')
 
         # setting attribs to non-extensible at *this* point would have allowed
         # custom user attribs on __init__ time (via args), but would then forbid
         # any additional custom attributes 
-        # self.attributes_extensible_ (False)
+        # self._attributes_extensible (False)
 
         # register a getter poll for 'plum', so that we can change values on the fly.  The
         # use case would be to, at this point, ask some backend for value updates.
@@ -58,8 +58,8 @@ class Attributator ( troy.Attributes ) :
             # returning True will keep the poller registered for further
             return True
         #################################
-        self.attributes_set_getter_ (None,    poller_all)
-        self.attributes_set_getter_ ('apple', poller)
+        self._attributes_set_getter (None,    poller_all)
+        self._attributes_set_getter ('apple', poller)
 
 
 ###########################################
@@ -101,7 +101,7 @@ if __name__ == "__main__":
     # the implementation to signal that no further changes on that
     # attribute are expected.  We use that here for demonstrating the
     # concept though.  Callback is invoked on set_final_.
-    attr.attributes_set_final_ ('apple')
+    attr._attributes_set_final ('apple')
     attr.apple = 'Abbel'
     print attr.apple 
 

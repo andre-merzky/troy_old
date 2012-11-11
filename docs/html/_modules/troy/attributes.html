@@ -58,6 +58,9 @@
 <span class="kn">import</span> <span class="nn">inspect</span>
 <span class="kn">import</span> <span class="nn">re</span>
 
+<span class="kn">import</span> <span class="nn">pdb</span><span class="p">;</span> 
+
+
 <span class="c"># FIXME: add a tagging &#39;Monitorable&#39; interface, which enables callbacks.</span>
 <span class="c"># FIXME: implement URL parser checks (or Troy URL class, or use some python URL class)</span>
 <span class="c"># FIXME: add an instance_data_ attribute registration to all Troy classes, and</span>
@@ -529,10 +532,8 @@
             <span class="n">setter_all</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s">&#39;setter&#39;</span><span class="p">]</span>
             <span class="n">setter_key</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s">&#39;attributes&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">][</span><span class="s">&#39;setter&#39;</span><span class="p">]</span>
 
-            <span class="n">val</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s">&#39;attributes&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">][</span><span class="s">&#39;value&#39;</span><span class="p">]</span>
-
-            <span class="k">if</span> <span class="n">setter_all</span> <span class="p">:</span> <span class="n">setter_all</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">setter_key</span> <span class="p">:</span> <span class="n">setter_key</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">setter_all</span> <span class="p">:</span> <span class="n">setter_all</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">setter_key</span> <span class="p">:</span> <span class="n">setter_key</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
 
         <span class="k">finally</span> <span class="p">:</span>
             <span class="n">d</span><span class="p">[</span><span class="s">&#39;attributes&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">][</span><span class="s">&#39;recursion&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
@@ -561,18 +562,8 @@
             <span class="n">getter_all</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s">&#39;getter&#39;</span><span class="p">]</span>
             <span class="n">getter_key</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s">&#39;attributes&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">][</span><span class="s">&#39;getter&#39;</span><span class="p">]</span>
 
-            <span class="n">val</span> <span class="o">=</span> <span class="bp">None</span>
-            <span class="n">ok</span>  <span class="o">=</span> <span class="bp">False</span>
-
-            <span class="k">if</span> <span class="n">getter_all</span> <span class="p">:</span> 
-                <span class="n">val</span> <span class="o">=</span> <span class="n">getter_all</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-                <span class="n">ok</span>  <span class="o">=</span> <span class="bp">True</span>
-            <span class="k">if</span> <span class="n">getter_key</span> <span class="p">:</span> 
-                <span class="n">val</span> <span class="o">=</span> <span class="n">getter_key</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-                <span class="n">ok</span>  <span class="o">=</span> <span class="bp">True</span> 
-
-            <span class="k">if</span> <span class="n">ok</span> <span class="p">:</span>
-                <span class="n">d</span><span class="p">[</span><span class="s">&#39;attributes&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">][</span><span class="s">&#39;value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+            <span class="k">if</span> <span class="n">getter_all</span> <span class="p">:</span> <span class="n">getter_all</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">getter_key</span> <span class="p">:</span> <span class="n">getter_key</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
 
         <span class="k">finally</span> <span class="p">:</span>
             <span class="n">d</span><span class="p">[</span><span class="s">&#39;attributes&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">][</span><span class="s">&#39;recursion&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>

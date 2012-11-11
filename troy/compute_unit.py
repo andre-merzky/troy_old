@@ -76,17 +76,17 @@ class ComputeUnit (Base) :
         Base.__init__ (self)
 
         # prepare supported attributes
-        self.attributes_register_  ('id',             None,      self.Url,    self.Scalar, self.ReadOnly)
-        self.attributes_register_  ('state',          State.New, self.Enum,   self.Scalar, self.ReadOnly)
-        self.attributes_register_  ('state_detail',   None,      self.String, self.Scalar, self.ReadOnly)
-        self.attributes_register_  ('description',    None,      self.Any,    self.Scalar, self.ReadOnly)
-        self.attributes_register_  ('pilot',          None,      self.Url,    self.Scalar, self.ReadOnly)
-        self.attributes_register_  ('framework',      None,      self.Url,    self.Scalar, self.ReadOnly)
+        self._attributes_register  ('id',             None,      self.Url,    self.Scalar, self.ReadOnly)
+        self._attributes_register  ('state',          State.New, self.Enum,   self.Scalar, self.ReadOnly)
+        self._attributes_register  ('state_detail',   None,      self.String, self.Scalar, self.ReadOnly)
+        self._attributes_register  ('description',    None,      self.Any,    self.Scalar, self.ReadOnly)
+        self._attributes_register  ('pilot',          None,      self.Url,    self.Scalar, self.ReadOnly)
+        self._attributes_register  ('framework',      None,      self.Url,    self.Scalar, self.ReadOnly)
 
         # we register callbacks to pull variable object state from the backend
         # / adaptor.
-        self.attributes_set_getter_ ('state',           self._pull_state)
-        self.attributes_set_getter_ ('state_detail',    self._pull_state)
+        self._attributes_set_getter ('state',           self._pull_state)
+        self._attributes_set_getter ('state_detail',    self._pull_state)
 
         # initialize id
         self.id = id

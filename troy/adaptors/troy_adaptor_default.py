@@ -51,7 +51,7 @@ class default_troy (troy.interface.iTroy) :
 
             # id is none - init new instance, assign an id
             self.id = "default_troy_%d"  %  self.adaptor.get_serial_ ()
-            self.api.attributes_i_set_ ('id', self.id)
+            self.api._attributes_i_set ('id', self.id)
 
             # register this instance in the adaptor for state persistency
             self.adaptor.adata_['default_troy'][self.id] = self
@@ -63,11 +63,11 @@ class default_troy (troy.interface.iTroy) :
                 # re-create the class state.
                 print "default_troy : will re-use existing instance " + id
                 old = self.adaptor.adata_['default_troy'][self.id]
-            
+
                 # sync all instance data from that registered version
-                self.api.attributes_i_set_ ('id', self.id)
-                self.api.attributes_i_set_ ('pilot_frameworks', old.api['pilot_frameworks'])
-                self.api.attributes_i_set_ ('schedulers',       old.api['schedulers'])
+                self.api._attributes_i_set ('id', self.id)
+                self.api._attributes_i_set ('pilot_frameworks', old.api['pilot_frameworks'])
+                self.api._attributes_i_set ('schedulers',       old.api['schedulers'])
 
             else : 
                 # The CUS instance was created by another adaptor.
@@ -151,20 +151,24 @@ class default_troy (troy.interface.iTroy) :
             Keyword arguments:
             pf -- PilotFramework to be used by this Troy instance.
 
-            FIXME: pf can be id or instance
+            PF can be id or instance
         """
+        pf_instance = None
+
         if isinstance (pf, basestring) :
             try :
-                instance = troy.pilot_framework (pf)
-                self.api['pilot_frameworks'].append (instance)
+                pf_instance = troy.pilot_framework (pf)
             except :
-                raise troy.Exception (troy.Error.BadParameter, 
-                      "Cannot handle pf id")
+                raise troy.Exception (troy.Error.BadParameter, "Cannot handle pf id")
+
         elif isinstance (pf, troy.PilotFramework) :
-            self.api['pilot_frameworks'].append (pf)
+            pf_instance = pf
+
         else :
             raise troy.Exception (troy.Error.BadParameter, 
                 "Cannot handle pf (expected string ID or troy.PilotFramework type")
+
+        self.api['pilot_frameworks'].append (pf_instance)
 
 
     ############################################################################

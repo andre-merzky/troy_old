@@ -70,17 +70,17 @@ class PilotFramework (Base) :
         Base.__init__ (self)
 
         # prepare supported attributes
-        self.attributes_register_  ('id',     None,  self.Url, self.Scalar, self.ReadOnly)
-        self.attributes_register_  ('pilots', [],    self.Url, self.Vector, self.ReadOnly)
-        self.attributes_register_  ('units',  [],    self.Url, self.Vector, self.ReadOnly)
+        self._attributes_register  ('id',     None,  self.Url, self.Scalar, self.ReadOnly)
+        self._attributes_register  ('pilots', [],    self.Url, self.Vector, self.ReadOnly)
+        self._attributes_register  ('units',  [],    self.Url, self.Vector, self.ReadOnly)
 
         # we register callbacks to push and pull variable object state to the
         # backend / adaptor.
-        self.attributes_set_getter_ ('pilots', self._pull_state)
-        self.attributes_set_getter_ ('units',  self._pull_state)
+        self._attributes_set_getter ('pilots', self._pull_state)
+        self._attributes_set_getter ('units',  self._pull_state)
 
-        self.attributes_set_setter_ ('pilots', self._push_state)
-        self.attributes_set_setter_ ('units',  self._push_state)
+        self._attributes_set_setter ('pilots', self._push_state)
+        self._attributes_set_setter ('units',  self._push_state)
 
         # initialize id
         self.id = id

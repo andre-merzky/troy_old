@@ -123,9 +123,8 @@ class adaptor (aBase) :
         # For the purpose of this skeleton adaptor, we load a dummy backend
         # module.
         try :
+            (f, p, d)    = imp.find_module ('peejay', ['/home/merzky/saga/peejay/'])
             self.backend = imp.load_module ('backend', f, p, d)
-            if 1 < 2 :
-                print "loading skeleton adaptor"
 
         except Exception as e :
             print ' could not load skeleton adaptor: ' + str (e)
@@ -358,7 +357,7 @@ class skeleton_cp (troy.interface.iComputePilot) :
         # attributes, so pull state from backend once.
         self.sync_backend_state ()
         
-        self.api.framework   = self.pilot.get_pf_id       ()
+        self.api.framework   = self.pilot.get_master_id   ()
         self.api.description = self.pilot.get_description ()
         self.api.units       = self.pilot.list_jobs       ()
 
@@ -451,7 +450,7 @@ class skeleton_cp (troy.interface.iComputePilot) :
         job.framework   = self.api.framework
 
         # register cu for later state checks etc.
-        self.api.attributes_dump_ ()
+        self.api._attributes_dump ()
         self.api['units'].append (job_id)
 
         return troy.ComputeUnit (job_id)
@@ -511,16 +510,15 @@ class skeleton_cu (troy.interface.iComputeUnit) :
             raise troy.Exception (troy.Error.NoSuccess, 
                     "skeleton needs an id to reconnect to a cu")
 
-        self.api.attributes_dump_ ()
+        self.api._attributes_dump ()
         self.job = self.backend.job (self.api.id)
 
         # we need to make sure that this CU instance has all required attributes
         self.sync_backend_state ()
-        # sets self.api.state
-        # sets self.api.state_detail
+        # sets self.api.state / self.api.state_detail
 
         self.api.pilot       = self.job.get_pilot_id    ()
-        self.api.framework   = self.job.get_pf_id       ()
+        self.api.framework   = self.job.get_master_id   ()
         self.api.description = self.job.get_description ()
 
         # make sure that this CU instance is watched by the adaptor's watcher

@@ -98,18 +98,18 @@ class DataPilotDescription (Attributes) :
     def __init__ (self) :
 
         # define supported attributes
-        self.attributes_register_  ('size',                     1,    self.Int,    self.Scalar, self.Writable)
-        self.attributes_register_  ('queue',                    None, self.String, self.Scalar, self.Writable)
-        self.attributes_register_  ('project',                  None, self.String, self.Scalar, self.Writable)
-        self.attributes_register_  ('candidate_hosts',          None, self.String, self.Vector, self.Writable)
-        self.attributes_register_  ('wall_time_limit',          None, self.Time,   self.Scalar, self.Writable)
-        self.attributes_register_  ('start_time',               None, self.Time,   self.Scalar, self.Writable)
-        self.attributes_register_  ('contact',                  None, self.String, self.Vector, self.Writable)
-        self.attributes_register_  ('affinity_datacenter_label',None, self.String, self.Scalar, self.Writable)
-        self.attributes_register_  ('affinity_machine_label',   None, self.String, self.Scalar, self.Writable)
+        self._attributes_register  ('size',                     1,    self.Int,    self.Scalar, self.Writable)
+        self._attributes_register  ('queue',                    None, self.String, self.Scalar, self.Writable)
+        self._attributes_register  ('project',                  None, self.String, self.Scalar, self.Writable)
+        self._attributes_register  ('candidate_hosts',          None, self.String, self.Vector, self.Writable)
+        self._attributes_register  ('wall_time_limit',          None, self.Time,   self.Scalar, self.Writable)
+        self._attributes_register  ('start_time',               None, self.Time,   self.Scalar, self.Writable)
+        self._attributes_register  ('contact',                  None, self.String, self.Vector, self.Writable)
+        self._attributes_register  ('affinity_datacenter_label',None, self.String, self.Scalar, self.Writable)
+        self._attributes_register  ('affinity_machine_label',   None, self.String, self.Scalar, self.Writable)
 
         # custom attributes are not allowed.
-        self.attributes_extensible_ (False)
+        self._attributes_extensible (False)
 
 
 

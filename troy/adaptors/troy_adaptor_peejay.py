@@ -50,6 +50,7 @@ class adaptor (aBase) :
         
         # duh!
         self.name     = 'troy_adaptor_peejay'
+        self.priority = 1
 
         # The registry maps api interface classes to the adaptor classes 
         # implementing them:
@@ -81,15 +82,15 @@ class adaptor (aBase) :
         # try lo load peejay
         try :
             (f, p, d)   = imp.find_module ('peejay', ['/home/merzky/saga/peejay/'])
-            self.module = imp.load_module ('peejay', f, p, d)
+            self.backend = imp.load_module ('peejay', f, p, d)
         except Exception as e :
             print ' ======== could not load peejay adaptor: ' + str (e)
-            raise troy.Exception (Error.NoSuccess, 'Could not load the peejay module')
+            raise troy.Exception (Error.NoSuccess, 'Could not load the peejay backend')
 
         # Hey, we can use peejay objects now!  Like this:
-        # self.module.state.New
+        # self.backend.state.New
 
-        # FIXME: disable module for now, so that we can test bigjob :P
+        # FIXME: disable backend for now, so that we can test bigjob :P
         # raise troy.Exception (Error.NoSuccess, 'disabling peejay adaptor')
     
 
@@ -115,7 +116,7 @@ class peejay_pf (troy.interface.iPilotFramework) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.peejay  = self.adaptor.module
+        self.peejay  = self.adaptor.backend
 
         # we accept two types of id URLs: complete and incomplete ones.
         # Complete ones (peejay:///path) are interpreted as ID, and are used to
@@ -156,6 +157,7 @@ class peejay_pf (troy.interface.iPilotFramework) :
 
     def _pull_state (self, obj, key) :
         self._sync_backend_state ()
+
 
     def _sync_backend_state (self) :
         pass
@@ -206,7 +208,7 @@ class peejay_cp (troy.interface.iComputePilot) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.peejay  = self.adaptor.module
+        self.peejay  = self.adaptor.backend
 
         # we MUST interpret cp_id, if present.  In fact, we need to have an id,
         # as creation is always done in the CPF
@@ -309,7 +311,7 @@ class peejay_cp (troy.interface.iComputePilot) :
         job.framework   = self.api.framework
 
         # register cu for later state checks etc.
-        self.api.attributes_dump_ ()
+        self.api._attributes_dump ()
         self.api['units'].append (job_id)
 
         return troy.ComputeUnit (job_id)
@@ -350,7 +352,7 @@ class peejay_cu (troy.interface.iComputeUnit) :
 
         self.api     = api 
         self.adaptor = adaptor
-        self.peejay  = self.adaptor.module
+        self.peejay  = self.adaptor.backend
 
         # we MUST interpret cu_id, if present.  In fact, we need to have an id,
         # as creation is always done in the CUS
@@ -358,13 +360,12 @@ class peejay_cu (troy.interface.iComputeUnit) :
             raise troy.Exception (troy.Error.NoSuccess, 
                     "peejay needs an id to reconnect to a cu")
 
-        self.api.attributes_dump_ ()
+        self.api._attributes_dump ()
         self.job = self.peejay.job (self.api.id)
 
         # we need to make sure that this CU instance has all required attributes
         self._sync_backend_state ()
-        # sets self.api.state
-        # sets self.api.state_detail
+        # sets self.api.state / self.api.state_detail
 
         self.api.pilot       = self.job.get_pilot_id ()
         self.api.framework   = self.job.get_master_id ()

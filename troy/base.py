@@ -54,10 +54,10 @@ class Base (Attributes, object):
         # _idata    : adaptor specific instance data      
         # _contexts : list of security context dicts      
 
-        self.attributes_register_  ('_engine',   engine.Engine(), self.Any, self.Scalar, self.ReadOnly)
-        self.attributes_register_  ('_adaptors', {},              self.Any, self.Scalar, self.ReadOnly)
-        self.attributes_register_  ('_idata',    {},              self.Any, self.Scalar, self.ReadOnly)
-        self.attributes_register_  ('_contexts', [],              self.Any, self.Scalar, self.ReadOnly)
+        self._attributes_register  ('_engine',   engine.Engine(), self.Any, self.Scalar, self.ReadOnly)
+        self._attributes_register  ('_adaptors', {},              self.Any, self.Scalar, self.ReadOnly)
+        self._attributes_register  ('_idata',    {},              self.Any, self.Scalar, self.ReadOnly)
+        self._attributes_register  ('_contexts', [],              self.Any, self.Scalar, self.ReadOnly)
 
 
     def dump_ (self) :

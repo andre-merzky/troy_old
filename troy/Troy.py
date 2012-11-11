@@ -69,17 +69,17 @@ class Troy (Base) :
         Base.__init__ (self)
 
         # prepare supported attributes
-        self.attributes_register_  ('id',               None, self.Url, self.Scalar, self.ReadOnly)
-        self.attributes_register_  ('pilot_frameworks', [],   self.Any, self.Vector, self.Writable)
-        self.attributes_register_  ('schedulers',       [],   self.Any, self.Vector, self.Writable)
+        self._attributes_register  ('id',               None, self.Url, self.Scalar, self.ReadOnly)
+        self._attributes_register  ('pilot_frameworks', [],   self.Any, self.Vector, self.Writable)
+        self._attributes_register  ('schedulers',       [],   self.Any, self.Vector, self.Writable)
 
         # we register callbacks to push and pull variable object state to the
         # backend / adaptor.
-        self.attributes_set_getter_ ('pilot_frameworks', self._pull_state)
-        self.attributes_set_getter_ ('schedulers',       self._pull_state)
+        self._attributes_set_getter ('pilot_frameworks', self._pull_state)
+        self._attributes_set_getter ('schedulers',       self._pull_state)
 
-        self.attributes_set_setter_ ('pilot_frameworks', self._push_state)
-        self.attributes_set_setter_ ('schedulers',       self._push_state)
+        self._attributes_set_setter ('pilot_frameworks', self._push_state)
+        self._attributes_set_setter ('schedulers',       self._push_state)
 
         # initialize id
         self.id = id

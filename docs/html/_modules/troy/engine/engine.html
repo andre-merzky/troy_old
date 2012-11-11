@@ -166,6 +166,7 @@
                 <span class="c"># this adaptor failed to load, or failed the sanity check - log</span>
                 <span class="c"># error and continute.</span>
                 <span class="k">print</span> <span class="s">&quot;engine: init: load adaptor: &quot;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s">&quot; failed:</span><span class="se">\n</span><span class="s">  &quot;</span> <span class="o">+</span> <span class="nb">str</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="c"># traceback.print_exc ()</span>
                 <span class="k">pass</span>
             
 
@@ -265,9 +266,11 @@
                 <span class="k">print</span> <span class="s">&quot;engine: call: &quot;</span> <span class="o">+</span> <span class="n">a_name</span>     <span class="o">+</span> <span class="s">&quot;.&quot;</span> <span class="o">+</span> <span class="n">a_cname</span> <span class="o">+</span> <span class="s">&quot;.&quot;</span>    <span class="o">+</span> <span class="n">method_name</span> <span class="o">+</span> \
                                   <span class="s">&quot; (&quot;</span> <span class="o">+</span> <span class="nb">str</span> <span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span> <span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>  <span class="o">+</span> <span class="s">&quot;) : &quot;</span> <span class="o">+</span> <span class="nb">str</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span>
                 <span class="n">e_stack</span> <span class="o">+=</span> <span class="s">&quot;  &quot;</span> <span class="o">+</span> <span class="n">a_name</span> <span class="o">+</span> <span class="s">&quot; </span><span class="se">\t</span><span class="s">: &quot;</span> <span class="o">+</span> <span class="nb">str</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-                <span class="k">print</span> <span class="s">&quot;  --- ~~~ ---&gt;&quot;</span>
-                <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span> <span class="p">()</span>
-                <span class="k">print</span> <span class="s">&quot; &lt;--- ~~~ ---&quot;</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span> <span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;Engine: call: &quot;</span> <span class="o">+</span> <span class="n">a_name</span>     <span class="o">+</span> <span class="s">&quot;.&quot;</span> <span class="o">+</span> <span class="n">a_cname</span> <span class="o">+</span> <span class="s">&quot;.&quot;</span>    <span class="o">+</span> <span class="n">method_name</span> <span class="o">+</span> \
+                                  <span class="s">&quot; (&quot;</span> <span class="o">+</span> <span class="nb">str</span> <span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span> <span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>  <span class="o">+</span> <span class="s">&quot;) : &quot;</span> <span class="o">+</span> <span class="nb">str</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="n">e_stack</span> <span class="o">+=</span> <span class="s">&quot;  &quot;</span> <span class="o">+</span> <span class="n">a_name</span> <span class="o">+</span> <span class="s">&quot; </span><span class="se">\t</span><span class="s">: &quot;</span> <span class="o">+</span> <span class="nb">str</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 
 
         <span class="c"># no adaptor succeeded</span>

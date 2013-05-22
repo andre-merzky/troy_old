@@ -1,6 +1,0 @@
-
-Engine
-======
-
-.. automodule:: troy.engine
-

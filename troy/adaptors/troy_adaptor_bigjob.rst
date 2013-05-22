@@ -3,6 +3,6 @@ TroyAdaptorPeejay
 =================
 
 .. comment
-   autoclass::  troy.adaptors.TroyAdaptorPeejay
+   autoclass::  troy.adaptors.TroyAdaptorBigJob
    :members:
 

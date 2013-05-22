@@ -1,0 +1,8 @@
+
+include troy/*.py
+include troy/interface/*.py
+include troy/engine/*.py
+include troy/adaptors/*.py
+
+include MANIFEST.in README.md LICENSE CHANGES
+

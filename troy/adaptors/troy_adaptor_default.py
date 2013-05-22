@@ -24,7 +24,7 @@ class adaptor (aBase) :
 
 
     def sanity_check (self) :
-      # raise troy.Exception (Error.NoSuccess, "adaptor disabled")
+      # raise troy.Exception (troy.Error.NoSuccess, "adaptor disabled")
         pass
 
 
@@ -84,42 +84,34 @@ class default_troy (troy.interface.iTroy) :
 
 
     ############################################################################
-    def add_scheduler (self, bs) :
+    def add_scheduler (self, s) :
         """ 
         Add a Backend Scheduler to this Troy instance.
 
         Keyword arguments:
-        bs -- Backend Scheduler to be used by this Troy instance.
+        s -- Backend Scheduler to be used by this Troy instance.
 
-        FIXME: bs can be id or instance
         """
-        if isinstance (bs, basestring) :
-            try :
-                instance = troy.BackendScheduler (bs)
-                self.api['schedulers'].append (instance)
-            except :
-                raise troy.Exception (troy.Error.BadParameter, 
-                      "Cannot handle bs id")
-        elif isinstance (bs, troy.Scheduler) :
-            self.api['schedulers'].append (bs)
-        else :
+        if  not   isinstance (s, troy.Scheduler) :
             raise troy.Exception (troy.Error.BadParameter, 
-                "Cannot handle bs (expected string ID or troy.Scheduler type")
+                  "not a troy.Scheduler")
 
+        self.api['schedulers'].append(s)
+        
 
     ############################################################################
     def list_schedulers (self) :
         """ List all Backend Scheduler IDs of this Troy instance """
         ret = []
 
-        for bs in self.api['schedulers'] :
-            ret.append (bs.id)
+        for s in self.api['schedulers'] :
+            ret.append (s.id)
 
         return ret
 
 
     ############################################################################
-    def remove_scheduler (self, bs) :
+    def remove_scheduler (self, s) :
         """ 
         Remove a Scheduler
 
@@ -127,21 +119,14 @@ class default_troy (troy.interface.iTroy) :
         just no longer receive any work units from this Troy instance
 
         Keyword arguments:
-        bs -- The Scheduler to remove 
+        s -- The Scheduler to remove 
         """
-        if isinstance (bs, basestring) :
-            try :
-                instance = troy.scheduler (bs)
-                self.api['schedulers'].remove (instance)
-            except :
-                raise troy.Exception (troy.Error.BadParameter, 
-                      "Cannot handle bs id")
-        elif isinstance (bs, troy.Scheduler) :
-            self.api['schedulers'].remove (bs)
-        else :
-            raise troy.Exception (troy.Error.BadParameter, 
-                "Cannot handle scheduler (expected string ID or troy.Scheduler type")
 
+        if  not   isinstance (s, troy.Scheduler) :
+            raise troy.Exception (troy.Error.BadParameter, 
+                  "not a troy.Scheduler")
+
+        self.api['schedulers'].remove (s)
 
 
     ############################################################################
@@ -220,11 +205,12 @@ class default_troy (troy.interface.iTroy) :
         """
 
         error = ""
+        print "SCHEDULERS:"
         for scheduler in self.api['schedulers'] :
             try :
                 return scheduler.schedule (self.api, ud)
             except troy.Exception as e :
-                error += "e.msg\n";
+                error += str(e) + "\n"
 
         raise troy.Exception (troy.Error.BadParameter, 
             "No scheduler algorithm managed to assign the unit to any of the " + \

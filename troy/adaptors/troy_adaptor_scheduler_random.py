@@ -10,8 +10,8 @@ from   troy.exception     import Exception, Error
 
 ########################################################################
 # 
-# This TROY adaptor implements a simple random scheduler, which schedules (as
-# the above suggests) 
+# This TROY adaptor implements a simple random scheduler, which schedules 
+# (as the above suggests) 
 #   
 # Note: http://xkcd.com/221/
 
@@ -80,14 +80,20 @@ class scheduler_random (troy.interface.iScheduler) :
 
         # gather all available pilots
         for pf_id in pf_ids :
-            pf        = troy.PilotFramework (pf_id)
+            print "PILOT_FRAMEWORK"
+            print pf_id
+            pf    = troy.PilotFramework (pf_id)
             p_ids = pf.list_pilots ()
+            print "have pf: %s" % pf
 
             for p_id in p_ids :
+                print "PILOT"
+                print p_id
                 try :
                     if self.ud_is_compute (ud) :
-                        pilots.append (troy.ComputePilot (p_id))
-                        print "1"
+                        p = troy.ComputePilot (p_id)
+                        print p
+                        pilots.append (p)
                     elif self.ud_is_data (ud) :
                         pilots.append (troy.DataPilot (p_id))
                     else :

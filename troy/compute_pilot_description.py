@@ -137,6 +137,11 @@ class ComputePilotDescription (Attributes) :
         self._attributes_register  ('affinity_datacenter_label',None, self.String, self.Scalar, self.Writable)
         self._attributes_register  ('affinity_machine_label',   None, self.String, self.Scalar, self.Writable)
 
+        # FIXME: the attribs below are for BJ
+        self._attributes_register  ('service_url',              None, self.String, self.Scalar, self.Writable)
+        self._attributes_register  ('working_directory',        None, self.String, self.Scalar, self.Writable)
+        self._attributes_register  ('number_of_processes',      None, self.String, self.Scalar, self.Writable)
+
         # custom attributes are not allowed.
         self._attributes_extensible (False)
 

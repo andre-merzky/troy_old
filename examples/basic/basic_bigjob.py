@@ -1,92 +1,85 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
 
 import troy
+import time
+import pdb
 
-COORDINATION_URL = "advert://localhost/?dbtype=sqlite3"
+PF_URL = "bigjob+redis://ILikeBigJob_wITH-REdIS@gw68.quarry.iu.teragrid.org:6379"
+PF_URL = "bigjob+redis://localhost:6379"
 
 def test_compute ():
     # try:
-        cpd = troy.pilot.ComputePilotDescription ()
-        cpd['rm'] = 'fork://localhost'
+        print " 1 -------------------------------------------- "
+        t   = troy.Troy ()
+        print " 2 -------------------------------------------- "
+        pf  = troy.PilotFramework (PF_URL)
 
-        cpf = troy.pilot.ComputePilotFramework ('bigjob://localhost/')
-        cp1 = cpf.submit_pilot (cpd)
-        cp2 = cpf.submit_pilot (cpd)
+        print " 3 -------------------------------------------- "
+        t.add_pilot_framework (pf)
 
-        print "--------------------"
-        cpf.dump_()
-        print "--------------------"
+        print " 4 -------------------------------------------- "
+        s   = troy.Scheduler ('Random')
+        print "RANDOM"
+        print str(s)
+        t.add_scheduler (s)
 
-        cus = troy.pilot.ComputeUnitService ()
+        print " 5 -------------------------------------------- "
+        cpd  = troy.ComputePilotDescription ()
 
-        print "--------------------"
-        cus.dump_()
-        print "--------------------"
+        cpd.service_url         = 'fork://localhost'
+        cpd.working_directory   = '/home/merzky/.bigjob/agent'
+        cpd.number_of_processes = 1
 
 
-        cus.add_compute_pilot (cp1)
-        cus.add_compute_pilot (cp2)
+        print " 6 -------------------------------------------- "
+        cp1  = pf.submit_pilot (cpd)
 
-        print "--------------------"
-        cus.dump_()
-        print "--------------------"
+        print " 7 -------------------------------------------- "
+        cp2  = pf.submit_pilot (cpd)
 
-        print str(cus.list_compute_pilots ())
+        print " 8 -------------------------------------------- "
 
-        cud = troy.pilot.ComputeUnitDescription ()
+        for id in t.list_pilot_frameworks () :
+            print "pf: " + str (id) + " : "
+            print "    " + str (troy.PilotFramework(id).list_pilots())
 
-        cud['executable'] = '/bin/sh'
-        cud['arguments']  = ['-c', 'touch /tmp/hello_troy_bj && sleep 10']
+        print " 9 -------------------------------------------- "
+        cud  = troy.ComputeUnitDescription ()
 
-        cu  = cus.submit_compute_unit (cud)
+        cud['executable'] = '/usr/bin/touch'
+        cud['arguments']  = ['/tmp/hello_troy_pj']
 
-        cu.wait ()
+        print " 10 ------------------------------------------- "
+        cu  = t.submit_unit (cud)
 
+        print " 11 ------------------------------------------- "
+        s_  = cu.state
+
+        while s_ != troy.State.Done and \
+              s_ != troy.State.Failed   :
+
+            print "cu : %s"  %  (str(s_))
+            time.sleep (1)
+          # from pudb import set_trace; set_trace()
+            s_ = cu.state
+
+        print "cu : %s"  %  (str(s_))
+
+        print " 11 -------------------------------------------- "
         cp1.cancel ()
         cp2.cancel ()
- 
-    # except Exception, e:
-        # print str (e)
-
-
-def test_data ():
-    # try:
-        dpd = troy.pilot.DataPilotDescription ()
-        dpf = troy.pilot.DataPilotFramework ('file://localhost')
-        dp  = dpf.submit_pilot (dpd)
-
-        dus = troy.pilot.DataUnitService ()
-        dus.add_data_pilot (dp)
-
-        dud = troy.pilot.DataUnitDescription ()
-        du  = dus.submit_data_unit (dud)
+        print " 12 ------------------------------------------- "
+        pf.cancel ()
  
     # except Exception, e:
     #     print str (e)
 
-
-def test_pilot ():
-    # try:
-        cpd = troy.pilot.ComputePilotDescription ()
-        cpf = troy.pilot.ComputePilotFramework ('fork://localhost')
-        cp  = cpf.submit_pilot (cpd)
-
-        cus = troy.pilot.ComputeUnitService ()
-        cus.add_compute_pilot (cp)
-
-        cud = troy.pilot.ComputeUnitDescription ()
-        cu  = cus.submit_compute_unit (cud)
- 
-    # except Exception, e:
-    #     print str (e)
 
  
 def main():
     test_compute ()
-    # test_data    ()
-    # test_pilot   ()
 
 if __name__ == '__main__':
     main()

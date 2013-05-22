@@ -8,6 +8,25 @@ import troy.exception
 
 
 def _EngineSingleton (stype) : 
+
+    instances = {}
+
+    def _EngineSingleton () :
+
+        if stype not in instances :
+            instances[stype] = stype ()
+        
+        return instances[stype]
+
+    _EngineSingleton.__doc__  = stype.__doc__
+    _EngineSingleton.__repr__ = stype.__repr__
+    
+    return _EngineSingleton
+
+
+@_EngineSingleton
+class Engine (object) :
+
     """
     .. py:class:: troy.engine.Engine (object)
 
@@ -36,23 +55,6 @@ def _EngineSingleton (stype) :
        (i.e. does not raise and exception).  
 
     """
-
-    instances = {}
-
-    def _EngineSingleton () :
-
-        if stype not in instances :
-            instances[stype] = stype ()
-        
-        return instances[stype]
-
-    _EngineSingleton.__doc__  = stype.__doc__
-    _EngineSingleton.__repr__ = stype.__repr__
-    
-    return _EngineSingleton
-
-@_EngineSingleton
-class Engine (object) :
 
     ##########################################################################
     # 
@@ -118,6 +120,9 @@ class Engine (object) :
                 print "engine: init: load adaptor: " + path + " failed:\n  " + str (e)
                 # traceback.print_exc ()
                 pass
+
+        import pprint
+        pprint.pprint (self.adaptors)
             
 
     ##########################################################################
@@ -169,6 +174,7 @@ class Engine (object) :
                                          reverse = True)
 
 
+        print ordered_adaptor_tuples
         for a_tuple in ordered_adaptor_tuples :
 
             a_name = a_tuple[0]
@@ -182,10 +188,14 @@ class Engine (object) :
 
                 if class_name in a_registry :
                     pass
+
                 a_cname    = a_registry[class_name]      # name of adaptor class
                                                          # implementing the requested 
                                                          # api class
                 a_class    = api_class._adaptors[a_name]['a_class'] # old adaptor class | None
+
+              # from pudb import set_trace; set_trace()
+
 
                 # this module/adaptor combo can in principle work.  Now we have
                 # to check if the api class used that adaptor before - and if
@@ -206,27 +216,35 @@ class Engine (object) :
                 # tried on the next method call on that api class instance
                 api_class._adaptors[a_name]['success'] += 1
 
-                print "engine: call: " + a_name     + "." + a_cname + "." + method_name + \
+                print "engine: call  ok: " + a_name     + "." + a_cname + "." + method_name + \
                                   " (" + str (args) + str (kwargs)  + ") = " + str (ret)
                 return ret
 
             # this adaptor failed to successfully call the method - we log the
             # error and the next adaptor is tried
             except troy.Exception as e :
-                print "engine: call: " + a_name     + "." + a_cname + "."    + method_name + \
+                print "engine: call nok: " + a_name     + "." + a_cname + "."    + method_name + \
                                   " (" + str (args) + str (kwargs)  + ") : " + str (e)
                 e_stack += "  " + a_name + " \t: " + str (e) + "\n";
+              # print "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+              # traceback.print_exc ()
+              # print "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
             except Exception as e :
-                print "Engine: call: " + a_name     + "." + a_cname + "."    + method_name + \
-                                  " (" + str (args) + str (kwargs)  + ") : " + str (e)
+                print "Engine: call NOK: " + a_name     + "." + a_cname + "."    + method_name + \
+                                  " (" + str (args) + str (kwargs)  + ") : '" + str (e) + "'"
                 e_stack += "  " + a_name + " \t: " + str (e) + "\n";
+              # print "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+              # traceback.print_exc ()
+              # print "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
 
         # no adaptor succeeded
-        if e_stack == "" :
+        if  e_stack == "" :
             e_stack = "  Bummer, no adaptors loaded.  None at all!"
 
+        print "ooops: %s" % e_stack
+        import sys; sys.exit (0)
         raise troy.Exception (troy.Error.NoSuccess, "no valid adaptor found:\n" + e_stack)        
 
 

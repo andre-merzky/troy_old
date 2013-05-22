@@ -39,10 +39,12 @@ class adaptor (aBase) :
         while True :
             for pilot_id in self.watch['cp'] :
                 pilot = self.watch['cp'][pilot_id]
-                state = pilot._sync_backend_state () 
+                if pilot :
+                    state = pilot._sync_backend_state () 
             for job_id in self.watch['cu'] :
                 pilot = self.watch['cu'][job_id]
-                state = pilot._sync_backend_state () 
+                if pilot :
+                    state = pilot._sync_backend_state () 
             sleep (1)
 
 
@@ -77,11 +79,12 @@ class adaptor (aBase) :
 
 
     def sanity_check (self) :
-        # raise troy.Exception (Error.NoSuccess, "adaptor disabled")
+
+        raise troy.Exception (Error.NoSuccess, "adaptor disabled")
         
         # try lo load peejay
         try :
-            (f, p, d)   = imp.find_module ('peejay', ['/home/merzky/saga/peejay/'])
+            (f, p, d)    = imp.find_module ('peejay', ['/home/merzky/saga/peejay/'])
             self.backend = imp.load_module ('peejay', f, p, d)
         except Exception as e :
             print ' ======== could not load peejay adaptor: ' + str (e)

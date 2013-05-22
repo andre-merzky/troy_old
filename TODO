@@ -1,0 +1,12 @@
+
+
+  - Ashley's requirements for scheduling:
+    - task dependencies? (2)
+    - pilot (1)
+      - walltime of pilot
+      - pilot description (size, memory)
+      - queue waiting time estimates (?)
+    - information service (3)
+      - connectivity (where to where)?
+      - application profiles, app runtime estimates, etc
+

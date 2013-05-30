@@ -4,10 +4,12 @@
 
 import troy
 import time
-import pdb
+import pudb
 
 PF_URL = "bigjob+redis://ILikeBigJob_wITH-REdIS@gw68.quarry.iu.teragrid.org:6379"
 PF_URL = "bigjob+redis://localhost:6379"
+
+pudb.set_interrupt_handler ()
 
 def test_compute ():
     # try:
@@ -20,7 +22,8 @@ def test_compute ():
         t.add_pilot_framework (pf)
 
         print " 4 -------------------------------------------- "
-        s   = troy.Scheduler ('Random')
+      # pudb.set_trace()
+        s   = troy.Scheduler ('RandomOrNot')
         print "RANDOM"
         print str(s)
         t.add_scheduler (s)
@@ -62,7 +65,7 @@ def test_compute ():
 
             print "cu : %s"  %  (str(s_))
             time.sleep (1)
-          # from pudb import set_trace; set_trace()
+          # pudb.set_trace()
             s_ = cu.state
 
         print "cu : %s"  %  (str(s_))

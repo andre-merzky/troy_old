@@ -56,6 +56,10 @@ class scheduler_random (troy.interface.iScheduler) :
         self.api     = api 
         self.adaptor = adaptor
 
+        if self.api.id != 'Random' :
+            raise troy.Exception (troy.Error.NoSuccess,
+                  "Requested scheduler (%s) not implemented by this adaptor (Random)" % self.api.id)
+
         # we MUST interpret policy, if present
         if 'policy' in self.api._idata :
             if self.api._idata['policy'] != 'Random' :

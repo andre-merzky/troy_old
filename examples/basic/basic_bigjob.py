@@ -12,7 +12,7 @@ PF_URL = "bigjob+redis://localhost:6379"
 pudb.set_interrupt_handler ()
 
 def test_compute ():
-    # try:
+    try:
         print " 1 -------------------------------------------- "
         t   = troy.Troy ()
         print " 2 -------------------------------------------- "
@@ -76,8 +76,9 @@ def test_compute ():
         print " 12 ------------------------------------------- "
         pf.cancel ()
  
-    # except Exception, e:
-    #     print str (e)
+    except Exception, e:
+        print "Exception: %s" % e
+        import traceback; traceback.print_stack ()
 
 
  

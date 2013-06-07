@@ -242,10 +242,10 @@ class Engine (object) :
         # no adaptor succeeded
         if  e_stack == "" :
             e_stack = "  Bummer, no adaptors loaded.  None at all!"
+        
+        raise troy.Exception (troy.Error.NoSuccess, 
+                              "no valid adaptor found: %s\n"  %  e_stack)        
 
-        print "ooops: %s" % e_stack
-        import sys; sys.exit (0)
-        raise troy.Exception (troy.Error.NoSuccess, "no valid adaptor found:\n" + e_stack)        
 
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

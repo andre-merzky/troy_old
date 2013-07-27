@@ -976,8 +976,8 @@
 			<integer>62</integer>
 			<key>Points</key>
 			<array>
-				<string>{275.68163128374107, 312.16245145118233}</string>
-				<string>{220.38135222332255, 366.80604487153687}</string>
+				<string>{275.68163128503454, 312.16245145118165}</string>
+				<string>{220.38135222716494, 366.80604487145013}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1009,8 +1009,8 @@
 			<integer>61</integer>
 			<key>Points</key>
 			<array>
-				<string>{106.99552898398193, 312.16245145118251}</string>
-				<string>{162.2958080533264, 366.80604487158712}</string>
+				<string>{106.99552897857967, 312.16245145118165}</string>
+				<string>{162.29580803750164, 366.80604487145013}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1042,8 +1042,8 @@
 			<integer>60</integer>
 			<key>Points</key>
 			<array>
-				<string>{254.67088989422771, 195.10563234088033}</string>
-				<string>{128.00627255696864, 258.43828143305484}</string>
+				<string>{254.67088945643204, 195.10550786011129}</string>
+				<string>{128.00627095273455, 258.43784197253069}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1177,8 +1177,8 @@
 			<integer>50</integer>
 			<key>Points</key>
 			<array>
-				<string>{304.72452913995562, 198.92519760131836}</string>
-				<string>{304.72477193796635, 254.61810302734372}</string>
+				<string>{304.72441802349374, 198.92519760131836}</string>
+				<string>{304.72444629260383, 254.61810302734375}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1256,8 +1256,8 @@
 			<integer>46</integer>
 			<key>Points</key>
 			<array>
-				<string>{219.70383223075427, 84.048547097577639}</string>
-				<string>{276.35915151935399, 141.37665050374034}</string>
+				<string>{219.70383217801316, 84.048547097577639}</string>
+				<string>{276.35915136127079, 141.37665050374073}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1289,8 +1289,8 @@
 			<integer>45</integer>
 			<key>Points</key>
 			<array>
-				<string>{162.97332803230731, 84.048547097577639}</string>
-				<string>{106.31800874370708, 141.37665050374105}</string>
+				<string>{162.97332808504837, 84.048547097577639}</string>
+				<string>{106.31800890179075, 141.37665050374073}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1329,8 +1329,6 @@
 
 \f0\fs24 \cf0 Execution}</string>
 			</dict>
-			<key>TextRelativeArea</key>
-			<string>{{0, 0}, {1, 1}}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
@@ -1431,8 +1429,6 @@
 
 \f0\fs24 \cf0 Decomposition}</string>
 			</dict>
-			<key>TextRelativeArea</key>
-			<string>{{0, 0}, {1, 1}}</string>
 		</dict>
 	</array>
 	<key>GridInfo</key>
@@ -1482,7 +1478,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2013-07-27 13:14:14 +0000</string>
+	<string>2013-07-27 16:21:10 +0000</string>
 	<key>Modifier</key>
 	<string>Matteo</string>
 	<key>NotesVisible</key>

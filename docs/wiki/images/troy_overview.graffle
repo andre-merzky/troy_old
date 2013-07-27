@@ -55,6 +55,27 @@
 	<array>
 		<dict>
 			<key>Bounds</key>
+			<string>{{382.6771240234375, 28.346456527709961}, {99.212600708007812, 56.692913055419922}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>165</integer>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Text</key>
+			<dict>
+				<key>Text</key>
+				<string>{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf390
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
+
+\f0\fs24 \cf0 Workflow\
+Engines}</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Bounds</key>
 			<string>{{477, 279.62200546264648}, {67, 20}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
@@ -374,7 +395,7 @@ Manager}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{340.1574535369873, 28.346452713012695}, {141.73226928710938, 56.692905426025391}}</string>
+			<string>{{264.5669002532959, 28.346456527709961}, {99.212600708007812, 56.692913055419922}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -395,7 +416,7 @@ Gateways}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{184.251953125, 28.346452713012695}, {141.73226928710938, 56.692905426025391}}</string>
+			<string>{{146.4566764831543, 28.346456527709961}, {99.212600708007812, 56.692913055419922}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -416,7 +437,7 @@ Applications}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{28.346452713012695, 28.346452713012695}, {141.73226928710938, 56.692905426025391}}</string>
+			<string>{{28.346452713012695, 28.346456527709961}, {99.212600708007812, 56.692913055419922}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -482,7 +503,7 @@ Applications}</string>
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2013-07-26 18:07:25 +0000</string>
+	<string>2013-07-27 12:12:48 +0000</string>
 	<key>Modifier</key>
 	<string>Matteo</string>
 	<key>NotesVisible</key>
@@ -563,7 +584,7 @@ Applications}</string>
 			</dict>
 		</array>
 		<key>Frame</key>
-		<string>{{107, 6}, {819, 872}}</string>
+		<string>{{251, 6}, {819, 872}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>

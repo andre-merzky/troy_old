@@ -139,7 +139,6 @@ class bigjob_pf (troy.interface.iPilotFramework) :
         self.adata['pilots'] = {}
 
 
-
     ############################################################################
     #
     # synchronize troy level state changes with the backend
@@ -173,7 +172,7 @@ class bigjob_pf (troy.interface.iPilotFramework) :
         """ Add a ComputePilot to the ComputePilotFramework
 
             Keyword arguments:
-            cpd     -- ComputePilot Description
+            pd     -- Pilot Description
 
             Return value:
             A ComputePilot handle
@@ -187,19 +186,26 @@ class bigjob_pf (troy.interface.iPilotFramework) :
         if  isinstance (pd, troy.ComputePilotDescription) :
 
             bj_pilot = self.adata['cps'].create_pilot (pilot_compute_description=bj_pd)
+
+            adaptor_info = { 'pilot' : bj_pilot }
+
             my_pilot = bigjob_cp (self.api, self.adaptor, _pilot=bj_pilot)
 
             self.adata['pilots'][bj_pilot.get_url ()] = my_pilot
 
             print self.adata['pilots'].keys ()
 
-            return my_pilot # FIXME: this should be a troy pilot instance!
+            cp = troy.ComputePilot (my_pilot.id)
+
+            return cp
 
 
-        if  isinstance (pd, troy.DataPilotDescription) :
+        elif isinstance (pd, troy.DataPilotDescription) :
             raise troy.Exception (troy.Error.NotImplemented, "data pilots not implemented!")
 
-        return
+
+        else :
+            raise troy.Exception (troy.Error.BadParameter, "unknown pilot description type!")
 
 
 
@@ -214,6 +220,12 @@ class bigjob_pf (troy.interface.iPilotFramework) :
     #
     def list_pilots (self) :
 
+        cps = self.adata['cps']
+        dps = self.adata['dps']
+        
+        pilots  = cps.list_pilots ()
+        pilots += dps.list_pilots ()
+
         return self.adata['pilots'].keys ()
         
 
@@ -221,7 +233,35 @@ class bigjob_pf (troy.interface.iPilotFramework) :
     ############################################################################
     #
     def list_units (self) :
-        raise troy.Exception (troy.Error.NotImplemented, "method not implemented!")
+
+        cps = self.adata['cps']
+        dps = self.adata['dps']
+
+        print "cps id  : %s " % cps.id
+        print "dps id  : %s " % dps.id
+        print "cps type: %s " % type(cps)
+        print "dps type: %s " % type(dps)
+        
+        cpilots = cps.list_pilots ()
+        dpilots = dps.list_pilots ()
+
+        print "cp: %s " % cpilots
+        print "dp: %s " % dpilots
+
+        cpilots = cps.list_pilot_compute ()
+        dpilots = dps.list_pilot_data ()
+
+        print "cp: %s " % cpilots
+        print "dp: %s " % dpilots
+
+        units   = []
+        for cpilot in cpilots :
+            units += cpilot.list_compute_units ()
+
+        for dpilot in dpilots :
+            units += dpilot.list_data_units ()
+
+        return units
 
 
     ############################################################################
@@ -405,7 +445,9 @@ class bigjob_cu (troy.interface.iComputeUnit) :
         elif s == "Failed"  : self._state = troy.State.Failed
         else                : self._state = troy.State.Unknown
         print "state:::: %s (%s)" % (self._state, type(self._state))
-        self.api._attributes_i_set ('state', self._state)
+
+        self.api._attributes_i_set ('state_detail', s)
+        self.api._attributes_i_set ('state',        self._state)
 
 
 

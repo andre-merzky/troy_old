@@ -15,8 +15,9 @@ docs:
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
 clean:
-	@rm -rf $(BUILDDIR)/html
+	@rm -rf $(BUILDDIR)/html build
 	@find . -name \*.pyc -exec rm {} \;
+
 
 sync:
 	# @git branch -D gh-pages
